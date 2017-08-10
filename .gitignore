@@ -1,0 +1,8 @@
+.idea
+client/target/
+common/target/
+server/target/
+target
+.iml
+*.iml
+logs
