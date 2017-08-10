@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="sie-web:war">
+    <output-path>$PROJECT_DIR$/sie-web/target</output-path>
+    <root id="archive" name="sie-web.war">
+      <element id="artifact" artifact-name="sie-web:war exploded" />
+    </root>
+  </artifact>
+</component>
