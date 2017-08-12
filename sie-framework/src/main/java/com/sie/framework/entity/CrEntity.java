@@ -1,6 +1,7 @@
 package com.sie.framework.entity;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 
 /**
  * Created by x on 2017/8/12.
@@ -12,7 +13,7 @@ public class CrEntity extends BaseEntity{
     private String code;
     private String personName;
     private Integer total;
-    private Integer price;
+    private Double price;
 
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
@@ -56,11 +57,11 @@ public class CrEntity extends BaseEntity{
 
     @Basic
     @Column(name = "price")
-    public Integer getPrice() {
+    public Double getPrice() {
         return price;
     }
 
-    public void setPrice(Integer price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
 }

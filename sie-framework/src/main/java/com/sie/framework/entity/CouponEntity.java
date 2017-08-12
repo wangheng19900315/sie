@@ -1,6 +1,7 @@
 package com.sie.framework.entity;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.sql.Timestamp;
 
 /**
@@ -9,10 +10,12 @@ import java.sql.Timestamp;
 @Entity
 @Table(name = "coupon")
 public class CouponEntity extends BaseEntity{
+
+
     private Integer id;
     private String code;
     private String status;
-    private Integer price;
+    private Double price;
     private Timestamp startTime;
 
     @Id
@@ -25,7 +28,7 @@ public class CouponEntity extends BaseEntity{
         this.id = id;
     }
 
-    @Basic
+
     @Column(name = "code")
     public String getCode() {
         return code;
@@ -35,7 +38,7 @@ public class CouponEntity extends BaseEntity{
         this.code = code;
     }
 
-    @Basic
+
     @Column(name = "status")
     public String getStatus() {
         return status;
@@ -45,17 +48,15 @@ public class CouponEntity extends BaseEntity{
         this.status = status;
     }
 
-    @Basic
     @Column(name = "price")
-    public Integer getPrice() {
+    public Double getPrice() {
         return price;
     }
 
-    public void setPrice(Integer price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
 
-    @Basic
     @Column(name = "start_time")
     public Timestamp getStartTime() {
         return startTime;

@@ -9,7 +9,7 @@ import javax.persistence.*;
 @Table(name = "grade")
 public class GradeEntity extends BaseEntity {
     private Integer id;
-    private Integer grade;
+    private Double grade;
     private Integer orderDetailId;
 
     @Id
@@ -24,11 +24,11 @@ public class GradeEntity extends BaseEntity {
 
     @Basic
     @Column(name = "grade")
-    public Integer getGrade() {
+    public Double getGrade() {
         return grade;
     }
 
-    public void setGrade(Integer grade) {
+    public void setGrade(Double grade) {
         this.grade = grade;
     }
 

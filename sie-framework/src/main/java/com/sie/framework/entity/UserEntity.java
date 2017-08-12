@@ -17,18 +17,16 @@ public class UserEntity extends BaseEntity{
      *
      */
     private static final long serialVersionUID = 6980093847795726310L;
-    @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
+
     private Integer id;
 
     private String name;
     private String password;
-
-    @Column(name = "role_id")
     private Integer roleId;
 
 
-
+    @Id
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     public Integer getId() {
         return id;
     }
@@ -53,6 +51,7 @@ public class UserEntity extends BaseEntity{
         this.password = password;
     }
 
+    @Column(name = "role_id")
     public Integer getRoleId() {
         return roleId;
     }
