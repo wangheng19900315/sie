@@ -46,7 +46,7 @@ public class UserController {
 
         List<UserEntity> list = null;
         try{
-            list = this.userService.findAll();
+           // list = this.userService.findAll();
         }catch (Exception e){
             e.printStackTrace();
         }

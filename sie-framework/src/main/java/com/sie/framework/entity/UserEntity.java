@@ -25,6 +25,7 @@ public class UserEntity implements Serializable{
     private String telephone;
 
 
+
     public Integer getId() {
         return id;
     }
