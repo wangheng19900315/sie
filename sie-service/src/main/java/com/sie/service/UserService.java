@@ -1,26 +1,17 @@
 package com.sie.service;
 
+import com.sie.framework.dao.GenericDao;
 import com.sie.framework.entity.UserEntity;
+import com.sie.service.bean.PageInfo;
+
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by wangheng on 2017/8/9.
  */
-public interface UserService {
+public interface UserService extends BaseService<UserEntity, Integer> {
 
-    UserEntity  load(String id);
 
-    UserEntity get(String id);
 
-    List<UserEntity> findAll();
-
-    void persist(UserEntity entity);
-
-    String save(UserEntity entity);
-
-    void saveOrUpdate(UserEntity entity);
-
-    void delete(String id);
-
-    void flush();
 }

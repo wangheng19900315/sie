@@ -3,10 +3,12 @@ package com.sie.service.impl;
 import com.sie.framework.dao.UserDao;
 import com.sie.framework.entity.UserEntity;
 import com.sie.service.UserService;
+import com.sie.service.bean.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by wangheng on 2017/8/9.
@@ -18,42 +20,31 @@ public class UserServiceImpl implements UserService {
     private UserDao userDao;
 
     @Override
-    public UserEntity load(String id) {
-        return userDao.load(id);
-    }
-
-    @Override
-    public UserEntity get(String id) {
-        return userDao.get(id);
-    }
-
-    @Override
-    public List<UserEntity> findAll() {
-        return userDao.findAll();
-    }
-
-    @Override
-    public void persist(UserEntity entity) {
-        userDao.persist(entity);
-    }
-
-    @Override
-    public String save(UserEntity entity) {
-        return userDao.save(entity);
+    public UserEntity get(Integer id) {
+        return null;
     }
 
     @Override
     public void saveOrUpdate(UserEntity entity) {
-        userDao.saveOrUpdate(entity);
+
     }
 
     @Override
-    public void delete(String id) {
-        userDao.delete(id);
+    public void delete(Integer id) {
+
     }
 
     @Override
-    public void flush() {
-        userDao.flush();
+    public PageInfo<UserEntity> getList(Integer page, Integer rows, Map<String, Object> parameter) {
+        parameter.put("start", (page - 1) * rows);
+        parameter.put("pageCount", rows);
+        //判断是否是管理员
+
+//        List<UserEntity> list = UserEntity.getMonitorList(parameter);
+//        int count = monitorMapper.getMonitorCount(parameter);
+
+//        PageInfo<UserEntity> pageInfo = new PageInfo<UserEntity>(count, rows);
+
+        return null;
     }
 }

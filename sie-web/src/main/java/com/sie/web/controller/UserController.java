@@ -26,40 +26,35 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @RequestMapping("/showInfo/{userId}")
-    public String showUserInfo(ModelMap modelMap, @PathVariable String userId){
-        LOGGER.info("查询用户：" + userId);
-         UserEntity userEntity = userService.load(userId);
-        modelMap.addAttribute("userInfo", userEntity);
+    @RequestMapping("/addOrUpdate")
+    public String showUserInfo(){
+
         return "/user/showInfo";
     }
 
-    @RequestMapping("/showInfos")
-    @ResponseBody
-    public List<UserEntity> showUserInfos(){
-        LOGGER.info("查询用户全部用户");
-        List<UserEntity> userInfos = userService.findAll();
-        return userInfos;
+
+    @RequestMapping("/list.html")
+    public String list(){
+        return "/user/list";
     }
 
-    public static void main(String args[])
-    {
 
-        String url = "jdbc:mysql://localhost:3306/uie";
-        String driver = "com.mysql.jdbc.Driver";
+
+    @RequestMapping("/list.json")
+    @ResponseBody
+    public String listJons(){
+
+        List<UserEntity> list = null;
         try{
-            Class.forName(driver);
-        }catch(Exception e){
-            System.out.println("无法加载驱动");
-        }
-
-        try {
-            Connection con = DriverManager.getConnection(url,"root","123456");
-            if(!con.isClosed())
-                System.out.println("success");
-        } catch (Exception e) {
-            // TODO Auto-generated catch block
+            list = this.userService.findAll();
+        }catch (Exception e){
             e.printStackTrace();
         }
+
+        return null;
     }
+
+
+
+
 }
