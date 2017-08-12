@@ -67,6 +67,8 @@ public class UserDaoImpl implements UserDao {
 //        query.setFirstResult(firstResult);
 //        query.setMaxResults(maxResults);
 //        return query.getResultList();
+
+        return null;
     }
 
     @Override

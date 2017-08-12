@@ -11,5 +11,5 @@ public interface UserDao extends GenericDao<UserEntity, Integer> {
 
     public List<UserEntity> getList(Integer page, Integer rows);
 
-    public Integer getListCount();
+    public Integer getListCount(Integer page, Integer rows);
 }
