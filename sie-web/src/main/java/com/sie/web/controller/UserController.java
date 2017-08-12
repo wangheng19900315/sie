@@ -1,7 +1,9 @@
 package com.sie.web.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.sie.framework.entity.UserEntity;
 import com.sie.service.UserService;
+import com.sie.service.bean.PageInfo;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -38,20 +40,25 @@ public class UserController {
         return "/user/list";
     }
 
+    @RequestMapping("/add.html")
+    public String add(){
+        return "/user/add";
+    }
+
 
 
     @RequestMapping("/list.json")
     @ResponseBody
-    public String listJons(){
+    public PageInfo<UserEntity> listJons(Integer page, Integer rows ){
 
-        List<UserEntity> list = null;
+        PageInfo<UserEntity> pageInfo = null;
         try{
-            list = this.userService.findAll();
+            pageInfo = this.userService.getList(page,rows, null);
         }catch (Exception e){
             e.printStackTrace();
         }
 
-        return null;
+        return pageInfo;
     }
 
 

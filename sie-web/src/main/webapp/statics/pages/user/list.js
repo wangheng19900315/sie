@@ -26,12 +26,12 @@ $(function(){
     var pager_selector = "#grid-pager";
 
     jQuery(grid_selector).jqGrid({
-        url: '/wisdom/monitor/list.ajax',
+        url: '/user/list.json',
         datatype: "json",
         height: '100%',
         mtype: 'post',
         postData: {},
-        colNames: ['ID', '创建时间' ,'创建人' ,'类型' ,'作业' ,'地址' ,'描述' ],
+        colNames: ['ID', '创建时间' ,'名称' ,'密码' ,'修改时间'  ],
         colModel: [
             {name: 'id', index: 'id', width: 20, hidden: true, sorttype: "int", sortable: false},
             {name: 'createTime', index: 'createTime', width: 160 , sortable: false, formatter:function(cellvalue, options, rowObject){
@@ -39,16 +39,14 @@ $(function(){
                 return time1;
             }
             },
-            {name: 'createUserName', index: 'createUserName', width: 120, sortable: false},
-            {name: 'typeName', index: 'typeName', width: 120, sortable: false},
-            {name: 'jobName', index: 'jobName', width: 120, sortable: false},
-            {name: 'url', index: 'url', width: 120, sortable: false, formatter:function(cellvalue, options, rowObject){
-                var result = "<a href='javascript:logView(\""+cellvalue+"\")'>监控链接</a>";
-                return result;
-            }
-            },
-            {name: 'description', index: 'description', width: 120, sortable: false},
+            {name: 'name', index: 'name', width: 120, sortable: false},
+            {name: 'password', index: 'password', width: 120, sortable: false},
 
+            {name: 'updateTime', index: 'updateTime', width: 160 , sortable: false, formatter:function(cellvalue, options, rowObject){
+                var time1 = new Date(cellvalue).Format("yyyy-MM-dd hh:mm:ss");
+                return time1;
+            }
+            }
         ],
         multiselect: true,
         multiboxonly: true,
@@ -60,7 +58,7 @@ $(function(){
         onSelectRow: selectRow,
         onSelectAll: selectRow,
         loadComplete: function () {
-            jqGrid.initWidth(jQuery, '.jd-table', ".jd-table-parent");
+            jqGrid.initWidth(jQuery, '#grid-table', ".table-primary");
             jqGrid.reset(jQuery);
         }
     });
@@ -83,7 +81,26 @@ $(function(){
     });
 
 
+    $("#searchBtn").bind("click",function(){
+        search();
+    })
 
+    $("#addBtn").bind("click",function(){
+        window.location.href="/user/add.html"
+    })
+
+
+    $("#editBtn").bind("click",function(){
+        search();
+    })
+
+    $("#deleteBtn").bind("click",function(){
+        search();
+    })
+
+    $("#infoBtn").bind("click",function(){
+        search();
+    })
 })
 
 
@@ -96,7 +113,7 @@ function search() {
     $('#view-btn').addClass('disabled');
 
     jQuery("#grid-table").jqGrid('setGridParam',{
-        url: '/wisdom/monitor/list.ajax',
+        url: '/user/list.json',
         datatype: "json",
         height: '100%',
         mtype: 'post',

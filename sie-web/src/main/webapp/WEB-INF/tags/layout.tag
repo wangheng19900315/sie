@@ -8,7 +8,7 @@
 head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-<title>Dashboard - PixelAdmin</title>
+<title>${title} - 网站管理</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
 
 <!-- Open Sans font from Google CDN -->
@@ -20,6 +20,7 @@ head>
 <link href="/statics/assets/stylesheets/widgets.min.css" rel="stylesheet" type="text/css">
 <link href="/statics/assets/stylesheets/rtl.min.css" rel="stylesheet" type="text/css">
 <link href="/statics/assets/stylesheets/themes.min.css" rel="stylesheet" type="text/css">
+<link href="/statics/common/common.css" rel="stylesheet" type="text/css">
 
 <link rel="stylesheet" type="text/css"
       href="/statics/jqGrid/ui.jqgrid.css?_dc=$!{staticVersion}"/>
@@ -38,8 +39,8 @@ head>
     <div id="content-wrapper">
         <ul class="breadcrumb breadcrumb-page">
             <div class="breadcrumb-label text-light-gray">You are here: </div>
-            <li><a href="#">Home</a></li>
-            <li class="active"><a href="#">Dashboard</a></li>
+            <li><a href="/index">Home</a></li>
+            <li class="active"><a href="#">${title}</a></li>
         </ul>
         <jsp:doBody></jsp:doBody>
     </div>
@@ -54,6 +55,7 @@ head>
 <script src="/statics/assets/javascripts/jquery-1.8.3.min.js"></script>
 <script src="/statics/assets/javascripts/bootstrap.min.js"></script>
 <script src="/statics/assets/javascripts/pixel-admin.min.js"></script>
+<script src="/statics/common/util.js"></script>
 <script src="/statics/jqGrid/jquery.jqGrid.min.js"></script>
 <script src="/statics/jqGrid/grid.locale-cn.js"></script>
 
