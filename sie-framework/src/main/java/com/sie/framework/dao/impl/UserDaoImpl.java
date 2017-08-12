@@ -52,23 +52,22 @@ public class UserDaoImpl implements UserDao {
 
 
     @Override
-    public List<UserEntity> getList(Integer page, Integer rows) {
+    public List<UserEntity> getList(Integer firstResult, Integer maxResults) {
         Map<String, Object> params = new HashMap<>();
         StringBuilder sb = new StringBuilder();
-        sb.append("select distinct c from QuestionEntity c ");
+        sb.append("select distinct c from UserEntity c ");
         sb.append(" where c.hdelete=0 ");
 //        if(StringUtil.isNotBlank(vo.getFilter())){
 //            sb.append(" and (c.customerName=:filter or  c.phoneModel=:filter or c.description=:filter)" );
 //            params.put("filter", "%"+vo.getFilter()+"%");
 //        }
-//        sb.append(" order by  c.createTime desc");
-//        Query<UserEntity> query = this.sessionFactory.getCurrentSession().createQuery(sb.toString());
+        sb.append(" order by  c.createTime desc");
+        Query query = this.sessionFactory.getCurrentSession().createQuery(sb.toString());
 //        query.setProperties(params);
-//        query.setFirstResult(firstResult);
-//        query.setMaxResults(maxResults);
-//        return query.getResultList();
+        query.setFirstResult(firstResult);
+        query.setMaxResults(maxResults);
+        return query.list();
 
-        return null;
     }
 
     @Override

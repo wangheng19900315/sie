@@ -4,9 +4,12 @@ import com.sie.framework.dao.UserDao;
 import com.sie.framework.entity.UserEntity;
 import com.sie.service.UserService;
 import com.sie.service.bean.PageInfo;
+import com.sie.util.NumberUtil;
+import com.sie.util.PageUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -36,15 +39,23 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public PageInfo<UserEntity> getList(Integer page, Integer rows, Map<String, Object> parameter) {
-        parameter.put("start", (page - 1) * rows);
-        parameter.put("pageCount", rows);
-        //判断是否是管理员
+        if (!NumberUtil.isSignless(rows)) {
+            rows = Integer.MAX_VALUE;
+        }
 
-//        List<UserEntity> list = UserEntity.getMonitorList(parameter);
-//        int count = monitorMapper.getMonitorCount(parameter);
+        if (!NumberUtil.isSignless(page)) {
+            page = 0;
+        }
+        Integer records = userDao.getListCount(page, rows);
+        PageInfo<UserEntity> pageBean = new PageInfo<>(records,PageUtil.getPageTotal(records, rows));
+        pageBean.setPage(PageUtil.getPageNow(page, pageBean.getTotal()));
+        Integer firstResult = PageUtil.getFirstResult(pageBean.getPage(), rows);
+        Integer maxResults = PageUtil.getMaxResults(rows);
+        List<UserEntity> entityList = userDao.getList( firstResult, maxResults);
 
-//        PageInfo<UserEntity> pageInfo = new PageInfo<UserEntity>(count, rows);
-
-        return null;
+        pageBean.setRows(entityList);
+        pageBean.setPage(page);
+        pageBean.setRecords(records);
+        return pageBean;
     }
 }

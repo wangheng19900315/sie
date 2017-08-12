@@ -1,6 +1,6 @@
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<div id="main-menu" role="navigation" style="background-color: #23272d;height: 100%">
+<div id="main-menu" role="navigation" style="background-color: #23272d;height: 100%;min-height: 950px">
     <div id="main-menu-inner">
         <%--<div class="menu-content top" id="menu-content-demo">--%>
             <%--<!-- Menu custom content demo--%>
@@ -88,13 +88,13 @@
                 <a href="#"><i class="menu-icon fa fa-th"></i><span class="mm-text">权限管理</span></a>
                 <ul>
                     <li>
-                        <a tabindex="-1" href="layouts-grid.html"><span class="mm-text">用户管理</span></a>
+                        <a tabindex="-1" href="/user/list.html"><span class="mm-text">用户管理</span></a>
                     </li>
                     <li>
                         <a tabindex="-1" href="layouts-main-menu.html"><i class="mm-text"></i>角色管理</a>
                     </li>
                     <li>
-                        <a tabindex="-1" href="layouts-main-menu.html"><i class="mm-text"></i>菜单管理</a>
+                        <a tabindex="-1" href="/user/list.html"><i class="mm-text"></i>菜单管理</a>
                     </li>
                 </ul>
             </li>

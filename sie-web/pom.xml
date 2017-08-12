@@ -194,21 +194,13 @@
                     <show>private</show>
                 </configuration>
             </plugin>
-
-            <!-- 部署至本机 -->
             <plugin>
-                <groupId>org.codehaus.cargo</groupId>
-                <artifactId>cargo-maven2-plugin</artifactId>
-                <version>1.0</version>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.3</version>
                 <configuration>
-                    <container>
-                        <containerId>tomcat6x</containerId>
-                        <home>D:\WebServer\apache-tomcat-6.0.39</home>
-                    </container>
-                    <configuration>
-                        <type>existing</type>
-                        <home>D:\WebServer\apache-tomcat-6.0.39</home>
-                    </configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
                 </configuration>
             </plugin>
 
@@ -221,6 +213,7 @@
                     <target>1.7</target>
                 </configuration>
             </plugin>
+
         </plugins>
 
     </build>

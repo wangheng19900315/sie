@@ -9,8 +9,8 @@ import java.sql.Date;
  */
 
 @Entity
-@Table(name = "t_user_info")
-public class UserEntity implements Serializable{
+@Table(name = "sys_user")
+public class UserEntity extends BaseEntity{
 
 
     /**
@@ -21,8 +21,11 @@ public class UserEntity implements Serializable{
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Integer id;
 
-    private String nickName;
-    private String telephone;
+    private String name;
+    private String password;
+
+    @Column(name = "role_id")
+    private Integer roleId;
 
 
 
@@ -34,21 +37,27 @@ public class UserEntity implements Serializable{
         this.id = id;
     }
 
-    public String getNickName() {
-        return nickName;
+    public String getName() {
+        return name;
     }
 
-    public void setNickName(String nickName) {
-        this.nickName = nickName;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getTelephone() {
-        return telephone;
+    public String getPassword() {
+        return password;
     }
 
-    public void setTelephone(String telephone) {
-        this.telephone = telephone;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
+    public Integer getRoleId() {
+        return roleId;
+    }
 
+    public void setRoleId(Integer roleId) {
+        this.roleId = roleId;
+    }
 }
