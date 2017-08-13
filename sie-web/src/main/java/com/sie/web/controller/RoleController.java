@@ -1,6 +1,6 @@
 package com.sie.web.controller;
 
-import com.sie.framework.entity.SysRoleEntity;
+import com.sie.framework.entity.RoleEntity;
 import com.sie.service.RoleService;
 import com.sie.service.bean.PageInfo;
 import org.apache.log4j.Logger;
@@ -42,9 +42,9 @@ public class RoleController {
 
     @RequestMapping("/list.json")
     @ResponseBody
-    public PageInfo<SysRoleEntity> listJons(Integer page, Integer rows ){
+    public PageInfo<RoleEntity> listJons(Integer page, Integer rows ){
 
-        PageInfo<SysRoleEntity> pageInfo = null;
+        PageInfo<RoleEntity> pageInfo = null;
         try{
             pageInfo = this.roleService.getList(page,rows, null);
         }catch (Exception e){

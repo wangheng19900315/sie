@@ -1,7 +1,6 @@
 package com.sie.web.controller;
 
-import com.sie.framework.entity.SysMenuEntity;
-import com.sie.framework.entity.SysRoleEntity;
+import com.sie.framework.entity.MenuEntity;
 import com.sie.service.MenuService;
 import com.sie.service.bean.PageInfo;
 import org.apache.log4j.Logger;
@@ -43,9 +42,9 @@ public class MenuController {
 
     @RequestMapping("/list.json")
     @ResponseBody
-    public PageInfo<SysMenuEntity> listJons(Integer page, Integer rows ){
+    public PageInfo<MenuEntity> listJons(Integer page, Integer rows ){
 
-        PageInfo<SysMenuEntity> pageInfo = null;
+        PageInfo<MenuEntity> pageInfo = null;
         try{
             pageInfo = this.menuService.getList(page,rows, null);
         }catch (Exception e){

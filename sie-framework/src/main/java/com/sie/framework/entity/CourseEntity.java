@@ -7,7 +7,7 @@ import java.sql.Timestamp;
  * Created by x on 2017/8/12.
  */
 @Entity
-@Table(name = "course")
+@Table(name = "t_course_info")
 public class CourseEntity extends BaseEntity{
     private Integer id;
     private String chineseName;

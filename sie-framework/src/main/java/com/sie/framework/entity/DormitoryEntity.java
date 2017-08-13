@@ -6,10 +6,11 @@ import javax.persistence.*;
  * Created by x on 2017/8/12.
  */
 @Entity
-@Table(name = "dormitory")
+@Table(name = "t_dormitory_info")
 public class DormitoryEntity extends BaseEntity{
     private Integer id;
     private String address;
+    private Double price;
     private Integer projectId;
 
     @Id
@@ -42,4 +43,14 @@ public class DormitoryEntity extends BaseEntity{
         this.projectId = projectId;
     }
 
+    @Basic
+    @Column(name = "price")
+
+    public Double getPrice() {
+        return price;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
+    }
 }

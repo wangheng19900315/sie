@@ -9,7 +9,7 @@ import java.sql.Date;
  */
 
 @Entity
-@Table(name = "sys_user")
+@Table(name = "t_user_info")
 public class UserEntity extends BaseEntity{
 
 
@@ -22,6 +22,8 @@ public class UserEntity extends BaseEntity{
 
     private String name;
     private String password;
+    private String email;
+    private String telephone;
     private Integer roleId;
     private String role_name;
 
@@ -59,5 +61,23 @@ public class UserEntity extends BaseEntity{
 
     public void setRoleId(Integer roleId) {
         this.roleId = roleId;
+    }
+
+    @Column(name = "email")
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    @Column(name = "telephone")
+    public String getTelephone() {
+        return telephone;
+    }
+
+    public void setTelephone(String telephone) {
+        this.telephone = telephone;
     }
 }

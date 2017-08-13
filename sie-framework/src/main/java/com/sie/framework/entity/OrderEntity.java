@@ -6,11 +6,11 @@ import javax.persistence.*;
  * Created by x on 2017/8/12.
  */
 @Entity
-@Table(name = "order")
+@Table(name = "t_order_info")
 public class OrderEntity extends BaseEntity {
     private Integer id;
     private String code;
-    private Integer money;
+    private Double money;
     private Integer crId;
     private Integer couponId;
     private Integer courseNumber;
@@ -38,11 +38,11 @@ public class OrderEntity extends BaseEntity {
 
     @Basic
     @Column(name = "money")
-    public Integer getMoney() {
+    public Double getMoney() {
         return money;
     }
 
-    public void setMoney(Integer money) {
+    public void setMoney(Double money) {
         this.money = money;
     }
 

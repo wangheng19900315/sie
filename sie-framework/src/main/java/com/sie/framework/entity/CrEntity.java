@@ -7,7 +7,7 @@ import java.math.BigDecimal;
  * Created by x on 2017/8/12.
  */
 @Entity
-@Table(name = "cr")
+@Table(name = "t_cr_info")
 public class CrEntity extends BaseEntity{
     private Integer id;
     private String code;

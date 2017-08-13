@@ -6,7 +6,7 @@ import javax.persistence.*;
  * Created by x on 2017/8/12.
  */
 @Entity
-@Table(name = "school")
+@Table(name = "t_school_info")
 public class SchoolEntity extends BaseEntity {
     private Integer id;
     private String name;

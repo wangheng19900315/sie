@@ -6,7 +6,7 @@ import javax.persistence.*;
  * Created by x on 2017/8/12.
  */
 @Entity
-@Table(name = "order_detail")
+@Table(name = "t_order_detail_info")
 public class OrderDetailEntity extends BaseEntity{
     private Integer id;
     private Integer projectId;

@@ -1,7 +1,6 @@
 package com.sie.web.controller;
 
 import com.sie.framework.entity.SchoolEntity;
-import com.sie.framework.entity.SysMenuEntity;
 import com.sie.service.SchoolService;
 import com.sie.service.bean.PageInfo;
 import org.apache.log4j.Logger;

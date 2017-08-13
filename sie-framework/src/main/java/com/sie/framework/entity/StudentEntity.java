@@ -8,7 +8,7 @@ import java.util.Arrays;
  * Created by x on 2017/8/12.
  */
 @Entity
-@Table(name = "student")
+@Table(name = "t_student_info")
 public class StudentEntity extends BaseEntity{
     private Integer id;
 

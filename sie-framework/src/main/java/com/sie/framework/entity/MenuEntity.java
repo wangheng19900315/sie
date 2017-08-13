@@ -6,8 +6,8 @@ import javax.persistence.*;
  * Created by x on 2017/8/12.
  */
 @Entity
-@Table(name = "sys_menu")
-public class SysMenuEntity extends BaseEntity{
+@Table(name = "t_menu_info")
+public class MenuEntity extends BaseEntity{
     private Integer id;
     private String name;
 

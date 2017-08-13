@@ -6,8 +6,8 @@ import javax.persistence.*;
  * Created by x on 2017/8/12.
  */
 @Entity
-@Table(name = "sys_role_menu")
-public class SysRoleMenuEntity extends BaseEntity{
+@Table(name = "t_role_menu_info")
+public class RoleMenuEntity extends BaseEntity{
     private Integer id;
     private Integer roleId;
     private Integer menuId;

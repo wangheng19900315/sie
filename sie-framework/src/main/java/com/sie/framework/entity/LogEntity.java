@@ -6,8 +6,8 @@ import javax.persistence.*;
  * Created by x on 2017/8/12.
  */
 @Entity
-@Table(name = "sys_log")
-public class SysLogEntity  extends BaseEntity{
+@Table(name = "t_log_info")
+public class LogEntity extends BaseEntity{
     private Integer id;
     private Integer userId;
     private String operate;

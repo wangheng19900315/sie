@@ -8,7 +8,7 @@ import java.sql.Timestamp;
  * Created by x on 2017/8/12.
  */
 @Entity
-@Table(name = "coupon")
+@Table(name = "t_coupon_info")
 public class CouponEntity extends BaseEntity{
 
 
