@@ -91,7 +91,7 @@
                         <a tabindex="-1" href="/user/list.html"><span class="mm-text">用户管理</span></a>
                     </li>
                     <li>
-                        <a tabindex="-1" href="layouts-main-menu.html"><i class="mm-text"></i>角色管理</a>
+                        <a tabindex="-1" href="/role/list.html"><i class="mm-text"></i>角色管理</a>
                     </li>
                     <li>
                         <a tabindex="-1" href="/user/list.html"><i class="mm-text"></i>菜单管理</a>

@@ -1,6 +1,7 @@
 package com.sie.service;
 
-import com.sie.service.bean.PageInfo;
+import com.sie.framework.base.PageInfo;
+import com.sie.framework.entity.BaseEntity;
 
 import java.io.Serializable;
 import java.util.Map;
@@ -8,7 +9,7 @@ import java.util.Map;
 /**
  * Created by wangheng on 2017/8/12.
  */
-public interface BaseService<T, PK extends Serializable> {
+public interface BaseService<T extends BaseEntity, PK extends Serializable> {
 
     T get(PK id);
 

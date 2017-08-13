@@ -1,6 +1,9 @@
 package com.sie.framework.base;
 
 import com.sie.framework.entity.BaseEntity;
+import com.sie.framework.entity.UserEntity;
+import com.sie.util.NumberUtil;
+import com.sie.util.PageUtil;
 import org.hibernate.SessionFactory;
 import org.hibernate.Query;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,13 +11,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
 import java.sql.Timestamp;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @SuppressWarnings("unchecked")
-public class GenericDaoImpl<T, PK extends Serializable> implements GenericDao<T, PK> {
+public class GenericDaoImpl<T extends BaseEntity, PK extends Serializable> implements GenericDao<T, PK> {
 
 	@Autowired
-	private SessionFactory sessionFactory;
+	protected SessionFactory sessionFactory;
 
 	private Class<T> clazz;
 

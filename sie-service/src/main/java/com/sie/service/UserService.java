@@ -8,6 +8,4 @@ import com.sie.framework.entity.UserEntity;
  */
 public interface UserService extends BaseService<UserEntity, Integer> {
 
-
-
 }
