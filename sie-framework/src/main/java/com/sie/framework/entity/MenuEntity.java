@@ -10,6 +10,7 @@ import javax.persistence.*;
 public class MenuEntity extends BaseEntity{
     private Integer id;
     private String name;
+    private String action;
 
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
@@ -31,4 +32,14 @@ public class MenuEntity extends BaseEntity{
         this.name = name;
     }
 
+
+    @Basic
+    @Column(name = "action")
+    public String getAction() {
+        return action;
+    }
+
+    public void setAction(String action) {
+        this.action = action;
+    }
 }

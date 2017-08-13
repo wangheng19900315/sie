@@ -17,6 +17,7 @@ public class CouponEntity extends BaseEntity{
     private String status;
     private Double price;
     private Timestamp startTime;
+    private Timestamp endTime;
 
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
@@ -66,4 +67,12 @@ public class CouponEntity extends BaseEntity{
         this.startTime = startTime;
     }
 
+    @Column(name = "end_time")
+    public Timestamp getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(Timestamp endTime) {
+        this.endTime = endTime;
+    }
 }

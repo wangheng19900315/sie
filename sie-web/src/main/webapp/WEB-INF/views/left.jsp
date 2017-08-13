@@ -60,7 +60,7 @@
                 <a href="#"><i class="menu-icon fa fa-th"></i><span class="mm-text">优惠管理</span></a>
                 <ul>
                     <li>  <a tabindex="-1" href="/cr/list.html"><span class="mm-text">CR管理</span></a> </li>
-                    <li>  <a tabindex="-1" href="layouts-grid.html"><span class="mm-text">优惠码管理</span></a> </li>
+                    <li>  <a tabindex="-1" href="/coupon/list.html"><span class="mm-text">优惠码管理</span></a> </li>
 
 
                 </ul>
