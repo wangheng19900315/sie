@@ -1,6 +1,6 @@
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<div id="main-menu" role="navigation" style="background-color: #23272d;height: 100%;min-height: 950px">
+<div id="main-menu" role="navigation" style="background-color: #23272d;height: 100%;min-height: 1060px">
     <div id="main-menu-inner">
         <%--<div class="menu-content top" id="menu-content-demo">--%>
             <%--<!-- Menu custom content demo--%>

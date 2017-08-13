@@ -1,7 +1,9 @@
 package com.sie.framework.dao.impl;
 
+import com.sie.framework.base.GenericDaoImpl;
 import com.sie.framework.dao.UserDao;
 import com.sie.framework.entity.UserEntity;
+import com.sun.tools.internal.xjc.reader.xmlschema.bindinfo.BIConversion;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -16,7 +18,7 @@ import java.util.Map;
  * Created by wangheng on 2017/8/9.
  */
 @Repository("userDao")
-public class UserDaoImpl implements UserDao {
+public class UserDaoImpl extends GenericDaoImpl<UserEntity, Integer> implements UserDao {
 
 
     @Autowired
@@ -26,29 +28,6 @@ public class UserDaoImpl implements UserDao {
         return this.sessionFactory.getCurrentSession();
     }
 
-
-    @Override
-    public UserEntity get(Integer id) {
-        return (UserEntity) this.getCurrentSession().get(UserEntity.class, id);
-    }
-
-    @SuppressWarnings("unchecked")
-    @Override
-    public List<UserEntity> findAll() {
-        List<UserEntity> acctUsers = this.getCurrentSession().createQuery("from UserEntity").setCacheable(true).list();
-        return acctUsers;
-    }
-
-    @Override
-    public void saveOrUpdate(UserEntity entity) {
-        this.getCurrentSession().saveOrUpdate(entity);
-    }
-
-    @Override
-    public void delete(Integer id) {
-        UserEntity entity = this.get(id);
-        this.getCurrentSession().delete(entity);
-    }
 
 
     @Override

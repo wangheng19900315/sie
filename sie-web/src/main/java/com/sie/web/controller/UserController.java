@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.sie.framework.entity.UserEntity;
 import com.sie.service.UserService;
 import com.sie.service.bean.PageInfo;
+import com.sie.service.bean.ResultBean;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -59,6 +60,23 @@ public class UserController {
         }
 
         return pageInfo;
+    }
+
+
+
+    @RequestMapping("/addOrupdate.json")
+    @ResponseBody
+    public ResultBean addOrupdate(UserEntity userEntity){
+        ResultBean resultBean = new ResultBean();
+
+
+        try{
+            Integer id = this.userService.saveOrUpdate(userEntity);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return resultBean;
     }
 
 

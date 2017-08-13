@@ -9,9 +9,11 @@ import com.sie.util.PageUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Date;
 
 /**
  * Created by wangheng on 2017/8/9.
@@ -28,13 +30,29 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void saveOrUpdate(UserEntity entity) {
+    public Integer saveOrUpdate(UserEntity entity) {
 
+//        if(!NumberUtil.isSignless(entity.getId())){
+//            this.userDao.createEntity(entity);
+//
+//        }else{
+//           UserEntity oldEntity = this.get(entity.getId());
+//            oldEntity.setName(entity.getName());
+//            oldEntity.setPassword(entity.getPassword());
+//
+//            entity = oldEntity;
+//            entity.setUpdateTime(new Timestamp(new Date().getTime()));
+//        }
+//
+//        .saveOrUpdate(entity);
+        return entity.getId();
     }
 
     @Override
     public void delete(Integer id) {
-
+        UserEntity userEntity = this.get(id);
+        userEntity.setHdelete(1);
+        this.userDao.updateEntity(userEntity);
     }
 
     @Override

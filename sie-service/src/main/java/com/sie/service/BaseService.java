@@ -12,7 +12,7 @@ public interface BaseService<T, PK extends Serializable> {
 
     T get(PK id);
 
-    void saveOrUpdate(T entity);
+    Integer saveOrUpdate(T entity);
 
     void delete(PK id);
 
