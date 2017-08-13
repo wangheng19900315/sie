@@ -67,7 +67,7 @@ public class GenericDaoImpl<T extends BaseEntity, PK extends Serializable> imple
 
 	@Override
 	public List<T> getList(int firstResult, int maxResults) {
-		Query query = this.sessionFactory.getCurrentSession().createQuery("from " + clazz.getName());
+		Query query = this.sessionFactory.getCurrentSession().createQuery("from " + clazz.getName() +" where hdelete=0 order by id desc");
 		query.setFirstResult(firstResult);
 		query.setMaxResults(maxResults);
 		return query.list();
@@ -75,7 +75,7 @@ public class GenericDaoImpl<T extends BaseEntity, PK extends Serializable> imple
 
 	@Override
 	public int getList_count() {
-		Query query = this.sessionFactory.getCurrentSession().createQuery("select count(entity) from " + clazz.getName() + " entity");
+		Query query = this.sessionFactory.getCurrentSession().createQuery("select count(entity) from " + clazz.getName() + " entity where hdelete=0 order by id desc");
 		Long count = (Long)query.uniqueResult();
 		return count.intValue();
 	}

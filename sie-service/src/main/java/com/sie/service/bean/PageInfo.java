@@ -34,7 +34,8 @@ public class PageInfo<T> {
      * @param pageCount 页数
      */
     public PageInfo(int count, int pageCount) {
-        total = maxPage(count, pageCount);
+        total = pageCount;
+        records=count;
     }
 
     /**
@@ -85,16 +86,7 @@ public class PageInfo<T> {
         this.rows = rows;
     }
 
-    /**
-     * 获取最大页数
-     *
-     * @param count     总条数
-     * @param pageCount 每页的数量
-     * @return
-     */
-    private int maxPage(int count, int pageCount) {
-        return count % pageCount == 0 ? count / pageCount : count / pageCount + 1;
-    }
+
 
 }
 

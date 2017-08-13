@@ -91,11 +91,33 @@ $(function(){
 
 
     $("#editBtn").bind("click",function(){
-        search();
+
     })
 
     $("#deleteBtn").bind("click",function(){
-        search();
+        var id = $("#grid-table").jqGrid('getGridParam', 'selarrrow');
+        bootbox.confirm({
+            message: "确定要删除该条记录?",
+            callback: function(result) {
+                if(result){
+
+                    $.ajax({
+                        url: '/user/delete.json?id='+id,
+                        type: 'get',
+                        dataType:'json',
+                        success: function (json, statusText, xhr, $form) {
+                            if (json.status==0) {
+                                alert("删除完成!");
+                                $("#grid-table").trigger('reloadGrid');
+                            } else {
+                                alert( json.message);
+                            }
+                        }
+                    });
+                }
+            },
+            className: "bootbox-sm"
+        });
     })
 
     $("#infoBtn").bind("click",function(){

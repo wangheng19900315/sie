@@ -4,11 +4,17 @@ import com.sie.framework.entity.UserEntity;
 import com.sie.service.UserService;
 import com.sie.service.bean.PageInfo;
 import com.sie.service.bean.ResultBean;
+import com.sie.util.NumberUtil;
+import org.apache.http.HttpRequest;
 import org.apache.log4j.Logger;
+import org.apache.xpath.operations.Number;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * Created by wangheng on 2017/8/9.
@@ -57,14 +63,33 @@ public class UserController {
 
 
 
-    @RequestMapping("/addOrupdate.json")
+    @RequestMapping(value = "/addOrupdate.json")
     @ResponseBody
-    public ResultBean addOrupdate(UserEntity userEntity){
+    public ResultBean addOrupdate(@ModelAttribute UserEntity userEntity){
         ResultBean resultBean = new ResultBean();
-
 
         try{
             Integer id = this.userService.saveOrUpdate(userEntity);
+            if(NumberUtil.isSignless(id)){
+                resultBean.setMessage("保存成功");
+                resultBean.setSuccess(true);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return resultBean;
+    }
+
+    @RequestMapping(value = "/delete.json")
+    @ResponseBody
+    public ResultBean delete(Integer id){
+        ResultBean resultBean = new ResultBean();
+
+        try{
+            this.userService.delete(id);
+            resultBean.setMessage("删除成功");
+            resultBean.setSuccess(true);
         }catch (Exception e){
             e.printStackTrace();
         }

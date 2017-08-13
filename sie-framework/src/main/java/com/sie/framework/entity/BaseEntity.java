@@ -14,10 +14,10 @@ import java.io.Serializable;
 public class BaseEntity implements Serializable{
 
 
-    private  Integer hversion;
+    private  Integer hversion=0;
 
 
-    private Integer hdelete;
+    private Integer hdelete=0;
 
 
     private Integer createUserId;

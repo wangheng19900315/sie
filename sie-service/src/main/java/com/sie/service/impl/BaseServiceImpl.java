@@ -27,7 +27,7 @@ public class BaseServiceImpl<T extends BaseEntity, PK extends Serializable> impl
 
     @Override
     public T get(PK id) {
-        return null;
+        return this.baseDao.getEntity(id);
     }
 
     @Override
@@ -61,7 +61,6 @@ public class BaseServiceImpl<T extends BaseEntity, PK extends Serializable> impl
 
         pageBean.setRows(entityList);
         pageBean.setPage(page);
-        pageBean.setRecords(records);
         return pageBean;
     }
 }
