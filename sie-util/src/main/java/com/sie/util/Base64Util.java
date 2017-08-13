@@ -1,6 +1,5 @@
 package com.sie.util;
 
-import java.util.Base64;
 
 /**
  * base64编解码工具类
@@ -21,7 +20,7 @@ public class Base64Util {
 			return null;
 		}
 		try {
-			asB64 = Base64.getEncoder().encodeToString(val.getBytes("utf-8"));
+//			asB64 = Base64.getEncoder().encodeToString(val.getBytes("utf-8"));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -37,14 +36,14 @@ public class Base64Util {
 		if (val == null || "".equals(val)) {
 			return null;
 		}
-		byte[] asBytes = Base64.getDecoder().decode(val);
-		String result = null;
-		try {
-			result = new String(asBytes, "utf-8");
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return result;
+//		byte[] asBytes = Base64.getDecoder().decode(val);
+//		String result = null;
+//		try {
+//			result = new String(asBytes, "utf-8");
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+		return null;
 	}
 
 

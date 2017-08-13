@@ -13,24 +13,25 @@ import java.io.Serializable;
 @MappedSuperclass
 public class BaseEntity implements Serializable{
 
-    @Column(name = "h_version")
+
     private  Integer hversion;
 
-    @Column(name = "h_delete")
+
     private Integer hdelete;
 
-    @Column(name = "create_user_id")
+
     private Integer createUserId;
 
-    @Column(name = "h_create_time")
+
     private Timestamp createTime;
 
-    @Column(name = "h_update_time")
+
     private Timestamp updateTime;
 
-    @Column(name = "modify_user_id")
+
     private Integer modifyUserId;
 
+    @Column(name = "h_version")
     public Integer getHversion() {
         return hversion;
     }
@@ -39,6 +40,7 @@ public class BaseEntity implements Serializable{
         this.hversion = hversion;
     }
 
+    @Column(name = "h_delete")
     public Integer getHdelete() {
         return hdelete;
     }
@@ -47,6 +49,7 @@ public class BaseEntity implements Serializable{
         this.hdelete = hdelete;
     }
 
+    @Column(name = "create_user_id")
     public Integer getCreateUserId() {
         return createUserId;
     }
@@ -55,6 +58,7 @@ public class BaseEntity implements Serializable{
         this.createUserId = createUserId;
     }
 
+    @Column(name = "h_create_time")
     public Timestamp getCreateTime() {
         return createTime;
     }
@@ -63,6 +67,7 @@ public class BaseEntity implements Serializable{
         this.createTime = createTime;
     }
 
+    @Column(name = "h_update_time")
     public Timestamp getUpdateTime() {
         return updateTime;
     }
@@ -71,6 +76,7 @@ public class BaseEntity implements Serializable{
         this.updateTime = updateTime;
     }
 
+    @Column(name = "modify_user_id")
     public Integer getModifyUserId() {
         return modifyUserId;
     }

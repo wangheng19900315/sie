@@ -1,0 +1,90 @@
+package com.sie.framework.entity;
+
+import javax.persistence.*;
+
+/**
+ * Created by x on 2017/8/12.
+ */
+@Entity
+@Table(name = "order")
+public class OrderEntity extends BaseEntity {
+    private Integer id;
+    private String code;
+    private Integer money;
+    private Integer crId;
+    private Integer couponId;
+    private Integer courseNumber;
+    private Byte status;
+
+    @Id
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    @Basic
+    @Column(name = "code")
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    @Basic
+    @Column(name = "money")
+    public Integer getMoney() {
+        return money;
+    }
+
+    public void setMoney(Integer money) {
+        this.money = money;
+    }
+
+    @Basic
+    @Column(name = "cr_id")
+    public Integer getCrId() {
+        return crId;
+    }
+
+    public void setCrId(Integer crId) {
+        this.crId = crId;
+    }
+
+    @Basic
+    @Column(name = "coupon_id")
+    public Integer getCouponId() {
+        return couponId;
+    }
+
+    public void setCouponId(Integer couponId) {
+        this.couponId = couponId;
+    }
+
+    @Basic
+    @Column(name = "course_number")
+    public Integer getCourseNumber() {
+        return courseNumber;
+    }
+
+    public void setCourseNumber(Integer courseNumber) {
+        this.courseNumber = courseNumber;
+    }
+
+    @Basic
+    @Column(name = "status")
+    public Byte getStatus() {
+        return status;
+    }
+
+    public void setStatus(Byte status) {
+        this.status = status;
+    }
+
+
+}
