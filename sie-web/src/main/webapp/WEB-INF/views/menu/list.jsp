@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="ot" tagdir="/WEB-INF/tags" %>
-<ot:layout title="用户管理">
+<ot:layout title="菜单管理">
 
 
 
@@ -24,7 +24,7 @@
                         </div>
                         <button type="btn" id="searchBtn" class="btn btn-primary">查找</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
-                        <button class="btn" id="addBtn" >添加</button> &nbsp;&nbsp;
+                        <%--<button class="btn" id="addBtn" >添加</button> &nbsp;&nbsp;--%>
                         <%--<button class="btn btn-primary" id="editBtn" >修改</button> &nbsp;&nbsp;--%>
                         <%--<button class="btn btn-info" id="deleteBtn" >删除</button> &nbsp;&nbsp;--%>
                         <%--<button class="btn btn-success" id="infoBtn">查看</button> &nbsp;&nbsp;--%>
@@ -49,10 +49,11 @@
                     </div>
                 </div>
             </div>
-    <!-- /11. $JQUERY_DATA_TABLES -->
 
          </div>
     </div>
 
+
+
 </ot:layout>
-<script src="/statics/pages/user/list.js"></script>
+<script src="/statics/pages/menu/list.js"></script>

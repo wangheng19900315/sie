@@ -21,7 +21,6 @@ head>
 <link href="/statics/assets/stylesheets/rtl.min.css" rel="stylesheet" type="text/css">
 <link href="/statics/assets/stylesheets/themes.min.css" rel="stylesheet" type="text/css">
 <link href="/statics/common/common.css" rel="stylesheet" type="text/css">
-<link href="/statics/assets/stylesheets/jquery-ui.min.css" rel="stylesheet" type="text/css">
 
 <link rel="stylesheet" type="text/css"
       href="/statics/jqGrid/ui.jqgrid.css?_dc=$!{staticVersion}"/>
@@ -59,7 +58,6 @@ head>
 <script src="/statics/common/util.js"></script>
 <script src="/statics/jqGrid/jquery.jqGrid.min.js"></script>
 <script src="/statics/jqGrid/grid.locale-cn.js"></script>
-<script src="/statics/assets/javascripts/jquery-ui.min.js"></script>
 
 <script type="text/javascript">
 

@@ -1,7 +1,7 @@
 package com.sie.service.impl;
 
 import com.sie.framework.base.GenericDao;
-import com.sie.framework.base.PageInfo;
+import com.sie.service.bean.PageInfo;
 import com.sie.framework.entity.BaseEntity;
 import com.sie.service.BaseService;
 import com.sie.util.NumberUtil;

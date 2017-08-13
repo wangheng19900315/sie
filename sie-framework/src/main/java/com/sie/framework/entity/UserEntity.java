@@ -23,6 +23,7 @@ public class UserEntity extends BaseEntity{
     private String name;
     private String password;
     private Integer roleId;
+    private String role_name;
 
 
     @Id

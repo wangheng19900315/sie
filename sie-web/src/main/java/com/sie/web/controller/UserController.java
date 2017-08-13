@@ -2,7 +2,7 @@ package com.sie.web.controller;
 
 import com.sie.framework.entity.UserEntity;
 import com.sie.service.UserService;
-import com.sie.framework.base.PageInfo;
+import com.sie.service.bean.PageInfo;
 import com.sie.service.bean.ResultBean;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;

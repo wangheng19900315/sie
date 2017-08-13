@@ -1,7 +1,8 @@
 package com.sie.web.controller;
 
-import com.sie.framework.entity.SysRoleEntity;
-import com.sie.service.RoleService;
+import com.sie.framework.entity.SchoolEntity;
+import com.sie.framework.entity.SysMenuEntity;
+import com.sie.service.SchoolService;
 import com.sie.service.bean.PageInfo;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,13 +14,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * Created by wangheng on 2017/8/9.
  */
 @Controller
-@RequestMapping("/role")
-public class RoleController {
+@RequestMapping("/school")
+public class SchoolController {
 
-    private static final Logger LOGGER = Logger.getLogger(RoleController.class);
+    private static final Logger LOGGER = Logger.getLogger(SchoolController.class);
 
     @Autowired
-    private RoleService roleService;
+    private SchoolService schoolService;
 
     @RequestMapping("/addOrUpdate")
     public String showUserInfo(){
@@ -30,23 +31,23 @@ public class RoleController {
 
     @RequestMapping("/list.html")
     public String list(){
-        return "/role/list";
+        return "/school/list";
     }
 
     @RequestMapping("/add.html")
     public String add(){
-        return "/role/add";
+        return "/school/add";
     }
 
 
 
     @RequestMapping("/list.json")
     @ResponseBody
-    public PageInfo<SysRoleEntity> listJons(Integer page, Integer rows ){
+    public PageInfo<SchoolEntity> listJons(Integer page, Integer rows ){
 
-        PageInfo<SysRoleEntity> pageInfo = null;
+        PageInfo<SchoolEntity> pageInfo = null;
         try{
-            pageInfo = this.roleService.getList(page,rows, null);
+            pageInfo = this.schoolService.getList(page,rows, null);
         }catch (Exception e){
             e.printStackTrace();
         }

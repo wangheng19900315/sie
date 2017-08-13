@@ -1,4 +1,4 @@
-package com.sie.framework.base;
+package com.sie.service.bean;
 
 import java.util.List;
 

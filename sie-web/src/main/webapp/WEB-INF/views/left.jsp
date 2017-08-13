@@ -66,7 +66,7 @@
                 </ul>
             </li>
             <li class="mm-dropdown">
-                <a href="#"><i class="menu-icon fa fa-th"></i><span class="mm-text">报表管理</span></a>
+                <a href="#"><i class="menu-icon fa fa-table"></i><span class="mm-text">报表管理</span></a>
                 <ul>
 
                     <li>  <a tabindex="-1" href="layouts-grid.html"><span class="mm-text">订单报表</span></a> </li>
@@ -78,8 +78,8 @@
                 <a href="#"><i class="menu-icon fa fa-th"></i><span class="mm-text">数据字典</span></a>
                 <ul>
 
-                    <li>  <a tabindex="-1" href="layouts-grid.html"><span class="mm-text">学校管理</span></a> </li>
-                    <li>  <a tabindex="-1" href="layouts-grid.html"><span class="mm-text">学校管理</span></a> </li>
+                    <li>  <a tabindex="-1" href="/school/list.html"><span class="mm-text">学校管理</span></a> </li>
+                    <%--<li>  <a tabindex="-1" href="layouts-grid.html"><span class="mm-text">学校管理</span></a> </li>--%>
 
 
                 </ul>
@@ -94,7 +94,7 @@
                         <a tabindex="-1" href="/role/list.html"><i class="mm-text"></i>角色管理</a>
                     </li>
                     <li>
-                        <a tabindex="-1" href="/user/list.html"><i class="mm-text"></i>菜单管理</a>
+                        <a tabindex="-1" href="/menu/list.html"><i class="mm-text"></i>菜单管理</a>
                     </li>
                 </ul>
             </li>

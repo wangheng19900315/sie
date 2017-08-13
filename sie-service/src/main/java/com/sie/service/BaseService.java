@@ -1,6 +1,6 @@
 package com.sie.service;
 
-import com.sie.framework.base.PageInfo;
+import com.sie.service.bean.PageInfo;
 import com.sie.framework.entity.BaseEntity;
 
 import java.io.Serializable;
