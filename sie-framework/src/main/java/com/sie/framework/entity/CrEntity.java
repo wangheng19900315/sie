@@ -13,6 +13,7 @@ public class CrEntity extends BaseEntity{
     private String code;
     private String personName;
     private Integer total;
+    private Integer used;
     private Double price;
 
     @Id
@@ -63,5 +64,15 @@ public class CrEntity extends BaseEntity{
 
     public void setPrice(Double price) {
         this.price = price;
+    }
+
+    @Basic
+    @Column(name = "used")
+    public Integer getUsed() {
+        return used;
+    }
+
+    public void setUsed(Integer used) {
+        this.used = used;
     }
 }
