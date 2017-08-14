@@ -26,7 +26,7 @@
                             <div class="form-group ">
                                 <label for="password" class="col-sm-2 control-label">name</label>
                                 <div class="col-sm-9">
-                                    <input type="email" class="form-control" id="name" name="name" placeholder="name">
+                                    <input type="text" class="form-control" id="name" name="name" placeholder="name" required data-msg-required="请输入名称">
                                 </div>
                             </div>
                         </div><!-- col-sm-6 -->
@@ -34,7 +34,7 @@
                             <div class="form-group ">
                                 <label for="password" class="col-sm-2 control-label">password</label>
                                 <div class="col-sm-9">
-                                    <input type="email" class="form-control" id="password" name="password" placeholder="password">
+                                    <input type="text" class="form-control" id="password" name="password" placeholder="password" required data-msg-required="请输入密码" minlength="6" data-msg-minlength="至少输入6个字符">
                                 </div>
                             </div>
 
@@ -46,7 +46,7 @@
                             <div class="form-group ">
                                 <label for="email" class="col-sm-2 control-label">Email</label>
                                 <div class="col-sm-9">
-                                    <input type="email" class="form-control" id="email" name="email" placeholder="Email">
+                                    <input type="email" class="form-control" id="email" name="email" placeholder="Email" required data-msg-required="请输入Email">
                                     </div>
                             </div>
                         </div><!-- col-sm-6 -->
@@ -54,14 +54,14 @@
                             <div class="form-group ">
                                 <label for="phone" class="col-sm-2 control-label">Phone</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="phone" name="phone" placeholder="Phone">
+                                    <input type="text" class="form-control" id="phone" name="phone" data-rule-mobile="true" placeholder="Phone" required data-msg-required="请输入手机号"  data-msg-mobile="请输入正确格式">
                                 </div>
                             </div>
                         </div><!-- col-sm-6 -->
                     </div><!-- row -->
                 </div>
                 <div class="panel-footer text-center">
-                    <button class="btn btn-primary" id="submitBtn" onclick="return false;">提交</button>
+                    <button class="btn btn-primary" id="submitBtn" type="submit" >提交</button>
                     <button class="btn btn-danger" onclick="window.history.go(-1)">取消</button>
                 </div>
             </form>
