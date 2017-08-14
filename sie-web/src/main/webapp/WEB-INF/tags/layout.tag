@@ -55,10 +55,10 @@ head>
 <script src="/statics/assets/javascripts/jquery-1.8.3.min.js"></script>
 <script src="/statics/assets/javascripts/bootstrap.min.js"></script>
 <script src="/statics/assets/javascripts/pixel-admin.min.js"></script>
-<script src="/statics/common/util.js"></script>
 <script src="/statics/jqGrid/jquery.jqGrid.min.js"></script>
 <script src="/statics/jqGrid/grid.locale-cn.js"></script>
 <script src="/statics/common/jquery.validate.js"></script>
+<script src="/statics/common/util.js"></script>
 
 <script type="text/javascript">
 

@@ -32,6 +32,9 @@ $.fn.serializeJson=function(){
     return serializeObj;
 };
 
+
+
+//验证的一些格式
 $.validator.setDefaults({
     errorElement:'span'
 });
@@ -141,4 +144,4 @@ jQuery.validator.addMethod("idCard", function (value, element) {
     var isIDCard2=/^[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}([0-9]|X)$/;//(18位)
 
     return this.optional(element) || (isIDCard1.test(value)) || (isIDCard2.test(value));
-});
+}, "格式不对");
