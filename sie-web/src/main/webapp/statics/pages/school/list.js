@@ -20,37 +20,7 @@ function selectRow() {
     //    $('#view-btn').addClass('disabled');
     //}
 };
-function Modify(id) {   //单击修改链接的操作
-    var model = jQuery("#grid-table").jqGrid('getRowData', id);
-    //alert(model.Id);
-    $("#editname").val(model.name);
-    //$("#txtCityName").val(model.Name);
-    //$("#txtFID").val(model.Fid);
-    $("#modifyform").dialog({
-        height:230,
-        width: 400,
-        modal:true,  //这里就是控制弹出为模态
-        resizable:false,
-        buttons:{
-            "确定":function(){
-                alert("在这里对数据进行修改！");
-                $(this).dialog("close");
-            },
-            "取消":function(){$(this).dialog("close");}
-        }
-        //height:230,
-        //width:400,
-        //resizable:false,
-        //modal:true,  //这里就是控制弹出为模态
-        //buttons:{
-        //    "确定":function(){
-        //        alert("在这里对数据进行修改！");
-        //        $(this).dialog("close");
-        //    },
-        //    "取消":function(){$(this).dialog("close");}
-        //}
-    });
-};
+
 function Delete(id) { //单击删除链接的操作
     alert("在这里执行异步删除操作，此时点击了id为 "+id+" 的行！");
 };
@@ -65,7 +35,7 @@ $(function(){
         height: '100%',
         mtype: 'post',
         postData: {},
-        colNames: ['ID', '学校名称' , '学校地址', '创建时间' ,'修改时间','修改',"删除" ],
+        colNames: ['ID', '学校名称' , '学校地址', '创建时间' ,'修改时间'],
         colModel: [
             {name: 'id', index: 'id', width: 20, hidden: true, sorttype: "int", sortable: false},
             {name: 'name', index: 'name', width: 120, sortable: false},
@@ -79,9 +49,7 @@ $(function(){
                 var time1 = new Date(cellvalue).Format("yyyy-MM-dd hh:mm:ss");
                 return time1;
                 }
-            },
-            {name:'Modify',index:'id',width:80,align:"center",sortable:false},
-            {name:'Delete',index:'id',width:80,align:'center',sortable:false}
+            }
         ],
         multiselect: true,
         multiboxonly: true,
@@ -95,16 +63,6 @@ $(function(){
         loadComplete: function () {
             jqGrid.initWidth(jQuery, '#grid-table', ".table-primary");
             jqGrid.reset(jQuery);
-
-            //在此事件中循环为每一行添加修改和删除链接
-            var ids=jQuery("#grid-table").jqGrid('getDataIDs');
-            for(var i=0; i<ids.length; i++){
-                var id=ids[i];
-                modify = "<a href='#' style='color:#f60' onclick='Modify(" + id + ")'>修改</a>";  //这里的onclick就是调用了上面的javascript函数 Modify(id)
-                del = "<a href='#'  style='color:#f60' onclick='Delete(" + id + ")' >删除</a>";
-                jQuery("#grid-table").jqGrid('setRowData', ids[i], { Modify: modify ,Delete:del});
-            }
-
         }
     });
 
