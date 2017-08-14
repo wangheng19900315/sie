@@ -106,7 +106,7 @@ $(function(){
                         type: 'get',
                         dataType:'json',
                         success: function (json, statusText, xhr, $form) {
-                            if (json.status==0) {
+                            if (json.success) {
                                 alert("删除完成!");
                                 $("#grid-table").trigger('reloadGrid');
                             } else {
