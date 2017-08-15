@@ -72,10 +72,24 @@
 
   <!-- 配置session超时时间，单位分钟 -->
   <session-config>
-    <session-timeout>30</session-timeout>
+    <session-timeout>1440</session-timeout>
   </session-config>
 
   <welcome-file-list>
     <welcome-file>/index</welcome-file>
   </welcome-file-list>
+
+  <error-page>
+    <error-code>404</error-code>
+    <location>/WEB-INF/views/404.html</location>
+  </error-page>
+
+  <error-page>
+    <error-code>500</error-code>
+    <location>/WEB-INF/views/500.html</location>
+  </error-page>
+  <error-page>
+    <exception-type>java.lang.Exception</exception-type>
+    <location>/WEB-INF/views/500.html</location>
+  </error-page>
 </web-app>

@@ -1,27 +1,15 @@
-<!DOCTYPE html>
-<!--[if IE 8]>         <html class="ie8"> <![endif]-->
-<!--[if IE 9]>         <html class="ie9 gt-ie8"> <![endif]-->
-<!--[if gt IE 9]><!--> <html class="gt-ie8 gt-ie9 not-ie"> <!--<![endif]-->
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 	<title>Sign In - PixelAdmin</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
-
-	<!-- Open Sans font from Google CDN -->
-	<!--<link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,600,700,300&subset=latin" rel="stylesheet" type="text/css">-->
-
-	<!-- Pixel Admin's stylesheets -->
-	<link href="assets/stylesheets/bootstrap.min.css" rel="stylesheet" type="text/css">
-	<link href="assets/stylesheets/pixel-admin.min.css" rel="stylesheet" type="text/css">
-	<link href="assets/stylesheets/pages.min.css" rel="stylesheet" type="text/css">
-	<link href="assets/stylesheets/rtl.min.css" rel="stylesheet" type="text/css">
-	<link href="assets/stylesheets/themes.min.css" rel="stylesheet" type="text/css">
-
-	<!--[if lt IE 9]>
-		<script src="assets/javascripts/ie.min.js"></script>
-	<![endif]-->
-
+	<link href="/statics/assets/stylesheets/bootstrap.min.css" rel="stylesheet" type="text/css">
+	<link href="/statics/assets/stylesheets/pixel-admin.min.css" rel="stylesheet" type="text/css">
+	<link href="/statics/assets/stylesheets/pages.min.css" rel="stylesheet" type="text/css">
+	<link href="/statics/assets/stylesheets/rtl.min.css" rel="stylesheet" type="text/css">
+	<link href="/statics/assets/stylesheets/themes.min.css" rel="stylesheet" type="text/css">
 
 <!-- $DEMO =========================================================================================
 
@@ -61,35 +49,15 @@
 -->
 <body class="theme-default page-signin">
 
- 
 
-<script>
-	var init = [];
-	init.push(function () {
-		var $div = $('<div id="signin-demo" class="hidden-xs"><div>PAGE BACKGROUND</div></div>'),
-		    bgs  = [ 'assets/demo/signin-bg-1.jpg', 'assets/demo/signin-bg-2.jpg', 'assets/demo/signin-bg-3.jpg',
-		    		 'assets/demo/signin-bg-4.jpg', 'assets/demo/signin-bg-5.jpg', 'assets/demo/signin-bg-6.jpg',
-					 'assets/demo/signin-bg-7.jpg', 'assets/demo/signin-bg-8.jpg', 'assets/demo/signin-bg-9.jpg' ];
-		for (var i=0, l=bgs.length; i < l; i++) $div.append($('<img src="' + bgs[i] + '">'));
-		$div.find('img').click(function () {
-			var img = new Image();
-			img.onload = function () {
-				$('#page-signin-bg > img').attr('src', img.src);
-				$(window).resize();
-			}
-			img.src = $(this).attr('src');
-		});
-		$('body').append($div);
-	});
-</script>
-<!-- Demo script --> <script src="assets/demo/demo.js"></script> <!-- / Demo script -->
+
 
 	<!-- Page background -->
 	<div id="page-signin-bg">
 		<!-- Background overlay -->
 		<div class="overlay"></div>
 		<!-- Replace this with your bg image -->
-		<img src="assets/demo/signin-bg-1.jpg" alt="">
+		<img src="/statics/assets/demo/signin-bg-1.jpg" alt="">
 	</div>
 	<!-- / Page background -->
 
@@ -99,7 +67,7 @@
 		<!-- Left side -->
 		<div class="signin-info">
 			<a href="index.html" class="logo">
-				<img src="assets/demo/logo-big.png" alt="" style="margin-top: -5px;">&nbsp;
+				<img src="/statics/assets/demo/logo-big.png" alt="" style="margin-top: -5px;">&nbsp;
 				PixelAdmin
 			</a> <!-- / .logo -->
 			<div class="slogan">
@@ -155,7 +123,7 @@
 						<div class="close">&times;</div>
 					</div> <!-- / .signin-text -->
 				</div> <!-- / .header -->
-				
+
 				<!-- Form -->
 				<form action="index.html" id="password-reset-form_id">
 					<div class="form-group w-icon">
@@ -178,79 +146,6 @@
 	<div class="not-a-member">
 		Not a member? <a href="pages-signup.html">Sign up now</a>
 	</div>
-
-<!-- Get jQuery from Google CDN -->
-<!--[if !IE]> -->
-	<script type="text/javascript"> window.jQuery || document.write('<script src="assets/javascripts/jquery-1.8.3.min.js">'+"<"+"/script>"); </script>
-<!-- <![endif]-->
-<!--[if lte IE 9]>
-	<script type="text/javascript"> window.jQuery || document.write('<script src="assets/javascripts/jquery-1.8.3.min.js">'+"<"+"/script>"); </script>
-<![endif]-->
-
-
-<!-- Pixel Admin's javascripts -->
-<script src="assets/javascripts/bootstrap.min.js"></script>
-<script src="assets/javascripts/pixel-admin.min.js"></script>
-
-<script type="text/javascript">
-	// Resize BG
-	init.push(function () {
-		var $ph  = $('#page-signin-bg'),
-		    $img = $ph.find('> img');
-
-		$(window).on('resize', function () {
-			$img.attr('style', '');
-			if ($img.height() < $ph.height()) {
-				$img.css({
-					height: '100%',
-					width: 'auto'
-				});
-			}
-		});
-	});
-
-	// Show/Hide password reset form on click
-	init.push(function () {
-		$('#forgot-password-link').click(function () {
-			$('#password-reset-form').fadeIn(400);
-			return false;
-		});
-		$('#password-reset-form .close').click(function () {
-			$('#password-reset-form').fadeOut(400);
-			return false;
-		});
-	});
-
-	// Setup Sign In form validation
-	init.push(function () {
-		$("#signin-form_id").validate({ focusInvalid: true, errorPlacement: function () {} });
-		
-		// Validate username
-		$("#username_id").rules("add", {
-			required: true,
-			minlength: 3
-		});
-
-		// Validate password
-		$("#password_id").rules("add", {
-			required: true,
-			minlength: 6
-		});
-	});
-
-	// Setup Password Reset form validation
-	init.push(function () {
-		$("#password-reset-form_id").validate({ focusInvalid: true, errorPlacement: function () {} });
-		
-		// Validate email
-		$("#p_email_id").rules("add", {
-			required: true,
-			email: true
-		});
-	});
-
-	window.PixelAdmin.start(init);
-</script>
 
 </body>
 </html>

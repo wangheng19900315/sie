@@ -5,7 +5,7 @@
 <c:set var="rootpath" value="${ pageContext.request.contextPath}" scope="request" />
 <!DOCTYPE html>
 <html lang="zh-CN">
-head>
+<head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 <title>${title} - 网站管理</title>

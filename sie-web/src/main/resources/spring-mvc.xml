@@ -28,7 +28,11 @@
             </bean>
         </mvc:message-converters>
     </mvc:annotation-driven>
-
+    <mvc:resources location="/" mapping="/**/*.js"/>
+    <mvc:resources location="/" mapping="/**/*.css"/>
+    <mvc:resources location="/" mapping="/**/*login*"/>
+    <mvc:resources location="/" mapping="/**/*404*"/>
+    <mvc:resources location="/" mapping="/**/*500*"/>
     <mvc:resources location="/statics/" mapping="/statics/**"/>
 
     <!-- 对模型视图名称的解析，即在模型视图名称添加前后缀 -->
@@ -38,5 +42,20 @@
         <property name="prefix" value="/WEB-INF/views/" />
         <property name="suffix" value=".jsp" />
     </bean>
+
+    <!--<mvc:interceptors>-->
+
+    <!--&lt;!&ndash;单点登录拦截器 &ndash;&gt;-->
+    <!--<mvc:interceptor>-->
+        <!--<mvc:mapping path="/**" />-->
+        <!--<mvc:exclude-mapping path="/**/*login*"/>-->
+        <!--<mvc:exclude-mapping path="/**/*404*"/>-->
+        <!--<mvc:exclude-mapping path="/**/*500*"/>-->
+        <!--&lt;!&ndash; 单点登录springmvc 拦截器bean &ndash;&gt;-->
+        <!--<bean id="longinInterceptor"-->
+              <!--class="com.sie.web.interceptor.UserLoginInterceptor">-->
+        <!--</bean>-->
+    <!--</mvc:interceptor>-->
+    <!--</mvc:interceptors>-->
 
 </beans>

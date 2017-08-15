@@ -81,21 +81,39 @@ public class UserController {
         return resultBean;
     }
 
-    @RequestMapping(value = "/delete.json")
+
+
+
+    @RequestMapping(value = "/login.json")
     @ResponseBody
-    public ResultBean delete(Integer id){
+    public ResultBean login(Integer userName, String password){
         ResultBean resultBean = new ResultBean();
 
         try{
-            this.userService.delete(id);
-            resultBean.setMessage("删除成功");
-            resultBean.setSuccess(true);
+//            this.userService.delete(id);
+//            resultBean.setMessage("删除成功");
+//            resultBean.setSuccess(true);
         }catch (Exception e){
             e.printStackTrace();
         }
 
         return resultBean;
     }
+
+    @RequestMapping(value = "/logout.json")
+    public String logout(){
+        ResultBean resultBean = new ResultBean();
+
+        try{
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return "";
+    }
+
+
 
 
 

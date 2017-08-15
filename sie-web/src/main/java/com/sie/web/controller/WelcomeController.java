@@ -15,8 +15,13 @@ public class WelcomeController {
         return "index";
     }
 
-    @RequestMapping("/index1")
-    public String index1(){
-        return "index1";
+    @RequestMapping("/")
+    public String welcome(){
+        return "index";
+    }
+
+    @RequestMapping(value = "/login.html")
+    public String login(){
+        return "login";
     }
 }
