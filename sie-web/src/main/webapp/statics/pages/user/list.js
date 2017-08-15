@@ -10,7 +10,6 @@ function selectRow() {
     var ids = $("#grid-table").jqGrid('getGridParam', 'selarrrow');
     selectRows[curpagenum-1]=ids;
 
-    debugger;
     if (ids && ids.length == 1) {
         $('#editBtn').removeClass('disabled');
         $('#deleteBtn').removeClass('disabled');
