@@ -95,7 +95,12 @@ $(function(){
     })
 
     $("#deleteBtn").bind("click",function(){
-        var id = $("#grid-table").jqGrid('getGridParam', 'selarrrow');
+        var id = $("#grid-table").jqGrid('getGridParam', 'selrow');
+        console.log(id);
+        if(id == null){
+            alert("请选择记录!");
+            return;
+        }
         bootbox.confirm({
             message: "确定要删除该条记录?",
             callback: function(result) {
