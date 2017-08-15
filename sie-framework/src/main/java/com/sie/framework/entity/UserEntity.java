@@ -26,10 +26,8 @@ public class UserEntity extends BaseEntity{
     private String password;
     private String email;
     private String telephone;
-    private Integer roleId;
-    @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
-    @JoinColumn(name = "role_id", nullable = true, columnDefinition = "COMMENT '角色id'")
-    @Where(clause = "h_delete=0")
+//    private Integer roleId;
+
     private RoleEntity roleEntity;
 
 
@@ -59,14 +57,14 @@ public class UserEntity extends BaseEntity{
         this.password = password;
     }
 
-    @Column(name = "role_id")
-    public Integer getRoleId() {
-        return roleId;
-    }
-
-    public void setRoleId(Integer roleId) {
-        this.roleId = roleId;
-    }
+//    @Column(name = "role_id")
+//    public Integer getRoleId() {
+//        return roleId;
+//    }
+//
+//    public void setRoleId(Integer roleId) {
+//        this.roleId = roleId;
+//    }
 
     @Column(name = "email")
     public String getEmail() {
@@ -84,5 +82,16 @@ public class UserEntity extends BaseEntity{
 
     public void setTelephone(String telephone) {
         this.telephone = telephone;
+    }
+
+    @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
+    @JoinColumn(name = "role_id", nullable = true, columnDefinition = "COMMENT '角色id'")
+    @Where(clause = "h_delete=0")
+    public RoleEntity getRoleEntity() {
+        return roleEntity;
+    }
+
+    public void setRoleEntity(RoleEntity roleEntity) {
+        this.roleEntity = roleEntity;
     }
 }

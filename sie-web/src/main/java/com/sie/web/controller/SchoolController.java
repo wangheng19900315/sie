@@ -3,9 +3,12 @@ package com.sie.web.controller;
 import com.sie.framework.entity.SchoolEntity;
 import com.sie.service.SchoolService;
 import com.sie.service.bean.PageInfo;
+import com.sie.service.bean.ResultBean;
+import com.sie.util.NumberUtil;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -52,6 +55,24 @@ public class SchoolController {
         }
 
         return pageInfo;
+    }
+
+    @RequestMapping(value = "/addOrupdate.json")
+    @ResponseBody
+    public ResultBean addOrupdate(@ModelAttribute SchoolEntity schoolEntity){
+        ResultBean resultBean = new ResultBean();
+
+        try{
+            Integer id = this.schoolService.saveOrUpdate(schoolEntity);
+            if(NumberUtil.isSignless(id)){
+                resultBean.setMessage("保存成功");
+                resultBean.setSuccess(true);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return resultBean;
     }
 
 }
