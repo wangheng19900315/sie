@@ -41,6 +41,7 @@ public class UserLoginInterceptor implements HandlerInterceptor {
 
     HttpSession session = request.getSession();
 
+    String url = request.getRequestURI();
     String userName = (String)session.getAttribute(Constant.SYSTEM_USER_NAME_KEY);
     if(StringUtils.isBlank(userName)){
       response.sendRedirect("/login.html");

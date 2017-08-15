@@ -1,6 +1,8 @@
 package com.sie.web.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.sie.framework.entity.UserEntity;
+import com.sie.framework.type.Constant;
 import com.sie.service.UserService;
 import com.sie.service.bean.PageInfo;
 import com.sie.service.bean.ResultBean;
@@ -10,11 +12,13 @@ import org.apache.log4j.Logger;
 import org.apache.xpath.operations.Number;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 /**
  * Created by wangheng on 2017/8/9.
@@ -40,9 +44,14 @@ public class UserController {
         return "/user/list";
     }
 
-    @RequestMapping("/add.html")
-    public String add(){
-        return "/user/add";
+    @RequestMapping("/addOrUpdate.html")
+    public String addOrupdate(Model model, Integer id){
+        if(NumberUtil.isSignless(id)){
+            UserEntity userEntity = this.userService.get(id);
+            model.addAttribute("userEntity", JSON.toJSON(userEntity));
+        }
+
+        return "/user/addOrUpdate";
     }
 
 
@@ -86,13 +95,18 @@ public class UserController {
 
     @RequestMapping(value = "/login.json")
     @ResponseBody
-    public ResultBean login(Integer userName, String password){
+    public ResultBean login(String userName, String password, HttpServletRequest request){
         ResultBean resultBean = new ResultBean();
-
         try{
-//            this.userService.delete(id);
-//            resultBean.setMessage("删除成功");
-//            resultBean.setSuccess(true);
+            UserEntity userEntity = this.userService.login(userName,password);
+            if(userEntity != null){
+                resultBean.setSuccess(true);
+                resultBean.setMessage("登录成功");
+                HttpSession session = request.getSession();
+                session.setAttribute(Constant.SYSTEM_USER_ID,userEntity.getId());
+                session.setAttribute(Constant.SYSTEM_USER_NAME_KEY,userEntity.getName());
+
+            }
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -112,6 +126,7 @@ public class UserController {
 
         return "";
     }
+
 
 
 

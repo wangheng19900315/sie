@@ -7,6 +7,8 @@ import com.sie.util.NumberUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * Created by wangheng on 2017/8/9.
  */
@@ -34,4 +36,13 @@ public class UserServiceImpl extends BaseServiceImpl<UserEntity,Integer> impleme
         return userEntity.getId();
     }
 
+    @Override
+    public UserEntity login(String userName, String password) {
+        String hql = "from UserEntity where hdelete=0 and name='"+userName+"' and password='"+password+"'";
+        List<UserEntity>  list = this.userDao.getList(hql);
+        if(list != null && list.size() > 0){
+            return list.get(0);
+        }
+        return null;
+    }
 }
