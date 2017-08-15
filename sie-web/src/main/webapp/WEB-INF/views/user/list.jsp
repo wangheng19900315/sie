@@ -27,7 +27,7 @@
                         <button type="btn" class="btn" id="addBtn" onclick="return false;" >添加</button> &nbsp;&nbsp;
                         <button type="btn" class="btn btn-primary" id="editBtn" onclick="return false;"  >修改</button> &nbsp;&nbsp;
                         <button type="btn" class="btn btn-info" id="deleteBtn"  onclick="return false;" >删除</button> &nbsp;&nbsp;
-                        <button type="btn" class="btn btn-success" id="infoBtn" onclick="return false;" >查看</button> &nbsp;&nbsp;
+                        <%--<button type="btn" class="btn btn-success" id="infoBtn" onclick="return false;" >查看</button> &nbsp;&nbsp;--%>
                     </form>
                 </div>
             </div>

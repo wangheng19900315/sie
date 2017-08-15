@@ -24,7 +24,7 @@ public class MenuController {
     @RequestMapping("/addOrUpdate")
     public String showUserInfo(){
 
-        return "/user/showInfo";
+        return "/menu/showInfo";
     }
 
 

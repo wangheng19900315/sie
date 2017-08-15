@@ -93,9 +93,9 @@
                     <li>
                         <a tabindex="-1" href="/role/list.html"><i class="mm-text"></i>角色管理</a>
                     </li>
-                    <li>
-                        <a tabindex="-1" href="/menu/list.html"><i class="mm-text"></i>菜单管理</a>
-                    </li>
+                    <%--<li>--%>
+                        <%--<a tabindex="-1" href="/menu/list.html"><i class="mm-text"></i>菜单管理</a>--%>
+                    <%--</li>--%>
                 </ul>
             </li>
 

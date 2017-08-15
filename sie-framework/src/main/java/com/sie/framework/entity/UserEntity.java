@@ -1,5 +1,7 @@
 package com.sie.framework.entity;
 
+import org.hibernate.annotations.Where;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Date;
@@ -25,7 +27,10 @@ public class UserEntity extends BaseEntity{
     private String email;
     private String telephone;
     private Integer roleId;
-    private String role_name;
+    @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
+    @JoinColumn(name = "role_id", nullable = true, columnDefinition = "COMMENT '角色id'")
+    @Where(clause = "h_delete=0")
+    private RoleEntity roleEntity;
 
 
     @Id

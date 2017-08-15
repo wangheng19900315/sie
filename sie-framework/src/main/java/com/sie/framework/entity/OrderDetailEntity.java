@@ -1,5 +1,7 @@
 package com.sie.framework.entity;
 
+import org.hibernate.annotations.Where;
+
 import javax.persistence.*;
 
 /**
@@ -14,6 +16,7 @@ public class OrderDetailEntity extends BaseEntity{
 
     @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
     @JoinColumn(name = "order_id", nullable = true, columnDefinition = "COMMENT '订单id'")
+    @Where(clause = "h_delete=0")
     private OrderEntity orderEntity;
 
     @Id

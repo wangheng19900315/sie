@@ -4,7 +4,6 @@ $(function(){
 
     $("#data-form").validate({
         submitHandler: function() {
-            debugger;
             var formData = $("#data-form").serializeJson();
             $.ajax({
                 url: '/user/addOrupdate.json',
