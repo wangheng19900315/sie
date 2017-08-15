@@ -1,6 +1,7 @@
 package com.sie.framework.entity;
 
 import javax.persistence.*;
+import java.util.List;
 
 /**
  * Created by x on 2017/8/12.
@@ -15,6 +16,9 @@ public class OrderEntity extends BaseEntity {
     private Integer couponId;
     private Integer courseNumber;
     private Byte status;
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "orderEntity", orphanRemoval = true)
+    private List<OrderDetailEntity> villageList;
 
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)

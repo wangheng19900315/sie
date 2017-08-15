@@ -12,6 +12,10 @@ public class OrderDetailEntity extends BaseEntity{
     private Integer projectId;
     private Integer courseId;
 
+    @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
+    @JoinColumn(name = "order_id", nullable = true, columnDefinition = "COMMENT '订单id'")
+    private OrderEntity orderEntity;
+
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     public Integer getId() {
