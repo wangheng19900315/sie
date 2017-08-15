@@ -87,11 +87,13 @@ $(function(){
     })
 
     $("#addBtn").bind("click",function(){
-        window.location.href="/user/add.html"
+        window.location.href="/user/addOrUpdate.html"
     })
 
 
     $("#editBtn").bind("click",function(){
+        var id = $("#grid-table").jqGrid('getGridParam', 'selrow');
+        window.location.href="/user/addOrUpdate.html?id="+id;
 
     })
 

@@ -1,5 +1,6 @@
 package com.sie.web.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.sie.framework.entity.UserEntity;
 import com.sie.framework.type.Constant;
 import com.sie.service.UserService;
@@ -11,6 +12,7 @@ import org.apache.log4j.Logger;
 import org.apache.xpath.operations.Number;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -42,9 +44,14 @@ public class UserController {
         return "/user/list";
     }
 
-    @RequestMapping("/add.html")
-    public String add(){
-        return "/user/add";
+    @RequestMapping("/addOrUpdate.html")
+    public String addOrupdate(Model model, Integer id){
+        if(NumberUtil.isSignless(id)){
+            UserEntity userEntity = this.userService.get(id);
+            model.addAttribute("userEntity", JSON.toJSON(userEntity));
+        }
+
+        return "/user/addOrUpdate";
     }
 
 
