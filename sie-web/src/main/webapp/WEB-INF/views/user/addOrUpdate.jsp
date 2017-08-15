@@ -52,9 +52,9 @@
                         </div><!-- col-sm-6 -->
                         <div class="col-sm-6">
                             <div class="form-group ">
-                                <label for="phone" class="col-sm-2 control-label">Phone</label>
+                                <label for="telephone" class="col-sm-2 control-label">Phone</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="phone" name="phone" placeholder="Phone" required  data-rule-mobile="true" data-msg-required="请输入手机号"  data-msg-mobile="请输入正确格式">
+                                    <input type="text" class="form-control" id="telephone" name="telephone" placeholder="Phone" required  data-rule-mobile="true" data-msg-required="请输入手机号"  data-msg-mobile="请输入正确格式">
                                 </div>
                             </div>
                         </div><!-- col-sm-6 -->
