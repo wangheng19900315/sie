@@ -24,7 +24,7 @@
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="form-group ">
-                                <label for="password" class="col-sm-2 control-label">name</label>
+                                <label for="name" class="col-sm-2 control-label">name</label>
                                 <div class="col-sm-9">
                                     <input type="text" class="form-control" id="name" name="name" placeholder="name" required data-msg-required="请输入名称">
                                 </div>
