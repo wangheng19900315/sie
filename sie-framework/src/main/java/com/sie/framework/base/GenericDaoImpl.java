@@ -81,6 +81,11 @@ public class GenericDaoImpl<T extends BaseEntity, PK extends Serializable> imple
 	}
 
 
+	public List<T> getList(String hql){
+		Query query = this.sessionFactory.getCurrentSession().createQuery(hql);
+		return query.list();
+	}
+
 
 
     @Override
