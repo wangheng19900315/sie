@@ -9,7 +9,7 @@ import java.util.List;
 @Entity
 @Table(name = "t_order_info")
 public class OrderEntity extends BaseEntity {
-    private Integer id;
+//    private Integer id;
     private String code;
     private Double money;
     private Integer crId;
@@ -20,15 +20,15 @@ public class OrderEntity extends BaseEntity {
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "orderEntity", orphanRemoval = true)
     private List<OrderDetailEntity> villageList;
 
-    @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
+//    @Id
+//    @GeneratedValue(strategy= GenerationType.IDENTITY)
+//    public Integer getId() {
+//        return id;
+//    }
+//
+//    public void setId(Integer id) {
+//        this.id = id;
+//    }
 
     @Basic
     @Column(name = "code")

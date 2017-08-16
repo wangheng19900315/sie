@@ -28,7 +28,7 @@ public class UserServiceImpl extends BaseServiceImpl<UserEntity,Integer> impleme
             UserEntity oldUserEntity = this.userDao.getEntity(userEntity.getId());
             oldUserEntity.setName(userEntity.getName());
             oldUserEntity.setPassword(userEntity.getPassword());
-            this.userDao.updateEntity(userEntity);
+            this.userDao.updateEntity(oldUserEntity);
         }else{
             this.userDao.createEntity(userEntity);
         }

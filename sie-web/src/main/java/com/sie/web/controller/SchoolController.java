@@ -1,6 +1,8 @@
 package com.sie.web.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.sie.framework.entity.SchoolEntity;
+import com.sie.framework.entity.UserEntity;
 import com.sie.service.SchoolService;
 import com.sie.service.bean.PageInfo;
 import com.sie.service.bean.ResultBean;
@@ -8,6 +10,7 @@ import com.sie.util.NumberUtil;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -36,9 +39,14 @@ public class SchoolController {
         return "/school/list";
     }
 
-    @RequestMapping("/add.html")
-    public String add(){
-        return "/school/add";
+    @RequestMapping("/addOrUpdate.html")
+    public String addOrupdate(Model model, Integer id){
+        if(NumberUtil.isSignless(id)){
+            SchoolEntity schoolEntity = this.schoolService.get(id);
+            model.addAttribute("entity", JSON.toJSON(schoolEntity));
+        }
+
+        return "/school/addOrUpdate";
     }
 
 
@@ -64,6 +72,24 @@ public class SchoolController {
 
         try{
             Integer id = this.schoolService.saveOrUpdate(schoolEntity);
+            if(NumberUtil.isSignless(id)){
+                resultBean.setMessage("保存成功");
+                resultBean.setSuccess(true);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return resultBean;
+    }
+
+    @RequestMapping(value = "/delete.json")
+    @ResponseBody
+    public ResultBean delete(Integer id){
+        ResultBean resultBean = new ResultBean();
+
+        try{
+            this.schoolService.delete(id);
             if(NumberUtil.isSignless(id)){
                 resultBean.setMessage("保存成功");
                 resultBean.setSuccess(true);

@@ -10,15 +10,13 @@ function selectRow() {
     var ids = $("#grid-table").jqGrid('getGridParam', 'selarrrow');
     selectRows[curpagenum-1]=ids;
 
-    //if (ids && ids.length == 1) {
-    //    $('#edit-btn').removeClass('disabled');
-    //    $('#del-btn').removeClass('disabled');
-    //    $('#view-btn').removeClass('disabled');
-    //} else {
-    //    $('#edit-btn').addClass('disabled');
-    //    $('#del-btn').addClass('disabled');
-    //    $('#view-btn').addClass('disabled');
-    //}
+    if (ids && ids.length == 1) {
+        $('#editBtn').removeClass('disabled');
+        $('#deleteBtn').removeClass('disabled');
+    } else {
+        $('#editBtn').addClass('disabled');
+        $('#deleteBtn').addClass('disabled');
+    }
 };
 $(function(){
 

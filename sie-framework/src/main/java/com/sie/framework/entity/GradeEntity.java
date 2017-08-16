@@ -8,19 +8,19 @@ import javax.persistence.*;
 @Entity
 @Table(name = "t_grade_info")
 public class GradeEntity extends BaseEntity {
-    private Integer id;
+//    private Integer id;
     private Double grade;
     private Integer orderDetailId;
 
-    @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
+//    @Id
+//    @GeneratedValue(strategy= GenerationType.IDENTITY)
+//    public Integer getId() {
+//        return id;
+//    }
+//
+//    public void setId(Integer id) {
+//        this.id = id;
+//    }
 
     @Basic
     @Column(name = "grade")

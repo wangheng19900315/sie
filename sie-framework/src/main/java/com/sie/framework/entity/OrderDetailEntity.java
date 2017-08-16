@@ -10,7 +10,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "t_order_detail_info")
 public class OrderDetailEntity extends BaseEntity{
-    private Integer id;
+//    private Integer id;
     private Integer projectId;
     private Integer courseId;
 
@@ -19,15 +19,15 @@ public class OrderDetailEntity extends BaseEntity{
     @Where(clause = "h_delete=0")
     private OrderEntity orderEntity;
 
-    @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
+//    @Id
+//    @GeneratedValue(strategy= GenerationType.IDENTITY)
+//    public Integer getId() {
+//        return id;
+//    }
+//
+//    public void setId(Integer id) {
+//        this.id = id;
+//    }
 
     @Basic
     @Column(name = "project_id")
@@ -49,25 +49,4 @@ public class OrderDetailEntity extends BaseEntity{
         this.courseId = courseId;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        OrderDetailEntity that = (OrderDetailEntity) o;
-
-        if (id != that.id) return false;
-        if (projectId != null ? !projectId.equals(that.projectId) : that.projectId != null) return false;
-        if (courseId != null ? !courseId.equals(that.courseId) : that.courseId != null) return false;
-
-        return true;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = id;
-        result = 31 * result + (projectId != null ? projectId.hashCode() : 0);
-        result = 31 * result + (courseId != null ? courseId.hashCode() : 0);
-        return result;
-    }
 }

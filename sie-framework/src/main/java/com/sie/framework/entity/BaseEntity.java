@@ -3,8 +3,7 @@ package com.sie.framework.entity;
 
 import java.sql.Timestamp;
 
-import javax.persistence.Column;
-import javax.persistence.MappedSuperclass;
+import javax.persistence.*;
 import java.io.Serializable;
 
 /**
@@ -13,6 +12,7 @@ import java.io.Serializable;
 @MappedSuperclass
 public class BaseEntity implements Serializable{
 
+    private Integer id;
 
     private  Integer hversion=0;
 
@@ -30,6 +30,16 @@ public class BaseEntity implements Serializable{
 
 
     private Integer modifyUserId;
+
+    @Id
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     @Column(name = "h_version")
     public Integer getHversion() {

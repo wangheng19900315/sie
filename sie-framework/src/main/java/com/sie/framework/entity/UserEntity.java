@@ -20,7 +20,7 @@ public class UserEntity extends BaseEntity{
      */
     private static final long serialVersionUID = 6980093847795726310L;
 
-    private Integer id;
+//    private Integer id;
 
     private String name;
     private String password;
@@ -31,15 +31,15 @@ public class UserEntity extends BaseEntity{
     private RoleEntity roleEntity;
 
 
-    @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
+//    @Id
+//    @GeneratedValue(strategy= GenerationType.IDENTITY)
+//    public Integer getId() {
+//        return id;
+//    }
+//
+//    public void setId(Integer id) {
+//        this.id = id;
+//    }
 
     public String getName() {
         return name;

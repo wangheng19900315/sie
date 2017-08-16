@@ -12,22 +12,22 @@ import java.sql.Timestamp;
 public class CouponEntity extends BaseEntity{
 
 
-    private Integer id;
+//    private Integer id;
     private String code;
     private String status;
     private Double price;
     private Timestamp startTime;
     private Timestamp endTime;
 
-    @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
+//    @Id
+//    @GeneratedValue(strategy= GenerationType.IDENTITY)
+//    public Integer getId() {
+//        return id;
+//    }
+//
+//    public void setId(Integer id) {
+//        this.id = id;
+//    }
 
 
     @Column(name = "code")
