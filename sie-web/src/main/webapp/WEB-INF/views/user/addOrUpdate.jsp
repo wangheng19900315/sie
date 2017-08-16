@@ -17,6 +17,7 @@
 
         <div class="col-sm-12">
             <form   class="panel form-horizontal" novalidate="novalidate" id="data-form" >
+                <input type="hidden" id="id" name="id">
                 <div class="panel-heading">
                     <span class="panel-title">用户信息</span>
                 </div>

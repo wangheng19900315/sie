@@ -31,6 +31,7 @@ public class UserEntity extends BaseEntity{
     private RoleEntity roleEntity;
 
 
+
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     public Integer getId() {
