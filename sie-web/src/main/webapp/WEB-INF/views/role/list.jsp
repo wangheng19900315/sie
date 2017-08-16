@@ -25,9 +25,9 @@
                         <button type="btn" id="searchBtn" class="btn btn-primary">查找</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
                         <button class="btn" id="addBtn" onclick="return false;">添加</button> &nbsp;&nbsp;
-                        <button class="btn btn-primary" id="editBtn"  onclick="return false;">修改</button> &nbsp;&nbsp;
-                        <button class="btn btn-info" id="deleteBtn" onclick="return false;" >删除</button> &nbsp;&nbsp;
-                        <button class="btn btn-success" id="infoBtn" onclick="return false;">查看</button> &nbsp;&nbsp;
+                        <button class="btn btn-primary disabled" id="editBtn"  onclick="return false;">修改</button> &nbsp;&nbsp;
+                        <button class="btn btn-danger disabled" id="deleteBtn" onclick="return false;" >删除</button> &nbsp;&nbsp;
+                        <%--<button class="btn btn-success" id="infoBtn" onclick="return false;">查看</button> &nbsp;&nbsp;--%>
                     </form>
                 </div>
             </div>

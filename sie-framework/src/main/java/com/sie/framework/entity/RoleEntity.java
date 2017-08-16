@@ -8,18 +8,18 @@ import javax.persistence.*;
 @Entity
 @Table(name = "t_role_info")
 public class RoleEntity extends BaseEntity{
-    private Integer id;
+//    private Integer id;
     private String name;
 
-    @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
+//    @Id
+//    @GeneratedValue(strategy= GenerationType.IDENTITY)
+//    public Integer getId() {
+//        return id;
+//    }
+//
+//    public void setId(Integer id) {
+//        this.id = id;
+//    }
 
     @Basic
     @Column(name = "name")

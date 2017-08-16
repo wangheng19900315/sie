@@ -22,16 +22,13 @@ public class CrServiceImpl extends BaseServiceImpl<CrEntity,Integer> implements 
     }
 
     public Integer saveOrUpdate(CrEntity crEntity){
-        //逻辑判断 总数量必须大于等于使用数量
-        if(crEntity.getTotal() < crEntity.getUsed()){
-            return null;
-        }
+
         if(NumberUtil.isSignless(crEntity.getId())){
             CrEntity oldCrEntity = this.crDao.getEntity(crEntity.getId());
             oldCrEntity.setPersonName(crEntity.getPersonName());
             oldCrEntity.setTotal(crEntity.getTotal());
             oldCrEntity.setPrice(crEntity.getPrice());
-            this.crDao.updateEntity(crEntity);
+            this.crDao.updateEntity(oldCrEntity);
         }else{
             crEntity.setUsed(0);
             this.crDao.createEntity(crEntity);

@@ -10,15 +10,13 @@ function selectRow() {
     var ids = $("#grid-table").jqGrid('getGridParam', 'selarrrow');
     selectRows[curpagenum-1]=ids;
 
-    //if (ids && ids.length == 1) {
-    //    $('#edit-btn').removeClass('disabled');
-    //    $('#del-btn').removeClass('disabled');
-    //    $('#view-btn').removeClass('disabled');
-    //} else {
-    //    $('#edit-btn').addClass('disabled');
-    //    $('#del-btn').addClass('disabled');
-    //    $('#view-btn').addClass('disabled');
-    //}
+    if (ids && ids.length == 1) {
+        $('#editBtn').removeClass('disabled');
+        $('#deleteBtn').removeClass('disabled');
+    } else {
+        $('#editBtn').addClass('disabled');
+        $('#deleteBtn').addClass('disabled');
+    }
 };
 
 function Delete(id) { //单击删除链接的操作
@@ -89,17 +87,37 @@ $(function(){
     })
 
     $("#addBtn").bind("click",function(){
-        window.location.href="/school/add.html"
+        window.location.href="/school/addOrUpdate.html"
     })
 
 
     $("#editBtn").bind("click",function(){
-        search();
+        var id = $("#grid-table").jqGrid('getGridParam', 'selrow');
+        window.location.href="/school/addOrUpdate.html?id="+id;
     })
 
     $("#deleteBtn").bind("click",function(){
-        search();
-    })
+        var id = $("#grid-table").jqGrid('getGridParam', 'selrow');
+        $.ajax({
+            url: '/school/delete.json',
+            data: {id:id},
+            type: 'post',
+            dataType: 'json',
+            cache: false,
+            success: function (data) {
+                if (data.success) {
+                    reloadData();//重新加载数据
+                    selectRow();//设置按钮有效性
+                    alert("删除成功！");
+                } else {
+                    alert("删除是被，请稍候重试！");
+                }
+            },
+            error: function () {
+                alert("提交保存信息出现错误！");
+            }
+        });
+    });
 
     $("#infoBtn").bind("click",function(){
         search();
@@ -115,8 +133,14 @@ function search() {
     $('#del-btn').addClass('disabled');
     $('#view-btn').addClass('disabled');
 
+    reloadData();
+
+}
+
+//重新加载数据
+var reloadData = function(){
     jQuery("#grid-table").jqGrid('setGridParam',{
-        url: '/role/list.json',
+        url: '/school/list.json',
         datatype: "json",
         height: '100%',
         mtype: 'post',
@@ -124,7 +148,6 @@ function search() {
             //name: $("#name").val()
         }
     }).trigger('reloadGrid');
-
 }
 
 /**

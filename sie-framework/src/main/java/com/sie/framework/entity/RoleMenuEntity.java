@@ -8,19 +8,19 @@ import javax.persistence.*;
 @Entity
 @Table(name = "t_role_menu_info")
 public class RoleMenuEntity extends BaseEntity{
-    private Integer id;
+//    private Integer id;
     private Integer roleId;
     private Integer menuId;
 
-    @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
+//    @Id
+//    @GeneratedValue(strategy= GenerationType.IDENTITY)
+//    public Integer getId() {
+//        return id;
+//    }
+//
+//    public void setId(Integer id) {
+//        this.id = id;
+//    }
 
     @Basic
     @Column(name = "role_id")

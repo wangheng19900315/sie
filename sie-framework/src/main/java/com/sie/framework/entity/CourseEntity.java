@@ -9,7 +9,7 @@ import java.sql.Timestamp;
 @Entity
 @Table(name = "t_course_info")
 public class CourseEntity extends BaseEntity{
-    private Integer id;
+//    private Integer id;
     private String chineseName;
     private String englishName;
     private Integer professorId;
@@ -25,15 +25,15 @@ public class CourseEntity extends BaseEntity{
     private Integer truMaxStudent;
     private Integer truTotalNumber;
 
-    @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
+//    @Id
+//    @GeneratedValue(strategy= GenerationType.IDENTITY)
+//    public Integer getId() {
+//        return id;
+//    }
+//
+//    public void setId(Integer id) {
+//        this.id = id;
+//    }
 
     @Basic
     @Column(name = "chinese_name")

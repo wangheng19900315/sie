@@ -9,22 +9,22 @@ import java.math.BigDecimal;
 @Entity
 @Table(name = "t_cr_info")
 public class CrEntity extends BaseEntity{
-    private Integer id;
+//    private Integer id;
     private String code;
     private String personName;
     private Integer total;
     private Integer used;
     private Double price;
 
-    @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
+//    @Id
+//    @GeneratedValue(strategy= GenerationType.IDENTITY)
+//    public Integer getId() {
+//        return id;
+//    }
+//
+//    public void setId(Integer id) {
+//        this.id = id;
+//    }
 
     @Basic
     @Column(name = "code")

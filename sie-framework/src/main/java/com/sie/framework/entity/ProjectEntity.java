@@ -8,7 +8,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "t_project_info")
 public class ProjectEntity extends BaseEntity {
-    private Integer id;
+//    private Integer id;
     private String name;
     private String mark;
     private Integer sieMaxStudent;
@@ -16,15 +16,15 @@ public class ProjectEntity extends BaseEntity {
     private Integer truMaxStudent;
     private Integer truMaxCourse;
 
-    @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
+//    @Id
+//    @GeneratedValue(strategy= GenerationType.IDENTITY)
+//    public Integer getId() {
+//        return id;
+//    }
+//
+//    public void setId(Integer id) {
+//        this.id = id;
+//    }
 
     @Basic
     @Column(name = "name")

@@ -26,7 +26,7 @@ public class SchoolServiceImpl extends BaseServiceImpl<SchoolEntity,Integer> imp
             SchoolEntity oldSchoolEntity = this.schoolDao.getEntity(schoolEntity.getId());
             oldSchoolEntity.setName(schoolEntity.getName());
             oldSchoolEntity.setAddress(schoolEntity.getAddress());
-            this.schoolDao.updateEntity(schoolEntity);
+            this.schoolDao.updateEntity(oldSchoolEntity);
         }else{
             this.schoolDao.createEntity(schoolEntity);
         }

@@ -10,17 +10,17 @@ import java.util.Arrays;
 @Entity
 @Table(name = "t_student_info")
 public class StudentEntity extends BaseEntity{
-    private Integer id;
+//    private Integer id;
 
-    @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
+//    @Id
+//    @GeneratedValue(strategy= GenerationType.IDENTITY)
+//    public Integer getId() {
+//        return id;
+//    }
+//
+//    public void setId(Integer id) {
+//        this.id = id;
+//    }
 
     private String name;
 

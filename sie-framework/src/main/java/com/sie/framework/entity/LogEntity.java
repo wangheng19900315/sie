@@ -8,20 +8,20 @@ import javax.persistence.*;
 @Entity
 @Table(name = "t_log_info")
 public class LogEntity extends BaseEntity{
-    private Integer id;
+//    private Integer id;
     private Integer userId;
     private String operate;
     private String comment;
 
-    @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
+//    @Id
+//    @GeneratedValue(strategy= GenerationType.IDENTITY)
+//    public Integer getId() {
+//        return id;
+//    }
+//
+//    public void setId(Integer id) {
+//        this.id = id;
+//    }
 
     @Basic
     @Column(name = "user_id")
