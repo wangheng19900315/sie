@@ -62,7 +62,7 @@
                 </div>
                 <div class="panel-footer text-center">
                     <button class="btn btn-primary" id="submitBtn" type="submit" >提交</button>
-                    <button class="btn btn-danger" onclick="window.history.go(-1)">取消</button>
+                    <button type="button"  class="btn btn-danger cancel" onclick="window.history.go(-1)">取消</button>
                 </div>
             </form>
         </div>
