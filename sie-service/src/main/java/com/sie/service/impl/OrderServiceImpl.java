@@ -5,6 +5,7 @@ import com.sie.framework.dao.OrderDao;
 import com.sie.framework.dao.RoleDao;
 import com.sie.framework.entity.OrderEntity;
 import com.sie.framework.entity.RoleEntity;
+import com.sie.framework.type.OrderStatus;
 import com.sie.service.OrderService;
 import com.sie.service.RoleService;
 import com.sie.service.bean.OrderBean;
@@ -59,11 +60,12 @@ public class OrderServiceImpl extends BaseServiceImpl<OrderEntity,Integer> imple
 
         try{
             BeanUtils.copyProperties(bean, orderEntity);
-//            if(NumberUtil.isSignless(bean.getStatus())){
-//
-//            }
-
-
+            if(NumberUtil.isSignless(bean.getStatus())){
+                OrderStatus status = OrderStatus.valueOf(bean.getStatus());
+                if(status != null){
+                    bean.setStatsName(status.getName());
+                }
+            }
         }catch (Exception e){
             e.printStackTrace();
         }

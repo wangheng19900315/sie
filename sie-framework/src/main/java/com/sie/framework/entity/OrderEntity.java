@@ -22,6 +22,7 @@ public class OrderEntity extends BaseEntity {
     private Integer status;
     private Timestamp payTime;
     private String remark;
+    private Integer orderType;
 
 
     private List<OrderDetailEntity> orderDetailEntityList;

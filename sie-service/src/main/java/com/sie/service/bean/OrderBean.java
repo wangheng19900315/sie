@@ -20,7 +20,7 @@ public class OrderBean  {
     private Integer couponId;
     private String couponName;
     private Integer courseNumber;
-    private Byte status;
+    private Integer status;
     private String statsName;
     private Timestamp payTime;
     private String remark;
@@ -77,11 +77,11 @@ public class OrderBean  {
         this.courseNumber = courseNumber;
     }
 
-    public Byte getStatus() {
+    public Integer getStatus() {
         return status;
     }
 
-    public void setStatus(Byte status) {
+    public void setStatus(Integer status) {
         this.status = status;
     }
 
