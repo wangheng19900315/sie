@@ -1,8 +1,8 @@
 package com.sie.service.impl;
 
-import com.sie.framework.dao.CouponDao;
-import com.sie.framework.entity.CouponEntity;
-import com.sie.service.CouponService;
+import com.sie.framework.dao.StudentDao;
+import com.sie.framework.entity.StudentEntity;
+import com.sie.service.StudentService;
 import com.sie.util.NumberUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,31 +10,26 @@ import org.springframework.stereotype.Service;
 /**
  * Created by wangheng on 2017/8/9.
  */
-@Service("couponService")
-public class StudentServiceImpl extends BaseServiceImpl<CouponEntity,Integer> implements CouponService {
-    private CouponDao couponDao;
+@Service("studentService")
+public class StudentServiceImpl extends BaseServiceImpl<StudentEntity,Integer> implements StudentService {
+    private StudentDao studentDao;
 
     @Autowired
-    public StudentServiceImpl(CouponDao couponDao){
-        super(couponDao);
-        this.couponDao = couponDao;
+    public StudentServiceImpl(StudentDao studentDao){
+        super(studentDao);
+        this.studentDao = studentDao;
     }
 
-    public Integer saveOrUpdate(CouponEntity couponEntity){
+    public Integer saveOrUpdate(StudentEntity studentEntity){
 
-        if(NumberUtil.isSignless(couponEntity.getId())){
-            CouponEntity oldCouponEntity = this.couponDao.getEntity(couponEntity.getId());
-            oldCouponEntity.setName(couponEntity.getName());
-            oldCouponEntity.setCode(couponEntity.getCode());
-            oldCouponEntity.setRmbDiscount(couponEntity.getRmbDiscount());
-            oldCouponEntity.setDollarDiscount(couponEntity.getDollarDiscount());
-            oldCouponEntity.setCanadianDiscount(couponEntity.getCanadianDiscount());
-            oldCouponEntity.setStatus(couponEntity.getStatus());
-            this.couponDao.updateEntity(oldCouponEntity);
+        if(NumberUtil.isSignless(studentEntity.getId())){
+            StudentEntity oldStudentEntity = this.studentDao.getEntity(studentEntity.getId());
+            //TODO 设置信息
+            this.studentDao.updateEntity(oldStudentEntity);
         }else{
-            this.couponDao.createEntity(couponEntity);
+            this.studentDao.createEntity(studentEntity);
         }
 
-        return couponEntity.getId();
+        return studentEntity.getId();
     }
 }

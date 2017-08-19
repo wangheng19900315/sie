@@ -54,6 +54,23 @@ public class UserController {
         return "/user/addOrUpdate";
     }
 
+    @RequestMapping(value = "/delete.json")
+    @ResponseBody
+    public ResultBean delete(Integer id){
+        ResultBean resultBean = new ResultBean();
+
+        try{
+            this.userService.delete(id);
+            if(NumberUtil.isSignless(id)){
+                resultBean.setMessage("删除成功");
+                resultBean.setSuccess(true);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return resultBean;
+    }
 
 
     @RequestMapping("/list.json")

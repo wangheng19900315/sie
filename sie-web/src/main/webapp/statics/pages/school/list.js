@@ -98,24 +98,31 @@ $(function(){
 
     $("#deleteBtn").bind("click",function(){
         var id = $("#grid-table").jqGrid('getGridParam', 'selrow');
-        $.ajax({
-            url: '/school/delete.json',
-            data: {id:id},
-            type: 'post',
-            dataType: 'json',
-            cache: false,
-            success: function (data) {
-                if (data.success) {
-                    reloadData();//重新加载数据
-                    selectRow();//设置按钮有效性
-                    alert("删除成功！");
-                } else {
-                    alert("删除是被，请稍候重试！");
+        if(id == null){
+            alert("请选择记录!");
+            return;
+        }
+        bootbox.confirm({
+            message: "确定要删除该条记录?",
+            callback: function(result) {
+                if(result){
+
+                    $.ajax({
+                        url: '/school/delete.json?id='+id,
+                        type: 'get',
+                        dataType:'json',
+                        success: function (json, statusText, xhr, $form) {
+                            if (json.success) {
+                                alert("删除完成!");
+                                $("#grid-table").trigger('reloadGrid');
+                            } else {
+                                alert( json.message);
+                            }
+                        }
+                    });
                 }
             },
-            error: function () {
-                alert("提交保存信息出现错误！");
-            }
+            className: "bootbox-sm"
         });
     });
 
@@ -133,22 +140,8 @@ function search() {
     $('#del-btn').addClass('disabled');
     $('#view-btn').addClass('disabled');
 
-    reloadData();
-
 }
 
-//重新加载数据
-var reloadData = function(){
-    jQuery("#grid-table").jqGrid('setGridParam',{
-        url: '/school/list.json',
-        datatype: "json",
-        height: '100%',
-        mtype: 'post',
-        postData: {
-            //name: $("#name").val()
-        }
-    }).trigger('reloadGrid');
-}
 
 /**
  * 重置

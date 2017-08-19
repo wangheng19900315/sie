@@ -38,7 +38,7 @@
                 <a href="#"><i class="menu-icon fa fa-th"></i><span class="mm-text">学生管理</span></a>
                 <ul>
 
-                    <li>  <a tabindex="-1" href="layouts-grid.html"><span class="mm-text">学生管理</span></a> </li>
+                    <li>  <a tabindex="-1" href="/student/list.html"><span class="mm-text">学生管理</span></a> </li>
                     <li>  <a tabindex="-1" href="layouts-grid.html"><span class="mm-text">成绩单管理</span></a> </li>
 
 

@@ -24,30 +24,22 @@ $(function(){
     var pager_selector = "#grid-pager";
 
     jQuery(grid_selector).jqGrid({
-        url: '/coupon/list.json',
+        url: '/student/list.json',
         datatype: "json",
         height: '100%',
         mtype: 'post',
         postData: {},
-        colNames: ['ID', '名称','优惠码' ,'RMB优惠' ,'美金优惠' ,'加币优惠','状态','创建时间' ,'修改时间'  ],
+        colNames: ['ID', '用户ID','中文名称' ,'性别' ,'微信号' ,'出生日期','国籍','护照号' ,'身份证号'  ],
         colModel: [
             {name: 'id', index: 'id', width: 20, hidden: true,  sortable: false},
-            {name: 'name', index: 'name', width: 20,   sortable: false},
-            {name: 'code', index: 'code', width: 20,   sortable: false},
-            {name: 'rmbDiscount', index: 'rmbDiscount', width: 20,  sortable: false},
-            {name: 'dollarDiscount', index: 'dollarDiscount', width: 20,  sortable: false},
-            {name: 'canadianDiscount', index: 'canadianDiscount', width: 20,  sortable: false},
-            {name: 'status', index: 'status', width: 20, sortable: false},
-            {name: 'createTime', index: 'createTime', width: 20 , sortable: false, formatter:function(cellvalue, options, rowObject){
-                var time1 = new Date(cellvalue).Format("yyyy-MM-dd hh:mm:ss");
-                return time1;
-            }
-            },
-            {name: 'updateTime', index: 'updateTime', width: 20 , sortable: false, formatter:function(cellvalue, options, rowObject){
-                var time1 = new Date(cellvalue).Format("yyyy-MM-dd hh:mm:ss");
-                return time1;
-            }
-            }
+            {name: 'userID', index: 'userID', width: 20,   sortable: false},
+            {name: 'chineseName', index: 'chineseName', width: 20,   sortable: false},
+            {name: 'sex', index: 'sex', width: 20,  sortable: false},
+            {name: 'weiXin', index: 'weiXin', width: 20,  sortable: false},
+            {name: 'birthday', index: 'birthday', width: 20,  sortable: false},
+            {name: 'nationality', index: 'nationality', width: 20, sortable: false},
+            {name: 'passportNumber', index: 'passportNumber', width: 20, sortable: false},
+            {name: 'idNumber', index: 'idNumber', width: 20 , sortable: false}
         ],
         multiselect: true,
         multiboxonly: true,
@@ -86,44 +78,10 @@ $(function(){
         search();
     })
 
-    $("#addBtn").bind("click",function(){
-        window.location.href="/coupon/addOrUpdate.html"
-    })
-
 
     $("#editBtn").bind("click",function(){
         var id = $("#grid-table").jqGrid('getGridParam', 'selrow');
-        window.location.href="/coupon/addOrUpdate.html?id="+id;
-    })
-
-    $("#deleteBtn").bind("click",function(){
-        var id = $("#grid-table").jqGrid('getGridParam', 'selrow');
-        if(id == null){
-            alert("请选择记录!");
-            return;
-        }
-        bootbox.confirm({
-            message: "确定要删除该条记录?",
-            callback: function(result) {
-                if(result){
-
-                    $.ajax({
-                        url: '/coupon/delete.json?id='+id,
-                        type: 'get',
-                        dataType:'json',
-                        success: function (json, statusText, xhr, $form) {
-                            if (json.success) {
-                                alert("删除完成!");
-                                $("#grid-table").trigger('reloadGrid');
-                            } else {
-                                alert( json.message);
-                            }
-                        }
-                    });
-                }
-            },
-            className: "bootbox-sm"
-        });
+        window.location.href="/student/update.html?id="+id;
     })
 
     $("#infoBtn").bind("click",function(){

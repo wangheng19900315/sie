@@ -2,7 +2,8 @@ package com.sie.web.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.sie.framework.entity.CouponEntity;
-import com.sie.service.CouponService;
+import com.sie.framework.entity.StudentEntity;
+import com.sie.service.StudentService;
 import com.sie.service.bean.PageInfo;
 import com.sie.service.bean.ResultBean;
 import com.sie.util.NumberUtil;
@@ -17,43 +18,43 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * Created by wangheng on 2017/8/9.
  */
 @Controller
-@RequestMapping("/coupon")
+@RequestMapping("/student")
 public class StudentController {
 
     private static final Logger LOGGER = Logger.getLogger(StudentController.class);
 
     @Autowired
-    private CouponService couponService;
+    private StudentService studentService;
 
     @RequestMapping("/addOrUpdate")
     public String showUserInfo(){
 
-        return "/coupon/showInfo";
+        return "/student/showInfo";
     }
 
 
     @RequestMapping("/list.html")
     public String list(){
-        return "/coupon/list";
+        return "/student/list";
     }
 
-    @RequestMapping("/addOrUpdate.html")
+    @RequestMapping("/update.html")
     public String addOrupdate(Model model, Integer id){
         if(NumberUtil.isSignless(id)){
-            CouponEntity couponEntity = this.couponService.get(id);
-            model.addAttribute("entity", JSON.toJSON(couponEntity));
+            StudentEntity studentEntity = this.studentService.get(id);
+            model.addAttribute("entity", JSON.toJSON(studentEntity));
         }
 
-        return "/coupon/addOrUpdate";
+        return "/student/update";
     }
 
     @RequestMapping("/list.json")
     @ResponseBody
-    public PageInfo<CouponEntity> listJons(Integer page, Integer rows ){
+    public PageInfo<StudentEntity> listJons(Integer page, Integer rows ){
 
-        PageInfo<CouponEntity> pageInfo = null;
+        PageInfo<StudentEntity> pageInfo = null;
         try{
-            pageInfo = this.couponService.getList(page,rows, null);
+            pageInfo = this.studentService.getList(page,rows, null);
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -65,12 +66,12 @@ public class StudentController {
 
     @RequestMapping("/addOrupdate.json")
     @ResponseBody
-    public ResultBean addOrupdate(CouponEntity couponEntity){
+    public ResultBean addOrupdate(StudentEntity studentEntity){
         ResultBean resultBean = new ResultBean();
 
 
         try{
-            Integer id = this.couponService.saveOrUpdate(couponEntity);
+            Integer id = this.studentService.saveOrUpdate(studentEntity);
             if(NumberUtil.isSignless(id)){
                 resultBean.setMessage("保存成功");
                 resultBean.setSuccess(true);
@@ -82,25 +83,23 @@ public class StudentController {
         return resultBean;
     }
 
-    @RequestMapping(value = "/delete.json")
-    @ResponseBody
-    public ResultBean delete(Integer id){
-        ResultBean resultBean = new ResultBean();
-
-        //TODO 判断是否有订单引用有则不能进行删除
-
-        try{
-            this.couponService.delete(id);
-            if(NumberUtil.isSignless(id)){
-                resultBean.setMessage("删除成功");
-                resultBean.setSuccess(true);
-            }
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-
-        return resultBean;
-    }
+//    @RequestMapping(value = "/delete.json")
+//    @ResponseBody
+//    public ResultBean delete(Integer id){
+//        ResultBean resultBean = new ResultBean();
+//
+//        try{
+//            this.studentService.delete(id);
+//            if(NumberUtil.isSignless(id)){
+//                resultBean.setMessage("删除成功");
+//                resultBean.setSuccess(true);
+//            }
+//        }catch (Exception e){
+//            e.printStackTrace();
+//        }
+//
+//        return resultBean;
+//    }
 
 
 }

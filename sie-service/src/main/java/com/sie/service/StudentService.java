@@ -1,13 +1,11 @@
 package com.sie.service;
 
-import com.sie.framework.entity.UserEntity;
+import com.sie.framework.entity.StudentEntity;
 
 
 /**
  * Created by wangheng on 2017/8/9.
  */
-public interface StudentService extends BaseService<UserEntity, Integer> {
-
-    public UserEntity login(String userName, String password);
+public interface StudentService extends BaseService<StudentEntity, Integer> {
 
 }

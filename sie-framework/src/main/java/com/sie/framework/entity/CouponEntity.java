@@ -13,9 +13,12 @@ public class CouponEntity extends BaseEntity{
 
 
 //    private Integer id;
+    private String name;
     private String code;
-    private String status;
-    private Double price;
+    private Integer status;
+    private Double rmbDiscount;
+    private Double dollarDiscount;
+    private Double canadianDiscount;
     private Timestamp startTime;
     private Timestamp endTime;
 
@@ -29,6 +32,14 @@ public class CouponEntity extends BaseEntity{
 //        this.id = id;
 //    }
 
+    @Column(name = "name")
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 
     @Column(name = "code")
     public String getCode() {
@@ -41,22 +52,42 @@ public class CouponEntity extends BaseEntity{
 
 
     @Column(name = "status")
-    public String getStatus() {
+    public Integer getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(Integer status) {
         this.status = status;
     }
 
-    @Column(name = "price")
-    public Double getPrice() {
-        return price;
+    @Column(name = "rmb_discount")
+    public Double getRmbDiscount() {
+        return rmbDiscount;
     }
 
-    public void setPrice(Double price) {
-        this.price = price;
+    public void setRmbDiscount(Double rmbDiscount) {
+        this.rmbDiscount = rmbDiscount;
     }
+
+    @Column(name = "dollar_discount")
+    public Double getDollarDiscount() {
+        return dollarDiscount;
+    }
+
+    public void setDollarDiscount(Double dollarDiscount) {
+        this.dollarDiscount = dollarDiscount;
+    }
+
+    @Column(name = "canadian_discount")
+    public Double getCanadianDiscount() {
+        return canadianDiscount;
+    }
+
+    public void setCanadianDiscount(Double canadianDiscount) {
+        this.canadianDiscount = canadianDiscount;
+    }
+
+
 
     @Column(name = "start_time")
     public Timestamp getStartTime() {

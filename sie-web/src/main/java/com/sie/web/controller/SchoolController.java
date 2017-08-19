@@ -91,7 +91,7 @@ public class SchoolController {
         try{
             this.schoolService.delete(id);
             if(NumberUtil.isSignless(id)){
-                resultBean.setMessage("保存成功");
+                resultBean.setMessage("删除成功");
                 resultBean.setSuccess(true);
             }
         }catch (Exception e){

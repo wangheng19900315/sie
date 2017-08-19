@@ -1,29 +1,50 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="ot" tagdir="/WEB-INF/tags" %>
-<ot:layout title="用户添加">
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+
+<ot:layout title="学生信息编辑">
 
     <div class="row">
         <div class="col-sm-12">
             <form   class="panel form-horizontal" novalidate="novalidate" id="data-form" >
                 <input type="hidden" id="id" name="id">
                 <div class="panel-heading">
-                    <span class="panel-title">优惠码信息</span>
+                    <span class="panel-title">学生信息</span>
                 </div>
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="form-group ">
-                                <label for="name" class="col-sm-2 control-label">名称</label>
+                                <label for="code" class="col-sm-2 control-label">用户名</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="name" name="name" placeholder="name" required data-msg-required="请输入名称">
+                                    <input type="text" class="form-control" id="code" name="code" placeholder="code" required data-msg-required="请输入用户名">
+                                </div>
+                            </div>
+
+                        </div><!-- col-sm-6 -->
+                        <div class="col-sm-6">
+                            <div class="form-group ">
+                                <label for="userID" class="col-sm-2 control-label">用户ID</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="userID" name="userID" placeholder="name" required data-msg-required="请输入用户ID">
+                                </div>
+                            </div>
+                        </div><!-- col-sm-6 -->
+                    </div><!-- row -->
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group ">
+                                <label for="email" class="col-sm-2 control-label">Email</label>
+                                <div class="col-sm-9">
+                                    <input type="email" class="form-control" id="email" name="email" placeholder="email" required data-msg-required="请输入邮箱" >
                                 </div>
                             </div>
                         </div><!-- col-sm-6 -->
                         <div class="col-sm-6">
                             <div class="form-group ">
-                                <label for="code" class="col-sm-2 control-label">优惠码</label>
+                                <label for="weiXin" class="col-sm-2 control-label">微信号</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="code" name="code" placeholder="code" required data-msg-required="请输入优惠码">
+                                    <input type="text" class="form-control" id="weiXin" name="weiXin" placeholder="weiXin" required data-msg-required="请输入微信号" >
                                 </div>
                             </div>
 
@@ -32,39 +53,117 @@
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="form-group ">
-                                <label for="rmbDiscount" class="col-sm-2 control-label">RMB优惠</label>
+                                <label for="lastName" class="col-sm-2 control-label">姓-LastName</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="rmbDiscount" name="rmbDiscount" placeholder="rmbDiscount" required data-msg-required="请输入RMB优惠" data-rule-number="true" data-msg-number="请输入正确的数字" >
+                                    <input type="text" class="form-control" id="lastName" name="lastName" placeholder="LastName" required data-msg-required="请输入姓" >
                                 </div>
                             </div>
                         </div><!-- col-sm-6 -->
                         <div class="col-sm-6">
                             <div class="form-group ">
-                                <label for="dollarDiscount" class="col-sm-2 control-label">美元优惠</label>
+                                <label for="firstName" class="col-sm-2 control-label">名-FirstName</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="dollarDiscount" name="dollarDiscount" placeholder="dollarDiscount" required data-msg-required="请输入美元优惠" data-rule-number="true" data-msg-number="请输入正确的数字">
+                                    <input type="text" class="form-control" id="firstName" name="firstName" placeholder="FirstName" required data-msg-required="请输入姓" >
                                 </div>
                             </div>
-
                         </div><!-- col-sm-6 -->
                     </div><!-- row -->
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="form-group ">
-                                <label for="canadianDiscount" class="col-sm-2 control-label">加币优惠</label>
+                                <label for="chineseName" class="col-sm-2 control-label">中文名称</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="canadianDiscount" name="canadianDiscount" placeholder="canadianDiscount" required data-msg-required="请输入加币优惠" data-rule-number="true" data-msg-number="请输入正确的数字" >
+                                    <input type="text" class="form-control" id="chineseName" name="chineseName" placeholder="chineseName" required data-msg-required="请输入姓名" >
                                 </div>
                             </div>
                         </div><!-- col-sm-6 -->
                         <div class="col-sm-6">
                             <div class="form-group ">
-                                <label for="status" class="col-sm-2 control-label">优惠状态</label>
+                                <label for="" class="col-sm-2 control-label">出生日期</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="status" name="status" placeholder="dollarDiscount" required data-msg-required="请输入活动状态" data-rule-number="true" data-msg-number="请输入正确的数字">
+                                    <div class="input-group date form_date"   data-date-format="dd-mm-yyyy" data-link-field="birthday" data-link-format="yyyy-mm-dd">
+                                        <input class="form-control" size="16" type="text"     value="<fmt:formatDate value='${entity.birthday}' pattern='yyyy-MM-dd'/>"  >
+                                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                    </div>
+
+                                    <input type="hidden" id="birthday" name="birthday">
                                 </div>
                             </div>
+                        </div><!-- col-sm-6 -->
+                    </div><!-- row -->
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group ">
+                                <label for="nationality" class="col-sm-2 control-label">国籍</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="nationality" name="nationality" placeholder="nationality" required data-msg-required="请输入国籍" >
+                                </div>
+                            </div>
+                        </div><!-- col-sm-6 -->
+                        <div class="col-sm-6">
+                            <div class="form-group ">
+                                <label for="idNumber" class="col-sm-2 control-label">身份证号</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="idNumber" name="idNumber" placeholder="ID">
+                                </div>
+                            </div>
+                        </div><!-- col-sm-6 -->
+                    </div><!-- row -->
 
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group ">
+                                <label for="passportNumber" class="col-sm-2 control-label">护照号</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="passportNumber" name="passportNumber" placeholder="Passport" >
+                                </div>
+                            </div>
+                        </div><!-- col-sm-6 -->
+                        <div class="col-sm-6">
+                            <div class="form-group ">
+                                <label for="telephone" class="col-sm-2 control-label">国内联系电话</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="telephone" name="telephone" placeholder="Phone" required data-msg-required="请输入手机号"  data-rule-mobile="true" data-msg-mobile="请输入正确格式">
+                                </div>
+                            </div>
+                        </div><!-- col-sm-6 -->
+                    </div><!-- row -->
+
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group ">
+                                <label for="university" class="col-sm-2 control-label">在读大学</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="university" name="university" placeholder="university" >
+                                </div>
+                            </div>
+                        </div><!-- col-sm-6 -->
+                        <div class="col-sm-6">
+                            <div class="form-group ">
+                                <label for="profession" class="col-sm-2 control-label">专业</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="profession" name="profession" placeholder="profession" >
+                                </div>
+                            </div>
+                        </div><!-- col-sm-6 -->
+                    </div><!-- row -->
+
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group ">
+                                <label for="gpa" class="col-sm-2 control-label">GAP</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="gpa" name="gpa" placeholder="GAP" >
+                                </div>
+                            </div>
+                        </div><!-- col-sm-6 -->
+                        <div class="col-sm-6">
+                            <div class="form-group ">
+                                <label for="graduationYear" class="col-sm-2 control-label">毕业年份</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="graduationYear" name="graduationYear" placeholder="graduationYear" >
+                                </div>
+                            </div>
                         </div><!-- col-sm-6 -->
                     </div><!-- row -->
                 </div>
@@ -79,7 +178,15 @@
     </div>
 
 </ot:layout>
-<script src="/statics/pages/student/add.js"></script>
+<script src="/statics/pages/student/update.js"></script>
 <script type="text/javascript">
     var entity = '${entity}';
+    $('.form_date').datetimepicker({
+        language: 'zh-CN',//显示中文
+        format: 'yyyy-mm-dd',//显示格式
+        autoclose: true,//选中自动关闭
+        startView: 2,
+        minView: 2,
+        forceParse: 0
+    });
 </script>

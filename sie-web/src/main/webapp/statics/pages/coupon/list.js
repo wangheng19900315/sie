@@ -29,19 +29,14 @@ $(function(){
         height: '100%',
         mtype: 'post',
         postData: {},
-        colNames: ['ID', '优惠编码' ,'优惠金额' ,'开始时间' ,'结束时间','状态','创建时间' ,'修改时间'  ],
+        colNames: ['ID', '名称','优惠码' ,'RMB优惠' ,'美金优惠' ,'加币优惠','状态','创建时间' ,'修改时间'  ],
         colModel: [
             {name: 'id', index: 'id', width: 20, hidden: true,  sortable: false},
+            {name: 'name', index: 'name', width: 20,   sortable: false},
             {name: 'code', index: 'code', width: 20,   sortable: false},
-            {name: 'price', index: 'price', width: 20,  sortable: false},
-            {name: 'startTime', index: 'startTime', width: 20,  sortable: false,formatter:function(cellvalue, options, rowObject){
-                var time1 = new Date(cellvalue).Format("yyyy-MM-dd hh:mm:ss");
-                return time1;
-            }},
-            {name: 'endTime', index: 'endTime', width: 20, sortable: false,formatter:function(cellvalue, options, rowObject){
-                var time1 = new Date(cellvalue).Format("yyyy-MM-dd hh:mm:ss");
-                return time1;
-            }},
+            {name: 'rmbDiscount', index: 'rmbDiscount', width: 20,  sortable: false},
+            {name: 'dollarDiscount', index: 'dollarDiscount', width: 20,  sortable: false},
+            {name: 'canadianDiscount', index: 'canadianDiscount', width: 20,  sortable: false},
             {name: 'status', index: 'status', width: 20, sortable: false},
             {name: 'createTime', index: 'createTime', width: 20 , sortable: false, formatter:function(cellvalue, options, rowObject){
                 var time1 = new Date(cellvalue).Format("yyyy-MM-dd hh:mm:ss");
@@ -92,16 +87,43 @@ $(function(){
     })
 
     $("#addBtn").bind("click",function(){
-        window.location.href="/coupon/add.html"
+        window.location.href="/coupon/addOrUpdate.html"
     })
 
 
     $("#editBtn").bind("click",function(){
-        search();
+        var id = $("#grid-table").jqGrid('getGridParam', 'selrow');
+        window.location.href="/coupon/addOrUpdate.html?id="+id;
     })
 
     $("#deleteBtn").bind("click",function(){
-        search();
+        var id = $("#grid-table").jqGrid('getGridParam', 'selrow');
+        if(id == null){
+            alert("请选择记录!");
+            return;
+        }
+        bootbox.confirm({
+            message: "确定要删除该条记录?",
+            callback: function(result) {
+                if(result){
+
+                    $.ajax({
+                        url: '/coupon/delete.json?id='+id,
+                        type: 'get',
+                        dataType:'json',
+                        success: function (json, statusText, xhr, $form) {
+                            if (json.success) {
+                                alert("删除完成!");
+                                $("#grid-table").trigger('reloadGrid');
+                            } else {
+                                alert( json.message);
+                            }
+                        }
+                    });
+                }
+            },
+            className: "bootbox-sm"
+        });
     })
 
     $("#infoBtn").bind("click",function(){

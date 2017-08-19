@@ -1,13 +1,17 @@
 package com.sie.web.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.sie.framework.entity.CouponEntity;
+import com.sie.framework.entity.CrEntity;
 import com.sie.framework.entity.UserEntity;
 import com.sie.service.CouponService;
 import com.sie.service.bean.PageInfo;
 import com.sie.service.bean.ResultBean;
+import com.sie.util.NumberUtil;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -35,12 +39,15 @@ public class CouponController {
         return "/coupon/list";
     }
 
-    @RequestMapping("/add.html")
-    public String add(){
-        return "/coupon/add";
+    @RequestMapping("/addOrUpdate.html")
+    public String addOrupdate(Model model, Integer id){
+        if(NumberUtil.isSignless(id)){
+            CouponEntity couponEntity = this.couponService.get(id);
+            model.addAttribute("entity", JSON.toJSON(couponEntity));
+        }
+
+        return "/coupon/addOrUpdate";
     }
-
-
 
     @RequestMapping("/list.json")
     @ResponseBody
@@ -66,6 +73,10 @@ public class CouponController {
 
         try{
             Integer id = this.couponService.saveOrUpdate(couponEntity);
+            if(NumberUtil.isSignless(id)){
+                resultBean.setMessage("保存成功");
+                resultBean.setSuccess(true);
+            }
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -73,7 +84,25 @@ public class CouponController {
         return resultBean;
     }
 
+    @RequestMapping(value = "/delete.json")
+    @ResponseBody
+    public ResultBean delete(Integer id){
+        ResultBean resultBean = new ResultBean();
 
+        //TODO 判断是否有订单引用有则不能进行删除
+
+        try{
+            this.couponService.delete(id);
+            if(NumberUtil.isSignless(id)){
+                resultBean.setMessage("删除成功");
+                resultBean.setSuccess(true);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return resultBean;
+    }
 
 
 }
