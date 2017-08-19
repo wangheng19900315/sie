@@ -22,16 +22,29 @@ public class StudentEntity extends BaseEntity{
 //        this.id = id;
 //    }
 
-    private String name;
+    private String userID;
 
     @Basic
-    @Column(name = "name")
-    public String getName() {
-        return name;
+    @Column(name = "user_id")
+    public String getUserID() {
+        return userID;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setUserID(String userID) {
+        this.userID = userID;
+    }
+
+
+    private String userName;
+
+    @Basic
+    @Column(name = "user_name")
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     private String email;
@@ -157,7 +170,7 @@ public class StudentEntity extends BaseEntity{
     private String passportNumber;
 
     @Basic
-    @Column(name = "passport_ number")
+    @Column(name = "passport_number")
     public String getPassportNumber() {
         return passportNumber;
     }
@@ -334,15 +347,16 @@ public class StudentEntity extends BaseEntity{
         this.gpa = gpa;
     }
 
-    private String knowWay;
+    private String university;
 
     @Basic
-    @Column(name = "know_way")
-    public String getKnowWay() {
-        return knowWay;
+    @Column(name = "university")
+
+    public String getUniversity() {
+        return university;
     }
 
-    public void setKnowWay(String knowWay) {
-        this.knowWay = knowWay;
+    public void setUniversity(String university) {
+        this.university = university;
     }
 }

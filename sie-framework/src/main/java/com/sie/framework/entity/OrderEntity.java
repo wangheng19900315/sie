@@ -19,7 +19,7 @@ public class OrderEntity extends BaseEntity {
     private Integer crId;
     private Integer couponId;
     private Integer courseNumber;
-    private Byte status;
+    private Integer status;
     private Timestamp payTime;
     private String remark;
 
@@ -79,11 +79,11 @@ public class OrderEntity extends BaseEntity {
 
     @Basic
     @Column(name = "status")
-    public Byte getStatus() {
+    public Integer getStatus() {
         return status;
     }
 
-    public void setStatus(Byte status) {
+    public void setStatus(Integer status) {
         this.status = status;
     }
 

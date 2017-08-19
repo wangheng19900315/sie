@@ -16,11 +16,11 @@ public class CourseEntity extends BaseEntity{
     private Timestamp startTime;
     private Timestamp endTime;
     private Integer projectId;
-    private Byte isSie;
+    private Integer isSie;
     private String sieCode;
     private Integer sieMaxStudent;
     private Integer sieTotalNumber;
-    private Byte isTru;
+    private Integer isTru;
     private String truCode;
     private Integer truMaxStudent;
     private Integer truTotalNumber;
@@ -97,11 +97,11 @@ public class CourseEntity extends BaseEntity{
 
     @Basic
     @Column(name = "is_sie")
-    public Byte getIsSie() {
+    public Integer getIsSie() {
         return isSie;
     }
 
-    public void setIsSie(Byte isSie) {
+    public void setIsSie(Integer isSie) {
         this.isSie = isSie;
     }
 
@@ -137,11 +137,11 @@ public class CourseEntity extends BaseEntity{
 
     @Basic
     @Column(name = "is_tru")
-    public Byte getIsTru() {
+    public Integer getIsTru() {
         return isTru;
     }
 
-    public void setIsTru(Byte isTru) {
+    public void setIsTru(Integer isTru) {
         this.isTru = isTru;
     }
 

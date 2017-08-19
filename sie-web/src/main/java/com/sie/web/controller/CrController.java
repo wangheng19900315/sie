@@ -71,7 +71,6 @@ public class CrController {
     public ResultBean addOrupdate(CrEntity crEntity){
         ResultBean resultBean = new ResultBean();
 
-
         try{
             Integer id = this.crService.saveOrUpdate(crEntity);
             if(NumberUtil.isSignless(id)){
@@ -85,7 +84,25 @@ public class CrController {
         return resultBean;
     }
 
+    @RequestMapping(value = "/delete.json")
+    @ResponseBody
+    public ResultBean delete(Integer id){
+        ResultBean resultBean = new ResultBean();
 
+        //TODO 判断是否有订单引用有则不能进行删除
+
+        try{
+            this.crService.delete(id);
+            if(NumberUtil.isSignless(id)){
+                resultBean.setMessage("删除成功");
+                resultBean.setSuccess(true);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return resultBean;
+    }
 
 
 }

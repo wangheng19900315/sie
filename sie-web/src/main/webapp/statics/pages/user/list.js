@@ -101,7 +101,6 @@ $(function(){
 
     $("#deleteBtn").bind("click",function(){
         var id = $("#grid-table").jqGrid('getGridParam', 'selrow');
-        console.log(id);
         if(id == null){
             alert("请选择记录!");
             return;
