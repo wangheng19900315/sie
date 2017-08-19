@@ -6,13 +6,15 @@ import com.sie.framework.entity.StudentEntity;
 import com.sie.service.StudentService;
 import com.sie.service.bean.PageInfo;
 import com.sie.service.bean.ResultBean;
+import com.sie.util.FileUtil;
 import com.sie.util.NumberUtil;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  * Created by wangheng on 2017/8/9.
@@ -25,6 +27,12 @@ public class StudentController {
 
     @Autowired
     private StudentService studentService;
+
+    /**
+     * 作业jar
+     */
+    @Value("${file.upload.url}")
+    private String fileUploadUrl;
 
     @RequestMapping("/addOrUpdate")
     public String showUserInfo(){
@@ -64,13 +72,15 @@ public class StudentController {
 
 
 
-    @RequestMapping("/addOrupdate.json")
+    @RequestMapping( value = "/addOrupdate.json")
     @ResponseBody
-    public ResultBean addOrupdate(StudentEntity studentEntity){
+    public ResultBean addOrupdate(@ModelAttribute StudentEntity studentEntity, @RequestParam("headImage") MultipartFile headImage){
         ResultBean resultBean = new ResultBean();
 
 
         try{
+            String fileUrl = FileUtil.saveToServer(headImage, fileUploadUrl);
+            studentEntity.setImage(fileUrl);
             Integer id = this.studentService.saveOrUpdate(studentEntity);
             if(NumberUtil.isSignless(id)){
                 resultBean.setMessage("保存成功");
@@ -82,24 +92,6 @@ public class StudentController {
 
         return resultBean;
     }
-
-//    @RequestMapping(value = "/delete.json")
-//    @ResponseBody
-//    public ResultBean delete(Integer id){
-//        ResultBean resultBean = new ResultBean();
-//
-//        try{
-//            this.studentService.delete(id);
-//            if(NumberUtil.isSignless(id)){
-//                resultBean.setMessage("删除成功");
-//                resultBean.setSuccess(true);
-//            }
-//        }catch (Exception e){
-//            e.printStackTrace();
-//        }
-//
-//        return resultBean;
-//    }
 
 
 }

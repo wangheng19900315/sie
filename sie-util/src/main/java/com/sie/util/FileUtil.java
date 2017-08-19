@@ -2,6 +2,7 @@ package com.sie.util;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
@@ -9,6 +10,7 @@ import java.net.URLEncoder;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
 import java.util.List;
+import java.util.UUID;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
@@ -299,5 +301,69 @@ public class FileUtil {
 			in.close();
 		}
 		out.close();
+	}
+
+	/**
+	 * 将文件保存到服务器上
+	 * @param multipartFile
+	 * @param fileUploadUrl
+	 * @return
+	 */
+	public static String saveToServer(MultipartFile multipartFile, String fileUploadUrl){
+		String fileInfo = "";
+		BufferedOutputStream bos = null;
+		BufferedInputStream bis = null;
+		try{
+
+			if(multipartFile == null){
+				return "";
+			}
+			fileInfo = "";
+			// 保存文件的根目录
+			String saveRootPath = fileUploadUrl;
+			File folder = new File(saveRootPath);
+			// 文件夹不存在创建
+			if (!folder.isDirectory()) {
+				folder.mkdirs();
+			}
+			// 文件扩展名
+			// String expand =
+			// getExpandFileName(multipartFile.getOriginalFilename());
+			String tempFolderPath = saveRootPath + File.separator + UUID.randomUUID().toString();
+			File tempFolder = new File(tempFolderPath);
+			tempFolder.mkdirs();
+			// 临时文件路径
+			String tempFilePath = tempFolderPath + File.separator + multipartFile.getOriginalFilename();
+			fileInfo = tempFilePath;
+
+			bos = new BufferedOutputStream(new FileOutputStream(tempFilePath));
+			bis = new BufferedInputStream(multipartFile.getInputStream());
+			byte[] byt = new byte[4096];
+			int n = 0;
+			while ((n = bis.read(byt, 0, 4096)) > -1) {
+				bos.write(byt, 0, n);
+			}
+			bos.flush();
+		} catch (FileNotFoundException e) {
+			logger.error("上传文件出现错误", e);
+		} catch (IOException e) {
+			logger.error("上传文件出现错误", e);
+		} finally {
+			if (bos != null) {
+				try {
+					bos.close();
+				} catch (IOException e) {
+					logger.error("上传文件,关闭输出流出错", e);
+				}
+			}
+			if (bis != null) {
+				try {
+					bis.close();
+				} catch (IOException e) {
+					logger.error("上传文件,关闭输入流出错", e);
+				}
+			}
+		}
+		return fileInfo;
 	}
 }

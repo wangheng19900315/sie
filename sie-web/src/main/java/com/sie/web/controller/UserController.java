@@ -131,17 +131,10 @@ public class UserController {
         return resultBean;
     }
 
-    @RequestMapping(value = "/logout.json")
-    public String logout(){
-        ResultBean resultBean = new ResultBean();
-
-        try{
-
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-
-        return "";
+    @RequestMapping(value = "/logout.html")
+    public String logout(HttpServletRequest request){
+        request.getSession().invalidate();
+        return "redirect:/login.html";
     }
 
 

@@ -1,12 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="ot" tagdir="/WEB-INF/tags" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
 <ot:layout title="学生信息编辑">
 
     <div class="row">
         <div class="col-sm-12">
-            <form   class="panel form-horizontal" novalidate="novalidate" id="data-form" >
+            <form   class="panel form-horizontal" novalidate="novalidate" action="/student/addOrupdate.json" id="data-form" enctype="multipart/form-data">
                 <input type="hidden" id="id" name="id">
                 <div class="panel-heading">
                     <span class="panel-title">学生信息</span>
@@ -15,21 +14,21 @@
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="form-group ">
-                                <label for="code" class="col-sm-2 control-label">用户名</label>
+                                <label for="userName" class="col-sm-2 control-label">用户名</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="code" name="code" placeholder="code" required data-msg-required="请输入用户名">
+                                    <input type="text" class="form-control" id="userName" name="userName" placeholder="code" required data-msg-required="请输入用户名">
                                 </div>
                             </div>
 
                         </div><!-- col-sm-6 -->
-                        <div class="col-sm-6">
-                            <div class="form-group ">
-                                <label for="userID" class="col-sm-2 control-label">用户ID</label>
-                                <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="userID" name="userID" placeholder="name" required data-msg-required="请输入用户ID">
-                                </div>
-                            </div>
-                        </div><!-- col-sm-6 -->
+                        <%--<div class="col-sm-6">--%>
+                            <%--<div class="form-group ">--%>
+                                <%--<label for="userID" class="col-sm-2 control-label">用户ID</label>--%>
+                                <%--<div class="col-sm-9">--%>
+                                    <%--<input type="text" class="form-control" id="userID" name="userID" placeholder="name" required data-msg-required="请输入用户ID">--%>
+                                <%--</div>--%>
+                            <%--</div>--%>
+                        <%--</div><!-- col-sm-6 -->--%>
                     </div><!-- row -->
                     <div class="row">
                         <div class="col-sm-6">
@@ -82,11 +81,10 @@
                                 <label class="col-sm-2 control-label">出生日期</label>
                                 <div class="col-sm-9">
                                     <div class="input-group date form_date"   data-date-format="dd-mm-yyyy" data-link-field="birthday" data-link-format="yyyy-mm-dd">
-                                        <input class="form-control" size="16" type="text"     value="<fmt:formatDate value='${entity.birthday}' pattern='yyyy-MM-dd'/>"  >
+                                        <input class="form-control" size="16" type="text"  id="birthday" name="birthday"  value=""   >
                                         <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                                     </div>
 
-                                    <input type="hidden" id="birthday" name="birthday">
                                 </div>
                             </div>
                         </div><!-- col-sm-6 -->
@@ -166,6 +164,16 @@
                             </div>
                         </div><!-- col-sm-6 -->
                     </div><!-- row -->
+                    <div class="row">
+                        <div class="col-sm-6">
+
+                            <label for="headImage" class="col-sm-2 control-label">头像</label>
+                            <div class="col-sm-9">
+                                <input type="file" class="form-control" id="headImage" accept="image/png,image/jpg" name="headImage" >
+                            </div>
+
+                        </div>
+                    </div>
                 </div>
                 <div class="panel-footer text-center">
                     <button class="btn btn-primary" id="submitBtn" type="submit" >提交</button>
@@ -189,4 +197,6 @@
         minView: 2,
         forceParse: 0
     });
+
+
 </script>

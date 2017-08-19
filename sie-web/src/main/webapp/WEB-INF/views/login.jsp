@@ -157,8 +157,17 @@
 		});
 	});
 	window.PixelAdmin.start(init);
+	document.onkeydown=submitLogin;
+	function submitLogin(){
+		if(event.keyCode == 13)
+		{
+			$("#submitBtn").click();
+			event.returnValue = false;
+		}
+	}
 
 	$(function(){
+
 		$("#submitBtn").bind("click", function(){
 			if($("#userName").val() == ""){
 				$("#errorMsg").html("请输入用户名")

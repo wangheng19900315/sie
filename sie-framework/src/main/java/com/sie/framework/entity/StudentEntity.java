@@ -10,19 +10,38 @@ import java.util.Arrays;
 @Entity
 @Table(name = "t_student_info")
 public class StudentEntity extends BaseEntity{
-//    private Integer id;
 
-//    @Id
-//    @GeneratedValue(strategy= GenerationType.IDENTITY)
-//    public Integer getId() {
-//        return id;
-//    }
-//
-//    public void setId(Integer id) {
-//        this.id = id;
-//    }
 
     private String userID;
+    private String userName;
+    private String email;
+    private String image;
+    private String lastName;
+    private String firstName;
+    private String chineseName;
+    private String sex;
+    private String weiXin;
+    private String school;
+    private Date birthday;
+    private String nationality;
+    private String passportNumber;
+    private String idNumber;
+    private String sendCity;
+    private String sendProvince;
+    private String telephone;
+    private String sendCode;
+    private String sendStreet;
+    private String sendUser;
+    private String sendTelephone;
+    private String emergencyPerson;
+    private String emergencyTelephone;
+    private String emergencyPersonRealtion;
+    private String profession;
+    private String graduationYear;
+    private String gpa;
+    private String university;
+
+
 
     @Basic
     @Column(name = "user_id")
@@ -35,8 +54,6 @@ public class StudentEntity extends BaseEntity{
     }
 
 
-    private String userName;
-
     @Basic
     @Column(name = "user_name")
     public String getUserName() {
@@ -47,7 +64,6 @@ public class StudentEntity extends BaseEntity{
         this.userName = userName;
     }
 
-    private String email;
 
     @Basic
     @Column(name = "email")
@@ -59,7 +75,7 @@ public class StudentEntity extends BaseEntity{
         this.email = email;
     }
 
-    private String image;
+
 
     @Basic
     @Column(name = "image")
@@ -71,7 +87,7 @@ public class StudentEntity extends BaseEntity{
         this.image = image;
     }
 
-    private String lastName;
+
 
     @Basic
     @Column(name = "last_name")
@@ -83,7 +99,7 @@ public class StudentEntity extends BaseEntity{
         this.lastName = lastName;
     }
 
-    private String firstName;
+
 
     @Basic
     @Column(name = "first_name")
@@ -95,7 +111,7 @@ public class StudentEntity extends BaseEntity{
         this.firstName = firstName;
     }
 
-    private String chineseName;
+
 
     @Basic
     @Column(name = "chinese_name")
@@ -107,7 +123,7 @@ public class StudentEntity extends BaseEntity{
         this.chineseName = chineseName;
     }
 
-    private String sex;
+
 
     @Basic
     @Column(name = "sex")
@@ -119,7 +135,7 @@ public class StudentEntity extends BaseEntity{
         this.sex = sex;
     }
 
-    private String weiXin;
+
 
     @Basic
     @Column(name = "wei_xin")
@@ -131,7 +147,7 @@ public class StudentEntity extends BaseEntity{
         this.weiXin = weiXin;
     }
 
-    private String school;
+
 
     @Basic
     @Column(name = "school")
@@ -143,7 +159,7 @@ public class StudentEntity extends BaseEntity{
         this.school = school;
     }
 
-    private Date birthday;
+
 
     @Basic
     @Column(name = "birthday")
@@ -155,7 +171,7 @@ public class StudentEntity extends BaseEntity{
         this.birthday = birthday;
     }
 
-    private String nationality;
+
 
     @Basic
     @Column(name = "nationality")
@@ -167,7 +183,7 @@ public class StudentEntity extends BaseEntity{
         this.nationality = nationality;
     }
 
-    private String passportNumber;
+
 
     @Basic
     @Column(name = "passport_number")
@@ -179,7 +195,6 @@ public class StudentEntity extends BaseEntity{
         this.passportNumber = passportNumber;
     }
 
-    private String idNumber;
 
     @Basic
     @Column(name = "id_number")
@@ -191,7 +206,7 @@ public class StudentEntity extends BaseEntity{
         this.idNumber = idNumber;
     }
 
-    private String telephone;
+
 
     @Basic
     @Column(name = "telephone")
@@ -203,7 +218,7 @@ public class StudentEntity extends BaseEntity{
         this.telephone = telephone;
     }
 
-    private String sendStreet;
+
 
     @Basic
     @Column(name = "send_street")
@@ -215,7 +230,7 @@ public class StudentEntity extends BaseEntity{
         this.sendStreet = sendStreet;
     }
 
-    private String sendCity;
+
 
     @Basic
     @Column(name = "send_city")
@@ -227,7 +242,7 @@ public class StudentEntity extends BaseEntity{
         this.sendCity = sendCity;
     }
 
-    private String sendProvince;
+
 
     @Basic
     @Column(name = "send_province")
@@ -239,7 +254,6 @@ public class StudentEntity extends BaseEntity{
         this.sendProvince = sendProvince;
     }
 
-    private String sendCode;
 
     @Basic
     @Column(name = "send_code")
@@ -251,7 +265,7 @@ public class StudentEntity extends BaseEntity{
         this.sendCode = sendCode;
     }
 
-    private String sendUser;
+
 
     @Basic
     @Column(name = "send_user")
@@ -263,7 +277,7 @@ public class StudentEntity extends BaseEntity{
         this.sendUser = sendUser;
     }
 
-    private String sendTelephone;
+
 
     @Basic
     @Column(name = "send_telephone")
@@ -275,7 +289,7 @@ public class StudentEntity extends BaseEntity{
         this.sendTelephone = sendTelephone;
     }
 
-    private String emergencyPerson;
+
 
     @Basic
     @Column(name = "emergency_person")
@@ -287,7 +301,7 @@ public class StudentEntity extends BaseEntity{
         this.emergencyPerson = emergencyPerson;
     }
 
-    private String emergencyTelephone;
+
 
     @Basic
     @Column(name = "emergency_telephone")
@@ -299,7 +313,7 @@ public class StudentEntity extends BaseEntity{
         this.emergencyTelephone = emergencyTelephone;
     }
 
-    private String emergencyPersonRealtion;
+
 
     @Basic
     @Column(name = "emergency_person_realtion")
@@ -311,7 +325,7 @@ public class StudentEntity extends BaseEntity{
         this.emergencyPersonRealtion = emergencyPersonRealtion;
     }
 
-    private String profession;
+
 
     @Basic
     @Column(name = "profession")
@@ -323,7 +337,7 @@ public class StudentEntity extends BaseEntity{
         this.profession = profession;
     }
 
-    private String graduationYear;
+
 
     @Basic
     @Column(name = "graduation_year")
@@ -335,7 +349,7 @@ public class StudentEntity extends BaseEntity{
         this.graduationYear = graduationYear;
     }
 
-    private String gpa;
+
 
     @Basic
     @Column(name = "gpa")
@@ -347,7 +361,7 @@ public class StudentEntity extends BaseEntity{
         this.gpa = gpa;
     }
 
-    private String university;
+
 
     @Basic
     @Column(name = "university")

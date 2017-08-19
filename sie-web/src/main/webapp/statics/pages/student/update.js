@@ -1,13 +1,17 @@
 $(function(){
     $("#data-form").validate({
         submitHandler: function() {
-            var formData = $("#data-form").serializeJson();
+            debugger;
+            var formData = new FormData(document.getElementById("data-form"));
+            //var formData = $("#data-form").serializeJson();
             $.ajax({
                 url: '/student/addOrupdate.json',
                 data: formData,
                 type: 'post',
                 dataType: 'json',
                 cache: false,
+                processData:false,
+                contentType:false,
                 success: function (data) {
                     if (data.success) {
                         alert("数据保存成功！");
@@ -24,7 +28,11 @@ $(function(){
     });
 
     if(entity.length > 0){
-        $("#data-form").loadJson(eval("("+entity+")"));
+        var json = eval("("+entity+")");
+
+        var birthDay =    new Date(json.birthday).Format("yyyy-MM-dd");
+        json.birthday=birthDay;
+        $("#data-form").loadJson(json);
     }
 
 })

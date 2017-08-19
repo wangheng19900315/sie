@@ -24,7 +24,7 @@ public class StudentServiceImpl extends BaseServiceImpl<StudentEntity,Integer> i
 
         if(NumberUtil.isSignless(studentEntity.getId())){
             StudentEntity oldStudentEntity = this.studentDao.getEntity(studentEntity.getId());
-
+            oldStudentEntity.setImage(studentEntity.getImage());
             oldStudentEntity.setBirthday(studentEntity.getBirthday());
             oldStudentEntity.setChineseName(studentEntity.getChineseName());
             oldStudentEntity.setUserName(studentEntity.getUserName());
