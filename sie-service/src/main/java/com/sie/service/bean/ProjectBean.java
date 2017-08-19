@@ -1,39 +1,30 @@
-package com.sie.framework.entity;
+package com.sie.service.bean;
 
-import javax.persistence.*;
+import com.sie.framework.entity.BaseEntity;
+
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import java.sql.Timestamp;
 
 /**
  * Created by x on 2017/8/12.
  */
-@Entity
-@Table(name = "t_project_info")
-public class ProjectEntity extends BaseEntity {
-//    private Integer id;
+public class ProjectBean extends BaseBean{
     private Integer system;
+    private String systemName;
     private String sieName;
     private String truName;
     private String mark;
-//    private Integer sieMaxStudent;
     private Integer sieMaxCourse;
-//    private Integer truMaxStudent;
     private Integer truMaxCourse;
     private Timestamp startTime;
     private Timestamp endTime;
 
-//    @Id
-//    @GeneratedValue(strategy= GenerationType.IDENTITY)
-//    public Integer getId() {
-//        return id;
-//    }
-//
-//    public void setId(Integer id) {
-//        this.id = id;
-//    }
+    private CoursePrice[] siePrice;
+    private CoursePrice[] truPrice;
 
-
-    @Basic
-    @Column(name = "system")
     public Integer getSystem() {
         return system;
     }
@@ -42,8 +33,14 @@ public class ProjectEntity extends BaseEntity {
         this.system = system;
     }
 
-    @Basic
-    @Column(name = "sie_name")
+    public String getSystemName() {
+        return systemName;
+    }
+
+    public void setSystemName(String systemName) {
+        this.systemName = systemName;
+    }
+
     public String getSieName() {
         return sieName;
     }
@@ -52,8 +49,6 @@ public class ProjectEntity extends BaseEntity {
         this.sieName = sieName;
     }
 
-    @Basic
-    @Column(name = "tru_name")
     public String getTruName() {
         return truName;
     }
@@ -62,9 +57,6 @@ public class ProjectEntity extends BaseEntity {
         this.truName = truName;
     }
 
-
-    @Basic
-    @Column(name = "mark")
     public String getMark() {
         return mark;
     }
@@ -73,18 +65,6 @@ public class ProjectEntity extends BaseEntity {
         this.mark = mark;
     }
 
-//    @Basic
-//    @Column(name = "sie_max_student")
-//    public Integer getSieMaxStudent() {
-//        return sieMaxStudent;
-//    }
-//
-//    public void setSieMaxStudent(Integer sieMaxStudent) {
-//        this.sieMaxStudent = sieMaxStudent;
-//    }
-
-    @Basic
-    @Column(name = "sie_max_course")
     public Integer getSieMaxCourse() {
         return sieMaxCourse;
     }
@@ -93,18 +73,6 @@ public class ProjectEntity extends BaseEntity {
         this.sieMaxCourse = sieMaxCourse;
     }
 
-//    @Basic
-//    @Column(name = "tru_max_student")
-//    public Integer getTruMaxStudent() {
-//        return truMaxStudent;
-//    }
-//
-//    public void setTruMaxStudent(Integer truMaxStudent) {
-//        this.truMaxStudent = truMaxStudent;
-//    }
-
-    @Basic
-    @Column(name = "tru_max_course")
     public Integer getTruMaxCourse() {
         return truMaxCourse;
     }
@@ -113,9 +81,6 @@ public class ProjectEntity extends BaseEntity {
         this.truMaxCourse = truMaxCourse;
     }
 
-
-    @Basic
-    @Column(name = "start_time")
     public Timestamp getStartTime() {
         return startTime;
     }
@@ -124,14 +89,27 @@ public class ProjectEntity extends BaseEntity {
         this.startTime = startTime;
     }
 
-
-    @Basic
-    @Column(name = "end_time")
     public Timestamp getEndTime() {
         return endTime;
     }
 
     public void setEndTime(Timestamp endTime) {
         this.endTime = endTime;
+    }
+
+    public CoursePrice[] getSiePrice() {
+        return siePrice;
+    }
+
+    public void setSiePrice(CoursePrice[] siePrice) {
+        this.siePrice = siePrice;
+    }
+
+    public CoursePrice[] getTruPrice() {
+        return truPrice;
+    }
+
+    public void setTruPrice(CoursePrice[] truPrice) {
+        this.truPrice = truPrice;
     }
 }

@@ -10,17 +10,18 @@ import java.sql.Timestamp;
 @Table(name = "t_course_info")
 public class CourseEntity extends BaseEntity{
 //    private Integer id;
+    private Integer system;
     private String chineseName;
     private String englishName;
     private Integer professorId;
     private Timestamp startTime;
     private Timestamp endTime;
     private Integer projectId;
-    private Integer isSie;
+//    private Integer isSie;
     private String sieCode;
     private Integer sieMaxStudent;
     private Integer sieTotalNumber;
-    private Integer isTru;
+//    private Integer isTru;
     private String truCode;
     private Integer truMaxStudent;
     private Integer truTotalNumber;
@@ -34,6 +35,17 @@ public class CourseEntity extends BaseEntity{
 //    public void setId(Integer id) {
 //        this.id = id;
 //    }
+
+
+    @Basic
+    @Column(name = "system")
+    public Integer getSystem() {
+        return system;
+    }
+
+    public void setSystem(Integer system) {
+        this.system = system;
+    }
 
     @Basic
     @Column(name = "chinese_name")
@@ -95,15 +107,15 @@ public class CourseEntity extends BaseEntity{
         this.projectId = projectId;
     }
 
-    @Basic
-    @Column(name = "is_sie")
-    public Integer getIsSie() {
-        return isSie;
-    }
-
-    public void setIsSie(Integer isSie) {
-        this.isSie = isSie;
-    }
+//    @Basic
+//    @Column(name = "is_sie")
+//    public Integer getIsSie() {
+//        return isSie;
+//    }
+//
+//    public void setIsSie(Integer isSie) {
+//        this.isSie = isSie;
+//    }
 
     @Basic
     @Column(name = "sie_code")
@@ -135,15 +147,15 @@ public class CourseEntity extends BaseEntity{
         this.sieTotalNumber = sieTotalNumber;
     }
 
-    @Basic
-    @Column(name = "is_tru")
-    public Integer getIsTru() {
-        return isTru;
-    }
-
-    public void setIsTru(Integer isTru) {
-        this.isTru = isTru;
-    }
+//    @Basic
+//    @Column(name = "is_tru")
+//    public Integer getIsTru() {
+//        return isTru;
+//    }
+//
+//    public void setIsTru(Integer isTru) {
+//        this.isTru = isTru;
+//    }
 
     @Basic
     @Column(name = "tru_code")

@@ -49,7 +49,7 @@
                 <a href="#"><i class="menu-icon fa fa-th"></i><span class="mm-text">项目管理</span></a>
                 <ul>
 
-                    <li>  <a tabindex="-1" href="layouts-grid.html"><span class="mm-text">项目管理</span></a> </li>
+                    <li>  <a tabindex="-1" href="/project/list.html"><span class="mm-text">项目管理</span></a> </li>
                     <li>  <a tabindex="-1" href="layouts-grid.html"><span class="mm-text">课程管理</span></a> </li>
                     <li>  <a tabindex="-1" href="layouts-grid.html"><span class="mm-text">宿舍管理</span></a> </li>
 
