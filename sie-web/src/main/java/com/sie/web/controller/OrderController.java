@@ -45,7 +45,7 @@ public class OrderController {
 
         PageInfo<OrderBean> pageInfo = null;
         try{
-            pageInfo = this.orderService.getList(page,rows, null);
+            pageInfo = this.orderService.getOrderList(page,rows, null);
         }catch (Exception e){
             e.printStackTrace();
         }
