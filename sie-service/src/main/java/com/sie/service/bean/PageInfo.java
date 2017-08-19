@@ -26,6 +26,9 @@ public class PageInfo<T> {
      * 信息
      */
     private List<T> rows;
+    public PageInfo(){
+
+    }
 
     /**
      * 构造

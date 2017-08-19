@@ -3,37 +3,37 @@ package com.sie.framework.type;
 /**
  * Created by wangheng on 2017/8/16.
  */
-public enum  OrderStatus {
+public enum PayType {
 
     /** ---------------- 电商 --------------------- */
 
     /**
-     * 提交订单
+     * 微信支付
      */
-    SUBMIT(1),
+    WECHAT(1),
 
 
     /**
-     * 已完成
+     * 支付宝
      */
-    COMPLETE(2),
+    AIPAY(2),
 
 
     /**
-     * 已退款
+     * 银联支付
      */
-    REFUND(3),
+    UNION(3),
 
     /**
-     * 取消
+     * 人工支付
      */
-    CANCEL(5);
+    MANUAL(4);
 
 
 
 
-    public static OrderStatus valueOf(int i) {
-        for (OrderStatus value : values()) {
+    public static PayType valueOf(int i) {
+        for (PayType value : values()) {
             if (value.equals(i)) {
                 return value;
             }
@@ -43,7 +43,7 @@ public enum  OrderStatus {
 
     private int value;
 
-    OrderStatus(int value) {
+    PayType(int value) {
         this.value = value;
     }
 
@@ -62,14 +62,14 @@ public enum  OrderStatus {
     public String getName() {
         switch (this) {
 
-            case SUBMIT:
-                return "已提交";
-            case COMPLETE:
-                return "已完成";
-            case REFUND:
-                return "已退款";
-            case CANCEL:
-                return "取消";
+            case WECHAT:
+                return "微信";
+            case AIPAY:
+                return "支付宝";
+            case UNION:
+                return "银联";
+            case MANUAL:
+                return "人工";
 
             default:
                 return "未定义";

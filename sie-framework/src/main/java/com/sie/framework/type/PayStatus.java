@@ -3,26 +3,26 @@ package com.sie.framework.type;
 /**
  * Created by wangheng on 2017/8/16.
  */
-public enum  OrderStatus {
+public enum PayStatus {
 
     /** ---------------- 电商 --------------------- */
 
     /**
-     * 提交订单
+     * 提交
      */
     SUBMIT(1),
 
 
     /**
-     * 已完成
+     * 支付成功
      */
     COMPLETE(2),
 
 
     /**
-     * 已退款
+     * 支付失败
      */
-    REFUND(3),
+    FAILED(3),
 
     /**
      * 取消
@@ -32,8 +32,8 @@ public enum  OrderStatus {
 
 
 
-    public static OrderStatus valueOf(int i) {
-        for (OrderStatus value : values()) {
+    public static PayStatus valueOf(int i) {
+        for (PayStatus value : values()) {
             if (value.equals(i)) {
                 return value;
             }
@@ -43,7 +43,7 @@ public enum  OrderStatus {
 
     private int value;
 
-    OrderStatus(int value) {
+    PayStatus(int value) {
         this.value = value;
     }
 
@@ -65,9 +65,9 @@ public enum  OrderStatus {
             case SUBMIT:
                 return "已提交";
             case COMPLETE:
-                return "已完成";
-            case REFUND:
-                return "已退款";
+                return "支付成功";
+            case FAILED:
+                return "支付失败";
             case CANCEL:
                 return "取消";
 

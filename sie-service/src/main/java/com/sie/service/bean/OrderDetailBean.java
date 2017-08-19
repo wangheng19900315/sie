@@ -1,5 +1,7 @@
-package com.sie.framework.entity;
+package com.sie.service.bean;
 
+import com.sie.framework.entity.BaseEntity;
+import com.sie.framework.entity.OrderEntity;
 import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
@@ -7,18 +9,15 @@ import javax.persistence.*;
 /**
  * Created by x on 2017/8/12.
  */
-@Entity
-@Table(name = "t_order_detail_info")
-public class OrderDetailEntity extends BaseEntity{
+public class OrderDetailBean extends BaseBean{
     private Integer projectId;
+    private String projectName;
     private String   courseIds;
+    private String custerNames;
     private Integer courseCount;
     private Integer dormitoryId;
-    private OrderEntity orderEntity;
+    private String dormitoryName;
 
-
-    @Basic
-    @Column(name = "project_id")
     public Integer getProjectId() {
         return projectId;
     }
@@ -27,8 +26,14 @@ public class OrderDetailEntity extends BaseEntity{
         this.projectId = projectId;
     }
 
-    @Basic
-    @Column(name = "course_ids")
+    public String getProjectName() {
+        return projectName;
+    }
+
+    public void setProjectName(String projectName) {
+        this.projectName = projectName;
+    }
+
     public String getCourseIds() {
         return courseIds;
     }
@@ -37,8 +42,14 @@ public class OrderDetailEntity extends BaseEntity{
         this.courseIds = courseIds;
     }
 
-    @Basic
-    @Column(name = "course_count")
+    public String getCusterNames() {
+        return custerNames;
+    }
+
+    public void setCusterNames(String custerNames) {
+        this.custerNames = custerNames;
+    }
+
     public Integer getCourseCount() {
         return courseCount;
     }
@@ -47,8 +58,6 @@ public class OrderDetailEntity extends BaseEntity{
         this.courseCount = courseCount;
     }
 
-    @Basic
-    @Column(name = "dormitory_id")
     public Integer getDormitoryId() {
         return dormitoryId;
     }
@@ -57,15 +66,11 @@ public class OrderDetailEntity extends BaseEntity{
         this.dormitoryId = dormitoryId;
     }
 
-
-    @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
-    @JoinColumn(name = "order_id", nullable = true, columnDefinition = "COMMENT '订单id'")
-    @Where(clause = "h_delete=0")
-    public OrderEntity getOrderEntity() {
-        return orderEntity;
+    public String getDormitoryName() {
+        return dormitoryName;
     }
 
-    public void setOrderEntity(OrderEntity orderEntity) {
-        this.orderEntity = orderEntity;
+    public void setDormitoryName(String dormitoryName) {
+        this.dormitoryName = dormitoryName;
     }
 }

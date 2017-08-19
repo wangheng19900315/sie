@@ -1,5 +1,7 @@
-package com.sie.framework.entity;
+package com.sie.service.bean;
 
+import com.sie.framework.entity.BaseEntity;
+import com.sie.framework.entity.OrderDetailEntity;
 import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
@@ -9,26 +11,24 @@ import java.util.List;
 /**
  * Created by x on 2017/8/12.
  */
-@Entity
-@Table(name = "t_order_info")
-public class OrderEntity extends BaseEntity {
-//    private Integer id;
+public class OrderBean  {
+
     private String code;
     private Double money;
     private Double discount;
     private Integer crId;
     private Integer couponId;
+    private String couponName;
     private Integer courseNumber;
     private Byte status;
+    private String statsName;
     private Timestamp payTime;
     private String remark;
 
 
-    private List<OrderDetailEntity> orderDetailEntityList;
+    private List<OrderDetailBean> orderDetailBeen;
 
 
-    @Basic
-    @Column(name = "code")
     public String getCode() {
         return code;
     }
@@ -37,8 +37,6 @@ public class OrderEntity extends BaseEntity {
         this.code = code;
     }
 
-    @Basic
-    @Column(name = "money")
     public Double getMoney() {
         return money;
     }
@@ -47,8 +45,14 @@ public class OrderEntity extends BaseEntity {
         this.money = money;
     }
 
-    @Basic
-    @Column(name = "cr_id")
+    public Double getDiscount() {
+        return discount;
+    }
+
+    public void setDiscount(Double discount) {
+        this.discount = discount;
+    }
+
     public Integer getCrId() {
         return crId;
     }
@@ -57,8 +61,6 @@ public class OrderEntity extends BaseEntity {
         this.crId = crId;
     }
 
-    @Basic
-    @Column(name = "coupon_id")
     public Integer getCouponId() {
         return couponId;
     }
@@ -67,8 +69,6 @@ public class OrderEntity extends BaseEntity {
         this.couponId = couponId;
     }
 
-    @Basic
-    @Column(name = "course_number")
     public Integer getCourseNumber() {
         return courseNumber;
     }
@@ -77,8 +77,6 @@ public class OrderEntity extends BaseEntity {
         this.courseNumber = courseNumber;
     }
 
-    @Basic
-    @Column(name = "status")
     public Byte getStatus() {
         return status;
     }
@@ -87,8 +85,14 @@ public class OrderEntity extends BaseEntity {
         this.status = status;
     }
 
-    @Basic
-    @Column(name = "pay_time")
+    public String getStatsName() {
+        return statsName;
+    }
+
+    public void setStatsName(String statsName) {
+        this.statsName = statsName;
+    }
+
     public Timestamp getPayTime() {
         return payTime;
     }
@@ -97,8 +101,6 @@ public class OrderEntity extends BaseEntity {
         this.payTime = payTime;
     }
 
-    @Basic
-    @Column(name = "remark")
     public String getRemark() {
         return remark;
     }
@@ -107,21 +109,19 @@ public class OrderEntity extends BaseEntity {
         this.remark = remark;
     }
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "orderEntity", orphanRemoval = true)
-    @Where(clause = "h_delete=0")
-    public List<OrderDetailEntity> getOrderDetailEntityList() {
-        return orderDetailEntityList;
+    public String getCouponName() {
+        return couponName;
     }
 
-    public void setOrderDetailEntityList(List<OrderDetailEntity> orderDetailEntityList) {
-        this.orderDetailEntityList = orderDetailEntityList;
+    public void setCouponName(String couponName) {
+        this.couponName = couponName;
     }
 
-    public Double getDiscount() {
-        return discount;
+    public List<OrderDetailBean> getOrderDetailBeen() {
+        return orderDetailBeen;
     }
 
-    public void setDiscount(Double discount) {
-        this.discount = discount;
+    public void setOrderDetailBeen(List<OrderDetailBean> orderDetailBeen) {
+        this.orderDetailBeen = orderDetailBeen;
     }
 }

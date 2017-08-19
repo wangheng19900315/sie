@@ -26,10 +26,10 @@
             </li>
 
             <li class="mm-dropdown">
-                <a href="#"><i class="menu-icon fa fa-th"></i><span class="mm-text">订单管理</span></a>
+                <a href="/order/list.html"><i class="menu-icon fa fa-th"></i><span class="mm-text">订单管理</span></a>
                 <ul>
                     <li>
-                        <a tabindex="-1" href="layouts-grid.html"><span class="mm-text">订单管理</span></a>
+                        <a tabindex="-1" href="/order/list.html"><span class="mm-text">订单管理</span></a>
                     </li>
 
                 </ul>
