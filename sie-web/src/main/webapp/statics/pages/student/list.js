@@ -24,30 +24,30 @@ $(function(){
     var pager_selector = "#grid-pager";
 
     jQuery(grid_selector).jqGrid({
-        url: '/user/list.json',
+        url: '/coupon/list.json',
         datatype: "json",
         height: '100%',
         mtype: 'post',
         postData: {},
-        colNames: ['ID', '名称' ,'密码' ,'角色名称' ,'Email','电话','创建时间' ,'修改时间'  ],
+        colNames: ['ID', '名称','优惠码' ,'RMB优惠' ,'美金优惠' ,'加币优惠','状态','创建时间' ,'修改时间'  ],
         colModel: [
-            {name: 'id', index: 'id', width: 20, hidden: true, sorttype: "int", sortable: false},
-
-            {name: 'name', index: 'name', width: 120, sortable: false},
-            {name: 'password', index: 'password', width: 120, sortable: false},
-            {name: 'roleEntity.name', index: 'roleEntity.name', width: 120, sortable: false},
-            {name: 'email', index: 'email', width: 120, sortable: false},
-            {name: 'telephone', index: 'telephone', width: 120, sortable: false},
-            {name: 'createTime', index: 'createTime', width: 160 , sortable: false, formatter:function(cellvalue, options, rowObject){
+            {name: 'id', index: 'id', width: 20, hidden: true,  sortable: false},
+            {name: 'name', index: 'name', width: 20,   sortable: false},
+            {name: 'code', index: 'code', width: 20,   sortable: false},
+            {name: 'rmbDiscount', index: 'rmbDiscount', width: 20,  sortable: false},
+            {name: 'dollarDiscount', index: 'dollarDiscount', width: 20,  sortable: false},
+            {name: 'canadianDiscount', index: 'canadianDiscount', width: 20,  sortable: false},
+            {name: 'status', index: 'status', width: 20, sortable: false},
+            {name: 'createTime', index: 'createTime', width: 20 , sortable: false, formatter:function(cellvalue, options, rowObject){
                 var time1 = new Date(cellvalue).Format("yyyy-MM-dd hh:mm:ss");
                 return time1;
             }
             },
-            {name: 'updateTime', index: 'updateTime', width: 160 , sortable: false, formatter:function(cellvalue, options, rowObject){
+            {name: 'updateTime', index: 'updateTime', width: 20 , sortable: false, formatter:function(cellvalue, options, rowObject){
                 var time1 = new Date(cellvalue).Format("yyyy-MM-dd hh:mm:ss");
                 return time1;
             }
-            },
+            }
         ],
         multiselect: true,
         multiboxonly: true,
@@ -87,14 +87,13 @@ $(function(){
     })
 
     $("#addBtn").bind("click",function(){
-        window.location.href="/user/addOrUpdate.html"
+        window.location.href="/coupon/addOrUpdate.html"
     })
 
 
     $("#editBtn").bind("click",function(){
         var id = $("#grid-table").jqGrid('getGridParam', 'selrow');
-        window.location.href="/user/addOrUpdate.html?id="+id;
-
+        window.location.href="/coupon/addOrUpdate.html?id="+id;
     })
 
     $("#deleteBtn").bind("click",function(){
@@ -109,7 +108,7 @@ $(function(){
                 if(result){
 
                     $.ajax({
-                        url: '/user/delete.json?id='+id,
+                        url: '/coupon/delete.json?id='+id,
                         type: 'get',
                         dataType:'json',
                         success: function (json, statusText, xhr, $form) {
@@ -142,7 +141,7 @@ function search() {
     $('#view-btn').addClass('disabled');
 
     jQuery("#grid-table").jqGrid('setGridParam',{
-        url: '/user/list.json',
+        url: '/coupon/list.json',
         datatype: "json",
         height: '100%',
         mtype: 'post',
