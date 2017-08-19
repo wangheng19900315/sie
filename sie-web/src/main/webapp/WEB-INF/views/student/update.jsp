@@ -79,7 +79,7 @@
                         </div><!-- col-sm-6 -->
                         <div class="col-sm-6">
                             <div class="form-group ">
-                                <label for="" class="col-sm-2 control-label">出生日期</label>
+                                <label class="col-sm-2 control-label">出生日期</label>
                                 <div class="col-sm-9">
                                     <div class="input-group date form_date"   data-date-format="dd-mm-yyyy" data-link-field="birthday" data-link-format="yyyy-mm-dd">
                                         <input class="form-control" size="16" type="text"     value="<fmt:formatDate value='${entity.birthday}' pattern='yyyy-MM-dd'/>"  >

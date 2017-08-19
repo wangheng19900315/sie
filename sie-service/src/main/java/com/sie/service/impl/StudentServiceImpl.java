@@ -24,7 +24,23 @@ public class StudentServiceImpl extends BaseServiceImpl<StudentEntity,Integer> i
 
         if(NumberUtil.isSignless(studentEntity.getId())){
             StudentEntity oldStudentEntity = this.studentDao.getEntity(studentEntity.getId());
-            //TODO 设置信息
+
+            oldStudentEntity.setBirthday(studentEntity.getBirthday());
+            oldStudentEntity.setChineseName(studentEntity.getChineseName());
+            oldStudentEntity.setUserName(studentEntity.getUserName());
+            oldStudentEntity.setUserID(studentEntity.getUserID());
+            oldStudentEntity.setEmail(studentEntity.getEmail());
+            oldStudentEntity.setWeiXin(studentEntity.getWeiXin());
+            oldStudentEntity.setLastName(studentEntity.getLastName());
+            oldStudentEntity.setFirstName(studentEntity.getFirstName());
+            oldStudentEntity.setNationality(studentEntity.getNationality());
+            oldStudentEntity.setIdNumber(studentEntity.getIdNumber());
+            oldStudentEntity.setPassportNumber(studentEntity.getPassportNumber());
+            oldStudentEntity.setTelephone(studentEntity.getTelephone());
+            oldStudentEntity.setUniversity(studentEntity.getUniversity());
+            oldStudentEntity.setProfession(studentEntity.getProfession());
+            oldStudentEntity.setGpa(studentEntity.getGpa());
+            oldStudentEntity.setGraduationYear(studentEntity.getGraduationYear());
             this.studentDao.updateEntity(oldStudentEntity);
         }else{
             this.studentDao.createEntity(studentEntity);
