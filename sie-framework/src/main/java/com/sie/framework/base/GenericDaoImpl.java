@@ -2,6 +2,7 @@ package com.sie.framework.base;
 
 import com.sie.framework.entity.BaseEntity;
 import com.sie.framework.entity.UserEntity;
+import com.sie.framework.util.SessionUtil;
 import com.sie.util.NumberUtil;
 import com.sie.util.PageUtil;
 import org.hibernate.SessionFactory;
@@ -32,6 +33,8 @@ public class GenericDaoImpl<T extends BaseEntity, PK extends Serializable> imple
 		BaseEntity e = (BaseEntity) entity;
         e.setUpdateTime(new Timestamp(System.currentTimeMillis()));
 		e.setHdelete(1);
+		e.setModifyUserId(SessionUtil.getUserId());
+		e.setHversion(e.getHversion()+1);
 		this.sessionFactory.getCurrentSession().saveOrUpdate(entity);
 		this.sessionFactory.getCurrentSession().flush();
 	}
@@ -91,6 +94,7 @@ public class GenericDaoImpl<T extends BaseEntity, PK extends Serializable> imple
     @Override
     public void createEntity(BaseEntity entity) {
         entity.setCreateTime(new Timestamp(System.currentTimeMillis()));
+		entity.setCreateUserId(SessionUtil.getUserId());
         this.sessionFactory.getCurrentSession().persist(entity);
 		this.sessionFactory.getCurrentSession().flush();
     }
@@ -98,6 +102,8 @@ public class GenericDaoImpl<T extends BaseEntity, PK extends Serializable> imple
     @Override
     public void updateEntity(BaseEntity entity) {
         entity.setUpdateTime(new Timestamp(System.currentTimeMillis()));
+		entity.setModifyUserId(SessionUtil.getUserId());
+		entity.setHversion(entity.getHversion()+1);
         this.sessionFactory.getCurrentSession().update(entity);
         this.sessionFactory.getCurrentSession().flush();
     }

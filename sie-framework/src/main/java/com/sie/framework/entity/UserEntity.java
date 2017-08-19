@@ -20,7 +20,6 @@ public class UserEntity extends BaseEntity{
      */
     private static final long serialVersionUID = 6980093847795726310L;
 
-//    private Integer id;
 
     private String name;
     private String password;
@@ -29,6 +28,7 @@ public class UserEntity extends BaseEntity{
 //    private Integer roleId;
 
     private RoleEntity roleEntity;
+
 
 
 //    @Id
@@ -40,6 +40,7 @@ public class UserEntity extends BaseEntity{
 //    public void setId(Integer id) {
 //        this.id = id;
 //    }
+
 
     public String getName() {
         return name;
