@@ -1,14 +1,17 @@
 package com.sie.service.bean;
 
+import com.sie.framework.entity.BaseEntity;
+
 /**
  * Created by x on 2017/8/19.
  */
-public class CoursePrice {
+public class ProjectPriceBean extends BaseBean{
     private Integer system;
     private Integer courseNumber;
     private Double rmbPrice;
     private Double dollarPrice;
     private Double canadianPrice;
+    private Integer projectId;
 
     public Integer getCourseNumber() {
         return courseNumber;
@@ -48,5 +51,13 @@ public class CoursePrice {
 
     public void setSystem(Integer system) {
         this.system = system;
+    }
+
+    public Integer getProjectId() {
+        return projectId;
+    }
+
+    public void setProjectId(Integer projectId) {
+        this.projectId = projectId;
     }
 }

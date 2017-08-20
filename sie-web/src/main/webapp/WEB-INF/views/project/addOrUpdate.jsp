@@ -23,7 +23,29 @@
 
                                 </div>
                             </div>
-                        </div><!-- col-sm-6 -->
+                        </div><!-- col-sm-4 -->
+                        <div class="col-sm-4">
+                            <div class="form-group ">
+                                <label for="startTime" class="col-sm-3 control-label">开始时间</label>
+                                <div class="col-sm-9">
+                                    <div class="input-group date form_datetime"   data-date-format="yyyy-mm-dd hh:ii:ss" data-link-field="startTime" data-link-format="yyyy-mm-dd hh:ii:ss">
+                                        <input class="form-control" type="text"  id="startTime" name="startTime"  value=""  required data-msg-required="请输入开始时间" >
+                                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div><!-- col-sm-4 -->
+                        <div class="col-sm-4">
+                            <div class="form-group ">
+                                <label for="endTime" class="col-sm-3 control-label">结束时间</label>
+                                <div class="col-sm-9">
+                                    <div class="input-group date form_datetime" data-date-format="yyyy-mm-dd hh:ii:ss" data-link-field="endTime" data-link-format="yyyy-mm-dd hh:ii:ss" >
+                                        <input class="form-control" size="16" type="text"  id="endTime" name="endTime"  value=""  required data-msg-required="请输入结束时间" >
+                                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div><!-- col-sm-4 -->
 
                     </div><!-- row -->
                     <div id="sie">

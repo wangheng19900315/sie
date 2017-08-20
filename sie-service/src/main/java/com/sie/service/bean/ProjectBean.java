@@ -1,11 +1,5 @@
 package com.sie.service.bean;
 
-import com.sie.framework.entity.BaseEntity;
-
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
 import java.sql.Timestamp;
 
 /**
@@ -22,8 +16,8 @@ public class ProjectBean extends BaseBean{
     private Timestamp startTime;
     private Timestamp endTime;
 
-    private CoursePrice[] siePrice;
-    private CoursePrice[] truPrice;
+    private ProjectPriceBean[] siePrice;
+    private ProjectPriceBean[] truPrice;
 
     public Integer getSystem() {
         return system;
@@ -97,19 +91,19 @@ public class ProjectBean extends BaseBean{
         this.endTime = endTime;
     }
 
-    public CoursePrice[] getSiePrice() {
+    public ProjectPriceBean[] getSiePrice() {
         return siePrice;
     }
 
-    public void setSiePrice(CoursePrice[] siePrice) {
+    public void setSiePrice(ProjectPriceBean[] siePrice) {
         this.siePrice = siePrice;
     }
 
-    public CoursePrice[] getTruPrice() {
+    public ProjectPriceBean[] getTruPrice() {
         return truPrice;
     }
 
-    public void setTruPrice(CoursePrice[] truPrice) {
+    public void setTruPrice(ProjectPriceBean[] truPrice) {
         this.truPrice = truPrice;
     }
 }

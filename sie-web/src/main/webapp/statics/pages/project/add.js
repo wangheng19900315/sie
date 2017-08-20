@@ -51,7 +51,6 @@ $(function(){
         $("#sie").append(startRow,sieName,sieMaxCourse,siePrice,endRow);
         //绑定课程数量发生变化事件
         $("#sieMaxCourse").bind("input propertychange", function(){
-            alert("出发事件了");
             $("#siePrice").empty();
             var num = $("#sieMaxCourse").val();
             //编辑num增加价格
@@ -112,9 +111,8 @@ $(function(){
         $("#tru").append(startRow,truName,truMaxCourse,truPrice,endRow);
         //绑定课程数量发生变化事件
         $("#truMaxCourse").bind("input propertychange", function(){
-            alert("出发事件了");
             $("#truPrice").empty();
-            var num = $("#sieMaxCourse").val();
+            var num = $("#truMaxCourse").val();
             //编辑num增加价格
             for(var i=0;i<num;i++){
                 var startRow = '<div class="row">'+
@@ -166,6 +164,18 @@ $(function(){
             //有误
         }
     });
+
+    //日期格式初始化
+    $('.form_datetime').datetimepicker({
+        language: 'zh-CN',//显示中文
+        format: "yyyy-mm-dd hh:ii:ss",
+        autoclose: true,
+        todayBtn: true,
+        pickerPosition: "bottom-left"
+    });
+
+    //出发select选中事件
+    $("#system").change();
 
 })
 
