@@ -3,27 +3,31 @@ package com.sie.framework.type;
 /**
  * Created by wangheng on 2017/8/16.
  */
-public enum OrderType {
+public enum OrderDetailStatus {
 
 
     /**
-     * 用户下单
+     * 正常
      */
-    USER(1),
+    NORMAL(1),
 
 
     /**
-     * 管理员下单
+     * 已退项目
      */
-    ADMIN(2);
+    RETREATPROJECT(2),
+
+
+    /**
+     * 已退课程
+     */
+    RETREATPCOURSE(3);
 
 
 
 
-
-
-    public static OrderType valueOf(int i) {
-        for (OrderType value : values()) {
+    public static OrderDetailStatus valueOf(int i) {
+        for (OrderDetailStatus value : values()) {
             if (value.equals(i)) {
                 return value;
             }
@@ -33,7 +37,7 @@ public enum OrderType {
 
     private int value;
 
-    OrderType(int value) {
+    OrderDetailStatus(int value) {
         this.value = value;
     }
 
@@ -52,11 +56,12 @@ public enum OrderType {
     public String getName() {
         switch (this) {
 
-            case USER:
-                return "用户";
-            case ADMIN:
-                return "管理员";
-
+            case NORMAL:
+                return "正常";
+            case RETREATPROJECT:
+                return "已退项目";
+            case RETREATPCOURSE:
+                return "已退课程";
             default:
                 return "未定义";
         }

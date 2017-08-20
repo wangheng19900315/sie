@@ -5,7 +5,6 @@ package com.sie.framework.type;
  */
 public enum  OrderStatus {
 
-    /** ---------------- 电商 --------------------- */
 
     /**
      * 提交订单
@@ -23,6 +22,11 @@ public enum  OrderStatus {
      * 已退款
      */
     REFUND(3),
+
+    /**
+     * 申请退款
+     */
+    APPLY(4),
 
     /**
      * 取消
@@ -68,6 +72,8 @@ public enum  OrderStatus {
                 return "已完成";
             case REFUND:
                 return "已退款";
+            case APPLY:
+                return "申请退款";
             case CANCEL:
                 return "取消";
 

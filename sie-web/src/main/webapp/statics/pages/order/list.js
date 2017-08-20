@@ -13,9 +13,11 @@ function selectRow() {
     if (ids && ids.length == 1) {
         $('#editBtn').removeClass('disabled');
         $('#deleteBtn').removeClass('disabled');
+        $('#infoBtn').removeClass('disabled');
     } else {
         $('#editBtn').addClass('disabled');
         $('#deleteBtn').addClass('disabled');
+        $('#infoBtn').addClass('disabled');
     }
 };
 $(function(){
@@ -30,7 +32,7 @@ $(function(){
         mtype: 'post',
         postData: {},
 
-        colNames: ['ID', '订单号','创建时间'  ,'总金额' ,'折扣金额' ,'支付金额','支付时间','订单状态','修改时间'  ],
+        colNames: ['ID', '订单号','创建时间'  ,'学生','总金额' ,'折扣金额' ,'支付金额','支付时间','订单状态','修改时间'  ],
         colModel: [
             {name: 'id', index: 'id', width: 20, hidden: true, sorttype: "int", sortable: false},
 
@@ -40,16 +42,16 @@ $(function(){
                 return time1;
             }
             },
+            {name: 'studentName', index: 'studentName', width: 120, sortable: false},
             {name: 'money', index: 'money', width: 120, sortable: false},
             {name: 'discount', index: 'discount', width: 120, sortable: false},
             {name: 'payMoney', index: 'payMoney', width: 120, sortable: false},
-            {name: 'status', index: 'status', width: 120, sortable: false},
-
             {name: 'payTime', index: 'payTime', width: 160 , sortable: false, formatter:function(cellvalue, options, rowObject){
                 var time1 = new Date(cellvalue).Format("yyyy-MM-dd hh:mm:ss");
                 return time1;
             }
             },
+            {name: 'statusName', index: 'statusName', width: 120, sortable: false},
             {name: 'updateTime', index: 'updateTime', width: 160 , sortable: false, formatter:function(cellvalue, options, rowObject){
                 var time1 = new Date(cellvalue).Format("yyyy-MM-dd hh:mm:ss");
                 return time1;
@@ -100,13 +102,12 @@ $(function(){
 
     $("#editBtn").bind("click",function(){
         var id = $("#grid-table").jqGrid('getGridParam', 'selrow');
-        window.location.href="/order/addOrUpdate.html?id="+id;
+        window.location.href="/order/update.html?id="+id;
 
     })
 
     $("#deleteBtn").bind("click",function(){
         var id = $("#grid-table").jqGrid('getGridParam', 'selrow');
-        console.log(id);
         if(id == null){
             alert("请选择记录!");
             return;
@@ -136,7 +137,8 @@ $(function(){
     })
 
     $("#infoBtn").bind("click",function(){
-        search();
+        var id = $("#grid-table").jqGrid('getGridParam', 'selrow');
+        window.location.href="/order/detail.html?id="+id;
     })
 })
 
@@ -147,7 +149,7 @@ $(function(){
 function search() {
     $('#edit-btn').addClass('disabled');
     $('#del-btn').addClass('disabled');
-    $('#view-btn').addClass('disabled');
+    $('#infoBtn').addClass('disabled');
 
     jQuery("#grid-table").jqGrid('setGridParam',{
         url: '/order/list.json',

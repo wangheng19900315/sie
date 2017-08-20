@@ -16,5 +16,9 @@ public interface CourseService extends BaseService<CourseEntity, Integer> {
 
 
     PageInfo<CourseBean> getCourseList(Integer page, Integer rows, Map<String, Object> parameter);
+
+
 //    Integer saveOrUpdate(CourseBean courseBean);
+
+    String getCourseCheckbox(Integer projectId, Integer systemType);
 }

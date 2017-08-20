@@ -107,4 +107,12 @@ public class GenericDaoImpl<T extends BaseEntity, PK extends Serializable> imple
         this.sessionFactory.getCurrentSession().update(entity);
         this.sessionFactory.getCurrentSession().flush();
     }
+
+	public SessionFactory getSessionFactory() {
+		return sessionFactory;
+	}
+
+	public void setSessionFactory(SessionFactory sessionFactory) {
+		this.sessionFactory = sessionFactory;
+	}
 }

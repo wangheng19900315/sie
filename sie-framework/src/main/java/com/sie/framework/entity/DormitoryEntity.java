@@ -10,6 +10,7 @@ import javax.persistence.*;
 public class DormitoryEntity extends BaseEntity{
 //    private Integer id;
     private String address;
+    private String name;
     private Double price;
     private Integer projectId;
 
@@ -52,5 +53,13 @@ public class DormitoryEntity extends BaseEntity{
 
     public void setPrice(Double price) {
         this.price = price;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

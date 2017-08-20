@@ -10,22 +10,14 @@ import javax.persistence.*;
 @Entity
 @Table(name = "t_order_detail_info")
 public class OrderDetailEntity extends BaseEntity{
-    private Integer projectId;
     private String   courseIds;
     private Integer courseCount;
-    private Integer dormitoryId;
+    private Integer orderDetailStatus;
+    private Double total;
     private OrderEntity orderEntity;
+    private ProjectEntity projectEntity;
+    private DormitoryEntity dormitoryEntity;
 
-
-    @Basic
-    @Column(name = "project_id")
-    public Integer getProjectId() {
-        return projectId;
-    }
-
-    public void setProjectId(Integer projectId) {
-        this.projectId = projectId;
-    }
 
     @Basic
     @Column(name = "course_ids")
@@ -47,15 +39,7 @@ public class OrderDetailEntity extends BaseEntity{
         this.courseCount = courseCount;
     }
 
-    @Basic
-    @Column(name = "dormitory_id")
-    public Integer getDormitoryId() {
-        return dormitoryId;
-    }
 
-    public void setDormitoryId(Integer dormitoryId) {
-        this.dormitoryId = dormitoryId;
-    }
 
 
     @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
@@ -67,5 +51,45 @@ public class OrderDetailEntity extends BaseEntity{
 
     public void setOrderEntity(OrderEntity orderEntity) {
         this.orderEntity = orderEntity;
+    }
+
+    @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
+    @JoinColumn(name = "project_id", nullable = true, columnDefinition = "COMMENT '项目id'")
+    @Where(clause = "h_delete=0")
+    public ProjectEntity getProjectEntity() {
+        return projectEntity;
+    }
+
+    public void setProjectEntity(ProjectEntity projectEntity) {
+        this.projectEntity = projectEntity;
+    }
+
+    @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
+    @JoinColumn(name = "dormitory_id", nullable = true, columnDefinition = "COMMENT '宿舍id'")
+    @Where(clause = "h_delete=0")
+    public DormitoryEntity getDormitoryEntity() {
+        return dormitoryEntity;
+    }
+
+    public void setDormitoryEntity(DormitoryEntity dormitoryEntity) {
+        this.dormitoryEntity = dormitoryEntity;
+    }
+
+    @Column(name = "order_detail_status")
+    public Integer getOrderDetailStatus() {
+        return orderDetailStatus;
+    }
+
+    public void setOrderDetailStatus(Integer orderDetailStatus) {
+        this.orderDetailStatus = orderDetailStatus;
+    }
+
+    @Column(name = "total")
+    public Double getTotal() {
+        return total;
+    }
+
+    public void setTotal(Double total) {
+        this.total = total;
     }
 }

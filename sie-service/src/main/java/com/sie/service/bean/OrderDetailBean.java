@@ -17,6 +17,9 @@ public class OrderDetailBean extends BaseBean{
     private Integer courseCount;
     private Integer dormitoryId;
     private String dormitoryName;
+    private Integer orderDetailStatus;
+    private String orderDetailStatusName;
+    private Double total;
 
     public Integer getProjectId() {
         return projectId;
@@ -72,5 +75,29 @@ public class OrderDetailBean extends BaseBean{
 
     public void setDormitoryName(String dormitoryName) {
         this.dormitoryName = dormitoryName;
+    }
+
+    public Integer getOrderDetailStatus() {
+        return orderDetailStatus;
+    }
+
+    public void setOrderDetailStatus(Integer orderDetailStatus) {
+        this.orderDetailStatus = orderDetailStatus;
+    }
+
+    public String getOrderDetailStatusName() {
+        return orderDetailStatusName;
+    }
+
+    public void setOrderDetailStatusName(String orderDetailStatusName) {
+        this.orderDetailStatusName = orderDetailStatusName;
+    }
+
+    public Double getTotal() {
+        return total;
+    }
+
+    public void setTotal(Double total) {
+        this.total = total;
     }
 }

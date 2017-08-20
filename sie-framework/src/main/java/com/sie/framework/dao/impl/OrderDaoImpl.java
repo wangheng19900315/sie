@@ -11,4 +11,5 @@ import org.springframework.stereotype.Repository;
 @Repository("orderDao")
 public class OrderDaoImpl extends GenericDaoImpl<OrderEntity, Integer> implements OrderDao {
 
+
 }

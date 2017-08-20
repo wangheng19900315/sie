@@ -8,4 +8,5 @@ import com.sie.framework.entity.OrderEntity;
  * Created by wangheng on 2017/8/9.
  */
 public interface OrderDao extends GenericDao<OrderEntity, Integer> {
+
 }

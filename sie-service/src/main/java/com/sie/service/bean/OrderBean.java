@@ -1,32 +1,37 @@
 package com.sie.service.bean;
 
-import com.sie.framework.entity.BaseEntity;
-import com.sie.framework.entity.OrderDetailEntity;
-import org.hibernate.annotations.Where;
-
-import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by x on 2017/8/12.
  */
-public class OrderBean  {
+public class OrderBean  extends BaseBean{
 
     private String code;
     private Double money;
     private Double discount;
     private Integer crId;
+    private String crnName;
     private Integer couponId;
     private String couponName;
-    private Integer courseNumber;
     private Integer status;
-    private String statsName;
+    private String statusName;
     private Timestamp payTime;
     private String remark;
+    private String orderTypeName;
+    private Double payMoney;
+    private String studentName;
+    private Integer studentId;
+    private Double crDiscount; //cr优惠金额
+    private Double couponDiscount; //优惠卷优惠金额
+    private Integer systemType;
+    private String systemTypeName;
 
 
-    private List<OrderDetailBean> orderDetailBeen;
+
+    private List<OrderDetailBean> orderDetailBeen = new ArrayList<>();
 
 
     public String getCode() {
@@ -69,14 +74,6 @@ public class OrderBean  {
         this.couponId = couponId;
     }
 
-    public Integer getCourseNumber() {
-        return courseNumber;
-    }
-
-    public void setCourseNumber(Integer courseNumber) {
-        this.courseNumber = courseNumber;
-    }
-
     public Integer getStatus() {
         return status;
     }
@@ -85,12 +82,12 @@ public class OrderBean  {
         this.status = status;
     }
 
-    public String getStatsName() {
-        return statsName;
+    public String getStatusName() {
+        return statusName;
     }
 
-    public void setStatsName(String statsName) {
-        this.statsName = statsName;
+    public void setStatusName(String statusName) {
+        this.statusName = statusName;
     }
 
     public Timestamp getPayTime() {
@@ -123,5 +120,77 @@ public class OrderBean  {
 
     public void setOrderDetailBeen(List<OrderDetailBean> orderDetailBeen) {
         this.orderDetailBeen = orderDetailBeen;
+    }
+
+    public String getCrnName() {
+        return crnName;
+    }
+
+    public void setCrnName(String crnName) {
+        this.crnName = crnName;
+    }
+
+    public String getOrderTypeName() {
+        return orderTypeName;
+    }
+
+    public void setOrderTypeName(String orderTypeName) {
+        this.orderTypeName = orderTypeName;
+    }
+
+    public Double getPayMoney() {
+        return payMoney;
+    }
+
+    public void setPayMoney(Double payMoney) {
+        this.payMoney = payMoney;
+    }
+
+    public String getStudentName() {
+        return studentName;
+    }
+
+    public void setStudentName(String studentName) {
+        this.studentName = studentName;
+    }
+
+    public Integer getStudentId() {
+        return studentId;
+    }
+
+    public void setStudentId(Integer studentId) {
+        this.studentId = studentId;
+    }
+
+    public Double getCrDiscount() {
+        return crDiscount;
+    }
+
+    public void setCrDiscount(Double crDiscount) {
+        this.crDiscount = crDiscount;
+    }
+
+    public Double getCouponDiscount() {
+        return couponDiscount;
+    }
+
+    public void setCouponDiscount(Double couponDiscount) {
+        this.couponDiscount = couponDiscount;
+    }
+
+    public Integer getSystemType() {
+        return systemType;
+    }
+
+    public void setSystemType(Integer systemType) {
+        this.systemType = systemType;
+    }
+
+    public String getSystemTypeName() {
+        return systemTypeName;
+    }
+
+    public void setSystemTypeName(String systemTypeName) {
+        this.systemTypeName = systemTypeName;
     }
 }

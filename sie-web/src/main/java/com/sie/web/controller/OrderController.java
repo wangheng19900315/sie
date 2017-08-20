@@ -1,9 +1,13 @@
 package com.sie.web.controller;
 
+import com.sie.framework.entity.OrderDetailEntity;
 import com.sie.framework.entity.OrderEntity;
+import com.sie.service.OrderDetailService;
 import com.sie.service.OrderService;
 import com.sie.service.bean.OrderBean;
+import com.sie.service.bean.OrderDetailBean;
 import com.sie.service.bean.PageInfo;
+import com.sie.service.bean.ResultBean;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,6 +27,9 @@ public class OrderController {
     @Autowired
     private OrderService orderService;
 
+    @Autowired
+    private OrderDetailService orderDetailService;
+
 
 
 
@@ -31,17 +38,25 @@ public class OrderController {
         return "/order/list";
     }
 
-    @RequestMapping("/addOrUpdate.html")
-    public String addOrupdate(Model model, Integer id){
 
-        return "/order/addOrUpdate";
+    @RequestMapping("/detail.html")
+    public String detail(Model model, Integer id){
+        model.addAttribute("id", id);
+        return "/order/detail";
     }
+
+    @RequestMapping("/update.html")
+    public String update(Model model, Integer id){
+        model.addAttribute("id", id);
+        return "/order/update";
+    }
+
 
 
 
     @RequestMapping("/list.json")
     @ResponseBody
-    public PageInfo<OrderBean> listJons(Integer page, Integer rows ){
+    public PageInfo<OrderBean> listJons(Integer page, Integer rows){
 
         PageInfo<OrderBean> pageInfo = null;
         try{
@@ -54,8 +69,50 @@ public class OrderController {
     }
 
 
+    @RequestMapping("/detail.json")
+    @ResponseBody
+    public OrderBean detail(Integer orderId){
+        OrderBean orderBean = null;
+        try{
+            orderBean  = this.orderService.getDetail(orderId);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return orderBean;
+    }
 
 
+    @RequestMapping("/detailList.json")
+    @ResponseBody
+    public PageInfo<OrderDetailBean> listJons(Integer page, Integer rows,Integer orderId ){
+
+        PageInfo<OrderDetailBean> pageInfo = null;
+        try{
+            pageInfo = this.orderDetailService.getOrderDetailList(page,rows, orderId);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return pageInfo;
+    }
+
+
+
+    @RequestMapping("/updateCourseIds.json")
+    @ResponseBody
+    public ResultBean updateCourseIds(OrderDetailEntity detailEntity){
+
+        ResultBean resultBean = new ResultBean();
+        try{
+           this.orderDetailService.updateCourseIds(detailEntity);
+            resultBean.setSuccess(true);
+            resultBean.setMessage("修改成功");
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return resultBean;
+    }
 
 
 

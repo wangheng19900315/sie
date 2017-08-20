@@ -112,4 +112,17 @@ public class CourseServiceImpl extends BaseServiceImpl<CourseEntity,Integer> imp
 
 
     }
+
+    @Override
+    public String getCourseCheckbox(Integer projectId, Integer systemType) {
+        StringBuilder sb = new StringBuilder();
+        String hql = "from CourseEntity where system="+systemType+" and projectId="+projectId;
+        List<CourseEntity> courseEntities = this.courseDao.getList(hql);
+        if(courseEntities.size()  >0){
+            for(CourseEntity courseEntity:courseEntities){
+                sb.append("<input type='checkbox' name='courseIds' value='"+courseEntity.getId()+"'> "+courseEntity.getEnglishName());
+            }
+        }
+        return sb.toString();
+    }
 }

@@ -1,5 +1,7 @@
 package com.sie.framework.entity;
 
+import org.hibernate.annotations.Where;
+
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.sql.Timestamp;

@@ -87,4 +87,18 @@ public class CourseController {
         return resultBean;
     }
 
+
+    @RequestMapping("/getCourseCheckbox.json")
+    @ResponseBody
+    public String getCourseCheckbox(Integer projectId, Integer systemType){
+        String result = "";
+        try{
+            result = this.courseService.getCourseCheckbox(projectId, systemType);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return result;
+    }
+
 }
