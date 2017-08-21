@@ -33,5 +33,7 @@ public interface GenericDao<T extends BaseEntity, PK extends Serializable> {
 
     public abstract void updateEntity(BaseEntity entity);
 
+	public abstract Integer updateByHql(String hql);
+
 	//TODO 缺少查询条件的接口 获取带查询条件的条数
 }

@@ -54,6 +54,8 @@ public class GenericDaoImpl<T extends BaseEntity, PK extends Serializable> imple
         this.sessionFactory.getCurrentSession().flush();
     }
 
+
+
     @Override
 	public T getEntity(PK id) {
 		if (id != null) {
@@ -107,6 +109,15 @@ public class GenericDaoImpl<T extends BaseEntity, PK extends Serializable> imple
         this.sessionFactory.getCurrentSession().update(entity);
         this.sessionFactory.getCurrentSession().flush();
     }
+
+	@Override
+	public Integer updateByHql(String hql) {
+
+		Query queryupdate=this.getSessionFactory().getCurrentSession().createQuery(hql);
+		int ret=queryupdate.executeUpdate();
+		this.sessionFactory.getCurrentSession().flush();
+		return ret;
+	}
 
 	public SessionFactory getSessionFactory() {
 		return sessionFactory;
