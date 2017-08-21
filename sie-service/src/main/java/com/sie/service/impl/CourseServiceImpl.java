@@ -30,6 +30,9 @@ public class CourseServiceImpl extends BaseServiceImpl<CourseEntity,Integer> imp
     private CourseDao courseDao;
 
     @Autowired
+    private ProjectDao projectDao;
+
+    @Autowired
     CourseServiceImpl(CourseDao courseDao) {
         super(courseDao);
         this.courseDao = courseDao;
@@ -59,13 +62,14 @@ public class CourseServiceImpl extends BaseServiceImpl<CourseEntity,Integer> imp
     }
 
     public Integer saveOrUpdate(CourseEntity courseEntity) {
+        genarateEntity(courseEntity);
         if(NumberUtil.isSignless(courseEntity.getId())){
             CourseEntity oldProjectEntity = this.courseDao.getEntity(courseEntity.getId());
             //TODO 设置值
             this.courseDao.updateEntity(oldProjectEntity);
             return oldProjectEntity.getId();
         }else{
-            genarateEntity(courseEntity);
+
             this.courseDao.createEntity(courseEntity);
             return courseEntity.getId();
         }
@@ -106,6 +110,9 @@ public class CourseServiceImpl extends BaseServiceImpl<CourseEntity,Integer> imp
                     bean.setSystemName(systemType.getName());
                 }
             }
+            //设置projectname
+            ProjectEntity projectEntity = projectDao.getEntity(courseEntity.getProjectId());
+            bean.setProjectName(projectEntity.getSieName());
         }catch (Exception e){
             e.printStackTrace();
         }

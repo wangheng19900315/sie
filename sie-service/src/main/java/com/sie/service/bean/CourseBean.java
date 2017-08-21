@@ -14,6 +14,7 @@ public class CourseBean  extends BaseBean{
     private Timestamp startTime;
     private Timestamp endTime;
     private Integer projectId;
+    private String projectName;
     private String sieCode;
     private Integer sieMaxStudent;
     private Integer sieTotalNumber;
@@ -131,5 +132,13 @@ public class CourseBean  extends BaseBean{
 
     public void setTruTotalNumber(Integer truTotalNumber) {
         this.truTotalNumber = truTotalNumber;
+    }
+
+    public String getProjectName() {
+        return projectName;
+    }
+
+    public void setProjectName(String projectName) {
+        this.projectName = projectName;
     }
 }

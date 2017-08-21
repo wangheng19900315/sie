@@ -1,5 +1,6 @@
 package com.sie.service.impl;
 
+import com.sie.framework.dao.CourseDao;
 import com.sie.framework.dao.ProjectDao;
 import com.sie.framework.dao.ProjectPriceDao;
 import com.sie.framework.entity.ProjectEntity;
@@ -37,6 +38,9 @@ public class ProjectServiceImpl extends BaseServiceImpl<ProjectEntity,Integer> i
 
     @Autowired
     private ProjectPriceDao projectPriceDao;
+
+    @Autowired
+    private CourseDao courseDao;
 
     @Autowired
     ProjectServiceImpl(ProjectDao projectDao) {
@@ -186,8 +190,8 @@ public class ProjectServiceImpl extends BaseServiceImpl<ProjectEntity,Integer> i
 
 
     private void saveOrUpdateProjectPrice(Integer projectId, ProjectBean bean){
-        //TODO 删除project下边的price
-        String hql = "update ProjectPriceEntity price set price.hdelete=1 where price.projectId='"+projectId+"'";
+        //删除project下边的price
+        String hql = "update ProjectPriceEntity price set price.hdelete=1 where price.projectId="+projectId;
         projectPriceDao.updateByHql(hql);
         
         ProjectPriceBean[] siePrice = bean.getSiePrice();
@@ -233,5 +237,18 @@ public class ProjectServiceImpl extends BaseServiceImpl<ProjectEntity,Integer> i
         }
 
 
+    }
+
+
+    @Override
+    public void delete(Integer id) {
+        //删除project
+        projectDao.deleteEntity(projectDao.getEntity(id));
+        //删除项目下的价格
+        String hql = "update ProjectPriceEntity price set price.hdelete=1 where price.projectId="+id;
+        projectPriceDao.updateByHql(hql);
+        //删除项目下的课程
+        hql = "update CourseEntity course set course.hdelete=1 where course.projectId="+id;
+        courseDao.updateByHql(hql);
     }
 }
