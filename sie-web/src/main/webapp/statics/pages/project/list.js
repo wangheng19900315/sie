@@ -39,10 +39,7 @@ $(function(){
             {name: 'sieMaxCourse', index: 'sieMaxCourse', width: 20,  sortable: false},
             {name: 'truName', index: 'truName', width: 20,  sortable: false},
             {name: 'truMaxCourse', index: 'truMaxCourse', width: 20,  sortable: false},
-            {name: 'startTime', index: 'startTime', width: 20, sortable: false, formatter:function(cellvalue, options, rowObject){
-                var time1 = new Date(cellvalue).Format("yyyy-MM-dd hh:mm:ss");
-                return time1;
-            }}
+            {name: 'startTimeFormat', index: 'startTimeFormat', width: 20, sortable: false}
         ],
         multiselect: true,
         multiboxonly: true,

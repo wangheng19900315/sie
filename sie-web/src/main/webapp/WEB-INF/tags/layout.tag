@@ -21,9 +21,6 @@
 <link href="/statics/assets/stylesheets/themes.min.css" rel="stylesheet" type="text/css">
 <link href="/statics/common/common.css" rel="stylesheet" type="text/css">
 
-<%--bootstrap datatime--%>
-<link href="/statics/datatime/css/bootstrap-datetimepicker.min.css" rel="stylesheet" type="text/css">
-<%--end bootstrap datatime--%>
 <link rel="stylesheet" type="text/css"
       href="/statics/jqGrid/ui.jqgrid.css?_dc=$!{staticVersion}"/>
 <script>var init = [];</script>
@@ -61,10 +58,7 @@
 <script src="/statics/jqGrid/grid.locale-cn.js"></script>
 <script src="/statics/common/jquery.validate.js"></script>
 <script src="/statics/common/util.js"></script>
-<%--bootstrap datatime--%>
-<script type="text/javascript" src="/statics/datatime/js/bootstrap-datetimepicker.min.js" charset="UTF-8"></script>
-<script type="text/javascript" src="/statics/datatime/js/bootstrap-datetimepicker.zh-CN.js" charset="UTF-8"></script>
-<%--end bootstrap datatime--%>
+
 <script type="text/javascript">
 
     init.push(function () {

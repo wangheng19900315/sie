@@ -1,5 +1,6 @@
 package com.sie.web.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.sie.service.ProjectService;
 import com.sie.service.bean.OrderBean;
 import com.sie.service.bean.PageInfo;
@@ -35,7 +36,11 @@ public class ProjectController {
 
     @RequestMapping("/addOrUpdate.html")
     public String addOrupdate(Model model, Integer id){
-
+        if(NumberUtil.isSignless(id)){
+            ProjectBean bean = this.projectService.getBean(id);
+            System.out.println(JSON.toJSON(bean));
+            model.addAttribute("entity", JSON.toJSON(bean));
+        }
         return "/project/addOrUpdate";
     }
 

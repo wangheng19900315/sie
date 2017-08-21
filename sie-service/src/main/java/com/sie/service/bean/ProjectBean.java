@@ -15,6 +15,8 @@ public class ProjectBean extends BaseBean{
     private Integer truMaxCourse;
     private Timestamp startTime;
     private Timestamp endTime;
+    private String startTimeFormat;
+    private String endTimeFormat;
 
     private ProjectPriceBean[] siePrice;
     private ProjectPriceBean[] truPrice;
@@ -105,5 +107,21 @@ public class ProjectBean extends BaseBean{
 
     public void setTruPrice(ProjectPriceBean[] truPrice) {
         this.truPrice = truPrice;
+    }
+
+    public String getStartTimeFormat() {
+        return startTimeFormat;
+    }
+
+    public void setStartTimeFormat(String startTimeFormat) {
+        this.startTimeFormat = startTimeFormat;
+    }
+
+    public String getEndTimeFormat() {
+        return endTimeFormat;
+    }
+
+    public void setEndTimeFormat(String endTimeFormat) {
+        this.endTimeFormat = endTimeFormat;
     }
 }

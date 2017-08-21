@@ -26,7 +26,6 @@ $(function(){
 
     //绑定系统选择事件
     $("#system").bind("change",function(){
-        alert(1);
         var type = $("#system").val();
         //清空原有配置
 
@@ -44,19 +43,15 @@ $(function(){
         }
     });
 
-    //日期格式初始化
-    $('.form_time').datetimepicker({
-        language: 'zh-CN',//显示中文
-        format: "yyyy-mm-dd hh:ii:ss",
-        weekStart: 1,
-        todayBtn:  1,
-        autoclose: 1,
-        todayHighlight: 1,
-        startView: 1,
-        minView: 0,
-        maxView: 1,
-        forceParse: 0
-    });
+    //时间格式初始化
+    var options = {
+        minuteStep: 1,
+        showSeconds: true,
+        showMeridian: false,
+        showInputs: false,
+        orientation: $('body').hasClass('right-to-left') ? { x: 'right', y: 'auto'} : { x: 'auto', y: 'auto'}
+    }
+    $('.form_time').timepicker(options);
 
     //出发select选中事件
     $("#system").change();
