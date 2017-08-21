@@ -73,6 +73,7 @@ public class ProjectServiceImpl extends BaseServiceImpl<ProjectEntity,Integer> i
 
     @Override
     public Integer saveOrUpdate(ProjectBean projectBean) {
+        genarateEntity(projectBean);
         if(!validatorBean(projectBean)){
             return null;
         }
@@ -179,10 +180,10 @@ public class ProjectServiceImpl extends BaseServiceImpl<ProjectEntity,Integer> i
     }
 
     private boolean validatorBean(ProjectBean bean){
-        if(bean.getSieMaxCourse() > bean.getSiePrice().length){
+        if((bean.getSieMaxCourse() != null) && (bean.getSieMaxCourse() > bean.getSiePrice().length)){
             return false;
         }
-        if(bean.getTruMaxCourse() > bean.getTruPrice().length){
+        if((bean.getTruMaxCourse() != null) && (bean.getTruMaxCourse() > bean.getTruPrice().length)){
             return false;
         }
         return true;
@@ -197,20 +198,23 @@ public class ProjectServiceImpl extends BaseServiceImpl<ProjectEntity,Integer> i
         ProjectPriceBean[] siePrice = bean.getSiePrice();
         ProjectPriceBean[] truPrice = bean.getTruPrice();
         //保存sie价格
-        for(int i = 0; i < siePrice.length && i < bean.getSieMaxCourse(); i ++){
-            ProjectPriceBean priceBean = siePrice[i];
-            priceBean.setSystem(1);
-            priceBean.setProjectId(projectId);
-            savePrice(priceBean);
+        if(bean.getSieMaxCourse() != null){
+            for(int i = 0; i < siePrice.length && i < bean.getSieMaxCourse(); i ++){
+                ProjectPriceBean priceBean = siePrice[i];
+                priceBean.setSystem(1);
+                priceBean.setProjectId(projectId);
+                savePrice(priceBean);
+            }
         }
 
-
         //保存tru价格
-        for(int i = 0; i < truPrice.length && i < bean.getTruMaxCourse(); i ++){
-            ProjectPriceBean priceBean = truPrice[i];
-            priceBean.setSystem(2);
-            priceBean.setProjectId(projectId);
-            savePrice(priceBean);
+        if(bean.getTruMaxCourse() != null){
+            for(int i = 0; i < truPrice.length && i < bean.getTruMaxCourse(); i ++){
+                ProjectPriceBean priceBean = truPrice[i];
+                priceBean.setSystem(2);
+                priceBean.setProjectId(projectId);
+                savePrice(priceBean);
+            }
         }
 
     }
@@ -239,6 +243,26 @@ public class ProjectServiceImpl extends BaseServiceImpl<ProjectEntity,Integer> i
 
     }
 
+    //根据选择的所属系统设置entity的值
+    private void genarateEntity(ProjectBean projectBean){
+        SystemType systemType = SystemType.valueOf(projectBean.getSystem());
+        switch (systemType){
+            case SIE:
+                //将TRU的信息设置为空
+                projectBean.setTruMaxCourse(null);
+                projectBean.setTruName(null);
+                break;
+            case TRU:
+                //将SIE的信息设置为空
+                projectBean.setSieMaxCourse(null);
+                projectBean.setSieName(null);
+                break;
+            case SIEANDTRU:
+                break;
+            default:
+                projectBean = null;
+        }
+    }
 
     @Override
     public void delete(Integer id) {
