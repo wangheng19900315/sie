@@ -16,4 +16,6 @@ public interface OrderService extends BaseService<OrderEntity, Integer> {
     PageInfo<OrderBean> getOrderList(Integer page, Integer rows, Map<String, Object> parameter);
 
     public OrderBean getDetail(Integer id);
+
+    void updateOrderInfo(OrderEntity orderEntity);
 }

@@ -30,6 +30,9 @@ public class CourseDaoImpl extends GenericDaoImpl<CourseEntity, Integer> impleme
                 names += courseEntity.getEnglishName()+",";
             }
         }
+        if(names.length() > 0){
+            names = names.substring(0, names.length()-1);
+        }
         return names;
     }
 }

@@ -114,6 +114,23 @@ public class OrderController {
         return resultBean;
     }
 
+    @RequestMapping("/updateOrderInfo.json")
+    @ResponseBody
+    public ResultBean updateOrderInfo(OrderEntity orderEntity){
+
+        ResultBean resultBean = new ResultBean();
+        try{
+            this.orderService.updateOrderInfo(orderEntity);
+            resultBean.setSuccess(true);
+            resultBean.setMessage("修改成功");
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return resultBean;
+    }
+
+
 
 
 }

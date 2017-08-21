@@ -28,6 +28,7 @@ import java.util.Map;
 @Service("orderDetailService")
 public class OrderDetailServiceImpl extends BaseServiceImpl<OrderDetailEntity,Integer> implements OrderDetailService {
 
+    @Autowired
     private OrderDetailDao orderDetailDao;
 
     @Autowired

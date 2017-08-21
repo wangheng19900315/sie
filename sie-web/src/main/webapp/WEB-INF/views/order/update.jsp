@@ -146,6 +146,10 @@
                                 </div>
                             </div>
                         </div>
+
+                        <div class="panel-footer text-center">
+                            <button class="btn btn-primary" id="submitBtn" type="button" >提交</button>
+                        </div>
                     </form>
                 </div>
             </div>
@@ -191,7 +195,7 @@
 
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    <button type="button" id="detailCanclBtn" class="btn btn-default" data-dismiss="modal">关闭</button>
                     <button type="button" id="detailSubmitBtn" class="btn btn-primary">提交</button>
                 </div>
             </div>

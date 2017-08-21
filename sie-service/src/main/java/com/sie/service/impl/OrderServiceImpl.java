@@ -133,6 +133,14 @@ public class OrderServiceImpl extends BaseServiceImpl<OrderEntity,Integer> imple
     }
 
 
-
-
+    @Override
+    public void updateOrderInfo(OrderEntity orderEntity) {
+        OrderEntity oldEntity = this.orderDao.getEntity(orderEntity.getId());
+        if(oldEntity != null){
+            oldEntity.setDiscount(orderEntity.getDiscount());
+            oldEntity.setPayMoney(orderEntity.getPayMoney());
+            oldEntity.setStatus(orderEntity.getStatus());
+            this.orderDao.updateEntity(oldEntity);
+        }
+    }
 }

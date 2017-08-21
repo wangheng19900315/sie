@@ -78,24 +78,38 @@ $(function(){
 
     $("#detailSubmitBtn").bind("click", function(){
         var rowData = $("#grid-table").jqGrid('getRowData', selectCourseId);
-
+        var courseCount = rowData.courseCount;
         var courseIds = "";
-        $("input[type=checkbox]").each(function(){
+        var count = 0;
+        $("input[name=courseIds]").each(function(){
             if($(this).attr("checked")){
-                courseIds += $(this).val();
+                courseIds += $(this).val()+",";
+                count++;
             }
         })
+        if(courseCount != count){
+            alert("课程选择的数目不对，请重新选择");
+            return;
+        }
+        courseIds = courseIds.substring(0,courseIds.length-1);
         var obj = {"id":selectCourseId,"courseIds":courseIds};
         $.ajax({
-            url: '/course/getCourseCheckbox.json',
+            url: '/order/updateCourseIds.json',
             type: 'post',
             async:false,
             dataType:'json',
             data:obj,
             success: function (data) {
-                if(data.success){
-                    alert("修改成功")
+                if (data.success) {
+                    alert("修改成功！");
+                    $("#detailCanclBtn").click();
+                    window.location.reload();
+                } else {
+                    alert("保存数据出现错误，请稍候重试！");
                 }
+            },
+            error: function () {
+                alert("提交保存信息出现错误！");
             }
         });
 
@@ -104,13 +118,61 @@ $(function(){
 
 
 
+    //修改金额
+    $("#discount").bind("change", function(){
+        if($(this).val()  == ""){
+            alert("请输入折扣金额！");
+            return;
+        }
+
+        var payMonety = $("#money").val()-$("#crDiscount").val()-$("#couponDiscount").val()-$("#discount").val();
+        if(payMonety  < 0){
+            $("#payMoney").val(payMonety);
+            alert("折扣金额大于总金额！");
+            return;
+        }
+        $("#payMoney").val(payMonety);
+    })
+
+
+    $("#submitBtn").click(function(){
+        if($("#discount").val()  == ""){
+            alert("请输入管理员折扣金额！");
+            return;
+        }
+
+        if( $("#payMoney").val() < 0){
+            alert("折扣金额大于总金额！");
+            return;
+        }
+
+        var formData = $("#data-form").serializeJson();
+        $.ajax({
+            url: '/order/updateOrderInfo.json',
+            type: 'post',
+            async:false,
+            dataType:'json',
+            data:formData,
+            success: function (data) {
+                if (data.success) {
+                    alert("修改成功！");
+                    $("#detailCanclBtn").click();
+                    window.location.reload();
+                } else {
+                    alert("保存数据出现错误，请稍候重试！");
+                }
+            },
+            error: function () {
+                alert("提交保存信息出现错误！");
+            }
+        });
+    })
+
 })
 
 function selectCourses(id){
     selectCourseId = id;
     var rowData = $("#grid-table").jqGrid('getRowData', id);
-    var custerNames = rowData.custerNames;
-    var courseCount = rowData.courseCount;
     var projectId = rowData.projectId;
     var courseIds = rowData.courseIds;
     var systemType = $("#systemType").val();
