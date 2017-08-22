@@ -12,10 +12,8 @@ function selectRow() {
     
     if (ids && ids.length == 1) {
         $('#editBtn').removeClass('disabled');
-        $('#deleteBtn').removeClass('disabled');
     } else {
         $('#editBtn').addClass('disabled');
-        $('#deleteBtn').addClass('disabled');
     }
 };
 $(function(){
@@ -24,33 +22,29 @@ $(function(){
     var pager_selector = "#grid-pager";
 
     jQuery(grid_selector).jqGrid({
-        url: '/cr/list.json',
+        url: '/grade/list.json',
         datatype: "json",
         height: '100%',
         mtype: 'post',
         postData: {},
-        colNames: ['ID', '姓名' ,'CR邀请码' ,'总数据量' ,'使用数量','剩余数量','优惠金额','创建时间' ,'修改时间'  ],
+        colNames: ['ID', '创建时间' ,'姓名' ,'系统','项目名' ,'课程名' ,'分数','修改时间'  ],
         colModel: [
             {name: 'id', index: 'id', width: 20, hidden: true,  sortable: false},
-            {name: 'personName', index: 'personName', width: 20,   sortable: false},
-            {name: 'code', index: 'code', width: 20,  sortable: false},
-            {name: 'total', index: 'total', width: 20,  sortable: false},
-            {name: 'used', index: 'used', width: 20, sortable: false},
-            {name: 'remain', index: 'remain', width: 20, sortable: false, formatter:function(cellvalue, options, rowObject){
-                var value = rowObject.total - rowObject.used;
-                return value;
-            }},
-            {name: 'price', index: 'price', width: 20,  sortable: false},
             {name: 'createTime', index: 'createTime', width: 20 , sortable: false, formatter:function(cellvalue, options, rowObject){
                 var time1 = new Date(cellvalue).Format("yyyy-MM-dd hh:mm:ss");
                 return time1;
             }
             },
+            {name: 'studentName', index: 'studentName', width: 20,   sortable: false},
+            {name: 'systemTypename', index: 'systemTypename', width: 20,   sortable: false},
+            {name: 'projectName', index: 'projectName', width: 20,  sortable: false},
+            {name: 'courseName', index: 'courseName', width: 20,  sortable: false},
+            {name: 'grade', index: 'grade', width: 20, sortable: false},
             {name: 'updateTime', index: 'updateTime', width: 20 , sortable: false, formatter:function(cellvalue, options, rowObject){
                 var time1 = new Date(cellvalue).Format("yyyy-MM-dd hh:mm:ss");
                 return time1;
             }
-            }
+            },
         ],
         multiselect: true,
         multiboxonly: true,
@@ -89,49 +83,21 @@ $(function(){
         search();
     })
 
-    $("#addBtn").bind("click",function(){
-        window.location.href="/cr/addOrUpdate.html"
-    })
 
 
     $("#editBtn").bind("click",function(){
         var id = $("#grid-table").jqGrid('getGridParam', 'selrow');
-        window.location.href="/cr/addOrUpdate.html?id="+id;
+        window.location.href="/grade/addOrUpdate.html?id="+id;
     })
 
-    $("#deleteBtn").bind("click",function(){
-        var id = $("#grid-table").jqGrid('getGridParam', 'selrow');
-        if(id == null){
-            alert("请选择记录!");
-            return;
-        }
-        bootbox.confirm({
-            message: "确定要删除该条记录?",
-            callback: function(result) {
-                if(result){
 
-                    $.ajax({
-                        url: '/cr/delete.json?id='+id,
-                        type: 'get',
-                        dataType:'json',
-                        success: function (json, statusText, xhr, $form) {
-                            if (json.success) {
-                                alert("删除完成!");
-                                $("#grid-table").trigger('reloadGrid');
-                            } else {
-                                alert( json.message);
-                            }
-                        }
-                    });
-                }
-            },
-            className: "bootbox-sm"
-        });
+
+    $("#excelBtn").bind("click", function(){
+        var title = "122";
+        getXlsFromTbl('grid-table', 'excel_div', title, true)
     })
 
-    $("#infoBtn").bind("click",function(){
-        search();
-    })
+
 })
 
 

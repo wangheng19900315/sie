@@ -1,5 +1,7 @@
 package com.sie.framework.entity;
 
+import org.hibernate.annotations.Where;
+
 import javax.persistence.*;
 
 /**
@@ -10,17 +12,11 @@ import javax.persistence.*;
 public class GradeEntity extends BaseEntity {
 //    private Integer id;
     private Double grade;
-    private Integer orderDetailId;
+    private ProjectEntity projectEntity;
+    private CourseEntity courseEntity;
+    private StudentEntity studentEntity;
+    private Integer systemType;
 
-//    @Id
-//    @GeneratedValue(strategy= GenerationType.IDENTITY)
-//    public Integer getId() {
-//        return id;
-//    }
-//
-//    public void setId(Integer id) {
-//        this.id = id;
-//    }
 
     @Basic
     @Column(name = "grade")
@@ -32,14 +28,45 @@ public class GradeEntity extends BaseEntity {
         this.grade = grade;
     }
 
-    @Basic
-    @Column(name = "order_detail_id")
-    public Integer getOrderDetailId() {
-        return orderDetailId;
+    @Column(name = "system_type")
+    public Integer getSystemType() {
+        return systemType;
     }
 
-    public void setOrderDetailId(Integer orderDetailId) {
-        this.orderDetailId = orderDetailId;
+    public void setSystemType(Integer systemType) {
+        this.systemType = systemType;
     }
 
+    @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
+    @JoinColumn(name = "project_id", nullable = true, columnDefinition = "COMMENT '项目id'")
+    @Where(clause = "h_delete=0")
+    public ProjectEntity getProjectEntity() {
+        return projectEntity;
+    }
+
+    public void setProjectEntity(ProjectEntity projectEntity) {
+        this.projectEntity = projectEntity;
+    }
+
+    @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
+    @JoinColumn(name = "course_id", nullable = true, columnDefinition = "COMMENT '课程'")
+    @Where(clause = "h_delete=0")
+    public CourseEntity getCourseEntity() {
+        return courseEntity;
+    }
+
+    public void setCourseEntity(CourseEntity courseEntity) {
+        this.courseEntity = courseEntity;
+    }
+
+    @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
+    @JoinColumn(name = "student_id", nullable = true, columnDefinition = "COMMENT '课程'")
+    @Where(clause = "h_delete=0")
+    public StudentEntity getStudentEntity() {
+        return studentEntity;
+    }
+
+    public void setStudentEntity(StudentEntity studentEntity) {
+        this.studentEntity = studentEntity;
+    }
 }
