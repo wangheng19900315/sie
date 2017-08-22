@@ -38,7 +38,6 @@ public class ProjectController {
     public String addOrupdate(Model model, Integer id){
         if(NumberUtil.isSignless(id)){
             ProjectBean bean = this.projectService.getBean(id);
-            System.out.println(JSON.toJSON(bean));
             model.addAttribute("entity", JSON.toJSON(bean));
         }
         return "/project/addOrUpdate";

@@ -24,10 +24,10 @@
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="form-group ">
-                                <label for="startTime" class="col-sm-2 control-label">开始时间</label>
+                                <label for="startTimeFormat" class="col-sm-2 control-label">开始时间</label>
                                 <div class="col-sm-9">
                                     <div class="input-group date">
-                                        <input type="text" class="form-control  form_time" id="startTime" name="startTime"  value=""  required data-msg-required="请输入开始时间">
+                                        <input type="text" class="form-control  form_time" id="startTimeFormat" name="startTimeFormat"  value=""  required data-msg-required="请输入开始时间">
                                         <span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
                                     </div>
                                 </div>
@@ -35,10 +35,10 @@
                         </div><!-- col-sm-6 -->
                         <div class="col-sm-6">
                             <div class="form-group ">
-                                <label for="endTime" class="col-sm-2 control-label">结束时间</label>
+                                <label for="endTimeFormat" class="col-sm-2 control-label">结束时间</label>
                                 <div class="col-sm-9">
                                     <div class="input-group date">
-                                        <input type="text" class="form-control  form_time" id="endTime" name="endTime"  value=""  required data-msg-required="请输入结束时间">
+                                        <input type="text" class="form-control  form_time" id="endTimeFormat" name="endTimeFormat"  value=""  required data-msg-required="请输入结束时间">
                                         <span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
                                     </div>
                                 </div>
@@ -108,7 +108,7 @@
                                 <div class="form-group ">
                                     <label for="sieMaxStudent" class="col-sm-2 control-label">SIE最大学生数</label>
                                     <div class="col-sm-9">
-                                        <input type="text" class="form-control" id="sieMaxStudent" name="sieMaxStudent" placeholder="sieMaxStudent" required data-msg-required="请输入SIE最大学生数">
+                                        <input type="text" class="form-control" id="sieMaxStudent" name="sieMaxStudent" placeholder="sieMaxStudent" required data-msg-required="请输入SIE最大学生数" data-rule-age="true" data-msg-age="请输入正确的整数">
 
                                     </div>
                                 </div>
@@ -130,7 +130,7 @@
                                 <div class="form-group ">
                                     <label for="truMaxStudent" class="col-sm-2 control-label">TRU最大学生数</label>
                                     <div class="col-sm-9">
-                                        <input type="text" class="form-control" id="truMaxStudent" name="truMaxStudent" placeholder="truMaxStudent" required data-msg-required="请输入TRU最大学生数">
+                                        <input type="text" class="form-control" id="truMaxStudent" name="truMaxStudent" placeholder="truMaxStudent" required data-msg-required="请输入TRU最大学生数 " data-rule-age="true" data-msg-age="请输入正确的整数">
 
                                     </div>
                                 </div>

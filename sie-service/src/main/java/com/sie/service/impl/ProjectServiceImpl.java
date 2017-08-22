@@ -74,6 +74,9 @@ public class ProjectServiceImpl extends BaseServiceImpl<ProjectEntity,Integer> i
     @Override
     public Integer saveOrUpdate(ProjectBean projectBean) {
         genarateEntity(projectBean);
+        if(projectBean == null){
+            return null;
+        }
         if(!validatorBean(projectBean)){
             return null;
         }

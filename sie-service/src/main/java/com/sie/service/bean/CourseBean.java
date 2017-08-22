@@ -12,7 +12,9 @@ public class CourseBean  extends BaseBean{
     private String englishName;
     private Integer professorId;
     private Timestamp startTime;
+    private String startTimeFormat;
     private Timestamp endTime;
+    private String endTimeFormat;
     private Integer projectId;
     private String projectName;
     private String sieCode;
@@ -140,5 +142,21 @@ public class CourseBean  extends BaseBean{
 
     public void setProjectName(String projectName) {
         this.projectName = projectName;
+    }
+
+    public String getStartTimeFormat() {
+        return startTimeFormat;
+    }
+
+    public void setStartTimeFormat(String startTimeFormat) {
+        this.startTimeFormat = startTimeFormat;
+    }
+
+    public String getEndTimeFormat() {
+        return endTimeFormat;
+    }
+
+    public void setEndTimeFormat(String endTimeFormat) {
+        this.endTimeFormat = endTimeFormat;
     }
 }

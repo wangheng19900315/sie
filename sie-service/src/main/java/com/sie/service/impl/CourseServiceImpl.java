@@ -12,12 +12,16 @@ import com.sie.service.bean.CourseBean;
 import com.sie.service.bean.ProjectPriceBean;
 import com.sie.service.bean.PageInfo;
 import com.sie.service.bean.ProjectBean;
+import com.sie.util.DateUtil;
 import com.sie.util.NumberUtil;
 import org.apache.commons.beanutils.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -28,6 +32,9 @@ import java.util.Map;
 public class CourseServiceImpl extends BaseServiceImpl<CourseEntity,Integer> implements CourseService {
 
     private CourseDao courseDao;
+
+    private static final String formString = "HH:mm:ss";
+    private static final SimpleDateFormat format = new SimpleDateFormat(formString);
 
     @Autowired
     private ProjectDao projectDao;
@@ -61,11 +68,39 @@ public class CourseServiceImpl extends BaseServiceImpl<CourseEntity,Integer> imp
         return result;
     }
 
-    public Integer saveOrUpdate(CourseEntity courseEntity) {
-        genarateEntity(courseEntity);
+    @Override
+    public Integer saveOrUpdate(CourseBean courseBean) {
+        genarateEntity(courseBean);
+
+        if(courseBean == null){
+            return null;
+        }
+
+        Date date;
+        //将bean转化为entity
+        CourseEntity courseEntity = new CourseEntity();
+        try {
+            BeanUtils.copyProperties(courseEntity,courseBean);
+            //设置时间格式
+            date = DateUtil.parse(courseBean.getStartTimeFormat(),formString);
+            courseEntity.setStartTime(new Timestamp(date.getTime()));
+            date = DateUtil.parse(courseBean.getEndTimeFormat(),formString);
+            courseEntity.setEndTime(new Timestamp(date.getTime()));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
         if(NumberUtil.isSignless(courseEntity.getId())){
-            CourseEntity oldProjectEntity = this.courseDao.getEntity(courseEntity.getId());
-            //TODO 设置值
+            CourseEntity oldProjectEntity = this.courseDao.getEntity(courseBean.getId());
+            //设置值
+            oldProjectEntity.setChineseName(courseEntity.getChineseName());
+            oldProjectEntity.setEnglishName(courseEntity.getEnglishName());
+            oldProjectEntity.setStartTime(courseEntity.getStartTime());
+            oldProjectEntity.setEndTime(courseEntity.getEndTime());
+            oldProjectEntity.setSieMaxStudent(courseEntity.getSieMaxStudent());
+            oldProjectEntity.setSieCode(courseEntity.getSieCode());
+            oldProjectEntity.setTruMaxStudent(courseEntity.getTruMaxStudent());
+            oldProjectEntity.setTruCode(courseEntity.getTruCode());
             this.courseDao.updateEntity(oldProjectEntity);
             return oldProjectEntity.getId();
         }else{
@@ -76,27 +111,27 @@ public class CourseServiceImpl extends BaseServiceImpl<CourseEntity,Integer> imp
     }
 
     //根据选择的所属系统设置entity的值
-    private void genarateEntity(CourseEntity courseEntity){
-        SystemType systemType = SystemType.valueOf(courseEntity.getSystem());
+    private void genarateEntity(CourseBean courseBean){
+        SystemType systemType = SystemType.valueOf(courseBean.getSystem());
         switch (systemType){
             case SIE:
                 //将TRU的信息设置为空
-                courseEntity.setTruCode(null);
-                courseEntity.setTruMaxStudent(null);
-                courseEntity.setSieTotalNumber(0);
+                courseBean.setTruCode(null);
+                courseBean.setTruMaxStudent(null);
+                courseBean.setSieTotalNumber(0);
                 break;
             case TRU:
                 //将SIE的信息设置为空
-                courseEntity.setSieCode(null);
-                courseEntity.setSieMaxStudent(null);
-                courseEntity.setTruTotalNumber(0);
+                courseBean.setSieCode(null);
+                courseBean.setSieMaxStudent(null);
+                courseBean.setTruTotalNumber(0);
                 break;
             case SIEANDTRU:
-                courseEntity.setSieTotalNumber(0);
-                courseEntity.setTruTotalNumber(0);
+                courseBean.setSieTotalNumber(0);
+                courseBean.setTruTotalNumber(0);
                 break;
             default:
-                courseEntity = null;
+                courseBean = null;
         }
     }
 
@@ -113,6 +148,14 @@ public class CourseServiceImpl extends BaseServiceImpl<CourseEntity,Integer> imp
             //设置projectname
             ProjectEntity projectEntity = projectDao.getEntity(courseEntity.getProjectId());
             bean.setProjectName(projectEntity.getSieName());
+
+            //设置时间格式的字符串
+            if(bean.getStartTime() != null){
+                bean.setStartTimeFormat(format.format(bean.getStartTime()));
+            }
+            if(bean.getEndTime() != null){
+                bean.setEndTimeFormat(format.format(bean.getEndTime()));
+            }
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -131,5 +174,18 @@ public class CourseServiceImpl extends BaseServiceImpl<CourseEntity,Integer> imp
             }
         }
         return sb.toString();
+    }
+
+    @Override
+    public CourseBean getBean(Integer id) {
+        CourseEntity entity = courseDao.getEntity(id);
+        CourseBean bean = new CourseBean();
+        try {
+            setBeanValues(entity,bean);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+        return bean;
     }
 }

@@ -99,7 +99,7 @@ $(function(){
 
     $("#editBtn").bind("click",function(){
         var id = $("#grid-table").jqGrid('getGridParam', 'selrow');
-        window.location.href="/project/addOrUpdate.html?id="+id;
+        window.location.href="/course/addOrUpdate.html?id="+id;
     })
 
     $("#deleteBtn").bind("click",function(){
@@ -114,7 +114,7 @@ $(function(){
                 if(result){
 
                     $.ajax({
-                        url: '/project/delete.json?id='+id,
+                        url: '/course/delete.json?id='+id,
                         type: 'get',
                         dataType:'json',
                         success: function (json, statusText, xhr, $form) {
