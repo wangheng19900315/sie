@@ -13,7 +13,7 @@
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="form-group ">
-                                <label for="chineseName" class="col-sm-2 control-label">所在项目</label>
+                                <label for="projectId" class="col-sm-2 control-label">所在项目</label>
                                 <div class="col-sm-9">
                                     <select class="form-control form-group-margin" id="projectId" name="projectId">
                                     </select>
