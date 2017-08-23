@@ -94,11 +94,8 @@ $(function(){
 
     $("#excelBtn").bind("click", function(){
         var studentName = $("#name").val();
-        var page = $('#grid-table').getGridParam('page'); // current page
-        var rows = $('#grid-table').getGridParam('rows'); // rows
-        if(rows == null){
-            rows=20;
-        }
+        var page = $("#grid-table").jqGrid("getGridParam", "page");  // current page
+        var rows = $("#grid-table").jqGrid("getGridParam", "rowNum"); // rows
         bootbox.confirm({
             message: "确认要导出excel?",
             callback: function(result) {

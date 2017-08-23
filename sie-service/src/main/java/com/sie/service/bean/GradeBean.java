@@ -5,7 +5,7 @@ import com.sie.util.annotation.ExcelField;
 /**
  * Created by x on 2017/8/12.
  */
-public class GradeBean {
+public class GradeBean extends BaseBean{
 
     private String studentName;
     private Integer studentId;
