@@ -42,8 +42,8 @@ public class CourseController {
     @RequestMapping("/addOrUpdate.html")
     public String addOrupdate(Model model, Integer id){
         if(NumberUtil.isSignless(id)){
-//            StudentEntity studentEntity = this.studentService.get(id);
-
+            CourseBean bean = this.courseService.getBean(id);
+            model.addAttribute("entity", JSON.toJSON(bean));
         }
         //添加工程
         Map<Integer,String> projects = projectService.getAllCourseProject();
@@ -70,12 +70,12 @@ public class CourseController {
 
     @RequestMapping("/addOrupdate.json")
     @ResponseBody
-    public ResultBean addOrupdate(CourseEntity courseEntity){
+    public ResultBean addOrupdate(CourseBean courseBean){
         ResultBean resultBean = new ResultBean();
 
 
         try{
-            Integer id = this.courseService.saveOrUpdate(courseEntity);
+            Integer id = this.courseService.saveOrUpdate(courseBean);
             if(NumberUtil.isSignless(id)){
                 resultBean.setMessage("保存成功");
                 resultBean.setSuccess(true);
@@ -99,6 +99,24 @@ public class CourseController {
         }
 
         return result;
+    }
+
+    @RequestMapping(value = "/delete.json")
+    @ResponseBody
+    public ResultBean delete(Integer id){
+        ResultBean resultBean = new ResultBean();
+
+        try{
+            this.courseService.delete(id);
+            if(NumberUtil.isSignless(id)){
+                resultBean.setMessage("删除成功");
+                resultBean.setSuccess(true);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return resultBean;
     }
 
 }

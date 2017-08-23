@@ -38,8 +38,9 @@ public class BaseServiceImpl<T extends BaseEntity, PK extends Serializable> impl
     @Override
     public void delete(PK id) {
         T entity = this.get(id);
-        entity.setHdelete(1);
-        this.baseDao.updateEntity(entity);
+//        entity.setHdelete(1);
+//        this.baseDao.updateEntity(entity);
+        this.baseDao.deleteEntity(entity);
     }
 
     @Override

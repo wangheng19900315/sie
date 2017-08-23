@@ -1,10 +1,12 @@
 package com.sie.web.controller;
 
 import com.alibaba.fastjson.JSON;
+import com.sie.framework.entity.CouponEntity;
+import com.sie.framework.entity.DormitoryEntity;
+import com.sie.service.DormitoryService;
 import com.sie.service.ProjectService;
-import com.sie.service.bean.OrderBean;
+import com.sie.service.bean.DormitoryBean;
 import com.sie.service.bean.PageInfo;
-import com.sie.service.bean.ProjectBean;
 import com.sie.service.bean.ResultBean;
 import com.sie.util.NumberUtil;
 import org.apache.log4j.Logger;
@@ -14,44 +16,54 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.Map;
+
 /**
  * Created by wangheng on 2017/8/9.
  */
 @Controller
-@RequestMapping("/project")
-public class ProjectController {
+@RequestMapping("/dormitory")
+public class DormitoryController {
 
-    private static final Logger LOGGER = Logger.getLogger(ProjectController.class);
+    private static final Logger LOGGER = Logger.getLogger(DormitoryController.class);
+
+    @Autowired
+    private DormitoryService dormitoryService;
 
     @Autowired
     private ProjectService projectService;
 
+    @RequestMapping("/addOrUpdate")
+    public String showUserInfo(){
 
+        return "/coupon/showInfo";
+    }
 
 
     @RequestMapping("/list.html")
     public String list(){
-        return "/project/list";
+        return "/dormitory/list";
     }
 
     @RequestMapping("/addOrUpdate.html")
     public String addOrupdate(Model model, Integer id){
         if(NumberUtil.isSignless(id)){
-            ProjectBean bean = this.projectService.getBean(id);
-            model.addAttribute("entity", JSON.toJSON(bean));
+            DormitoryEntity dormitoryEntity = this.dormitoryService.get(id);
+            model.addAttribute("entity", JSON.toJSON(dormitoryEntity));
         }
-        return "/project/addOrUpdate";
+        //添加工程
+        Map<Integer,String> projects = projectService.getAllCourseProject();
+        model.addAttribute("projects", JSON.toJSON(projects));
+        return "/dormitory/addOrUpdate";
     }
-
-
 
     @RequestMapping("/list.json")
     @ResponseBody
-    public PageInfo<ProjectBean> listJons(Integer page, Integer rows ){
+    public PageInfo<DormitoryBean> listJons(Integer page, Integer rows ){
 
-        PageInfo<ProjectBean> pageInfo = null;
+        PageInfo<DormitoryBean> pageInfo = null;
         try{
-            pageInfo = this.projectService.getProjectList(page,rows, null);
+            pageInfo = this.dormitoryService.getDormitoryList(page,rows, null);
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -60,14 +72,15 @@ public class ProjectController {
     }
 
 
+
     @RequestMapping("/addOrupdate.json")
     @ResponseBody
-    public ResultBean addOrupdate(ProjectBean projectBean){
+    public ResultBean addOrupdate(DormitoryEntity dormitoryEntity){
         ResultBean resultBean = new ResultBean();
 
 
         try{
-            Integer id = this.projectService.saveOrUpdate(projectBean);
+            Integer id = this.dormitoryService.saveOrUpdate(dormitoryEntity);
             if(NumberUtil.isSignless(id)){
                 resultBean.setMessage("保存成功");
                 resultBean.setSuccess(true);
@@ -84,8 +97,10 @@ public class ProjectController {
     public ResultBean delete(Integer id){
         ResultBean resultBean = new ResultBean();
 
+        //TODO 判断是否有订单引用有则不能进行删除
+
         try{
-            this.projectService.delete(id);
+            this.dormitoryService.delete(id);
             if(NumberUtil.isSignless(id)){
                 resultBean.setMessage("删除成功");
                 resultBean.setSuccess(true);
@@ -96,5 +111,6 @@ public class ProjectController {
 
         return resultBean;
     }
+
 
 }

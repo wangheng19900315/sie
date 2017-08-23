@@ -67,7 +67,7 @@ public class GenericDaoImpl<T extends BaseEntity, PK extends Serializable> imple
 
 	@Override
 	public List<T> getList() {
-		return this.sessionFactory.getCurrentSession().createQuery("from " + clazz.getName()).list();
+		return this.sessionFactory.getCurrentSession().createQuery("from " + clazz.getName()  + " where hdelete=0 ").list();
 	}
 
 	@Override

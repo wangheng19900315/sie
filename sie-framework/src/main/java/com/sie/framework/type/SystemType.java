@@ -56,11 +56,11 @@ public enum SystemType {
         switch (this) {
 
             case SIE:
-                return "SIE系统";
+                return "SIE";
             case TRU:
-                return "TRU系统";
+                return "TRU";
             case SIEANDTRU:
-                return "SIE系统&TRU系统";
+                return "SIE&TRU";
             default:
                 return "未定义";
         }

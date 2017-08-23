@@ -16,4 +16,5 @@ public interface ProjectService extends BaseService<ProjectEntity, Integer> {
     PageInfo<ProjectBean> getProjectList(Integer page, Integer rows, Map<String, Object> parameter);
     Integer saveOrUpdate(ProjectBean projectBean);
     Map<Integer,String> getAllCourseProject();
+    ProjectBean getBean(Integer id);
 }

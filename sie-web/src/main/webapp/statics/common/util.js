@@ -172,4 +172,25 @@ $.fn.loadJson = function(jsonValue) {
         }
     });
 };
+var formatDateOption={
+    language: "zh-CN",
+    autoclose: true,//选中之后自动隐藏日期选择框
+    format: "yyyy-mm-dd"
+}
+$('.form_date').datepicker(formatDateOption);
 
+var formatTimeOption = {
+    minuteStep: 1,
+    showSeconds: true,
+    showMeridian: false,
+    showInputs: false,
+    orientation: $('body').hasClass('right-to-left') ? { x: 'right', y: 'auto'} : { x: 'auto', y: 'auto'}
+}
+$('.form_time').timepicker(formatTimeOption);
+
+//var formatDateTimeOption={
+//    language: "zh-CN",
+//    autoclose: true,//选中之后自动隐藏日期选择框
+//    format: "yyyy-mm-dd hh:ii"
+//}
+//$('.form_datetime').datetimepicker(formatDateTimeOption);

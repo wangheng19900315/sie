@@ -13,11 +13,9 @@ function selectRow() {
     if (ids && ids.length == 1) {
         $('#editBtn').removeClass('disabled');
         $('#deleteBtn').removeClass('disabled');
-        $('#infoBtn').removeClass('disabled');
     } else {
         $('#editBtn').addClass('disabled');
         $('#deleteBtn').addClass('disabled');
-        $('#infoBtn').addClass('disabled');
     }
 };
 $(function(){
@@ -26,20 +24,22 @@ $(function(){
     var pager_selector = "#grid-pager";
 
     jQuery(grid_selector).jqGrid({
-        url: '/project/list.json',
+        url: '/dormitory/list.json',
         datatype: "json",
         height: '100%',
         mtype: 'post',
         postData: {},
-        colNames: ['ID', '所在系统','SIE系统名称' ,'SIE系统最多报课程数' ,'TRU系统名称' ,'TRU系统最多报课程数','开始时间' ],
+        colNames: ['ID', '名称','项目名称' ,'价格' ,'地址' ,'人数限制','总人数','女生人数' ,'男士人数'  ],
         colModel: [
             {name: 'id', index: 'id', width: 20, hidden: true,  sortable: false},
-            {name: 'systemName', index: 'systemName', width: 20,   sortable: false},
-            {name: 'sieName', index: 'sieName', width: 20,   sortable: false},
-            {name: 'sieMaxCourse', index: 'sieMaxCourse', width: 20,  sortable: false},
-            {name: 'truName', index: 'truName', width: 20,  sortable: false},
-            {name: 'truMaxCourse', index: 'truMaxCourse', width: 20,  sortable: false},
-            {name: 'startTimeFormat', index: 'startTimeFormat', width: 20, sortable: false}
+            {name: 'name', index: 'name', width: 20,   sortable: false},
+            {name: 'projectName', index: 'projectName', width: 20,   sortable: false},
+            {name: 'price', index: 'price', width: 20,  sortable: false},
+            {name: 'address', index: 'address', width: 20,  sortable: false},
+            {name: 'maxNumber', index: 'maxNumber', width: 20,  sortable: false},
+            {name: 'totalNumber', index: 'totalNumber', width: 20, sortable: false},
+            {name: 'womanNumber', index: 'womanNumber', width: 20 , sortable: false},
+            {name: 'manNumber', index: 'manNumber', width: 20 , sortable: false}
         ],
         multiselect: true,
         multiboxonly: true,
@@ -79,13 +79,13 @@ $(function(){
     })
 
     $("#addBtn").bind("click",function(){
-        window.location.href="/project/addOrUpdate.html"
+        window.location.href="/dormitory/addOrUpdate.html"
     })
 
 
     $("#editBtn").bind("click",function(){
         var id = $("#grid-table").jqGrid('getGridParam', 'selrow');
-        window.location.href="/project/addOrUpdate.html?id="+id;
+        window.location.href="/dormitory/addOrUpdate.html?id="+id;
     })
 
     $("#deleteBtn").bind("click",function(){
@@ -100,7 +100,7 @@ $(function(){
                 if(result){
 
                     $.ajax({
-                        url: '/project/delete.json?id='+id,
+                        url: '/dormitory/delete.json?id='+id,
                         type: 'get',
                         dataType:'json',
                         success: function (json, statusText, xhr, $form) {
@@ -121,7 +121,6 @@ $(function(){
     $("#infoBtn").bind("click",function(){
         search();
     })
-
 })
 
 
@@ -134,7 +133,7 @@ function search() {
     $('#view-btn').addClass('disabled');
 
     jQuery("#grid-table").jqGrid('setGridParam',{
-        url: '/project/list.json',
+        url: '/dormitory/list.json',
         datatype: "json",
         height: '100%',
         mtype: 'post',
