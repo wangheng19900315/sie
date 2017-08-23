@@ -1,33 +1,28 @@
 package com.sie.service.impl;
 
 import com.sie.framework.base.GenericDao;
-import com.sie.framework.dao.CouponDao;
-import com.sie.framework.dao.CourseDao;
 import com.sie.framework.dao.OrderDao;
-import com.sie.framework.dao.RoleDao;
+import com.sie.framework.entity.GradeEntity;
 import com.sie.framework.entity.OrderDetailEntity;
 import com.sie.framework.entity.OrderEntity;
-import com.sie.framework.entity.RoleEntity;
-import com.sie.framework.type.OrderDetailStatus;
 import com.sie.framework.type.OrderStatus;
 import com.sie.framework.type.OrderType;
 import com.sie.framework.type.SystemType;
+import com.sie.framework.vo.OrderSearchVo;
 import com.sie.service.OrderDetailService;
 import com.sie.service.OrderService;
-import com.sie.service.RoleService;
+import com.sie.service.bean.GradeBean;
 import com.sie.service.bean.OrderBean;
 import com.sie.service.bean.OrderDetailBean;
 import com.sie.service.bean.PageInfo;
 import com.sie.util.NumberUtil;
-import com.sie.util.StringUtil;
+import com.sie.util.PageUtil;
 import org.apache.commons.beanutils.BeanUtils;
-import org.apache.commons.codec.binary.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by wangheng on 2017/8/9.
@@ -48,26 +43,36 @@ public class OrderServiceImpl extends BaseServiceImpl<OrderEntity,Integer> imple
 
 
     @Override
-    public PageInfo<OrderBean> getOrderList(Integer page, Integer rows, Map<String, Object> parameter) {
+    public PageInfo<OrderBean> getOrderList(Integer page, Integer rows, OrderSearchVo vo) {
 
-        PageInfo<OrderEntity> pageInfo = this.getList(page,rows, parameter);
-        PageInfo<OrderBean> result = new PageInfo<OrderBean>();
-        result.setPage(pageInfo.getPage());
-        result.setRecords(pageInfo.getRecords());
-        result.setTotal(pageInfo.getTotal());
+
+        if (!NumberUtil.isSignless(rows)) {
+            rows = Integer.MAX_VALUE;
+        }
+
+        if (!NumberUtil.isSignless(page)) {
+            page = 0;
+        }
+        Integer records = orderDao.getCount(vo);
+        PageInfo<OrderBean> pageBean = new PageInfo<>(records, PageUtil.getPageTotal(records, rows));
+        pageBean.setPage(PageUtil.getPageNow(page, pageBean.getTotal()));
+        Integer firstResult = PageUtil.getFirstResult(pageBean.getPage(), rows);
+        Integer maxResults = PageUtil.getMaxResults(rows);
+        List<OrderEntity> entityList =  orderDao.getList(firstResult, maxResults, vo);
+
 
         List<OrderBean> orderBeanList = new ArrayList<>();
-        if(pageInfo.getRows().size() > 0){
-            for(OrderEntity orderEntity:pageInfo.getRows()){
+        if(entityList.size() > 0){
+            for(OrderEntity orderEntity:entityList){
 
                 OrderBean bean = new OrderBean();
                 setBeanValues(orderEntity, bean);
                 orderBeanList.add(bean);
             }
-            result.setRows(orderBeanList);
+            pageBean.setRows(orderBeanList);
         }
 
-        return result;
+        return pageBean;
     }
 
     public OrderBean getDetail(Integer id){

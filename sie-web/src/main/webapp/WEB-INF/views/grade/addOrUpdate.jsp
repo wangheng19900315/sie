@@ -10,7 +10,7 @@
             <form   class="panel form-horizontal" novalidate="novalidate" id="data-form" >
                 <input type="hidden" id="id" name="id">
                 <div class="panel-heading">
-                    <span class="panel-title">姓名</span>
+                    <span class="panel-title">成绩信息</span>
                 </div>
                 <div class="panel-body">
                     <div class="row">

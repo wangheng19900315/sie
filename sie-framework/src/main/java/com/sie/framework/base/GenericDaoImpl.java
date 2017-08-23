@@ -91,6 +91,19 @@ public class GenericDaoImpl<T extends BaseEntity, PK extends Serializable> imple
 		return query.list();
 	}
 
+	public List<T> getList(String hql, int firstResult, int maxResults){
+		Query query = this.sessionFactory.getCurrentSession().createQuery(hql);
+		query.setFirstResult(firstResult);
+		query.setMaxResults(maxResults);
+		return query.list();
+	}
+
+	@Override
+	public int getList_count(String hql) {
+		Query query = this.sessionFactory.getCurrentSession().createQuery(hql);
+		Long count = (Long)query.uniqueResult();
+		return count.intValue();
+	}
 
 
     @Override

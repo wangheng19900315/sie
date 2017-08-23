@@ -27,6 +27,10 @@ public interface GenericDao<T extends BaseEntity, PK extends Serializable> {
 
 	public List<T> getList(String hql);
 
+	public List<T> getList(String hql, int firstResult, int maxResults);
+
+	public int getList_count(String hql);
+
 //	public abstract void saveEntity(T entity);
 
     public abstract void createEntity(BaseEntity entity);

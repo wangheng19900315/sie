@@ -18,12 +18,39 @@
         <div class="col-sm-12">
             <div class="panel">
                 <div class="panel-body buttons-with-margins">
-                    <form class="form-inline">
+                    <form class="form-inline" id="search-form">
                         <div class="form-group">
-                            <input type="text" class="form-control" id="name" placeholder="输入名称">
+                            <input type="text" class="form-control" id="orderCode"  name="orderCode" placeholder="订单号">
                         </div>
-                        <button type="button" id="searchBtn" class="btn btn-primary" onclick="return false;" >查找</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="studentName" name="studentName" placeholder="用户名">
+                        </div>
+                        <div class="form-group">
+                            <select   class="form-control" id="orderStatus" name="orderStatus"  >
+                                <option value="1">已提交</option>
+                                <option value="2">已完成</option>
+                                <option value="3">已退款</option>
+                                <option value="4">申请退款</option>
+                                <option value="5">取消</option>
+                             </select>
+                        </div>
+                        <div class="form-group">
+                            <select class="form-control" id="payStatus" name="payStatus"  >
+                                <option value="1">已提交</option>
+                                <option value="2">已支付</option>
+                                <option value="3">支付失败</option>
+                                <option value="5">取消</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" class="form-control" id="crCode" name="crCode" placeholder="Cr Code">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="couponCode" name="crCode" placeholder="优惠码">
+                        </div>
 
+                        <button type="button" id="searchBtn" class="btn btn-primary" onclick="return false;" >查找</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <br/>
                         <button type="button" class="btn" id="addBtn" onclick="return false;" >添加</button> &nbsp;&nbsp;
                         <button type="button" class="btn btn-primary disabled" id="editBtn" onclick="return false;"  >修改</button> &nbsp;&nbsp;
                         <button type="button" class="btn btn-danger disabled" id="deleteBtn"  onclick="return false;" >删除</button> &nbsp;&nbsp;

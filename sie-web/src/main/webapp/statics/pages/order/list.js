@@ -151,14 +151,14 @@ function search() {
     $('#del-btn').addClass('disabled');
     $('#infoBtn').addClass('disabled');
 
+    var searData = $("#search-form").serializeJson();
+
     jQuery("#grid-table").jqGrid('setGridParam',{
         url: '/order/list.json',
         datatype: "json",
         height: '100%',
         mtype: 'post',
-        postData: {
-            //name: $("#name").val()
-        }
+        postData: searData
     }).trigger('reloadGrid');
 
 }

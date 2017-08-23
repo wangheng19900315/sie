@@ -7,7 +7,7 @@ public enum  OrderStatus {
 
 
     /**
-     * 提交订单
+     * 已订单
      */
     SUBMIT(1),
 

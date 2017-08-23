@@ -2,6 +2,7 @@ package com.sie.web.controller;
 
 import com.sie.framework.entity.OrderDetailEntity;
 import com.sie.framework.entity.OrderEntity;
+import com.sie.framework.vo.OrderSearchVo;
 import com.sie.service.OrderDetailService;
 import com.sie.service.OrderService;
 import com.sie.service.bean.OrderBean;
@@ -56,11 +57,11 @@ public class OrderController {
 
     @RequestMapping("/list.json")
     @ResponseBody
-    public PageInfo<OrderBean> listJons(Integer page, Integer rows){
+    public PageInfo<OrderBean> listJons(OrderSearchVo vo, Integer page, Integer rows){
 
         PageInfo<OrderBean> pageInfo = null;
         try{
-            pageInfo = this.orderService.getOrderList(page,rows, null);
+            pageInfo = this.orderService.getOrderList(page,rows, vo);
         }catch (Exception e){
             e.printStackTrace();
         }
