@@ -44,7 +44,7 @@ $(function(){
                 var time1 = new Date(cellvalue).Format("yyyy-MM-dd hh:mm:ss");
                 return time1;
             }
-            },
+            }
         ],
         multiselect: true,
         multiboxonly: true,
@@ -93,8 +93,21 @@ $(function(){
 
 
     $("#excelBtn").bind("click", function(){
-        var title = "122";
-        getXlsFromTbl('grid-table', 'excel_div', title, true)
+        var studentName = $("#name").val();
+        var page = $('#grid-table').getGridParam('page'); // current page
+        var rows = $('#grid-table').getGridParam('rows'); // rows
+        if(rows == null){
+            rows=20;
+        }
+        bootbox.confirm({
+            message: "确认要导出excel?",
+            callback: function(result) {
+                if(result){
+                    window.location.href="/grade/export.json?studentName="+studentName+"&rows="+rows+"&page="+page;
+                }
+            },
+            className: "bootbox-sm"
+        });
     })
 
 

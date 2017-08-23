@@ -24,8 +24,7 @@
 <%--bootstrap datatime--%>
 <link href="/statics/datatime/css/bootstrap-datetimepicker.min.css" rel="stylesheet" type="text/css">
 <%--end bootstrap datatime--%>
-<link rel="stylesheet" type="text/css"
-      href="/statics/jqGrid/ui.jqgrid.css?_dc=$!{staticVersion}"/>
+<link rel="stylesheet" type="text/css" href="/statics/jqGrid/ui.jqgrid.css?"/>
 <script>var init = [];</script>
 </head>
 <body class="theme-default main-menu-animated">

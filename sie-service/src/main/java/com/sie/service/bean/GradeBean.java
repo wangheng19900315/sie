@@ -1,9 +1,11 @@
 package com.sie.service.bean;
 
+import com.sie.util.annotation.ExcelField;
+
 /**
  * Created by x on 2017/8/12.
  */
-public class GradeBean extends BaseBean{
+public class GradeBean {
 
     private String studentName;
     private Integer studentId;
@@ -16,6 +18,7 @@ public class GradeBean extends BaseBean{
     private String systemTypename;
 
 
+    @ExcelField(title="学生名称", align=2, sort=1)
     public String getStudentName() {
         return studentName;
     }
@@ -24,6 +27,7 @@ public class GradeBean extends BaseBean{
         this.studentName = studentName;
     }
 
+    @ExcelField(title="学生id", align=2, sort=2)
     public Integer getStudentId() {
         return studentId;
     }
@@ -32,6 +36,7 @@ public class GradeBean extends BaseBean{
         this.studentId = studentId;
     }
 
+    @ExcelField(title="项目id", align=2, sort=3)
     public Integer getProjectId() {
         return projectId;
     }
@@ -40,6 +45,7 @@ public class GradeBean extends BaseBean{
         this.projectId = projectId;
     }
 
+    @ExcelField(title="项目名称", align=2, sort=4)
     public String getProjectName() {
         return projectName;
     }
@@ -48,6 +54,7 @@ public class GradeBean extends BaseBean{
         this.projectName = projectName;
     }
 
+    @ExcelField(title="课程id", align=2, sort=5)
     public Integer getCourseId() {
         return courseId;
     }
@@ -56,6 +63,7 @@ public class GradeBean extends BaseBean{
         this.courseId = courseId;
     }
 
+    @ExcelField(title="课程名", align=2, sort=6)
     public String getCourseName() {
         return courseName;
     }
@@ -64,6 +72,7 @@ public class GradeBean extends BaseBean{
         this.courseName = courseName;
     }
 
+    @ExcelField(title="分数", align=2, sort=7)
     public Double getGrade() {
         return grade;
     }
@@ -72,6 +81,7 @@ public class GradeBean extends BaseBean{
         this.grade = grade;
     }
 
+    @ExcelField(title="系统", align=2, sort=8)
     public Integer getSystemType() {
         return systemType;
     }
@@ -80,6 +90,7 @@ public class GradeBean extends BaseBean{
         this.systemType = systemType;
     }
 
+    @ExcelField(title="系统名", align=2, sort=9)
     public String getSystemTypename() {
         return systemTypename;
     }

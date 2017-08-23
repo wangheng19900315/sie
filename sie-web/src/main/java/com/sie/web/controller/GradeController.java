@@ -8,13 +8,23 @@ import com.sie.service.GradeService;
 import com.sie.service.bean.GradeBean;
 import com.sie.service.bean.PageInfo;
 import com.sie.service.bean.ResultBean;
+import com.sie.util.DateUtil;
+import com.sie.util.ExportExcel;
 import com.sie.util.NumberUtil;
+import jdk.nashorn.internal.objects.Global;
+import org.apache.http.client.utils.DateUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.util.Date;
 
 /**
  * Created by wangheng on 2017/8/9.
@@ -58,7 +68,7 @@ public class GradeController {
 
         PageInfo<GradeBean> pageInfo = null;
         try{
-            pageInfo = this.gradeService.getOrderDetailList(page,rows, studentName);
+            pageInfo = this.gradeService.getGradeList(page,rows, studentName);
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -87,6 +97,21 @@ public class GradeController {
     }
 
 
+
+
+    @RequestMapping(value = "export.json")
+    public String exportFile(Integer page, Integer rows, String studentName, HttpServletResponse response, RedirectAttributes redirectAttributes) {
+        try {
+            String fileName = "成绩"+ DateUtil.format(new Date(), "yyyyMMddHHmmss")+".xlsx";
+            PageInfo<GradeBean> pageInfo = gradeService.getGradeList(page, rows, studentName);
+            new ExportExcel("成绩", GradeBean.class).setDataList(pageInfo.getRows()).write(response, fileName).dispose();
+
+            return null;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "redirect:/grad/list.html";
+    }
 
 
 }

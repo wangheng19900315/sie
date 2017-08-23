@@ -30,7 +30,7 @@ public class GradeServiceImpl extends BaseServiceImpl<GradeEntity,Integer> imple
 
 
     @Override
-    public PageInfo<GradeBean> getOrderDetailList(Integer page, Integer rows, String  studentName) {
+    public PageInfo<GradeBean> getGradeList(Integer page, Integer rows, String  studentName) {
 
         if (!NumberUtil.isSignless(rows)) {
             rows = Integer.MAX_VALUE;

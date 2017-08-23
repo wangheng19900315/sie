@@ -13,7 +13,7 @@ public interface GradeService extends BaseService<GradeEntity, Integer> {
 
     public void setDetailBeanValues(GradeEntity gradeEntity, GradeBean bean);
 
-    public PageInfo<GradeBean> getOrderDetailList(Integer page, Integer rows, String  studentName);
+    public PageInfo<GradeBean> getGradeList(Integer page, Integer rows, String  studentName);
 
     GradeBean getBean(Integer id);
 
