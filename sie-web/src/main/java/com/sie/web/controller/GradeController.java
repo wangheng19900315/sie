@@ -11,7 +11,6 @@ import com.sie.service.bean.ResultBean;
 import com.sie.util.DateUtil;
 import com.sie.util.ExportExcel;
 import com.sie.util.NumberUtil;
-import jdk.nashorn.internal.objects.Global;
 import org.apache.http.client.utils.DateUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;

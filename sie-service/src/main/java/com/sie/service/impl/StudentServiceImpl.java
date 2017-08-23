@@ -7,6 +7,10 @@ import com.sie.util.NumberUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 /**
  * Created by wangheng on 2017/8/9.
  */
@@ -47,5 +51,15 @@ public class StudentServiceImpl extends BaseServiceImpl<StudentEntity,Integer> i
         }
 
         return studentEntity.getId();
+    }
+
+    @Override
+    public Map<Integer, String> getAllStudent() {
+        List<StudentEntity> studentEntityList = studentDao.getList();
+        Map<Integer,String> students = new HashMap<>();
+        for(StudentEntity entity : studentEntityList){
+            students.put(entity.getId(),entity.getChineseName());
+        }
+        return students;
     }
 }
