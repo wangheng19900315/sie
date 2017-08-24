@@ -1,37 +1,18 @@
-package com.sie.framework.entity;
-
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
-import java.sql.Timestamp;
+package com.sie.service.bean;
 
 /**
- * Created by x on 2017/8/12.
+ * Created by x on 2017/8/19.
  */
-@Entity
-@Table(name = "t_project_price_info")
-public class ProjectPriceEntity extends BaseEntity {
+public class PackagePriceBean extends BaseBean{
+    private Integer system;
+    private String systemName;
     private Integer projectNumber;
     private Integer courseNumber;
     private Double rmbPrice;
     private Double dollarPrice;
     private Double canadianPrice;
     private Integer projectId;
-    private Integer system;
 
-    @Basic
-    @Column(name = "project_number")
-    public Integer getProjectNumber() {
-        return projectNumber;
-    }
-
-    public void setProjectNumber(Integer projectNumber) {
-        this.projectNumber = projectNumber;
-    }
-
-    @Basic
-    @Column(name = "course_number")
     public Integer getCourseNumber() {
         return courseNumber;
     }
@@ -40,8 +21,6 @@ public class ProjectPriceEntity extends BaseEntity {
         this.courseNumber = courseNumber;
     }
 
-    @Basic
-    @Column(name = "rmb_price")
     public Double getRmbPrice() {
         return rmbPrice;
     }
@@ -50,8 +29,6 @@ public class ProjectPriceEntity extends BaseEntity {
         this.rmbPrice = rmbPrice;
     }
 
-    @Basic
-    @Column(name = "dollar_price")
     public Double getDollarPrice() {
         return dollarPrice;
     }
@@ -60,9 +37,6 @@ public class ProjectPriceEntity extends BaseEntity {
         this.dollarPrice = dollarPrice;
     }
 
-
-    @Basic
-    @Column(name = "canadian_price")
     public Double getCanadianPrice() {
         return canadianPrice;
     }
@@ -71,8 +45,14 @@ public class ProjectPriceEntity extends BaseEntity {
         this.canadianPrice = canadianPrice;
     }
 
-    @Basic
-    @Column(name = "project_id")
+    public Integer getSystem() {
+        return system;
+    }
+
+    public void setSystem(Integer system) {
+        this.system = system;
+    }
+
     public Integer getProjectId() {
         return projectId;
     }
@@ -81,13 +61,19 @@ public class ProjectPriceEntity extends BaseEntity {
         this.projectId = projectId;
     }
 
-    @Basic
-    @Column(name = "system")
-    public Integer getSystem() {
-        return system;
+    public String getSystemName() {
+        return systemName;
     }
 
-    public void setSystem(Integer system) {
-        this.system = system;
+    public void setSystemName(String systemName) {
+        this.systemName = systemName;
+    }
+
+    public Integer getProjectNumber() {
+        return projectNumber;
+    }
+
+    public void setProjectNumber(Integer projectNumber) {
+        this.projectNumber = projectNumber;
     }
 }

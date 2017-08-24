@@ -52,7 +52,7 @@
                     <li>  <a tabindex="-1" href="/project/list.html"><span class="mm-text">项目管理</span></a> </li>
                     <li>  <a tabindex="-1" href="/course/list.html"><span class="mm-text">课程管理</span></a> </li>
                     <li>  <a tabindex="-1" href="/dormitory/list.html"><span class="mm-text">宿舍管理</span></a> </li>
-
+                    <li>  <a tabindex="-1" href="/packagePrice/list.html"><span class="mm-text">组合价格</span></a> </li>
 
                 </ul>
             </li>
