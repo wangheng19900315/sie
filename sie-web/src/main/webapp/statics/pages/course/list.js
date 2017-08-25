@@ -31,16 +31,19 @@ $(function(){
         height: '100%',
         mtype: 'post',
         postData: {},
-        colNames: ['ID', '项目名称','中文名','英文名' ,'总报名人数','时间' ,'教授名称' ,'所在系统','SIE课程编码','SIE最大学生数','SIE报名人数', 'TRU课程编码','TRU最大学生数','TRU报名人数'],
+        colNames: ['ID', '项目名称','中文名','英文名' ,'最大报名人数','总报名人数','SIE报名人数','TRU报名人数','时间' ,'教授名称' ,'所在系统','SIE课程编码', 'TRU课程编码'],
         colModel: [
             {name: 'id', index: 'id', width: 20, hidden: true,  sortable: false},
             {name: 'projectName', index: 'projectName', width: 20,   sortable: false},
             {name: 'chineseName', index: 'chineseName', width: 20,   sortable: false},
             {name: 'englishName', index: 'englishName', width: 20,   sortable: false},
+            {name: 'maxStudent', index: 'maxStudent', width: 20,  sortable: false},
             {name: 'totalNumber', index: 'totalNumber', width: 20,   sortable: false,formatter:function(cellvalue, options, rowObject){
                 var total = rowObject.sieTotalNumber + rowObject.truTotalNumber;
                 return total;
             }},
+            {name: 'sieTotalNumber', index: 'sieTotalNumber', width: 20,  sortable: false},
+            {name: 'truTotalNumber', index: 'truTotalNumber', width: 20,  sortable: false},
             {name: 'start_end', index: 'start_end', width: 20,  sortable: false,formatter:function(cellvalue, options, rowObject){
                 var startTime = new Date(rowObject.startTime).Format("hh:mm:ss");
                 var endTime = new Date(rowObject.endTime).Format("hh:mm:ss");
@@ -49,11 +52,7 @@ $(function(){
             {name: 'projectId', index: 'projectId', width: 20,  sortable: false},
             {name: 'systemName', index: 'systemName', width: 20,   sortable: false},
             {name: 'sieCode', index: 'sieCode', width: 20,  sortable: false},
-            {name: 'sieMaxStudent', index: 'sieMaxStudent', width: 20,  sortable: false},
-            {name: 'sieTotalNumber', index: 'sieTotalNumber', width: 20,  sortable: false},
-            {name: 'truCode', index: 'truCode', width: 20,  sortable: false},
-            {name: 'truMaxStudent', index: 'truMaxStudent', width: 20,  sortable: false},
-            {name: 'truTotalNumber', index: 'truTotalNumber', width: 20,  sortable: false},
+            {name: 'truCode', index: 'truCode', width: 20,  sortable: false}
         ],
         multiselect: true,
         multiboxonly: true,

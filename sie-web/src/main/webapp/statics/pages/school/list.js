@@ -33,11 +33,10 @@ $(function(){
         height: '100%',
         mtype: 'post',
         postData: {},
-        colNames: ['ID', '学校名称' , '学校地址', '创建时间' ,'修改时间'],
+        colNames: ['ID', '学校名称' ,'创建时间' ,'修改时间'],
         colModel: [
             {name: 'id', index: 'id', width: 20, hidden: true, sorttype: "int", sortable: false},
             {name: 'name', index: 'name', width: 120, sortable: false},
-            {name: 'address', index: 'address', width: 120, sortable: false},
             {name: 'createTime', index: 'createTime', width: 160 , sortable: false, formatter:function(cellvalue, options, rowObject){
                 var time1 = new Date(cellvalue).Format("yyyy-MM-dd hh:mm:ss");
                 return time1;

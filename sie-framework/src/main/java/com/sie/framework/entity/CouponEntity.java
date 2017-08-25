@@ -17,12 +17,13 @@ public class CouponEntity extends BaseEntity{
 //    private Integer id;
     private String name;
     private String code;
-    private Integer status;
+//    private Integer status;
     private Double rmbDiscount;
     private Double dollarDiscount;
     private Double canadianDiscount;
     private Timestamp startTime;
     private Timestamp endTime;
+    private Integer enabled;
 
 //    @Id
 //    @GeneratedValue(strategy= GenerationType.IDENTITY)
@@ -53,14 +54,14 @@ public class CouponEntity extends BaseEntity{
     }
 
 
-    @Column(name = "status")
-    public Integer getStatus() {
-        return status;
-    }
-
-    public void setStatus(Integer status) {
-        this.status = status;
-    }
+//    @Column(name = "status")
+//    public Integer getStatus() {
+//        return status;
+//    }
+//
+//    public void setStatus(Integer status) {
+//        this.status = status;
+//    }
 
     @Column(name = "rmb_discount")
     public Double getRmbDiscount() {
@@ -107,5 +108,15 @@ public class CouponEntity extends BaseEntity{
 
     public void setEndTime(Timestamp endTime) {
         this.endTime = endTime;
+    }
+
+    @Column(name = "enabled")
+
+    public Integer getEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(Integer enabled) {
+        this.enabled = enabled;
     }
 }

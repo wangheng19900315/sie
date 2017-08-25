@@ -12,9 +12,10 @@ public class CrEntity extends BaseEntity{
 //    private Integer id;
     private String code;
     private String personName;
-    private Integer total;
     private Integer used;
-    private Double price;
+    private Double rmbPrice;
+    private Double dollarPrice;
+    private Double canadianPrice;
 
 //    @Id
 //    @GeneratedValue(strategy= GenerationType.IDENTITY)
@@ -47,23 +48,33 @@ public class CrEntity extends BaseEntity{
     }
 
     @Basic
-    @Column(name = "total")
-    public Integer getTotal() {
-        return total;
+    @Column(name = "rmb_price")
+    public Double getRmbPrice() {
+        return rmbPrice;
     }
 
-    public void setTotal(Integer total) {
-        this.total = total;
+    public void setRmbPrice(Double rmbPrice) {
+        this.rmbPrice = rmbPrice;
     }
 
     @Basic
-    @Column(name = "price")
-    public Double getPrice() {
-        return price;
+    @Column(name = "dollar_price")
+    public Double getDollarPrice() {
+        return dollarPrice;
     }
 
-    public void setPrice(Double price) {
-        this.price = price;
+    public void setDollarPrice(Double dollarPrice) {
+        this.dollarPrice = dollarPrice;
+    }
+
+    @Basic
+    @Column(name = "canadian_price")
+    public Double getCanadianPrice() {
+        return canadianPrice;
+    }
+
+    public void setCanadianPrice(Double canadianPrice) {
+        this.canadianPrice = canadianPrice;
     }
 
     @Basic

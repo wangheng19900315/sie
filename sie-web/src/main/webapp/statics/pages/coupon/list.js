@@ -29,7 +29,7 @@ $(function(){
         height: '100%',
         mtype: 'post',
         postData: {},
-        colNames: ['ID', '名称','优惠码' ,'RMB优惠' ,'美金优惠' ,'加币优惠','状态','创建时间' ,'修改时间'  ],
+        colNames: ['ID', '名称','优惠码' ,'RMB优惠' ,'美金优惠' ,'加币优惠','是否有效','创建时间' ],
         colModel: [
             {name: 'id', index: 'id', width: 20, hidden: true,  sortable: false},
             {name: 'name', index: 'name', width: 20,   sortable: false},
@@ -37,13 +37,13 @@ $(function(){
             {name: 'rmbDiscount', index: 'rmbDiscount', width: 20,  sortable: false},
             {name: 'dollarDiscount', index: 'dollarDiscount', width: 20,  sortable: false},
             {name: 'canadianDiscount', index: 'canadianDiscount', width: 20,  sortable: false},
-            {name: 'status', index: 'status', width: 20, sortable: false},
+            {name: 'enabled', index: 'enabled', width: 20, sortable: false,formatter:function(cellvalue, options, rowObject){
+                if(cellvalue == 1){
+                    return '是'
+                }
+                return '否';
+            }},
             {name: 'createTime', index: 'createTime', width: 20 , sortable: false, formatter:function(cellvalue, options, rowObject){
-                var time1 = new Date(cellvalue).Format("yyyy-MM-dd hh:mm:ss");
-                return time1;
-            }
-            },
-            {name: 'updateTime', index: 'updateTime', width: 20 , sortable: false, formatter:function(cellvalue, options, rowObject){
                 var time1 = new Date(cellvalue).Format("yyyy-MM-dd hh:mm:ss");
                 return time1;
             }

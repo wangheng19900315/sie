@@ -21,11 +21,11 @@ public class CourseEntity extends BaseEntity{
     private Integer projectId;
 //    private Integer isSie;
     private String sieCode;
-    private Integer sieMaxStudent;
+    private Integer maxStudent;
     private Integer sieTotalNumber;
 //    private Integer isTru;
     private String truCode;
-    private Integer truMaxStudent;
+//    private Integer truMaxStudent;
     private Integer truTotalNumber;
 
 //    @Id
@@ -109,16 +109,6 @@ public class CourseEntity extends BaseEntity{
         this.projectId = projectId;
     }
 
-//    @Basic
-//    @Column(name = "is_sie")
-//    public Integer getIsSie() {
-//        return isSie;
-//    }
-//
-//    public void setIsSie(Integer isSie) {
-//        this.isSie = isSie;
-//    }
-
     @Basic
     @Column(name = "sie_code")
     public String getSieCode() {
@@ -130,13 +120,13 @@ public class CourseEntity extends BaseEntity{
     }
 
     @Basic
-    @Column(name = "sie_max_student")
-    public Integer getSieMaxStudent() {
-        return sieMaxStudent;
+    @Column(name = "max_student")
+    public Integer getMaxStudent() {
+        return maxStudent;
     }
 
-    public void setSieMaxStudent(Integer sieMaxStudent) {
-        this.sieMaxStudent = sieMaxStudent;
+    public void setMaxStudent(Integer maxStudent) {
+        this.maxStudent = maxStudent;
     }
 
     @Basic
@@ -149,16 +139,6 @@ public class CourseEntity extends BaseEntity{
         this.sieTotalNumber = sieTotalNumber;
     }
 
-//    @Basic
-//    @Column(name = "is_tru")
-//    public Integer getIsTru() {
-//        return isTru;
-//    }
-//
-//    public void setIsTru(Integer isTru) {
-//        this.isTru = isTru;
-//    }
-
     @Basic
     @Column(name = "tru_code")
     public String getTruCode() {
@@ -167,16 +147,6 @@ public class CourseEntity extends BaseEntity{
 
     public void setTruCode(String truCode) {
         this.truCode = truCode;
-    }
-
-    @Basic
-    @Column(name = "tru_max_student")
-    public Integer getTruMaxStudent() {
-        return truMaxStudent;
-    }
-
-    public void setTruMaxStudent(Integer truMaxStudent) {
-        this.truMaxStudent = truMaxStudent;
     }
 
     @Basic

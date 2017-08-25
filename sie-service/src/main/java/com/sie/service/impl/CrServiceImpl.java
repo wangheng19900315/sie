@@ -26,8 +26,9 @@ public class CrServiceImpl extends BaseServiceImpl<CrEntity,Integer> implements 
         if(NumberUtil.isSignless(crEntity.getId())){
             CrEntity oldCrEntity = this.crDao.getEntity(crEntity.getId());
             oldCrEntity.setPersonName(crEntity.getPersonName());
-            oldCrEntity.setTotal(crEntity.getTotal());
-            oldCrEntity.setPrice(crEntity.getPrice());
+            oldCrEntity.setRmbPrice(crEntity.getRmbPrice());
+            oldCrEntity.setDollarPrice(crEntity.getDollarPrice());
+            oldCrEntity.setCanadianPrice(crEntity.getCanadianPrice());
             this.crDao.updateEntity(oldCrEntity);
         }else{
             crEntity.setUsed(0);
