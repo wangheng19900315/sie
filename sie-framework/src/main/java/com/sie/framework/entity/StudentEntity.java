@@ -21,25 +21,27 @@ public class StudentEntity extends BaseEntity{
     private String chineseName;
     private String sex;
     private String weiXin;
-    private String school;
+    private String schoolName;
     private Date birthday;
     private String nationality;
     private String passportNumber;
     private String idNumber;
-    private String sendCity;
-    private String sendProvince;
     private String telephone;
     private String sendCode;
-    private String sendStreet;
-    private String sendUser;
-    private String sendTelephone;
     private String emergencyPerson;
     private String emergencyTelephone;
     private String emergencyPersonRealtion;
     private String profession;
     private String graduationYear;
     private String gpa;
-    private String university;
+
+    //成绩单寄送地址
+    private String sendCountry;//寄送县市
+    private String sendProvince;//寄送州省
+    private String sendStreet;
+    private String sendPostCode;//寄送邮编
+    private String sendPerson;
+    private String sendTel;
 
 
 
@@ -147,19 +149,15 @@ public class StudentEntity extends BaseEntity{
         this.weiXin = weiXin;
     }
 
-
-
     @Basic
-    @Column(name = "school")
-    public String getSchool() {
-        return school;
+    @Column(name = "school_name")
+    public String getSchoolName() {
+        return schoolName;
     }
 
-    public void setSchool(String school) {
-        this.school = school;
+    public void setSchoolName(String schoolName) {
+        this.schoolName = schoolName;
     }
-
-
 
     @Basic
     @Column(name = "birthday")
@@ -231,19 +229,6 @@ public class StudentEntity extends BaseEntity{
     }
 
 
-
-    @Basic
-    @Column(name = "send_city")
-    public String getSendCity() {
-        return sendCity;
-    }
-
-    public void setSendCity(String sendCity) {
-        this.sendCity = sendCity;
-    }
-
-
-
     @Basic
     @Column(name = "send_province")
     public String getSendProvince() {
@@ -264,31 +249,6 @@ public class StudentEntity extends BaseEntity{
     public void setSendCode(String sendCode) {
         this.sendCode = sendCode;
     }
-
-
-
-    @Basic
-    @Column(name = "send_user")
-    public String getSendUser() {
-        return sendUser;
-    }
-
-    public void setSendUser(String sendUser) {
-        this.sendUser = sendUser;
-    }
-
-
-
-    @Basic
-    @Column(name = "send_telephone")
-    public String getSendTelephone() {
-        return sendTelephone;
-    }
-
-    public void setSendTelephone(String sendTelephone) {
-        this.sendTelephone = sendTelephone;
-    }
-
 
 
     @Basic
@@ -361,16 +321,43 @@ public class StudentEntity extends BaseEntity{
         this.gpa = gpa;
     }
 
-
-
     @Basic
-    @Column(name = "university")
-
-    public String getUniversity() {
-        return university;
+    @Column(name = "send_country")
+    public String getSendCountry() {
+        return sendCountry;
     }
 
-    public void setUniversity(String university) {
-        this.university = university;
+    public void setSendCountry(String sendCountry) {
+        this.sendCountry = sendCountry;
+    }
+
+    @Basic
+    @Column(name = "send_post_code")
+    public String getSendPostCode() {
+        return sendPostCode;
+    }
+
+    public void setSendPostCode(String sendPostCode) {
+        this.sendPostCode = sendPostCode;
+    }
+
+    @Basic
+    @Column(name = "send_person")
+    public String getSendPerson() {
+        return sendPerson;
+    }
+
+    public void setSendPerson(String sendPerson) {
+        this.sendPerson = sendPerson;
+    }
+
+    @Basic
+    @Column(name = "send_tel")
+    public String getSendTel() {
+        return sendTel;
+    }
+
+    public void setSendTel(String sendTel) {
+        this.sendTel = sendTel;
     }
 }

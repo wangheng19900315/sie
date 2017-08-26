@@ -8,6 +8,9 @@ import com.sie.util.NumberUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by wangheng on 2017/8/9.
  */
@@ -31,5 +34,15 @@ public class SchoolServiceImpl extends BaseServiceImpl<SchoolEntity,Integer> imp
         }
 
         return schoolEntity.getId();
+    }
+
+    @Override
+    public List<String> getAllSchoolName() {
+        List<String> schools = new ArrayList<>();
+        List<SchoolEntity> schoolEntities = schoolDao.getList();
+        for(SchoolEntity entity : schoolEntities){
+            schools.add(entity.getName());
+        }
+        return schools;
     }
 }

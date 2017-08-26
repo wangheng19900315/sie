@@ -1,7 +1,7 @@
 $(function(){
     $("#data-form").validate({
         submitHandler: function() {
-            debugger;
+            //debugger;
             var formData = new FormData(document.getElementById("data-form"));
             //var formData = $("#data-form").serializeJson();
             $.ajax({
@@ -27,6 +27,28 @@ $(function(){
         }
     });
 
+    //加载学校列表
+    $.ajax({
+        url: '/student/university_list.json',
+        type: 'post',
+        dataType: 'json',
+        async:false,
+        cache: false,
+        processData:false,
+        contentType:false,
+        success: function (data) {
+            var schools;
+            $.each(data,function(i,value){
+                schools = schools + '<option value="'+ value +'">' + value +'</option>';
+            });
+            $("#schoolName").append(schools);
+        },
+        error: function () {
+            alert("加载学校失败！");
+        }
+    });
+
+    //加载学生信息
     if(entity.length > 0){
         var json = eval("("+entity+")");
 
@@ -34,6 +56,7 @@ $(function(){
         json.birthday=birthDay;
         $("#data-form").loadJson(json);
     }
+
 
 })
 

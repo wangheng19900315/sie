@@ -52,7 +52,7 @@
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="form-group ">
-                                <label for="sendProvince" class="col-sm-2 control-label">寄送州/市</label>
+                                <label for="sendProvince" class="col-sm-2 control-label">寄送州/省</label>
                                 <div class="col-sm-9">
                                     <input type="text" class="form-control" id="sendProvince" name="sendProvince" placeholder="sendProvince" required data-msg-required="请输入州/市" >
                                 </div>

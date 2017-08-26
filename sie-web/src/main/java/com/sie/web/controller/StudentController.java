@@ -2,7 +2,9 @@ package com.sie.web.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.sie.framework.entity.CouponEntity;
+import com.sie.framework.entity.SchoolEntity;
 import com.sie.framework.entity.StudentEntity;
+import com.sie.service.SchoolService;
 import com.sie.service.StudentService;
 import com.sie.service.bean.PageInfo;
 import com.sie.service.bean.ResultBean;
@@ -16,6 +18,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.List;
+
 /**
  * Created by wangheng on 2017/8/9.
  */
@@ -27,6 +31,9 @@ public class StudentController {
 
     @Autowired
     private StudentService studentService;
+
+    @Autowired
+    private SchoolService schoolService;
 
     /**
      * 作业jar
@@ -56,6 +63,13 @@ public class StudentController {
         return "/student/update";
     }
 
+    @RequestMapping("/university_list.json")
+    @ResponseBody
+    public List<String> getUnversities(){
+        List<String> schools = schoolService.getAllSchoolName();
+        return schools;
+    }
+
     @RequestMapping("/list.json")
     @ResponseBody
     public PageInfo<StudentEntity> listJons(Integer page, Integer rows ){
@@ -79,8 +93,11 @@ public class StudentController {
 
 
         try{
-            String fileUrl = FileUtil.saveToServer(headImage, fileUploadUrl);
-            studentEntity.setImage(fileUrl);
+            studentEntity.setImage(null);
+            if(headImage != null && !headImage.isEmpty()){
+                String fileUrl = FileUtil.saveToServer(headImage, fileUploadUrl);
+                studentEntity.setImage(fileUrl);
+            }
             Integer id = this.studentService.saveOrUpdate(studentEntity);
             if(NumberUtil.isSignless(id)){
                 resultBean.setMessage("保存成功");
