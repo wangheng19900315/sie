@@ -7,3 +7,6 @@
 .btn{
     margin-bottom: 10px !important;
 }
+#resultMessage p{
+    margin:0 0 1px !important;
+}

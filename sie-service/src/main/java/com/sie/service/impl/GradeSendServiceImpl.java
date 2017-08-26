@@ -20,6 +20,7 @@ import org.apache.commons.beanutils.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.lang.reflect.InvocationTargetException;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -102,4 +103,29 @@ public class GradeSendServiceImpl extends BaseServiceImpl<GradeSendEntity,Intege
 
     }
 
+    @Override
+    public String importBean(GradeSendBean bean) {
+        String result  = null;
+
+        StudentEntity studentEntity = this.studentDao.getEntity(bean.getStudentId());
+        if(studentEntity == null){
+            result = "学生信息不存在";
+            return result;
+        }
+        try {
+            GradeSendEntity  entity = new GradeSendEntity();
+            BeanUtils.copyProperties(entity, bean);
+            GradeSendEntity checkEntity = this.gradeSendDao.getRepeatEntity(entity);
+            if(checkEntity == null){
+                this.saveOrUpdate(entity);
+            }else{
+                result = "导入信息重复";
+            }
+
+        } catch (Exception e) {
+            result = "信息出错";
+            e.printStackTrace();
+        }
+        return result;
+    }
 }

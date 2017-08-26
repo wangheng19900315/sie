@@ -87,6 +87,8 @@ $(function(){
     $("#infoBtn").bind("click",function(){
         search();
     })
+
+
 })
 
 

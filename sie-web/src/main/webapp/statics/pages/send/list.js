@@ -121,6 +121,37 @@ $(function(){
     $("#infoBtn").bind("click",function(){
         search();
     })
+
+    $("#importBtn").bind("click", function(){
+        $("#resultMessage").html("");
+        $("#showImportFile").click();
+    })
+
+
+    $("#submitBtn").bind("click", function(){
+            var formData = new FormData(document.getElementById("fileFrom"));
+            $.ajax({
+                url: '/send/import.json',
+                data: formData,
+                type: 'post',
+                dataType: 'json',
+                cache: false,
+                processData:false,
+                contentType:false,
+                success: function (data) {
+                    if (data.success) {
+                        alert("导入数据成功！");
+                        search();
+                    } else {
+                        $("#resultMessage").html(data.message);
+                        //alert("保存数据出现错误，请稍候重试！");
+                    }
+                },
+                error: function () {
+                    alert("导入数据失败！");
+                }
+            });
+    });
 })
 
 
