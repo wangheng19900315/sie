@@ -7,4 +7,7 @@ import com.sie.framework.entity.GradeSendEntity;
  * Created by wangheng on 2017/8/9.
  */
 public interface GradeSendDao extends GenericDao<GradeSendEntity, Integer> {
+
+    GradeSendEntity getRepeatEntity(GradeSendEntity entity);
+
 }
