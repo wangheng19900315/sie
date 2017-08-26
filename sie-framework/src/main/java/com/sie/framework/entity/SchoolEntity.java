@@ -10,7 +10,7 @@ import javax.persistence.*;
 public class SchoolEntity extends BaseEntity {
 //    private Integer id;
     private String name;
-    private String address;
+//    private String address;
 
 //    @Id
 //    @GeneratedValue(strategy= GenerationType.IDENTITY)
@@ -32,14 +32,14 @@ public class SchoolEntity extends BaseEntity {
         this.name = name;
     }
 
-    @Basic
-    @Column(name = "address")
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
+//    @Basic
+//    @Column(name = "address")
+//    public String getAddress() {
+//        return address;
+//    }
+//
+//    public void setAddress(String address) {
+//        this.address = address;
+//    }
 
 }

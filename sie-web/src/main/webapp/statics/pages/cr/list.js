@@ -29,24 +29,16 @@ $(function(){
         height: '100%',
         mtype: 'post',
         postData: {},
-        colNames: ['ID', '姓名' ,'CR邀请码' ,'总数据量' ,'使用数量','剩余数量','优惠金额','创建时间' ,'修改时间'  ],
+        colNames: ['ID', '姓名' ,'CR邀请码' ,'使用数量','RMB优惠','美金优惠' ,'加币优惠' ,'创建时间'  ],
         colModel: [
             {name: 'id', index: 'id', width: 20, hidden: true,  sortable: false},
             {name: 'personName', index: 'personName', width: 20,   sortable: false},
             {name: 'code', index: 'code', width: 20,  sortable: false},
-            {name: 'total', index: 'total', width: 20,  sortable: false},
             {name: 'used', index: 'used', width: 20, sortable: false},
-            {name: 'remain', index: 'remain', width: 20, sortable: false, formatter:function(cellvalue, options, rowObject){
-                var value = rowObject.total - rowObject.used;
-                return value;
-            }},
-            {name: 'price', index: 'price', width: 20,  sortable: false},
+            {name: 'rmbPrice', index: 'rmbPrice', width: 20,  sortable: false},
+            {name: 'dollarPrice', index: 'dollarPrice', width: 20,  sortable: false},
+            {name: 'canadianPrice', index: 'canadianPrice', width: 20,  sortable: false},
             {name: 'createTime', index: 'createTime', width: 20 , sortable: false, formatter:function(cellvalue, options, rowObject){
-                var time1 = new Date(cellvalue).Format("yyyy-MM-dd hh:mm:ss");
-                return time1;
-            }
-            },
-            {name: 'updateTime', index: 'updateTime', width: 20 , sortable: false, formatter:function(cellvalue, options, rowObject){
                 var time1 = new Date(cellvalue).Format("yyyy-MM-dd hh:mm:ss");
                 return time1;
             }

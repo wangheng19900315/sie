@@ -22,15 +22,6 @@
                                 </div>
                             </div>
                         </div><!-- col-sm-6 -->
-                        <div class="col-sm-6">
-                            <div class="form-group ">
-                                <label for="address" class="col-sm-2 control-label">address</label>
-                                <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="address" name="address" placeholder="password" required data-msg-required="请输入地址">
-                                </div>
-                            </div>
-
-                        </div><!-- col-sm-6 -->
                     </div><!-- row -->
                 </div>
                 <div class="panel-footer text-center">

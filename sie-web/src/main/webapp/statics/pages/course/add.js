@@ -53,13 +53,14 @@ $(function(){
     }
     $('.form_time').timepicker(options);
 
-    //出发select选中事件
-    $("#system").change();
+    initProjectOption();
+
     if(entity.length > 0){
         $("#data-form").loadJson(eval("("+entity+")"));
     }
+    //出发select选中事件
+    $("#system").change();
 
-    initProjectOption();
 });
 
 var initProjectOption = function(){

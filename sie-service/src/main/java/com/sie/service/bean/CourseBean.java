@@ -18,10 +18,9 @@ public class CourseBean  extends BaseBean{
     private Integer projectId;
     private String projectName;
     private String sieCode;
-    private Integer sieMaxStudent;
+    private Integer maxStudent;
     private Integer sieTotalNumber;
     private String truCode;
-    private Integer truMaxStudent;
     private Integer truTotalNumber;
 
     public Integer getSystem() {
@@ -96,14 +95,6 @@ public class CourseBean  extends BaseBean{
         this.sieCode = sieCode;
     }
 
-    public Integer getSieMaxStudent() {
-        return sieMaxStudent;
-    }
-
-    public void setSieMaxStudent(Integer sieMaxStudent) {
-        this.sieMaxStudent = sieMaxStudent;
-    }
-
     public Integer getSieTotalNumber() {
         return sieTotalNumber;
     }
@@ -118,14 +109,6 @@ public class CourseBean  extends BaseBean{
 
     public void setTruCode(String truCode) {
         this.truCode = truCode;
-    }
-
-    public Integer getTruMaxStudent() {
-        return truMaxStudent;
-    }
-
-    public void setTruMaxStudent(Integer truMaxStudent) {
-        this.truMaxStudent = truMaxStudent;
     }
 
     public Integer getTruTotalNumber() {
@@ -158,5 +141,13 @@ public class CourseBean  extends BaseBean{
 
     public void setEndTimeFormat(String endTimeFormat) {
         this.endTimeFormat = endTimeFormat;
+    }
+
+    public Integer getMaxStudent() {
+        return maxStudent;
+    }
+
+    public void setMaxStudent(Integer maxStudent) {
+        this.maxStudent = maxStudent;
     }
 }

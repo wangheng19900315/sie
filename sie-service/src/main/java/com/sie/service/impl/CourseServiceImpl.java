@@ -97,9 +97,8 @@ public class CourseServiceImpl extends BaseServiceImpl<CourseEntity,Integer> imp
             oldProjectEntity.setEnglishName(courseEntity.getEnglishName());
             oldProjectEntity.setStartTime(courseEntity.getStartTime());
             oldProjectEntity.setEndTime(courseEntity.getEndTime());
-            oldProjectEntity.setSieMaxStudent(courseEntity.getSieMaxStudent());
+            oldProjectEntity.setMaxStudent(courseEntity.getMaxStudent());
             oldProjectEntity.setSieCode(courseEntity.getSieCode());
-            oldProjectEntity.setTruMaxStudent(courseEntity.getTruMaxStudent());
             oldProjectEntity.setTruCode(courseEntity.getTruCode());
             this.courseDao.updateEntity(oldProjectEntity);
             return oldProjectEntity.getId();
@@ -117,13 +116,11 @@ public class CourseServiceImpl extends BaseServiceImpl<CourseEntity,Integer> imp
             case SIE:
                 //将TRU的信息设置为空
                 courseBean.setTruCode(null);
-                courseBean.setTruMaxStudent(null);
                 courseBean.setSieTotalNumber(0);
                 break;
             case TRU:
                 //将SIE的信息设置为空
                 courseBean.setSieCode(null);
-                courseBean.setSieMaxStudent(null);
                 courseBean.setTruTotalNumber(0);
                 break;
             case SIEANDTRU:

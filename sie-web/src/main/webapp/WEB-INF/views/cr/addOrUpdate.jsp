@@ -10,7 +10,7 @@
             <form   class="panel form-horizontal" novalidate="novalidate" id="data-form" >
                 <input type="hidden" id="id" name="id">
                 <div class="panel-heading">
-                    <span class="panel-title">姓名</span>
+                    <span class="panel-title">CR信息</span>
                 </div>
                 <div class="panel-body">
                     <div class="row">
@@ -35,17 +35,29 @@
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="form-group ">
-                                <label for="total" class="col-sm-2 control-label">总数</label>
+                                <label for="rmbPrice" class="col-sm-2 control-label">RMB优惠</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="total" name="total" placeholder="total" required data-msg-required="请输入总数量" data-rule-age="true" data-msg-age="请输入数字" >
+                                    <input type="text" class="form-control" id="rmbPrice" name="rmbPrice" placeholder="rmbPrice" required data-msg-required="请输入RMB优惠金额" data-rule-number="true" data-msg-number="请输入正确的数字">
                                 </div>
                             </div>
+
                         </div><!-- col-sm-6 -->
                         <div class="col-sm-6">
                             <div class="form-group ">
-                                <label for="price" class="col-sm-2 control-label">优惠金额</label>
+                                <label for="dollarPrice" class="col-sm-2 control-label">美金优惠</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="price" name="price" placeholder="price" required data-msg-required="请输入优惠金额" data-rule-number="true" data-msg-number="请输入正确的数字">
+                                    <input type="text" class="form-control" id="dollarPrice" name="dollarPrice" placeholder="dollarPrice" required data-msg-required="请输入美金优惠金额" data-rule-number="true" data-msg-number="请输入正确的数字">
+                                </div>
+                            </div>
+
+                        </div><!-- col-sm-6 -->
+                    </div><!-- row -->
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group ">
+                                <label for="canadianPrice" class="col-sm-2 control-label">加币优惠</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="canadianPrice" name="canadianPrice" placeholder="canadianPrice" required data-msg-required="请输入加币优惠金额" data-rule-number="true" data-msg-number="请输入正确的数字">
                                 </div>
                             </div>
 

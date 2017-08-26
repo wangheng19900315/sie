@@ -20,6 +20,14 @@
                                 </div>
                             </div>
                         </div><!-- col-sm-6 -->
+                        <div class="col-sm-6">
+                            <div class="form-group ">
+                                <label for="maxStudent" class="col-sm-2 control-label">最大学生数</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="maxStudent" name="maxStudent" placeholder="maxStudent" required data-msg-required="请输入最大学生数" data-rule-age="true" data-msg-age="请输入正确的整数">
+                                </div>
+                            </div>
+                        </div><!-- col-sm-6 -->
                     </div>
                     <div class="row">
                         <div class="col-sm-6">
@@ -43,7 +51,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div><!-- col-sm-4 -->
+                        </div><!-- col-sm-6 -->
 
                     </div><!-- row -->
                     <div class="row">
@@ -65,7 +73,6 @@
                                 <label for="system" class="col-sm-2 control-label">教授名称ID</label>
                                 <div class="col-sm-9">
                                     <input type="text" class="form-control" id="professorId" name="professorId" placeholder="professorId" required data-msg-required="请输入教授ID">
-
                                 </div>
                             </div>
                         </div><!-- col-sm-6 -->
@@ -77,7 +84,6 @@
                                 <label for="chineseName" class="col-sm-2 control-label">中文名称</label>
                                 <div class="col-sm-9">
                                     <input type="text" class="form-control" id="chineseName" name="chineseName" placeholder="chineseName" required data-msg-required="请输入中文名称">
-
                                 </div>
                             </div>
                         </div><!-- col-sm-6 -->
@@ -86,56 +92,30 @@
                                 <label for="chineseName" class="col-sm-2 control-label">英文名称</label>
                                 <div class="col-sm-9">
                                     <input type="text" class="form-control" id="englishName" name="englishName" placeholder="englishName" required data-msg-required="请输入中文名称">
-
                                 </div>
                             </div>
                         </div><!-- col-sm-6 -->
                     </div>
 
-
-                    <div id="sie">
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <div class="form-group ">
-                                    <label for="sieCode" class="col-sm-2 control-label">SIE课程编码</label>
-                                    <div class="col-sm-9">
-                                        <input type="text" class="form-control" id="sieCode" name="sieCode" placeholder="sieCode" required data-msg-required="请输入SIE课程编码">
-
-                                    </div>
+                    <div class="row">
+                        <div class="col-sm-6" id="sie" hidden>
+                            <div class="form-group ">
+                                <label for="sieCode" class="col-sm-2 control-label">SIE课程编码</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="sieCode" name="sieCode" placeholder="sieCode" required data-msg-required="请输入SIE课程编码">
                                 </div>
-                            </div><!-- col-sm-6 -->
-                            <div class="col-sm-6">
-                                <div class="form-group ">
-                                    <label for="sieMaxStudent" class="col-sm-2 control-label">SIE最大学生数</label>
-                                    <div class="col-sm-9">
-                                        <input type="text" class="form-control" id="sieMaxStudent" name="sieMaxStudent" placeholder="sieMaxStudent" required data-msg-required="请输入SIE最大学生数" data-rule-age="true" data-msg-age="请输入正确的整数">
+                            </div>
+                        </div><!-- col-sm-6 -->
 
-                                    </div>
+                        <div class="col-sm-6" id="tru" hidden>
+                            <div class="form-group ">
+                                <label for="truCode" class="col-sm-2 control-label">TRU课程编码</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="truCode" name="truCode" placeholder="truCode" required data-msg-required="请输入TRU课程编码">
                                 </div>
-                            </div><!-- col-sm-6 -->
-                        </div>
-                    </div>
-                    <div id="tru">
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <div class="form-group ">
-                                    <label for="truCode" class="col-sm-2 control-label">TRU课程编码</label>
-                                    <div class="col-sm-9">
-                                        <input type="text" class="form-control" id="truCode" name="truCode" placeholder="truCode" required data-msg-required="请输入TRU课程编码">
+                            </div>
+                        </div><!-- col-sm-6 -->
 
-                                    </div>
-                                </div>
-                            </div><!-- col-sm-6 -->
-                            <div class="col-sm-6">
-                                <div class="form-group ">
-                                    <label for="truMaxStudent" class="col-sm-2 control-label">TRU最大学生数</label>
-                                    <div class="col-sm-9">
-                                        <input type="text" class="form-control" id="truMaxStudent" name="truMaxStudent" placeholder="truMaxStudent" required data-msg-required="请输入TRU最大学生数 " data-rule-age="true" data-msg-age="请输入正确的整数">
-
-                                    </div>
-                                </div>
-                            </div><!-- col-sm-6 -->
-                        </div>
                     </div>
                 </div>
                 <div class="panel-footer text-center">

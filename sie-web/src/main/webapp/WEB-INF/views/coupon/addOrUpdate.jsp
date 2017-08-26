@@ -59,9 +59,13 @@
                         </div><!-- col-sm-6 -->
                         <div class="col-sm-6">
                             <div class="form-group ">
-                                <label for="status" class="col-sm-2 control-label">优惠状态</label>
+                                <label for="enabled" class="col-sm-2 control-label">是否有效</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="status" name="status" placeholder="dollarDiscount" required data-msg-required="请输入活动状态" data-rule-number="true" data-msg-number="请输入正确的数字">
+                                    <select class="form-control form-group-margin" id="enabled" name="enabled">
+                                        <option value="1">是</option>
+                                        <option value="0">否</option>
+                                    </select>
+                                    <%--<input type="text" class="form-control" id="status" name="status" placeholder="dollarDiscount" required data-msg-required="请输入活动状态" data-rule-number="true" data-msg-number="请输入正确的数字">--%>
                                 </div>
                             </div>
 
