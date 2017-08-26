@@ -37,6 +37,7 @@ public class DormitoryServiceImpl extends BaseServiceImpl<DormitoryEntity,Intege
         if(NumberUtil.isSignless(dormitoryEntity.getId())){
             DormitoryEntity oldDormitoryEntity = this.dormitoryDao.getEntity(dormitoryEntity.getId());
             oldDormitoryEntity.setName(dormitoryEntity.getName());
+            oldDormitoryEntity.setCode(dormitoryEntity.getCode());
             oldDormitoryEntity.setMaxNumber(dormitoryEntity.getMaxNumber());
             oldDormitoryEntity.setAddress(dormitoryEntity.getAddress());
             oldDormitoryEntity.setProjectId(dormitoryEntity.getProjectId());

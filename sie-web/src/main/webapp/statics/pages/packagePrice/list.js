@@ -1,5 +1,5 @@
 
-
+var lastsel;
 $(function(){
 
     var grid_selector = "#grid-table";
@@ -33,31 +33,35 @@ $(function(){
             jqGrid.reset(jQuery);
         },
         ondblClickRow: function(id){//进行行编辑
-            alert(1);
-            var rowData = $(grid_selector).jqGrid("getRowData", id);
-            $(grid_selector).jqGrid('editRow',id,{
-                keys : true,        //这里按[enter]保存
-                url: "/packagePrice/update.json",
-                mtype : "POST",
-                extraparam: {
-                    "id": rowData.id,
-                    "rmbPrice": $("#"+id+"_rmbPrice").val(),
-                    "dollarPrice": $("#"+id+"_dollarPrice").val(),
-                    "canadianPrice": $("#"+id+"_canadianPrice").val()
-                },
-                oneditfunc: function(rowid){
-                },
-                successfunc: function(response){
-                    if(response.success){
-                        return true;
-                    }else{
+            if(id && id !== lastsel) {
+                var rowData = $(grid_selector).jqGrid("getRowData", id);
+                $(grid_selector).jqGrid('restoreRow', lastsel);
+                lastsel = id;
+                var rowData = $(grid_selector).jqGrid("getRowData", id);
+                $(grid_selector).jqGrid('editRow',id,{
+                    keys : true,        //这里按[enter]保存
+                    url: "/packagePrice/update.json",
+                    mtype : "POST",
+                    extraparam: {
+                        "id": rowData.id,
+                        "rmbPrice": $("#"+id+"_rmbPrice").val(),
+                        "dollarPrice": $("#"+id+"_dollarPrice").val(),
+                        "canadianPrice": $("#"+id+"_canadianPrice").val()
+                    },
+                    oneditfunc: function(rowid){
+                    },
+                    successfunc: function(response){
+                        if(response.success){
+                            return true;
+                        }else{
+                            alert("保存失败");
+                        }
+                    },
+                    errorfunc: function(rowid, res){
                         alert("保存失败");
                     }
-                },
-                errorfunc: function(rowid, res){
-                    alert("保存失败");
-                }
-            });
+                });
+            }
         }
     });
 

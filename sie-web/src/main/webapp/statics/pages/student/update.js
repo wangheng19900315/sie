@@ -1,10 +1,6 @@
 $(function(){
     $("#data-form").validate({
         submitHandler: function() {
-<<<<<<< HEAD
-            //debugger;
-=======
->>>>>>> 4f90805b9bb66ba85ba35c3f99594415fc8b18e8
             var formData = new FormData(document.getElementById("data-form"));
             //var formData = $("#data-form").serializeJson();
             $.ajax({

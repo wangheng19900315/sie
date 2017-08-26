@@ -96,7 +96,7 @@ public class ProjectServiceImpl extends BaseServiceImpl<ProjectEntity,Integer> i
         }
         if(NumberUtil.isSignless(projectEntity.getId())){
             ProjectEntity oldProjectEntity = this.projectDao.getEntity(projectBean.getId());
-           //TODO 设置值
+            oldProjectEntity.setCode(projectEntity.getCode());
             oldProjectEntity.setSystem(projectEntity.getSystem());
             oldProjectEntity.setStartTime(projectEntity.getStartTime());
             oldProjectEntity.setEndTime(projectEntity.getEndTime());

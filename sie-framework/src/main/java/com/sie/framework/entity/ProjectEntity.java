@@ -11,6 +11,7 @@ import java.sql.Timestamp;
 public class ProjectEntity extends BaseEntity {
 //    private Integer id;
     private Integer system;
+    private String code;
     private String sieName;
     private String truName;
     private String mark;
@@ -133,5 +134,16 @@ public class ProjectEntity extends BaseEntity {
 
     public void setEndTime(Timestamp endTime) {
         this.endTime = endTime;
+    }
+
+    @Basic
+    @Column(name = "code")
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
     }
 }

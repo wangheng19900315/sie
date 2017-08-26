@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -49,7 +50,10 @@ public class PackagePriceServiceImpl extends BaseServiceImpl<ProjectPriceEntity,
     @Override
     public PageInfo<PackagePriceBean> getPriceList(Integer page, Integer rows, Map<String, Object> parameter) {
         //设置project内容为空
-        parameter.put("projectNumber",null);
+        if(parameter == null){
+            parameter = new HashMap<>();
+        }
+        parameter.put("projectNumber",2);
         PageInfo<ProjectPriceEntity> pageInfo = this.getList(page,rows, parameter);
         PageInfo<PackagePriceBean> result = new PageInfo<PackagePriceBean>();
         result.setPage(pageInfo.getPage());

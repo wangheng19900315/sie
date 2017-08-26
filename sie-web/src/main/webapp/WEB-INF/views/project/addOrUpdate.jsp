@@ -24,6 +24,16 @@
                                 </div>
                             </div>
                         </div><!-- col-sm-4 -->
+                    </div><!-- row -->
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <div class="form-group ">
+                                <label for="code" class="col-sm-3 control-label">项目编码</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="code" name="code" placeholder="code" required data-msg-required="请输入项目编码" >
+                                </div>
+                            </div>
+                        </div><!-- col-sm-4 -->
                         <div class="col-sm-4">
                             <div class="form-group ">
                                 <label for="startTimeFormat" class="col-sm-3 control-label">开始时间</label>

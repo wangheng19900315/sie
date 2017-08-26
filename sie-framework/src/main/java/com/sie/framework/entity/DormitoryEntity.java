@@ -11,6 +11,7 @@ public class DormitoryEntity extends BaseEntity{
 //    private Integer id;
     private String address;
     private String name;
+    private String code;
     private Double price;
     private Integer projectId;
     private Integer womanNumber;
@@ -106,5 +107,15 @@ public class DormitoryEntity extends BaseEntity{
 
     public void setMaxNumber(Integer maxNumber) {
         this.maxNumber = maxNumber;
+    }
+
+    @Basic
+    @Column(name = "code")
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
     }
 }

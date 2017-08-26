@@ -13,6 +13,7 @@ import javax.persistence.Table;
 public class DormitoryBean extends BaseBean{
     private String address;
     private String name;
+    private String code;
     private Double price;
     private Integer projectId;
     private String projectName;
@@ -93,4 +94,11 @@ public class DormitoryBean extends BaseBean{
         this.projectName = projectName;
     }
 
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
 }
