@@ -22,11 +22,11 @@
         <%--</div>--%>
         <ul class="navigation">
             <li>
-                <a href="index.html"><i class="menu-icon fa fa-dashboard"></i><span class="mm-text">Dashboard</span></a>
+                <a href="/index.html"><i class="menu-icon fa fa-dashboard"></i><span class="mm-text">Dashboard</span></a>
             </li>
 
             <li class="mm-dropdown">
-                <a href="/order/list.html"><i class="menu-icon fa fa-th"></i><span class="mm-text">订单管理</span></a>
+                <a href="#"><i class="menu-icon fa fa-th"></i><span class="mm-text">订单管理</span></a>
                 <ul>
                     <li>
                         <a tabindex="-1" href="/order/list.html"><span class="mm-text">订单管理</span></a>
