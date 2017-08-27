@@ -21,13 +21,10 @@
 <link href="/statics/assets/stylesheets/themes.min.css" rel="stylesheet" type="text/css">
 <link href="/statics/common/common.css" rel="stylesheet" type="text/css">
 
-<<<<<<< HEAD
 <%--bootstrap datatime--%>
 <link href="/statics/datatime/css/bootstrap-datetimepicker.min.css" rel="stylesheet" type="text/css">
 <%--end bootstrap datatime--%>
-<link rel="stylesheet" type="text/css" href="/statics/jqGrid/ui.jqgrid.css?"/>
-<link rel="stylesheet" type="text/css"
-      href="/statics/jqGrid/ui.jqgrid.css"/>
+<link rel="stylesheet" type="text/css" href="/statics/jqGrid/ui.jqgrid.css"/>
 <script>var init = [];</script>
 </head>
 <body class="theme-default main-menu-animated">

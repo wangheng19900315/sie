@@ -39,5 +39,9 @@ public interface GenericDao<T extends BaseEntity, PK extends Serializable> {
 
 	public abstract Integer updateByHql(String hql);
 
+	public List<T> getList(String hql,List<HqlOperateVo> hqlOperateVos, int firstResult, int maxResults);
+
+	public Integer getCount(String hql, List<HqlOperateVo> hqlOperateVos);
+
 	//TODO 缺少查询条件的接口 获取带查询条件的条数
 }

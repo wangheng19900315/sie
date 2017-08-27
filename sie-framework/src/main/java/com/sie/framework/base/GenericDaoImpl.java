@@ -8,6 +8,7 @@ import com.sie.util.PageUtil;
 import org.hibernate.SessionFactory;
 import org.hibernate.Query;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.StringUtils;
 
 import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
@@ -130,6 +131,42 @@ public class GenericDaoImpl<T extends BaseEntity, PK extends Serializable> imple
 		int ret=queryupdate.executeUpdate();
 		this.sessionFactory.getCurrentSession().flush();
 		return ret;
+	}
+
+	@Override
+	public List<T> getList(String hql, List<HqlOperateVo> hqlOperateVos, int firstResult, int maxResults) {
+		hql = this.getHql(hql, hqlOperateVos);
+		return this.getList(hql, firstResult, maxResults);
+	}
+
+	@Override
+	public Integer getCount(String hql, List<HqlOperateVo> hqlOperateVos) {
+		hql = this.getHql(hql, hqlOperateVos);
+		return this.getList_count(hql);
+	}
+
+	private String  getHql(String hql, List<HqlOperateVo> hqlOperateVos){
+		if(hqlOperateVos != null && hqlOperateVos.size() > 0){
+			for(HqlOperateVo vo:hqlOperateVos){
+
+				if(StringUtils.isEmpty(vo.getValue())){
+					continue;
+				}
+				if(hql.indexOf("where") > -1){
+					hql += " where ";
+				}else{
+					hql += " and ";
+				}
+
+				if("like".equals(vo.getOperate())){
+					hql += " "+vo.getName()+" like '%"+vo.getValue()+"%'";
+				}else{
+					hql += " "+vo.getName()+" = '"+vo.getValue()+"'";
+				}
+			}
+		}
+
+		return hql;
 	}
 
 	public SessionFactory getSessionFactory() {
