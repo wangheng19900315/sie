@@ -1,5 +1,6 @@
 package com.sie.service.impl;
 
+import com.sie.framework.base.HqlOperateVo;
 import com.sie.framework.dao.CourseDao;
 import com.sie.framework.dao.ProjectDao;
 import com.sie.framework.dao.ProjectPriceDao;
@@ -47,8 +48,8 @@ public class CourseServiceImpl extends BaseServiceImpl<CourseEntity,Integer> imp
 
 
     @Override
-    public PageInfo<CourseBean> getCourseList(Integer page, Integer rows, Map<String, Object> parameter){
-        PageInfo<CourseEntity> pageInfo = this.getList(page,rows, parameter);
+    public PageInfo<CourseBean> getCourseList(Integer page, Integer rows,  List<HqlOperateVo> hqlOperateVos){
+        PageInfo<CourseEntity> pageInfo = this.getList(page,rows, hqlOperateVos);
         PageInfo<CourseBean> result = new PageInfo<CourseBean>();
         result.setPage(pageInfo.getPage());
         result.setRecords(pageInfo.getRecords());

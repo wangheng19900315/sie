@@ -1,9 +1,11 @@
 package com.sie.service;
 
+import com.sie.framework.base.HqlOperateVo;
 import com.sie.service.bean.PageInfo;
 import com.sie.framework.entity.BaseEntity;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -17,5 +19,5 @@ public interface BaseService<T extends BaseEntity, PK extends Serializable> {
 
     void delete(PK id);
 
-    PageInfo<T> getList(Integer page, Integer rows, Map<String, Object> parameter);
+    PageInfo<T> getList(Integer page, Integer rows, List<HqlOperateVo> hqlOperateVos);
 }

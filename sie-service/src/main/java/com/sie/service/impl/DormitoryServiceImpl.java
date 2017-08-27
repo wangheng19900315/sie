@@ -1,5 +1,6 @@
 package com.sie.service.impl;
 
+import com.sie.framework.base.HqlOperateVo;
 import com.sie.framework.dao.DormitoryDao;
 import com.sie.framework.dao.ProjectDao;
 import com.sie.framework.entity.DormitoryEntity;
@@ -53,8 +54,8 @@ public class DormitoryServiceImpl extends BaseServiceImpl<DormitoryEntity,Intege
     }
 
     @Override
-    public PageInfo<DormitoryBean> getDormitoryList(Integer page, Integer rows, Map<String, Object> parameter){
-        PageInfo<DormitoryEntity> pageInfo = this.getList(page,rows, parameter);
+    public PageInfo<DormitoryBean> getDormitoryList(Integer page, Integer rows,  List<HqlOperateVo> hqlOperateVos){
+        PageInfo<DormitoryEntity> pageInfo = this.getList(page,rows, hqlOperateVos);
         PageInfo<DormitoryBean> result = new PageInfo<DormitoryBean>();
         result.setPage(pageInfo.getPage());
         result.setRecords(pageInfo.getRecords());

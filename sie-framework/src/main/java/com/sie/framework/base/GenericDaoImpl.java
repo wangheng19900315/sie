@@ -80,7 +80,7 @@ public class GenericDaoImpl<T extends BaseEntity, PK extends Serializable> imple
 	}
 
 	@Override
-	public int getList_count() {
+	public int getCount() {
 		Query query = this.sessionFactory.getCurrentSession().createQuery("select count(entity) from " + clazz.getName() + " entity where hdelete=0 order by id desc");
 		Long count = (Long)query.uniqueResult();
 		return count.intValue();
@@ -134,13 +134,22 @@ public class GenericDaoImpl<T extends BaseEntity, PK extends Serializable> imple
 	}
 
 	@Override
-	public List<T> getList(String hql, List<HqlOperateVo> hqlOperateVos, int firstResult, int maxResults) {
+	public List<T> getList(List<HqlOperateVo> hqlOperateVos, int firstResult, int maxResults) {
+		String hql = "from " + clazz.getName() + " where hdelete=0 ";
 		hql = this.getHql(hql, hqlOperateVos);
 		return this.getList(hql, firstResult, maxResults);
 	}
 
 	@Override
-	public Integer getCount(String hql, List<HqlOperateVo> hqlOperateVos) {
+	public List<T> getList(List<HqlOperateVo> hqlOperateVos) {
+		String hql = "from " + clazz.getName() + " where hdelete=0 ";
+		hql = this.getHql(hql, hqlOperateVos);
+		return this.getList(hql);
+	}
+
+	@Override
+	public Integer getCount( List<HqlOperateVo> hqlOperateVos) {
+		String hql = "select count(entity) from " + clazz.getName() + " entity where hdelete=0";
 		hql = this.getHql(hql, hqlOperateVos);
 		return this.getList_count(hql);
 	}
@@ -152,11 +161,12 @@ public class GenericDaoImpl<T extends BaseEntity, PK extends Serializable> imple
 				if(StringUtils.isEmpty(vo.getValue())){
 					continue;
 				}
-				if(hql.indexOf("where") > -1){
-					hql += " where ";
-				}else{
-					hql += " and ";
-				}
+				hql += " and ";
+//				if(hql.indexOf("where") > -1){
+//					hql += " and ";
+//				}else{
+//					hql += " where ";
+//				}
 
 				if("like".equals(vo.getOperate())){
 					hql += " "+vo.getName()+" like '%"+vo.getValue()+"%'";

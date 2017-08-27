@@ -1,6 +1,7 @@
 package com.sie.service.impl;
 
 import com.sie.framework.base.GenericDao;
+import com.sie.framework.base.HqlOperateVo;
 import com.sie.service.bean.PageInfo;
 import com.sie.framework.entity.BaseEntity;
 import com.sie.service.BaseService;
@@ -44,7 +45,7 @@ public class BaseServiceImpl<T extends BaseEntity, PK extends Serializable> impl
     }
 
     @Override
-    public PageInfo<T> getList(Integer page, Integer rows, Map<String, Object> parameter) {
+    public PageInfo<T> getList(Integer page, Integer rows, List<HqlOperateVo> hqlOperateVos) {
         //TODO 查询条件没有
         if (!NumberUtil.isSignless(rows)) {
             rows = Integer.MAX_VALUE;
@@ -53,12 +54,12 @@ public class BaseServiceImpl<T extends BaseEntity, PK extends Serializable> impl
         if (!NumberUtil.isSignless(page)) {
             page = 0;
         }
-        Integer records = baseDao.getList_count();
+        Integer records = baseDao.getCount(hqlOperateVos);
         PageInfo<T> pageBean = new PageInfo<>(records, PageUtil.getPageTotal(records, rows));
         pageBean.setPage(PageUtil.getPageNow(page, pageBean.getTotal()));
         Integer firstResult = PageUtil.getFirstResult(pageBean.getPage(), rows);
         Integer maxResults = PageUtil.getMaxResults(rows);
-        List<T> entityList =  baseDao.getList(firstResult, maxResults);
+        List<T> entityList =  baseDao.getList(hqlOperateVos,firstResult, maxResults);
 
         pageBean.setRows(entityList);
         pageBean.setPage(page);

@@ -1,5 +1,6 @@
 package com.sie.service.impl;
 
+import com.sie.framework.base.HqlOperateVo;
 import com.sie.framework.dao.CourseDao;
 import com.sie.framework.dao.GradeSendDao;
 import com.sie.framework.dao.ProjectDao;
@@ -68,8 +69,8 @@ public class GradeSendServiceImpl extends BaseServiceImpl<GradeSendEntity,Intege
     }
 
     @Override
-    public PageInfo<GradeSendBean> getGradeSendList(Integer page, Integer rows, Map<String, Object> parameter){
-        PageInfo<GradeSendEntity> pageInfo = this.getList(page,rows, parameter);
+    public PageInfo<GradeSendBean> getGradeSendList(Integer page, Integer rows,  List<HqlOperateVo> hqlOperateVos){
+        PageInfo<GradeSendEntity> pageInfo = this.getList(page,rows, hqlOperateVos);
         PageInfo<GradeSendBean> result = new PageInfo<GradeSendBean>();
         result.setPage(pageInfo.getPage());
         result.setRecords(pageInfo.getRecords());
