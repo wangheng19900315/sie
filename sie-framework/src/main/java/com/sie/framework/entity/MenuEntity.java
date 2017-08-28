@@ -1,6 +1,7 @@
 package com.sie.framework.entity;
 
 import javax.persistence.*;
+import java.util.List;
 
 /**
  * Created by x on 2017/8/12.
@@ -12,16 +13,9 @@ public class MenuEntity extends BaseEntity{
     private String name;
     private String action;
 
+    private Integer parentId;
 
-//    @Id
-//    @GeneratedValue(strategy= GenerationType.IDENTITY)
-//    public Integer getId() {
-//        return id;
-//    }
-//
-//    public void setId(Integer id) {
-//        this.id = id;
-//    }
+
 
     @Basic
     @Column(name = "name")
@@ -42,5 +36,14 @@ public class MenuEntity extends BaseEntity{
 
     public void setAction(String action) {
         this.action = action;
+    }
+
+    @Column(name = "parent_id")
+    public Integer getParentId() {
+        return parentId;
+    }
+
+    public void setParentId(Integer parentId) {
+        this.parentId = parentId;
     }
 }

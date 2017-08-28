@@ -35,8 +35,7 @@ $(function(){
             {name: 'chineseName', index: 'chineseName', width: 20,   sortable: false},
             {name: 'courseCode', index: 'courseCode', width: 20,  sortable: false},
             {name: 'courseName', index: 'courseName', width: 20,  sortable: false},
-            {name: 'grade', index: 'grade', width: 20, sortable: false},
-            {name: 'grade', index: 'grade', width: 20 , sortable: false}
+            {name: 'grade', index: 'grade', width: 20, sortable: false}
         ],
         multiselect: true,
         multiboxonly: true,
