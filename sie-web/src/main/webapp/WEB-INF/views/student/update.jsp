@@ -21,14 +21,14 @@
                             </div>
 
                         </div><!-- col-sm-6 -->
-                        <%--<div class="col-sm-6">--%>
-                            <%--<div class="form-group ">--%>
-                                <%--<label for="userID" class="col-sm-2 control-label">用户ID</label>--%>
-                                <%--<div class="col-sm-9">--%>
-                                    <%--<input type="text" class="form-control" id="userID" name="userID" placeholder="name" required data-msg-required="请输入用户ID">--%>
-                                <%--</div>--%>
-                            <%--</div>--%>
-                        <%--</div><!-- col-sm-6 -->--%>
+                        <div class="col-sm-6">
+
+                            <label for="headImage" class="col-sm-2 control-label">头像</label>
+                            <div class="col-sm-9">
+                                <input type="file" class="form-control" id="headImage" accept="image/png,image/jpg" name="headImage" >
+                            </div>
+
+                        </div>
                     </div><!-- row -->
                     <div class="row">
                         <div class="col-sm-6">
@@ -130,9 +130,12 @@
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="form-group ">
-                                <label for="university" class="col-sm-2 control-label">在读大学</label>
+                                <label for="schoolName" class="col-sm-2 control-label">在读大学</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="university" name="university" placeholder="university" >
+                                    <select class="form-control form-group-margin" id="schoolName" name="schoolName">
+                                        <option value="">...</option>
+                                    </select>
+                                    <%--<input type="text" class="form-control" id="university" name="university" placeholder="university" >--%>
                                 </div>
                             </div>
                         </div><!-- col-sm-6 -->
@@ -166,14 +169,53 @@
                     </div><!-- row -->
                     <div class="row">
                         <div class="col-sm-6">
-
-                            <label for="headImage" class="col-sm-2 control-label">头像</label>
-                            <div class="col-sm-9">
-                                <input type="file" class="form-control" id="headImage" accept="image/png,image/jpg" name="headImage" >
+                            <div class="form-group ">
+                                <label for="sendPerson" class="col-sm-2 control-label">寄送联系人/部门</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="sendPerson" name="sendPerson" placeholder="sendPerson" required data-msg-required="请输入联系人/部门" >
+                                </div>
+                            </div>
+                        </div><!-- col-sm-6 -->
+                        <div class="col-sm-6">
+                            <div class="form-group ">
+                                <label for="sendTel" class="col-sm-2 control-label">寄送电话</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="sendTel" name="sendTel" placeholder="sendTel" required data-msg-required="请输入电话" data-rule-mobile="true"  data-msg-mobile="请输入正确格式">
+                                </div>
                             </div>
 
-                        </div>
-                    </div>
+                        </div><!-- col-sm-6 -->
+                    </div><!-- row -->
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group ">
+                                <label for="sendPostCode" class="col-sm-2 control-label">寄送邮编</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="sendPostCode" name="sendPostCode" placeholder="sendPostCode" required data-msg-required="请输入邮编">
+                                </div>
+                            </div>
+
+                        </div><!-- col-sm-6 -->
+                        <div class="col-sm-6">
+                            <div class="form-group ">
+                                <label for="sendProvince" class="col-sm-2 control-label">寄送州/省</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="sendProvince" name="sendProvince" placeholder="sendProvince" required data-msg-required="请输入州/市" >
+                                </div>
+                            </div>
+                        </div><!-- col-sm-6 -->
+                    </div><!-- row -->
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group ">
+                                <label for="sendCountry" class="col-sm-2 control-label">寄送县/市</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="sendCountry" name="sendCountry" placeholder="sendCountry" required data-msg-required="请输入县/市">
+                                </div>
+                            </div>
+
+                        </div><!-- col-sm-6 -->
+                    </div><!-- row -->
                 </div>
                 <div class="panel-footer text-center">
                     <button class="btn btn-primary" id="submitBtn" type="submit" >提交</button>
@@ -189,14 +231,4 @@
 <script src="/statics/pages/student/update.js"></script>
 <script type="text/javascript">
     var entity = '${entity}';
-    $('.form_date').datetimepicker({
-        language: 'zh-CN',//显示中文
-        format: 'yyyy-mm-dd',//显示格式
-        autoclose: true,//选中自动关闭
-        startView: 2,
-        minView: 2,
-        forceParse: 0
-    });
-
-
 </script>

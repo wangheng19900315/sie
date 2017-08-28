@@ -9,6 +9,12 @@ public class HqlOperateVo {
     private String operate;
     private String value;
 
+    public HqlOperateVo(String name,String operate,String value){
+        this.name = name;
+        this.operate = operate;
+        this.value = value;
+    }
+
     public String getName() {
         return name;
     }

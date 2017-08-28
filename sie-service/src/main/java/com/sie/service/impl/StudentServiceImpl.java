@@ -4,8 +4,10 @@ import com.sie.framework.dao.StudentDao;
 import com.sie.framework.entity.StudentEntity;
 import com.sie.service.StudentService;
 import com.sie.util.NumberUtil;
+import com.sie.util.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import java.util.HashMap;
 import java.util.List;
@@ -28,7 +30,9 @@ public class StudentServiceImpl extends BaseServiceImpl<StudentEntity,Integer> i
 
         if(NumberUtil.isSignless(studentEntity.getId())){
             StudentEntity oldStudentEntity = this.studentDao.getEntity(studentEntity.getId());
-            oldStudentEntity.setImage(studentEntity.getImage());
+            if(StringUtil.isNotBlank(studentEntity.getImage())){
+                oldStudentEntity.setImage(studentEntity.getImage());
+            }
             oldStudentEntity.setBirthday(studentEntity.getBirthday());
             oldStudentEntity.setChineseName(studentEntity.getChineseName());
             oldStudentEntity.setUserName(studentEntity.getUserName());
@@ -41,10 +45,15 @@ public class StudentServiceImpl extends BaseServiceImpl<StudentEntity,Integer> i
             oldStudentEntity.setIdNumber(studentEntity.getIdNumber());
             oldStudentEntity.setPassportNumber(studentEntity.getPassportNumber());
             oldStudentEntity.setTelephone(studentEntity.getTelephone());
-            oldStudentEntity.setUniversity(studentEntity.getUniversity());
+            oldStudentEntity.setSchoolName(studentEntity.getSchoolName());
             oldStudentEntity.setProfession(studentEntity.getProfession());
             oldStudentEntity.setGpa(studentEntity.getGpa());
             oldStudentEntity.setGraduationYear(studentEntity.getGraduationYear());
+            oldStudentEntity.setSendPerson(studentEntity.getSendPerson());
+            oldStudentEntity.setSendTel(studentEntity.getSendTel());
+            oldStudentEntity.setSendProvince(studentEntity.getSendProvince());
+            oldStudentEntity.setSendCountry(studentEntity.getSendCountry());
+            oldStudentEntity.setSendPostCode(studentEntity.getSendPostCode());
             this.studentDao.updateEntity(oldStudentEntity);
         }else{
             this.studentDao.createEntity(studentEntity);

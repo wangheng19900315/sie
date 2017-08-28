@@ -20,6 +20,8 @@
                                 </div>
                             </div>
                         </div><!-- col-sm-6 -->
+                    </div><!-- row -->
+                    <div class="row">
                         <div class="col-sm-6">
                             <div class="form-group ">
                                 <label for="name" class="col-sm-2 control-label">宿舍名称</label>
@@ -29,7 +31,16 @@
                             </div>
 
                         </div><!-- col-sm-6 -->
-                    </div><!-- row -->
+                        <div class="col-sm-6">
+                            <div class="form-group ">
+                                <label for="code" class="col-sm-2 control-label">宿舍编号</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="code" name="code" placeholder="code" required data-msg-required="请输入编码">
+                                </div>
+                            </div>
+
+                        </div><!-- col-sm-6 -->
+                    </div>
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="form-group ">

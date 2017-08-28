@@ -1,5 +1,6 @@
 package com.sie.service.impl;
 
+import com.sie.framework.base.HqlOperateVo;
 import com.sie.framework.dao.CourseDao;
 import com.sie.framework.dao.ProjectDao;
 import com.sie.framework.dao.ProjectPriceDao;
@@ -50,8 +51,8 @@ public class ProjectServiceImpl extends BaseServiceImpl<ProjectEntity,Integer> i
 
 
     @Override
-    public PageInfo<ProjectBean> getProjectList(Integer page, Integer rows, Map<String, Object> parameter){
-        PageInfo<ProjectEntity> pageInfo = this.getList(page,rows, parameter);
+    public PageInfo<ProjectBean> getProjectList(Integer page, Integer rows, List<HqlOperateVo> hqlOperateVos){
+        PageInfo<ProjectEntity> pageInfo = this.getList(page,rows, hqlOperateVos);
         PageInfo<ProjectBean> result = new PageInfo<ProjectBean>();
         result.setPage(pageInfo.getPage());
         result.setRecords(pageInfo.getRecords());
@@ -96,7 +97,7 @@ public class ProjectServiceImpl extends BaseServiceImpl<ProjectEntity,Integer> i
         }
         if(NumberUtil.isSignless(projectEntity.getId())){
             ProjectEntity oldProjectEntity = this.projectDao.getEntity(projectBean.getId());
-           //TODO 设置值
+            oldProjectEntity.setCode(projectEntity.getCode());
             oldProjectEntity.setSystem(projectEntity.getSystem());
             oldProjectEntity.setStartTime(projectEntity.getStartTime());
             oldProjectEntity.setEndTime(projectEntity.getEndTime());

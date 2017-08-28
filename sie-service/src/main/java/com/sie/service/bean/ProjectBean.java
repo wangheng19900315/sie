@@ -8,6 +8,7 @@ import java.sql.Timestamp;
 public class ProjectBean extends BaseBean{
     private Integer system;
     private String systemName;
+    private String code;
     private String sieName;
     private String truName;
     private String mark;
@@ -123,5 +124,13 @@ public class ProjectBean extends BaseBean{
 
     public void setEndTimeFormat(String endTimeFormat) {
         this.endTimeFormat = endTimeFormat;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
     }
 }

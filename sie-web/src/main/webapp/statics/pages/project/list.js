@@ -31,9 +31,10 @@ $(function(){
         height: '100%',
         mtype: 'post',
         postData: {},
-        colNames: ['ID', '所在系统','SIE系统名称' ,'SIE系统最多报课程数' ,'TRU系统名称' ,'TRU系统最多报课程数','开始时间' ],
+        colNames: ['ID','项目编号', '所在系统','SIE系统名称' ,'SIE系统最多报课程数' ,'TRU系统名称' ,'TRU系统最多报课程数','开始时间' ],
         colModel: [
             {name: 'id', index: 'id', width: 20, hidden: true,  sortable: false},
+            {name: 'code', index: 'code', width: 20,   sortable: false},
             {name: 'systemName', index: 'systemName', width: 20,   sortable: false},
             {name: 'sieName', index: 'sieName', width: 20,   sortable: false},
             {name: 'sieMaxCourse', index: 'sieMaxCourse', width: 20,  sortable: false},

@@ -11,7 +11,7 @@ import javax.persistence.*;
 @Table(name = "t_grade_info")
 public class GradeEntity extends BaseEntity {
 //    private Integer id;
-    private Double grade;
+    private String grade;
     private ProjectEntity projectEntity;
     private CourseEntity courseEntity;
     private StudentEntity studentEntity;
@@ -20,11 +20,11 @@ public class GradeEntity extends BaseEntity {
 
     @Basic
     @Column(name = "grade")
-    public Double getGrade() {
+    public String getGrade() {
         return grade;
     }
 
-    public void setGrade(Double grade) {
+    public void setGrade(String grade) {
         this.grade = grade;
     }
 

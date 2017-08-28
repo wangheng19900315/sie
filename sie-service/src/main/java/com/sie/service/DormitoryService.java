@@ -1,9 +1,11 @@
 package com.sie.service;
 
+import com.sie.framework.base.HqlOperateVo;
 import com.sie.framework.entity.DormitoryEntity;
 import com.sie.service.bean.DormitoryBean;
 import com.sie.service.bean.PageInfo;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -11,5 +13,5 @@ import java.util.Map;
  */
 public interface DormitoryService extends BaseService<DormitoryEntity, Integer> {
 
-    PageInfo<DormitoryBean> getDormitoryList(Integer page, Integer rows, Map<String, Object> parameter);
+    PageInfo<DormitoryBean> getDormitoryList(Integer page, Integer rows,  List<HqlOperateVo> hqlOperateVos);
 }

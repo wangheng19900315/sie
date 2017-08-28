@@ -1,5 +1,6 @@
 package com.sie.service.impl;
 
+import com.sie.framework.base.HqlOperateVo;
 import com.sie.framework.dao.CouponDao;
 import com.sie.framework.dao.ProjectPriceDao;
 import com.sie.framework.entity.CouponEntity;
@@ -14,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -47,10 +49,13 @@ public class PackagePriceServiceImpl extends BaseServiceImpl<ProjectPriceEntity,
     }
 
     @Override
-    public PageInfo<PackagePriceBean> getPriceList(Integer page, Integer rows, Map<String, Object> parameter) {
+    public PageInfo<PackagePriceBean> getPriceList(Integer page, Integer rows, List<HqlOperateVo> hqlOperateVos) {
         //设置project内容为空
-        parameter.put("projectNumber",null);
-        PageInfo<ProjectPriceEntity> pageInfo = this.getList(page,rows, parameter);
+        if(hqlOperateVos == null){
+            hqlOperateVos = new ArrayList<>();
+        }
+        hqlOperateVos.add(new HqlOperateVo("projectNumber","=","2"));
+        PageInfo<ProjectPriceEntity> pageInfo = this.getList(page,rows, hqlOperateVos);
         PageInfo<PackagePriceBean> result = new PageInfo<PackagePriceBean>();
         result.setPage(pageInfo.getPage());
         result.setRecords(pageInfo.getRecords());

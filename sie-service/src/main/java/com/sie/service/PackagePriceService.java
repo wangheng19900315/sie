@@ -1,11 +1,13 @@
 package com.sie.service;
 
+import com.sie.framework.base.HqlOperateVo;
 import com.sie.framework.entity.CouponEntity;
 import com.sie.framework.entity.ProjectPriceEntity;
 import com.sie.service.bean.CourseBean;
 import com.sie.service.bean.PackagePriceBean;
 import com.sie.service.bean.PageInfo;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -17,5 +19,5 @@ public interface PackagePriceService extends BaseService<ProjectPriceEntity, Int
      */
     Integer update(ProjectPriceEntity projectPriceEntity);
 
-    PageInfo<PackagePriceBean> getPriceList(Integer page, Integer rows, Map<String, Object> parameter);
+    PageInfo<PackagePriceBean> getPriceList(Integer page, Integer rows, List<HqlOperateVo> hqlOperateVos);
 }
