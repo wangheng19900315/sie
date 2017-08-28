@@ -17,6 +17,7 @@ public class OrderEntity extends BaseEntity {
     private Double discount; //管理员优惠金额
     private Double crDiscount; //cr优惠金额
     private Double payMoney;
+    private Integer payType;//支付方式
     private Double couponDiscount; //优惠卷优惠金额
     private Integer orderType;
     private Integer status;
@@ -154,7 +155,7 @@ public class OrderEntity extends BaseEntity {
         this.couponDiscount = couponDiscount;
     }
 
-    @Column(name = "order_oype")
+    @Column(name = "order_type")
     public Integer getOrderType() {
         return orderType;
     }
@@ -179,5 +180,15 @@ public class OrderEntity extends BaseEntity {
 
     public void setPayMoney(Double payMoney) {
         this.payMoney = payMoney;
+    }
+
+    @Basic
+    @Column(name = "pay_type")
+    public Integer getPayType() {
+        return payType;
+    }
+
+    public void setPayType(Integer payType) {
+        this.payType = payType;
     }
 }

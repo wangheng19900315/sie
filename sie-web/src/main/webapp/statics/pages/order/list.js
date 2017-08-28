@@ -32,7 +32,7 @@ $(function(){
         mtype: 'post',
         postData: {},
 
-        colNames: ['ID', '订单号','创建时间'  ,'学生','总金额' ,'折扣金额' ,'支付金额','支付时间','订单状态','修改时间'  ],
+        colNames: ['ID', '订单号','创建时间','提交系统','学生姓名','支付金额','订单状态','支付时间','项目名称','课程数' ],
         colModel: [
             {name: 'id', index: 'id', width: 20, hidden: true, sorttype: "int", sortable: false},
 
@@ -42,21 +42,21 @@ $(function(){
                 return time1;
             }
             },
+            {name: 'systemTypeName', index: 'systemTypeName', width: 120, sortable: false},
             {name: 'studentName', index: 'studentName', width: 120, sortable: false},
-            {name: 'money', index: 'money', width: 120, sortable: false},
-            {name: 'discount', index: 'discount', width: 120, sortable: false},
+            //{name: 'money', index: 'money', width: 120, sortable: false},
+            //{name: 'discount', index: 'discount', width: 120, sortable: false},
+            //{name: 'couponDiscount', index: 'couponDiscount', width: 120, sortable: false},
+            //{name: 'crDiscount', index: 'crDiscount', width: 120, sortable: false},
             {name: 'payMoney', index: 'payMoney', width: 120, sortable: false},
+            {name: 'statusName', index: 'statusName', width: 120, sortable: false},
             {name: 'payTime', index: 'payTime', width: 160 , sortable: false, formatter:function(cellvalue, options, rowObject){
                 var time1 = new Date(cellvalue).Format("yyyy-MM-dd hh:mm:ss");
                 return time1;
             }
             },
-            {name: 'statusName', index: 'statusName', width: 120, sortable: false},
-            {name: 'updateTime', index: 'updateTime', width: 160 , sortable: false, formatter:function(cellvalue, options, rowObject){
-                var time1 = new Date(cellvalue).Format("yyyy-MM-dd hh:mm:ss");
-                return time1;
-            }
-            },
+            {name: 'projectNames', index: 'projectNames', width: 120, sortable: false},
+            {name: 'courseNumber', index: 'courseNumber', width: 120, sortable: false}
         ],
         multiselect: true,
         multiboxonly: true,

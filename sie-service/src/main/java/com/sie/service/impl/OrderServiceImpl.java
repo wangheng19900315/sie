@@ -18,6 +18,7 @@ import com.sie.service.bean.PageInfo;
 import com.sie.util.NumberUtil;
 import com.sie.util.PageUtil;
 import org.apache.commons.beanutils.BeanUtils;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -113,7 +114,21 @@ public class OrderServiceImpl extends BaseServiceImpl<OrderEntity,Integer> imple
             }
             if(orderEntity.getStudentEntity() != null){
                 bean.setStudentId(orderEntity.getStudentEntity().getId());
-                bean.setStudentName(orderEntity.getStudentEntity().getChineseName());
+                bean.setStudentName(orderEntity.getStudentEntity().getLastName() + " " + orderEntity.getStudentEntity().getFirstName());
+                bean.setStudentTel(orderEntity.getStudentEntity().getTelephone());
+                bean.setStudentID(orderEntity.getStudentEntity().getUserID());
+                bean.setStudentChineseName(orderEntity.getStudentEntity().getChineseName());
+                bean.setSchoolName(orderEntity.getStudentEntity().getSchoolName());
+                bean.setProfession(orderEntity.getStudentEntity().getProfession());
+                bean.setWeiXin(orderEntity.getStudentEntity().getWeiXin());
+                bean.setStudentEmail(orderEntity.getStudentEntity().getEmail());
+                //身份证号或者护照号
+                if(orderEntity.getStudentEntity().getIdNumber() != null){
+                    bean.setIdentity(orderEntity.getStudentEntity().getIdNumber());
+                }else{
+                    bean.setIdentity(orderEntity.getStudentEntity().getPassportNumber());
+                }
+
             }
             if(NumberUtil.isSignless(orderEntity.getOrderType())){
                 OrderType type = OrderType.valueOf(orderEntity.getOrderType());
@@ -129,6 +144,22 @@ public class OrderServiceImpl extends BaseServiceImpl<OrderEntity,Integer> imple
                     bean.setSystemTypeName(systemType.getName());
                 }
             }
+            //设置项目名称
+            List<String> projectNameList = new ArrayList<>();
+            int courseNumber = 0;
+            for(OrderDetailEntity detailEntity:orderEntity.getOrderDetailEntityList()){
+
+                if(detailEntity.getDormitoryEntity()!= null){
+                    //明细为住宿
+                    projectNameList.add(detailEntity.getDormitoryEntity().getCode());
+                }else{
+                    projectNameList.add(detailEntity.getProjectEntity().getCode());
+                    //课程数进行累加
+                    courseNumber = courseNumber + detailEntity.getCourseCount().intValue();
+                }
+            }
+            bean.setProjectNames(StringUtils.join(projectNameList, ","));
+            bean.setCourseNumber(courseNumber);
 
         }catch (Exception e){
             e.printStackTrace();

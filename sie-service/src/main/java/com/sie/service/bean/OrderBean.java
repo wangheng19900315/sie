@@ -9,6 +9,18 @@ import java.util.List;
  */
 public class OrderBean  extends BaseBean{
 
+    //学生信息
+    private String studentName;
+    private String studentChineseName;
+    private String schoolName;
+    private String studentID;
+    private String studentEmail;
+    private String studentTel;
+    private Integer studentId;
+    private String weiXin;
+    private String profession;
+    private String identity;
+
     private String code;
     private Double money;
     private Double discount;
@@ -22,15 +34,15 @@ public class OrderBean  extends BaseBean{
     private String remark;
     private String orderTypeName;
     private Double payMoney;
-    private String studentName;
-    private Integer studentId;
+    private Integer payType;
+    private String payTypeName;
     private Double crDiscount; //cr优惠金额
     private Double couponDiscount; //优惠卷优惠金额
     private Integer systemType;
     private String systemTypeName;
 
-
-
+    private String projectNames;
+    private Integer courseNumber;
     private List<OrderDetailBean> orderDetailBeen = new ArrayList<>();
 
 
@@ -192,5 +204,101 @@ public class OrderBean  extends BaseBean{
 
     public void setSystemTypeName(String systemTypeName) {
         this.systemTypeName = systemTypeName;
+    }
+
+    public String getStudentID() {
+        return studentID;
+    }
+
+    public void setStudentID(String studentID) {
+        this.studentID = studentID;
+    }
+
+    public String getStudentEmail() {
+        return studentEmail;
+    }
+
+    public void setStudentEmail(String studentEmail) {
+        this.studentEmail = studentEmail;
+    }
+
+    public Integer getPayType() {
+        return payType;
+    }
+
+    public void setPayType(Integer payType) {
+        this.payType = payType;
+    }
+
+    public String getPayTypeName() {
+        return payTypeName;
+    }
+
+    public void setPayTypeName(String payTypeName) {
+        this.payTypeName = payTypeName;
+    }
+
+    public String getStudentTel() {
+        return studentTel;
+    }
+
+    public void setStudentTel(String studentTel) {
+        this.studentTel = studentTel;
+    }
+
+    public String getProjectNames() {
+        return projectNames;
+    }
+
+    public void setProjectNames(String projectNames) {
+        this.projectNames = projectNames;
+    }
+
+    public Integer getCourseNumber() {
+        return courseNumber;
+    }
+
+    public void setCourseNumber(Integer courseNumber) {
+        this.courseNumber = courseNumber;
+    }
+
+    public String getStudentChineseName() {
+        return studentChineseName;
+    }
+
+    public void setStudentChineseName(String studentChineseName) {
+        this.studentChineseName = studentChineseName;
+    }
+
+    public String getSchoolName() {
+        return schoolName;
+    }
+
+    public void setSchoolName(String schoolName) {
+        this.schoolName = schoolName;
+    }
+
+    public String getWeiXin() {
+        return weiXin;
+    }
+
+    public String getProfession() {
+        return profession;
+    }
+
+    public String getIdentity() {
+        return identity;
+    }
+
+    public void setWeiXin(String weiXin) {
+        this.weiXin = weiXin;
+    }
+
+    public void setProfession(String profession) {
+        this.profession = profession;
+    }
+
+    public void setIdentity(String identity) {
+        this.identity = identity;
     }
 }

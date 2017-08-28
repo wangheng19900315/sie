@@ -15,7 +15,7 @@
                             <div class="form-group ">
                                 <label for="system" class="col-sm-2 control-label">系统</label>
                                 <div class="col-sm-9">
-                                    <select class="form-control form-group-margin" id="system" name="system">
+                                    <select class="form-control" id="system" name="system">
                                         <option value="1">SIE</option>
                                         <option value="2">TRU</option>
                                     </select>
@@ -27,7 +27,7 @@
                             <div class="form-group ">
                                 <label for="studentID" class="col-sm-2 control-label">学生</label>
                                 <div class="col-sm-9">
-                                    <select class="form-control form-group-margin" id="studentID" name="studentID">
+                                    <select class="form-control" id="studentID" name="studentID">
                                         <option value="1">李易</option>
                                     </select>
 
@@ -40,7 +40,7 @@
                             <div class="form-group ">
                                 <label for="projectId" class="col-sm-2 control-label">项目</label>
                                 <div class="col-sm-9">
-                                    <select class="form-control form-group-margin" id="projectId" name="projectId">
+                                    <select class="form-control" id="projectId" name="projectId">
                                         <option value="">...</option>
                                     </select>
                                 </div>
@@ -58,10 +58,10 @@
                     <div class="row">
                         <div class="col-sm-12">
                             <div class="form-group ">
-                                <label class="col-sm-3 control-label">课程选择</label>
-                                <div class="col-sm-9">
-                                    <label><input type="checkbox" name="courseIds"value="1">课程1</label>
-                                    <label><input type="checkbox" name="courseIds"value="2">课程2</label>
+                                <label class="col-sm-1 control-label">课程选择</label>
+                                <div class="col-sm-11">
+                                    <label><input type="checkbox" name="courseIds"value="1" >课程1</label>
+                                    <label><input type="checkbox" name="courseIds"value="2" >课程2</label>
                                 </div>
                             </div>
                         </div>
