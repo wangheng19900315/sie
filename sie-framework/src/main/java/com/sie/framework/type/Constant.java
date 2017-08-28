@@ -32,6 +32,11 @@ public class Constant {
    */
   public static final String SYSTEM_USER_ID = "USER_ID";
 
+  /**
+   * 用户菜单
+   */
+  public static final String SYSTEM_MENU_LIST = "MENU_LIST";
+
 
 
 }

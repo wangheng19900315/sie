@@ -10,4 +10,6 @@ public interface UserService extends BaseService<UserEntity, Integer> {
 
     public UserEntity login(String userName, String password);
 
+    public Integer updateRole(Integer id, Integer roleId);
+
 }

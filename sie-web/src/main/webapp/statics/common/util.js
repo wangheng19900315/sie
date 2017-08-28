@@ -194,3 +194,31 @@ $('.form_time').timepicker(formatTimeOption);
 //    format: "yyyy-mm-dd hh:ii"
 //}
 //$('.form_datetime').datetimepicker(formatDateTimeOption);
+
+
+$(function(){
+    if(menuList.length > 0){
+        var html = ""
+        var jsons = eval("("+menuList+")");
+        for(var i=0; i<jsons.length; i++){
+            var menu = jsons[i];
+            if(!menu.parentId){
+                html += '<li class="mm-dropdown"> <a href="#"><i class="menu-icon fa fa-th"></i><span class="mm-text">'+menu.name+'</span></a><ul>';
+
+                for(var j=0; j<jsons.length; j++){
+                    var child =jsons[j];
+                    console.info(child.name)
+                    if(child.parentId && child.parentId==menu.id){
+                        html += ' <li> <a tabindex="-1" href="'+child.action+'"><span class="mm-text">'+child.name+'</span></a></li>' ;
+                    }
+                }
+
+                html += "</ul></li>"
+            }
+
+//            if(menu.parentId == )
+        }
+
+        $("#main-menu-inner .navigation").append(html);
+    }
+})

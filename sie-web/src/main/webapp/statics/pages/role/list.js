@@ -13,9 +13,11 @@ function selectRow() {
     if (ids && ids.length == 1) {
         $('#editBtn').removeClass('disabled');
         $('#deleteBtn').removeClass('disabled');
+        $('#selectMenu').removeClass('disabled');
     } else {
         $('#editBtn').addClass('disabled');
         $('#deleteBtn').addClass('disabled');
+        $('#selectMenu').addClass('disabled');
     }
 };
 function Modify(id) {   //单击修改链接的操作
@@ -34,10 +36,12 @@ $(function(){
         height: '100%',
         mtype: 'post',
         postData: {},
-        colNames: ['ID', '名称' ,'创建时间' ,'修改时间'],
+        colNames: ['ID','menuIds', '名称' ,'创建时间' ,'修改时间'],
         colModel: [
             {name: 'id', index: 'id', width: 20, hidden: true, sorttype: "int", sortable: false},
+            {name: 'menuIds', index: 'menuIds', width: 120, sortable: false,hidden: true},
             {name: 'name', index: 'name', width: 120, sortable: false},
+
             {name: 'createTime', index: 'createTime', width: 160 , sortable: false, formatter:function(cellvalue, options, rowObject){
                 var time1 = new Date(cellvalue).Format("yyyy-MM-dd hh:mm:ss");
                 return time1;
@@ -87,20 +91,138 @@ $(function(){
     })
 
     $("#addBtn").bind("click",function(){
-        window.location.href="/role/add.html"
+        window.location.href="/role/addOrUpdate.html"
     })
 
 
     $("#editBtn").bind("click",function(){
-        search();
+        var id = $("#grid-table").jqGrid('getGridParam', 'selrow');
+        window.location.href="/role/addOrUpdate.html?id="+id;
     })
 
     $("#deleteBtn").bind("click",function(){
-        search();
+        var id = $("#grid-table").jqGrid('getGridParam', 'selrow');
+        if(id == null){
+            alert("请选择记录!");
+            return;
+        }
+        bootbox.confirm({
+            message: "确定要删除该条记录?",
+            callback: function(result) {
+                if(result){
+
+                    $.ajax({
+                        url: '/role/delete.json?id='+id,
+                        type: 'get',
+                        dataType:'json',
+                        success: function (json, statusText, xhr, $form) {
+                            if (json.success) {
+                                alert("删除完成!");
+                                $("#grid-table").trigger('reloadGrid');
+                            } else {
+                                alert( json.message);
+                            }
+                        }
+                    });
+                }
+            },
+            className: "bootbox-sm"
+        });
     })
 
-    $("#infoBtn").bind("click",function(){
-        search();
+    $("#selectMenu").bind("click", function(){
+        $("#showMenubtn").click();
+        var id = $("#grid-table").jqGrid('getGridParam', 'selrow');
+        var obj = $("#grid-table").jqGrid('getRowData', id);
+        $("#selectMenuDiv").find("input[type=checkbox]").attr("checked",false);
+        if(obj.menuIds.length  > 0){
+            var strs = obj.menuIds.split(",");
+            for(var i=0; i<strs.length; i++){
+                $("#selectMenuDiv").find("input[value="+strs[i]+"]").attr("checked","checked");
+            }
+        }
+
+
+        $("#id").val(id);
+    })
+
+
+    $(".panel-heading input").bind("click", function(){
+        var checked = $(this).attr("checked");
+        if(!checked){
+            checked=false;
+        }
+
+        $(this).parent().next().find("input").attr("checked",checked);
+    })
+
+    $(".panel-collapse input").bind("click", function(){
+        var checked = $(this).attr("checked");
+        if(!checked){
+            var flag = false;
+            $(this).parent().find("input").each(function(){
+                if($(this).attr("checked")){
+                    flag = true;
+                    $(this).parent().parent().prev().find("input").attr("checked", "checked");
+                }
+
+                if(!flag){
+                    $(this).parent().parent().prev().find("input").attr("checked", false);
+                }
+            })
+
+
+        }else{
+            $(this).parent().parent().prev().find("input").attr("checked", checked);
+        }
+
+    })
+
+    $(".panel-heading input").bind("click", function(){
+        var checked = $(this).attr("checked");
+        if(!checked){
+            checked=false;
+        }
+
+        $(this).parent().next().find("input").attr("checked",checked);
+    })
+
+    $("#submitBtn").bind("click", function(){
+        var menuIds = "";
+        $("input[name='menuId']").each(function(){
+            if($(this).attr("checked")){
+                menuIds += $(this).val()+",";
+            }
+        })
+
+        if(menuIds.length > 0){
+            menuIds = menuIds.substring(0, menuIds.length -1);
+        }
+
+
+        var obj ={"id":$("#id").val(),"menuIds":menuIds}
+        $.ajax({
+            url: '/role/updateMenu.json',
+            data: obj,
+            type: 'post',
+            dataType: 'json',
+            cache: false,
+            success: function (data) {
+                if (data.success) {
+                    alert("数据保存成功！");
+                    $("#cancelBtn").click();
+                    search();
+                } else {
+                    alert("保存数据出现错误，请稍候重试！");
+                }
+            },
+            error: function () {
+                alert("提交保存信息出现错误！");
+            }
+        });
+
+
+
     })
 })
 

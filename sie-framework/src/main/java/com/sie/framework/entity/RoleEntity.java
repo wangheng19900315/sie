@@ -1,6 +1,8 @@
 package com.sie.framework.entity;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by x on 2017/8/12.
@@ -21,6 +23,9 @@ public class RoleEntity extends BaseEntity{
 //        this.id = id;
 //    }
 
+
+
+    private List<MenuEntity> menuList = new ArrayList<>();
     @Basic
     @Column(name = "name")
     public String getName() {
@@ -31,4 +36,15 @@ public class RoleEntity extends BaseEntity{
         this.name = name;
     }
 
+
+    @ManyToMany(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
+    @JoinTable(name="t_role_menu_info", joinColumns={@JoinColumn(name="role_id")}
+            , inverseJoinColumns={@JoinColumn(name="menu_id")})
+    public List<MenuEntity> getMenuList() {
+        return menuList;
+    }
+
+    public void setMenuList(List<MenuEntity> menuList) {
+        this.menuList = menuList;
+    }
 }

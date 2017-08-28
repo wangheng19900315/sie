@@ -108,6 +108,25 @@ public class UserController {
     }
 
 
+    @RequestMapping(value = "/updateRole.json")
+    @ResponseBody
+    public ResultBean updateRole(Integer id, Integer roleId){
+        ResultBean resultBean = new ResultBean();
+
+        try{
+            Integer result  = this.userService.updateRole(id, roleId);
+            if(NumberUtil.isSignless(id)){
+                resultBean.setMessage("保存成功");
+                resultBean.setSuccess(true);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return resultBean;
+    }
+
+
 
 
     @RequestMapping(value = "/login.json")
@@ -122,6 +141,7 @@ public class UserController {
                 HttpSession session = request.getSession();
                 session.setAttribute(Constant.SYSTEM_USER_ID,userEntity.getId());
                 session.setAttribute(Constant.SYSTEM_USER_NAME_KEY,userEntity.getName());
+                session.setAttribute(Constant.SYSTEM_MENU_LIST, JSON.toJSON(userEntity.getRoleEntity().getMenuList()));
 
             }
         }catch (Exception e){
