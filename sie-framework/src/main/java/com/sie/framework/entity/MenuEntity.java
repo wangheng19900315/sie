@@ -12,6 +12,7 @@ public class MenuEntity extends BaseEntity{
     private String name;
     private String action;
 
+
 //    @Id
 //    @GeneratedValue(strategy= GenerationType.IDENTITY)
 //    public Integer getId() {

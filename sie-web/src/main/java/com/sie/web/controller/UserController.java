@@ -108,6 +108,25 @@ public class UserController {
     }
 
 
+    @RequestMapping(value = "/updateRole.json")
+    @ResponseBody
+    public ResultBean updateRole(Integer id, Integer roleId){
+        ResultBean resultBean = new ResultBean();
+
+        try{
+            Integer result  = this.userService.updateRole(id, roleId);
+            if(NumberUtil.isSignless(id)){
+                resultBean.setMessage("保存成功");
+                resultBean.setSuccess(true);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return resultBean;
+    }
+
+
 
 
     @RequestMapping(value = "/login.json")

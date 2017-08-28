@@ -1,6 +1,8 @@
 package com.sie.service.impl;
 
+import com.sie.framework.dao.RoleDao;
 import com.sie.framework.dao.UserDao;
+import com.sie.framework.entity.RoleEntity;
 import com.sie.framework.entity.UserEntity;
 import com.sie.service.UserService;
 import com.sie.util.NumberUtil;
@@ -14,7 +16,11 @@ import java.util.List;
  */
 @Service("userService")
 public class UserServiceImpl extends BaseServiceImpl<UserEntity,Integer> implements UserService {
+
     private UserDao userDao;
+
+    @Autowired
+    private RoleDao roleDao;
 
     @Autowired
     public UserServiceImpl(UserDao userDao){
@@ -36,6 +42,21 @@ public class UserServiceImpl extends BaseServiceImpl<UserEntity,Integer> impleme
         }
 
         return userEntity.getId();
+    }
+
+
+    public Integer updateRole(Integer id, Integer roleId){
+        Integer result = 0;
+        if(NumberUtil.isSignless(id)){
+            UserEntity userEntity = this.userDao.getEntity(id);
+            RoleEntity roleEntity = this.roleDao.getEntity(roleId);
+            userEntity.setRoleEntity(roleEntity);
+            this.userDao.updateEntity(userEntity);
+
+            result = userEntity.getId();
+        }
+
+        return result;
     }
 
     @Override

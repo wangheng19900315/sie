@@ -52,7 +52,6 @@
          </div>
     </div>
 
-    <iframe id="HideFrm" style="display: none"></iframe>
 </ot:layout>
 <script src="/statics/pages/grade/list.js"></script>
 

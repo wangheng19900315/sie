@@ -13,9 +13,11 @@ function selectRow() {
     if (ids && ids.length == 1) {
         $('#editBtn').removeClass('disabled');
         $('#deleteBtn').removeClass('disabled');
+        $('#selectRoleBtn').removeClass('disabled');
     } else {
         $('#editBtn').addClass('disabled');
         $('#deleteBtn').addClass('disabled');
+        $('#selectRoleBtn').addClass('disabled');
     }
 };
 $(function(){
@@ -30,10 +32,10 @@ $(function(){
         mtype: 'post',
         postData: {},
 
-        colNames: ['ID', '名称' ,'密码' ,'角色名称' ,'Email','电话','创建时间' ,'修改时间'  ],
+        colNames: ['ID','角色id', '名称' ,'密码' ,'角色名称' ,'Email','电话','创建时间' ,'修改时间'  ],
         colModel: [
             {name: 'id', index: 'id', width: 20, hidden: true, sorttype: "int", sortable: false},
-
+            {name: 'roleEntity.id', index: 'roleEntity.id', width: 20, hidden: true, sorttype: "int", sortable: false},
             {name: 'name', index: 'name', width: 120, sortable: false},
             {name: 'password', index: 'password', width: 120, sortable: false},
             {name: 'roleEntity.name', index: 'roleEntity.name', width: 120, sortable: false},
@@ -131,6 +133,56 @@ $(function(){
 
     $("#infoBtn").bind("click",function(){
         search();
+    })
+
+    $.ajax({
+        url: '/role/getSelect.json',
+        type: 'get',
+        cache: false,
+        success: function (data) {
+            if(data.length > 0){
+                $("#roleId").html(data);
+            }
+        }
+    });
+
+    $("#selectRoleBtn").bind("click", function(){
+        $("#showSelectRoles").click();
+
+        var id = $("#grid-table").jqGrid('getGridParam', 'selrow');
+        var objRow =$("#grid-table").jqGrid('getRowData', id);
+        $("#roleId option").each(function(){
+            if($(this).val() == objRow["roleEntity.id"]){
+                $(this).attr("selected","selected");
+            }else{
+                $(this).attr("selected","");
+            }
+        })
+        $("#id").val(id);
+
+    })
+
+    $("#submitBtn").bind("click", function(){
+        var obj = {id:$("#id").val(),roleId:$("#roleId").val()};
+        $.ajax({
+            url: '/user/updateRole.json',
+            data: obj,
+            type: 'post',
+            dataType: 'json',
+            cache: false,
+            success: function (data) {
+                if (data.success) {
+                    alert("数据保存成功！");
+                    $("#cancelBtn").click();
+                    search();
+                } else {
+                    alert("保存数据出现错误，请稍候重试！");
+                }
+            },
+            error: function () {
+                alert("提交保存信息出现错误！");
+            }
+        });
     })
 })
 

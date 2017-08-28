@@ -26,7 +26,7 @@
             </li>
 
             <li class="mm-dropdown">
-                <a href="#"><i class="menu-icon fa fa-th"></i><span class="mm-text">订单管理</span></a>
+                <a href="#"><i class="menu-icon fa fa-th"></i><span class="mm-text" >订单管理</span></a>
                 <ul>
                     <li>
                         <a tabindex="-1" href="/order/list.html"><span class="mm-text">订单管理</span></a>
@@ -69,7 +69,7 @@
                 <a href="#"><i class="menu-icon fa fa-table"></i><span class="mm-text">报表管理</span></a>
                 <ul>
 
-                    <li>  <a tabindex="-1" href="layouts-grid.html"><span class="mm-text">订单报表</span></a> </li>
+                    <li>  <a tabindex="-1" href="/layouts-grid.html"><span class="mm-text">订单报表</span></a> </li>
 
 
                 </ul>
