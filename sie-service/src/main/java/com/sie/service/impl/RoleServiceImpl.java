@@ -39,7 +39,7 @@ public class RoleServiceImpl extends BaseServiceImpl<RoleEntity,Integer> impleme
 
     @Override
     public PageInfo<RoleBean> getRoleList(Integer page, Integer rows, Map<String, Object> parameter) {
-        PageInfo<RoleEntity> pageInfo = this.getList(page,rows, parameter);
+        PageInfo<RoleEntity> pageInfo = this.getList(page,rows, null);
         PageInfo<RoleBean> result = new PageInfo<RoleBean>();
         result.setPage(pageInfo.getPage());
         result.setRecords(pageInfo.getRecords());
