@@ -27,12 +27,12 @@ $(function(){
         height: '100%',
         mtype: 'post',
         postData: {},
-        colNames: ['ID', '用户ID' ,'用户姓名' ,'中文名称','课程编号' ,'课程名称' ,'成绩' ],
+        colNames: ['ID', '用户ID' ,'用户姓名' ,'项目名称','课程编号' ,'课程名称' ,'成绩' ],
         colModel: [
             {name: 'id', index: 'id', width: 20, hidden: true,  sortable: false},
-            {name: 'userID', index: 'userID', width: 20 , sortable: false},
-            {name: 'name', index: 'name', width: 20,   sortable: false},
-            {name: 'chineseName', index: 'chineseName', width: 20,   sortable: false},
+            {name: 'studentId', index: 'studentId', width: 20 ,hidden: true, sortable: false},
+            {name: 'studentName', index: 'studentName', width: 20,   sortable: false},
+            {name: 'projectName', index: 'projectName', width: 20,   sortable: false},
             {name: 'courseCode', index: 'courseCode', width: 20,  sortable: false},
             {name: 'courseName', index: 'courseName', width: 20,  sortable: false},
             {name: 'grade', index: 'grade', width: 20, sortable: false}
