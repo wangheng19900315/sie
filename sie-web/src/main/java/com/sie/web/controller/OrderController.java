@@ -83,6 +83,21 @@ public class OrderController {
     }
 
 
+    @RequestMapping("/add.json")
+    @ResponseBody
+    public ResultBean add(OrderBean orderBean){
+
+        ResultBean resultBean = new ResultBean();
+        try{
+            resultBean = this.orderService.addOrder(orderBean);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return resultBean;
+    }
+
+
     @RequestMapping("/detailList.json")
     @ResponseBody
     public PageInfo<OrderDetailBean> listJons(Integer page, Integer rows,Integer orderId ){

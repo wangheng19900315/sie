@@ -32,6 +32,7 @@ public class OrderBean  extends BaseBean{
     private String statusName;
     private Timestamp payTime;
     private String remark;
+    private Integer orderType;
     private String orderTypeName;
     private Double payMoney;
     private Integer payType;
@@ -300,5 +301,13 @@ public class OrderBean  extends BaseBean{
 
     public void setIdentity(String identity) {
         this.identity = identity;
+    }
+
+    public Integer getOrderType() {
+        return orderType;
+    }
+
+    public void setOrderType(Integer orderType) {
+        this.orderType = orderType;
     }
 }

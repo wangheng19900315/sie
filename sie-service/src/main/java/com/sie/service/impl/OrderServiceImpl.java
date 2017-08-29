@@ -1,20 +1,17 @@
 package com.sie.service.impl;
 
 import com.sie.framework.base.GenericDao;
-import com.sie.framework.dao.OrderDao;
-import com.sie.framework.entity.GradeEntity;
-import com.sie.framework.entity.OrderDetailEntity;
-import com.sie.framework.entity.OrderEntity;
+import com.sie.framework.dao.*;
+import com.sie.framework.entity.*;
 import com.sie.framework.type.OrderStatus;
 import com.sie.framework.type.OrderType;
+import com.sie.framework.type.PayStatus;
 import com.sie.framework.type.SystemType;
 import com.sie.framework.vo.OrderSearchVo;
 import com.sie.service.OrderDetailService;
 import com.sie.service.OrderService;
-import com.sie.service.bean.GradeBean;
-import com.sie.service.bean.OrderBean;
-import com.sie.service.bean.OrderDetailBean;
-import com.sie.service.bean.PageInfo;
+import com.sie.service.bean.*;
+import com.sie.util.DateUtil;
 import com.sie.util.NumberUtil;
 import com.sie.util.PageUtil;
 import org.apache.commons.beanutils.BeanUtils;
@@ -23,6 +20,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -41,6 +39,28 @@ public class OrderServiceImpl extends BaseServiceImpl<OrderEntity,Integer> imple
 
     @Autowired
     private OrderDetailService orderDetailService;
+
+    @Autowired
+    private CouponDao couponDao;
+
+    @Autowired
+    private CrDao crDao;
+
+    @Autowired
+    private OrderDetailDao orderDetailDao;
+
+    @Autowired
+    private StudentDao studentDao;
+
+    @Autowired
+    private OrderPayDao orderPayDao;
+
+    @Autowired
+    private ProjectDao projectDao;
+
+    @Autowired
+    private DormitoryDao dormitoryDao;
+
 
 
     @Override
@@ -178,5 +198,108 @@ public class OrderServiceImpl extends BaseServiceImpl<OrderEntity,Integer> imple
             oldEntity.setStatus(orderEntity.getStatus());
             this.orderDao.updateEntity(oldEntity);
         }
+    }
+
+    @Override
+    public ResultBean addOrder(OrderBean orderBean) {
+        ResultBean resultBean = new ResultBean();
+        OrderEntity orderEntity = new OrderEntity();
+        orderEntity.setCode(DateUtil.format(new Date(), "yyyyMMddHHmmss"));
+        if(NumberUtil.isSignless(orderBean.getStatus())){
+            orderEntity.setStatus(orderBean.getStatus());
+        }else{
+            orderEntity.setStatus(orderBean.getStatus());
+        }
+
+        orderEntity.setSystemType(orderBean.getSystemType());
+        orderEntity.setPayType(PayStatus.SUBMIT.value());
+        orderEntity.setMoney(orderBean.getMoney());
+
+        if(orderBean.getOrderDetailBeen() != null || orderBean.getOrderDetailBeen().size() == 0){
+            resultBean.setMessage("订单明细为空，请确认提交信息");
+            return resultBean;
+        }
+
+        if(NumberUtil.isSignless(orderBean.getDiscount())){
+            orderEntity.setDiscount(0.0);
+        }else{
+            orderEntity.setDiscount(orderBean.getDiscount());
+        }
+
+        StudentEntity studentEntity = this.studentDao.getEntity(orderBean.getStudentId());
+        if(studentEntity == null){
+            resultBean.setMessage("查找不到学生信息，请确认提交信息");
+            return resultBean;
+        }
+
+        if(NumberUtil.isSignless(orderBean.getCouponId())){
+            CouponEntity couponEntity = this.couponDao.getEntity(orderBean.getCouponId());
+            if(couponEntity == null){
+                resultBean.setMessage("查找不到优惠卷信息，请确认提交信息");
+                return resultBean;
+            }
+
+            orderEntity.setCouponEntity(couponEntity);
+            orderEntity.setCouponDiscount(couponEntity.getRmbDiscount());
+        }
+
+        orderEntity.setCrDiscount(0.0);
+        orderEntity.setCrEntity(null);
+        orderEntity.setRemark(orderBean.getRemark());
+        Double payMoney = NumberUtil.getDoubleScale(orderEntity.getMoney()-orderEntity.getCouponDiscount()-orderEntity.getDiscount(),0);
+        orderEntity.setPayMoney(payMoney);
+
+        this.orderDao.createEntity(orderEntity);
+
+        //创建支付信息
+        OrderPayEntity orderPayEntity = new OrderPayEntity();
+        orderPayEntity.setOrderEntity(orderEntity);
+        orderPayEntity.setPayStatus(PayStatus.SUBMIT.value());
+        orderPayEntity.setPayTotal(payMoney);
+        orderPayEntity.setPayType(orderBean.getPayType());
+        this.orderPayDao.createEntity(orderPayEntity);
+
+        //创建订单明细
+        for(OrderDetailBean orderDetailBean:orderBean.getOrderDetailBeen()){
+            OrderDetailEntity orderDetailEntity = new OrderDetailEntity();
+            orderDetailEntity.setOrderEntity(orderEntity);
+
+            ProjectEntity projectEntity = this.projectDao.getEntity(orderDetailBean.getProjectId());
+            if(projectEntity == null){
+                resultBean.setMessage("查找不到项目信息，请确认提交信息");
+                return resultBean;
+            }
+            orderDetailEntity.setProjectEntity(projectEntity);
+
+            if(NumberUtil.isSignless(orderDetailBean.getDormitoryId())){
+                DormitoryEntity dormitoryEntity = this.dormitoryDao.getEntity(orderDetailBean.getDormitoryId());
+
+                if(dormitoryEntity == null){
+                    resultBean.setMessage("查找不到宿舍信息，请确认提交信息");
+                    return resultBean;
+                }
+                orderDetailEntity.setDormitoryEntity(dormitoryEntity);
+                orderDetailEntity.setCourseCount(0);
+            }else{
+                orderDetailEntity.setCourseIds(orderDetailBean.getCourseIds());
+
+                if(NumberUtil.isSignless(orderDetailBean.getCourseCount())){
+                    orderDetailEntity.setCourseCount(orderDetailBean.getCourseCount());
+                }else{
+                    orderDetailEntity.setCourseCount(orderDetailBean.getCourseIds().split(",").length);
+                }
+            }
+
+            this.orderDetailDao.createEntity(orderDetailEntity);
+
+
+        }
+
+
+
+
+        resultBean.setMessage("添加成功");
+        resultBean.setSuccess(true);
+        return resultBean;
     }
 }

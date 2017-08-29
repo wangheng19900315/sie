@@ -116,6 +116,18 @@ public class NumberUtil {
 		return false;
 	}
 
+	/**
+	 * 是否是正整数 大于 0的int类型
+	 *
+	 * @return
+	 */
+	public static boolean isSignless(Double value) {
+		if (value != null && value.intValue() > 0) {
+			return true;
+		}
+		return false;
+	}
+
 
 	/**
 	 * 是否是正整数 大于 0的int类型

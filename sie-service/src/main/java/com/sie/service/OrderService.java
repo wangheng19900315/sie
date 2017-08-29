@@ -4,6 +4,7 @@ import com.sie.framework.entity.OrderEntity;
 import com.sie.framework.vo.OrderSearchVo;
 import com.sie.service.bean.OrderBean;
 import com.sie.service.bean.PageInfo;
+import com.sie.service.bean.ResultBean;
 
 /**
  * Created by wangheng on 2017/8/9.
@@ -17,4 +18,11 @@ public interface OrderService extends BaseService<OrderEntity, Integer> {
     public OrderBean getDetail(Integer id);
 
     void updateOrderInfo(OrderEntity orderEntity);
+
+    /**
+     * 添加订单
+     * @param orderBean
+     * @return
+     */
+    ResultBean addOrder(OrderBean orderBean);
 }
