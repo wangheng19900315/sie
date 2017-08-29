@@ -17,6 +17,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -88,17 +89,17 @@ public class CourseController {
     }
 
 
-    @RequestMapping("/getCourseCheckbox.json")
+    @RequestMapping("/getCourses.json")
     @ResponseBody
-    public String getCourseCheckbox(Integer projectId, Integer systemType){
-        String result = "";
+    public Map<Integer,String> getCourseCheckbox(Integer projectId, Integer systemType){
+        Map<Integer,String> courses = new HashMap<>();
         try{
-            result = this.courseService.getCourseCheckbox(projectId, systemType);
+            courses = this.courseService.getCourses(projectId, systemType);
         }catch (Exception e){
             e.printStackTrace();
         }
 
-        return result;
+        return courses;
     }
 
     @RequestMapping(value = "/delete.json")

@@ -28,6 +28,7 @@ $(function(){
                 json.createTime = new Date(json.createTime).Format("yyyy-MM-dd hh:mm:ss");
                 json.payTime = new Date(json.payTime).Format("yyyy-MM-dd hh:mm:ss");
                 $("#data-form").loadJson(json);
+                $("#userInfo").loadJson(json);
                 jsonData = json.orderDetailBeen;
             }
         }
@@ -39,7 +40,7 @@ $(function(){
         url: '#',
         datatype: "local",
         data:jsonData,
-        height: '100%',
+        //height: '100%',
         mtype: 'post',
         postData: {},
         colNames: ['ID', '项目名','创建时间','课程数'  ,'课程名' ,'金额' ,'状态'],

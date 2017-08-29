@@ -28,6 +28,7 @@ $(function(){
                 json.createTime = new Date(json.createTime).Format("yyyy-MM-dd hh:mm:ss");
                 json.payTime = new Date(json.payTime).Format("yyyy-MM-dd hh:mm:ss");
                 $("#data-form").loadJson(json);
+                $("#userInfo").loadJson(json);
                 jsonData = json.orderDetailBeen;
             }
         }
@@ -39,7 +40,7 @@ $(function(){
         url: '#',
         datatype: "local",
         data:jsonData,
-        height: '100%',
+        //height: '100%',
         mtype: 'post',
         postData: {},
         colNames: ['ID','projectId','courseIds', '项目名','创建时间','课程数'  ,'课程名' ,'金额' ,'状态', '操作'],
@@ -120,10 +121,10 @@ $(function(){
 
     //修改金额
     $("#discount").bind("change", function(){
-        if($(this).val()  == ""){
-            alert("请输入折扣金额！");
-            return;
-        }
+        //if($(this).val()  == ""){
+        //    alert("请输入折扣金额！");
+        //    return;
+        //}
 
         var payMonety = $("#money").val()-$("#crDiscount").val()-$("#couponDiscount").val()-$("#discount").val();
         if(payMonety  < 0){
@@ -136,10 +137,10 @@ $(function(){
 
 
     $("#submitBtn").click(function(){
-        if($("#discount").val()  == ""){
-            alert("请输入管理员折扣金额！");
-            return;
-        }
+        //if($("#discount").val()  == ""){
+        //    alert("请输入管理员折扣金额！");
+        //    return;
+        //}
 
         if( $("#payMoney").val() < 0){
             alert("折扣金额大于总金额！");
@@ -157,7 +158,7 @@ $(function(){
                 if (data.success) {
                     alert("修改成功！");
                     $("#detailCanclBtn").click();
-                    window.location.reload();
+                    history.go(-1);
                 } else {
                     alert("保存数据出现错误，请稍候重试！");
                 }
@@ -177,12 +178,21 @@ function selectCourses(id){
     var courseIds = rowData.courseIds;
     var systemType = $("#systemType").val();
     $.ajax({
-        url: '/course/getCourseCheckbox.json?projectId='+projectId+"&systemType=" +systemType,
+        url: '/course/getCourses.json?projectId='+projectId+"&systemType=" +systemType,
         type: 'get',
+        dataType:'json',
         async:false,
         success: function (data, statusText, xhr, $form) {
-            if(data != null && data.length > 0){
-                $("#courseNameDivs").html(data);
+            $("#courseNameDivs").empty();
+            var courseChecks;
+            if(data != null){
+                $.each(data,function(key,value){
+                    courseChecks = '<div class="row" style="margin-bottom: 10px;">' +
+                            '<input name="courseIds" type="checkbox" value="'+key+'" />'+value +
+                        '</div>';
+                    $("#courseNameDivs").append(courseChecks);
+                });
+                //$("#courseNameDivs").html(courseChecks);
             }
         }
     });

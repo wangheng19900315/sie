@@ -1,5 +1,6 @@
 package com.sie.service.impl;
 
+import com.google.common.collect.Maps;
 import com.sie.framework.base.HqlOperateVo;
 import com.sie.framework.dao.CourseDao;
 import com.sie.framework.dao.ProjectDao;
@@ -21,10 +22,7 @@ import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by wangheng on 2017/8/9.
@@ -94,6 +92,7 @@ public class CourseServiceImpl extends BaseServiceImpl<CourseEntity,Integer> imp
         if(NumberUtil.isSignless(courseEntity.getId())){
             CourseEntity oldProjectEntity = this.courseDao.getEntity(courseBean.getId());
             //设置值
+            oldProjectEntity.setSystem(courseEntity.getSystem());
             oldProjectEntity.setChineseName(courseEntity.getChineseName());
             oldProjectEntity.setEnglishName(courseEntity.getEnglishName());
             oldProjectEntity.setStartTime(courseEntity.getStartTime());
@@ -162,16 +161,28 @@ public class CourseServiceImpl extends BaseServiceImpl<CourseEntity,Integer> imp
     }
 
     @Override
-    public String getCourseCheckbox(Integer projectId, Integer systemType) {
-        StringBuilder sb = new StringBuilder();
-        String hql = "from CourseEntity where system="+systemType+" and projectId="+projectId;
+    public Map<Integer,String> getCourses(Integer projectId, Integer systemType) {
+        Map<Integer,String> courses = new HashMap<>();
+        //得到属于当前系统和同事属于两个系统的
+        String hql = "from CourseEntity where (system="+systemType+" or system="+SystemType.SIEANDTRU.value()+") and projectId="+projectId;
         List<CourseEntity> courseEntities = this.courseDao.getList(hql);
         if(courseEntities.size()  >0){
             for(CourseEntity courseEntity:courseEntities){
-                sb.append("<input type='checkbox' name='courseIds' value='"+courseEntity.getId()+"'> "+courseEntity.getEnglishName());
+                String code = "";
+                SystemType system = SystemType.valueOf(systemType);
+                switch (system){
+                    case SIE:
+                        code = courseEntity.getSieCode();
+                        break;
+                    case TRU:
+                        code = courseEntity.getTruCode();
+                        break;
+                }
+                  courses.put(courseEntity.getId(),code + "(" + courseEntity.getChineseName() + "," +courseEntity.getEnglishName()+ ")");
+//                sb.append("<lable><input type='checkbox' name='courseIds' value='"+courseEntity.getId()+"'> "+courseEntity.getEnglishName() + "</lable>");
             }
         }
-        return sb.toString();
+        return courses;
     }
 
     @Override

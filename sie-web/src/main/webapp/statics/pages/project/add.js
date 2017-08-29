@@ -81,7 +81,7 @@ $(function(){
             }
         });
         //设置tru价格
-        $.each(jsonObj.siePrice,function(i,value){
+        $.each(jsonObj.truPrice,function(i,value){
             if(value != null){
                 $("#truPrice_" + i +"_courseNumber").val(value.courseNumber);
                 $("#truPrice_" + i + "_rmbPrice").val(value.rmbPrice);

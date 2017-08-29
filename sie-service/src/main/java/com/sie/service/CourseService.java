@@ -20,7 +20,7 @@ public interface CourseService extends BaseService<CourseEntity, Integer> {
 
     Integer saveOrUpdate(CourseBean courseBean);
 
-    String getCourseCheckbox(Integer projectId, Integer systemType);
+    Map<Integer,String> getCourses(Integer projectId, Integer systemType);
 
     CourseBean getBean(Integer id);
 }

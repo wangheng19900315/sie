@@ -13,7 +13,7 @@ public class OrderDetailEntity extends BaseEntity{
     private String   courseIds;
     private Integer courseCount;
     private Integer orderDetailStatus;
-    private Double total;
+//    private Double total;
     private OrderEntity orderEntity;
     private ProjectEntity projectEntity;
     private DormitoryEntity dormitoryEntity;
@@ -84,12 +84,4 @@ public class OrderDetailEntity extends BaseEntity{
         this.orderDetailStatus = orderDetailStatus;
     }
 
-    @Column(name = "total")
-    public Double getTotal() {
-        return total;
-    }
-
-    public void setTotal(Double total) {
-        this.total = total;
-    }
 }

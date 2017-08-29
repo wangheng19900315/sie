@@ -1,5 +1,7 @@
 package com.sie.web.controller;
 
+import com.alibaba.fastjson.JSON;
+import com.sie.framework.entity.CouponEntity;
 import com.sie.framework.entity.OrderDetailEntity;
 import com.sie.framework.entity.OrderEntity;
 import com.sie.framework.vo.OrderSearchVo;
@@ -9,6 +11,7 @@ import com.sie.service.bean.OrderBean;
 import com.sie.service.bean.OrderDetailBean;
 import com.sie.service.bean.PageInfo;
 import com.sie.service.bean.ResultBean;
+import com.sie.util.NumberUtil;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -30,9 +33,6 @@ public class OrderController {
 
     @Autowired
     private OrderDetailService orderDetailService;
-
-
-
 
     @RequestMapping("/list.html")
     public String list(){
