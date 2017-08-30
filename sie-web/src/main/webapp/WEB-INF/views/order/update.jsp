@@ -167,7 +167,7 @@
                                                 <option value="1">微信</option>
                                                 <option value="2">支付宝</option>
                                                 <option value="3">银联</option>
-                                                <option value="4">人工缉费</option>
+                                                <option value="4">人工支付</option>
                                             </select>
                                         </div>
                                     </div>
