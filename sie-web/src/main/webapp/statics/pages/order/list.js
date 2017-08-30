@@ -12,13 +12,16 @@ function selectRow() {
 
     if (ids && ids.length == 1) {
         $('#editBtn').removeClass('disabled');
-        $('#deleteBtn').removeClass('disabled');
         $('#infoBtn').removeClass('disabled');
         var status = $("#grid-table").jqGrid('getRowData', ids[0]).status;
         //Fixme 已经完成的订单才可以进行退款和加课
         if(status == '2'){
             $('#refundBtn').removeClass('disabled');
             $('#addOrderBtn').removeClass('disabled');
+        }
+        //已经取消的订单可以进行删除
+        if(status == '5'){
+            $('#deleteBtn').removeClass('disabled');
         }
     } else {
         $('#editBtn').addClass('disabled');
@@ -115,36 +118,6 @@ $(function(){
 
     })
 
-    $("#deleteBtn").bind("click",function(){
-        var id = $("#grid-table").jqGrid('getGridParam', 'selrow');
-        if(id == null){
-            alert("请选择记录!");
-            return;
-        }
-        bootbox.confirm({
-            message: "确定要删除该条记录?",
-            callback: function(result) {
-                if(result){
-
-                    $.ajax({
-                        url: '/order/delete.json?id='+id,
-                        type: 'get',
-                        dataType:'json',
-                        success: function (json, statusText, xhr, $form) {
-                            if (json.success) {
-                                alert("删除完成!");
-                                $("#grid-table").trigger('reloadGrid');
-                            } else {
-                                alert( json.message);
-                            }
-                        }
-                    });
-                }
-            },
-            className: "bootbox-sm"
-        });
-    })
-
     $("#infoBtn").bind("click",function(){
         var id = $("#grid-table").jqGrid('getGridParam', 'selrow');
         window.location.href="/order/detail.html?id="+id;
@@ -174,12 +147,14 @@ $(function(){
                             html = html + item.projectName+'</label>';
                             html = html + '<div class="col-sm-10 courses">';
                             html = html + '<input type="hidden" name="projectId" value="'+item.projectId+'">';
-                            var courseIds = item.courseIds.split(",");
-                            var courseNames = item.custerNames.split(",");
-                            //遍历课程列表
-                            $.each(courseIds,function(i,courseId){
-                                html = html + '<input name="courseids" type="checkbox" value="'+courseId+'"/>'+ courseNames[i]+'&nbsp;&nbsp;&nbsp;&nbsp;';
-                            });
+                            if(item.courseIds != ''){
+                                var courseIds = item.courseIds.split(",");
+                                var courseNames = item.custerNames.split(",");
+                                //遍历课程列表
+                                $.each(courseIds,function(i,courseId){
+                                    html = html + '<input name="courseids" type="checkbox" value="'+courseId+'"/>'+ courseNames[i]+'&nbsp;&nbsp;&nbsp;&nbsp;';
+                                });
+                            }
 
                         }else{
                             html = html + item.projectName+'</label>';
@@ -279,7 +254,7 @@ $(function(){
 
     $("#refundSubmitBtn").bind("click",function(){
         if($("#details").find("input[type='checkbox']:checked").length == 0){
-            alert("请选择要退款的项目");
+            alert("请选择项目");
             return;
         }
         var order = {};
@@ -332,6 +307,36 @@ $(function(){
     })
 
 
+    //已经取消的订单进行删除
+    $("#deleteBtn").bind("click",function(){
+        var id = $("#grid-table").jqGrid('getGridParam', 'selrow');
+        if(id == null){
+            alert("请选择记录!");
+            return;
+        }
+        bootbox.confirm({
+            message: "确定要删除该条记录?",
+            callback: function(result) {
+                if(result){
+
+                    $.ajax({
+                        url: '/order/delete.json?id='+id,
+                        type: 'get',
+                        dataType:'json',
+                        success: function (json, statusText, xhr, $form) {
+                            if (json.success) {
+                                alert("删除完成!");
+                                $("#grid-table").trigger('reloadGrid');
+                            } else {
+                                alert( json.message);
+                            }
+                        }
+                    });
+                }
+            },
+            className: "bootbox-sm"
+        });
+    })
 
 })
 

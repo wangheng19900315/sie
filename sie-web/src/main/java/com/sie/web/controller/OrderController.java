@@ -1,23 +1,24 @@
 package com.sie.web.controller;
 
-import com.alibaba.fastjson.JSON;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.sie.framework.entity.CouponEntity;
 import com.sie.framework.entity.OrderDetailEntity;
 import com.sie.framework.entity.OrderEntity;
+import com.sie.framework.type.OrderStatus;
 import com.sie.framework.vo.OrderSearchVo;
 import com.sie.service.OrderDetailService;
 import com.sie.service.OrderService;
-import com.sie.service.bean.*;
+import com.sie.service.bean.OrderBean;
+import com.sie.service.bean.OrderDetailBean;
+import com.sie.service.bean.PageInfo;
+import com.sie.service.bean.ResultBean;
 import com.sie.util.NumberUtil;
-import net.sf.json.JSONObject;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  * Created by wangheng on 2017/8/9.
@@ -160,6 +161,30 @@ public class OrderController {
             e.printStackTrace();
         }
         return orderBean;
+    }
+
+    @RequestMapping(value = "/delete.json")
+    @ResponseBody
+    public ResultBean delete(Integer id){
+        ResultBean resultBean = new ResultBean();
+        //判断是否可以删除
+        OrderEntity orderEntity = orderService.get(id);
+        if(orderEntity != null){
+            //判断是否可以删除
+            OrderStatus status = OrderStatus.valueOf(orderEntity.getStatus());
+            if(status == OrderStatus.CANCEL){
+                try{
+                    this.orderService.delete(id);
+                    if(NumberUtil.isSignless(id)){
+                        resultBean.setMessage("删除成功");
+                        resultBean.setSuccess(true);
+                    }
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+            }
+        }
+        return resultBean;
     }
 
 
