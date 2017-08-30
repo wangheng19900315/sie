@@ -74,7 +74,7 @@ $(function(){
                 count++;
             }
         })
-        if(courseCount > count){
+        if(courseCount < count){
             alert("课程选择的数目不对，请重新选择");
             return;
         }
