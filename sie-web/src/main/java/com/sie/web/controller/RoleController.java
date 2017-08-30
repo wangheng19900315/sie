@@ -89,11 +89,11 @@ public class RoleController {
 
     @RequestMapping(value = "/addOrupdate.json")
     @ResponseBody
-    public ResultBean addOrupdate(@ModelAttribute RoleEntity userEntity){
+    public ResultBean addOrupdate(@ModelAttribute RoleEntity roleEntity){
         ResultBean resultBean = new ResultBean();
 
         try{
-            Integer id = this.roleService.saveOrUpdate(userEntity);
+            Integer id = this.roleService.saveOrUpdate(roleEntity);
             if(NumberUtil.isSignless(id)){
                 resultBean.setMessage("保存成功");
                 resultBean.setSuccess(true);

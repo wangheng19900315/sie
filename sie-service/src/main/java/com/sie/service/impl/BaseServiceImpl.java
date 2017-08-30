@@ -2,6 +2,7 @@ package com.sie.service.impl;
 
 import com.sie.framework.base.GenericDao;
 import com.sie.framework.base.HqlOperateVo;
+import com.sie.framework.entity.CouponEntity;
 import com.sie.service.bean.PageInfo;
 import com.sie.framework.entity.BaseEntity;
 import com.sie.service.BaseService;
@@ -33,7 +34,13 @@ public class BaseServiceImpl<T extends BaseEntity, PK extends Serializable> impl
 
     @Override
     public Integer saveOrUpdate(T entity) {
-        return null;
+        if(NumberUtil.isSignless(entity.getId())){
+            this.baseDao.updateEntity(entity);
+        }else{
+            this.baseDao.createEntity(entity);
+        }
+
+        return entity.getId();
     }
 
     @Override
