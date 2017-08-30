@@ -90,18 +90,19 @@ public class CourseServiceImpl extends BaseServiceImpl<CourseEntity,Integer> imp
             return null;
         }
         if(NumberUtil.isSignless(courseEntity.getId())){
-            CourseEntity oldProjectEntity = this.courseDao.getEntity(courseBean.getId());
+            CourseEntity oldCourseEntity = this.courseDao.getEntity(courseBean.getId());
             //设置值
-            oldProjectEntity.setSystem(courseEntity.getSystem());
-            oldProjectEntity.setChineseName(courseEntity.getChineseName());
-            oldProjectEntity.setEnglishName(courseEntity.getEnglishName());
-            oldProjectEntity.setStartTime(courseEntity.getStartTime());
-            oldProjectEntity.setEndTime(courseEntity.getEndTime());
-            oldProjectEntity.setMaxStudent(courseEntity.getMaxStudent());
-            oldProjectEntity.setSieCode(courseEntity.getSieCode());
-            oldProjectEntity.setTruCode(courseEntity.getTruCode());
-            this.courseDao.updateEntity(oldProjectEntity);
-            return oldProjectEntity.getId();
+            oldCourseEntity.setSystem(courseEntity.getSystem());
+            oldCourseEntity.setProjectId(courseEntity.getProjectId());
+            oldCourseEntity.setChineseName(courseEntity.getChineseName());
+            oldCourseEntity.setEnglishName(courseEntity.getEnglishName());
+            oldCourseEntity.setStartTime(courseEntity.getStartTime());
+            oldCourseEntity.setEndTime(courseEntity.getEndTime());
+            oldCourseEntity.setMaxStudent(courseEntity.getMaxStudent());
+            oldCourseEntity.setSieCode(courseEntity.getSieCode());
+            oldCourseEntity.setTruCode(courseEntity.getTruCode());
+            this.courseDao.updateEntity(oldCourseEntity);
+            return oldCourseEntity.getId();
         }else{
 
             this.courseDao.createEntity(courseEntity);
@@ -161,28 +162,29 @@ public class CourseServiceImpl extends BaseServiceImpl<CourseEntity,Integer> imp
     }
 
     @Override
-    public Map<Integer,String> getCourses(Integer projectId, Integer systemType) {
+    public List<CourseEntity> getCourses(Integer projectId, Integer systemType) {
         Map<Integer,String> courses = new HashMap<>();
         //得到属于当前系统和同事属于两个系统的
         String hql = "from CourseEntity where (system="+systemType+" or system="+SystemType.SIEANDTRU.value()+") and projectId="+projectId;
         List<CourseEntity> courseEntities = this.courseDao.getList(hql);
-        if(courseEntities.size()  >0){
-            for(CourseEntity courseEntity:courseEntities){
-                String code = "";
-                SystemType system = SystemType.valueOf(systemType);
-                switch (system){
-                    case SIE:
-                        code = courseEntity.getSieCode();
-                        break;
-                    case TRU:
-                        code = courseEntity.getTruCode();
-                        break;
-                }
-                  courses.put(courseEntity.getId(),code + "(" + courseEntity.getChineseName() + "," +courseEntity.getEnglishName()+ ")");
-//                sb.append("<lable><input type='checkbox' name='courseIds' value='"+courseEntity.getId()+"'> "+courseEntity.getEnglishName() + "</lable>");
-            }
-        }
-        return courses;
+//        if(courseEntities.size()  >0){
+//            for(CourseEntity courseEntity:courseEntities){
+//                String code = "";
+//                SystemType system = SystemType.valueOf(systemType);
+//                switch (system){
+//                    case SIE:
+//                        code = courseEntity.getSieCode();
+//                        break;
+//                    case TRU:
+//                        code = courseEntity.getTruCode();
+//                        break;
+//                }
+//                  courses.put(courseEntity.getId(),code + "(" + courseEntity.getChineseName() + "," +courseEntity.getEnglishName()+ ")");
+////                sb.append("<lable><input type='checkbox' name='courseIds' value='"+courseEntity.getId()+"'> "+courseEntity.getEnglishName() + "</lable>");
+//            }
+//        }
+//        return courses;
+        return courseEntities;
     }
 
     @Override

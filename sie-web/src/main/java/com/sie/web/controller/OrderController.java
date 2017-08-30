@@ -1,23 +1,23 @@
 package com.sie.web.controller;
 
 import com.alibaba.fastjson.JSON;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sie.framework.entity.CouponEntity;
 import com.sie.framework.entity.OrderDetailEntity;
 import com.sie.framework.entity.OrderEntity;
 import com.sie.framework.vo.OrderSearchVo;
 import com.sie.service.OrderDetailService;
 import com.sie.service.OrderService;
-import com.sie.service.bean.OrderBean;
-import com.sie.service.bean.OrderDetailBean;
-import com.sie.service.bean.PageInfo;
-import com.sie.service.bean.ResultBean;
+import com.sie.service.bean.*;
 import com.sie.util.NumberUtil;
+import net.sf.json.JSONObject;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * Created by wangheng on 2017/8/9.
@@ -83,12 +83,14 @@ public class OrderController {
     }
 
 
-    @RequestMapping("/add.json")
+    @RequestMapping(value = "/add.json",method = RequestMethod.POST)
     @ResponseBody
-    public ResultBean add(OrderBean orderBean){
-
+    public ResultBean add(String order){
+        ObjectMapper mapper = new ObjectMapper();
         ResultBean resultBean = new ResultBean();
+
         try{
+            OrderBean orderBean = mapper.readValue(order,OrderBean.class);
             resultBean = this.orderService.addOrder(orderBean);
         }catch (Exception e){
             e.printStackTrace();
@@ -147,6 +149,18 @@ public class OrderController {
     }
 
 
+    @RequestMapping("/addCoursesAndDorm.json")
+    @ResponseBody
+    public OrderBean updateOrderInfo(Integer orderId){
+        //获取订单下边可以加个的课程和住宿
+        OrderBean orderBean = null;
+        try{
+            orderBean  = this.orderService.getDetail(orderId);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return orderBean;
+    }
 
 
 }

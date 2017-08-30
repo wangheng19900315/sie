@@ -14,10 +14,18 @@ function selectRow() {
         $('#editBtn').removeClass('disabled');
         $('#deleteBtn').removeClass('disabled');
         $('#infoBtn').removeClass('disabled');
+        var status = $("#grid-table").jqGrid('getRowData', ids[0]).status;
+        //Fixme 已经完成的订单才可以进行退款和加课
+        if(status == '2'){
+            $('#refundBtn').removeClass('disabled');
+            $('#addOrderBtn').removeClass('disabled');
+        }
     } else {
         $('#editBtn').addClass('disabled');
         $('#deleteBtn').addClass('disabled');
         $('#infoBtn').addClass('disabled');
+        $('#refundBtn').addClass('disabled');
+        $('#addOrderBtn').addClass('disabled');
     }
 };
 $(function(){
@@ -32,7 +40,7 @@ $(function(){
         mtype: 'post',
         postData: {},
 
-        colNames: ['ID', '订单号','创建时间','提交系统','学生姓名','支付金额','订单状态','支付时间','项目名称','课程数' ],
+        colNames: ['ID', '订单号','创建时间','提交系统','学生姓名','支付金额','订单状态','订单状态','支付时间','项目名称','课程数' ],
         colModel: [
             {name: 'id', index: 'id', width: 20, hidden: true, sorttype: "int", sortable: false},
 
@@ -50,6 +58,7 @@ $(function(){
             //{name: 'crDiscount', index: 'crDiscount', width: 120, sortable: false},
             {name: 'payMoney', index: 'payMoney', width: 120, sortable: false},
             {name: 'statusName', index: 'statusName', width: 120, sortable: false},
+            {name: 'status', index: 'status', width: 120,hidden: true,  sortable: false},
             {name: 'payTime', index: 'payTime', width: 160 , sortable: false, formatter:function(cellvalue, options, rowObject){
                 var time1 = new Date(cellvalue).Format("yyyy-MM-dd hh:mm:ss");
                 return time1;
@@ -140,8 +149,191 @@ $(function(){
         var id = $("#grid-table").jqGrid('getGridParam', 'selrow');
         window.location.href="/order/detail.html?id="+id;
     })
-})
 
+    //退课获取课程信息
+    $("#refundBtn").bind("click",function(){
+        $("#myModalLabel").html("退款");
+        var id = $("#grid-table").jqGrid('getGridParam', 'selrow');
+        $.ajax({
+            url: '/order/detail.json?orderId='+id,
+            type: 'get',
+            dataType:'json',
+            async:false,
+            success: function (json, statusText, xhr, $form) {
+                if(json != null){
+                    var detail = json.orderDetailBean;
+                    $("#studentId").val(json.studentId);
+                    $("#status").val(4);//申请退款
+                    var html;
+                    $("#details").empty();
+                    $.each(detail,function(i,item){
+                        html = '<div class="form-group">' +
+                            '<label  class="col-sm-2 control-label">';
+                        if($.trim(item.dormitoryId)==''){
+                            //课程明细需要提起课程列表
+                            html = html + item.projectName+'</label>';
+                            html = html + '<div class="col-sm-10 courses">';
+                            html = html + '<input type="hidden" name="projectId" value="'+item.projectId+'">';
+                            var courseIds = item.courseIds.split(",");
+                            var courseNames = item.custerNames.split(",");
+                            //遍历课程列表
+                            $.each(courseIds,function(i,courseId){
+                                html = html + '<input name="courseids" type="checkbox" value="'+courseId+'"/>'+ courseNames[i]+'&nbsp;&nbsp;&nbsp;&nbsp;';
+                            });
+
+                        }else{
+                            html = html + item.projectName+'</label>';
+                            html = html + '<div class="col-sm-10 dormitory">';
+                            html = html + '<input type="hidden" name="projectId" value="'+item.projectId+'">';
+                            html = html + '<input name="dormitoryid" type="checkbox" value="'+item.dormitoryId+'"/>' + item.dormitoryName;
+                        }
+                        html = html + '</div></div>';
+
+                        $("#details").append(html);
+                    });
+                }
+            }
+        });
+    });
+
+
+    //加课获取可以添加课程的列表
+    $("#addOrderBtn").bind("click",function(){
+        $("#myModalLabel").html("加课");
+        var id = $("#grid-table").jqGrid('getGridParam', 'selrow');
+        $.ajax({
+            url: '/order/detail.json?orderId='+id,
+            type: 'get',
+            dataType:'json',
+            async:false,
+            success: function (json, statusText, xhr, $form) {
+                if(json != null){
+                    var detail = json.orderDetailBean;
+                    $("#studentId").val(json.studentId);
+                    $("#status").val(1);//提交订单
+                    var html;
+                    $("#details").empty();
+                    $.each(detail,function(i,item){
+                        //html = '<div class="form-group">' +
+                        //    '<label  class="col-sm-2 control-label">';
+                        if($.trim(item.dormitoryId)==''){
+                            //订单明细为课程
+                            var courseIds = item.courseIds.split(",");
+                            //去后台请求project下所有的课程列表
+                            $.ajax({
+                                url: '/course/getCourses.json?projectId='+item.projectId+"&systemType=" +json.systemType,
+                                type: 'get',
+                                dataType:'json',
+                                success: function (data, statusText, xhr, $form) {
+                                    //console.log(data);
+                                    if(data != null){
+                                        if(data.length != courseIds.length){
+                                            //项目中可以进行加课
+                                            html = '<div class="form-group">' +
+                                                '<label  class="col-sm-2 control-label">';
+                                            html = html + item.projectName+'</label>';
+                                            html = html + '<div class="col-sm-10 courses">';
+                                            html = html + '<input type="hidden" name="projectId" value="'+item.projectId+'">';
+                                            $.each(data,function(i,course){
+                                                if($.inArray(course.id.toString(), courseIds) == -1){
+                                                    //没有选课
+                                                    html = html + '<input name="courseids" type="checkbox"  value="'+course.id+'"/>'+ course.chineseName+'&nbsp;&nbsp;&nbsp;&nbsp;';
+                                                }
+
+                                            });
+                                            html = html + '</div></div>';
+                                            $("#details").append(html);
+                                        }
+                                    }
+                                }
+                            });
+
+                            //Fixme 以前下单的还可以再选择住宿吗  添加住宿
+                            //去后台请求project下所有的住宿信息
+                            $.ajax({
+                                url: '/dormitory/getDormitory.json?projectId='+item.projectId,
+                                type: 'get',
+                                dataType:'json',
+                                success: function (data, statusText, xhr, $form) {
+                                    if(data != null){
+                                        //添加住宿
+                                        html = '<div class="form-group">' +
+                                            '<label  class="col-sm-2 control-label">';
+                                        html = html + item.projectName+'</label>';
+                                        html = html + '<div class="col-sm-10 courses">';
+                                        html = html + '<input type="hidden" name="projectId" value="'+item.projectId+'">';
+                                        html = html + '<input name="dormitoryid" type="checkbox"value="'+data.id+'"/>'+data.name;
+                                        html = html + '</div></div>';
+                                        $("#details").append(html);
+                                    }
+                                }
+                            });
+                        }
+
+                    });
+                }
+            }
+        });
+    });
+
+
+    $("#refundSubmitBtn").bind("click",function(){
+        if($("#details").find("input[type='checkbox']:checked").length == 0){
+            alert("请选择要退款的项目");
+            return;
+        }
+        var order = {};
+        order["studentId"] = $("#studentId").val();
+        order["money"] = $("#money").val();
+        order["status"] = $("#status").val();
+
+        var orderDetailBean = [];
+        $("#details").find(".courses").each(function(){
+            var coursesObj = $(this).find("input[type='checkbox']:checked");
+            if(coursesObj.length != 0){
+                var detail = {};
+                console.log($(this).find("input[name=projectId]").val());
+                detail["projectId"] = $(this).find("input[name=projectId]").val();
+
+                //遍历所有的课程
+                var courseIds = "";
+                coursesObj.each(function(){
+                    courseIds += $(this).val()+",";
+                });
+                courseIds = courseIds.substring(0,courseIds.length-1);
+                detail["courseIds"] = courseIds;
+                orderDetailBean.push(detail);
+            }
+        });
+        order["orderDetailBean"] =  orderDetailBean;
+
+        console.log(order);
+
+        $.ajax({
+            url: '/order/add.json',
+            type: 'post',
+            async:false,
+            dataType:'json',
+            data: {"order":JSON.stringify(order)},
+            tranditional:true,
+            success: function (data) {
+                if (data.success) {
+                    alert("保存成功！");
+                    $("#detailCanclBtn").click();
+                    window.location.reload();
+                } else {
+                    alert("保存数据出现错误，请稍候重试！");
+                }
+            },
+            error: function () {
+                alert("提交保存信息出现错误！");
+            }
+        });
+    })
+
+
+
+})
 
 /**
  * 查询

@@ -207,7 +207,7 @@ $(function(){
 
                 for(var j=0; j<jsons.length; j++){
                     var child =jsons[j];
-                    console.info(child.name)
+                    //console.info(child.name)
                     if(child.parentId && child.parentId==menu.id){
                         html += ' <li> <a tabindex="-1" href="'+child.action+'"><span class="mm-text">'+child.name+'</span></a></li>' ;
                     }

@@ -16,6 +16,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -110,6 +111,13 @@ public class DormitoryController {
         }
 
         return resultBean;
+    }
+
+    //获取项目下的住宿
+    @RequestMapping("/getDormitory.json")
+    @ResponseBody
+    public DormitoryBean getDormitory(Integer projectId){
+        return this.dormitoryService.getDormitoryByProjectId(projectId);
     }
 
 

@@ -20,6 +20,15 @@
                                 </div>
                             </div>
                         </div><!-- col-sm-6 -->
+
+                        <div class="col-sm-6">
+                            <div class="form-group ">
+                                <label for="projectId" class="col-sm-2 control-label">价格</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="price" name="price" placeholder="price" required data-msg-required="请输入价格" data-rule-number="true" data-msg-number="请输入正确的数字" >
+                                </div>
+                            </div>
+                        </div><!-- col-sm-6 -->
                     </div><!-- row -->
                     <div class="row">
                         <div class="col-sm-6">

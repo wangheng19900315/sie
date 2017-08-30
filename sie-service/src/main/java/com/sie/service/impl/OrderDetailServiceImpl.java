@@ -81,7 +81,7 @@ public class OrderDetailServiceImpl extends BaseServiceImpl<OrderDetailEntity,In
             BeanUtils.copyProperties(detailBean, detailEntity);
             if(detailEntity.getDormitoryEntity() != null){
                 detailBean.setDormitoryId(detailEntity.getDormitoryEntity().getId());
-                detailBean.setDormitoryName(detailEntity.getDormitoryEntity().getAddress());
+                detailBean.setDormitoryName(detailEntity.getDormitoryEntity().getCode());
             }
             if(detailEntity.getProjectEntity() != null){
                 detailBean.setProjectId(detailEntity.getProjectEntity().getId());

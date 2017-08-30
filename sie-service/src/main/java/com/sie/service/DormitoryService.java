@@ -14,4 +14,6 @@ import java.util.Map;
 public interface DormitoryService extends BaseService<DormitoryEntity, Integer> {
 
     PageInfo<DormitoryBean> getDormitoryList(Integer page, Integer rows,  List<HqlOperateVo> hqlOperateVos);
+
+    DormitoryBean getDormitoryByProjectId(Integer projectId);
 }

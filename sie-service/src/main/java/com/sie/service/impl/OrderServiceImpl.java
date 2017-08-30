@@ -104,15 +104,22 @@ public class OrderServiceImpl extends BaseServiceImpl<OrderEntity,Integer> imple
             this.setBeanValues(orderEntity, orderBean);
 
             if(orderEntity.getOrderDetailEntityList().size() > 0){
+                List<OrderDetailBean> detailList = new ArrayList<>();
                 for(OrderDetailEntity detailEntity:orderEntity.getOrderDetailEntityList()){
                     OrderDetailBean detailBean = new OrderDetailBean();
                     orderDetailService.setDetailBeanValues(detailEntity, detailBean);
-                    orderBean.getOrderDetailBeen().add(detailBean);
+                    detailList.add(detailBean);
                 }
+                orderBean.setOrderDetailBean(detailList);
             }
         }
 
         return orderBean;
+    }
+
+    @Override
+    public OrderBean getAddDetail(Integer id) {
+        return null;
     }
 
     private void setBeanValues(OrderEntity orderEntity, OrderBean bean){
@@ -169,10 +176,8 @@ public class OrderServiceImpl extends BaseServiceImpl<OrderEntity,Integer> imple
             int courseNumber = 0;
             for(OrderDetailEntity detailEntity:orderEntity.getOrderDetailEntityList()){
 
-                if(detailEntity.getDormitoryEntity()!= null){
+                if(detailEntity.getDormitoryEntity()== null){
                     //明细为住宿
-                    projectNameList.add(detailEntity.getDormitoryEntity().getCode());
-                }else{
                     projectNameList.add(detailEntity.getProjectEntity().getCode());
                     //课程数进行累加
                     courseNumber = courseNumber + detailEntity.getCourseCount().intValue();
@@ -215,7 +220,7 @@ public class OrderServiceImpl extends BaseServiceImpl<OrderEntity,Integer> imple
         orderEntity.setPayType(PayStatus.SUBMIT.value());
         orderEntity.setMoney(orderBean.getMoney());
 
-        if(orderBean.getOrderDetailBeen() != null || orderBean.getOrderDetailBeen().size() == 0){
+        if(orderBean.getOrderDetailBean() == null || orderBean.getOrderDetailBean().size() == 0){
             resultBean.setMessage("订单明细为空，请确认提交信息");
             return resultBean;
         }
@@ -231,6 +236,7 @@ public class OrderServiceImpl extends BaseServiceImpl<OrderEntity,Integer> imple
             resultBean.setMessage("查找不到学生信息，请确认提交信息");
             return resultBean;
         }
+        orderEntity.setStudentEntity(studentEntity);
 
         if(NumberUtil.isSignless(orderBean.getCouponId())){
             CouponEntity couponEntity = this.couponDao.getEntity(orderBean.getCouponId());
@@ -241,12 +247,31 @@ public class OrderServiceImpl extends BaseServiceImpl<OrderEntity,Integer> imple
 
             orderEntity.setCouponEntity(couponEntity);
             orderEntity.setCouponDiscount(couponEntity.getRmbDiscount());
+        }else{
+            orderEntity.setCouponEntity(null);
+            orderEntity.setCouponDiscount(0.0);
+        }
+
+        //Fixme 是否需要增加cr优惠
+        if(NumberUtil.isSignless(orderBean.getCrId())){
+            CrEntity crEntity = this.crDao.getEntity(orderBean.getCrId());
+            if(crEntity == null){
+                resultBean.setMessage("查找不到优惠卷信息，请确认提交信息");
+                return resultBean;
+            }
+
+            orderEntity.setCrEntity(crEntity);
+            orderEntity.setCrDiscount(crEntity.getRmbPrice());
+        }else{
+            orderEntity.setCrEntity(null);
+            orderEntity.setCrDiscount(0.0);
         }
 
         orderEntity.setCrDiscount(0.0);
         orderEntity.setCrEntity(null);
         orderEntity.setRemark(orderBean.getRemark());
-        Double payMoney = NumberUtil.getDoubleScale(orderEntity.getMoney()-orderEntity.getCouponDiscount()-orderEntity.getDiscount(),0);
+        //Fixme 实际支付金额=总金额-cr优惠金额-优惠活动金额
+        Double payMoney = NumberUtil.getDoubleScale(orderEntity.getMoney()-orderEntity.getCouponDiscount()-orderEntity.getCrDiscount(),0);
         orderEntity.setPayMoney(payMoney);
 
         this.orderDao.createEntity(orderEntity);
@@ -260,7 +285,7 @@ public class OrderServiceImpl extends BaseServiceImpl<OrderEntity,Integer> imple
         this.orderPayDao.createEntity(orderPayEntity);
 
         //创建订单明细
-        for(OrderDetailBean orderDetailBean:orderBean.getOrderDetailBeen()){
+        for(OrderDetailBean orderDetailBean:orderBean.getOrderDetailBean()){
             OrderDetailEntity orderDetailEntity = new OrderDetailEntity();
             orderDetailEntity.setOrderEntity(orderEntity);
 

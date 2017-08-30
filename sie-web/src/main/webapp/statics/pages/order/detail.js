@@ -29,7 +29,7 @@ $(function(){
                 json.payTime = new Date(json.payTime).Format("yyyy-MM-dd hh:mm:ss");
                 $("#data-form").loadJson(json);
                 $("#userInfo").loadJson(json);
-                jsonData = json.orderDetailBeen;
+                jsonData = json.orderDetailBean;
             }
         }
     });

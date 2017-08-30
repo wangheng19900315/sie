@@ -44,7 +44,7 @@ public class OrderBean  extends BaseBean{
 
     private String projectNames;
     private Integer courseNumber;
-    private List<OrderDetailBean> orderDetailBeen = new ArrayList<>();
+    private List<OrderDetailBean> orderDetailBean;
 
 
     public String getCode() {
@@ -127,12 +127,12 @@ public class OrderBean  extends BaseBean{
         this.couponName = couponName;
     }
 
-    public List<OrderDetailBean> getOrderDetailBeen() {
-        return orderDetailBeen;
+    public List<OrderDetailBean> getOrderDetailBean() {
+        return orderDetailBean;
     }
 
-    public void setOrderDetailBeen(List<OrderDetailBean> orderDetailBeen) {
-        this.orderDetailBeen = orderDetailBeen;
+    public void setOrderDetailBean(List<OrderDetailBean> orderDetailBean) {
+        this.orderDetailBean = orderDetailBean;
     }
 
     public String getCrnName() {

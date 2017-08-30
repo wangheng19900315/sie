@@ -17,6 +17,13 @@ public interface OrderService extends BaseService<OrderEntity, Integer> {
 
     public OrderBean getDetail(Integer id);
 
+    /**
+     * 获取可以进行加课的订单明细
+     * @param id
+     * @return
+     */
+    public OrderBean getAddDetail(Integer id);
+
     void updateOrderInfo(OrderEntity orderEntity);
 
     /**
