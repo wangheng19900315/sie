@@ -126,7 +126,6 @@ public class GenericDaoImpl<T extends BaseEntity, PK extends Serializable> imple
 
 	@Override
 	public Integer updateByHql(String hql) {
-
 		Query queryupdate=this.getSessionFactory().getCurrentSession().createQuery(hql);
 		int ret=queryupdate.executeUpdate();
 		this.sessionFactory.getCurrentSession().flush();

@@ -8,6 +8,7 @@ import com.sie.framework.type.OrderType;
 import com.sie.framework.type.PayStatus;
 import com.sie.framework.type.SystemType;
 import com.sie.framework.vo.OrderSearchVo;
+import com.sie.service.GradeService;
 import com.sie.service.OrderDetailService;
 import com.sie.service.OrderService;
 import com.sie.service.bean.*;
@@ -60,6 +61,9 @@ public class OrderServiceImpl extends BaseServiceImpl<OrderEntity,Integer> imple
 
     @Autowired
     private DormitoryDao dormitoryDao;
+
+    @Autowired
+    private GradeService gradeService;
 
 
 
@@ -202,6 +206,8 @@ public class OrderServiceImpl extends BaseServiceImpl<OrderEntity,Integer> imple
             oldEntity.setPayMoney(orderEntity.getPayMoney());
             oldEntity.setStatus(orderEntity.getStatus());
             this.orderDao.updateEntity(oldEntity);
+
+            gradeService.updateStudentGradeList(oldEntity.getStudentEntity().getId());
         }
     }
 
