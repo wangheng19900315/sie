@@ -44,7 +44,7 @@ public class OrderBean  extends BaseBean{
 
     private String projectNames;
     private Integer courseNumber;
-    private List<OrderDetailBean> orderDetailBean;
+    private List<OrderDetailBean> orderDetailBean = new ArrayList<>();
 
 
     public String getCode() {
