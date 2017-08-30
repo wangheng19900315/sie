@@ -19,7 +19,7 @@
     <script>
         var accessToken = "un23n4no2bu4bs34";
     </script>
-    <title>商品接口</title>
+    <title>网站接口</title>
 </head>
 <body>
 <ul class="list-group fixed opacity-50 col-xs-1 col-lg-1 col-md-1 col-sm-1">
@@ -47,8 +47,12 @@
                 <form id="test_register_form" class="form-inline" onsubmit="return false"
                       url="/api/register.json">
                     <div class="form-group">
-                        <label>userName</label>
-                        <input type="text" class="form-control" name="userName" placeholder="userName" required>
+                        <label>email</label>
+                        <input type="text" class="form-control" name="email" placeholder="email"  >
+                    </div>
+                    <div class="form-group">
+                        <label>weixin</label>
+                        <input type="text" class="form-control" name="weixin" placeholder="weixin"  >
                     </div>
                     <div class="form-group">
                         <label>password</label>
@@ -62,6 +66,31 @@
                 </form>
                 <h5>输出结果</h5>
                 <pre id="register_result"></pre>
+            </div>
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-heading">2.登录(/api/login.json)</div>
+            <div class="panel-body">
+                <form id="test_login_form" class="form-inline" onsubmit="return false"
+                      url="/api/login.json">
+                    <div class="form-group">
+                        <label>userName</label>
+                        <input type="text" class="form-control" name="userName" placeholder="userName"  required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>password</label>
+                        <input type="text" class="form-control" name="password" placeholder="password" required>
+                    </div>
+
+                    <button class="btn btn-default"
+                            onclick="dhcc.Unit.submit('#test_login_form', '#login_result',  accessToken)">
+                        提交
+                    </button>
+                </form>
+                <h5>输出结果</h5>
+                <pre id="login_result"></pre>
             </div>
         </div>
 

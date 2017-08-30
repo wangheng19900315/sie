@@ -1,6 +1,7 @@
 package com.sie.service;
 
 import com.sie.framework.entity.StudentEntity;
+import com.sie.service.bean.ResultBean;
 
 import java.util.Map;
 
@@ -10,4 +11,10 @@ import java.util.Map;
  */
 public interface StudentService extends BaseService<StudentEntity, Integer> {
     Map<Integer,String> getAllStudent();
+
+    ResultBean register(String email, String weiXin, String password);
+
+    StudentEntity login(String userName, String password);
+
+    ResultBean updateEntity(StudentEntity studentEntity);
 }

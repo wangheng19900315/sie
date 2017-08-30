@@ -1,17 +1,20 @@
 package com.sie.service.impl;
 
+import com.sie.framework.base.HqlOperateVo;
 import com.sie.framework.dao.StudentDao;
 import com.sie.framework.entity.StudentEntity;
+import com.sie.framework.help.ApplicationHelp;
 import com.sie.service.StudentService;
+import com.sie.service.bean.ResultBean;
+import com.sie.util.DateUtil;
+import com.sie.util.Md5Util;
 import com.sie.util.NumberUtil;
 import com.sie.util.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by wangheng on 2017/8/9.
@@ -70,5 +73,66 @@ public class StudentServiceImpl extends BaseServiceImpl<StudentEntity,Integer> i
             students.put(entity.getId(),entity.getChineseName());
         }
         return students;
+    }
+
+    @Override
+    public ResultBean register(String email, String weiXin, String password) {
+        ResultBean resultBean = new ResultBean();
+
+        String userName = null;
+        if(StringUtil.isNotBlank(email)){
+            userName = email;
+        }else{
+            userName = weiXin;
+        }
+
+        List<HqlOperateVo> hqlOperateVos = new ArrayList<>();
+        hqlOperateVos.add(new HqlOperateVo("userName", "=", userName));
+        List<StudentEntity> studentEntityList = studentDao.getList(hqlOperateVos);
+        if(studentEntityList != null && studentEntityList.size() > 0){
+            resultBean.setMessage("该用户名已经注册");
+            return resultBean;
+        }
+        StudentEntity studentEntity = new StudentEntity();
+        studentEntity.setUserID(DateUtil.format(new Date(), "yyyyMMddHHmmss")+ NumberUtil.randomInt(1000, 9999));
+        studentEntity.setEmail(email);
+        studentEntity.setUserName(userName);
+        studentEntity.setWeiXin(weiXin);
+        studentEntity.setPassword(Md5Util.getMD5(password, ApplicationHelp.MD5_SHA1));
+        this.studentDao.createEntity(studentEntity);
+        resultBean.setMessage("注册成功");
+        resultBean.setSuccess(true);
+        return resultBean;
+    }
+
+
+    @Override
+    public StudentEntity login(String userName, String password) {
+
+        List<HqlOperateVo> hqlOperateVos = new ArrayList<>();
+        hqlOperateVos.add(new HqlOperateVo("userName", "=", userName));
+        hqlOperateVos.add(new HqlOperateVo("password", "=", Md5Util.getMD5(password, ApplicationHelp.MD5_SHA1)));
+
+        List<StudentEntity> studentEntityList = studentDao.getList(hqlOperateVos);
+        if(studentEntityList != null && studentEntityList.size() > 0){
+             return studentEntityList.get(0);
+        }
+
+        return null;
+    }
+
+    @Override
+    public ResultBean updateEntity(StudentEntity studentEntity) {
+        ResultBean resultBean = new ResultBean();
+        StudentEntity oldEntity = this.studentDao.getEntity(studentEntity.getId());
+        if(oldEntity == null){
+            resultBean.setMessage("查找不到学生信息，请检查参数");
+            return resultBean;
+        }
+
+        this.saveOrUpdate(studentEntity);
+        resultBean.setMessage("修改成功");
+        resultBean.setSuccess(true);
+        return resultBean;
     }
 }

@@ -43,6 +43,8 @@ public class StudentEntity extends BaseEntity{
     private String sendPerson;
     private String sendTel;
 
+    private String password;
+
 
 
     @Basic
@@ -359,5 +361,14 @@ public class StudentEntity extends BaseEntity{
 
     public void setSendTel(String sendTel) {
         this.sendTel = sendTel;
+    }
+
+    @Column(name = "password")
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

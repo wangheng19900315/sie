@@ -5,7 +5,7 @@ import java.io.Serializable;
 /**
  * Created by wangheng on 2017/8/12.
  */
-public class ResultBean implements Serializable{
+public class ResultBean<T> implements Serializable{
 
     private boolean success;
 
@@ -13,9 +13,21 @@ public class ResultBean implements Serializable{
 
     private Integer id;
 
+    private T data;
+
+
+
     public ResultBean(){
         this.success = false;
         this.message = "操作失败，请联系管理员";
+    }
+
+    public T getData() {
+        return data;
+    }
+
+    public void setData(T data) {
+        this.data = data;
     }
 
     public boolean isSuccess() {
@@ -41,4 +53,6 @@ public class ResultBean implements Serializable{
     public void setId(Integer id) {
         this.id = id;
     }
+
+
 }
