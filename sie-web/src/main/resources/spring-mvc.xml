@@ -51,6 +51,7 @@
         <mvc:exclude-mapping path="/**/*404*"/>
         <mvc:exclude-mapping path="/**/*500*"/>
         <mvc:exclude-mapping path="/statics/**"/>
+        <mvc:exclude-mapping path="/api/**"/>
         <!-- 单点登录springmvc 拦截器bean -->
         <bean id="longinInterceptor"
               class="com.sie.web.interceptor.UserLoginInterceptor">

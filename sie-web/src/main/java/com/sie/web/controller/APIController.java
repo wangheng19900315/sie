@@ -1,8 +1,10 @@
 package com.sie.web.controller;
 
 import com.sie.framework.entity.StudentEntity;
+import com.sie.service.bean.ResultBean;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  * Created by wangheng on 2017/8/20.
@@ -11,13 +13,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/api")
 public class APIController {
 
+
+    @RequestMapping("/index.html")
+    public String index(){
+        return "api";
+    }
     /**
      * 学生注册
      * @return
      */
-    public String register(StudentEntity studentEntity){
+    @RequestMapping("/register.json")
+    @ResponseBody
+    public ResultBean register(StudentEntity studentEntity){
 
-        return null;
+        return new ResultBean();
     }
 
     /**
