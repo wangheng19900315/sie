@@ -47,15 +47,18 @@ $(function(){
         }
     });
 
+
     //加载学生信息
     if(entity.length > 0){
+        console.log(entity);
         var json = eval("("+entity+")");
 
         var birthDay =    new Date(json.birthday).Format("yyyy-MM-dd");
         json.birthday=birthDay;
         $("#data-form").loadJson(json);
+        //加载照片
+        $('#ImgPr').attr('src','/student/loadImage?image='+json.image);
     }
-
 
 })
 

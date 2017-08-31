@@ -9,6 +9,7 @@ import java.io.*;
 import java.net.URLEncoder;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.UUID;
 import java.util.zip.ZipEntry;
@@ -329,12 +330,13 @@ public class FileUtil {
 			// 文件扩展名
 			// String expand =
 			// getExpandFileName(multipartFile.getOriginalFilename());
-			String tempFolderPath = saveRootPath + File.separator + UUID.randomUUID().toString();
+			String tempFolderPath = Paths.get(saveRootPath,UUID.randomUUID().toString()).toString();
 			File tempFolder = new File(tempFolderPath);
 			tempFolder.mkdirs();
 			// 临时文件路径
-			String tempFilePath = tempFolderPath + File.separator + multipartFile.getOriginalFilename();
-			fileInfo = tempFilePath;
+			String tempFilePath = Paths.get(tempFolderPath,multipartFile.getOriginalFilename()).toString();
+			//转化后的path为\ 用正则表达式转化为/
+			fileInfo = tempFilePath.replaceAll("\\\\", "/");
 
 			bos = new BufferedOutputStream(new FileOutputStream(tempFilePath));
 			bis = new BufferedInputStream(multipartFile.getInputStream());

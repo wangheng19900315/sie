@@ -12,42 +12,34 @@
                 </div>
                 <div class="panel-body">
                     <div class="row">
+                        <%--<div class="col-sm-6">--%>
+                            <%--<div class="form-group ">--%>
+                                <%--<label for="userName" class="col-sm-2 control-label">用户名</label>--%>
+                                <%--<div class="col-sm-9">--%>
+                                    <%--<input type="text" class="form-control" id="userName" name="userName" placeholder="code" required data-msg-required="请输入用户名" readonly>--%>
+                                <%--</div>--%>
+                            <%--</div>--%>
+                        <%--</div><!-- col-sm-6 -->--%>
                         <div class="col-sm-6">
                             <div class="form-group ">
-                                <label for="userName" class="col-sm-2 control-label">用户名</label>
+                                <label for="chineseName" class="col-sm-2 control-label">中文名称</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="userName" name="userName" placeholder="code" required data-msg-required="请输入用户名">
-                                </div>
-                            </div>
-
-                        </div><!-- col-sm-6 -->
-                        <div class="col-sm-6">
-
-                            <label for="headImage" class="col-sm-2 control-label">头像</label>
-                            <div class="col-sm-9">
-                                <input type="file" class="form-control" id="headImage" accept="image/png,image/jpg" name="headImage" >
-                            </div>
-
-                        </div>
-                    </div><!-- row -->
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <div class="form-group ">
-                                <label for="email" class="col-sm-2 control-label">Email</label>
-                                <div class="col-sm-9">
-                                    <input type="email" class="form-control" id="email" name="email" placeholder="email" required data-msg-required="请输入邮箱" >
+                                    <input type="text" class="form-control" id="chineseName" name="chineseName" placeholder="chineseName" required data-msg-required="请输入姓名" >
                                 </div>
                             </div>
                         </div><!-- col-sm-6 -->
-                        <div class="col-sm-6">
-                            <div class="form-group ">
-                                <label for="weiXin" class="col-sm-2 control-label">微信号</label>
-                                <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="weiXin" name="weiXin" placeholder="weiXin" required data-msg-required="请输入微信号" >
-                                </div>
-                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group ">
+                                    <label class="col-sm-2 control-label">出生日期</label>
+                                    <div class="col-sm-9">
+                                        <div class="input-group date form_date"   data-date-format="dd-mm-yyyy" data-link-field="birthday" data-link-format="yyyy-mm-dd">
+                                            <input class="form-control" size="16" type="text"  id="birthday" name="birthday"  value=""  required data-msg-required="请输入出生日期" >
+                                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                        </div>
 
-                        </div><!-- col-sm-6 -->
+                                    </div>
+                                </div>
+                            </div><!-- col-sm-6 -->
                     </div><!-- row -->
                     <div class="row">
                         <div class="col-sm-6">
@@ -70,50 +62,30 @@
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="form-group ">
-                                <label for="chineseName" class="col-sm-2 control-label">中文名称</label>
+                                <label for="email" class="col-sm-2 control-label">Email</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="chineseName" name="chineseName" placeholder="chineseName" required data-msg-required="请输入姓名" >
+                                    <input type="email" class="form-control" id="email" name="email" placeholder="email" required data-msg-required="请输入邮箱" >
                                 </div>
                             </div>
                         </div><!-- col-sm-6 -->
                         <div class="col-sm-6">
                             <div class="form-group ">
-                                <label class="col-sm-2 control-label">出生日期</label>
+                                <label for="weiXin" class="col-sm-2 control-label">微信号</label>
                                 <div class="col-sm-9">
-                                    <div class="input-group date form_date"   data-date-format="dd-mm-yyyy" data-link-field="birthday" data-link-format="yyyy-mm-dd">
-                                        <input class="form-control" size="16" type="text"  id="birthday" name="birthday"  value=""   >
-                                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                                    </div>
-
+                                    <input type="text" class="form-control" id="weiXin" name="weiXin" placeholder="weiXin" required data-msg-required="请输入微信号" >
                                 </div>
                             </div>
+
                         </div><!-- col-sm-6 -->
                     </div><!-- row -->
+
                     <div class="row">
+
                         <div class="col-sm-6">
                             <div class="form-group ">
                                 <label for="nationality" class="col-sm-2 control-label">国籍</label>
                                 <div class="col-sm-9">
                                     <input type="text" class="form-control" id="nationality" name="nationality" placeholder="nationality" required data-msg-required="请输入国籍" >
-                                </div>
-                            </div>
-                        </div><!-- col-sm-6 -->
-                        <div class="col-sm-6">
-                            <div class="form-group ">
-                                <label for="idNumber" class="col-sm-2 control-label">身份证号</label>
-                                <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="idNumber" name="idNumber" placeholder="ID">
-                                </div>
-                            </div>
-                        </div><!-- col-sm-6 -->
-                    </div><!-- row -->
-
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <div class="form-group ">
-                                <label for="passportNumber" class="col-sm-2 control-label">护照号</label>
-                                <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="passportNumber" name="passportNumber" placeholder="Passport" >
                                 </div>
                             </div>
                         </div><!-- col-sm-6 -->
@@ -126,13 +98,32 @@
                             </div>
                         </div><!-- col-sm-6 -->
                     </div><!-- row -->
+                    <div class="row">
+
+                        <div class="col-sm-6">
+                            <div class="form-group ">
+                                <label for="idNumber" class="col-sm-2 control-label">身份证号</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="idNumber" name="idNumber" placeholder="ID">
+                                </div>
+                            </div>
+                        </div><!-- col-sm-6 -->
+                        <div class="col-sm-6">
+                            <div class="form-group ">
+                                <label for="passportNumber" class="col-sm-2 control-label">护照号</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="passportNumber" name="passportNumber" placeholder="Passport" >
+                                </div>
+                            </div>
+                        </div><!-- col-sm-6 -->
+                    </div><!-- row -->
 
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="form-group ">
                                 <label for="schoolName" class="col-sm-2 control-label">在读大学</label>
                                 <div class="col-sm-9">
-                                    <select class="form-control form-group-margin" id="schoolName" name="schoolName">
+                                    <select class="form-control" id="schoolName" name="schoolName">
                                         <option value="">...</option>
                                     </select>
                                     <%--<input type="text" class="form-control" id="university" name="university" placeholder="university" >--%>
@@ -216,6 +207,16 @@
 
                         </div><!-- col-sm-6 -->
                     </div><!-- row -->
+
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <label for="headImage" class="col-sm-2 control-label">头像</label>
+                            <div class="col-sm-9">
+                                <img id="ImgPr" width="90" height="120"/>
+                                <input type="file" id="headImage" name="headImage" >
+                            </div>
+                        </div>
+                    </div><!-- row -->
                 </div>
                 <div class="panel-footer text-center">
                     <button class="btn btn-primary" id="submitBtn" type="submit" >提交</button>
@@ -231,4 +232,7 @@
 <script src="/statics/pages/student/update.js"></script>
 <script type="text/javascript">
     var entity = '${entity}';
+
+    //绑定上传照片后进行展示功能
+    $("#headImage").uploadPreview({ Img: "ImgPr", Width: 90, Height: 120 });
 </script>

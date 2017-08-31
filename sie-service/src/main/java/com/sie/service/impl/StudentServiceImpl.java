@@ -38,8 +38,8 @@ public class StudentServiceImpl extends BaseServiceImpl<StudentEntity,Integer> i
             }
             oldStudentEntity.setBirthday(studentEntity.getBirthday());
             oldStudentEntity.setChineseName(studentEntity.getChineseName());
-            oldStudentEntity.setUserName(studentEntity.getUserName());
-            oldStudentEntity.setUserID(studentEntity.getUserID());
+//            oldStudentEntity.setUserName(studentEntity.getUserName());
+//            oldStudentEntity.setUserID(studentEntity.getUserID());
             oldStudentEntity.setEmail(studentEntity.getEmail());
             oldStudentEntity.setWeiXin(studentEntity.getWeiXin());
             oldStudentEntity.setLastName(studentEntity.getLastName());
