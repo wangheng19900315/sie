@@ -29,7 +29,7 @@ $(function(){
         height: '100%',
         mtype: 'post',
         postData: {},
-        colNames: ['ID','用户名','用户名ID','中文名称' ,'性别' ,'微信号' ,'出生日期','国籍','护照号' ,'身份证号'  ],
+        colNames: ['ID','用户名','用户ID','中文名称' ,'性别' ,'微信号' ,'出生日期','国籍','护照号' ,'身份证号'  ],
         colModel: [
             {name: 'id', index: 'id', width: 20, hidden: true,  sortable: false},
             {name: 'userName', index: 'userName', width: 20,   sortable: false},
@@ -89,6 +89,21 @@ $(function(){
         search();
     })
 
+    //绑定导出事件
+    $("#exportBtn").bind("click", function(){
+        var searData = $("#search-form").serializeJson();
+        bootbox.confirm({
+            message: "确认要导出excel?",
+            callback: function(result) {
+                if(result){
+                    window.location.href="/student/export.json?"+searData;
+                }
+            },
+            className: "bootbox-sm"
+        });
+    })
+
+
 
 })
 
@@ -98,17 +113,15 @@ $(function(){
  */
 function search() {
     $('#edit-btn').addClass('disabled');
-    $('#del-btn').addClass('disabled');
-    $('#view-btn').addClass('disabled');
-
+    //$('#del-btn').addClass('disabled');
+    //$('#view-btn').addClass('disabled');
+    var searData = $("#search-form").serializeJson();
     jQuery("#grid-table").jqGrid('setGridParam',{
-        url: '/coupon/list.json',
+        url: '/student/list.json',
         datatype: "json",
         height: '100%',
         mtype: 'post',
-        postData: {
-            //name: $("#name").val()
-        }
+        postData: searData
     }).trigger('reloadGrid');
 
 }

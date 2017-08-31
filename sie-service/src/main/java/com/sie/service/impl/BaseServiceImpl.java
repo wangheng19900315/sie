@@ -72,4 +72,9 @@ public class BaseServiceImpl<T extends BaseEntity, PK extends Serializable> impl
         pageBean.setPage(page);
         return pageBean;
     }
+
+    @Override
+    public List<T> getList(List<HqlOperateVo> hqlOperateVos) {
+        return baseDao.getList(hqlOperateVos);
+    }
 }
