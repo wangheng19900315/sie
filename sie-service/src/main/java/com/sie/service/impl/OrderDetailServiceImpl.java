@@ -7,6 +7,7 @@ import com.sie.framework.dao.OrderDetailDao;
 import com.sie.framework.entity.OrderDetailEntity;
 import com.sie.framework.entity.OrderEntity;
 import com.sie.framework.type.OrderDetailStatus;
+import com.sie.service.GradeService;
 import com.sie.service.OrderDetailService;
 import com.sie.service.bean.OrderBean;
 import com.sie.service.bean.OrderDetailBean;
@@ -27,6 +28,10 @@ import java.util.Map;
  */
 @Service("orderDetailService")
 public class OrderDetailServiceImpl extends BaseServiceImpl<OrderDetailEntity,Integer> implements OrderDetailService {
+
+
+    @Autowired
+    private GradeService gradeService;
 
     @Autowired
     private OrderDetailDao orderDetailDao;
@@ -111,6 +116,8 @@ public class OrderDetailServiceImpl extends BaseServiceImpl<OrderDetailEntity,In
         if(oldEntity != null){
             oldEntity.setCourseIds(detailEntity.getCourseIds());
             this.orderDetailDao.updateEntity(oldEntity);
+
+            gradeService.updateStudentGradeList(oldEntity.getOrderEntity().getStudentEntity().getId());
         }
 
     }

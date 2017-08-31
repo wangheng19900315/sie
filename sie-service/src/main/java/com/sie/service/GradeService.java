@@ -18,4 +18,7 @@ public interface GradeService extends BaseService<GradeEntity, Integer> {
     GradeBean getBean(Integer id);
 
     Integer updateGrade(GradeEntity gradeEntity);
+
+
+    public void updateStudentGradeList(Integer studentId);
 }

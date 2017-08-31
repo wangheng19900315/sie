@@ -20,7 +20,7 @@ public class GradeDaoImpl extends GenericDaoImpl<GradeEntity, Integer> implement
     @Override
     public List<GradeEntity> getList(Integer firstResult, Integer maxResults, String studentName) {
 
-        String hql = "from GradeEntity grade where 1=1 ";
+        String hql = "from GradeEntity grade where hdelete=0 ";
 
         if(StringUtil.isNotBlank(studentName)){
             hql += " and  grade.studentEntity.userName like '%"+studentName+"%'";
@@ -33,7 +33,7 @@ public class GradeDaoImpl extends GenericDaoImpl<GradeEntity, Integer> implement
 
     @Override
     public Integer getCount(String studentName) {
-        String hql = "select count(*) from GradeEntity grade where 1=1 ";
+        String hql = "select count(*) from GradeEntity grade where hdelete=0 ";
         if(StringUtil.isNotBlank(studentName)){
             hql += " and  grade.studentEntity.userName like '%"+studentName+"%'";
         }
