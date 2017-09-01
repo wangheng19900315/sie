@@ -618,7 +618,7 @@
 }
 
 .ui-jqgrid tr.ui-state-highlight.ui-row-ltr td {
-    border-right-color: #c7d3a9
+    /*border-right-color: #c7d3a9*/
 }
 
 .ui-jqgrid tr.ui-state-highlight.ui-row-rtl td {
@@ -638,7 +638,7 @@
 }
 
 .ui-jqgrid-btable .ui-widget-content.ui-state-highlight {
-    background-color: #e4efc9
+    /*background-color: #e4efc9*/
 }
 
 .ui-jqgrid .ui-jqgrid-pager {
@@ -1388,7 +1388,7 @@ th[aria-selected=true] .ui-jqgrid-sortable {
 }
 
 .ui-jqgrid tr.ui-state-highlight.ui-row-ltr td {
-    border-right-color: #c7d3a9 !important
+    /*border-right-color: #c7d3a9 !important*/
 }
 
 .ui-jqgrid tr.ui-state-highlight.ui-row-rtl td {
@@ -1408,7 +1408,7 @@ th[aria-selected=true] .ui-jqgrid-sortable {
 }
 
 .ui-jqgrid-btable .ui-widget-content.ui-state-highlight {
-    background-color: #e4efc9
+    /*background-color: #e4efc9*/
 }
 
 .ui-jqgrid .ui-jqgrid-pager {

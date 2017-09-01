@@ -10,3 +10,14 @@
 #resultMessage p{
     margin:0 0 1px !important;
 }
+
+#cb_grid-table{
+    margin-top: -4px !important;
+    margin-left:2px;
+}
+
+.ui-jqgrid td .cbox{
+
+    margin-top:4px; !important;
+}
+
