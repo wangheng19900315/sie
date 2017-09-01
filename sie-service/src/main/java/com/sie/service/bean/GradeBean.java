@@ -8,12 +8,15 @@ import com.sie.util.annotation.ExcelField;
 public class GradeBean extends BaseBean{
 
     private String studentName;
+    private String studentID;
     private Integer studentId;
     private Integer projectId;
+    private String projectCode;
     private String projectName;
     private Integer courseId;
+    private String courseCode;
     private String courseName;
-    private Double grade;
+    private String grade;
     private Integer systemType;
     private String systemTypename;
 
@@ -27,7 +30,15 @@ public class GradeBean extends BaseBean{
         this.studentName = studentName;
     }
 
-    @ExcelField(title="学生id", align=2, sort=2)
+    @ExcelField(title="学生ID", align=2, sort=2)
+    public String getStudentID() {
+        return studentID;
+    }
+
+    public void setStudentID(String studentID) {
+        this.studentID = studentID;
+    }
+
     public Integer getStudentId() {
         return studentId;
     }
@@ -36,7 +47,6 @@ public class GradeBean extends BaseBean{
         this.studentId = studentId;
     }
 
-    @ExcelField(title="项目id", align=2, sort=3)
     public Integer getProjectId() {
         return projectId;
     }
@@ -45,16 +55,16 @@ public class GradeBean extends BaseBean{
         this.projectId = projectId;
     }
 
-    @ExcelField(title="项目名称", align=2, sort=4)
-    public String getProjectName() {
-        return projectName;
+
+    @ExcelField(title="项目编号", align=2, sort=3)
+    public String getProjectCode() {
+        return projectCode;
     }
 
-    public void setProjectName(String projectName) {
-        this.projectName = projectName;
+    public void setProjectCode(String projectCode) {
+        this.projectCode = projectCode;
     }
 
-    @ExcelField(title="课程id", align=2, sort=5)
     public Integer getCourseId() {
         return courseId;
     }
@@ -63,7 +73,16 @@ public class GradeBean extends BaseBean{
         this.courseId = courseId;
     }
 
-    @ExcelField(title="课程名", align=2, sort=6)
+    @ExcelField(title="课程编号", align=2, sort=4)
+    public String getCourseCode() {
+        return courseCode;
+    }
+
+    public void setCourseCode(String courseCode) {
+        this.courseCode = courseCode;
+    }
+
+    @ExcelField(title="课程名", align=2, sort=5)
     public String getCourseName() {
         return courseName;
     }
@@ -72,16 +91,16 @@ public class GradeBean extends BaseBean{
         this.courseName = courseName;
     }
 
-    @ExcelField(title="分数", align=2, sort=7)
-    public Double getGrade() {
+    @ExcelField(title="分数", align=2, sort=6)
+    public String getGrade() {
         return grade;
     }
 
-    public void setGrade(Double grade) {
+    public void setGrade(String grade) {
         this.grade = grade;
     }
 
-    @ExcelField(title="系统", align=2, sort=8)
+
     public Integer getSystemType() {
         return systemType;
     }
@@ -90,7 +109,6 @@ public class GradeBean extends BaseBean{
         this.systemType = systemType;
     }
 
-    @ExcelField(title="系统名", align=2, sort=9)
     public String getSystemTypename() {
         return systemTypename;
     }
@@ -99,18 +117,11 @@ public class GradeBean extends BaseBean{
         this.systemTypename = systemTypename;
     }
 
-    @Override
-    public String toString() {
-        return "GradeBean{" +
-                "studentName='" + studentName + '\'' +
-                ", studentId=" + studentId +
-                ", projectId=" + projectId +
-                ", projectName='" + projectName + '\'' +
-                ", courseId=" + courseId +
-                ", courseName='" + courseName + '\'' +
-                ", grade=" + grade +
-                ", systemType=" + systemType +
-                ", systemTypename='" + systemTypename + '\'' +
-                '}';
+    public String getProjectName() {
+        return projectName;
+    }
+
+    public void setProjectName(String projectName) {
+        this.projectName = projectName;
     }
 }

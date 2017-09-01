@@ -17,6 +17,7 @@ public class DormitoryBean extends BaseBean{
     private Double price;
     private Integer projectId;
     private String projectName;
+    private String projectCode;
     private Integer womanNumber;
     private Integer manNumber;
     private Integer totalNumber;
@@ -100,5 +101,13 @@ public class DormitoryBean extends BaseBean{
 
     public void setCode(String code) {
         this.code = code;
+    }
+
+    public String getProjectCode() {
+        return projectCode;
+    }
+
+    public void setProjectCode(String projectCode) {
+        this.projectCode = projectCode;
     }
 }

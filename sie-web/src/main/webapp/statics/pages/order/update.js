@@ -30,17 +30,12 @@ $(function(){
         //height: '100%',
         mtype: 'post',
         postData: {},
-        colNames: ['ID','projectId','courseIds', '项目名','创建时间','住宿名称','课程数'  ,'课程名', '操作'],
+        colNames: ['ID','projectId','courseIds', '项目名','住宿名称','课程数'  ,'课程名', '操作'],
         colModel: [
             {name: 'id', index: 'id', width: 20, hidden: true, sorttype: "int", sortable: false},
             {name: 'projectId', index: 'projectId', width: 20, hidden: true,   sortable: false},
             {name: 'courseIds', index: 'courseIds', width: 20, hidden: true,  sortable: false},
             {name: 'projectName', index: 'projectName', width: 120, sortable: false},
-            {name: 'createTime', index: 'createTime', width: 120 , sortable: false, formatter:function(cellvalue, options, rowObject){
-                var time1 = new Date(cellvalue).Format("yyyy-MM-dd hh:mm:ss");
-                return time1;
-            }
-            },
             {name: 'dormitoryName', index: 'dormitoryName', width: 120, sortable: false},
             {name: 'courseCount', index: 'courseCount', width: 60, sortable: false},
             {name: 'custerNames', index: 'custerNames', width: 360, sortable: false},
@@ -53,8 +48,9 @@ $(function(){
             }
             }
         ],
-        multiselect: true,
-        multiboxonly: true,
+        //multiselect: true,
+        //multiboxonly: true,
+        hoverrows:false,
         altRows: true,
         loadComplete: function () {
             jqGrid.initWidth(jQuery, '#grid-table', ".table-primary");

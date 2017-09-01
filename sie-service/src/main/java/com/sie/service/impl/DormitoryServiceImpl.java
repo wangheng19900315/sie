@@ -96,7 +96,7 @@ public class DormitoryServiceImpl extends BaseServiceImpl<DormitoryEntity,Intege
             //设置projectname
             ProjectEntity projectEntity = projectDao.getEntity(dormitoryEntity.getProjectId());
             bean.setProjectName(projectEntity.getSieName());
-
+            bean.setProjectCode(projectEntity.getCode());
         }catch (Exception e){
             e.printStackTrace();
         }

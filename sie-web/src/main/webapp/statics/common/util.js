@@ -257,6 +257,22 @@ $('.form_time').timepicker(formatTimeOption);
 //}
 //$('.form_datetime').datetimepicker(formatDateTimeOption);
 
+//拼接form中的请求参数
+$.fn.getGetMethodUrl = function(){
+    var searData = $(this).serializeJson();
+    var getParams = '';
+    //拼装url
+    $.each(searData,function(key,value){
+        if(value != ''){
+            getParams += key + "=" + value + '&';
+        }
+    });
+    //去掉最后一个&
+    if(getParams != ''){
+        getParams = getParams.substr(0,getParams.length-1);
+    }
+    return getParams;
+}
 
 $(function(){
     if(menuList.length > 0){

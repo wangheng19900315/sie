@@ -14,9 +14,28 @@
                 </div>
                 <div class="panel-body">
                     <div class="row">
+
                         <div class="col-sm-6">
                             <div class="form-group ">
-                                <label for="name" class="col-sm-2 control-label">name</label>
+                                <label for="nationality" class="col-sm-2 control-label">国家</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="nationality" name="nationality" placeholder="nationality" required data-msg-required="请输入国家">
+                                </div>
+                            </div>
+                        </div><!-- col-sm-6 -->
+                        <div class="col-sm-6">
+                            <div class="form-group ">
+                                <label for="province" class="col-sm-2 control-label">省份</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="province" name="province" placeholder="province" required data-msg-required="请输入省份">
+                                </div>
+                            </div>
+                        </div><!-- col-sm-6 -->
+                    </div><!-- row -->
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group ">
+                                <label for="name" class="col-sm-2 control-label">名称</label>
                                 <div class="col-sm-9">
                                     <input type="text" class="form-control" id="name" name="name" placeholder="name" required data-msg-required="请输入名称">
                                 </div>

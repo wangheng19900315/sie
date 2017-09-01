@@ -203,6 +203,17 @@
                             </div>
                         </div>
 
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <div class="form-group ">
+                                    <label   class="col-sm-3 control-label">备注:</label>
+                                    <div class="col-sm-8">
+                                        <textarea type="text" class="form-control" id="remark" name="remark" style="resize: none"></textarea>
+                                    </div>
+                                </div>
+                            </div><!-- col-sm-6 -->
+                        </div>
+
                     </form>
                 </div>
             </div>

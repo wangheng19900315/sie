@@ -52,9 +52,6 @@ public class DormitoryController {
             DormitoryEntity dormitoryEntity = this.dormitoryService.get(id);
             model.addAttribute("entity", JSON.toJSON(dormitoryEntity));
         }
-        //添加工程
-        Map<Integer,String> projects = projectService.getAllCourseProject();
-        model.addAttribute("projects", JSON.toJSON(projects));
         return "/dormitory/addOrUpdate";
     }
 

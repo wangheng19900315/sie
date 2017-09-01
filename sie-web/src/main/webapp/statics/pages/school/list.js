@@ -33,21 +33,20 @@ $(function(){
         height: '100%',
         mtype: 'post',
         postData: {},
-        colNames: ['ID', '学校名称' ,'创建时间' ,'修改时间'],
+        colNames: ['ID', '学校名称','国家','省份' ,'创建时间' ],
         colModel: [
             {name: 'id', index: 'id', width: 20, hidden: true, sorttype: "int", sortable: false},
             {name: 'name', index: 'name', width: 120, sortable: false},
+            {name: 'nationality', index: 'nationality', width: 120, sortable: false},
+            {name: 'province', index: 'province', width: 120, sortable: false},
             {name: 'createTime', index: 'createTime', width: 160 , sortable: false, formatter:function(cellvalue, options, rowObject){
                 var time1 = new Date(cellvalue).Format("yyyy-MM-dd hh:mm:ss");
                 return time1;
             }
-            },
-            {name: 'updateTime', index: 'updateTime', width: 160 , sortable: false, formatter:function(cellvalue, options, rowObject){
-                var time1 = new Date(cellvalue).Format("yyyy-MM-dd hh:mm:ss");
-                return time1;
-                }
             }
         ],
+        rownumbers: true,
+        hoverrows:false,
         multiselect: true,
         multiboxonly: true,
         viewrecords: true,

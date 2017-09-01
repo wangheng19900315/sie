@@ -47,9 +47,6 @@ public class CourseController {
             CourseBean bean = this.courseService.getBean(id);
             model.addAttribute("entity", JSON.toJSON(bean));
         }
-        //添加工程
-        Map<Integer,String> projects = projectService.getAllCourseProject();
-        model.addAttribute("projects", JSON.toJSON(projects));
         return "/course/addOrUpdate";
     }
 

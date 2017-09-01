@@ -1,15 +1,24 @@
 package com.sie.web.controller;
 
 import com.alibaba.fastjson.JSON;
+import com.google.common.collect.Lists;
+import com.sie.framework.base.HqlOperateVo;
 import com.sie.framework.entity.CouponEntity;
 import com.sie.framework.entity.SchoolEntity;
 import com.sie.framework.entity.StudentEntity;
+import com.sie.framework.vo.StudentSearchVo;
 import com.sie.service.SchoolService;
 import com.sie.service.StudentService;
+import com.sie.service.bean.GradeBean;
 import com.sie.service.bean.PageInfo;
 import com.sie.service.bean.ResultBean;
+import com.sie.service.export.StudentExport;
+import com.sie.util.DateUtil;
+import com.sie.util.ExportExcel;
 import com.sie.util.FileUtil;
 import com.sie.util.NumberUtil;
+import org.apache.commons.beanutils.BeanUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -17,6 +26,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
@@ -24,6 +34,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -78,11 +90,11 @@ public class StudentController {
 
     @RequestMapping("/list.json")
     @ResponseBody
-    public PageInfo<StudentEntity> listJons(Integer page, Integer rows ){
+    public PageInfo<StudentEntity> listJons(StudentSearchVo searchVo,Integer page, Integer rows ){
 
         PageInfo<StudentEntity> pageInfo = null;
         try{
-            pageInfo = this.studentService.getList(page,rows, null);
+            pageInfo = this.studentService.getList(page,rows, searchVo.transToHqlOperateVo());
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -119,6 +131,7 @@ public class StudentController {
 
     //加载头像
     @RequestMapping(value = "/loadImage", method = RequestMethod.GET)
+    @ResponseBody
     public String loadImage(String image, HttpServletRequest request, HttpServletResponse response) throws IOException {
         ServletOutputStream out = null;
         FileInputStream ips = null;
@@ -142,6 +155,28 @@ public class StudentController {
             ips.close();
         }
         return null;
+    }
+
+    //导出学生信息
+    @RequestMapping(value = "export.json")
+    @ResponseBody
+    public String exportFile(StudentSearchVo searchVo,HttpServletResponse response, RedirectAttributes redirectAttributes) {
+        try {
+            String fileName = "学生信息"+ DateUtil.format(new Date(), "yyyyMMddHHmmss")+".xlsx";
+            List<StudentEntity> studentEntities = studentService.getList(searchVo.transToHqlOperateVo());
+            List<StudentExport> studentExports = Lists.newArrayList();
+            for(StudentEntity studentEntity : studentEntities){
+                StudentExport export = new StudentExport();
+                BeanUtils.copyProperties(export, studentEntity);
+                studentExports.add(export);
+            }
+            new ExportExcel(null, StudentExport.class).setDataList(studentExports).write(response, fileName).dispose();
+
+            return null;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "redirect:/student/list.html";
     }
 
 

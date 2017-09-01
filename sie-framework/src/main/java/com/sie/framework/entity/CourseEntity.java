@@ -13,6 +13,7 @@ import java.sql.Timestamp;
 public class CourseEntity extends BaseEntity{
 //    private Integer id;
     private Integer system;
+    private String courseID;
     private String chineseName;
     private String englishName;
     private Integer professorId;
@@ -47,6 +48,16 @@ public class CourseEntity extends BaseEntity{
 
     public void setSystem(Integer system) {
         this.system = system;
+    }
+
+    @Basic
+    @Column(name = "course_ID")
+    public String getCourseID() {
+        return courseID;
+    }
+
+    public void setCourseID(String courseID) {
+        this.courseID = courseID;
     }
 
     @Basic

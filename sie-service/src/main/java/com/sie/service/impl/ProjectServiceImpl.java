@@ -37,8 +37,8 @@ public class ProjectServiceImpl extends BaseServiceImpl<ProjectEntity,Integer> i
     private static final String formString = "yyyy-MM-dd";
     private static final SimpleDateFormat format = new SimpleDateFormat(formString);
 
-    @Autowired
-    private ProjectPriceDao projectPriceDao;
+//    @Autowired
+//    private ProjectPriceDao projectPriceDao;
 
     @Autowired
     private CourseDao courseDao;
@@ -78,9 +78,9 @@ public class ProjectServiceImpl extends BaseServiceImpl<ProjectEntity,Integer> i
         if(projectBean == null){
             return null;
         }
-        if(!validatorBean(projectBean)){
-            return null;
-        }
+//        if(!validatorBean(projectBean)){
+//            return null;
+//        }
         Date date;
         //将bean转化为entity
         ProjectEntity projectEntity = new ProjectEntity();
@@ -111,19 +111,24 @@ public class ProjectServiceImpl extends BaseServiceImpl<ProjectEntity,Integer> i
             this.projectDao.createEntity(projectEntity);
         }
         //TODO 保存价格
-        if(NumberUtil.isSignless(projectEntity.getId())){
-            saveOrUpdateProjectPrice(projectEntity.getId(),projectBean);
-        }
+//        if(NumberUtil.isSignless(projectEntity.getId())){
+//            saveOrUpdateProjectPrice(projectEntity.getId(),projectBean);
+//        }
         return projectEntity.getId();
     }
 
     @Override
-    public Map<Integer, String> getAllCourseProject() {
-        List<ProjectEntity> projectEntities = projectDao.getList();
+    public Map<Integer, String> getAllCourseProject(Integer system) {
+        String hql = "from ProjectEntity";
+        if(system != null){
+            //得到属于本系统或者同事属于两个系统共有的
+            hql = hql + " where system="+system+" or system="+SystemType.SIEANDTRU.value();
+        }
+        List<ProjectEntity> projectEntities = projectDao.getList(hql);
         Map<Integer,String> projects = new HashedMap();
         //TODO 应该选择可以添加课程的项目
         for(ProjectEntity entity : projectEntities){
-            projects.put(entity.getId(),entity.getSieName());
+            projects.put(entity.getId(),entity.getCode());
         }
         return projects;
     }
@@ -139,26 +144,26 @@ public class ProjectServiceImpl extends BaseServiceImpl<ProjectEntity,Integer> i
             return null;
         }
 
-        ProjectPriceBean[] siePrice = new ProjectPriceBean[5];
-        ProjectPriceBean[] truPrice = new ProjectPriceBean[5];
+//        ProjectPriceBean[] siePrice = new ProjectPriceBean[5];
+//        ProjectPriceBean[] truPrice = new ProjectPriceBean[5];
         //设置price
-        String hql = "from ProjectPriceEntity where system=1 and projectId='" + id + "' and hdelete=0 order by courseNumber";
-        List<ProjectPriceEntity> siePrices = projectPriceDao.getList(hql);
-        for(int i = 0; i < siePrices.size(); i++){
-            ProjectPriceBean priceBean = new ProjectPriceBean();
-            entityToBean(siePrices.get(i),priceBean);
-            siePrice[i] = priceBean;
-        }
-
-        hql = "from ProjectPriceEntity where system=2 and projectId='" + id + "' and hdelete=0 order by courseNumber";
-        List<ProjectPriceEntity> truPrices = projectPriceDao.getList(hql);
-        for(int i = 0; i < truPrices.size(); i++){
-            ProjectPriceBean priceBean = new ProjectPriceBean();
-            entityToBean(truPrices.get(i),priceBean);
-            truPrice[i] = priceBean;
-        }
-        bean.setSiePrice(siePrice);
-        bean.setTruPrice(truPrice);
+//        String hql = "from ProjectPriceEntity where system=1 and projectId='" + id + "' and hdelete=0 order by courseNumber";
+//        List<ProjectPriceEntity> siePrices = projectPriceDao.getList(hql);
+//        for(int i = 0; i < siePrices.size(); i++){
+//            ProjectPriceBean priceBean = new ProjectPriceBean();
+//            entityToBean(siePrices.get(i),priceBean);
+//            siePrice[i] = priceBean;
+//        }
+//
+//        hql = "from ProjectPriceEntity where system=2 and projectId='" + id + "' and hdelete=0 order by courseNumber";
+//        List<ProjectPriceEntity> truPrices = projectPriceDao.getList(hql);
+//        for(int i = 0; i < truPrices.size(); i++){
+//            ProjectPriceBean priceBean = new ProjectPriceBean();
+//            entityToBean(truPrices.get(i),priceBean);
+//            truPrice[i] = priceBean;
+//        }
+//        bean.setSiePrice(siePrice);
+//        bean.setTruPrice(truPrice);
         return bean;
     }
 
@@ -183,45 +188,45 @@ public class ProjectServiceImpl extends BaseServiceImpl<ProjectEntity,Integer> i
         return projectPriceEntity.getId();
     }
 
-    private boolean validatorBean(ProjectBean bean){
-        if((bean.getSieMaxCourse() != null) && (bean.getSieMaxCourse() > bean.getSiePrice().length)){
-            return false;
-        }
-        if((bean.getTruMaxCourse() != null) && (bean.getTruMaxCourse() > bean.getTruPrice().length)){
-            return false;
-        }
-        return true;
-    }
+//    private boolean validatorBean(ProjectBean bean){
+//        if((bean.getSieMaxCourse() != null) && (bean.getSieMaxCourse() > bean.getSiePrice().length)){
+//            return false;
+//        }
+//        if((bean.getTruMaxCourse() != null) && (bean.getTruMaxCourse() > bean.getTruPrice().length)){
+//            return false;
+//        }
+//        return true;
+//    }
 
 
-    private void saveOrUpdateProjectPrice(Integer projectId, ProjectBean bean){
-        //删除project下边的price
-        String hql = "update ProjectPriceEntity price set price.hdelete=1 where price.projectId="+projectId;
-        projectPriceDao.updateByHql(hql);
-        
-        ProjectPriceBean[] siePrice = bean.getSiePrice();
-        ProjectPriceBean[] truPrice = bean.getTruPrice();
-        //保存sie价格
-        if(bean.getSieMaxCourse() != null){
-            for(int i = 0; i < siePrice.length && i < bean.getSieMaxCourse(); i ++){
-                ProjectPriceBean priceBean = siePrice[i];
-                priceBean.setSystem(1);
-                priceBean.setProjectId(projectId);
-                savePrice(priceBean);
-            }
-        }
-
-        //保存tru价格
-        if(bean.getTruMaxCourse() != null){
-            for(int i = 0; i < truPrice.length && i < bean.getTruMaxCourse(); i ++){
-                ProjectPriceBean priceBean = truPrice[i];
-                priceBean.setSystem(2);
-                priceBean.setProjectId(projectId);
-                savePrice(priceBean);
-            }
-        }
-
-    }
+//    private void saveOrUpdateProjectPrice(Integer projectId, ProjectBean bean){
+//        //删除project下边的price
+//        String hql = "update ProjectPriceEntity price set price.hdelete=1 where price.projectId="+projectId;
+//        projectPriceDao.updateByHql(hql);
+//
+//        ProjectPriceBean[] siePrice = bean.getSiePrice();
+//        ProjectPriceBean[] truPrice = bean.getTruPrice();
+//        //保存sie价格
+//        if(bean.getSieMaxCourse() != null){
+//            for(int i = 0; i < siePrice.length && i < bean.getSieMaxCourse(); i ++){
+//                ProjectPriceBean priceBean = siePrice[i];
+//                priceBean.setSystem(1);
+//                priceBean.setProjectId(projectId);
+//                savePrice(priceBean);
+//            }
+//        }
+//
+//        //保存tru价格
+//        if(bean.getTruMaxCourse() != null){
+//            for(int i = 0; i < truPrice.length && i < bean.getTruMaxCourse(); i ++){
+//                ProjectPriceBean priceBean = truPrice[i];
+//                priceBean.setSystem(2);
+//                priceBean.setProjectId(projectId);
+//                savePrice(priceBean);
+//            }
+//        }
+//
+//    }
 
     private void setBeanValues(ProjectEntity projectEntity, ProjectBean bean){
 
@@ -272,11 +277,11 @@ public class ProjectServiceImpl extends BaseServiceImpl<ProjectEntity,Integer> i
     public void delete(Integer id) {
         //删除project
         projectDao.deleteEntity(projectDao.getEntity(id));
-        //删除项目下的价格
-        String hql = "update ProjectPriceEntity price set price.hdelete=1 where price.projectId="+id;
-        projectPriceDao.updateByHql(hql);
+//        //删除项目下的价格
+//        String hql = "update ProjectPriceEntity price set price.hdelete=1 where price.projectId="+id;
+//        projectPriceDao.updateByHql(hql);
         //删除项目下的课程
-        hql = "update CourseEntity course set course.hdelete=1 where course.projectId="+id;
+        String hql = "update CourseEntity course set course.hdelete=1 where course.projectId="+id;
         courseDao.updateByHql(hql);
     }
 }

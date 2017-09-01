@@ -54,6 +54,8 @@ $(function(){
             {name: 'sieCode', index: 'sieCode', width: 20,  sortable: false},
             {name: 'truCode', index: 'truCode', width: 20,  sortable: false}
         ],
+        rownumbers: true,
+        hoverrows:false,
         multiselect: true,
         multiboxonly: true,
         viewrecords: true,

@@ -29,19 +29,20 @@ $(function(){
         height: '100%',
         mtype: 'post',
         postData: {},
-        colNames: ['ID','用户名','用户名ID','中文名称' ,'性别' ,'微信号' ,'出生日期','国籍','护照号' ,'身份证号'  ],
+        colNames: ['ID','用户ID','中文名称' ,'性别' ,'微信号' ,'在读大学','国内联系电话','Email' ],
         colModel: [
             {name: 'id', index: 'id', width: 20, hidden: true,  sortable: false},
-            {name: 'userName', index: 'userName', width: 20,   sortable: false},
+            //{name: 'userName', index: 'userName', width: 20,   sortable: false},
             {name: 'userID', index: 'userID', width: 20,   sortable: false},
             {name: 'chineseName', index: 'chineseName', width: 20,   sortable: false},
-            {name: 'sex', index: 'sex', width: 20,  sortable: false},
+            {name: 'sex', index: 'sex', width: 10,  sortable: false},
             {name: 'weiXin', index: 'weiXin', width: 20,  sortable: false},
-            {name: 'birthday', index: 'birthday', width: 20,  sortable: false},
-            {name: 'nationality', index: 'nationality', width: 20, sortable: false},
-            {name: 'passportNumber', index: 'passportNumber', width: 20, sortable: false},
-            {name: 'idNumber', index: 'idNumber', width: 20 , sortable: false}
+            {name: 'schoolName', index: 'schoolName', width: 20,  sortable: false},
+            {name: 'telephone', index: 'telephone', width: 20, sortable: false},
+            {name: 'email', index: 'email', width: 20, sortable: false}
         ],
+        rownumbers: true,
+        hoverrows:false,
         multiselect: true,
         multiboxonly: true,
         viewrecords: true,
@@ -89,6 +90,23 @@ $(function(){
         search();
     })
 
+    //绑定导出事件
+    $("#exportBtn").bind("click", function(){
+        bootbox.confirm({
+            message: "确认要导出excel?",
+            callback: function(result) {
+                if(result){
+                    var url = "/student/export.json";
+                    var params = $("#search-form").getGetMethodUrl();
+                    if(params != ''){
+                        url += "?" + params;
+                    }
+                    window.location.href = url;
+                }
+            },
+            className: "bootbox-sm"
+        });
+    })
 
 })
 
@@ -98,17 +116,15 @@ $(function(){
  */
 function search() {
     $('#edit-btn').addClass('disabled');
-    $('#del-btn').addClass('disabled');
-    $('#view-btn').addClass('disabled');
-
+    //$('#del-btn').addClass('disabled');
+    //$('#view-btn').addClass('disabled');
+    var searData = $("#search-form").serializeJson();
     jQuery("#grid-table").jqGrid('setGridParam',{
-        url: '/coupon/list.json',
+        url: '/student/list.json',
         datatype: "json",
         height: '100%',
         mtype: 'post',
-        postData: {
-            //name: $("#name").val()
-        }
+        postData: searData
     }).trigger('reloadGrid');
 
 }

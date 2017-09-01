@@ -3,6 +3,7 @@ package com.sie.web.controller;
 import com.alibaba.fastjson.JSON;
 import com.sie.framework.entity.CrEntity;
 import com.sie.framework.entity.GradeEntity;
+import com.sie.framework.vo.GradeSearchVo;
 import com.sie.service.CrService;
 import com.sie.service.GradeService;
 import com.sie.service.bean.GradeBean;
@@ -24,6 +25,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by wangheng on 2017/8/9.
@@ -63,11 +65,11 @@ public class GradeController {
 
     @RequestMapping("/list.json")
     @ResponseBody
-    public PageInfo<GradeBean> listJons(Integer page, Integer rows, String studentName ){
+    public PageInfo<GradeBean> listJons(Integer page, Integer rows, GradeSearchVo gradeSearchVo){
 
         PageInfo<GradeBean> pageInfo = null;
         try{
-            pageInfo = this.gradeService.getGradeList(page,rows, studentName);
+            pageInfo = this.gradeService.getGradeList(page,rows, gradeSearchVo.transToHqlOperateVo());
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -99,11 +101,11 @@ public class GradeController {
 
 
     @RequestMapping(value = "export.json")
-    public String exportFile(Integer page, Integer rows, String studentName, HttpServletResponse response, RedirectAttributes redirectAttributes) {
+    public String exportFile(GradeSearchVo gradeSearchVo, HttpServletResponse response, RedirectAttributes redirectAttributes) {
         try {
             String fileName = "成绩"+ DateUtil.format(new Date(), "yyyyMMddHHmmss")+".xlsx";
-            PageInfo<GradeBean> pageInfo = gradeService.getGradeList(page, rows, studentName);
-            new ExportExcel("成绩", GradeBean.class).setDataList(pageInfo.getRows()).write(response, fileName).dispose();
+            List<GradeBean> gradeBeanList = gradeService.getGradeList(gradeSearchVo.transToHqlOperateVo());
+            new ExportExcel(null, GradeBean.class).setDataList(gradeBeanList).write(response, fileName).dispose();
 
             return null;
         } catch (Exception e) {

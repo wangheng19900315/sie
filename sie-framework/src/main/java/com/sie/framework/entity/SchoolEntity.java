@@ -10,17 +10,8 @@ import javax.persistence.*;
 public class SchoolEntity extends BaseEntity {
 //    private Integer id;
     private String name;
-//    private String address;
-
-//    @Id
-//    @GeneratedValue(strategy= GenerationType.IDENTITY)
-//    public Integer getId() {
-//        return id;
-//    }
-//
-//    public void setId(Integer id) {
-//        this.id = id;
-//    }
+    private String nationality;
+    private String province;
 
     @Basic
     @Column(name = "name")
@@ -32,14 +23,23 @@ public class SchoolEntity extends BaseEntity {
         this.name = name;
     }
 
-//    @Basic
-//    @Column(name = "address")
-//    public String getAddress() {
-//        return address;
-//    }
-//
-//    public void setAddress(String address) {
-//        this.address = address;
-//    }
+    @Basic
+    @Column(name = "nationality")
+    public String getNationality() {
+        return nationality;
+    }
 
+    public void setNationality(String nationality) {
+        this.nationality = nationality;
+    }
+
+    @Basic
+    @Column(name = "province")
+    public String getProvince() {
+        return province;
+    }
+
+    public void setProvince(String province) {
+        this.province = province;
+    }
 }

@@ -1,13 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="ot" tagdir="/WEB-INF/tags" %>
-<ot:layout title="宿舍添加">
+<ot:layout title="寄送信息添加">
 
     <div class="row">
         <div class="col-sm-12">
             <form   class="panel form-horizontal" novalidate="novalidate" id="data-form" >
                 <input type="hidden" id="id" name="id">
                 <div class="panel-heading">
-                    <span class="panel-title">优惠码信息</span>
+                    <span class="panel-title">寄送信息</span>
                 </div>
                 <div class="panel-body">
                     <div class="row">
