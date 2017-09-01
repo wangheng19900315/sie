@@ -19,8 +19,8 @@ public class ProjectBean extends BaseBean{
     private String startTimeFormat;
     private String endTimeFormat;
 
-    private ProjectPriceBean[] siePrice;
-    private ProjectPriceBean[] truPrice;
+//    private ProjectPriceBean[] siePrice;
+//    private ProjectPriceBean[] truPrice;
 
     public Integer getSystem() {
         return system;
@@ -94,21 +94,21 @@ public class ProjectBean extends BaseBean{
         this.endTime = endTime;
     }
 
-    public ProjectPriceBean[] getSiePrice() {
-        return siePrice;
-    }
-
-    public void setSiePrice(ProjectPriceBean[] siePrice) {
-        this.siePrice = siePrice;
-    }
-
-    public ProjectPriceBean[] getTruPrice() {
-        return truPrice;
-    }
-
-    public void setTruPrice(ProjectPriceBean[] truPrice) {
-        this.truPrice = truPrice;
-    }
+//    public ProjectPriceBean[] getSiePrice() {
+//        return siePrice;
+//    }
+//
+//    public void setSiePrice(ProjectPriceBean[] siePrice) {
+//        this.siePrice = siePrice;
+//    }
+//
+//    public ProjectPriceBean[] getTruPrice() {
+//        return truPrice;
+//    }
+//
+//    public void setTruPrice(ProjectPriceBean[] truPrice) {
+//        this.truPrice = truPrice;
+//    }
 
     public String getStartTimeFormat() {
         return startTimeFormat;

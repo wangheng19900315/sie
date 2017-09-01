@@ -29,12 +29,12 @@ $(function(){
         height: '100%',
         mtype: 'post',
         postData: {},
-        colNames: ['ID', '名称','编号','项目名称' ,'价格' ,'地址' ,'人数限制','总人数','女生人数' ,'男士人数'  ],
+        colNames: ['ID', '名称','编号','项目编号' ,'价格' ,'地址' ,'人数限制','总人数','女生人数' ,'男士人数'  ],
         colModel: [
             {name: 'id', index: 'id', width: 20, hidden: true,  sortable: false},
             {name: 'name', index: 'name', width: 20,   sortable: false},
             {name: 'code', index: 'code', width: 20,   sortable: false},
-            {name: 'projectName', index: 'projectName', width: 20,   sortable: false},
+            {name: 'projectCode', index: 'projectCode', width: 20,   sortable: false},
             {name: 'price', index: 'price', width: 20,  sortable: false},
             {name: 'address', index: 'address', width: 20,  sortable: false},
             {name: 'maxNumber', index: 'maxNumber', width: 20,  sortable: false},
@@ -42,6 +42,8 @@ $(function(){
             {name: 'womanNumber', index: 'womanNumber', width: 20 , sortable: false},
             {name: 'manNumber', index: 'manNumber', width: 20 , sortable: false}
         ],
+        rownumbers: true,
+        hoverrows:false,
         multiselect: true,
         multiboxonly: true,
         viewrecords: true,

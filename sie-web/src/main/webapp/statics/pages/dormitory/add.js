@@ -23,11 +23,29 @@ $(function(){
         }
     });
 
+
+    //加载项目
+    $.ajax({
+        url: '/project/getAllProject.json',
+        data: {},
+        type: 'post',
+        async: false,
+        dataType: 'json',
+        cache: false,
+        success: function (data) {
+            var projectOption;
+            $.each(data, function (key, value) {
+                projectOption += '<option value="' + key + '">' + value + "</option>";
+            });
+            $("#projectId").append(projectOption);
+        },
+        error: function () {
+            alert("加载项目失败！");
+        }
+    });
     if(entity.length > 0){
         $("#data-form").loadJson(eval("("+entity+")"));
     }
-
-    initProjectOption();
 
 })
 
@@ -35,10 +53,6 @@ var initProjectOption = function(){
     //初始化project select框
     projects = JSON.parse(projects);
     console.log(projects);
-    var projectOption;
-    $.each(projects, function (key, value) {
-        projectOption += '<option value="' + key + '">' + value + "</option>";
-    });
-    $("#projectId").append(projectOption);
+
 };
 

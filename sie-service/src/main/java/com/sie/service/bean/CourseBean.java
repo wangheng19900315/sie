@@ -7,6 +7,7 @@ import java.sql.Timestamp;
  */
 public class CourseBean  extends BaseBean{
     private Integer system;
+    private String courseID;
     private String systemName;
     private String chineseName;
     private String englishName;
@@ -29,6 +30,14 @@ public class CourseBean  extends BaseBean{
 
     public void setSystem(Integer system) {
         this.system = system;
+    }
+
+    public String getCourseID() {
+        return courseID;
+    }
+
+    public void setCourseID(String courseID) {
+        this.courseID = courseID;
     }
 
     public String getSystemName() {

@@ -6,7 +6,7 @@ $(function(){
     var pager_selector = "#grid-pager";
 
     jQuery(grid_selector).jqGrid({
-        url: '/packagePrice/list.json',
+        url: '/price/list.json',
         datatype: "json",
         height: '100%',
         mtype: 'post',
@@ -22,7 +22,8 @@ $(function(){
             {name: 'canadianPrice', index: 'canadianPrice', width: 20,   sortable: false,editable:true, edittype:"text",editrules:{required: true, number: true}}
         ],
         //multiselect: true,
-        multiboxonly: true,
+        rownumbers: true,
+        hoverrows:false,
         viewrecords: true,
         rowList: [10, 20, 50, 100],
         pager: pager_selector,

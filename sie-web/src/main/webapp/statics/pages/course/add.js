@@ -28,7 +28,6 @@ $(function(){
     $("#system").bind("change",function(){
         var type = $("#system").val();
         //清空原有配置
-
         if(type == "1"){
             $("#sie").show();
             $("#tru").hide();
@@ -41,19 +40,18 @@ $(function(){
         }else{
             //有误
         }
+        initProjectOption();
     });
 
-    //时间格式初始化
-    var options = {
-        minuteStep: 1,
-        showSeconds: true,
-        showMeridian: false,
-        showInputs: false,
-        orientation: $('body').hasClass('right-to-left') ? { x: 'right', y: 'auto'} : { x: 'auto', y: 'auto'}
-    }
-    $('.form_time').timepicker(options);
-
-    initProjectOption();
+    ////时间格式初始化
+    //var options = {
+    //    minuteStep: 1,
+    //    showSeconds: true,
+    //    showMeridian: false,
+    //    showInputs: false,
+    //    orientation: $('body').hasClass('right-to-left') ? { x: 'right', y: 'auto'} : { x: 'auto', y: 'auto'}
+    //}
+    //$('.form_time').timepicker(options);
 
     if(entity.length > 0){
         $("#data-form").loadJson(eval("("+entity+")"));
@@ -64,14 +62,26 @@ $(function(){
 });
 
 var initProjectOption = function(){
-    //初始化project select框
-    projects = JSON.parse(projects);
-    console.log(projects);
-    var projectOption;
-    $.each(projects, function (key, value) {
-        projectOption += '<option value="' + key + '">' + value + "</option>";
+    $("#projectId").empty();
+    //加载项目
+    $.ajax({
+        url: '/project/getAllProject.json',
+        data: {"system":$("#system").val()},
+        type: 'post',
+        async: false,
+        dataType: 'json',
+        cache: false,
+        success: function (data) {
+            var projectOption;
+            $.each(data, function (key, value) {
+                projectOption += '<option value="' + key + '">' + value + "</option>";
+            });
+            $("#projectId").append(projectOption);
+        },
+        error: function () {
+            alert("加载项目失败！");
+        }
     });
-    $("#projectId").append(projectOption);
 };
 
 

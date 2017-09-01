@@ -84,5 +84,4 @@
 <script src="/statics/pages/dormitory/add.js"></script>
 <script type="text/javascript">
     var entity = '${entity}';
-    var projects = '${projects}';
 </script>

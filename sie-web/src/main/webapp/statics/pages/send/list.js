@@ -41,6 +41,8 @@ $(function(){
             {name: 'expressCompany', index: 'expressCompany', width: 20 , sortable: false},
             {name: 'trackingNumber', index: 'trackingNumber', width: 20 , sortable: false}
         ],
+        rownumbers: true,
+        hoverrows:false,
         multiselect: true,
         multiboxonly: true,
         viewrecords: true,

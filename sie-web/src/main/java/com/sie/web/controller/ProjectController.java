@@ -14,6 +14,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.Map;
+
 /**
  * Created by wangheng on 2017/8/9.
  */
@@ -96,5 +98,14 @@ public class ProjectController {
 
         return resultBean;
     }
+
+    @RequestMapping(value = "/getAllProject.json")
+    @ResponseBody
+    public Map<Integer,String> getAllProject(Integer system){
+        //添加工程
+        Map<Integer,String> projects = projectService.getAllCourseProject(system);
+        return projects;
+    }
+
 
 }

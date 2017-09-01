@@ -51,10 +51,10 @@ public class PackagePriceServiceImpl extends BaseServiceImpl<ProjectPriceEntity,
     @Override
     public PageInfo<PackagePriceBean> getPriceList(Integer page, Integer rows, List<HqlOperateVo> hqlOperateVos) {
         //设置project内容为空
-        if(hqlOperateVos == null){
-            hqlOperateVos = new ArrayList<>();
-        }
-        hqlOperateVos.add(new HqlOperateVo("projectNumber","=","2"));
+//        if(hqlOperateVos == null){
+//            hqlOperateVos = new ArrayList<>();
+//        }
+//        hqlOperateVos.add(new HqlOperateVo("projectNumber","=","2"));
         PageInfo<ProjectPriceEntity> pageInfo = this.getList(page,rows, hqlOperateVos);
         PageInfo<PackagePriceBean> result = new PageInfo<PackagePriceBean>();
         result.setPage(pageInfo.getPage());

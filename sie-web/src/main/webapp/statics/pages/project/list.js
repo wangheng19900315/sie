@@ -42,6 +42,8 @@ $(function(){
             {name: 'truMaxCourse', index: 'truMaxCourse', width: 20,  sortable: false},
             {name: 'startTimeFormat', index: 'startTimeFormat', width: 20, sortable: false}
         ],
+        rownumbers: true,
+        hoverrows:false,
         multiselect: true,
         multiboxonly: true,
         viewrecords: true,
@@ -135,13 +137,7 @@ function search() {
     $('#view-btn').addClass('disabled');
 
     jQuery("#grid-table").jqGrid('setGridParam',{
-        url: '/project/list.json',
-        datatype: "json",
-        height: '100%',
-        mtype: 'post',
-        postData: {
-            //name: $("#name").val()
-        }
+        postData: $("#search-form").serializeJson()
     }).trigger('reloadGrid');
 
 }

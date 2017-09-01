@@ -28,6 +28,8 @@ public class SchoolServiceImpl extends BaseServiceImpl<SchoolEntity,Integer> imp
         if(NumberUtil.isSignless(schoolEntity.getId())){
             SchoolEntity oldSchoolEntity = this.schoolDao.getEntity(schoolEntity.getId());
             oldSchoolEntity.setName(schoolEntity.getName());
+            oldSchoolEntity.setProvince(schoolEntity.getProvince());
+            oldSchoolEntity.setNationality(schoolEntity.getNationality());
             this.schoolDao.updateEntity(oldSchoolEntity);
         }else{
             this.schoolDao.createEntity(schoolEntity);

@@ -13,10 +13,24 @@
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="form-group ">
-                                <label for="projectId" class="col-sm-2 control-label">所在项目</label>
+                                <label for="system" class="col-sm-2 control-label">系统</label>
                                 <div class="col-sm-9">
-                                    <select class="form-control form-group-margin" id="projectId" name="projectId">
+                                    <select class="form-control" id="system" name="system">
+                                        <option value="1">SIE</option>
+                                        <option value="2">TRU</option>
+                                        <option value="3">SIE&TRU</option>
                                     </select>
+
+                                </div>
+                            </div>
+                        </div><!-- col-sm-6 -->
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group ">
+                                <label for="projectId" class="col-sm-2 control-label">课程ID</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="courseID" name="courseID" placeholder="courseID" required data-msg-required="请输入课程ID">
                                 </div>
                             </div>
                         </div><!-- col-sm-6 -->
@@ -28,7 +42,7 @@
                                 </div>
                             </div>
                         </div><!-- col-sm-6 -->
-                    </div>
+                    </div><!-- row -->
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="form-group ">
@@ -57,14 +71,10 @@
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="form-group ">
-                                <label for="system" class="col-sm-2 control-label">系统</label>
+                                <label for="projectId" class="col-sm-2 control-label">所在项目</label>
                                 <div class="col-sm-9">
-                                    <select class="form-control form-group-margin" id="system" name="system">
-                                        <option value="1">SIE</option>
-                                        <option value="2">TRU</option>
-                                        <option value="3">SIE&TRU</option>
+                                    <select class="form-control" id="projectId" name="projectId">
                                     </select>
-
                                 </div>
                             </div>
                         </div><!-- col-sm-6 -->

@@ -44,6 +44,8 @@ $(function(){
             }
             }
         ],
+        rownumbers: true,
+        hoverrows:false,
         multiselect: true,
         multiboxonly: true,
         viewrecords: true,
