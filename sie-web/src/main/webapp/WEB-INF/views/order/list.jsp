@@ -18,7 +18,7 @@
         <div class="col-sm-12">
             <div class="panel">
                 <div class="panel-body buttons-with-margins">
-                    <form class="form-inline" id="search-form">
+                    <form class="form-inline" id="search-form" action="" method="post">
                         <div class="form-group">
                             <input type="text" class="form-control" id="orderCode"  name="orderCode" placeholder="订单号">
                         </div>
@@ -46,7 +46,7 @@
                             <input type="email" class="form-control" id="crCode" name="crCode" placeholder="Cr Code">
                         </div>
                         <div class="form-group">
-                            <input type="text" class="form-control" id="couponCode" name="crCode" placeholder="优惠码">
+                            <input type="text" class="form-control" id="couponCode" name="couponCode" placeholder="优惠码">
                         </div>
 
                         <button type="button" id="searchBtn" class="btn btn-primary" onclick="return false;" >查找</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -57,6 +57,9 @@
                         <button type="button" class="btn btn-success disabled"  id="refundBtn" data-toggle="modal" data-target="#refund">退课</button> &nbsp;&nbsp;
                         <button type="button" class="btn btn-danger disabled" id="addOrderBtn"  data-toggle="modal" data-target="#refund">加课</button> &nbsp;&nbsp;
                         <button type="button" class="btn btn-danger disabled" id="deleteBtn"  >删除</button> &nbsp;&nbsp;
+                        <button type="button" class="btn btn-info" id="importBtn"  >导入</button> &nbsp;&nbsp;
+                        <button type="button" class="btn btn-info" id="exportBtn"  >导出</button> &nbsp;&nbsp;
+                        <button type="button"  id="showImportFile" style="display: none" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#importExcels"></button>
                     </form>
                 </div>
             </div>
@@ -139,6 +142,34 @@
 
 
 
+
+    <div id="importExcels" class="modal fade" tabindex="-1" role="dialog" style="display: none;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title"  >导入Excel</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-inline" id="fileFrom" enctype="multipart/form-data">
+                        <div class="form-group ">
+                            <label   class="col-sm-3 control-label">文件:</label>
+                            <div class="col-sm-8" id="courseNameDivs">
+                                <input type="file" class="form-control" id="excelFile" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel"  name="excelFile" >
+                            </div>
+                        </div>
+
+                        <div   id="resultMessage" style="color:red;">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="cancelBtn" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    <button type="button" id="submitBtn" class="btn btn-primary">提交</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
 </ot:layout>
 <script src="/statics/pages/order/list.js"></script>

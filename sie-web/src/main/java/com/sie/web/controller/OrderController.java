@@ -7,18 +7,25 @@ import com.sie.framework.type.OrderStatus;
 import com.sie.framework.vo.OrderSearchVo;
 import com.sie.service.OrderDetailService;
 import com.sie.service.OrderService;
-import com.sie.service.bean.OrderBean;
-import com.sie.service.bean.OrderDetailBean;
-import com.sie.service.bean.PageInfo;
-import com.sie.service.bean.ResultBean;
+import com.sie.service.bean.*;
+import com.sie.service.excel.OrderExcelBean;
+import com.sie.util.DateUtil;
+import com.sie.util.ExportExcel;
 import com.sie.util.NumberUtil;
 import org.apache.log4j.Logger;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import javax.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 /**
  * Created by wangheng on 2017/8/9.
@@ -186,6 +193,39 @@ public class OrderController {
         }
         return resultBean;
     }
+
+
+
+
+
+    @RequestMapping(value = "export.json")
+    public String exportFile(OrderSearchVo vo, HttpServletResponse response, RedirectAttributes redirectAttributes) {
+        try {
+            String fileName = "订单信息"+ DateUtil.format(new Date(), "yyyyMMddHHmmss")+".xlsx";
+            PageInfo<OrderBean> pageInfo = orderService.getOrderList(0,Integer.MAX_VALUE, vo);
+
+            List<OrderExcelBean> orderExcelBeanList = new ArrayList<>();
+            if(pageInfo.getRows() != null && pageInfo.getRows().size() > 0){
+                for(OrderBean orderBean:pageInfo.getRows()){
+                    OrderExcelBean orderExcelBean = new OrderExcelBean();
+                    BeanUtils.copyProperties(orderBean, orderExcelBean);
+                    if(orderBean.getCreateTime() != null){
+                        orderExcelBean.setCreateTimeString(DateUtil.format(orderBean.getCreateTime(), "yyyy-MM-dd"));
+                    }
+                    if(orderBean.getPayTime() != null){
+                        orderExcelBean.setPayTimeString(DateUtil.format(orderBean.getPayTime(), "yyyy-MM-dd"));
+                    }
+                    orderExcelBeanList.add(orderExcelBean);
+                }
+            }
+            new ExportExcel("订单信息", OrderExcelBean.class).setDataList(orderExcelBeanList).write(response, fileName).dispose();
+            return null;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "redirect:/order/list.html";
+    }
+
 
 
 }

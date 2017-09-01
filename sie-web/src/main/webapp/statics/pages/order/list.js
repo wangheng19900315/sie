@@ -338,6 +338,53 @@ $(function(){
         });
     })
 
+
+    /**
+     * 导入Excel
+     */
+    $("#importBtn").bind("click", function(){
+        $("#resultMessage").html("");
+        $("#showImportFile").click();
+    })
+
+
+    $("#submitBtn").bind("click", function(){
+        var formData = new FormData(document.getElementById("fileFrom"));
+        $.ajax({
+            url: '/order/import.json',
+            data: formData,
+            type: 'post',
+            dataType: 'json',
+            cache: false,
+            processData:false,
+            contentType:false,
+            success: function (data) {
+                if (data.success) {
+                    alert("导入数据成功！");
+                    search();
+                } else {
+                    $("#resultMessage").html(data.message);
+                }
+            },
+            error: function () {
+                alert("导入数据失败！");
+            }
+        });
+    });
+
+    $("#exportBtn").bind("click", function(){
+        var studentName = $("#name").val();
+        bootbox.confirm({
+            message: "确认要导出excel?",
+            callback: function(result) {
+                if(result){
+                    $("#search-form").attr("action", "/order/export.json");
+                    $("#search-form").submit();
+                }
+            },
+            className: "bootbox-sm"
+        });
+    })
 })
 
 /**
