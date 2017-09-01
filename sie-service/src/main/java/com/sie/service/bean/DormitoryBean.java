@@ -1,6 +1,7 @@
 package com.sie.service.bean;
 
 import com.sie.framework.entity.BaseEntity;
+import com.sie.util.annotation.ExcelField;
 
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -22,6 +23,80 @@ public class DormitoryBean extends BaseBean{
     private Integer manNumber;
     private Integer totalNumber;
     private Integer maxNumber;
+    private Integer sieNumber;
+    private Integer truNumber;
+
+    @ExcelField(title="住宿ID", align=2, sort=1)
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    @ExcelField(title="住宿名称", align=2, sort=2)
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    @ExcelField(title="限制人数", align=2, sort=3)
+    public Integer getMaxNumber() {
+        return maxNumber;
+    }
+
+    public void setMaxNumber(Integer maxNumber) {
+        this.maxNumber = maxNumber;
+    }
+
+    @ExcelField(title="女生人数", align=2, sort=4)
+    public Integer getWomanNumber() {
+        return womanNumber;
+    }
+
+    public void setWomanNumber(Integer womanNumber) {
+        this.womanNumber = womanNumber;
+    }
+
+    @ExcelField(title="男生人数", align=2, sort=5)
+    public Integer getManNumber() {
+        return manNumber;
+    }
+
+    public void setManNumber(Integer manNumber) {
+        this.manNumber = manNumber;
+    }
+
+    @ExcelField(title="SIE人数", align=2, sort=6)
+    public Integer getSieNumber() {
+        return sieNumber;
+    }
+
+    public void setSieNumber(Integer sieNumber) {
+        this.sieNumber = sieNumber;
+    }
+
+    @ExcelField(title="TRU人数", align=2, sort=7)
+    public Integer getTruNumber() {
+        return truNumber;
+    }
+
+    public void setTruNumber(Integer truNumber) {
+        this.truNumber = truNumber;
+    }
+
+    @ExcelField(title="总人数", align=2, sort=8)
+    public Integer getTotalNumber() {
+        return totalNumber;
+    }
+
+    public void setTotalNumber(Integer totalNumber) {
+        this.totalNumber = totalNumber;
+    }
 
     public String getAddress() {
         return address;
@@ -29,14 +104,6 @@ public class DormitoryBean extends BaseBean{
 
     public void setAddress(String address) {
         this.address = address;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public Double getPrice() {
@@ -55,52 +122,12 @@ public class DormitoryBean extends BaseBean{
         this.projectId = projectId;
     }
 
-    public Integer getWomanNumber() {
-        return womanNumber;
-    }
-
-    public void setWomanNumber(Integer womanNumber) {
-        this.womanNumber = womanNumber;
-    }
-
-    public Integer getManNumber() {
-        return manNumber;
-    }
-
-    public void setManNumber(Integer manNumber) {
-        this.manNumber = manNumber;
-    }
-
-    public Integer getTotalNumber() {
-        return totalNumber;
-    }
-
-    public void setTotalNumber(Integer totalNumber) {
-        this.totalNumber = totalNumber;
-    }
-
-    public Integer getMaxNumber() {
-        return maxNumber;
-    }
-
-    public void setMaxNumber(Integer maxNumber) {
-        this.maxNumber = maxNumber;
-    }
-
     public String getProjectName() {
         return projectName;
     }
 
     public void setProjectName(String projectName) {
         this.projectName = projectName;
-    }
-
-    public String getCode() {
-        return code;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
     }
 
     public String getProjectCode() {
@@ -110,4 +137,6 @@ public class DormitoryBean extends BaseBean{
     public void setProjectCode(String projectCode) {
         this.projectCode = projectCode;
     }
+
+
 }

@@ -15,5 +15,7 @@ public interface DormitoryService extends BaseService<DormitoryEntity, Integer> 
 
     PageInfo<DormitoryBean> getDormitoryList(Integer page, Integer rows,  List<HqlOperateVo> hqlOperateVos);
 
+    List<DormitoryBean> getDormitoryList(List<HqlOperateVo> hqlOperateVos);
+
     DormitoryBean getDormitoryByProjectId(Integer projectId);
 }

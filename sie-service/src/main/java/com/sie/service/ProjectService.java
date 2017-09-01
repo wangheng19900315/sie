@@ -16,6 +16,7 @@ public interface ProjectService extends BaseService<ProjectEntity, Integer> {
 
 
     PageInfo<ProjectBean> getProjectList(Integer page, Integer rows, List<HqlOperateVo> hqlOperateVos);
+    List<ProjectBean> getProjectList(List<HqlOperateVo> hqlOperateVos);
     Integer saveOrUpdate(ProjectBean projectBean);
     Map<Integer,String> getAllCourseProject(Integer system);
     ProjectBean getBean(Integer id);

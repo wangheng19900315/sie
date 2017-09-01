@@ -73,6 +73,23 @@ public class ProjectServiceImpl extends BaseServiceImpl<ProjectEntity,Integer> i
     }
 
     @Override
+    public List<ProjectBean> getProjectList( List<HqlOperateVo> hqlOperateVos){
+        List<ProjectEntity> projectEntities = this.getList(hqlOperateVos);
+
+        List<ProjectBean> projectBeanList = new ArrayList<>();
+
+        for(ProjectEntity projectEntity:projectEntities){
+
+            ProjectBean bean = new ProjectBean();
+            setBeanValues(projectEntity, bean);
+            //TODO 得到项目下所有课程SIE和TRU项目总工报名人数进行相加
+            projectBeanList.add(bean);
+        }
+
+        return projectBeanList;
+    }
+
+    @Override
     public Integer saveOrUpdate(ProjectBean projectBean) {
         genarateEntity(projectBean);
         if(projectBean == null){

@@ -1,5 +1,7 @@
 package com.sie.service.bean;
 
+import com.sie.util.annotation.ExcelField;
+
 import java.sql.Timestamp;
 
 /**
@@ -19,8 +21,85 @@ public class ProjectBean extends BaseBean{
     private String startTimeFormat;
     private String endTimeFormat;
 
+    //导出Excel人数统计用
+    private Integer sieNumber;
+    private Integer truNumber;
+    private Integer totalNumber;
+
 //    private ProjectPriceBean[] siePrice;
 //    private ProjectPriceBean[] truPrice;
+
+    @ExcelField(title="项目ID", align=2, sort=1)
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    @ExcelField(title="SIE项目名称", align=2, sort=2)
+    public String getSieName() {
+        return sieName;
+    }
+
+    public void setSieName(String sieName) {
+        this.sieName = sieName;
+    }
+
+    @ExcelField(title="TRU项目名称", align=2, sort=3)
+    public String getTruName() {
+        return truName;
+    }
+
+    public void setTruName(String truName) {
+        this.truName = truName;
+    }
+
+    @ExcelField(title="开始时间", align=2, sort=4)
+    public Timestamp getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(Timestamp startTime) {
+        this.startTime = startTime;
+    }
+
+    @ExcelField(title="结束时间", align=2, sort=5)
+    public Timestamp getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(Timestamp endTime) {
+        this.endTime = endTime;
+    }
+
+    @ExcelField(title="SIE人数", align=2, sort=6)
+    public Integer getSieNumber() {
+        return sieNumber;
+    }
+
+    public void setSieNumber(Integer sieNumber) {
+        this.sieNumber = sieNumber;
+    }
+
+    @ExcelField(title="TRU人数", align=2, sort=7)
+    public Integer getTotalNumber() {
+        return totalNumber;
+    }
+
+    public void setTotalNumber(Integer totalNumber) {
+        this.totalNumber = totalNumber;
+    }
+
+    @ExcelField(title="总人数", align=2, sort=8)
+    public Integer getTruNumber() {
+        return truNumber;
+    }
+
+    public void setTruNumber(Integer truNumber) {
+        this.truNumber = truNumber;
+    }
 
     public Integer getSystem() {
         return system;
@@ -36,22 +115,6 @@ public class ProjectBean extends BaseBean{
 
     public void setSystemName(String systemName) {
         this.systemName = systemName;
-    }
-
-    public String getSieName() {
-        return sieName;
-    }
-
-    public void setSieName(String sieName) {
-        this.sieName = sieName;
-    }
-
-    public String getTruName() {
-        return truName;
-    }
-
-    public void setTruName(String truName) {
-        this.truName = truName;
     }
 
     public String getMark() {
@@ -78,21 +141,6 @@ public class ProjectBean extends BaseBean{
         this.truMaxCourse = truMaxCourse;
     }
 
-    public Timestamp getStartTime() {
-        return startTime;
-    }
-
-    public void setStartTime(Timestamp startTime) {
-        this.startTime = startTime;
-    }
-
-    public Timestamp getEndTime() {
-        return endTime;
-    }
-
-    public void setEndTime(Timestamp endTime) {
-        this.endTime = endTime;
-    }
 
 //    public ProjectPriceBean[] getSiePrice() {
 //        return siePrice;
@@ -126,11 +174,4 @@ public class ProjectBean extends BaseBean{
         this.endTimeFormat = endTimeFormat;
     }
 
-    public String getCode() {
-        return code;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
-    }
 }

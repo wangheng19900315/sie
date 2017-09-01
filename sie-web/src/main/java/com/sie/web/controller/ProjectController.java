@@ -2,10 +2,9 @@ package com.sie.web.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.sie.service.ProjectService;
-import com.sie.service.bean.OrderBean;
-import com.sie.service.bean.PageInfo;
-import com.sie.service.bean.ProjectBean;
-import com.sie.service.bean.ResultBean;
+import com.sie.service.bean.*;
+import com.sie.util.DateUtil;
+import com.sie.util.ExportExcel;
 import com.sie.util.NumberUtil;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +12,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpServletResponse;
+import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -107,5 +110,19 @@ public class ProjectController {
         return projects;
     }
 
+    //导出项目信息
+    @RequestMapping(value = "export.json")
+    @ResponseBody
+    public String exportFile(HttpServletResponse response, RedirectAttributes redirectAttributes) {
+        try {
+            String fileName = "项目信息"+ DateUtil.format(new Date(), "yyyyMMddHHmmss")+".xlsx";
+            List<ProjectBean> projectBeanList = projectService.getProjectList(null);
+            new ExportExcel(null, ProjectBean.class).setDataList(projectBeanList).write(response, fileName).dispose();
+            return null;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "redirect:/student/list.html";
+    }
 
 }
