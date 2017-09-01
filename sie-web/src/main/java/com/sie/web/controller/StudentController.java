@@ -1,6 +1,7 @@
 package com.sie.web.controller;
 
 import com.alibaba.fastjson.JSON;
+import com.google.common.collect.Lists;
 import com.sie.framework.base.HqlOperateVo;
 import com.sie.framework.entity.CouponEntity;
 import com.sie.framework.entity.SchoolEntity;
@@ -11,10 +12,12 @@ import com.sie.service.StudentService;
 import com.sie.service.bean.GradeBean;
 import com.sie.service.bean.PageInfo;
 import com.sie.service.bean.ResultBean;
+import com.sie.service.export.StudentExport;
 import com.sie.util.DateUtil;
 import com.sie.util.ExportExcel;
 import com.sie.util.FileUtil;
 import com.sie.util.NumberUtil;
+import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -97,9 +100,6 @@ public class StudentController {
         if(StringUtils.isNotBlank(searchVo.getUserID())){
             operateVos.add(new HqlOperateVo("userID","like",searchVo.getUserID()));
         }
-        if(StringUtils.isNotBlank(searchVo.getUserName())){
-            operateVos.add(new HqlOperateVo("userName","like",searchVo.getUserName()));
-        }
 
         PageInfo<StudentEntity> pageInfo = null;
         try{
@@ -140,6 +140,7 @@ public class StudentController {
 
     //加载头像
     @RequestMapping(value = "/loadImage", method = RequestMethod.GET)
+    @ResponseBody
     public String loadImage(String image, HttpServletRequest request, HttpServletResponse response) throws IOException {
         ServletOutputStream out = null;
         FileInputStream ips = null;
@@ -167,6 +168,7 @@ public class StudentController {
 
     //导出学生信息
     @RequestMapping(value = "export.json")
+    @ResponseBody
     public String exportFile(StudentSearchVo searchVo,HttpServletResponse response, RedirectAttributes redirectAttributes) {
         //组装查询条件
         List<HqlOperateVo> operateVos = new ArrayList<>();
@@ -176,13 +178,16 @@ public class StudentController {
         if(StringUtils.isNotBlank(searchVo.getUserID())){
             operateVos.add(new HqlOperateVo("userID","like",searchVo.getUserID()));
         }
-        if(StringUtils.isNotBlank(searchVo.getUserName())){
-            operateVos.add(new HqlOperateVo("userName","like",searchVo.getUserName()));
-        }
         try {
             String fileName = "学生信息"+ DateUtil.format(new Date(), "yyyyMMddHHmmss")+".xlsx";
             List<StudentEntity> studentEntities = studentService.getList(operateVos);
-            new ExportExcel(null, StudentEntity.class).setDataList(studentEntities).write(response, fileName).dispose();
+            List<StudentExport> studentExports = Lists.newArrayList();
+            for(StudentEntity studentEntity : studentEntities){
+                StudentExport export = new StudentExport();
+                BeanUtils.copyProperties(export, studentEntity);
+                studentExports.add(export);
+            }
+            new ExportExcel(null, StudentExport.class).setDataList(studentExports).write(response, fileName).dispose();
 
             return null;
         } catch (Exception e) {

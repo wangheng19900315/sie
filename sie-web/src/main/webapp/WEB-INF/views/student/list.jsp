@@ -21,7 +21,6 @@
                     <form class="form-inline" id="search-form">
                         <div class="form-group">
                             <input type="text" class="form-control" id="chineseName" name="chineseName" placeholder="中文名称">
-                            <input type="text" class="form-control" id="userName" name="userName" placeholder="用户名">
                             <input type="text" class="form-control" id="userID" name="userID" placeholder="用户ID">
                         </div>
                         <button type="button" id="searchBtn" class="btn btn-primary" style="margin-right: 10px;">查找</button>

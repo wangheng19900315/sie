@@ -202,9 +202,13 @@ public class OrderServiceImpl extends BaseServiceImpl<OrderEntity,Integer> imple
     public void updateOrderInfo(OrderEntity orderEntity) {
         OrderEntity oldEntity = this.orderDao.getEntity(orderEntity.getId());
         if(oldEntity != null){
+            //TODO 修改的时候增加逻辑判断 已提交的订单可以修改为已完成或者已取消
+            // 已完成的订单只能修改为申请退款 申请退款的订单只能修改为完成退款
             oldEntity.setDiscount(orderEntity.getDiscount());
             oldEntity.setPayMoney(orderEntity.getPayMoney());
             oldEntity.setStatus(orderEntity.getStatus());
+            oldEntity.setPayType(orderEntity.getPayType());
+            oldEntity.setRemark(orderEntity.getRemark());
             this.orderDao.updateEntity(oldEntity);
 
             gradeService.updateStudentGradeList(oldEntity.getStudentEntity().getId());

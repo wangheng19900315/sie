@@ -5,7 +5,6 @@ package com.sie.framework.vo;
  */
 public class StudentSearchVo {
     private String userID;
-    private String userName;
     private String chineseName;
 
     public String getUserID() {
@@ -14,14 +13,6 @@ public class StudentSearchVo {
 
     public void setUserID(String userID) {
         this.userID = userID;
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
     }
 
     public String getChineseName() {
