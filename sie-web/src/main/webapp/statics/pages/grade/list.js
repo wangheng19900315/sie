@@ -26,17 +26,20 @@ $(function(){
         datatype: "json",
         height: '100%',
         mtype: 'post',
-        postData: {},
-        colNames: ['ID', '用户ID' ,'用户姓名' ,'项目名称','课程编号' ,'课程名称' ,'成绩' ],
+        postData:{},
+        colNames: ['ID', 'studentId','学生ID' ,'学生姓名' ,'项目名称','课程编号' ,'课程名称' ,'成绩' ],
         colModel: [
             {name: 'id', index: 'id', width: 20, hidden: true,  sortable: false},
-            {name: 'studentId', index: 'studentId', width: 20 ,hidden: true, sortable: false},
+            {name: 'studentId', index: 'studentId', width: 20 , hidden: true, sortable: false},
+            {name: 'studentID', index: 'studentID', width: 20 , sortable: false},
             {name: 'studentName', index: 'studentName', width: 20,   sortable: false},
             {name: 'projectName', index: 'projectName', width: 20,   sortable: false},
             {name: 'courseCode', index: 'courseCode', width: 20,  sortable: false},
             {name: 'courseName', index: 'courseName', width: 20,  sortable: false},
             {name: 'grade', index: 'grade', width: 20, sortable: false}
         ],
+        rownumbers: true,
+        hoverrows:false,
         multiselect: true,
         multiboxonly: true,
         viewrecords: true,
@@ -91,7 +94,12 @@ $(function(){
             message: "确认要导出excel?",
             callback: function(result) {
                 if(result){
-                    window.location.href="/grade/export.json?studentName="+studentName+"&rows="+rows+"&page="+page;
+                    var url = "/grade/export.json";
+                    var params = $("#search-form").getGetMethodUrl();
+                    if(params != ''){
+                        url += "?" + params;
+                    }
+                    window.location.href = url;
                 }
             },
             className: "bootbox-sm"
@@ -111,13 +119,7 @@ function search() {
     $('#view-btn').addClass('disabled');
 
     jQuery("#grid-table").jqGrid('setGridParam',{
-        url: '/grade/list.json',
-        datatype: "json",
-        height: '100%',
-        mtype: 'post',
-        postData: {
-            //name: $("#name").val()
-        }
+        postData: $("#search-form").serializeJson()
     }).trigger('reloadGrid');
 
 }

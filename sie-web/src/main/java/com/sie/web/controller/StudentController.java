@@ -92,18 +92,9 @@ public class StudentController {
     @ResponseBody
     public PageInfo<StudentEntity> listJons(StudentSearchVo searchVo,Integer page, Integer rows ){
 
-        //组装查询条件
-        List<HqlOperateVo> operateVos = new ArrayList<>();
-        if(StringUtils.isNotBlank(searchVo.getChineseName())){
-            operateVos.add(new HqlOperateVo("chineseName","like",searchVo.getChineseName()));
-        }
-        if(StringUtils.isNotBlank(searchVo.getUserID())){
-            operateVos.add(new HqlOperateVo("userID","like",searchVo.getUserID()));
-        }
-
         PageInfo<StudentEntity> pageInfo = null;
         try{
-            pageInfo = this.studentService.getList(page,rows, operateVos);
+            pageInfo = this.studentService.getList(page,rows, searchVo.transToHqlOperateVo());
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -170,17 +161,9 @@ public class StudentController {
     @RequestMapping(value = "export.json")
     @ResponseBody
     public String exportFile(StudentSearchVo searchVo,HttpServletResponse response, RedirectAttributes redirectAttributes) {
-        //组装查询条件
-        List<HqlOperateVo> operateVos = new ArrayList<>();
-        if(StringUtils.isNotBlank(searchVo.getChineseName())){
-            operateVos.add(new HqlOperateVo("chineseName","like",searchVo.getChineseName()));
-        }
-        if(StringUtils.isNotBlank(searchVo.getUserID())){
-            operateVos.add(new HqlOperateVo("userID","like",searchVo.getUserID()));
-        }
         try {
             String fileName = "学生信息"+ DateUtil.format(new Date(), "yyyyMMddHHmmss")+".xlsx";
-            List<StudentEntity> studentEntities = studentService.getList(operateVos);
+            List<StudentEntity> studentEntities = studentService.getList(searchVo.transToHqlOperateVo());
             List<StudentExport> studentExports = Lists.newArrayList();
             for(StudentEntity studentEntity : studentEntities){
                 StudentExport export = new StudentExport();

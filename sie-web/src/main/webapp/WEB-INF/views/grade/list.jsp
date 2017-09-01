@@ -18,9 +18,9 @@
         <div class="col-sm-12">
             <div class="panel">
                 <div class="panel-body buttons-with-margins">
-                    <form class="form-inline">
-                        <div class="form-group">
-                            <input type="text" class="form-control" id="name" placeholder="输入名称">
+                    <form class="form-inline" id="search-form">
+                        <div class="form-group" >
+                            <input type="text" class="form-control" id="studentName" name="studentName" placeholder="学生姓名">
                         </div>
                         <button type="button"  id="searchBtn" class="btn btn-primary" onclick="return false;" >查找</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 

@@ -47,7 +47,7 @@ public class GradeServiceImpl extends BaseServiceImpl<GradeEntity,Integer> imple
 
 
     @Override
-    public PageInfo<GradeBean> getGradeList(Integer page, Integer rows, String  studentName) {
+    public PageInfo<GradeBean> getGradeList(Integer page, Integer rows, List<HqlOperateVo> hqlOperateVoList) {
 
         if (!NumberUtil.isSignless(rows)) {
             rows = Integer.MAX_VALUE;
@@ -56,12 +56,12 @@ public class GradeServiceImpl extends BaseServiceImpl<GradeEntity,Integer> imple
         if (!NumberUtil.isSignless(page)) {
             page = 0;
         }
-        Integer records = gradeDao.getCount(studentName);
+        Integer records = gradeDao.getCount(hqlOperateVoList);
         PageInfo<GradeBean> pageBean = new PageInfo<>(records, PageUtil.getPageTotal(records, rows));
         pageBean.setPage(PageUtil.getPageNow(page, pageBean.getTotal()));
         Integer firstResult = PageUtil.getFirstResult(pageBean.getPage(), rows);
         Integer maxResults = PageUtil.getMaxResults(rows);
-        List<GradeEntity> entityList =  gradeDao.getList(firstResult, maxResults, studentName);
+        List<GradeEntity> entityList =  gradeDao.getList(hqlOperateVoList,firstResult, maxResults);
 
         List<GradeBean> orderBeanList = new ArrayList<>();
         if(entityList.size() > 0){
@@ -81,6 +81,20 @@ public class GradeServiceImpl extends BaseServiceImpl<GradeEntity,Integer> imple
 
     }
 
+    @Override
+    public List<GradeBean> getGradeList(List<HqlOperateVo> hqlOperateVoList) {
+        List<GradeEntity> entityList = gradeDao.getList(hqlOperateVoList);
+        List<GradeBean> orderBeanList = new ArrayList<>();
+        if(entityList.size() > 0){
+            for(GradeEntity detailEntity:entityList){
+                GradeBean detailBean = new GradeBean();
+                setDetailBeanValues(detailEntity, detailBean);
+                orderBeanList.add(detailBean);
+            }
+        }
+        return orderBeanList;
+    }
+
     public void setDetailBeanValues(GradeEntity gradeEntity, GradeBean bean){
         try{
             BeanUtils.copyProperties(bean, gradeEntity);
@@ -95,17 +109,24 @@ public class GradeServiceImpl extends BaseServiceImpl<GradeEntity,Integer> imple
                 }else{
                     bean.setProjectName(gradeEntity.getProjectEntity().getTruName());
                 }
-
+                bean.setProjectCode(gradeEntity.getProjectEntity().getCode());
             }
             if(gradeEntity.getStudentEntity() != null){
                 bean.setStudentId(gradeEntity.getStudentEntity().getId());
-                bean.setStudentName(gradeEntity.getStudentEntity().getUserName());
+                bean.setStudentName(gradeEntity.getStudentEntity().getChineseName());
+                bean.setStudentID(gradeEntity.getStudentEntity().getUserID());
             }
 
             if(NumberUtil.isSignless(gradeEntity.getSystemType())){
                 SystemType type = SystemType.valueOf(gradeEntity.getSystemType());
                 if(type != null){
                     bean.setSystemTypename(type.getName());
+                }
+                //设置课程编号
+                if(type == SystemType.SIE){
+                    bean.setCourseCode(gradeEntity.getCourseEntity().getSieCode());
+                }else{
+                    bean.setCourseCode(gradeEntity.getCourseEntity().getTruCode());
                 }
             }
         }catch (Exception e){

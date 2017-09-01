@@ -46,7 +46,13 @@
                             <div class="form-group ">
                                 <label   class="col-sm-2 control-label">分数</label>
                                 <div class="col-sm-9">
-                                    <input type="number" class="form-control" id="grade" name="grade" required data-msg-required="请输入分数">
+                                    <select   class="form-control" id="grade" name="grade"  >
+                                        <option value="">...</option>
+                                        <option value="A">A</option>
+                                        <option value="B">B</option>
+                                        <option value="C">C</option>
+                                        <option value="D">D</option>
+                                    </select>
                                 </div>
                             </div>
 
