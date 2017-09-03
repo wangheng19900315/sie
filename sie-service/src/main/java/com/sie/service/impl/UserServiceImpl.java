@@ -35,7 +35,6 @@ public class UserServiceImpl extends BaseServiceImpl<UserEntity,Integer> impleme
         if(NumberUtil.isSignless(userEntity.getId())){
             UserEntity oldUserEntity = this.userDao.getEntity(userEntity.getId());
             oldUserEntity.setName(userEntity.getName());
-            oldUserEntity.setPassword(Md5Util.getMD5(userEntity.getPassword(), ApplicationHelp.MD5_SHA1));
             oldUserEntity.setEmail(userEntity.getEmail());
             oldUserEntity.setTelephone(userEntity.getTelephone());
             this.userDao.updateEntity(oldUserEntity);
@@ -60,6 +59,20 @@ public class UserServiceImpl extends BaseServiceImpl<UserEntity,Integer> impleme
         }
 
         return result;
+    }
+
+    @Override
+    public boolean modifyPassword(Integer id, String oldPassword, String newPassword) {
+        UserEntity userEntity = userDao.getEntity(id);
+        oldPassword = Md5Util.getMD5(oldPassword, ApplicationHelp.MD5_SHA1);
+        if(userEntity.getPassword().equals(oldPassword)){
+            userEntity.setPassword(Md5Util.getMD5(newPassword, ApplicationHelp.MD5_SHA1));
+            this.userDao.updateEntity(userEntity);
+            if(saveOrUpdate(userEntity) != null){
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override

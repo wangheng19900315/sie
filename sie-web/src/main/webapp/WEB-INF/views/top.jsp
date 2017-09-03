@@ -100,7 +100,10 @@
                                 <%--<li><a href="#"><i class="dropdown-icon fa fa-cog"></i>&nbsp;&nbsp;Settings</a></li>--%>
                                 <%--<li class="divider"></li>--%>
                                 <li><a href="/user/logout.html"><i class="dropdown-icon fa fa-power-off"></i>&nbsp;&nbsp;Log Out</a></li>
+                                <li><a data-toggle="modal" data-target="#modify-password"><i class="dropdown-icon fa fa-power-off"></i>&nbsp;&nbsp;修改密码</a></li>
+                                    <%--<button type="button" class="btn btn-success disabled"  id="refundBtn" data-toggle="modal" data-target="#refund">退课</button> &nbsp;&nbsp;--%>
                             </ul>
+
                         </li>
                     </ul> <!-- / .navbar-nav -->
                 </div> <!-- / .right -->
@@ -109,3 +112,35 @@
     </div> <!-- / .navbar-inner -->
 </div> <!-- / #main-navbar -->
 <!-- /2. $END_MAIN_NAVIGATION -->
+<%--修改密码弹出框--%>
+<div id="modify-password" class="modal fade" tabindex="-1" role="dialog" style="display: none;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title">修改密码</h4>
+            </div>
+            <div class="modal-body" >
+                <form class="form-horizontal" novalidate="novalidate" id="password-form">
+                    <div class="form-group ">
+                        <label  class="col-sm-2 control-label">原密码</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="oldPassworld"  name="oldPassworld" placeholder="oldPassworld" required data-msg-required="请输入原密码">
+                        </div>
+                    </div>
+                    <div class="form-group ">
+                        <label  class="col-sm-2 control-label">新密码</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="newPassworld"  name="newPassworld" placeholder="newPassworld" required data-msg-required="请输入新密码">
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" id="modifyPasswordSubmitBtn" class="btn btn-primary" data-dismiss="modal">提交</button>
+            </div>
+        </div>
+    </div>
+</div>

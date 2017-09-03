@@ -33,29 +33,29 @@
                         </div><!-- col-sm-6 -->
                         <div class="col-sm-6">
                             <div class="form-group ">
-                                <label for="password" class="col-sm-2 control-label">password</label>
+                                <label for="email" class="col-sm-2 control-label">Email</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="password" name="password" placeholder="password" required data-msg-required="请输入密码" minlength="6" data-msg-minlength="至少输入6个字符">
+                                    <input type="email" class="form-control" id="email" name="email" placeholder="Email" required data-msg-required="请输入Email">
                                 </div>
                             </div>
-
                         </div><!-- col-sm-6 -->
                     </div><!-- row -->
 
                     <div class="row">
-                        <div class="col-sm-6">
-                            <div class="form-group ">
-                                <label for="email" class="col-sm-2 control-label">Email</label>
-                                <div class="col-sm-9">
-                                    <input type="email" class="form-control" id="email" name="email" placeholder="Email" required data-msg-required="请输入Email">
-                                    </div>
-                            </div>
-                        </div><!-- col-sm-6 -->
+
                         <div class="col-sm-6">
                             <div class="form-group ">
                                 <label for="telephone" class="col-sm-2 control-label">Phone</label>
                                 <div class="col-sm-9">
                                     <input type="text" class="form-control" id="telephone" name="telephone" placeholder="Phone" required  data-rule-mobile="true" data-msg-required="请输入手机号"  data-msg-mobile="请输入正确格式">
+                                </div>
+                            </div>
+                        </div><!-- col-sm-6 -->
+                        <div class="col-sm-6" id="password-div" hidden>
+                            <div class="form-group ">
+                                <label for="password" class="col-sm-2 control-label">password</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="password" name="password" placeholder="password" required data-msg-required="请输入密码" minlength="6" data-msg-minlength="至少输入6个字符">
                                 </div>
                             </div>
                         </div><!-- col-sm-6 -->

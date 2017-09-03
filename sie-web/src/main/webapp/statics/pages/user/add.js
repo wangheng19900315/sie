@@ -29,8 +29,9 @@ $(function(){
 
     if(userEntity.length > 0){
         $("#data-form").loadJson(eval("("+userEntity+")"));
+    }else{
+        $("#password-div").show();
     }
 
-    //
 })
 

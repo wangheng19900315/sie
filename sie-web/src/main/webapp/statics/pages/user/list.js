@@ -32,12 +32,11 @@ $(function(){
         mtype: 'post',
         postData: {},
 
-        colNames: ['ID','角色id', '名称' ,'密码' ,'角色名称' ,'Email','电话','创建时间' ,'修改时间'  ],
+        colNames: ['ID','角色id', '名称' ,'角色名称' ,'Email','电话','创建时间' ],
         colModel: [
             {name: 'id', index: 'id', width: 20, hidden: true, sorttype: "int", sortable: false},
             {name: 'roleEntity.id', index: 'roleEntity.id', width: 20, hidden: true, sorttype: "int", sortable: false},
             {name: 'name', index: 'name', width: 120, sortable: false},
-            {name: 'password', index: 'password', width: 120, sortable: false},
             {name: 'roleEntity.name', index: 'roleEntity.name', width: 120, sortable: false},
             {name: 'telephone', index: 'telephone', width: 120, sortable: false},
             {name: 'email', index: 'email', width: 120, sortable: false},
@@ -46,12 +45,7 @@ $(function(){
                 var time1 = new Date(cellvalue).Format("yyyy-MM-dd hh:mm:ss");
                 return time1;
             }
-            },
-            {name: 'updateTime', index: 'updateTime', width: 160 , sortable: false, formatter:function(cellvalue, options, rowObject){
-                var time1 = new Date(cellvalue).Format("yyyy-MM-dd hh:mm:ss");
-                return time1;
             }
-            },
         ],
         rownumbers: true,
         hoverrows:false,
