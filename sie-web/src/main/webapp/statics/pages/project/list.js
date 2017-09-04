@@ -121,8 +121,22 @@ $(function(){
         });
     })
 
-    $("#infoBtn").bind("click",function(){
-        search();
+    //绑定导出事件
+    $("#exportBtn").bind("click", function(){
+        bootbox.confirm({
+            message: "确认要导出excel?",
+            callback: function(result) {
+                if(result){
+                    var url = "/project/export.json";
+                    var params = $("#search-form").getGetMethodUrl();
+                    if(params != ''){
+                        url += "?" + params;
+                    }
+                    window.location.href = url;
+                }
+            },
+            className: "bootbox-sm"
+        });
     })
 
 })

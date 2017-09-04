@@ -1,22 +1,33 @@
 package com.sie.web.controller;
 
 import com.alibaba.fastjson.JSON;
+import com.google.common.collect.Lists;
 import com.sie.framework.entity.CouponEntity;
 import com.sie.framework.entity.DormitoryEntity;
+import com.sie.framework.entity.StudentEntity;
+import com.sie.framework.vo.StudentSearchVo;
 import com.sie.service.DormitoryService;
 import com.sie.service.ProjectService;
 import com.sie.service.bean.DormitoryBean;
 import com.sie.service.bean.PageInfo;
 import com.sie.service.bean.ResultBean;
+import com.sie.service.export.StudentExport;
+import com.sie.util.DateUtil;
+import com.sie.util.ExportExcel;
 import com.sie.util.NumberUtil;
+import org.apache.commons.beanutils.BeanUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpServletResponse;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -116,6 +127,22 @@ public class DormitoryController {
     public DormitoryBean getDormitory(Integer projectId){
         return this.dormitoryService.getDormitoryByProjectId(projectId);
     }
+
+    //导出住宿信息
+    @RequestMapping(value = "export.json")
+    @ResponseBody
+    public String exportFile(HttpServletResponse response, RedirectAttributes redirectAttributes) {
+        try {
+            String fileName = "住宿信息"+ DateUtil.format(new Date(), "yyyyMMddHHmmss")+".xlsx";
+            List<DormitoryBean> dormitoryBeanList = dormitoryService.getDormitoryList(null);
+            new ExportExcel(null, DormitoryBean.class).setDataList(dormitoryBeanList).write(response, fileName).dispose();
+            return null;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "redirect:/student/list.html";
+    }
+
 
 
 }

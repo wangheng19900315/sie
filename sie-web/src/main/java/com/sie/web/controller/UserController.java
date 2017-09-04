@@ -2,10 +2,12 @@ package com.sie.web.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.sie.framework.entity.UserEntity;
+import com.sie.framework.help.ApplicationHelp;
 import com.sie.framework.type.Constant;
 import com.sie.service.UserService;
 import com.sie.service.bean.PageInfo;
 import com.sie.service.bean.ResultBean;
+import com.sie.util.Md5Util;
 import com.sie.util.NumberUtil;
 import org.apache.http.HttpRequest;
 import org.apache.log4j.Logger;
@@ -158,9 +160,22 @@ public class UserController {
     }
 
 
+    @RequestMapping(value = "/modifyPassword.json")
+    @ResponseBody
+    public ResultBean modifyPassword(String oldPassworld, String newPassworld, HttpServletRequest request){
+        ResultBean resultBean = new ResultBean();
 
+        try{
+            Integer id = (Integer) request.getSession().getAttribute(Constant.SYSTEM_USER_ID);
+            if(userService.modifyPassword(id,oldPassworld,newPassworld)){
+                resultBean.setSuccess(true);
+                resultBean.setMessage("登录成功");
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
 
-
-
+        return resultBean;
+    }
 
 }

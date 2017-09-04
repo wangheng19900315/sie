@@ -77,6 +77,20 @@ public class DormitoryServiceImpl extends BaseServiceImpl<DormitoryEntity,Intege
     }
 
     @Override
+    public List<DormitoryBean> getDormitoryList(List<HqlOperateVo> hqlOperateVos) {
+        List<DormitoryEntity> dormitoryEntities = dormitoryDao.getList(hqlOperateVos);
+        List<DormitoryBean> dormitoryBeanList = new ArrayList<>();
+
+        for(DormitoryEntity dormitoryEntity:dormitoryEntities){
+
+            DormitoryBean bean = new DormitoryBean();
+            setBeanValues(dormitoryEntity, bean);
+            dormitoryBeanList.add(bean);
+        }
+        return dormitoryBeanList;
+    }
+
+    @Override
     public DormitoryBean getDormitoryByProjectId(Integer projectId) {
         List<HqlOperateVo> hqlOperateVos = new ArrayList<>();
         hqlOperateVos.add(new HqlOperateVo("projectId","=",projectId.toString()));

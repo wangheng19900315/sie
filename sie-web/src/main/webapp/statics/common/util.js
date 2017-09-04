@@ -299,4 +299,28 @@ $(function(){
 
         $("#main-menu-inner .navigation").append(html);
     }
+
+    //绑定修改密码事件
+    $("#modifyPasswordSubmitBtn").bind("click",function(){
+        $.ajax({
+            url: '/user/modifyPassword.json',
+            type: 'post',
+            async:false,
+            dataType:'json',
+            data: $("#password-form").serializeJson(),
+            tranditional:true,
+            success: function (data) {
+                if (data.success) {
+                    alert("修改密码成功！");
+                    $("#detailCanclBtn").click();
+                    window.location.reload();
+                } else {
+                    alert(data.message);
+                }
+            },
+            error: function () {
+                alert("提交保存信息出现错误！");
+            }
+        });
+    })
 })

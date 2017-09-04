@@ -12,4 +12,6 @@ public interface UserService extends BaseService<UserEntity, Integer> {
 
     public Integer updateRole(Integer id, Integer roleId);
 
+    boolean modifyPassword(Integer id, String oldPassword,String newPassword);
+
 }
