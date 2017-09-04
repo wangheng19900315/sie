@@ -190,6 +190,12 @@ public class OrderServiceImpl extends BaseServiceImpl<OrderEntity,Integer> imple
             bean.setProjectNames(StringUtils.join(projectNameList, ","));
             bean.setCourseNumber(courseNumber);
 
+            for(OrderDetailEntity orderDetailEntity : orderEntity.getOrderDetailEntityList()){
+                OrderDetailBean orderDetailBean = new OrderDetailBean();
+                this.orderDetailService.setDetailBeanValues(orderDetailEntity,orderDetailBean);
+                bean.getOrderDetailBean().add(orderDetailBean);
+            }
+
         }catch (Exception e){
             e.printStackTrace();
         }

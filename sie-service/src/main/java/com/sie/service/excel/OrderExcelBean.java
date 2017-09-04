@@ -17,34 +17,38 @@ public class OrderExcelBean extends BaseBean{
 
     @ExcelField(title="订单号", align=2, sort=1)
     private String code;
-    @ExcelField(title="CR推荐码", align=2, sort=2)
-    private String crnName;
-    @ExcelField(title="优惠码", align=2, sort=3)
-    private String couponName;
-    @ExcelField(title="支付状态", align=2, sort=4)
-    private String statusName;
-    @ExcelField(title="支付时间", align=2, sort=5)
-    private String payTimeString;
-    @ExcelField(title="下单时间", align=2, sort=6)
-    private String createTimeString;
-    @ExcelField(title="备注", align=2, sort=7)
-    private String remark;
-    @ExcelField(title="订单类型", align=2, sort=8)
-    private Integer orderType;
-    @ExcelField(title="支付金额", align=2, sort=9)
-    private Double payMoney;
-    @ExcelField(title="支付类型", align=2, sort=10)
-    private String payTypeName;
-    @ExcelField(title="所属心痛", align=2, sort=11)
-    private String systemTypeName;
-
-    @ExcelField(title="学生名称", align=2, sort=12)
-    private String studentName;
-    @ExcelField(title="学生编号", align=2, sort=13)
+    @ExcelField(title="学生编号", align=2, sort=2)
     private String studentID;
+    @ExcelField(title="详情-项目ID", align=2, sort=3)
+    private String projectName;
+    @ExcelField(title="详情-课程数", align=2, sort=4)
+    private String courseCount;
+    @ExcelField(title="CR推荐码", align=2, sort=5)
+    private String crnName;
+    @ExcelField(title="优惠码", align=2, sort=6)
+    private String couponName;
+    @ExcelField(title="支付状态", align=2, sort=7)
+    private String statusName;
+    @ExcelField(title="支付时间", align=2, sort=8)
+    private String payTimeString;
+    @ExcelField(title="下单时间", align=2, sort=9)
+    private String createTimeString;
+    @ExcelField(title="备注", align=2, sort=10)
+    private String remark;
+    @ExcelField(title="订单类型", align=2, sort=11)
+    private Integer orderType;
+    @ExcelField(title="支付金额", align=2, sort=12)
+    private Double payMoney;
+    @ExcelField(title="支付类型", align=2, sort=13)
+    private String payTypeName;
+    @ExcelField(title="所属心痛", align=2, sort=14)
+    private String systemTypeName;
+    @ExcelField(title="学生名称", align=2, sort=15)
+    private String studentName;
 
 
-//    private List<OrderDetailBean> orderDetailBean = new ArrayList<>();
+
+
 
 
 
@@ -150,5 +154,21 @@ public class OrderExcelBean extends BaseBean{
 
     public void setCreateTimeString(String createTimeString) {
         this.createTimeString = createTimeString;
+    }
+
+    public String getProjectName() {
+        return projectName;
+    }
+
+    public void setProjectName(String projectName) {
+        this.projectName = projectName;
+    }
+
+    public String getCourseCount() {
+        return courseCount;
+    }
+
+    public void setCourseCount(String courseCount) {
+        this.courseCount = courseCount;
     }
 }
