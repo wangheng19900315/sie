@@ -32,4 +32,9 @@ public interface OrderService extends BaseService<OrderEntity, Integer> {
      * @return
      */
     ResultBean addOrder(OrderBean orderBean);
+
+    /**
+     * 取消订单
+     */
+    void cancelOrder();
 }

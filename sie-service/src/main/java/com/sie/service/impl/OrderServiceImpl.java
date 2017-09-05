@@ -1,6 +1,7 @@
 package com.sie.service.impl;
 
 import com.sie.framework.base.GenericDao;
+import com.sie.framework.base.HqlOperateVo;
 import com.sie.framework.dao.*;
 import com.sie.framework.entity.*;
 import com.sie.framework.type.OrderStatus;
@@ -233,7 +234,13 @@ public class OrderServiceImpl extends BaseServiceImpl<OrderEntity,Integer> imple
         }
 
         orderEntity.setSystemType(orderBean.getSystemType());
-        orderEntity.setPayType(PayStatus.SUBMIT.value());
+
+        if(NumberUtil.isSignless(orderBean.getPayType())){
+            orderEntity.setPayType(orderBean.getPayType());
+        }else{
+            orderEntity.setPayType(PayStatus.SUBMIT.value());
+        }
+
         orderEntity.setMoney(orderBean.getMoney());
 
         if(orderBean.getOrderDetailBean() == null || orderBean.getOrderDetailBean().size() == 0){
@@ -268,6 +275,8 @@ public class OrderServiceImpl extends BaseServiceImpl<OrderEntity,Integer> imple
             orderEntity.setCouponDiscount(0.0);
         }
 
+        orderEntity.setCrDiscount(0.0);
+        orderEntity.setCrEntity(null);
         //Fixme 是否需要增加cr优惠
         if(NumberUtil.isSignless(orderBean.getCrId())){
             CrEntity crEntity = this.crDao.getEntity(orderBean.getCrId());
@@ -283,8 +292,7 @@ public class OrderServiceImpl extends BaseServiceImpl<OrderEntity,Integer> imple
             orderEntity.setCrDiscount(0.0);
         }
 
-        orderEntity.setCrDiscount(0.0);
-        orderEntity.setCrEntity(null);
+
         orderEntity.setRemark(orderBean.getRemark());
         //Fixme 实际支付金额=总金额-cr优惠金额-优惠活动金额
         Double payMoney = NumberUtil.getDoubleScale(orderEntity.getMoney()-orderEntity.getCouponDiscount()-orderEntity.getCrDiscount(),0);
@@ -342,5 +350,14 @@ public class OrderServiceImpl extends BaseServiceImpl<OrderEntity,Integer> imple
         resultBean.setMessage("添加成功");
         resultBean.setSuccess(true);
         return resultBean;
+    }
+
+
+    @Override
+    public void cancelOrder() {
+        List<HqlOperateVo> operateVos = new ArrayList<>();
+        operateVos.add(new HqlOperateVo("","",""));
+        operateVos.add(new HqlOperateVo("status","",""));
+        operateVos.add(new HqlOperateVo("status","",""));
     }
 }
