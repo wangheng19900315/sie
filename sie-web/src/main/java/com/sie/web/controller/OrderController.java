@@ -12,6 +12,9 @@ import com.sie.service.excel.OrderExcelBean;
 import com.sie.service.excel.OrderImport;
 import com.sie.util.*;
 import org.apache.log4j.Logger;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.util.CellRangeAddress;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,9 +27,8 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletResponse;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.io.*;
+import java.util.*;
 
 /**
  * Created by wangheng on 2017/8/9.
@@ -44,34 +46,32 @@ public class OrderController {
     private OrderDetailService orderDetailService;
 
     @RequestMapping("/list.html")
-    public String list(){
+    public String list() {
         return "/order/list";
     }
 
 
     @RequestMapping("/detail.html")
-    public String detail(Model model, Integer id){
+    public String detail(Model model, Integer id) {
         model.addAttribute("id", id);
         return "/order/detail";
     }
 
     @RequestMapping("/update.html")
-    public String update(Model model, Integer id){
+    public String update(Model model, Integer id) {
         model.addAttribute("id", id);
         return "/order/update";
     }
 
 
-
-
     @RequestMapping("/list.json")
     @ResponseBody
-    public PageInfo<OrderBean> listJons(OrderSearchVo vo, Integer page, Integer rows){
+    public PageInfo<OrderBean> listJons(OrderSearchVo vo, Integer page, Integer rows) {
 
         PageInfo<OrderBean> pageInfo = null;
-        try{
-            pageInfo = this.orderService.getOrderList(page,rows, vo);
-        }catch (Exception e){
+        try {
+            pageInfo = this.orderService.getOrderList(page, rows, vo);
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -81,27 +81,27 @@ public class OrderController {
 
     @RequestMapping("/detail.json")
     @ResponseBody
-    public OrderBean detail(Integer orderId){
+    public OrderBean detail(Integer orderId) {
         OrderBean orderBean = null;
-        try{
-            orderBean  = this.orderService.getDetail(orderId);
-        }catch (Exception e){
+        try {
+            orderBean = this.orderService.getDetail(orderId);
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return orderBean;
     }
 
 
-    @RequestMapping(value = "/add.json",method = RequestMethod.POST)
+    @RequestMapping(value = "/add.json", method = RequestMethod.POST)
     @ResponseBody
-    public ResultBean add(String order){
+    public ResultBean add(String order) {
         ObjectMapper mapper = new ObjectMapper();
         ResultBean resultBean = new ResultBean();
 
-        try{
-            OrderBean orderBean = mapper.readValue(order,OrderBean.class);
+        try {
+            OrderBean orderBean = mapper.readValue(order, OrderBean.class);
             resultBean = this.orderService.addOrder(orderBean);
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -111,12 +111,12 @@ public class OrderController {
 
     @RequestMapping("/detailList.json")
     @ResponseBody
-    public PageInfo<OrderDetailBean> listJons(Integer page, Integer rows,Integer orderId ){
+    public PageInfo<OrderDetailBean> listJons(Integer page, Integer rows, Integer orderId) {
 
         PageInfo<OrderDetailBean> pageInfo = null;
-        try{
-            pageInfo = this.orderDetailService.getOrderDetailList(page,rows, orderId);
-        }catch (Exception e){
+        try {
+            pageInfo = this.orderDetailService.getOrderDetailList(page, rows, orderId);
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -124,17 +124,16 @@ public class OrderController {
     }
 
 
-
     @RequestMapping("/updateCourseIds.json")
     @ResponseBody
-    public ResultBean updateCourseIds(OrderDetailEntity detailEntity){
+    public ResultBean updateCourseIds(OrderDetailEntity detailEntity) {
 
         ResultBean resultBean = new ResultBean();
-        try{
-           this.orderDetailService.updateCourseIds(detailEntity);
+        try {
+            this.orderDetailService.updateCourseIds(detailEntity);
             resultBean.setSuccess(true);
             resultBean.setMessage("修改成功");
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -143,14 +142,14 @@ public class OrderController {
 
     @RequestMapping("/updateOrderInfo.json")
     @ResponseBody
-    public ResultBean updateOrderInfo(OrderEntity orderEntity){
+    public ResultBean updateOrderInfo(OrderEntity orderEntity) {
 
         ResultBean resultBean = new ResultBean();
-        try{
+        try {
             this.orderService.updateOrderInfo(orderEntity);
             resultBean.setSuccess(true);
             resultBean.setMessage("修改成功");
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -160,12 +159,12 @@ public class OrderController {
 
     @RequestMapping("/addCoursesAndDorm.json")
     @ResponseBody
-    public OrderBean updateOrderInfo(Integer orderId){
+    public OrderBean updateOrderInfo(Integer orderId) {
         //获取订单下边可以加个的课程和住宿
         OrderBean orderBean = null;
-        try{
-            orderBean  = this.orderService.getDetail(orderId);
-        }catch (Exception e){
+        try {
+            orderBean = this.orderService.getDetail(orderId);
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return orderBean;
@@ -173,21 +172,21 @@ public class OrderController {
 
     @RequestMapping(value = "/delete.json")
     @ResponseBody
-    public ResultBean delete(Integer id){
+    public ResultBean delete(Integer id) {
         ResultBean resultBean = new ResultBean();
         //判断是否可以删除
         OrderEntity orderEntity = orderService.get(id);
-        if(orderEntity != null){
+        if (orderEntity != null) {
             //判断是否可以删除
             OrderStatus status = OrderStatus.valueOf(orderEntity.getStatus());
-            if(status == OrderStatus.CANCEL){
-                try{
+            if (status == OrderStatus.CANCEL) {
+                try {
                     this.orderService.delete(id);
-                    if(NumberUtil.isSignless(id)){
+                    if (NumberUtil.isSignless(id)) {
                         resultBean.setMessage("删除成功");
                         resultBean.setSuccess(true);
                     }
-                }catch (Exception e){
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
@@ -196,30 +195,34 @@ public class OrderController {
     }
 
 
-
-
-
     @RequestMapping(value = "export.json")
     public String exportFile(OrderSearchVo vo, HttpServletResponse response, RedirectAttributes redirectAttributes) {
         try {
-            String fileName = "订单信息"+ DateUtil.format(new Date(), "yyyyMMddHHmmss")+".xlsx";
-            PageInfo<OrderBean> pageInfo = orderService.getOrderList(0,Integer.MAX_VALUE, vo);
+            String fileName = "订单信息" + DateUtil.format(new Date(), "yyyyMMddHHmmss") + ".xlsx";
+            PageInfo<OrderBean> pageInfo = orderService.getOrderList(0, Integer.MAX_VALUE, vo);
 
             List<OrderExcelBean> orderExcelBeanList = new ArrayList<>();
-            if(pageInfo.getRows() != null && pageInfo.getRows().size() > 0){
-                for(OrderBean orderBean:pageInfo.getRows()){
-                    OrderExcelBean orderExcelBean = new OrderExcelBean();
-                    BeanUtils.copyProperties(orderBean, orderExcelBean);
-                    if(orderBean.getCreateTime() != null){
-                        orderExcelBean.setCreateTimeString(DateUtil.format(orderBean.getCreateTime(), "yyyy-MM-dd"));
+            if (pageInfo.getRows() != null && pageInfo.getRows().size() > 0) {
+                for (OrderBean orderBean : pageInfo.getRows()) {
+
+                    for(OrderDetailBean orderDetailBean : orderBean.getOrderDetailBean()){
+                        OrderExcelBean orderExcelBean = new OrderExcelBean();
+                        BeanUtils.copyProperties(orderBean, orderExcelBean);
+                        if (orderBean.getCreateTime() != null) {
+                            orderExcelBean.setCreateTimeString(DateUtil.format(orderBean.getCreateTime(), "yyyy-MM-dd"));
+                        }
+                        if (orderBean.getPayTime() != null) {
+                            orderExcelBean.setPayTimeString(DateUtil.format(orderBean.getPayTime(), "yyyy-MM-dd"));
+                        }
+                        orderExcelBean.setProjectName(orderDetailBean.getProjectName());
+                        orderExcelBean.setCourseCount(orderDetailBean.getCourseCount()+"");
+                        orderExcelBeanList.add(orderExcelBean);
                     }
-                    if(orderBean.getPayTime() != null){
-                        orderExcelBean.setPayTimeString(DateUtil.format(orderBean.getPayTime(), "yyyy-MM-dd"));
-                    }
-                    orderExcelBeanList.add(orderExcelBean);
+
                 }
             }
-            new ExportExcel("订单信息", OrderExcelBean.class).setDataList(orderExcelBeanList).write(response, fileName).dispose();
+            new ExportExcel("订单信息", OrderExcelBean.class).setDataList(orderExcelBeanList).mergeCell(0, "2,3")
+                    .write(response, fileName).dispose();
             return null;
         } catch (Exception e) {
             e.printStackTrace();
@@ -265,5 +268,6 @@ public class OrderController {
         }
         return resultBean;
     }
+
 
 }

@@ -45,4 +45,9 @@ public interface OrderService extends BaseService<OrderEntity, Integer> {
      * @return
      */
     String importBean(List<OrderImport> orderImports,int start,int end);
+
+    /*
+     *  * 取消订单
+     */
+    void cancelOrder();
 }

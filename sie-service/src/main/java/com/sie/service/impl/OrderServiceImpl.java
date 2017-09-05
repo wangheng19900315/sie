@@ -1,6 +1,7 @@
 package com.sie.service.impl;
 
 import com.sie.framework.base.GenericDao;
+import com.sie.framework.base.HqlOperateVo;
 import com.sie.framework.dao.*;
 import com.sie.framework.entity.*;
 import com.sie.framework.type.*;
@@ -193,6 +194,12 @@ public class OrderServiceImpl extends BaseServiceImpl<OrderEntity,Integer> imple
             bean.setProjectNames(StringUtils.join(projectNameList, ","));
             bean.setCourseNumber(courseNumber);
 
+            for(OrderDetailEntity orderDetailEntity : orderEntity.getOrderDetailEntityList()){
+                OrderDetailBean orderDetailBean = new OrderDetailBean();
+                this.orderDetailService.setDetailBeanValues(orderDetailEntity,orderDetailBean);
+                bean.getOrderDetailBean().add(orderDetailBean);
+            }
+
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -230,7 +237,13 @@ public class OrderServiceImpl extends BaseServiceImpl<OrderEntity,Integer> imple
         }
 
         orderEntity.setSystemType(orderBean.getSystemType());
-        orderEntity.setPayType(PayStatus.SUBMIT.value());
+
+        if(NumberUtil.isSignless(orderBean.getPayType())){
+            orderEntity.setPayType(orderBean.getPayType());
+        }else{
+            orderEntity.setPayType(PayStatus.SUBMIT.value());
+        }
+
         orderEntity.setMoney(orderBean.getMoney());
 
         if(orderBean.getOrderDetailBean() == null || orderBean.getOrderDetailBean().size() == 0){
@@ -265,6 +278,8 @@ public class OrderServiceImpl extends BaseServiceImpl<OrderEntity,Integer> imple
             orderEntity.setCouponDiscount(0.0);
         }
 
+        orderEntity.setCrDiscount(0.0);
+        orderEntity.setCrEntity(null);
         //Fixme 是否需要增加cr优惠
         if(NumberUtil.isSignless(orderBean.getCrId())){
             CrEntity crEntity = this.crDao.getEntity(orderBean.getCrId());
@@ -280,20 +295,23 @@ public class OrderServiceImpl extends BaseServiceImpl<OrderEntity,Integer> imple
             orderEntity.setCrDiscount(0.0);
         }
 
-        orderEntity.setCrDiscount(0.0);
-        orderEntity.setCrEntity(null);
+
         orderEntity.setRemark(orderBean.getRemark());
         //Fixme 实际支付金额=总金额-cr优惠金额-优惠活动金额
-        Double payMoney = NumberUtil.getDoubleScale(orderEntity.getMoney()-orderEntity.getCouponDiscount()-orderEntity.getCrDiscount(),0);
-        orderEntity.setPayMoney(payMoney);
-
+        if(NumberUtil.isSignless(orderEntity.getPayMoney())){
+            Double totalMoney = NumberUtil.getDoubleScale(orderEntity.getPayMoney()+orderEntity.getCouponDiscount()+orderEntity.getCrDiscount(),0);
+            orderEntity.setMoney(totalMoney);
+        }else if(NumberUtil.isSignless(orderEntity.getMoney())){
+            Double payMoney = NumberUtil.getDoubleScale(orderEntity.getMoney()-orderEntity.getCouponDiscount()-orderEntity.getCrDiscount(),0);
+            orderEntity.setPayMoney(payMoney);
+        }
         this.orderDao.createEntity(orderEntity);
 
         //创建支付信息
         OrderPayEntity orderPayEntity = new OrderPayEntity();
         orderPayEntity.setOrderEntity(orderEntity);
         orderPayEntity.setPayStatus(PayStatus.SUBMIT.value());
-        orderPayEntity.setPayTotal(payMoney);
+        orderPayEntity.setPayTotal(orderEntity.getPayMoney());
         orderPayEntity.setPayType(orderBean.getPayType());
         this.orderPayDao.createEntity(orderPayEntity);
 
@@ -343,11 +361,11 @@ public class OrderServiceImpl extends BaseServiceImpl<OrderEntity,Integer> imple
 
     @Override
     public String importBean(List<OrderImport> orderImports, int start, int end) {
-        String result  = null;
+        String result = null;
 
-        String hql = "from StudentEntity where idNumber='" + orderImports.get(start).getStudentID() + "' or passportNumber='" + orderImports.get(start).getStudentID()+"'";
+        String hql = "from StudentEntity where idNumber='" + orderImports.get(start).getStudentID() + "' or passportNumber='" + orderImports.get(start).getStudentID() + "'";
         List<StudentEntity> studentEntities = this.studentDao.getList(hql);
-        if(studentEntities.size() == 0){
+        if (studentEntities.size() == 0) {
             return "学生信息不存在";
         }
 
@@ -358,7 +376,7 @@ public class OrderServiceImpl extends BaseServiceImpl<OrderEntity,Integer> imple
         String payTypeName = orderImports.get(start).getPayTypeName();
         //支付信息
         PayType payType = PayType.valueOfName(payTypeName);
-        if(payType != null){
+        if (payType != null) {
             orderBean.setPayType(payType.value());
         }
         orderBean.setPayMoney(orderImports.get(start).getPayMoney());
@@ -368,16 +386,16 @@ public class OrderServiceImpl extends BaseServiceImpl<OrderEntity,Integer> imple
         orderBean.setOrderTime(new Timestamp(orderImports.get(start).getOrderDate().getTime()));
         //订单状态
         OrderStatus orderStatus = OrderStatus.valueOfName(orderImports.get(start).getStatus());
-        if(orderStatus != null){
+        if (orderStatus != null) {
             orderBean.setStatus(orderStatus.value());
         }
 
         String crCode = orderImports.get(start).getCr();
         //订单CR推荐码 code进行处理
-        if(StringUtils.isNotBlank(crCode)){
+        if (StringUtils.isNotBlank(crCode)) {
             hql = "from CrEntity where code='" + crCode + "'";
             List<CrEntity> crEntities = crDao.getList(hql);
-            if(crEntities.size() != 1){
+            if (crEntities.size() != 1) {
                 return "CR推荐码有误";
             }
             orderBean.setCrId(crEntities.get(0).getId());
@@ -386,10 +404,10 @@ public class OrderServiceImpl extends BaseServiceImpl<OrderEntity,Integer> imple
 
         String couponCode = orderImports.get(start).getCoupon();
         //订单优惠码 code进行处理
-        if(StringUtils.isNotBlank(crCode)){
+        if (StringUtils.isNotBlank(crCode)) {
             hql = "from CouponEntity where code='" + couponCode + "'";
             List<CouponEntity> couponEntities = couponDao.getList(hql);
-            if(couponEntities.size() != 1){
+            if (couponEntities.size() != 1) {
                 return "优惠码有误";
             }
             orderBean.setCouponId(couponEntities.get(0).getId());
@@ -399,42 +417,42 @@ public class OrderServiceImpl extends BaseServiceImpl<OrderEntity,Integer> imple
 
         //设置订单明细
         List<OrderDetailBean> orderDetailBean = new ArrayList<>();
-        for(int i = start; i < end; i++){
+        for (int i = start; i < end; i++) {
             OrderDetailBean detailBean = new OrderDetailBean();
             String projectCode = orderImports.get(i).getProjectCode();
-            if(orderImports.get(i).getCourseNumber() == 0){
+            if (orderImports.get(i).getCourseNumber() == 0) {
                 //明细为宿舍 得到宿舍Id
                 hql = "from DormitoryEntity where code='" + projectCode + "'";
                 List<DormitoryEntity> dormitoryEntities = dormitoryDao.getList(hql);
-                if(dormitoryEntities.size() != 1){
-                    return orderImports.get(i).getProjectCode()+"宿舍信息有误";
+                if (dormitoryEntities.size() != 1) {
+                    return orderImports.get(i).getProjectCode() + "宿舍信息有误";
                 }
                 detailBean.setDormitoryId(dormitoryEntities.get(0).getId());
                 detailBean.setProjectId(dormitoryEntities.get(0).getProjectId());
-            }else{
+            } else {
                 //明细为课程
                 hql = "from ProjectEntity where code='" + projectCode + "'";
                 List<ProjectEntity> projectEntities = projectDao.getList(hql);
-                if(projectEntities.size() != 1){
-                    return orderImports.get(i).getProjectCode()+"项目信息有误";
+                if (projectEntities.size() != 1) {
+                    return orderImports.get(i).getProjectCode() + "项目信息有误";
                 }
                 detailBean.setProjectId(projectEntities.get(0).getId());
                 //处理课程
                 String[] courseIDs = orderImports.get(i).getCourseIDs().split(",");
                 List<Integer> courseIds = new ArrayList<>();
-                for(String courseID : courseIDs){
+                for (String courseID : courseIDs) {
                     //查找课程
                     hql = "from CourseEntity where courseID='" + courseID + "'";
                     List<CourseEntity> courseEntities = courseDao.getList(hql);
-                    if(courseEntities.size() != 1){
-                        return courseID+"课程不存在 ";
+                    if (courseEntities.size() != 1) {
+                        return courseID + "课程不存在 ";
                     }
-                    if(!projectEntities.get(0).getId().equals(courseEntities.get(0).getProjectId())){
-                        return courseID+"课程不在" + projectCode + "项目下 ";
+                    if (!projectEntities.get(0).getId().equals(courseEntities.get(0).getProjectId())) {
+                        return courseID + "课程不在" + projectCode + "项目下 ";
                     }
                     courseIds.add(courseEntities.get(0).getId());
                 }
-                detailBean.setCourseIds(StringUtils.join(courseIds,","));
+                detailBean.setCourseIds(StringUtils.join(courseIds, ","));
             }
             orderDetailBean.add(detailBean);
 
@@ -448,5 +466,13 @@ public class OrderServiceImpl extends BaseServiceImpl<OrderEntity,Integer> imple
             e.printStackTrace();
         }
         return result;
+    }
+
+    @Override
+    public void cancelOrder() {
+        List<HqlOperateVo> operateVos = new ArrayList<>();
+        operateVos.add(new HqlOperateVo("","",""));
+        operateVos.add(new HqlOperateVo("status","",""));
+        operateVos.add(new HqlOperateVo("status","",""));
     }
 }

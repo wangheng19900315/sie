@@ -9,6 +9,8 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.text.NumberFormat;
+import java.text.SimpleDateFormat;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
@@ -20,6 +22,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.sie.util.annotation.ExcelField;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.poi.hssf.usermodel.HSSFDateUtil;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.Comment;
@@ -434,42 +437,104 @@ public class ExportExcel {
 		wb.dispose();
 		return this;
 	}
-	
-//	/**
-//	 * 导出测试
-//	 */
-//	public static void main(String[] args) throws Throwable {
-//		
-//		List<String> headerList = Lists.newArrayList();
-//		for (int i = 1; i <= 10; i++) {
-//			headerList.add("表头"+i);
-//		}
-//		
-//		List<String> dataRowList = Lists.newArrayList();
-//		for (int i = 1; i <= headerList.size(); i++) {
-//			dataRowList.add("数据"+i);
-//		}
-//		
-//		List<List<String>> dataList = Lists.newArrayList();
-//		for (int i = 1; i <=1000000; i++) {
-//			dataList.add(dataRowList);
-//		}
-//
-//		ExportExcel ee = new ExportExcel("表格标题", headerList);
-//		
-//		for (int i = 0; i < dataList.size(); i++) {
-//			Row row = ee.addRow();
-//			for (int j = 0; j < dataList.get(i).size(); j++) {
-//				ee.addCell(row, j, dataList.get(i).get(j));
-//			}
-//		}
-//		
-//		ee.writeFile("target/export.xlsx");
-//
-//		ee.dispose();
-//		
-//		log.debug("Export success.");
-//		
-//	}
+
+
+	/**
+	 * 合并excel列
+	 * @param mergeColumn 已该列为合并标示
+	 * @param excludeIds 表示这些列是不合并的
+	 * @return
+     */
+	public ExportExcel mergeCell(Integer mergeColumn, String excludeIds){
+
+		Map<String, String> maps = new HashMap<String, String>();
+		if(StringUtil.isNotBlank(excludeIds)){
+			for(String str:excludeIds.split(",")){
+				maps.put(str, str);
+			}
+		}
+
+		if(this.sheet.getLastRowNum() < 3){
+			return this;
+		}
+
+		Row row = this.getRow(2);
+		String oldValue =  this.getCellValue(row, mergeColumn).toString();
+		for (int i = 3; i <= this.sheet.getLastRowNum(); i++) {
+			int column = 0;
+			row = this.getRow(i);
+			Object val = this.getCellValue(row, mergeColumn);
+			if(oldValue.equals(val)){
+				for (Object[] os : annotationList) {
+					if(maps.get(column+"") == null){
+						this.sheet.addMergedRegion(new CellRangeAddress((i-1),(i),column,column));
+					}
+					column++;
+				}
+
+			}else{
+				oldValue = val.toString();
+			}
+
+
+
+
+		}
+		return this;
+	}
+
+
+	/**
+	 * 获取行对象
+	 * @param rownum
+	 * @return
+	 */
+	public Row getRow(int rownum){
+		return this.sheet.getRow(rownum);
+	}
+
+
+
+	/**
+	 * 获取单元格值
+	 * @param row 获取的行
+	 * @param column 获取单元格列号
+	 * @return 单元格值
+	 */
+	public Object getCellValue(Row row, int column) {
+		Object val = "";
+		try {
+			Cell cell = row.getCell(column);
+			if (cell != null) {
+				if (cell.getCellType() == Cell.CELL_TYPE_NUMERIC) {
+					// val = cell.getNumericCellValue();
+					// 当excel 中的数据为数值或日期是需要特殊处理
+					if (HSSFDateUtil.isCellDateFormatted(cell)) {
+						double d = cell.getNumericCellValue();
+						Date date = HSSFDateUtil.getJavaDate(d);
+						SimpleDateFormat dformat = new SimpleDateFormat(
+								"yyyy-MM-dd");
+						val = dformat.format(date);
+					} else {
+						NumberFormat nf = NumberFormat.getInstance();
+						nf.setGroupingUsed(false);// true时的格式：1,234,567,890
+						val = nf.format(cell.getNumericCellValue());// 数值类型的数据为double，所以需要转换一下
+					}
+				} else if (cell.getCellType() == Cell.CELL_TYPE_STRING) {
+					val = cell.getStringCellValue();
+				} else if (cell.getCellType() == Cell.CELL_TYPE_FORMULA) {
+					val = cell.getCellFormula();
+				} else if (cell.getCellType() == Cell.CELL_TYPE_BOOLEAN) {
+					val = cell.getBooleanCellValue();
+				} else if (cell.getCellType() == Cell.CELL_TYPE_ERROR) {
+					val = cell.getErrorCellValue();
+				}
+			}
+		} catch (Exception e) {
+			return val;
+		}
+		return val;
+	}
+
 
 }

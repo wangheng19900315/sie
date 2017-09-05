@@ -5,6 +5,7 @@ import com.sie.framework.dao.UserDao;
 import com.sie.framework.entity.RoleEntity;
 import com.sie.framework.entity.UserEntity;
 import com.sie.framework.help.ApplicationHelp;
+import com.sie.framework.type.PayType;
 import com.sie.service.UserService;
 import com.sie.util.Md5Util;
 import com.sie.util.NumberUtil;
