@@ -7,6 +7,7 @@ import com.sie.framework.dao.OrderDetailDao;
 import com.sie.framework.entity.OrderDetailEntity;
 import com.sie.framework.entity.OrderEntity;
 import com.sie.framework.type.OrderDetailStatus;
+import com.sie.service.CourseService;
 import com.sie.service.GradeService;
 import com.sie.service.OrderDetailService;
 import com.sie.service.bean.OrderBean;
@@ -35,6 +36,9 @@ public class OrderDetailServiceImpl extends BaseServiceImpl<OrderDetailEntity,In
 
     @Autowired
     private OrderDetailDao orderDetailDao;
+
+    @Autowired
+    private CourseService courseService;
 
     @Autowired
     OrderDetailServiceImpl(GenericDao<OrderDetailEntity, Integer> orderDetailDao) {
@@ -114,6 +118,9 @@ public class OrderDetailServiceImpl extends BaseServiceImpl<OrderDetailEntity,In
     public void updateCourseIds(OrderDetailEntity detailEntity) {
         OrderDetailEntity oldEntity = this.orderDetailDao.getEntity(detailEntity.getId());
         if(oldEntity != null){
+
+            this.courseService.updateCourseCount(oldEntity.getCourseIds(), oldEntity.getOrderEntity().getSystemType(),oldEntity.getOrderEntity().getOrderType(), -1);
+            this.courseService.updateCourseCount(detailEntity.getCourseIds(), oldEntity.getOrderEntity().getSystemType(),oldEntity.getOrderEntity().getOrderType(), 1);
             oldEntity.setCourseIds(detailEntity.getCourseIds());
             this.orderDetailDao.updateEntity(oldEntity);
 

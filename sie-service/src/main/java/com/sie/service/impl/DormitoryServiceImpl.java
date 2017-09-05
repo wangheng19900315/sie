@@ -117,4 +117,21 @@ public class DormitoryServiceImpl extends BaseServiceImpl<DormitoryEntity,Intege
 
 
     }
+
+
+    public void updateStudentCount(Integer id, String sex, Integer flag){
+        if(!NumberUtil.isSignless(id)){
+            return;
+        }
+
+        DormitoryEntity dormitoryEntity = this.get(id);
+        if(dormitoryEntity == null){
+            throw new RuntimeException("id 为 "+id+"宿舍为空，请检查参数");
+        }
+        if("男".equals(sex)){
+            dormitoryEntity.setManNumber(dormitoryEntity.getManNumber()+flag);
+        }else{
+            dormitoryEntity.setWomanNumber(dormitoryEntity.getWomanNumber()+flag);
+        }
+    }
 }
