@@ -42,7 +42,7 @@ $(function(){
         height: '100%',
         mtype: 'post',
         postData: {},
-        colNames: ['ID','订单号','创建时间','提交系统','订单类型','学生姓名','学生ID','支付金额','订单状态','订单状态','支付时间','项目名称','课程数' ],
+        colNames: ['ID','订单号','创建时间','systemType','提交系统','订单类型','学生姓名','学生ID','支付金额','订单状态','订单状态','支付时间','项目名称','课程数' ],
         colModel: [
             {name: 'id', index: 'id', width: 20, hidden: true, sorttype: "int", sortable: false},
             {name: 'code', index: 'code', width: 120, sortable: false},
@@ -51,6 +51,7 @@ $(function(){
                 return time1;
             }
             },
+            {name: 'systemType', index: 'systemType', hidden: true,width: 120, sortable: false},
             {name: 'systemTypeName', index: 'systemTypeName', width: 120, sortable: false},
             {name: 'orderTypeName', index: 'orderTypeName', width: 120, sortable: false},
             {name: 'studentChineseName', index: 'studentChineseName', width: 120, sortable: false},
@@ -130,6 +131,7 @@ $(function(){
     $("#refundBtn").bind("click",function(){
         $("#myModalLabel").html("退款");
         var id = $("#grid-table").jqGrid('getGridParam', 'selrow');
+        var objRow =$("#grid-table").jqGrid('getRowData', id);
         $.ajax({
             url: '/order/detail.json?orderId='+id,
             type: 'get',
@@ -140,6 +142,7 @@ $(function(){
                     var detail = json.orderDetailBean;
                     $("#studentId").val(json.studentId);
                     $("#status").val(4);//申请退款
+                    $("#systemType").val(objRow.systemType);//订单系统
                     var html;
                     $("#details").empty();
                     $.each(detail,function(i,item){
@@ -179,6 +182,7 @@ $(function(){
     $("#addOrderBtn").bind("click",function(){
         $("#myModalLabel").html("加课");
         var id = $("#grid-table").jqGrid('getGridParam', 'selrow');
+        var objRow =$("#grid-table").jqGrid('getRowData', id);
         $.ajax({
             url: '/order/detail.json?orderId='+id,
             type: 'get',
@@ -189,6 +193,7 @@ $(function(){
                     var detail = json.orderDetailBean;
                     $("#studentId").val(json.studentId);
                     $("#status").val(1);//提交订单
+                    $("#systemType").val(objRow.systemType);//订单系统
                     var html;
                     $("#details").empty();
                     $.each(detail,function(i,item){

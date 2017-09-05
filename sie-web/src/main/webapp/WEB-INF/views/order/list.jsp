@@ -108,6 +108,8 @@
                     <form   class="form-horizontal" novalidate="novalidate" id="details-form">
                         <input type="hidden" id="studentId" name="studentId" value="">
                         <input type="hidden" id="status" name="status" value="">
+                        <input type="hidden" id="orderType" name="orderType" value="2">
+                        <input type="hidden" id="systemType" name="systemType" value="">
                         <div id="details"></div>
                         <div class="form-group ">
                             <label  class="col-sm-2 control-label">金额</label>
