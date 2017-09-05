@@ -3,24 +3,25 @@ package com.sie.service.impl;
 import com.sie.framework.base.GenericDao;
 import com.sie.framework.dao.*;
 import com.sie.framework.entity.*;
-import com.sie.framework.type.OrderStatus;
-import com.sie.framework.type.OrderType;
-import com.sie.framework.type.PayStatus;
-import com.sie.framework.type.SystemType;
+import com.sie.framework.type.*;
 import com.sie.framework.vo.OrderSearchVo;
 import com.sie.service.GradeService;
 import com.sie.service.OrderDetailService;
 import com.sie.service.OrderService;
 import com.sie.service.bean.*;
+import com.sie.service.excel.OrderImport;
 import com.sie.util.DateUtil;
 import com.sie.util.NumberUtil;
 import com.sie.util.PageUtil;
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.lang.StringUtils;
+import org.apache.poi.util.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -65,6 +66,8 @@ public class OrderServiceImpl extends BaseServiceImpl<OrderEntity,Integer> imple
     @Autowired
     private GradeService gradeService;
 
+    @Autowired
+    private CourseDao courseDao;
 
 
     @Override
@@ -336,5 +339,114 @@ public class OrderServiceImpl extends BaseServiceImpl<OrderEntity,Integer> imple
         resultBean.setMessage("添加成功");
         resultBean.setSuccess(true);
         return resultBean;
+    }
+
+    @Override
+    public String importBean(List<OrderImport> orderImports, int start, int end) {
+        String result  = null;
+
+        String hql = "from StudentEntity where idNumber='" + orderImports.get(start).getStudentID() + "' or passportNumber='" + orderImports.get(start).getStudentID()+"'";
+        List<StudentEntity> studentEntities = this.studentDao.getList(hql);
+        if(studentEntities.size() == 0){
+            return "学生信息不存在";
+        }
+
+        //设置orderbean的值
+        OrderBean orderBean = new OrderBean();
+        orderBean.setStudentId(studentEntities.get(0).getId());
+
+        String payTypeName = orderImports.get(start).getPayTypeName();
+        //支付信息
+        PayType payType = PayType.valueOfName(payTypeName);
+        if(payType != null){
+            orderBean.setPayType(payType.value());
+        }
+        orderBean.setPayMoney(orderImports.get(start).getPayMoney());
+        //TODO 时间合并
+        orderBean.setPayTime(new Timestamp(orderImports.get(start).getPayDate().getTime()));
+
+        orderBean.setOrderTime(new Timestamp(orderImports.get(start).getOrderDate().getTime()));
+        //订单状态
+        OrderStatus orderStatus = OrderStatus.valueOfName(orderImports.get(start).getStatus());
+        if(orderStatus != null){
+            orderBean.setStatus(orderStatus.value());
+        }
+
+        String crCode = orderImports.get(start).getCr();
+        //订单CR推荐码 code进行处理
+        if(StringUtils.isNotBlank(crCode)){
+            hql = "from CrEntity where code='" + crCode + "'";
+            List<CrEntity> crEntities = crDao.getList(hql);
+            if(crEntities.size() != 1){
+                return "CR推荐码有误";
+            }
+            orderBean.setCrId(crEntities.get(0).getId());
+        }
+
+
+        String couponCode = orderImports.get(start).getCoupon();
+        //订单优惠码 code进行处理
+        if(StringUtils.isNotBlank(crCode)){
+            hql = "from CouponEntity where code='" + couponCode + "'";
+            List<CouponEntity> couponEntities = couponDao.getList(hql);
+            if(couponEntities.size() != 1){
+                return "优惠码有误";
+            }
+            orderBean.setCouponId(couponEntities.get(0).getId());
+        }
+
+        orderBean.setRemark(orderImports.get(start).getRemark() + orderImports.get(start).getPayInfo());
+
+        //设置订单明细
+        List<OrderDetailBean> orderDetailBean = new ArrayList<>();
+        for(int i = start; i < end; i++){
+            OrderDetailBean detailBean = new OrderDetailBean();
+            String projectCode = orderImports.get(i).getProjectCode();
+            if(orderImports.get(i).getCourseNumber() == 0){
+                //明细为宿舍 得到宿舍Id
+                hql = "from DormitoryEntity where code='" + projectCode + "'";
+                List<DormitoryEntity> dormitoryEntities = dormitoryDao.getList(hql);
+                if(dormitoryEntities.size() != 1){
+                    return orderImports.get(i).getProjectCode()+"宿舍信息有误";
+                }
+                detailBean.setDormitoryId(dormitoryEntities.get(0).getId());
+                detailBean.setProjectId(dormitoryEntities.get(0).getProjectId());
+            }else{
+                //明细为课程
+                hql = "from ProjectEntity where code='" + projectCode + "'";
+                List<ProjectEntity> projectEntities = projectDao.getList(hql);
+                if(projectEntities.size() != 1){
+                    return orderImports.get(i).getProjectCode()+"项目信息有误";
+                }
+                detailBean.setProjectId(projectEntities.get(0).getId());
+                //处理课程
+                String[] courseIDs = orderImports.get(i).getCourseIDs().split(",");
+                List<Integer> courseIds = new ArrayList<>();
+                for(String courseID : courseIDs){
+                    //查找课程
+                    hql = "from CourseEntity where courseID='" + courseID + "'";
+                    List<CourseEntity> courseEntities = courseDao.getList(hql);
+                    if(courseEntities.size() != 1){
+                        return courseID+"课程不存在 ";
+                    }
+                    if(!projectEntities.get(0).getId().equals(courseEntities.get(0).getProjectId())){
+                        return courseID+"课程不在" + projectCode + "项目下 ";
+                    }
+                    courseIds.add(courseEntities.get(0).getId());
+                }
+                detailBean.setCourseIds(StringUtils.join(courseIds,","));
+            }
+            orderDetailBean.add(detailBean);
+
+        }
+        orderBean.setOrderDetailBean(orderDetailBean);
+
+        try {
+//            addOrder(orderBean);
+        } catch (Exception e) {
+            result = "信息出错";
+            e.printStackTrace();
+        }
+        return result;
     }
 }

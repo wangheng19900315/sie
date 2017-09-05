@@ -44,6 +44,25 @@ public enum  OrderStatus {
         }
         return null;
     }
+    public static OrderStatus valueOfName(String value) {
+        value = value.trim();
+        switch (value) {
+
+            case "未支付":
+                return SUBMIT;
+            case "已完成":
+                return COMPLETE;
+            case "已退款":
+                return REFUND;
+            case "退款中":
+                return APPLY;
+            case "已取消":
+                return CANCEL;
+
+            default:
+                return null;
+        }
+    }
 
     private int value;
 
@@ -67,15 +86,15 @@ public enum  OrderStatus {
         switch (this) {
 
             case SUBMIT:
-                return "已提交";
+                return "未支付";
             case COMPLETE:
                 return "已完成";
             case REFUND:
                 return "已退款";
             case APPLY:
-                return "申请退款";
+                return "退款中";
             case CANCEL:
-                return "取消";
+                return "已取消";
 
             default:
                 return "未定义";

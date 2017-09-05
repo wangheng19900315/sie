@@ -1,6 +1,5 @@
 package com.sie.service.excel;
 
-import com.sie.service.bean.BaseBean;
 import com.sie.util.annotation.ExcelField;
 
 import java.sql.Time;
@@ -14,6 +13,7 @@ public class OrderImport {
     private String studentID;
     private String projectCode;
     private Integer courseNumber;
+    private String courseIDs;
     private String cr;
     private String coupon;
     private String remark;
@@ -21,7 +21,7 @@ public class OrderImport {
     private Double payMoney;
     private String status;
     private String payTypeName;
-    private String orderDate;
+    private Date orderDate;
     private Date payDate;
     private Time payTime;
 
@@ -52,7 +52,16 @@ public class OrderImport {
         this.courseNumber = courseNumber;
     }
 
-    @ExcelField(title="CR推荐码", align=2, sort=4)
+    @ExcelField(title="课程ID", align=2, sort=4)
+    public String getCourseIDs() {
+        return courseIDs;
+    }
+
+    public void setCourseIDs(String courseIDs) {
+        this.courseIDs = courseIDs;
+    }
+
+    @ExcelField(title="CR推荐码", align=2, sort=5)
     public String getCr() {
         return cr;
     }
@@ -61,7 +70,7 @@ public class OrderImport {
         this.cr = cr;
     }
 
-    @ExcelField(title="优惠码", align=2, sort=5)
+    @ExcelField(title="优惠码", align=2, sort=6)
     public String getCoupon() {
         return coupon;
     }
@@ -70,7 +79,7 @@ public class OrderImport {
         this.coupon = coupon;
     }
 
-    @ExcelField(title="备注", align=2, sort=6)
+    @ExcelField(title="备注", align=2, sort=7)
     public String getRemark() {
         return remark;
     }
@@ -79,7 +88,7 @@ public class OrderImport {
         this.remark = remark;
     }
 
-    @ExcelField(title="支付信息", align=2, sort=7)
+    @ExcelField(title="支付信息", align=2, sort=8)
     public String getPayInfo() {
         return payInfo;
     }
@@ -88,7 +97,7 @@ public class OrderImport {
         this.payInfo = payInfo;
     }
 
-    @ExcelField(title="金额", align=2, sort=8)
+    @ExcelField(title="金额", align=2, sort=9)
     public Double getPayMoney() {
         return payMoney;
     }
@@ -97,7 +106,7 @@ public class OrderImport {
         this.payMoney = payMoney;
     }
 
-    @ExcelField(title="状态", align=2, sort=9)
+    @ExcelField(title="状态", align=2, sort=10)
     public String getStatus() {
         return status;
     }
@@ -106,7 +115,7 @@ public class OrderImport {
         this.status = status;
     }
 
-    @ExcelField(title="支付类型", align=2, sort=10)
+    @ExcelField(title="支付类型", align=2, sort=11)
     public String getPayTypeName() {
         return payTypeName;
     }
@@ -115,16 +124,16 @@ public class OrderImport {
         this.payTypeName = payTypeName;
     }
 
-    @ExcelField(title="下单日期", align=2, sort=11)
-    public String getOrderDate() {
+    @ExcelField(title="下单日期", align=2, sort=12)
+    public Date getOrderDate() {
         return orderDate;
     }
 
-    public void setOrderDate(String orderDate) {
+    public void setOrderDate(Date orderDate) {
         this.orderDate = orderDate;
     }
 
-    @ExcelField(title="支付日期", align=2, sort=12)
+    @ExcelField(title="支付日期", align=2, sort=13)
     public Date getPayDate() {
         return payDate;
     }
@@ -133,7 +142,7 @@ public class OrderImport {
         this.payDate = payDate;
     }
 
-    @ExcelField(title="支付时间", align=2, sort=13)
+    @ExcelField(title="支付时间", align=2, sort=14)
     public Time getPayTime() {
         return payTime;
     }

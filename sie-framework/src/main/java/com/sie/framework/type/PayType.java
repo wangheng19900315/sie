@@ -41,6 +41,24 @@ public enum PayType {
         return null;
     }
 
+    public static PayType valueOfName(String value) {
+        value = value.trim();
+        switch (value) {
+
+            case "微信":
+                return WECHAT;
+            case "支付宝":
+                return AIPAY;
+            case "银联":
+                return UNION;
+            case "人工":
+                return MANUAL;
+
+            default:
+                return null;
+        }
+    }
+
     private int value;
 
     PayType(int value) {

@@ -41,6 +41,7 @@ public class OrderBean  extends BaseBean{
     private Double couponDiscount; //优惠卷优惠金额
     private Integer systemType;
     private String systemTypeName;
+    private Timestamp orderTime;
 
     private String projectNames;
     private Integer courseNumber;
@@ -309,5 +310,13 @@ public class OrderBean  extends BaseBean{
 
     public void setOrderType(Integer orderType) {
         this.orderType = orderType;
+    }
+
+    public Timestamp getOrderTime() {
+        return orderTime;
+    }
+
+    public void setOrderTime(Timestamp orderTime) {
+        this.orderTime = orderTime;
     }
 }

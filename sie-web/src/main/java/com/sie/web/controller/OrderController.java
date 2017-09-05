@@ -241,15 +241,24 @@ public class OrderController {
                 resultBean.setMessage("excel数据为空，请检查文件");
                 return resultBean;
             }
-//            for(int i=0; i<list.size(); i++){
-//                String flag = this.gradeSendService.importBean(list.get(i));
-//                if(StringUtil.isNotBlank(flag)){
-//                    failureMsg.append("<p>第"+(i+2)+"行:"+flag+"</p>") ;
-//                    failureNum ++;
-//                }else{
-//                    successNum++;
-//                }
-//            }
+            int start,end;//订单开始和结束的位置
+            for(int i=0; i<list.size(); ){
+                String studentID = list.get(i).getStudentID();
+                start = i;
+                end = i+1;
+                //订单合并单元格
+                while (end < list.size() && studentID.equals(list.get(end).getStudentID())){
+                    end++;
+                }
+                String flag = this.orderService.importBean(list,start,end);
+                if(StringUtil.isNotBlank(flag)){
+                    failureMsg.append("<p>第"+(i+2)+"行:"+flag+"</p>") ;
+                    failureNum ++;
+                }else{
+                    successNum++;
+                }
+                i = end;
+            }
             resultBean.setMessage("导入完毕，成功导入"+successNum+"条,导入失败"+failureNum+"条;"+failureMsg.toString());
         } catch (Exception e) {
             e.printStackTrace();

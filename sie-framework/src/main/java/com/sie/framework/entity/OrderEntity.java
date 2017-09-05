@@ -27,6 +27,7 @@ public class OrderEntity extends BaseEntity {
     private CouponEntity couponEntity;
     private Integer systemType;
     private StudentEntity studentEntity;
+    private Timestamp orderTime;
 
 
 
@@ -190,5 +191,15 @@ public class OrderEntity extends BaseEntity {
 
     public void setPayType(Integer payType) {
         this.payType = payType;
+    }
+
+    @Basic
+    @Column(name = "order_time")
+    public Timestamp getOrderTime() {
+        return orderTime;
+    }
+
+    public void setOrderTime(Timestamp orderTime) {
+        this.orderTime = orderTime;
     }
 }

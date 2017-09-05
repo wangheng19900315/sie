@@ -2,9 +2,13 @@ package com.sie.service;
 
 import com.sie.framework.entity.OrderEntity;
 import com.sie.framework.vo.OrderSearchVo;
+import com.sie.service.bean.GradeSendBean;
 import com.sie.service.bean.OrderBean;
 import com.sie.service.bean.PageInfo;
 import com.sie.service.bean.ResultBean;
+import com.sie.service.excel.OrderImport;
+
+import java.util.List;
 
 /**
  * Created by wangheng on 2017/8/9.
@@ -32,4 +36,13 @@ public interface OrderService extends BaseService<OrderEntity, Integer> {
      * @return
      */
     ResultBean addOrder(OrderBean orderBean);
+
+    /**
+     * 导入订单
+     * @param orderImports
+     * @param start
+     * @param end
+     * @return
+     */
+    String importBean(List<OrderImport> orderImports,int start,int end);
 }
