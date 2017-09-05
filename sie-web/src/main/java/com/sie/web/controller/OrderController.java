@@ -70,7 +70,7 @@ public class OrderController {
 
         PageInfo<OrderBean> pageInfo = null;
         try {
-            pageInfo = this.orderService.getOrderList(page, rows, vo);
+            pageInfo = this.orderService.getOrderList(page, rows, vo.transToHqlOperateVo());
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -199,27 +199,24 @@ public class OrderController {
     public String exportFile(OrderSearchVo vo, HttpServletResponse response, RedirectAttributes redirectAttributes) {
         try {
             String fileName = "订单信息" + DateUtil.format(new Date(), "yyyyMMddHHmmss") + ".xlsx";
-            PageInfo<OrderBean> pageInfo = orderService.getOrderList(0, Integer.MAX_VALUE, vo);
-
+            List<OrderBean> gradeBeanList = orderService.getOrderList(vo.transToHqlOperateVo());
             List<OrderExcelBean> orderExcelBeanList = new ArrayList<>();
-            if (pageInfo.getRows() != null && pageInfo.getRows().size() > 0) {
-                for (OrderBean orderBean : pageInfo.getRows()) {
+            for (OrderBean orderBean : gradeBeanList) {
 
-                    for(OrderDetailBean orderDetailBean : orderBean.getOrderDetailBean()){
-                        OrderExcelBean orderExcelBean = new OrderExcelBean();
-                        BeanUtils.copyProperties(orderBean, orderExcelBean);
-                        if (orderBean.getCreateTime() != null) {
-                            orderExcelBean.setCreateTimeString(DateUtil.format(orderBean.getCreateTime(), "yyyy-MM-dd"));
-                        }
-                        if (orderBean.getPayTime() != null) {
-                            orderExcelBean.setPayTimeString(DateUtil.format(orderBean.getPayTime(), "yyyy-MM-dd"));
-                        }
-                        orderExcelBean.setProjectName(orderDetailBean.getProjectName());
-                        orderExcelBean.setCourseCount(orderDetailBean.getCourseCount()+"");
-                        orderExcelBeanList.add(orderExcelBean);
+                for(OrderDetailBean orderDetailBean : orderBean.getOrderDetailBean()){
+                    OrderExcelBean orderExcelBean = new OrderExcelBean();
+                    BeanUtils.copyProperties(orderBean, orderExcelBean);
+                    if (orderBean.getCreateTime() != null) {
+                        orderExcelBean.setCreateTimeString(DateUtil.format(orderBean.getCreateTime(), "yyyy-MM-dd"));
                     }
-
+                    if (orderBean.getPayTime() != null) {
+                        orderExcelBean.setPayTimeString(DateUtil.format(orderBean.getPayTime(), "yyyy-MM-dd"));
+                    }
+                    orderExcelBean.setProjectName(orderDetailBean.getProjectName());
+                    orderExcelBean.setCourseCount(orderDetailBean.getCourseCount()+"");
+                    orderExcelBeanList.add(orderExcelBean);
                 }
+
             }
             new ExportExcel("订单信息", OrderExcelBean.class).setDataList(orderExcelBeanList).mergeCell(0, "2,3")
                     .write(response, fileName).dispose();
@@ -262,6 +259,7 @@ public class OrderController {
                 }
                 i = end;
             }
+            resultBean.setSuccess(true);
             resultBean.setMessage("导入完毕，成功导入"+successNum+"条,导入失败"+failureNum+"条;"+failureMsg.toString());
         } catch (Exception e) {
             e.printStackTrace();

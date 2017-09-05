@@ -1,5 +1,6 @@
 package com.sie.service;
 
+import com.sie.framework.base.HqlOperateVo;
 import com.sie.framework.entity.OrderEntity;
 import com.sie.framework.vo.OrderSearchVo;
 import com.sie.service.bean.GradeSendBean;
@@ -17,7 +18,9 @@ public interface OrderService extends BaseService<OrderEntity, Integer> {
 
 
 
-    PageInfo<OrderBean> getOrderList(Integer page, Integer rows, OrderSearchVo vo);
+    PageInfo<OrderBean> getOrderList(Integer page, Integer rows, List<HqlOperateVo> hqlOperateVoList);
+
+    List<OrderBean> getOrderList(List<HqlOperateVo> hqlOperateVoList);
 
     public OrderBean getDetail(Integer id);
 

@@ -134,21 +134,21 @@ public class GenericDaoImpl<T extends BaseEntity, PK extends Serializable> imple
 
 	@Override
 	public List<T> getList(List<HqlOperateVo> hqlOperateVos, int firstResult, int maxResults) {
-		String hql = "from " + clazz.getName() + " where hdelete=0 ";
+		String hql = "select distinct entity  from " + clazz.getName() +" entity";
 		hql = this.getHql(hql, hqlOperateVos);
 		return this.getList(hql, firstResult, maxResults);
 	}
 
 	@Override
 	public List<T> getList(List<HqlOperateVo> hqlOperateVos) {
-		String hql = "from " + clazz.getName() + " where hdelete=0 ";
+		String hql = "from " + clazz.getName()   ;
 		hql = this.getHql(hql, hqlOperateVos);
 		return this.getList(hql);
 	}
 
 	@Override
 	public Integer getCount( List<HqlOperateVo> hqlOperateVos) {
-		String hql = "select count(entity) from " + clazz.getName() + " entity where hdelete=0";
+		String hql = "select count(entity) from " + clazz.getName() + " entity  ";
 		hql = this.getHql(hql, hqlOperateVos);
 		return this.getList_count(hql);
 	}
@@ -156,16 +156,19 @@ public class GenericDaoImpl<T extends BaseEntity, PK extends Serializable> imple
 	private String  getHql(String hql, List<HqlOperateVo> hqlOperateVos){
 		if(hqlOperateVos != null && hqlOperateVos.size() > 0){
 			for(HqlOperateVo vo:hqlOperateVos){
-
+				if("join".equals(vo.getOperate())){
+					hql += vo.getName();
+				}
 				if(StringUtils.isEmpty(vo.getValue())){
 					continue;
 				}
-				hql += " and ";
-//				if(hql.indexOf("where") > -1){
-//					hql += " and ";
-//				}else{
-//					hql += " where ";
-//				}
+
+
+				if(hql.indexOf("where") > -1){
+					hql += " and ";
+				}else{
+					hql += " where ";
+				}
 
 				if("like".equals(vo.getOperate())){
 					hql += " "+vo.getName()+" like '%"+vo.getValue()+"%'";
@@ -174,6 +177,13 @@ public class GenericDaoImpl<T extends BaseEntity, PK extends Serializable> imple
 				}
 			}
 		}
+
+		if(hql.indexOf("where") > -1){
+			hql += " and entity.hdelete=0 order by entity.id desc";
+		}else{
+			hql += " where entity.hdelete=0 order by entity.id desc";
+		}
+
 
 		return hql;
 	}

@@ -351,7 +351,7 @@ $(function(){
     })
 
 
-    $("#submitBtn").bind("click", function(){
+    $("#importSubmitBtn").bind("click", function(){
         var formData = new FormData(document.getElementById("fileFrom"));
         $.ajax({
             url: '/order/import.json',
@@ -363,8 +363,9 @@ $(function(){
             contentType:false,
             success: function (data) {
                 if (data.success) {
-                    alert("导入数据成功！");
-                    search();
+                    //alert("导入数据成功！");
+                    $("#resultMessage").html(data.message);
+                    reloadGrid();
                 } else {
                     $("#resultMessage").html(data.message);
                 }
@@ -393,32 +394,6 @@ $(function(){
         $("#resultMessage").html("");
         $("#showImportFile").click();
     })
-
-
-    $("#submitBtn").bind("click", function(){
-        var formData = new FormData(document.getElementById("fileFrom"));
-        $.ajax({
-            url: '/order/import.json',
-            data: formData,
-            type: 'post',
-            dataType: 'json',
-            cache: false,
-            processData:false,
-            contentType:false,
-            success: function (data) {
-                if (data.success) {
-                    alert("导入数据成功！");
-                    search();
-                } else {
-                    $("#resultMessage").html(data.message);
-                    //alert("保存数据出现错误，请稍候重试！");
-                }
-            },
-            error: function () {
-                alert("导入数据失败！");
-            }
-        });
-    });
 })
 
 /**
@@ -429,14 +404,16 @@ function search() {
     $('#del-btn').addClass('disabled');
     $('#infoBtn').addClass('disabled');
 
-    var searData = $("#search-form").serializeJson();
+    reloadGrid();
+}
 
+function reloadGrid(){
     jQuery("#grid-table").jqGrid('setGridParam',{
         url: '/order/list.json',
         datatype: "json",
         height: '100%',
         mtype: 'post',
-        postData: searData
+        postData: $("#search-form").serializeJson()
     }).trigger('reloadGrid');
 
 }

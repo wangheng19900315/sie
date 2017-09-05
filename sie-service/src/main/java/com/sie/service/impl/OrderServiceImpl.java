@@ -5,7 +5,6 @@ import com.sie.framework.base.HqlOperateVo;
 import com.sie.framework.dao.*;
 import com.sie.framework.entity.*;
 import com.sie.framework.type.*;
-import com.sie.framework.vo.OrderSearchVo;
 import com.sie.service.GradeService;
 import com.sie.service.OrderDetailService;
 import com.sie.service.OrderService;
@@ -16,13 +15,11 @@ import com.sie.util.NumberUtil;
 import com.sie.util.PageUtil;
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.lang.StringUtils;
-import org.apache.poi.util.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -72,7 +69,7 @@ public class OrderServiceImpl extends BaseServiceImpl<OrderEntity,Integer> imple
 
 
     @Override
-    public PageInfo<OrderBean> getOrderList(Integer page, Integer rows, OrderSearchVo vo) {
+    public PageInfo<OrderBean> getOrderList(Integer page, Integer rows, List<HqlOperateVo> hqlOperateVoList) {
 
 
         if (!NumberUtil.isSignless(rows)) {
@@ -82,12 +79,12 @@ public class OrderServiceImpl extends BaseServiceImpl<OrderEntity,Integer> imple
         if (!NumberUtil.isSignless(page)) {
             page = 0;
         }
-        Integer records = orderDao.getCount(vo);
+        Integer records = orderDao.getCount(hqlOperateVoList);
         PageInfo<OrderBean> pageBean = new PageInfo<>(records, PageUtil.getPageTotal(records, rows));
         pageBean.setPage(PageUtil.getPageNow(page, pageBean.getTotal()));
         Integer firstResult = PageUtil.getFirstResult(pageBean.getPage(), rows);
         Integer maxResults = PageUtil.getMaxResults(rows);
-        List<OrderEntity> entityList =  orderDao.getList(firstResult, maxResults, vo);
+        List<OrderEntity> entityList =  orderDao.getList(hqlOperateVoList,firstResult, maxResults );
 
 
         List<OrderBean> orderBeanList = new ArrayList<>();
@@ -102,6 +99,20 @@ public class OrderServiceImpl extends BaseServiceImpl<OrderEntity,Integer> imple
         }
 
         return pageBean;
+    }
+
+    @Override
+    public List<OrderBean> getOrderList(List<HqlOperateVo> hqlOperateVoList) {
+        List<OrderEntity> entityList = orderDao.getList(hqlOperateVoList);
+        List<OrderBean> orderBeanList = new ArrayList<>();
+        if(entityList.size() > 0){
+            for(OrderEntity entity :entityList){
+                OrderBean bean = new OrderBean();
+                setBeanValues(entity, bean);
+                orderBeanList.add(bean);
+            }
+        }
+        return orderBeanList;
     }
 
     public OrderBean getDetail(Integer id){
@@ -298,10 +309,12 @@ public class OrderServiceImpl extends BaseServiceImpl<OrderEntity,Integer> imple
 
         orderEntity.setRemark(orderBean.getRemark());
         //Fixme 实际支付金额=总金额-cr优惠金额-优惠活动金额
-        if(NumberUtil.isSignless(orderEntity.getPayMoney())){
+        if(NumberUtil.isSignless(orderBean.getPayMoney())){
+            orderEntity.setPayMoney(orderBean.getPayMoney());
             Double totalMoney = NumberUtil.getDoubleScale(orderEntity.getPayMoney()+orderEntity.getCouponDiscount()+orderEntity.getCrDiscount(),0);
             orderEntity.setMoney(totalMoney);
-        }else if(NumberUtil.isSignless(orderEntity.getMoney())){
+        }else if(NumberUtil.isSignless(orderBean.getMoney())){
+            orderEntity.setMoney(orderBean.getMoney());
             Double payMoney = NumberUtil.getDoubleScale(orderEntity.getMoney()-orderEntity.getCouponDiscount()-orderEntity.getCrDiscount(),0);
             orderEntity.setPayMoney(payMoney);
         }
@@ -382,6 +395,8 @@ public class OrderServiceImpl extends BaseServiceImpl<OrderEntity,Integer> imple
         orderBean.setPayMoney(orderImports.get(start).getPayMoney());
         //TODO 时间合并
         orderBean.setPayTime(new Timestamp(orderImports.get(start).getPayDate().getTime()));
+        orderBean.setPayMoney(orderImports.get(start).getPayMoney());
+
 
         orderBean.setOrderTime(new Timestamp(orderImports.get(start).getOrderDate().getTime()));
         //订单状态
@@ -414,6 +429,9 @@ public class OrderServiceImpl extends BaseServiceImpl<OrderEntity,Integer> imple
         }
 
         orderBean.setRemark(orderImports.get(start).getRemark() + orderImports.get(start).getPayInfo());
+
+        //设置订单类型
+        orderBean.setOrderType(OrderType.ADMIN.value());
 
         //设置订单明细
         List<OrderDetailBean> orderDetailBean = new ArrayList<>();

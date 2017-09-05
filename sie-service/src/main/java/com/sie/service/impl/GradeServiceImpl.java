@@ -84,15 +84,15 @@ public class GradeServiceImpl extends BaseServiceImpl<GradeEntity,Integer> imple
     @Override
     public List<GradeBean> getGradeList(List<HqlOperateVo> hqlOperateVoList) {
         List<GradeEntity> entityList = gradeDao.getList(hqlOperateVoList);
-        List<GradeBean> orderBeanList = new ArrayList<>();
+        List<GradeBean> gradeBeanList = new ArrayList<>();
         if(entityList.size() > 0){
             for(GradeEntity detailEntity:entityList){
                 GradeBean detailBean = new GradeBean();
                 setDetailBeanValues(detailEntity, detailBean);
-                orderBeanList.add(detailBean);
+                gradeBeanList.add(detailBean);
             }
         }
-        return orderBeanList;
+        return gradeBeanList;
     }
 
     public void setDetailBeanValues(GradeEntity gradeEntity, GradeBean bean){

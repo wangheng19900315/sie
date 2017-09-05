@@ -11,8 +11,4 @@ import java.util.List;
  */
 public interface OrderDao extends GenericDao<OrderEntity, Integer> {
 
-
-    Integer getCount(OrderSearchVo vo);
-
-    List<OrderEntity> getList(Integer firstResult, Integer maxResults, OrderSearchVo vo);
 }

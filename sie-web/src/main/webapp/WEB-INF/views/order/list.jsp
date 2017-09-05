@@ -23,10 +23,14 @@
                             <input type="text" class="form-control" id="orderCode"  name="orderCode" placeholder="订单号">
                         </div>
                         <div class="form-group">
-                            <input type="text" class="form-control" id="studentName" name="studentName" placeholder="用户名">
+                            <input type="text" class="form-control" id="studentChineseName" name="studentChineseName" placeholder="学生姓名">
                         </div>
                         <div class="form-group">
-                            <select   class="form-control" id="orderStatus" name="orderStatus"  >
+                            <input type="email" class="form-control" id="projectCode" name="projectCode" placeholder="项目编码">
+                        </div>
+                        <div class="form-group">
+                            <select   class="form-control" id="orderStatus" name="orderStatus" placeholder="订单状态" >
+                                <option value="">...</option>
                                 <option value="1">已提交</option>
                                 <option value="2">已完成</option>
                                 <option value="3">已退款</option>
@@ -34,19 +38,19 @@
                                 <option value="5">取消</option>
                              </select>
                         </div>
+                        <%--<div class="form-group">--%>
+                            <%--<select class="form-control" id="orderType" name="orderType"  placeholder="订单类型">--%>
+                                <%--<option value="">...</option>--%>
+                                <%--<option value="1">用户</option>--%>
+                                <%--<option value="2">管理员</option>--%>
+                            <%--</select>--%>
+                        <%--</div>--%>
                         <div class="form-group">
-                            <select class="form-control" id="payStatus" name="payStatus"  >
-                                <option value="1">已提交</option>
-                                <option value="2">已支付</option>
-                                <option value="3">支付失败</option>
-                                <option value="5">取消</option>
+                            <select class="form-control" id="system" name="system"  placeholder="提交系统">
+                                <option value="">...</option>
+                                <option value="1">SIE</option>
+                                <option value="2">TRU</option>
                             </select>
-                        </div>
-                        <div class="form-group">
-                            <input type="email" class="form-control" id="crCode" name="crCode" placeholder="Cr Code">
-                        </div>
-                        <div class="form-group">
-                            <input type="text" class="form-control" id="couponCode" name="couponCode" placeholder="优惠码">
                         </div>
 
                         <button type="button" id="searchBtn" class="btn btn-primary" onclick="return false;" >查找</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -165,7 +169,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" id="cancelBtn" class="btn btn-default" data-dismiss="modal">关闭</button>
-                    <button type="button" id="submitBtn" class="btn btn-primary">提交</button>
+                    <button type="button" id="importSubmitBtn" class="btn btn-primary">提交</button>
                 </div>
             </div>
         </div>
