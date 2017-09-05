@@ -442,7 +442,7 @@ public class OrderServiceImpl extends BaseServiceImpl<OrderEntity,Integer> imple
         orderBean.setOrderDetailBean(orderDetailBean);
 
         try {
-//            addOrder(orderBean);
+            addOrder(orderBean);
         } catch (Exception e) {
             result = "信息出错";
             e.printStackTrace();
