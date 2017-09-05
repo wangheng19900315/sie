@@ -23,4 +23,13 @@ public interface CourseService extends BaseService<CourseEntity, Integer> {
     List<CourseEntity> getCourses(Integer projectId, Integer systemType);
 
     CourseBean getBean(Integer id);
+
+    /**
+     * 更新课程报名人数
+     * @param courseIds
+     * @param systemType
+     * @param orderType
+     * @param flag 1表示报名人数加1，-1 表示报名人数减1
+     */
+    public void updateCourseCount(String courseIds, Integer systemType,  Integer orderType,Integer flag);
 }

@@ -8,6 +8,7 @@ import com.sie.framework.dao.ProjectPriceDao;
 import com.sie.framework.entity.CourseEntity;
 import com.sie.framework.entity.ProjectEntity;
 import com.sie.framework.entity.ProjectPriceEntity;
+import com.sie.framework.type.OrderType;
 import com.sie.framework.type.SystemType;
 import com.sie.service.CourseService;
 import com.sie.service.bean.CourseBean;
@@ -16,6 +17,7 @@ import com.sie.service.bean.PageInfo;
 import com.sie.service.bean.ProjectBean;
 import com.sie.util.DateUtil;
 import com.sie.util.NumberUtil;
+import com.sie.util.StringUtil;
 import org.apache.commons.beanutils.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -198,5 +200,39 @@ public class CourseServiceImpl extends BaseServiceImpl<CourseEntity,Integer> imp
             return null;
         }
         return bean;
+    }
+
+    /**
+     * 更新课程报名人数
+     * @param courseIds
+     * @param systemType
+     * @param orderType
+     * @param flag 1表示报名人数加1，-1 表示报名人数减1
+     */
+    public void updateCourseCount(String courseIds, Integer systemType,  Integer orderType,Integer flag){
+        if(StringUtil.isBlank(courseIds)){
+            return;
+        }
+        String[] strs = courseIds.split(",");
+        for(String str:strs){
+            CourseEntity courseEntity = this.courseDao.getEntity(Integer.parseInt(str));
+            if(courseEntity == null){
+                throw new RuntimeException("id 为 "+str+"课程为空，请检查参数");
+            }
+
+            if(systemType == SystemType.SIE.value()){
+                courseEntity.setSieTotalNumber(courseEntity.getSieTotalNumber()+flag);
+            }else{
+                courseEntity.setTruTotalNumber(courseEntity.getTruTotalNumber()+flag);
+            }
+            if(orderType == OrderType.USER.value() && flag > 0){
+                if((courseEntity.getSieTotalNumber()+courseEntity.getTruTotalNumber()) > courseEntity.getMaxStudent()){
+                    throw new RuntimeException("课程["+courseEntity.getChineseName()+"]人数最高能报"+courseEntity.getMaxStudent()+"");
+                }
+            }
+
+            this.courseDao.updateEntity(courseEntity);
+
+        }
     }
 }

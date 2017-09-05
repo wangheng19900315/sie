@@ -49,5 +49,5 @@ public interface OrderService extends BaseService<OrderEntity, Integer> {
     /*
      *  * 取消订单
      */
-    void cancelOrder();
+    public void cancelOrder(Integer mins);
 }

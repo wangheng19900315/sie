@@ -6,9 +6,7 @@ import com.sie.framework.dao.*;
 import com.sie.framework.entity.*;
 import com.sie.framework.type.*;
 import com.sie.framework.vo.OrderSearchVo;
-import com.sie.service.GradeService;
-import com.sie.service.OrderDetailService;
-import com.sie.service.OrderService;
+import com.sie.service.*;
 import com.sie.service.bean.*;
 import com.sie.service.excel.OrderImport;
 import com.sie.util.DateUtil;
@@ -69,6 +67,12 @@ public class OrderServiceImpl extends BaseServiceImpl<OrderEntity,Integer> imple
 
     @Autowired
     private CourseDao courseDao;
+
+    @Autowired
+    private CourseService courseService;
+
+    @Autowired
+    private DormitoryService dormitoryService;
 
 
     @Override
@@ -214,6 +218,26 @@ public class OrderServiceImpl extends BaseServiceImpl<OrderEntity,Integer> imple
         if(oldEntity != null){
             //TODO 修改的时候增加逻辑判断 已提交的订单可以修改为已完成或者已取消
             // 已完成的订单只能修改为申请退款 申请退款的订单只能修改为完成退款
+
+            Integer flag = 0;
+            if(orderEntity.getStatus() != oldEntity.getStatus()){
+                //修改报名人数
+                if(orderEntity.getStatus() == OrderStatus.CANCEL.value()){
+                    if(oldEntity.getStatus() == OrderStatus.SUBMIT.value()){
+                        flag = -1;
+                    }
+                }else if(orderEntity.getStatus() == OrderStatus.SUBMIT.value()){
+                    if(oldEntity.getStatus() == OrderStatus.CANCEL.value()){
+                        flag = 1;
+                    }
+                }else if(orderEntity.getStatus() == OrderStatus.APPLY.value()){
+                    if(oldEntity.getStatus() == OrderStatus.COMPLETE.value()){
+                        flag = -1;
+                    }
+
+                }
+            }
+
             oldEntity.setDiscount(orderEntity.getDiscount());
             oldEntity.setPayMoney(orderEntity.getPayMoney());
             oldEntity.setStatus(orderEntity.getStatus());
@@ -221,7 +245,21 @@ public class OrderServiceImpl extends BaseServiceImpl<OrderEntity,Integer> imple
             oldEntity.setRemark(orderEntity.getRemark());
             this.orderDao.updateEntity(oldEntity);
 
+            if(flag != 0){
+                List<OrderDetailEntity> orderDetailEntities = oldEntity.getOrderDetailEntityList();
+                for(OrderDetailEntity detailEntity:orderDetailEntities){
+                    if(detailEntity.getDormitoryEntity() != null){
+                        this.dormitoryService.updateStudentCount(detailEntity.getDormitoryEntity().getId(), orderEntity.getStudentEntity().getSex(), 1);
+                    }else{
+                        this.courseService.updateCourseCount(detailEntity.getCourseIds(), orderEntity.getSystemType(),orderEntity.getOrderType(), 1);
+                    }
+                }
+            }
+
+
             gradeService.updateStudentGradeList(oldEntity.getStudentEntity().getId());
+
+
         }
     }
 
@@ -230,6 +268,12 @@ public class OrderServiceImpl extends BaseServiceImpl<OrderEntity,Integer> imple
         ResultBean resultBean = new ResultBean();
         OrderEntity orderEntity = new OrderEntity();
         orderEntity.setCode(DateUtil.format(new Date(), "yyyyMMddHHmmss"));
+        if(NumberUtil.isSignless(orderBean.getOrderType())){
+            orderEntity.setOrderType(orderBean.getOrderType());
+        }else{
+            orderEntity.setOrderType(OrderType.ADMIN.value());
+        }
+
         if(NumberUtil.isSignless(orderBean.getStatus())){
             orderEntity.setStatus(orderBean.getStatus());
         }else{
@@ -351,8 +395,24 @@ public class OrderServiceImpl extends BaseServiceImpl<OrderEntity,Integer> imple
 
         }
 
+        Integer flag = 0;
 
+        if(orderEntity.getStatus() == OrderStatus.SUBMIT.value() || orderEntity.getStatus() == OrderStatus.COMPLETE.value()){
+           flag = 1;
+        }else if(orderEntity.getStatus() == OrderStatus.APPLY.value() || orderEntity.getStatus() == OrderStatus.REFUND.value()){
+            flag = -1;
+        }
 
+        if(flag != 0){
+            List<OrderDetailEntity> orderDetailEntities = orderEntity.getOrderDetailEntityList();
+            for(OrderDetailEntity detailEntity:orderDetailEntities){
+                if(detailEntity.getDormitoryEntity() != null){
+                    this.dormitoryService.updateStudentCount(detailEntity.getDormitoryEntity().getId(), orderEntity.getStudentEntity().getSex(), flag);
+                }else{
+                    this.courseService.updateCourseCount(detailEntity.getCourseIds(), orderEntity.getSystemType(),orderEntity.getOrderType(), flag);
+                }
+            }
+        }
 
         resultBean.setMessage("添加成功");
         resultBean.setSuccess(true);
@@ -469,10 +529,28 @@ public class OrderServiceImpl extends BaseServiceImpl<OrderEntity,Integer> imple
     }
 
     @Override
-    public void cancelOrder() {
+    public void cancelOrder(Integer mins) {
         List<HqlOperateVo> operateVos = new ArrayList<>();
-        operateVos.add(new HqlOperateVo("","",""));
-        operateVos.add(new HqlOperateVo("status","",""));
-        operateVos.add(new HqlOperateVo("status","",""));
+
+        String date = DateUtil.format(DateUtil.addMinutes(new Date(), mins), "yyyy-MM-dd HH:mm:ss");
+        operateVos.add(new HqlOperateVo("createTime","<=",date));
+        operateVos.add(new HqlOperateVo("status","=",OrderStatus.SUBMIT.value()+""));
+
+        List<OrderEntity> orderEntities = this.orderDao.getList(operateVos, 0, 10);
+        if(orderEntities != null && orderEntities.size() > 0){
+            for(OrderEntity orderEntity:orderEntities){
+                orderEntity.setStatus(OrderStatus.CANCEL.value());
+
+                List<OrderDetailEntity> orderDetailEntities = orderEntity.getOrderDetailEntityList();
+                for(OrderDetailEntity detailEntity:orderDetailEntities){
+                    if(detailEntity.getDormitoryEntity() != null){
+                        this.dormitoryService.updateStudentCount(detailEntity.getDormitoryEntity().getId(), orderEntity.getStudentEntity().getSex(), -1);
+                    }else{
+                        this.courseService.updateCourseCount(detailEntity.getCourseIds(), orderEntity.getSystemType(),orderEntity.getOrderType(), -1);
+                    }
+                }
+                this.orderDao.updateEntity(orderEntity);
+            }
+        }
     }
 }

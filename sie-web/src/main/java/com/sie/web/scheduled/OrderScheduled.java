@@ -23,14 +23,14 @@ public class OrderScheduled {
      * 订单过期时间
      */
     @Value("${order.timeout}")
-    private String orderTimeout;
+    private Integer orderTimeout;
 
     /**
      * 定时任务，更新作业状态；
      */
     @Scheduled(fixedRate = 1000*60)
     public void cancelOrder(){
-        orderService.cancelOrder();
+        orderService.cancelOrder(orderTimeout);
     }
 
 }

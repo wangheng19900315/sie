@@ -18,4 +18,12 @@ public interface DormitoryService extends BaseService<DormitoryEntity, Integer> 
     List<DormitoryBean> getDormitoryList(List<HqlOperateVo> hqlOperateVos);
 
     DormitoryBean getDormitoryByProjectId(Integer projectId);
+
+    /**
+     * 更新宿舍人数
+     * @param id
+     * @param sex 表示性别
+     * @param flag 1，表示人数加1； -1表示人数减1
+     */
+    public void updateStudentCount(Integer id, String sex, Integer flag);
 }
