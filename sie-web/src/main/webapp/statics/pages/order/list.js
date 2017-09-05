@@ -142,7 +142,7 @@ $(function(){
                     var detail = json.orderDetailBean;
                     $("#studentId").val(json.studentId);
                     $("#status").val(4);//申请退款
-                    $("#systemType").val(objRow.systemType);//订单系统
+                    $("#systemType").val(json.systemType);//订单系统
                     var html;
                     $("#details").empty();
                     $.each(detail,function(i,item){
@@ -193,7 +193,7 @@ $(function(){
                     var detail = json.orderDetailBean;
                     $("#studentId").val(json.studentId);
                     $("#status").val(1);//提交订单
-                    $("#systemType").val(objRow.systemType);//订单系统
+                    $("#systemType").val(json.systemType);//订单系统
                     var html;
                     $("#details").empty();
                     $.each(detail,function(i,item){
@@ -269,7 +269,8 @@ $(function(){
         order["studentId"] = $("#studentId").val();
         order["money"] = $("#money").val();
         order["status"] = $("#status").val();
-
+        order["systemType"] = $("#systemType").val();
+        order["orderType"] = $("#orderType").val();
         var orderDetailBean = [];
         $("#details").find(".courses").each(function(){
             var coursesObj = $(this).find("input[type='checkbox']:checked");

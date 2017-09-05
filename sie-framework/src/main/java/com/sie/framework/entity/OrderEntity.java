@@ -4,6 +4,7 @@ import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -31,7 +32,7 @@ public class OrderEntity extends BaseEntity {
 
 
 
-    private List<OrderDetailEntity> orderDetailEntityList;
+    private List<OrderDetailEntity> orderDetailEntityList = new ArrayList<>();
 
 
     @Basic

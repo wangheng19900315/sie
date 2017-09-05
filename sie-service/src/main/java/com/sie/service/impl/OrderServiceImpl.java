@@ -408,7 +408,7 @@ public class OrderServiceImpl extends BaseServiceImpl<OrderEntity,Integer> imple
             }
 
             this.orderDetailDao.createEntity(orderDetailEntity);
-
+            orderEntity.getOrderDetailEntityList().add(orderDetailEntity);
 
         }
 
@@ -421,6 +421,7 @@ public class OrderServiceImpl extends BaseServiceImpl<OrderEntity,Integer> imple
         }
 
         if(flag != 0){
+            orderEntity = this.get(orderEntity.getId());
             List<OrderDetailEntity> orderDetailEntities = orderEntity.getOrderDetailEntityList();
             for(OrderDetailEntity detailEntity:orderDetailEntities){
                 if(detailEntity.getDormitoryEntity() != null){
