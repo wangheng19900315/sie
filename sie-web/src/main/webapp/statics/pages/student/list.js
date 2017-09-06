@@ -106,7 +106,33 @@ $(function(){
             },
             className: "bootbox-sm"
         });
-    })
+    });
+
+    //绑定导入事件
+    $("#importSubmitBtn").bind("click", function(){
+        var formData = new FormData(document.getElementById("fileFrom"));
+        $.ajax({
+            url: '/student/import.json',
+            data: formData,
+            type: 'post',
+            dataType: 'json',
+            cache: false,
+            processData:false,
+            contentType:false,
+            success: function (data) {
+                if (data.success) {
+                    //alert("导入数据成功！");
+                    $("#resultMessage").html(data.message);
+                    reloadGrid();
+                } else {
+                    $("#resultMessage").html(data.message);
+                }
+            },
+            error: function () {
+                alert("导入数据失败！");
+            }
+        });
+    });
 
 })
 
@@ -118,6 +144,11 @@ function search() {
     $('#edit-btn').addClass('disabled');
     //$('#del-btn').addClass('disabled');
     //$('#view-btn').addClass('disabled');
+    reloadGrid();
+
+}
+
+function reloadGrid(){
     var searData = $("#search-form").serializeJson();
     jQuery("#grid-table").jqGrid('setGridParam',{
         url: '/student/list.json',
@@ -126,7 +157,6 @@ function search() {
         mtype: 'post',
         postData: searData
     }).trigger('reloadGrid');
-
 }
 
 /**

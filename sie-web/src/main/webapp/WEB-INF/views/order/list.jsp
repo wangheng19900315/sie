@@ -61,8 +61,8 @@
                         <button type="button" class="btn btn-success disabled"  id="refundBtn" data-toggle="modal" data-target="#refund">退课</button> &nbsp;&nbsp;
                         <button type="button" class="btn btn-danger disabled" id="addOrderBtn"  data-toggle="modal" data-target="#refund">加课</button> &nbsp;&nbsp;
                         <button type="button" class="btn btn-danger disabled" id="deleteBtn"  >删除</button> &nbsp;&nbsp;
-                        <button type="button" class="btn btn-info" id="importBtn"  >导入</button> &nbsp;&nbsp;
-                        <button type="button" class="btn btn-info" id="exportBtn"  >导出</button> &nbsp;&nbsp;
+                        <button type="button" class="btn btn-primary" id="importBtn"  >导入</button> &nbsp;&nbsp;
+                        <button type="button" class="btn btn-primary" id="exportBtn"  >导出</button> &nbsp;&nbsp;
                         <button type="button"  id="showImportFile" style="display: none" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#importExcels"></button>
                     </form>
                 </div>
@@ -114,14 +114,13 @@
                         <div class="form-group ">
                             <label  class="col-sm-2 control-label">金额</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" id="money"  name="money" placeholder="金额" required data-msg-required="请输入退款金额" data-rule-number="true" data-msg-number="请输入正确的数字" >
+                                <input type="text" class="form-control" id="money"  name="money" placeholder="金额">
                             </div>
                         </div>
                         <div class="form-group ">
                             <label  class="col-sm-2 control-label">付款方式</label>
                             <div class="col-sm-9">
                                 <select class="form-control" id="payType" name="payType">
-                                    <option value="">...</option>
                                     <option value="4">人工支付</option>
                                     <option value="1">微信</option>
                                     <option value="2">支付宝</option>
