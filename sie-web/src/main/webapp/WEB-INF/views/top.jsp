@@ -10,8 +10,8 @@
 
             <!-- Logo -->
             <a href="index.html" class="navbar-brand">
-                <div><img alt="Pixel Admin" src="/statics/assets/images/pixel-admin/main-navbar-logo.png"></div>
-                PixelAdmin
+                <div><img alt="SIE网站管理系统" src="/statics/assets/images/pixel-admin/main-navbar-logo.png"></div>
+                SIE网站管理系统
             </a>
 
             <!-- Main navbar toggle -->
@@ -23,17 +23,9 @@
             <div>
                 <ul class="nav navbar-nav">
                     <li>
-                        <a href="#">Home</a>
+                        <a href="/order/list.html">Home</a>
                     </li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown</a>
-                        <ul class="dropdown-menu">
-                            <li><a href="#">First item</a></li>
-                            <li><a href="#">Second item</a></li>
-                            <li class="divider"></li>
-                            <li><a href="#">Third item</a></li>
-                        </ul>
-                    </li>
+
                 </ul> <!-- / .navbar-nav -->
 
                 <div class="right clearfix">

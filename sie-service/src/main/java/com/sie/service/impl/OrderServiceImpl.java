@@ -5,12 +5,11 @@ import com.sie.framework.base.HqlOperateVo;
 import com.sie.framework.dao.*;
 import com.sie.framework.entity.*;
 import com.sie.framework.type.*;
-import com.sie.service.GradeService;
-import com.sie.service.OrderDetailService;
-import com.sie.service.OrderService;
-import com.sie.framework.vo.OrderSearchVo;
 import com.sie.service.*;
-import com.sie.service.bean.*;
+import com.sie.service.bean.OrderBean;
+import com.sie.service.bean.OrderDetailBean;
+import com.sie.service.bean.PageInfo;
+import com.sie.service.bean.ResultBean;
 import com.sie.service.excel.OrderImport;
 import com.sie.util.DateUtil;
 import com.sie.util.NumberUtil;
@@ -233,10 +232,36 @@ public class OrderServiceImpl extends BaseServiceImpl<OrderEntity,Integer> imple
         if(oldEntity != null){
             //TODO 修改的时候增加逻辑判断 已提交的订单可以修改为已完成或者已取消
             // 已完成的订单只能修改为申请退款 申请退款的订单只能修改为完成退款
+            if(orderEntity.getStatus() != oldEntity.getStatus()){
 
+                if(oldEntity.getStatus() == OrderStatus.CANCEL.value()){
+                    if(orderEntity.getStatus() !=  OrderStatus.SUBMIT.value() && orderEntity.getStatus() !=  OrderStatus.APPLY.value()){
+                        throw new RuntimeException("已取消的订单，只能修改成已提交或申请退款");
+                    }
+                }else if(oldEntity.getStatus() == OrderStatus.SUBMIT.value()){
+                    if(orderEntity.getStatus() !=  OrderStatus.COMPLETE.value() && orderEntity.getStatus() !=  OrderStatus.CANCEL.value()){
+                        throw new RuntimeException("提交的订单，只能修改成已完成或已取消");
+                    }
+                }else if(oldEntity.getStatus() == OrderStatus.COMPLETE.value()){
+                    if(orderEntity.getStatus() !=  OrderStatus.APPLY.value() && orderEntity.getStatus() !=  OrderStatus.SUBMIT.value()){
+                        throw new RuntimeException("已完成的订单，只能修改成已提交或申请退款");
+                    }
+
+                }else if(oldEntity.getStatus() == OrderStatus.APPLY.value()){
+                    if(orderEntity.getStatus() !=  OrderStatus.REFUND.value() && orderEntity.getStatus() !=  OrderStatus.CANCEL.value()){
+                        throw new RuntimeException("申请退款中的订单，只能修改成已退款或已取消");
+                    }
+                }else if(oldEntity.getStatus() == OrderStatus.REFUND.value()){
+                     if(orderEntity.getStatus() !=  OrderStatus.APPLY.value()){
+                         throw new RuntimeException("已退款的订单，只能修改成申请退款中");
+                     }
+                }
+            }
+
+
+            //修改报名人数
             Integer flag = 0;
             if(orderEntity.getStatus() != oldEntity.getStatus()){
-                //修改报名人数
                 if(orderEntity.getStatus() == OrderStatus.CANCEL.value()){
                     if(oldEntity.getStatus() == OrderStatus.SUBMIT.value()){
                         flag = -1;
@@ -264,9 +289,9 @@ public class OrderServiceImpl extends BaseServiceImpl<OrderEntity,Integer> imple
                 List<OrderDetailEntity> orderDetailEntities = oldEntity.getOrderDetailEntityList();
                 for(OrderDetailEntity detailEntity:orderDetailEntities){
                     if(detailEntity.getDormitoryEntity() != null){
-                        this.dormitoryService.updateStudentCount(detailEntity.getDormitoryEntity().getId(), orderEntity.getStudentEntity().getSex(), 1);
+                        this.dormitoryService.updateStudentCount(detailEntity.getDormitoryEntity().getId(), oldEntity.getStudentEntity().getSex(), 1);
                     }else{
-                        this.courseService.updateCourseCount(detailEntity.getCourseIds(), orderEntity.getSystemType(),orderEntity.getOrderType(), 1);
+                        this.courseService.updateCourseCount(detailEntity.getCourseIds(), oldEntity.getSystemType(),oldEntity.getOrderType(), 1);
                     }
                 }
             }

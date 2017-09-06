@@ -17,7 +17,7 @@
 
         <div class="col-sm-12">
             <div class="panel">
-                <div class="panel-body buttons-with-margins">
+                <div class="panel-body buttons-with-margins" >
                     <form class="form-inline" id="search-form" action="" method="post">
                         <div class="form-group">
                             <input type="text" class="form-control" id="orderCode"  name="orderCode" placeholder="订单号">
@@ -29,6 +29,7 @@
                             <input type="email" class="form-control" id="projectCode" name="projectCode" placeholder="项目编码">
                         </div>
                         <div class="form-group">
+<<<<<<< HEAD
                             <select   class="form-control" id="orderStatus" name="orderStatus" placeholder="订单状态" >
                                 <option value=""></option>
                                 <option value="1">已提交</option>
@@ -37,6 +38,19 @@
                                 <option value="4">申请退款</option>
                                 <option value="5">取消</option>
                              </select>
+=======
+                            <label class="col-sm-4 control-label" style="padding-left: 5px;padding-right: 0px;margin-top:5px;">状态:</label>
+                            <div class="col-sm-5">
+                                <select   class="form-control" id="orderStatus" name="orderStatus" placeholder="订单状态" >
+                                    <option value="">全部</option>
+                                    <option value="1">已提交</option>
+                                    <option value="2">已完成</option>
+                                    <option value="3">已退款</option>
+                                    <option value="4">申请退款</option>
+                                    <option value="5">取消</option>
+                                 </select>
+                            </div>
+>>>>>>> 82eafa5b167a48390e393c78953a06fad0651b15
                         </div>
                         <%--<div class="form-group">--%>
                             <%--<select class="form-control" id="orderType" name="orderType"  placeholder="订单类型">--%>
@@ -46,11 +60,22 @@
                             <%--</select>--%>
                         <%--</div>--%>
                         <div class="form-group">
+<<<<<<< HEAD
                             <select class="form-control" id="system" name="system"  placeholder="提交系统">
                                 <option value=""></option>
                                 <option value="1">SIE</option>
                                 <option value="2">TRU</option>
                             </select>
+=======
+                            <label class="col-sm-4 control-label" style="padding-left: 5px;padding-right: 0px;margin-top:5px;">系统:</label>
+                            <div class="col-sm-5">
+                                <select class="form-control" id="system" name="system"  placeholder="提交系统">
+                                    <option value="">全部</option>
+                                    <option value="1">SIE</option>
+                                    <option value="2">TRU</option>
+                                </select>
+                             </div>
+>>>>>>> 82eafa5b167a48390e393c78953a06fad0651b15
                         </div>
 
                         <button type="button" id="searchBtn" class="btn btn-primary" onclick="return false;" >查找</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -61,8 +86,9 @@
                         <button type="button" class="btn btn-success disabled"  id="refundBtn" data-toggle="modal" data-target="#refund">退课</button> &nbsp;&nbsp;
                         <button type="button" class="btn btn-danger disabled" id="addOrderBtn"  data-toggle="modal" data-target="#refund">加课</button> &nbsp;&nbsp;
                         <button type="button" class="btn btn-danger disabled" id="deleteBtn"  >删除</button> &nbsp;&nbsp;
-                        <button type="button" class="btn btn-primary" id="importBtn"  >导入</button> &nbsp;&nbsp;
-                        <button type="button" class="btn btn-primary" id="exportBtn"  >导出</button> &nbsp;&nbsp;
+                        <button type="button" class="btn btn-warning" id="importBtn"  >导入</button> &nbsp;&nbsp;
+                        <button type="button" class="btn btn-success" id="exportBtn"  >导出</button> &nbsp;&nbsp;
+
                         <button type="button"  id="showImportFile" style="display: none" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#importExcels"></button>
                     </form>
                 </div>

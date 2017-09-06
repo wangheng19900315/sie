@@ -133,6 +133,9 @@ public class OrderController {
             this.orderDetailService.updateCourseIds(detailEntity);
             resultBean.setSuccess(true);
             resultBean.setMessage("修改成功");
+        }catch(RuntimeException e){
+            e.printStackTrace();
+            resultBean.setMessage(e.getMessage());
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -149,6 +152,9 @@ public class OrderController {
             this.orderService.updateOrderInfo(orderEntity);
             resultBean.setSuccess(true);
             resultBean.setMessage("修改成功");
+        }catch(RuntimeException e){
+            e.printStackTrace();
+            resultBean.setMessage(e.getMessage());
         } catch (Exception e) {
             e.printStackTrace();
         }

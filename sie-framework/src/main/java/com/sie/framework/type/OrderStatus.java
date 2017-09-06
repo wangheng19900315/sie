@@ -7,7 +7,7 @@ public enum  OrderStatus {
 
 
     /**
-     * 已订单
+     * 已提交
      */
     SUBMIT(1),
 
@@ -86,7 +86,7 @@ public enum  OrderStatus {
         switch (this) {
 
             case SUBMIT:
-                return "未支付";
+                return "已提交";
             case COMPLETE:
                 return "已完成";
             case REFUND:

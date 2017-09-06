@@ -88,16 +88,15 @@
 		<div class="signin-info">
 			<a href="index.html" class="logo">
 				<img src="/statics/assets/demo/logo-big.png" alt="" style="margin-top: -5px;">&nbsp;
-				PixelAdmin
+				SIE管理系统
 			</a> <!-- / .logo -->
 			<div class="slogan">
-				Simple. Flexible. Powerful.
+				简单、方便、提升效率
 			</div> <!-- / .slogan -->
 			<ul>
-				<li><i class="fa fa-sitemap signin-icon"></i> Flexible modular structure</li>
-				<li><i class="fa fa-file-text-o signin-icon"></i> LESS &amp; SCSS source files</li>
-				<li><i class="fa fa-outdent signin-icon"></i> RTL direction support</li>
-				<li><i class="fa fa-heart signin-icon"></i> Crafted with love</li>
+				<li><i class="fa fa-sitemap signin-icon"></i> 管理订单信息</li>
+				<li><i class="fa fa-file-text-o signin-icon"></i> 管理学生信息</li>
+				<li><i class="fa fa-outdent signin-icon"></i> 支持导入导出</li>
 			</ul> <!-- / Info list -->
 		</div>
 		<!-- / Left side -->
