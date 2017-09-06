@@ -141,11 +141,7 @@ public class GenericDaoImpl<T extends BaseEntity, PK extends Serializable> imple
 
 	@Override
 	public List<T> getList(List<HqlOperateVo> hqlOperateVos) {
-<<<<<<< HEAD
 		String hql = "from " + clazz.getName() + " entity  "  ;
-=======
-		String hql = "from " + clazz.getName()   + " entity  ";
->>>>>>> 82eafa5b167a48390e393c78953a06fad0651b15
 		hql = this.getHql(hql, hqlOperateVos);
 		return this.getList(hql);
 	}

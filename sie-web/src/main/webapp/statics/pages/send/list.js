@@ -29,10 +29,11 @@ $(function(){
         height: '100%',
         mtype: 'post',
         postData: {},
-        colNames: ['ID', '学生姓名','寄送县/市' ,'寄送州/市' ,'寄送邮编' ,'寄送联系人/部门','寄送电话','快递公司' ,'寄送单号'  ],
+        colNames: ['ID', '学生姓名','街道' ,'寄送县/市' ,'寄送州/市' ,'寄送邮编' ,'寄送联系人/部门','寄送电话','快递公司' ,'寄送单号'  ],
         colModel: [
             {name: 'id', index: 'id', width: 20, hidden: true,  sortable: false},
             {name: 'studentName', index: 'studentName', width: 20,   sortable: false},
+            {name: 'sendStreet', index: 'sendStreet', width: 20,   sortable: false},
             {name: 'sendCountry', index: 'sendCountry', width: 20,   sortable: false},
             {name: 'sendProvince', index: 'sendProvince', width: 20,  sortable: false},
             {name: 'sendPostCode', index: 'sendPostCode', width: 20,  sortable: false},
@@ -142,7 +143,7 @@ $(function(){
                 contentType:false,
                 success: function (data) {
                     if (data.success) {
-                        alert("导入数据成功！");
+                        $("#resultMessage").html(data.message);
                         search();
                     } else {
                         $("#resultMessage").html(data.message);

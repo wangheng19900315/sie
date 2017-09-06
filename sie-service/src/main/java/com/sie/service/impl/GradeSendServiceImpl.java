@@ -107,9 +107,10 @@ public class GradeSendServiceImpl extends BaseServiceImpl<GradeSendEntity,Intege
     @Override
     public String importBean(GradeSendBean bean) {
         String result  = null;
-
-        StudentEntity studentEntity = this.studentDao.getEntity(bean.getStudentId());
-        if(studentEntity == null){
+        List<HqlOperateVo> hqlOperateVos = new ArrayList<>();
+        hqlOperateVos.add(new HqlOperateVo("userID","=",bean.getUserID()));
+        List<StudentEntity> studentEntities = this.studentDao.getList(hqlOperateVos);
+        if(studentEntities == null || studentEntities.size() == 0){
             result = "学生信息不存在";
             return result;
         }
@@ -119,8 +120,6 @@ public class GradeSendServiceImpl extends BaseServiceImpl<GradeSendEntity,Intege
             GradeSendEntity checkEntity = this.gradeSendDao.getRepeatEntity(entity);
             if(checkEntity == null){
                 this.saveOrUpdate(entity);
-            }else{
-                result = "导入信息重复";
             }
 
         } catch (Exception e) {

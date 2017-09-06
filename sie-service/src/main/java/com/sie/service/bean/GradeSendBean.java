@@ -7,18 +7,30 @@ import com.sie.util.annotation.ExcelField;
  * Created by x on 2017/8/12.
  */
 public class GradeSendBean extends BaseEntity{
+
     private Integer studentId;
+    @ExcelField(title="学生id", align=2, sort=1)
+    private String userID;
     private String studentName;
+    @ExcelField(title="成绩单街道", align=2, sort=2)
+    private String sendStreet;//寄送街道
+    @ExcelField(title="寄送县／市", align=2, sort=3)
     private String sendCountry;//寄送县市
+    @ExcelField(title="寄送州／省", align=2, sort=4)
     private String sendProvince;//寄送州省
+    @ExcelField(title="寄送邮编", align=2, sort=5)
     private String sendPostCode;//寄送邮编
+    @ExcelField(title="收货人", align=2, sort=6)
     private String sendPerson;
+    @ExcelField(title="收货人电话", align=2, sort=7)
     private String sendTel;
+    @ExcelField(title="快递公司", align=2, sort=8)
     private String expressCompany;
+    @ExcelField(title="快递单号", align=2, sort=9)
     private String trackingNumber;
     private String comment;
 
-    @ExcelField(title="学生id", align=2, sort=1)
+
     public Integer getStudentId() {
         return studentId;
     }
@@ -27,7 +39,6 @@ public class GradeSendBean extends BaseEntity{
         this.studentId = studentId;
     }
 
-    @ExcelField(title="学生id", align=2, sort=2)
     public String getStudentName() {
         return studentName;
     }
@@ -36,7 +47,7 @@ public class GradeSendBean extends BaseEntity{
         this.studentName = studentName;
     }
 
-    @ExcelField(title="寄送县／市", align=2, sort=4)
+
     public String getSendCountry() {
         return sendCountry;
     }
@@ -45,7 +56,7 @@ public class GradeSendBean extends BaseEntity{
         this.sendCountry = sendCountry;
     }
 
-    @ExcelField(title="寄送州／省", align=2, sort=3)
+
     public String getSendProvince() {
         return sendProvince;
     }
@@ -54,7 +65,7 @@ public class GradeSendBean extends BaseEntity{
         this.sendProvince = sendProvince;
     }
 
-    @ExcelField(title="寄送邮编", align=2, sort=5)
+
     public String getSendPostCode() {
         return sendPostCode;
     }
@@ -63,7 +74,7 @@ public class GradeSendBean extends BaseEntity{
         this.sendPostCode = sendPostCode;
     }
 
-    @ExcelField(title="收货人", align=2, sort=6)
+
     public String getSendPerson() {
         return sendPerson;
     }
@@ -73,7 +84,7 @@ public class GradeSendBean extends BaseEntity{
         this.sendPerson = sendPerson;
     }
 
-    @ExcelField(title="收货人电话", align=2, sort=7)
+
     public String getSendTel() {
         return sendTel;
     }
@@ -82,7 +93,7 @@ public class GradeSendBean extends BaseEntity{
         this.sendTel = sendTel;
     }
 
-    @ExcelField(title="快递公司", align=2, sort=8)
+
     public String getExpressCompany() {
         return expressCompany;
     }
@@ -91,7 +102,7 @@ public class GradeSendBean extends BaseEntity{
         this.expressCompany = expressCompany;
     }
 
-    @ExcelField(title="快递单号", align=2, sort=9)
+
     public String getTrackingNumber() {
         return trackingNumber;
     }
@@ -106,5 +117,21 @@ public class GradeSendBean extends BaseEntity{
 
     public void setComment(String comment) {
         this.comment = comment;
+    }
+
+    public String getUserID() {
+        return userID;
+    }
+
+    public void setUserID(String userID) {
+        this.userID = userID;
+    }
+
+    public String getSendStreet() {
+        return sendStreet;
+    }
+
+    public void setSendStreet(String sendStreet) {
+        this.sendStreet = sendStreet;
     }
 }

@@ -147,6 +147,7 @@ public class GradeSendController {
                     successNum++;
                 }
             }
+            resultBean.setSuccess(true);
             resultBean.setMessage("导入完毕，成功导入"+successNum+"条,导入失败"+failureNum+"条;"+failureMsg.toString());
         } catch (Exception e) {
             e.printStackTrace();
