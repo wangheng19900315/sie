@@ -41,7 +41,7 @@ $(function(){
                 var rowData = $(grid_selector).jqGrid("getRowData", id);
                 $(grid_selector).jqGrid('editRow',id,{
                     keys : true,        //这里按[enter]保存
-                    url: "/packagePrice/update.json",
+                    url: "/price/update.json",
                     mtype : "POST",
                     extraparam: {
                         "id": rowData.id,
