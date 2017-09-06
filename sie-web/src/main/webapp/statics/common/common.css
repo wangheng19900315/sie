@@ -20,4 +20,6 @@
 
     margin-top:4px; !important;
 }
-
+.buttons-with-margins{
+    padding: 10px 10px 0px 10px;
+}
