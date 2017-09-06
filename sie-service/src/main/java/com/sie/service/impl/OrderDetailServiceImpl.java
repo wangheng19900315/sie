@@ -7,6 +7,7 @@ import com.sie.framework.dao.OrderDetailDao;
 import com.sie.framework.entity.OrderDetailEntity;
 import com.sie.framework.entity.OrderEntity;
 import com.sie.framework.type.OrderDetailStatus;
+import com.sie.framework.type.OrderStatus;
 import com.sie.service.CourseService;
 import com.sie.service.GradeService;
 import com.sie.service.OrderDetailService;
@@ -118,6 +119,9 @@ public class OrderDetailServiceImpl extends BaseServiceImpl<OrderDetailEntity,In
     public void updateCourseIds(OrderDetailEntity detailEntity) {
         OrderDetailEntity oldEntity = this.orderDetailDao.getEntity(detailEntity.getId());
         if(oldEntity != null){
+            if(oldEntity.getOrderEntity().getStatus() != OrderStatus.SUBMIT.value() && oldEntity.getOrderEntity().getStatus() != OrderStatus.COMPLETE.value()){
+                throw new RuntimeException("只有已提交或者已完成的订单，才能修改课程");
+            }
 
             this.courseService.updateCourseCount(oldEntity.getCourseIds(), oldEntity.getOrderEntity().getSystemType(),oldEntity.getOrderEntity().getOrderType(), -1);
             this.courseService.updateCourseCount(detailEntity.getCourseIds(), oldEntity.getOrderEntity().getSystemType(),oldEntity.getOrderEntity().getOrderType(), 1);

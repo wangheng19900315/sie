@@ -1,21 +1,15 @@
 package com.sie.web.controller;
 
 import com.alibaba.fastjson.JSON;
-import com.google.common.collect.Lists;
-import com.sie.framework.entity.CouponEntity;
 import com.sie.framework.entity.DormitoryEntity;
-import com.sie.framework.entity.StudentEntity;
-import com.sie.framework.vo.StudentSearchVo;
 import com.sie.service.DormitoryService;
 import com.sie.service.ProjectService;
 import com.sie.service.bean.DormitoryBean;
 import com.sie.service.bean.PageInfo;
 import com.sie.service.bean.ResultBean;
-import com.sie.service.export.StudentExport;
 import com.sie.util.DateUtil;
 import com.sie.util.ExportExcel;
 import com.sie.util.NumberUtil;
-import org.apache.commons.beanutils.BeanUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -26,9 +20,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletResponse;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by wangheng on 2017/8/9.

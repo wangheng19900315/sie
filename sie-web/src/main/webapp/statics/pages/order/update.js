@@ -88,7 +88,12 @@ $(function(){
                     $("#detailCanclBtn").click();
                     window.location.reload();
                 } else {
-                    alert("保存数据出现错误，请稍候重试！");
+                    if(data.message){
+                        alert(data.message);
+                    }else{
+                        alert("保存数据出现错误，请稍候重试！");
+                    }
+
                 }
             },
             error: function () {
@@ -142,7 +147,11 @@ $(function(){
                     $("#detailCanclBtn").click();
                     history.go(-1);
                 } else {
-                    alert("保存数据出现错误，请稍候重试！");
+                    if(data.message){
+                        alert(data.message);
+                    }else{
+                        alert("保存数据出现错误，请稍候重试！");
+                    }
                 }
             },
             error: function () {

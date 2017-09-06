@@ -2,7 +2,9 @@ package com.sie.service;
 
 import com.sie.framework.entity.StudentEntity;
 import com.sie.service.bean.ResultBean;
+import com.sie.service.excel.StudentExcelBean;
 
+import java.util.List;
 import java.util.Map;
 
 
@@ -17,4 +19,10 @@ public interface StudentService extends BaseService<StudentEntity, Integer> {
     StudentEntity login(String userName, String password);
 
     ResultBean updateEntity(StudentEntity studentEntity);
+
+    boolean importBean(List<StudentExcelBean> beanList);
+
+    String repeatEntity(StudentExcelBean bean);
+
+    String repeatEntity(StudentEntity entity);
 }

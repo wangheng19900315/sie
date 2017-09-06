@@ -265,6 +265,15 @@ $(function(){
             alert("请选择项目");
             return;
         }
+        if($("#money").val() == ''){
+            alert("请选择输入金额");
+            return;
+        }else{
+            if(isNaN($("#money").val())){
+                alert("金额请输入数字");
+                return;
+            }
+        }
         var order = {};
         order["studentId"] = $("#studentId").val();
         order["money"] = $("#money").val();

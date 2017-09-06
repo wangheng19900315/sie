@@ -6,10 +6,12 @@ import com.sie.framework.entity.StudentEntity;
 import com.sie.framework.help.ApplicationHelp;
 import com.sie.service.StudentService;
 import com.sie.service.bean.ResultBean;
+import com.sie.service.excel.StudentExcelBean;
 import com.sie.util.DateUtil;
 import com.sie.util.Md5Util;
 import com.sie.util.NumberUtil;
 import com.sie.util.StringUtil;
+import org.apache.commons.beanutils.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
@@ -134,5 +136,43 @@ public class StudentServiceImpl extends BaseServiceImpl<StudentEntity,Integer> i
         resultBean.setMessage("修改成功");
         resultBean.setSuccess(true);
         return resultBean;
+    }
+
+    @Override
+    public boolean importBean(List<StudentExcelBean> beanList) {
+        try {
+            for(int i=0; i<beanList.size(); i++){
+                StudentEntity  entity = new StudentEntity();
+                BeanUtils.copyProperties(entity, beanList.get(i));
+                this.saveOrUpdate(entity);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String repeatEntity(StudentExcelBean bean) {
+        return repeat(bean.getIdNumber(),bean.getPassportNumber());
+    }
+
+    @Override
+    public String repeatEntity(StudentEntity entity) {
+        return repeat(entity.getIdNumber(),entity.getPassportNumber());
+    }
+
+    private String repeat(String idNumber,String passportNumber){
+        String result = null;
+        //判断学生信息是否重复
+        String hql = "from StudentEntity where (idNumber='"+ idNumber + "' or passportNumber='"+passportNumber+"') and hdelete=0";
+        List<StudentEntity> studentEntities = this.studentDao.getList(hql);
+        if(studentEntities.size() > 0){
+            result = idNumber +" "+passportNumber+ "学生信息不存在";
+            return result;
+        }
+        return result;
     }
 }

@@ -163,7 +163,6 @@
                                         <label   class="col-sm-3 control-label">支付方式:</label>
                                         <div class="col-sm-8">
                                             <select class="form-control" id="payType" name="payType">
-                                                <option value="">...</option>
                                                 <option value="1">微信</option>
                                                 <option value="2">支付宝</option>
                                                 <option value="3">银联</option>

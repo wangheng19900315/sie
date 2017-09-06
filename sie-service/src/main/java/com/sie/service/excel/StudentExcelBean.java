@@ -1,4 +1,4 @@
-package com.sie.service.export;
+package com.sie.service.excel;
 
 import com.sie.service.bean.BaseBean;
 import com.sie.util.annotation.ExcelField;
@@ -8,7 +8,7 @@ import java.sql.Date;
 /**
  * Created by x on 2017/8/12.
  */
-public class StudentExport{
+public class StudentExcelBean {
 
     private String userID;
     private String email;
