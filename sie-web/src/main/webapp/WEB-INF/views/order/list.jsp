@@ -30,7 +30,7 @@
                         </div>
                         <div class="form-group">
                             <select   class="form-control" id="orderStatus" name="orderStatus" placeholder="订单状态" >
-                                <option value="">...</option>
+                                <option value=""></option>
                                 <option value="1">已提交</option>
                                 <option value="2">已完成</option>
                                 <option value="3">已退款</option>
@@ -47,7 +47,7 @@
                         <%--</div>--%>
                         <div class="form-group">
                             <select class="form-control" id="system" name="system"  placeholder="提交系统">
-                                <option value="">...</option>
+                                <option value=""></option>
                                 <option value="1">SIE</option>
                                 <option value="2">TRU</option>
                             </select>

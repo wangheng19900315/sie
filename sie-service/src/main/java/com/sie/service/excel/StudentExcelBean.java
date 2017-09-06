@@ -38,18 +38,13 @@ public class StudentExcelBean {
         this.userID = userID;
     }
 
-    @ExcelField(title="用户邮箱/用户名", align=2, sort=1)
+    @ExcelField(title="用户邮箱/用户名", align=2, sort=2)
     public String getEmail() {
         return email;
     }
 
     public void setEmail(String email) {
         this.email = email;
-    }
-    @ExcelField(title="照片", align=2, sort=2)
-    public String getImageName() {
-        imageName = userID + image.substring(image.lastIndexOf('.'));
-        return imageName;
     }
 
     public void setImageName(String imageName) {
@@ -181,6 +176,12 @@ public class StudentExcelBean {
 
     public void setGraduationYear(String graduationYear) {
         this.graduationYear = graduationYear;
+    }
+
+    @ExcelField(title="照片", align=2, sort=17)
+    public String getImageName() {
+        imageName = userID + image.substring(image.lastIndexOf('.'));
+        return imageName;
     }
 
     public String getImage() {

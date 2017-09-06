@@ -14,7 +14,6 @@ import com.sie.util.StringUtil;
 import org.apache.commons.beanutils.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
 
 import java.util.*;
 
@@ -61,6 +60,7 @@ public class StudentServiceImpl extends BaseServiceImpl<StudentEntity,Integer> i
             oldStudentEntity.setSendPostCode(studentEntity.getSendPostCode());
             this.studentDao.updateEntity(oldStudentEntity);
         }else{
+            studentEntity.setUserID(DateUtil.format(new Date(), "yyyyMMddHHmmss")+ NumberUtil.randomInt(1000, 9999));
             this.studentDao.createEntity(studentEntity);
         }
 
@@ -166,11 +166,19 @@ public class StudentServiceImpl extends BaseServiceImpl<StudentEntity,Integer> i
 
     private String repeat(String idNumber,String passportNumber){
         String result = null;
+        String hql;
+        if(StringUtil.isNotBlank(idNumber)){
+            hql = "from StudentEntity where idNumber='"+ idNumber + "' and hdelete=0";
+        }else if(StringUtil.isNotBlank(passportNumber)){
+            hql = "from StudentEntity where passportNumber='"+ passportNumber + "' and hdelete=0";
+        }else{
+            result = "学生身份证号和者护照号都为空";
+            return result;
+        }
         //判断学生信息是否重复
-        String hql = "from StudentEntity where (idNumber='"+ idNumber + "' or passportNumber='"+passportNumber+"') and hdelete=0";
         List<StudentEntity> studentEntities = this.studentDao.getList(hql);
         if(studentEntities.size() > 0){
-            result = idNumber +" "+passportNumber+ "学生信息不存在";
+            result = idNumber +" "+passportNumber+ "学生信息重复";
             return result;
         }
         return result;

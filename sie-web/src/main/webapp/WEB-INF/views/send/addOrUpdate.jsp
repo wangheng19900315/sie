@@ -20,6 +20,9 @@
                                 </div>
                             </div>
                         </div><!-- col-sm-6 -->
+
+                    </div><!-- row -->
+                    <div class="row">
                         <div class="col-sm-6">
                             <div class="form-group ">
                                 <label for="expressCompany" class="col-sm-2 control-label">快递公司</label>
@@ -29,8 +32,6 @@
                             </div>
 
                         </div><!-- col-sm-6 -->
-                    </div><!-- row -->
-                    <div class="row">
                         <div class="col-sm-6">
                             <div class="form-group ">
                                 <label for="trackingNumber" class="col-sm-2 control-label">寄送单号</label>
@@ -38,6 +39,17 @@
                                     <input type="text" class="form-control" id="trackingNumber" name="trackingNumber" placeholder="trackingNumber" required data-msg-required="请输入单号">
                                 </div>
                             </div>
+                        </div><!-- col-sm-6 -->
+                    </div><!-- row -->
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group ">
+                                <label for="sendCountry" class="col-sm-2 control-label">寄送街道</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="sendStreet" name="sendStreet" placeholder="sendStreet" required data-msg-required="请输入街道">
+                                </div>
+                            </div>
+
                         </div><!-- col-sm-6 -->
                         <div class="col-sm-6">
                             <div class="form-group ">
@@ -48,7 +60,7 @@
                             </div>
 
                         </div><!-- col-sm-6 -->
-                    </div><!-- row -->
+                    </div>
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="form-group ">

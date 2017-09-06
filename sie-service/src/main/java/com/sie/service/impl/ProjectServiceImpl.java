@@ -4,6 +4,7 @@ import com.sie.framework.base.HqlOperateVo;
 import com.sie.framework.dao.CourseDao;
 import com.sie.framework.dao.ProjectDao;
 import com.sie.framework.dao.ProjectPriceDao;
+import com.sie.framework.entity.CourseEntity;
 import com.sie.framework.entity.ProjectEntity;
 import com.sie.framework.entity.ProjectPriceEntity;
 import com.sie.framework.type.SystemType;
@@ -83,6 +84,20 @@ public class ProjectServiceImpl extends BaseServiceImpl<ProjectEntity,Integer> i
             ProjectBean bean = new ProjectBean();
             setBeanValues(projectEntity, bean);
             //TODO 得到项目下所有课程SIE和TRU项目总工报名人数进行相加
+            String hql = "from CourseEntity where projectId='"+projectEntity.getId()+"' and hdelete=0";
+            List<CourseEntity> courseEntities = courseDao.getList(hql);
+            int sieNum = 0;
+            int truNum = 0;
+            for(CourseEntity courseEntity : courseEntities){
+                if(courseEntity.getSieTotalNumber() != null){
+                    sieNum = sieNum + courseEntity.getSieTotalNumber().intValue();
+                }
+                if(courseEntity.getTruTotalNumber() != null){
+                    truNum = truNum + courseEntity.getTruTotalNumber().intValue();
+                }
+            }
+            bean.setSieNumber(sieNum);
+            bean.setTruNumber(truNum);
             projectBeanList.add(bean);
         }
 

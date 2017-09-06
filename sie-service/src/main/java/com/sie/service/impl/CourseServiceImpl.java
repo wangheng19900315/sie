@@ -106,7 +106,8 @@ public class CourseServiceImpl extends BaseServiceImpl<CourseEntity,Integer> imp
             this.courseDao.updateEntity(oldCourseEntity);
             return oldCourseEntity.getId();
         }else{
-
+            courseEntity.setSieTotalNumber(0);
+            courseEntity.setTruTotalNumber(0);
             this.courseDao.createEntity(courseEntity);
             return courseEntity.getId();
         }

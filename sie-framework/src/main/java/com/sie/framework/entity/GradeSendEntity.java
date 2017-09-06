@@ -12,6 +12,7 @@ import javax.persistence.Table;
 @Table(name = "t_grade_send_info")
 public class GradeSendEntity extends BaseEntity{
     private Integer studentId;
+    private String sendStreet;//寄送街道
     private String sendCountry;//寄送县市
     private String sendProvince;//寄送州省
     private String sendPostCode;//寄送邮编
@@ -29,6 +30,16 @@ public class GradeSendEntity extends BaseEntity{
 
     public void setStudentId(Integer studentId) {
         this.studentId = studentId;
+    }
+
+    @Basic
+    @Column(name = "send_street")
+    public String getSendStreet() {
+        return sendStreet;
+    }
+
+    public void setSendStreet(String sendStreet) {
+        this.sendStreet = sendStreet;
     }
 
     @Basic

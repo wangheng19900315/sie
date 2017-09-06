@@ -108,6 +108,13 @@ $(function(){
         });
     });
 
+    /**
+     * 导入Excel
+     */
+    $("#importBtn").bind("click", function(){
+        $("#resultMessage").html("");
+        $("#showImportFile").click();
+    });
     //绑定导入事件
     $("#importSubmitBtn").bind("click", function(){
         var formData = new FormData(document.getElementById("fileFrom"));
