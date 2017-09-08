@@ -14,5 +14,6 @@ import java.util.Map;
 public interface GradeSendService extends BaseService<GradeSendEntity, Integer> {
     PageInfo<GradeSendBean> getGradeSendList(Integer page, Integer rows,  List<HqlOperateVo> hqlOperateVos);
 
+    List<GradeSendBean> getGradeSendList(List<HqlOperateVo> hqlOperateVos);
     String importBean(GradeSendBean bean);
 }

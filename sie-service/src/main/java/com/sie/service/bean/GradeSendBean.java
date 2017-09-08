@@ -9,7 +9,7 @@ import com.sie.util.annotation.ExcelField;
 public class GradeSendBean extends BaseEntity{
 
     private Integer studentId;
-    @ExcelField(title="学生id", align=2, sort=1)
+    @ExcelField(title="学生ID", align=2, sort=1)
     private String userID;
     private String studentName;
     @ExcelField(title="成绩单街道", align=2, sort=2)

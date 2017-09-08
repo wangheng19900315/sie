@@ -90,6 +90,19 @@ public class GradeSendServiceImpl extends BaseServiceImpl<GradeSendEntity,Intege
         return result;
     }
 
+    @Override
+    public List<GradeSendBean> getGradeSendList(List<HqlOperateVo> hqlOperateVos) {
+        List<GradeSendEntity> gradeSendEntities = this.getList(hqlOperateVos);
+        List<GradeSendBean> gradeSendBeanList = new ArrayList<>();
+        for(GradeSendEntity gradeSendEntity:gradeSendEntities){
+
+            GradeSendBean bean = new GradeSendBean();
+            setBeanValues(gradeSendEntity, bean);
+            gradeSendBeanList.add(bean);
+        }
+        return gradeSendBeanList;
+    }
+
     private void setBeanValues(GradeSendEntity entity, GradeSendBean bean){
 
         try{
@@ -97,7 +110,7 @@ public class GradeSendServiceImpl extends BaseServiceImpl<GradeSendEntity,Intege
             //设置studentname
             StudentEntity studentEntity = studentDao.getEntity(entity.getStudentId());
             bean.setStudentName(studentEntity.getChineseName());
-
+            bean.setUserID(studentEntity.getUserID());
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -114,18 +127,17 @@ public class GradeSendServiceImpl extends BaseServiceImpl<GradeSendEntity,Intege
             result = "学生信息不存在";
             return result;
         }
-        try {
-            GradeSendEntity  entity = new GradeSendEntity();
-            BeanUtils.copyProperties(entity, bean);
-            GradeSendEntity checkEntity = this.gradeSendDao.getRepeatEntity(entity);
-            if(checkEntity == null){
-                this.saveOrUpdate(entity);
-            }
-
-        } catch (Exception e) {
-            result = "信息出错";
-            e.printStackTrace();
+        hqlOperateVos = new ArrayList<>();
+        hqlOperateVos.add(new HqlOperateVo("studentId","=",studentEntities.get(0).getId().toString()));
+        List<GradeSendEntity>  gradeSendEntities = this.gradeSendDao.getList(hqlOperateVos);
+        if(gradeSendEntities == null || gradeSendEntities.size() == 0){
+            result = "成绩单寄送不存在";
+            return result;
         }
+        GradeSendEntity gradeSendEntity = gradeSendEntities.get(0);
+        gradeSendEntity.setTrackingNumber(bean.getTrackingNumber());
+        gradeSendEntity.setExpressCompany(bean.getExpressCompany());
+        this.saveOrUpdate(gradeSendEntity);
         return result;
     }
 }

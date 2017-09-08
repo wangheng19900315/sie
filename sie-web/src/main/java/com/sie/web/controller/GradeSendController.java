@@ -1,6 +1,7 @@
 package com.sie.web.controller;
 
 import com.alibaba.fastjson.JSON;
+import com.sie.framework.base.HqlOperateVo;
 import com.sie.framework.entity.CouponEntity;
 import com.sie.framework.entity.GradeSendEntity;
 import com.sie.framework.entity.StudentEntity;
@@ -9,9 +10,7 @@ import com.sie.service.StudentService;
 import com.sie.service.bean.GradeSendBean;
 import com.sie.service.bean.PageInfo;
 import com.sie.service.bean.ResultBean;
-import com.sie.util.ImportExcel;
-import com.sie.util.NumberUtil;
-import com.sie.util.StringUtil;
+import com.sie.util.*;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,6 +21,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -153,6 +155,23 @@ public class GradeSendController {
             e.printStackTrace();
         }
         return resultBean;
+    }
+
+    @RequestMapping(value = "export.json")
+    @ResponseBody
+    public String exportFile(HttpServletResponse response, RedirectAttributes redirectAttributes) {
+        try {
+            String fileName = "成绩单寄送信息"+ DateUtil.format(new Date(), "yyyyMMddHHmmss")+".xlsx";
+            List<HqlOperateVo> hqlOperateVos = new ArrayList<>();
+            //设置默认的条件为寄送单号为空的记录
+            hqlOperateVos.add(new HqlOperateVo("trackingNumber","=","''"));
+            List<GradeSendBean> sendBeanList = gradeSendService.getGradeSendList(hqlOperateVos);
+            new ExportExcel(null, GradeSendBean.class).setDataList(sendBeanList).write(response, fileName).dispose();
+            return null;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "redirect:/send/list.html";
     }
 
 }
