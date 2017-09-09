@@ -16,4 +16,8 @@ public interface GradeSendService extends BaseService<GradeSendEntity, Integer> 
 
     List<GradeSendBean> getGradeSendList(List<HqlOperateVo> hqlOperateVos);
     String importBean(GradeSendBean bean);
+
+    void updateStudentGradeSend(Integer studentId);
+
+    GradeSendBean getGraseSendBean(Integer gradeSendId);
 }

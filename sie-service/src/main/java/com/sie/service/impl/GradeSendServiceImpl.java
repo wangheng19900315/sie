@@ -1,14 +1,9 @@
 package com.sie.service.impl;
 
 import com.sie.framework.base.HqlOperateVo;
-import com.sie.framework.dao.CourseDao;
-import com.sie.framework.dao.GradeSendDao;
-import com.sie.framework.dao.ProjectDao;
-import com.sie.framework.dao.StudentDao;
-import com.sie.framework.entity.CourseEntity;
-import com.sie.framework.entity.GradeSendEntity;
-import com.sie.framework.entity.ProjectEntity;
-import com.sie.framework.entity.StudentEntity;
+import com.sie.framework.dao.*;
+import com.sie.framework.entity.*;
+import com.sie.framework.type.OrderStatus;
 import com.sie.framework.type.SystemType;
 import com.sie.service.CourseService;
 import com.sie.service.GradeSendService;
@@ -41,6 +36,9 @@ public class GradeSendServiceImpl extends BaseServiceImpl<GradeSendEntity,Intege
     private StudentDao studentDao;
 
     @Autowired
+    private OrderDao orderDao;
+
+    @Autowired
     GradeSendServiceImpl(GradeSendDao gradeSendDao) {
         super(gradeSendDao);
         this.gradeSendDao = gradeSendDao;
@@ -50,18 +48,22 @@ public class GradeSendServiceImpl extends BaseServiceImpl<GradeSendEntity,Intege
     public Integer saveOrUpdate(GradeSendEntity gradeSendEntity) {
 
         if(NumberUtil.isSignless(gradeSendEntity.getId())){
-            GradeSendEntity oldgradeSendEntity = this.gradeSendDao.getEntity(gradeSendEntity.getId());
+            GradeSendEntity oldGradeSendEntity = this.gradeSendDao.getEntity(gradeSendEntity.getId());
             //设置值
-            oldgradeSendEntity.setExpressCompany(gradeSendEntity.getExpressCompany());
-            oldgradeSendEntity.setSendCountry(gradeSendEntity.getSendCountry());
-            oldgradeSendEntity.setSendPerson(gradeSendEntity.getSendPerson());
-            oldgradeSendEntity.setSendPostCode(gradeSendEntity.getSendPostCode());
-            oldgradeSendEntity.setSendProvince(gradeSendEntity.getSendProvince());
-            oldgradeSendEntity.setSendTel(gradeSendEntity.getSendTel());
-            oldgradeSendEntity.setStudentId(gradeSendEntity.getStudentId());
-            oldgradeSendEntity.setTrackingNumber(gradeSendEntity.getTrackingNumber());
-            this.gradeSendDao.updateEntity(oldgradeSendEntity);
-            return oldgradeSendEntity.getId();
+            oldGradeSendEntity.setExpressCompany(gradeSendEntity.getExpressCompany());
+            oldGradeSendEntity.setTrackingNumber(gradeSendEntity.getTrackingNumber());
+            if(oldGradeSendEntity.getDefaultSend() == 0){
+                oldGradeSendEntity.setStudentId(gradeSendEntity.getStudentId());
+                oldGradeSendEntity.setSendPerson(gradeSendEntity.getSendPerson());
+                oldGradeSendEntity.setSendPostCode(gradeSendEntity.getSendPostCode());
+                oldGradeSendEntity.setSendProvince(gradeSendEntity.getSendProvince());
+                oldGradeSendEntity.setSendTel(gradeSendEntity.getSendTel());
+                oldGradeSendEntity.setSendStreet(gradeSendEntity.getSendStreet());
+                oldGradeSendEntity.setSendCountry(gradeSendEntity.getSendCountry());
+            }
+
+            this.gradeSendDao.updateEntity(oldGradeSendEntity);
+            return oldGradeSendEntity.getId();
         }else{
             this.gradeSendDao.createEntity(gradeSendEntity);
         }
@@ -111,6 +113,16 @@ public class GradeSendServiceImpl extends BaseServiceImpl<GradeSendEntity,Intege
             StudentEntity studentEntity = studentDao.getEntity(entity.getStudentId());
             bean.setStudentName(studentEntity.getChineseName());
             bean.setUserID(studentEntity.getUserID());
+
+            if(entity.getDefaultSend() == 1){
+                //默认订单需要设置寄送地址
+                bean.setSendPerson(studentEntity.getSendPerson());
+                bean.setSendPostCode(studentEntity.getSendPostCode());
+                bean.setSendProvince(studentEntity.getSendProvince());
+                bean.setSendTel(studentEntity.getSendTel());
+                bean.setSendStreet(studentEntity.getSendStreet());
+                bean.setSendCountry(studentEntity.getSendCountry());
+            }
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -129,6 +141,7 @@ public class GradeSendServiceImpl extends BaseServiceImpl<GradeSendEntity,Intege
         }
         hqlOperateVos = new ArrayList<>();
         hqlOperateVos.add(new HqlOperateVo("studentId","=",studentEntities.get(0).getId().toString()));
+        hqlOperateVos.add(new HqlOperateVo("defaultSend","=","1"));
         List<GradeSendEntity>  gradeSendEntities = this.gradeSendDao.getList(hqlOperateVos);
         if(gradeSendEntities == null || gradeSendEntities.size() == 0){
             result = "成绩单寄送不存在";
@@ -139,5 +152,43 @@ public class GradeSendServiceImpl extends BaseServiceImpl<GradeSendEntity,Intege
         gradeSendEntity.setExpressCompany(bean.getExpressCompany());
         this.saveOrUpdate(gradeSendEntity);
         return result;
+    }
+
+    @Override
+    public void updateStudentGradeSend(Integer studentId) {
+        List<HqlOperateVo> hqlOperateVos = new ArrayList<>();
+        hqlOperateVos.add(new HqlOperateVo("studentEntity.id", "=", studentId+""));
+        hqlOperateVos.add(new HqlOperateVo("status", "=", OrderStatus.COMPLETE.value()+""));
+        List<OrderEntity> completeOrders = this.orderDao.getList(hqlOperateVos);
+
+
+        hqlOperateVos = new ArrayList<>();
+        hqlOperateVos.add(new HqlOperateVo("studentId", "=", studentId+""));
+        hqlOperateVos.add(new HqlOperateVo("defaultSend", "=", "1"));
+        List<GradeSendEntity> gradeSendEntities = gradeSendDao.getList(hqlOperateVos);
+
+        if(completeOrders.size() > 0){
+            //学生存在已经完成的订单判断是否需要新增成绩单寄送
+            if(gradeSendEntities.size() == 0){
+                //如果不存在成绩单寄送进行添加
+                GradeSendEntity gradeSendEntity = new GradeSendEntity();
+                gradeSendEntity.setStudentId(studentId);
+                gradeSendEntity.setDefaultSend(1);//设置为默认订单
+                saveOrUpdate(gradeSendEntity);
+            }
+        }else{
+            if(gradeSendEntities.size() > 0){
+                //如果成绩单寄送存在进行删除
+                gradeSendDao.updateByHql("update GradeSendEntity g  set g.hdelete=1 where g.studentId="+studentId);
+            }
+        }
+    }
+
+    @Override
+    public GradeSendBean getGraseSendBean(Integer gradeSendId) {
+        GradeSendEntity gradeSendEntity = gradeSendDao.getEntity(gradeSendId);
+        GradeSendBean bean = new GradeSendBean();
+        setBeanValues(gradeSendEntity, bean);
+        return bean;
     }
 }

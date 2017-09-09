@@ -57,8 +57,8 @@ public class GradeSendController {
     @RequestMapping("/addOrUpdate.html")
     public String addOrupdate(Model model, Integer id){
         if(NumberUtil.isSignless(id)){
-            GradeSendEntity gradeSendEntity = this.gradeSendService.get(id);
-            model.addAttribute("entity", JSON.toJSON(gradeSendEntity));
+            GradeSendBean graseSendBean = this.gradeSendService.getGraseSendBean(id);
+            model.addAttribute("entity", JSON.toJSON(graseSendBean));
         }
         //添加学生
         Map<Integer,String> students = studentService.getAllStudent();
@@ -164,7 +164,7 @@ public class GradeSendController {
             String fileName = "成绩单寄送信息"+ DateUtil.format(new Date(), "yyyyMMddHHmmss")+".xlsx";
             List<HqlOperateVo> hqlOperateVos = new ArrayList<>();
             //设置默认的条件为寄送单号为空的记录
-            hqlOperateVos.add(new HqlOperateVo("trackingNumber","=","''"));
+            hqlOperateVos.add(new HqlOperateVo("defaultSend", "=", "1"));
             List<GradeSendBean> sendBeanList = gradeSendService.getGradeSendList(hqlOperateVos);
             new ExportExcel(null, GradeSendBean.class).setDataList(sendBeanList).write(response, fileName).dispose();
             return null;

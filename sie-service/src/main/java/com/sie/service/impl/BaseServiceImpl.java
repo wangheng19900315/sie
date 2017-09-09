@@ -77,4 +77,9 @@ public class BaseServiceImpl<T extends BaseEntity, PK extends Serializable> impl
     public List<T> getList(List<HqlOperateVo> hqlOperateVos) {
         return baseDao.getList(hqlOperateVos);
     }
+
+    @Override
+    public List<T> getList(String hql) {
+        return baseDao.getList(hql);
+    }
 }

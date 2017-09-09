@@ -21,6 +21,7 @@ public class GradeSendEntity extends BaseEntity{
     private String expressCompany;
     private String trackingNumber;
     private String comment;
+    private Integer defaultSend;//是否是学生默认的寄送订单
 
     @Basic
     @Column(name = "student_id")
@@ -122,4 +123,13 @@ public class GradeSendEntity extends BaseEntity{
         this.comment = comment;
     }
 
+    @Basic
+    @Column(name = "default_send")
+    public Integer getDefaultSend() {
+        return defaultSend;
+    }
+
+    public void setDefaultSend(Integer defaultSend) {
+        this.defaultSend = defaultSend;
+    }
 }

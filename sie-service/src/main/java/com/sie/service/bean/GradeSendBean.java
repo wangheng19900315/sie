@@ -29,6 +29,7 @@ public class GradeSendBean extends BaseEntity{
     @ExcelField(title="快递单号", align=2, sort=9)
     private String trackingNumber;
     private String comment;
+    private Integer defaultSend;
 
 
     public Integer getStudentId() {
@@ -133,5 +134,13 @@ public class GradeSendBean extends BaseEntity{
 
     public void setSendStreet(String sendStreet) {
         this.sendStreet = sendStreet;
+    }
+
+    public Integer getDefaultSend() {
+        return defaultSend;
+    }
+
+    public void setDefaultSend(Integer defaultSend) {
+        this.defaultSend = defaultSend;
     }
 }

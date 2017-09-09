@@ -22,4 +22,6 @@ public interface BaseService<T extends BaseEntity, PK extends Serializable> {
     PageInfo<T> getList(Integer page, Integer rows, List<HqlOperateVo> hqlOperateVos);
 
     List<T> getList(List<HqlOperateVo> hqlOperateVos);
+
+    List<T> getList(String hql);
 }

@@ -55,6 +55,7 @@ public class StudentServiceImpl extends BaseServiceImpl<StudentEntity,Integer> i
             oldStudentEntity.setGraduationYear(studentEntity.getGraduationYear());
             oldStudentEntity.setSendPerson(studentEntity.getSendPerson());
             oldStudentEntity.setSendTel(studentEntity.getSendTel());
+            oldStudentEntity.setSendStreet(studentEntity.getSendStreet());
             oldStudentEntity.setSendProvince(studentEntity.getSendProvince());
             oldStudentEntity.setSendCountry(studentEntity.getSendCountry());
             oldStudentEntity.setSendPostCode(studentEntity.getSendPostCode());
