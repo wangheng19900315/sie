@@ -48,6 +48,8 @@ public class DormitoryServiceImpl extends BaseServiceImpl<DormitoryEntity,Intege
             dormitoryEntity.setWomanNumber(0);
             dormitoryEntity.setManNumber(0);
             dormitoryEntity.setTotalNumber(0);
+            dormitoryEntity.setSieNumber(0);
+            dormitoryEntity.setTruNumber(0);
             this.dormitoryDao.createEntity(dormitoryEntity);
         }
 

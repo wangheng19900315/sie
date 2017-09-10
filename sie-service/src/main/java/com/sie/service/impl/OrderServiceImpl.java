@@ -460,6 +460,10 @@ public class OrderServiceImpl extends BaseServiceImpl<OrderEntity,Integer> imple
             }
         }
 
+        gradeService.updateStudentGradeList(studentEntity.getId());
+
+        gradeSendService.updateStudentGradeSend(studentEntity.getId());
+
         resultBean.setMessage("添加成功");
         resultBean.setSuccess(true);
         return resultBean;
@@ -572,6 +576,7 @@ public class OrderServiceImpl extends BaseServiceImpl<OrderEntity,Integer> imple
 
         try {
             addOrder(orderBean);
+            //判断添加的订单是否为已经完成
         } catch (Exception e) {
             result = "信息出错";
             e.printStackTrace();
