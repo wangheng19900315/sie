@@ -23,11 +23,22 @@ $(function(){
         }
     });
 
+    initStudentOption();
     if(entity.length > 0){
         $("#data-form").loadJson(eval("("+entity+")"));
+        console.log(eval("("+entity+")"));
+        //判断订单是否为默认订单
+        if($("#defaultSend").val() == 1){
+            //设置学生 寄送信息不可更改
+            $("#studentId").attr("disabled","disabled");
+            $("#sendStreet").attr("disabled","disabled");
+            $("#sendCountry").attr("disabled","disabled");
+            $("#sendProvince").attr("disabled","disabled");
+            $("#sendPostCode").attr("disabled","disabled");
+            $("#sendPerson").attr("disabled","disabled");
+            $("#sendTel").attr("disabled","disabled");
+        }
     }
-
-    initStudentOption();
 
 })
 

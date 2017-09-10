@@ -29,10 +29,11 @@ $(function(){
         height: '100%',
         mtype: 'post',
         postData: {},
-        colNames: ['ID', '学生姓名','街道' ,'寄送县/市' ,'寄送州/市' ,'寄送邮编' ,'寄送联系人/部门','寄送电话','快递公司' ,'寄送单号'  ],
+        colNames: ['ID', '学生姓名','学生ID','街道' ,'寄送县/市' ,'寄送州/市' ,'寄送邮编' ,'寄送联系人/部门','寄送电话','快递公司' ,'寄送单号'  ],
         colModel: [
             {name: 'id', index: 'id', width: 20, hidden: true,  sortable: false},
             {name: 'studentName', index: 'studentName', width: 20,   sortable: false},
+            {name: 'userID', index: 'userID', width: 20,   sortable: false},
             {name: 'sendStreet', index: 'sendStreet', width: 20,   sortable: false},
             {name: 'sendCountry', index: 'sendCountry', width: 20,   sortable: false},
             {name: 'sendProvince', index: 'sendProvince', width: 20,  sortable: false},
@@ -154,6 +155,19 @@ $(function(){
                     alert("导入数据失败！");
                 }
             });
+    });
+
+    $("#exportBtn").bind("click", function(){
+        bootbox.confirm({
+            message: "确认要导出excel?",
+            callback: function(result) {
+                if(result){
+                    $("#search-form").attr("action", "/send/export.json");
+                    $("#search-form").submit();
+                }
+            },
+            className: "bootbox-sm"
+        });
     });
 })
 

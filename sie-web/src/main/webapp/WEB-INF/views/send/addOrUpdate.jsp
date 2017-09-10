@@ -6,6 +6,7 @@
         <div class="col-sm-12">
             <form   class="panel form-horizontal" novalidate="novalidate" id="data-form" >
                 <input type="hidden" id="id" name="id">
+                <input type="hidden" id="defaultSend" name="defaultSend" value="0">
                 <div class="panel-heading">
                     <span class="panel-title">寄送信息</span>
                 </div>

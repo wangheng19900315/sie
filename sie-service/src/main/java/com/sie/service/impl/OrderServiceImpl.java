@@ -74,6 +74,9 @@ public class OrderServiceImpl extends BaseServiceImpl<OrderEntity,Integer> imple
     @Autowired
     private DormitoryService dormitoryService;
 
+    @Autowired
+    private GradeSendService gradeSendService;
+
 
     @Override
     public PageInfo<OrderBean> getOrderList(Integer page, Integer rows, List<HqlOperateVo> hqlOperateVoList) {
@@ -299,7 +302,7 @@ public class OrderServiceImpl extends BaseServiceImpl<OrderEntity,Integer> imple
 
             gradeService.updateStudentGradeList(oldEntity.getStudentEntity().getId());
 
-
+            gradeSendService.updateStudentGradeSend(oldEntity.getStudentEntity().getId());
         }
     }
 
