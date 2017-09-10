@@ -11,6 +11,7 @@ import com.sie.service.bean.OrderDetailBean;
 import com.sie.service.bean.PageInfo;
 import com.sie.service.bean.ResultBean;
 import com.sie.service.excel.OrderImport;
+import com.sie.service.vo.OrderVo;
 import com.sie.util.DateUtil;
 import com.sie.util.NumberUtil;
 import com.sie.util.PageUtil;
@@ -151,7 +152,7 @@ public class OrderServiceImpl extends BaseServiceImpl<OrderEntity,Integer> imple
         return null;
     }
 
-    private void setBeanValues(OrderEntity orderEntity, OrderBean bean){
+    public void setBeanValues(OrderEntity orderEntity, OrderBean bean){
         try{
             BeanUtils.copyProperties(bean, orderEntity);
             if(NumberUtil.isSignless(bean.getStatus())){
@@ -616,5 +617,33 @@ public class OrderServiceImpl extends BaseServiceImpl<OrderEntity,Integer> imple
                 this.orderDao.updateEntity(orderEntity);
             }
         }
+    }
+
+
+    @Override
+    public List<OrderVo> getOrderListVo(String systemType, String studentId) {
+        List<OrderVo> orderVos = new ArrayList<>();
+        List<HqlOperateVo> list = new  ArrayList<HqlOperateVo>();
+        list.add(new HqlOperateVo("systemType", "=", systemType));
+        list.add(new HqlOperateVo("studentEntity.id", "=", studentId));
+        List<OrderEntity> orderEntities = this.getList(list);
+        if(orderEntities.size() > 0) {
+            for (OrderEntity orderEntity : orderEntities) {
+
+                OrderBean orderBean = new OrderBean();
+                this.setBeanValues(orderEntity, orderBean);
+                OrderVo vo = new OrderVo();
+                org.springframework.beans.BeanUtils.copyProperties(orderBean, vo);
+
+                if (orderEntity.getOrderTime() != null) {
+                    vo.setOrderTime(DateUtil.format(orderEntity.getOrderTime(), "yyyy-MM-dd"));
+                }
+                if (orderEntity.getPayTime() != null) {
+                    vo.setPayTime(DateUtil.format(orderEntity.getPayTime(), "yyyy-MM-dd"));
+                }
+                orderVos.add(vo);
+            }
+        }
+        return orderVos;
     }
 }

@@ -12,7 +12,6 @@ import javax.persistence.*;
 public class OrderDetailEntity extends BaseEntity{
     private String   courseIds;
     private Integer courseCount;
-    private Integer orderDetailStatus;
 //    private Double total;
     private OrderEntity orderEntity;
     private ProjectEntity projectEntity;
@@ -75,13 +74,6 @@ public class OrderDetailEntity extends BaseEntity{
         this.dormitoryEntity = dormitoryEntity;
     }
 
-    @Column(name = "order_detail_status")
-    public Integer getOrderDetailStatus() {
-        return orderDetailStatus;
-    }
 
-    public void setOrderDetailStatus(Integer orderDetailStatus) {
-        this.orderDetailStatus = orderDetailStatus;
-    }
 
 }

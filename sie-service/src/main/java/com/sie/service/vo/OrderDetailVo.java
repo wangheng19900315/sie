@@ -1,15 +1,12 @@
-package com.sie.service.bean;
+package com.sie.service.vo;
 
-import com.sie.framework.entity.BaseEntity;
-import com.sie.framework.entity.OrderEntity;
-import org.hibernate.annotations.Where;
-
-import javax.persistence.*;
+import com.sie.service.bean.BaseBean;
 
 /**
  * Created by x on 2017/8/12.
  */
-public class OrderDetailBean extends BaseBean{
+public class OrderDetailVo  {
+    private Integer id;
     private Integer projectId;
     private String projectName;
     private String   courseIds;
@@ -72,5 +69,13 @@ public class OrderDetailBean extends BaseBean{
 
     public void setDormitoryName(String dormitoryName) {
         this.dormitoryName = dormitoryName;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 }
