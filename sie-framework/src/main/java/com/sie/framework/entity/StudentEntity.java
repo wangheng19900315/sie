@@ -27,7 +27,6 @@ public class StudentEntity extends BaseEntity{
     private String passportNumber;
     private String idNumber;
     private String telephone;
-    private String sendCode;
     private String emergencyPerson;
     private String emergencyTelephone;
     private String emergencyPersonRealtion;
@@ -240,18 +239,6 @@ public class StudentEntity extends BaseEntity{
     public void setSendProvince(String sendProvince) {
         this.sendProvince = sendProvince;
     }
-
-
-    @Basic
-    @Column(name = "send_code")
-    public String getSendCode() {
-        return sendCode;
-    }
-
-    public void setSendCode(String sendCode) {
-        this.sendCode = sendCode;
-    }
-
 
     @Basic
     @Column(name = "emergency_person")

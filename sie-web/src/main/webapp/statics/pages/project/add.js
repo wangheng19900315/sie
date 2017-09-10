@@ -68,28 +68,28 @@ $(function(){
         }
     });
 
-    //if(entity.length > 0){
-    //    $("#data-form").loadJson(eval("("+entity+")"));
-    //    var jsonObj = eval("("+entity+")");
-    //    //设置sie价格
-    //    $.each(jsonObj.siePrice,function(i,value){
-    //        if(value != null){
-    //            $("#siePrice_" + i +"_courseNumber").val(value.courseNumber);
-    //            $("#siePrice_" + i + "_rmbPrice").val(value.rmbPrice);
-    //            $("#siePrice_" + i + "_dollarPrice").val(value.dollarPrice);
-    //            $("#siePrice_" + i + "_canadianPrice").val(value.canadianPrice);
-    //        }
-    //    });
-    //    //设置tru价格
-    //    $.each(jsonObj.truPrice,function(i,value){
-    //        if(value != null){
-    //            $("#truPrice_" + i +"_courseNumber").val(value.courseNumber);
-    //            $("#truPrice_" + i + "_rmbPrice").val(value.rmbPrice);
-    //            $("#truPrice_" + i + "_dollarPrice").val(value.dollarPrice);
-    //            $("#truPrice_" + i + "_canadianPrice").val(value.canadianPrice);
-    //        }
-    //    });
-    //}
+    if(entity.length > 0){
+        $("#data-form").loadJson(eval("("+entity+")"));
+        //var jsonObj = eval("("+entity+")");
+        ////设置sie价格
+        //$.each(jsonObj.siePrice,function(i,value){
+        //    if(value != null){
+        //        $("#siePrice_" + i +"_courseNumber").val(value.courseNumber);
+        //        $("#siePrice_" + i + "_rmbPrice").val(value.rmbPrice);
+        //        $("#siePrice_" + i + "_dollarPrice").val(value.dollarPrice);
+        //        $("#siePrice_" + i + "_canadianPrice").val(value.canadianPrice);
+        //    }
+        //});
+        ////设置tru价格
+        //$.each(jsonObj.truPrice,function(i,value){
+        //    if(value != null){
+        //        $("#truPrice_" + i +"_courseNumber").val(value.courseNumber);
+        //        $("#truPrice_" + i + "_rmbPrice").val(value.rmbPrice);
+        //        $("#truPrice_" + i + "_dollarPrice").val(value.dollarPrice);
+        //        $("#truPrice_" + i + "_canadianPrice").val(value.canadianPrice);
+        //    }
+        //});
+    }
 
     //触发select选中事件
     $("#system").change();

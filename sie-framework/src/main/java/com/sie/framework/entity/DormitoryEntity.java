@@ -16,6 +16,8 @@ public class DormitoryEntity extends BaseEntity{
     private Integer projectId;
     private Integer womanNumber;
     private Integer manNumber;
+    private Integer sieNumber;
+    private Integer truNumber;
     private Integer totalNumber;
     private Integer maxNumber;
 //    @Id
@@ -97,6 +99,26 @@ public class DormitoryEntity extends BaseEntity{
 
     public void setManNumber(Integer manNumber) {
         this.manNumber = manNumber;
+    }
+
+    @Basic
+    @Column(name = "sie_number")
+    public Integer getSieNumber() {
+        return sieNumber;
+    }
+
+    public void setSieNumber(Integer sieNumber) {
+        this.sieNumber = sieNumber;
+    }
+
+    @Basic
+    @Column(name = "tru_number")
+    public Integer getTruNumber() {
+        return truNumber;
+    }
+
+    public void setTruNumber(Integer truNumber) {
+        this.truNumber = truNumber;
     }
 
     @Basic

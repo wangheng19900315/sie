@@ -17,7 +17,6 @@ public class ProjectPriceEntity extends BaseEntity {
     private Double rmbPrice;
     private Double dollarPrice;
     private Double canadianPrice;
-    private Integer projectId;
     private Integer system;
 
     @Basic
@@ -69,16 +68,6 @@ public class ProjectPriceEntity extends BaseEntity {
 
     public void setCanadianPrice(Double canadianPrice) {
         this.canadianPrice = canadianPrice;
-    }
-
-    @Basic
-    @Column(name = "project_id")
-    public Integer getProjectId() {
-        return projectId;
-    }
-
-    public void setProjectId(Integer projectId) {
-        this.projectId = projectId;
     }
 
     @Basic
