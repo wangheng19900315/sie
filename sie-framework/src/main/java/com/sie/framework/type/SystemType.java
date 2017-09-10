@@ -34,6 +34,19 @@ public enum SystemType {
         return null;
     }
 
+    public static SystemType valueOfName(String value) {
+        value = value.trim();
+        switch (value) {
+
+            case "SIE":
+                return SIE;
+            case "TRU":
+                return TRU;
+            default:
+                return null;
+        }
+    }
+
     private int value;
 
     SystemType(int value) {
