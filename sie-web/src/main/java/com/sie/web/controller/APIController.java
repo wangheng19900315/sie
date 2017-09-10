@@ -1,17 +1,25 @@
 package com.sie.web.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.sie.framework.entity.StudentEntity;
-import com.sie.service.StudentService;
+import com.sie.framework.base.HqlOperateVo;
+import com.sie.framework.entity.*;
+import com.sie.service.*;
+import com.sie.service.bean.OrderBean;
+import com.sie.service.bean.OrderDetailBean;
 import com.sie.service.bean.ResultBean;
+import com.sie.service.vo.*;
+import com.sie.util.DateUtil;
 import com.sie.util.StringUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -23,6 +31,24 @@ public class APIController {
 
     @Autowired
     private StudentService studentService;
+
+    @Autowired
+    private SchoolService schoolService;
+
+    @Autowired
+    private OrderService orderService;
+
+    @Autowired
+    private ProjectService projectService;
+
+    @Autowired
+    private CourseService courseService;
+
+    @Autowired
+    private OrderDetailService orderDetailService;
+
+    @Autowired
+    private PackagePriceService packagePriceService;
 
 
     private static final Logger logger = LoggerFactory.getLogger(APIController.class);
@@ -133,14 +159,14 @@ public class APIController {
         ResultBean resultBean = new ResultBean();
 
         try{
-            ObjectMapper mapper = new ObjectMapper();
-            StudentEntity studentEntity = mapper.readValue(params, StudentEntity.class);
-
-
             if(StringUtil.isBlank(accessToken) || !accessToken.equals(SYSTEM_ACCESS_TOKEN)){
                 resultBean.setMessage("token 为空，请检查参数");
                 return resultBean;
             }
+
+            ObjectMapper mapper = new ObjectMapper();
+            StudentEntity studentEntity = mapper.readValue(params, StudentEntity.class);
+
 
             resultBean = this.studentService.updateEntity(studentEntity);
         }catch(Exception e){
@@ -155,9 +181,40 @@ public class APIController {
      * 获取学校信息
      * @return
      */
-    public String  getSchool(String params, String accessToken){
+    @RequestMapping("/getSchool.json")
+    @ResponseBody
+    public ResultBean  getSchool(String params, String accessToken){
         logger.info("getSchool.json params="+params +" accessToken="+accessToken);
-        return null;
+        ResultBean resultBean = new ResultBean();
+
+        try{
+
+            if(StringUtil.isBlank(accessToken) || !accessToken.equals(SYSTEM_ACCESS_TOKEN)){
+                resultBean.setMessage("token 为空，请检查参数");
+                return resultBean;
+            }
+
+
+            List<SchoolEntity> studentEntityList = this.schoolService.getList(new ArrayList<HqlOperateVo>());
+            if(studentEntityList.size() > 0){
+
+                List<SchoolVo> schoolVos = new ArrayList<>();
+                for(SchoolEntity schoolEntity:studentEntityList){
+                    SchoolVo vo = new SchoolVo();
+                    BeanUtils.copyProperties(schoolEntity, vo);
+                    schoolVos.add(vo);
+                }
+                resultBean.setMessage("查找成功");
+                resultBean.setSuccess(true);
+                resultBean.setData(schoolVos);
+            }
+
+
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+
+        return resultBean;
     }
 
 
@@ -165,9 +222,51 @@ public class APIController {
      * 获取项目信息
      * @return
      */
-    public String  getProjects(String params, String accessToken){
-        logger.info("getSchool.json params="+params +" accessToken="+accessToken);
-        return null;
+    @RequestMapping("/getProjects.json")
+    @ResponseBody
+    public ResultBean  getProjects(String params, String accessToken){
+        logger.info("getProjects.json params="+params +" accessToken="+accessToken);
+        ResultBean resultBean = new ResultBean();
+
+        try{
+            if(StringUtil.isBlank(accessToken) || !accessToken.equals(SYSTEM_ACCESS_TOKEN)){
+                resultBean.setMessage("token 为空，请检查参数");
+                return resultBean;
+            }
+
+            ObjectMapper mapper = new ObjectMapper();
+            Map<String,String >maps = mapper.readValue(params, Map.class);
+            String systemType = maps.get("systemType");
+            if(StringUtil.isBlank(systemType)){
+                resultBean.setMessage("systemType 为空，请检查参数");
+                return resultBean;
+            }
+            List<HqlOperateVo> list = new  ArrayList<HqlOperateVo>();
+            list.add(new HqlOperateVo("system", "=", systemType));
+            List<ProjectEntity> projectEntities = this.projectService.getList(list);
+            if(projectEntities.size() > 0){
+
+                List<ProjectVo> schoolVos = new ArrayList<>();
+                for(ProjectEntity projectEntity:projectEntities){
+                    ProjectVo vo = new ProjectVo();
+                    BeanUtils.copyProperties(projectEntity, vo);
+                    if(projectEntity.getStartTime() != null){
+                        vo.setStartTime(DateUtil.format(projectEntity.getStartTime(), "yyyy-MM-dd"));
+                    }
+                    if(projectEntity.getEndTime() != null){
+                        vo.setEndTime(DateUtil.format(projectEntity.getEndTime(), "yyyy-MM-dd"));
+                    }
+                    schoolVos.add(vo);
+                }
+                resultBean.setMessage("查找成功");
+                resultBean.setSuccess(true);
+                resultBean.setData(schoolVos);
+            }
+
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return resultBean;
     }
 
 
@@ -175,18 +274,102 @@ public class APIController {
      * 获取课程信息
      * @return
      */
-    public String  getCourses(String params, String accessToken){
-        logger.info("getSchool.json params="+params +" accessToken="+accessToken);
-        return null;
+    @RequestMapping("/getCourses.json")
+    @ResponseBody
+    public ResultBean  getCourses(String params, String accessToken){
+        logger.info("getCourses.json params="+params +" accessToken="+accessToken);
+        ResultBean resultBean = new ResultBean();
+
+        try{
+            if(StringUtil.isBlank(accessToken) || !accessToken.equals(SYSTEM_ACCESS_TOKEN)){
+                resultBean.setMessage("token 为空，请检查参数");
+                return resultBean;
+            }
+
+            ObjectMapper mapper = new ObjectMapper();
+            Map<String,String >maps = mapper.readValue(params, Map.class);
+            String systemType = maps.get("systemType");
+            String projectId = maps.get("projectId");
+            if(StringUtil.isBlank(systemType)){
+                resultBean.setMessage("systemType 为空，请检查参数");
+                return resultBean;
+            }
+            List<HqlOperateVo> list = new  ArrayList<HqlOperateVo>();
+            list.add(new HqlOperateVo("system", "=", systemType));
+            list.add(new HqlOperateVo("projectId", "=", projectId));
+            List<CourseEntity> courseEntities = this.courseService.getList(list);
+            if(courseEntities.size() > 0){
+
+                List<CourseVo> courseVos = new ArrayList<>();
+                for(CourseEntity courseEntity:courseEntities){
+                    CourseVo vo = new CourseVo();
+                    BeanUtils.copyProperties(courseEntity, vo);
+                    if(courseEntity.getStartTime() != null){
+                        vo.setStartTime(DateUtil.format(courseEntity.getStartTime(), "yyyy-MM-dd"));
+                    }
+                    if(courseEntity.getEndTime() != null){
+                        vo.setEndTime(DateUtil.format(courseEntity.getEndTime(), "yyyy-MM-dd"));
+                    }
+                    courseVos.add(vo);
+                }
+                resultBean.setMessage("查找成功");
+                resultBean.setSuccess(true);
+                resultBean.setData(courseVos);
+            }
+
+
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+
+        return resultBean;
     }
 
     /**
      * 获取价格信息
      * @return
      */
-    public String  getPrices(String params, String accessToken){
-        logger.info("getSchool.json params="+params +" accessToken="+accessToken);
-        return null;
+    @RequestMapping("/getPrices.json")
+    @ResponseBody
+    public ResultBean  getPrices(String params, String accessToken){
+        logger.info("getPrices.json params="+params +" accessToken="+accessToken);
+        ResultBean resultBean = new ResultBean();
+
+        try{
+            if(StringUtil.isBlank(accessToken) || !accessToken.equals(SYSTEM_ACCESS_TOKEN)){
+                resultBean.setMessage("token 为空，请检查参数");
+                return resultBean;
+            }
+
+            ObjectMapper mapper = new ObjectMapper();
+            Map<String,String >maps = mapper.readValue(params, Map.class);
+            String systemType = maps.get("systemType");
+            if(StringUtil.isBlank(systemType)){
+                resultBean.setMessage("systemType 为空，请检查参数");
+                return resultBean;
+            }
+            List<HqlOperateVo> list = new  ArrayList<HqlOperateVo>();
+            list.add(new HqlOperateVo("system", "=", systemType));
+            List<ProjectPriceEntity> priceEntities = this.packagePriceService.getList(list);
+            if(priceEntities.size() > 0){
+
+                List<ProjectPriceVo> projectPriceVos = new ArrayList<>();
+                for(ProjectPriceEntity priceEntity:priceEntities){
+                    ProjectPriceVo vo = new ProjectPriceVo();
+                    BeanUtils.copyProperties(priceEntity, vo);
+
+                    projectPriceVos.add(vo);
+                }
+                resultBean.setMessage("查找成功");
+                resultBean.setSuccess(true);
+                resultBean.setData(projectPriceVos);
+            }
+
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+
+        return resultBean;
     }
 
 
@@ -194,18 +377,75 @@ public class APIController {
      * 获取用户订单
      * @return
      */
-    public String  getOrderList(String params, String accessToken){
-        logger.info("getSchool.json params="+params +" accessToken="+accessToken);
-        return null;
+    @RequestMapping("/getOrderList.json")
+    @ResponseBody
+    public ResultBean  getOrderList(String params, String accessToken){
+        logger.info("getOrderList.json params="+params +" accessToken="+accessToken);
+        ResultBean resultBean = new ResultBean();
+
+        try{
+            if(StringUtil.isBlank(accessToken) || !accessToken.equals(SYSTEM_ACCESS_TOKEN)){
+                resultBean.setMessage("token 为空，请检查参数");
+                return resultBean;
+            }
+
+            ObjectMapper mapper = new ObjectMapper();
+            Map<String,String >maps = mapper.readValue(params, Map.class);
+            String studentId = maps.get("studentId");
+            if(StringUtil.isBlank(studentId)){
+                resultBean.setMessage("studentId 为空，请检查参数");
+                return resultBean;
+            }
+            String systemType = maps.get("systemType");
+            if(StringUtil.isBlank(systemType)){
+                resultBean.setMessage("systemType 为空，请检查参数");
+                return resultBean;
+            }
+
+            List<OrderVo> orderVos = this.orderService.getOrderListVo(systemType, studentId);
+            resultBean.setMessage("查找成功");
+            resultBean.setSuccess(true);
+            resultBean.setData(orderVos);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+
+        return resultBean;
     }
 
     /**
      * 获取用户订单详情
      * @return
      */
-    public String  getOrderInfo(String params, String accessToken){
-        logger.info("getSchool.json params="+params +" accessToken="+accessToken);
-        return null;
+    @RequestMapping("/getOrderDetail.json")
+    @ResponseBody
+    public ResultBean  getOrderInfo(String params, String accessToken){
+        logger.info("getOrderDetail.json params="+params +" accessToken="+accessToken);
+        ResultBean resultBean = new ResultBean();
+
+        try{
+            if(StringUtil.isBlank(accessToken) || !accessToken.equals(SYSTEM_ACCESS_TOKEN)){
+                resultBean.setMessage("token 为空，请检查参数");
+                return resultBean;
+            }
+
+            ObjectMapper mapper = new ObjectMapper();
+            Map<String,String >maps = mapper.readValue(params, Map.class);
+            String orderId = maps.get("orderId");
+            if(StringUtil.isBlank(orderId)){
+                resultBean.setMessage("orderId 为空，请检查参数");
+                return resultBean;
+            }
+
+            List<OrderDetailVo> orderDetailVos = this.orderDetailService.getDetailVoList(orderId);
+            resultBean.setMessage("查找成功");
+            resultBean.setSuccess(true);
+            resultBean.setData(orderDetailVos);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+
+        return resultBean;
     }
 
 
@@ -213,7 +453,7 @@ public class APIController {
      * 用户下单
      * @return
      */
-    public String  createOrder(String params, String accessToken){
+    public ResultBean  createOrder(String params, String accessToken){
         logger.info("getSchool.json params="+params +" accessToken="+accessToken);
         return null;
     }
@@ -223,7 +463,7 @@ public class APIController {
      * 用户支付
      * @return
      */
-    public String  payOrder(String params, String accessToken){
+    public ResultBean  payOrder(String params, String accessToken){
         logger.info("getSchool.json params="+params +" accessToken="+accessToken);
         return null;
     }
@@ -232,7 +472,7 @@ public class APIController {
      * 完成支付
      * @return
      */
-    public String  paySucess(String params, String accessToken){
+    public ResultBean  paySucess(String params, String accessToken){
         logger.info("getSchool.json params="+params +" accessToken="+accessToken);
         return null;
     }
@@ -241,7 +481,7 @@ public class APIController {
      * 用户提交退课
      * @return
      */
-    public String  refundOrder(String params, String accessToken){
+    public ResultBean  refundOrder(String params, String accessToken){
         logger.info("refundOrder.json params="+params +" accessToken="+accessToken);
         return null;
     }

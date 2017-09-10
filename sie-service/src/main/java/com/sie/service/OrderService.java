@@ -8,6 +8,7 @@ import com.sie.service.bean.OrderBean;
 import com.sie.service.bean.PageInfo;
 import com.sie.service.bean.ResultBean;
 import com.sie.service.excel.OrderImport;
+import com.sie.service.vo.OrderVo;
 
 import java.util.List;
 
@@ -53,4 +54,8 @@ public interface OrderService extends BaseService<OrderEntity, Integer> {
      *  * 取消订单
      */
     public void cancelOrder(Integer mins);
+
+    public void setBeanValues(OrderEntity orderEntity, OrderBean bean);
+
+    List<OrderVo> getOrderListVo(String systemType, String studentId);
 }

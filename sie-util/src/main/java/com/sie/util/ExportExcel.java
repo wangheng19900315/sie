@@ -459,26 +459,34 @@ public class ExportExcel {
 		}
 
 		Row row = this.getRow(2);
+		int start = 2;
 		String oldValue =  this.getCellValue(row, mergeColumn).toString();
 		for (int i = 3; i <= this.sheet.getLastRowNum(); i++) {
 			int column = 0;
 			row = this.getRow(i);
 			Object val = this.getCellValue(row, mergeColumn);
-			if(oldValue.equals(val)){
+			if(!oldValue.equals(val)){
 				for (Object[] os : annotationList) {
 					if(maps.get(column+"") == null){
-						this.sheet.addMergedRegion(new CellRangeAddress((i-1),(i),column,column));
+						this.sheet.addMergedRegion(new CellRangeAddress((start),(i-1),column,column));
 					}
 					column++;
 				}
-
-			}else{
 				oldValue = val.toString();
+				start = i;
+
+
 			}
+		}
 
-
-
-
+		if(start < this.sheet.getLastRowNum()){
+			int column = 0;
+			for (Object[] os : annotationList) {
+				if(maps.get(column+"") == null){
+					this.sheet.addMergedRegion(new CellRangeAddress((start),(this.sheet.getLastRowNum()),column,column));
+				}
+				column++;
+			}
 		}
 		return this;
 	}

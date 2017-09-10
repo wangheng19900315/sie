@@ -1,6 +1,7 @@
 package com.sie.service.impl;
 
 import com.sie.framework.base.GenericDao;
+import com.sie.framework.base.HqlOperateVo;
 import com.sie.framework.dao.CourseDao;
 import com.sie.framework.dao.OrderDao;
 import com.sie.framework.dao.OrderDetailDao;
@@ -14,6 +15,7 @@ import com.sie.service.OrderDetailService;
 import com.sie.service.bean.OrderBean;
 import com.sie.service.bean.OrderDetailBean;
 import com.sie.service.bean.PageInfo;
+import com.sie.service.vo.OrderDetailVo;
 import com.sie.util.NumberUtil;
 import com.sie.util.PageUtil;
 import com.sie.util.StringUtil;
@@ -97,12 +99,12 @@ public class OrderDetailServiceImpl extends BaseServiceImpl<OrderDetailEntity,In
                 detailBean.setProjectId(detailEntity.getProjectEntity().getId());
                 detailBean.setProjectName(detailEntity.getProjectEntity().getSieName());
             }
-            if(NumberUtil.isSignless(detailEntity.getOrderDetailStatus())){
-                OrderDetailStatus status = OrderDetailStatus.valueOf(detailEntity.getOrderDetailStatus());
-                if(status != null){
-                    detailBean.setOrderDetailStatusName(status.getName());
-                }
-            }
+//            if(NumberUtil.isSignless(detailEntity.getOrderDetailStatus())){
+//                OrderDetailStatus status = OrderDetailStatus.valueOf(detailEntity.getOrderDetailStatus());
+//                if(status != null){
+//                    detailBean.setOrderDetailStatusName(status.getName());
+//                }
+//            }
 
             if(StringUtil.isNotBlank(detailEntity.getCourseIds())){
                 detailBean.setCusterNames(this.courseDao.getNamesByIds(detailEntity.getCourseIds()));
@@ -131,5 +133,26 @@ public class OrderDetailServiceImpl extends BaseServiceImpl<OrderDetailEntity,In
             gradeService.updateStudentGradeList(oldEntity.getOrderEntity().getStudentEntity().getId());
         }
 
+    }
+
+    @Override
+    public List<OrderDetailVo> getDetailVoList(String orderId) {
+        List<OrderDetailVo> orderDetailVos = new ArrayList<>();
+        List<HqlOperateVo> list = new  ArrayList<HqlOperateVo>();
+        list.add(new HqlOperateVo("orderEntity.id", "=", orderId));
+        List<OrderDetailEntity> orderEntities = this.getList(list);
+        if(orderEntities.size() > 0) {
+
+            for (OrderDetailEntity detailEntity : orderEntities) {
+
+                OrderDetailBean detailBean = new OrderDetailBean();
+                this.setDetailBeanValues(detailEntity, detailBean);
+                OrderDetailVo vo = new OrderDetailVo();
+                org.springframework.beans.BeanUtils.copyProperties(detailBean, vo);
+
+                orderDetailVos.add(vo);
+            }
+        }
+        return orderDetailVos;
     }
 }
