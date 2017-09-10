@@ -172,6 +172,8 @@ public class GenericDaoImpl<T extends BaseEntity, PK extends Serializable> imple
 
 				if("like".equals(vo.getOperate())){
 					hql += " "+vo.getName()+" like '%"+vo.getValue()+"%'";
+				}else if("in".equals(vo.getOperate())){
+					hql += "  "+vo.getName()+" "+vo.getOperate()+" ("+vo.getValue()+") ";
 				}else{
 					hql += "  "+vo.getName()+vo.getOperate()+" '"+vo.getValue()+"'";
 				}

@@ -5,9 +5,9 @@ import com.sie.framework.base.HqlOperateVo;
 import com.sie.framework.entity.*;
 import com.sie.framework.type.OrderStatus;
 import com.sie.framework.type.OrderType;
+import com.sie.framework.type.SystemType;
 import com.sie.service.*;
 import com.sie.service.bean.OrderBean;
-import com.sie.service.bean.OrderDetailBean;
 import com.sie.service.bean.ResultBean;
 import com.sie.service.vo.*;
 import com.sie.util.DateUtil;
@@ -244,7 +244,7 @@ public class APIController {
                 return resultBean;
             }
             List<HqlOperateVo> list = new  ArrayList<HqlOperateVo>();
-            list.add(new HqlOperateVo("system", "=", systemType));
+            list.add(new HqlOperateVo("system", "in", systemType+","+ SystemType.SIEANDTRU.value()));
             List<ProjectEntity> projectEntities = this.projectService.getList(list);
             if(projectEntities.size() > 0){
 
@@ -297,7 +297,7 @@ public class APIController {
                 return resultBean;
             }
             List<HqlOperateVo> list = new  ArrayList<HqlOperateVo>();
-            list.add(new HqlOperateVo("system", "=", systemType));
+            list.add(new HqlOperateVo("system", "in", systemType+","+ SystemType.SIEANDTRU.value()));
             list.add(new HqlOperateVo("projectId", "=", projectId));
             List<CourseEntity> courseEntities = this.courseService.getList(list);
             if(courseEntities.size() > 0){
