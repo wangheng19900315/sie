@@ -88,4 +88,4 @@
     </div>
 
 </ot:layout>
-<script src="/statics/pages/student/list.js"></script>
+<script src="${rootPath}/statics/pages/student/list.js"></script>

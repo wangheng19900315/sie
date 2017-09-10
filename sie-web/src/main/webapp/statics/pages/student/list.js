@@ -24,7 +24,7 @@ $(function(){
     var pager_selector = "#grid-pager";
 
     jQuery(grid_selector).jqGrid({
-        url: '/student/list.json',
+        url: pageRootPath+'/student/list.json',
         datatype: "json",
         height: '100%',
         mtype: 'post',
@@ -83,7 +83,7 @@ $(function(){
 
     $("#editBtn").bind("click",function(){
         var id = $("#grid-table").jqGrid('getGridParam', 'selrow');
-        window.location.href="/student/update.html?id="+id;
+        window.location.href=pageRootPath+"/student/update.html?id="+id;
     })
 
     $("#infoBtn").bind("click",function(){
@@ -96,7 +96,7 @@ $(function(){
             message: "确认要导出excel?",
             callback: function(result) {
                 if(result){
-                    var url = "/student/export.json";
+                    var url = pageRootPath+"/student/export.json";
                     var params = $("#search-form").getGetMethodUrl();
                     if(params != ''){
                         url += "?" + params;
@@ -119,7 +119,7 @@ $(function(){
     $("#importSubmitBtn").bind("click", function(){
         var formData = new FormData(document.getElementById("fileFrom"));
         $.ajax({
-            url: '/student/import.json',
+            url: pageRootPath+'/student/import.json',
             data: formData,
             type: 'post',
             dataType: 'json',
@@ -158,7 +158,7 @@ function search() {
 function reloadGrid(){
     var searData = $("#search-form").serializeJson();
     jQuery("#grid-table").jqGrid('setGridParam',{
-        url: '/student/list.json',
+        url:pageRootPath+ '/student/list.json',
         datatype: "json",
         height: '100%',
         mtype: 'post',

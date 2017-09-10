@@ -186,4 +186,4 @@
     </div>
 
 </ot:layout>
-<script src="/statics/pages/order/list.js"></script>
+<script src="${rootPath}/statics/pages/order/list.js"></script>

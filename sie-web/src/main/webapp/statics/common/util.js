@@ -287,7 +287,7 @@ $(function(){
                     var child =jsons[j];
                     //console.info(child.name)
                     if(child.parentId && child.parentId==menu.id){
-                        html += ' <li> <a tabindex="-1" href="'+child.action+'"><span class="mm-text">'+child.name+'</span></a></li>' ;
+                        html += ' <li> <a tabindex="-1" href="'+pageRootPath+child.action+'"><span class="mm-text">'+child.name+'</span></a></li>' ;
                     }
                 }
 

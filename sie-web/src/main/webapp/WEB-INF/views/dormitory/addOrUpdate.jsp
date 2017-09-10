@@ -81,7 +81,7 @@
     </div>
 
 </ot:layout>
-<script src="/statics/pages/dormitory/add.js"></script>
+<script src="${rootPath}/statics/pages/dormitory/add.js"></script>
 <script type="text/javascript">
     var entity = '${entity}';
 </script>

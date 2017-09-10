@@ -77,6 +77,7 @@
                         <%--<a tabindex="-1" href="/role/list.html"><i class="mm-text"></i>角色管理</a>--%>
                     <%--</li>--%>
                     <%--&lt;%&ndash;<li>&ndash;%&gt;--%>
+
                         <%--&lt;%&ndash;<a tabindex="-1" href="/menu/list.html"><i class="mm-text"></i>菜单管理</a>&ndash;%&gt;--%>
                     <%--&lt;%&ndash;</li>&ndash;%&gt;--%>
                 <%--</ul>--%>

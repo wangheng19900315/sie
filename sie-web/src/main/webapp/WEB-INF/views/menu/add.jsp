@@ -73,4 +73,4 @@
 
 
 </ot:layout>
-<script src="/statics/pages/menu/add.js"></script>
+<script src="${rootPath}/statics/pages/menu/add.js"></script>

@@ -37,7 +37,7 @@ $(function(){
     var pager_selector = "#grid-pager";
 
     jQuery(grid_selector).jqGrid({
-        url: '/order/list.json',
+        url: pageRootPath+'/order/list.json',
         datatype: "json",
         height: '100%',
         mtype: 'post',
@@ -112,19 +112,19 @@ $(function(){
     })
 
     $("#addBtn").bind("click",function(){
-        window.location.href="/order/addOrUpdate.html"
+        window.location.href=pageRootPath+"/order/addOrUpdate.html"
     })
 
 
     $("#editBtn").bind("click",function(){
         var id = $("#grid-table").jqGrid('getGridParam', 'selrow');
-        window.location.href="/order/update.html?id="+id;
+        window.location.href=pageRootPath+"/order/update.html?id="+id;
 
     })
 
     $("#infoBtn").bind("click",function(){
         var id = $("#grid-table").jqGrid('getGridParam', 'selrow');
-        window.location.href="/order/detail.html?id="+id;
+        window.location.href=pageRootPath+"/order/detail.html?id="+id;
     })
 
     //退课获取课程信息
@@ -133,7 +133,7 @@ $(function(){
         var id = $("#grid-table").jqGrid('getGridParam', 'selrow');
         var objRow =$("#grid-table").jqGrid('getRowData', id);
         $.ajax({
-            url: '/order/detail.json?orderId='+id,
+            url: pageRootPath+'/order/detail.json?orderId='+id,
             type: 'get',
             dataType:'json',
             async:false,
@@ -184,7 +184,7 @@ $(function(){
         var id = $("#grid-table").jqGrid('getGridParam', 'selrow');
         var objRow =$("#grid-table").jqGrid('getRowData', id);
         $.ajax({
-            url: '/order/detail.json?orderId='+id,
+            url: pageRootPath+'/order/detail.json?orderId='+id,
             type: 'get',
             dataType:'json',
             async:false,
@@ -204,7 +204,7 @@ $(function(){
                             var courseIds = item.courseIds.split(",");
                             //去后台请求project下所有的课程列表
                             $.ajax({
-                                url: '/course/getCourses.json?projectId='+item.projectId+"&systemType=" +json.systemType,
+                                url: pageRootPath+'/course/getCourses.json?projectId='+item.projectId+"&systemType=" +json.systemType,
                                 type: 'get',
                                 dataType:'json',
                                 success: function (data, statusText, xhr, $form) {
@@ -234,7 +234,7 @@ $(function(){
                             //Fixme 以前下单的还可以再选择住宿吗  添加住宿
                             //去后台请求project下所有的住宿信息
                             $.ajax({
-                                url: '/dormitory/getDormitory.json?projectId='+item.projectId,
+                                url: pageRootPath+'/dormitory/getDormitory.json?projectId='+item.projectId,
                                 type: 'get',
                                 dataType:'json',
                                 success: function (data, statusText, xhr, $form) {
@@ -303,7 +303,7 @@ $(function(){
         console.log(order);
 
         $.ajax({
-            url: '/order/add.json',
+            url: pageRootPath+'/order/add.json',
             type: 'post',
             async:false,
             dataType:'json',
@@ -338,7 +338,7 @@ $(function(){
                 if(result){
 
                     $.ajax({
-                        url: '/order/delete.json?id='+id,
+                        url: pageRootPath+'/order/delete.json?id='+id,
                         type: 'get',
                         dataType:'json',
                         success: function (json, statusText, xhr, $form) {
@@ -369,7 +369,7 @@ $(function(){
     $("#importSubmitBtn").bind("click", function(){
         var formData = new FormData(document.getElementById("fileFrom"));
         $.ajax({
-            url: '/order/import.json',
+            url: pageRootPath+'/order/import.json',
             data: formData,
             type: 'post',
             dataType: 'json',
@@ -397,7 +397,7 @@ $(function(){
             message: "确认要导出excel?",
             callback: function(result) {
                 if(result){
-                    $("#search-form").attr("action", "/order/export.json");
+                    $("#search-form").attr("action", pageRootPath+"/order/export.json");
                     $("#search-form").submit();
                 }
             },
@@ -424,7 +424,7 @@ function search() {
 
 function reloadGrid(){
     jQuery("#grid-table").jqGrid('setGridParam',{
-        url: '/order/list.json',
+        url: pageRootPath+'/order/list.json',
         datatype: "json",
         height: '100%',
         mtype: 'post',

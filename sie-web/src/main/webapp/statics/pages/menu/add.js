@@ -6,7 +6,7 @@ $(function(){
         submitHandler: function() {
             var formData = $("#data-form").serializeJson();
             $.ajax({
-                url: '/user/addOrupdate.json',
+                url: pageRootPath+'/user/addOrupdate.json',
                 data: formData,
                 type: 'post',
                 dataType: 'json',

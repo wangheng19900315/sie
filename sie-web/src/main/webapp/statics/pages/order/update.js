@@ -6,7 +6,7 @@ $(function(){
 
     var jsonData = "";
     $.ajax({
-        url: '/order/detail.json?orderId='+id,
+        url: pageRootPath+'/order/detail.json?orderId='+id,
         type: 'get',
         dataType:'json',
         async:false,
@@ -77,7 +77,7 @@ $(function(){
         courseIds = courseIds.substring(0,courseIds.length-1);
         var obj = {"id":selectCourseId,"courseIds":courseIds};
         $.ajax({
-            url: '/order/updateCourseIds.json',
+            url: pageRootPath+'/order/updateCourseIds.json',
             type: 'post',
             async:false,
             dataType:'json',
@@ -136,7 +136,7 @@ $(function(){
 
         var formData = $("#data-form").serializeJson();
         $.ajax({
-            url: '/order/updateOrderInfo.json',
+            url: pageRootPath+'/order/updateOrderInfo.json',
             type: 'post',
             async:false,
             dataType:'json',
@@ -169,7 +169,7 @@ function selectCourses(id){
     var courseIds = rowData.courseIds.split(",");
     var systemType = $("#systemType").val();
     $.ajax({
-        url: '/course/getCourses.json?projectId='+projectId+"&systemType=" +systemType,
+        url: pageRootPath+'/course/getCourses.json?projectId='+projectId+"&systemType=" +systemType,
         type: 'get',
         dataType:'json',
         async:false,

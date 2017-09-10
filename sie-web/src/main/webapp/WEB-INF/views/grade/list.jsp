@@ -53,5 +53,5 @@
     </div>
 
 </ot:layout>
-<script src="/statics/pages/grade/list.js"></script>
+<script src="${rootPath}/statics/pages/grade/list.js"></script>
 

@@ -1,15 +1,18 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%
+	request.setAttribute("rootPath",request.getContextPath());
+%>
 <html>
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 	<title>Sign In - PixelAdmin</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
-	<link href="/statics/assets/stylesheets/bootstrap.min.css" rel="stylesheet" type="text/css">
-	<link href="/statics/assets/stylesheets/pixel-admin.min.css" rel="stylesheet" type="text/css">
-	<link href="/statics/assets/stylesheets/pages.min.css" rel="stylesheet" type="text/css">
-	<link href="/statics/assets/stylesheets/rtl.min.css" rel="stylesheet" type="text/css">
-	<link href="/statics/assets/stylesheets/themes.min.css" rel="stylesheet" type="text/css">
+	<link href="${rootPath}/statics/assets/stylesheets/bootstrap.min.css" rel="stylesheet" type="text/css">
+	<link href="${rootPath}/statics/assets/stylesheets/pixel-admin.min.css" rel="stylesheet" type="text/css">
+	<link href="${rootPath}/statics/assets/stylesheets/pages.min.css" rel="stylesheet" type="text/css">
+	<link href="${rootPath}/statics/assets/stylesheets/rtl.min.css" rel="stylesheet" type="text/css">
+	<link href="${rootPath}/statics/assets/stylesheets/themes.min.css" rel="stylesheet" type="text/css">
 
 <!-- $DEMO =========================================================================================
 
@@ -55,9 +58,9 @@
 	var init = [];
 	init.push(function () {
 		var $div = $('<div id="signin-demo" class="hidden-xs"><div>PAGE BACKGROUND</div></div>'),
-		    bgs  = [ '/statics/assets/demo/signin-bg-1.jpg', '/statics/assets/demo/signin-bg-2.jpg', '/statics/assets/demo/signin-bg-3.jpg',
-		    		 '/statics/assets/demo/signin-bg-4.jpg', '/statics/assets/demo/signin-bg-5.jpg', '/statics/assets/demo/signin-bg-6.jpg',
-					 '/statics/assets/demo/signin-bg-7.jpg', '/statics/assets/demo/signin-bg-8.jpg', '/statics/assets/demo/signin-bg-9.jpg' ];
+		    bgs  = [ '${rootPath}/statics/assets/demo/signin-bg-1.jpg', '${rootPath}/statics/assets/demo/signin-bg-2.jpg', '${rootPath}/statics/assets/demo/signin-bg-3.jpg',
+		    		 '${rootPath}/statics/assets/demo/signin-bg-4.jpg', '${rootPath}/statics/assets/demo/signin-bg-5.jpg', '${rootPath}/statics/assets/demo/signin-bg-6.jpg',
+					 '${rootPath}/statics/assets/demo/signin-bg-7.jpg', '${rootPath}/statics/assets/demo/signin-bg-8.jpg', '${rootPath}/statics/assets/demo/signin-bg-9.jpg' ];
 		for (var i=0, l=bgs.length; i < l; i++) $div.append($('<img src="' + bgs[i] + '">'));
 		$div.find('img').click(function () {
 			var img = new Image();
@@ -70,14 +73,14 @@
 		$('body').append($div);
 	});
 </script>
-<!-- Demo script --> <script src="/statics/assets/demo/demo.js"></script> <!-- / Demo script -->
+<!-- Demo script --> <script src="${rootPath}/statics/assets/demo/demo.js"></script> <!-- / Demo script -->
 
 	<!-- Page background -->
 	<div id="page-signin-bg">
 		<!-- Background overlay -->
 		<div class="overlay"></div>
 		<!-- Replace this with your bg image -->
-		<img src="/statics/assets/demo/signin-bg-1.jpg" alt="">
+		<img src="${rootPath}/statics/assets/demo/signin-bg-1.jpg" alt="">
 	</div>
 	<!-- / Page background -->
 
@@ -87,7 +90,7 @@
 		<!-- Left side -->
 		<div class="signin-info">
 			<a href="index.html" class="logo">
-				<img src="/statics/assets/demo/logo-big.png" alt="" style="margin-top: -5px;">&nbsp;
+				<img src="${rootPath}/statics/assets/demo/logo-big.png" alt="" style="margin-top: -5px;">&nbsp;
 				SIE管理系统
 			</a> <!-- / .logo -->
 			<div class="slogan">
@@ -133,11 +136,11 @@
 	</div>
 	<!-- / Container -->
 
-<script src="/statics/assets/javascripts/jquery-1.8.3.min.js"></script>
+<script src="${rootPath}/statics/assets/javascripts/jquery-1.8.3.min.js"></script>
 
 <!-- Pixel Admin's javascripts -->
-<script src="/statics/assets/javascripts/bootstrap.min.js"></script>
-<script src="/statics/assets/javascripts/pixel-admin.min.js"></script>
+<script src="${rootPath}/statics/assets/javascripts/bootstrap.min.js"></script>
+<script src="${rootPath}/statics/assets/javascripts/pixel-admin.min.js"></script>
 
 <script type="text/javascript">
 	// Resize BG
@@ -179,14 +182,14 @@
 
 			var data = {"userName":$("#userName").val(),"password":$("#password").val()}
 			$.ajax({
-				url: '/user/login.json',
+				url: '${rootPath}/user/login.json',
 				data: data,
 				type: 'post',
 				dataType: 'json',
 				cache: false,
 				success: function (data) {
 					if (data.success) {
-						window.location.href="/order/list.html";
+						window.location.href="${rootPath}/order/list.html";
 					} else {
 						$("#errorMsg").html("登录失败，用户名或密码错误")
 					}

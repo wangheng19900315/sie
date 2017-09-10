@@ -26,7 +26,7 @@ $(function(){
     var pager_selector = "#grid-pager";
 
     jQuery(grid_selector).jqGrid({
-        url: '/user/list.json',
+        url: pageRootPath+'/user/list.json',
         datatype: "json",
         height: '100%',
         mtype: 'post',
@@ -87,13 +87,13 @@ $(function(){
     })
 
     $("#addBtn").bind("click",function(){
-        window.location.href="/user/addOrUpdate.html"
+        window.location.href=pageRootPath+"/user/addOrUpdate.html"
     })
 
 
     $("#editBtn").bind("click",function(){
         var id = $("#grid-table").jqGrid('getGridParam', 'selrow');
-        window.location.href="/user/addOrUpdate.html?id="+id;
+        window.location.href=pageRootPath+"/user/addOrUpdate.html?id="+id;
 
     })
 
@@ -109,7 +109,7 @@ $(function(){
                 if(result){
 
                     $.ajax({
-                        url: '/user/delete.json?id='+id,
+                        url: pageRootPath+'/user/delete.json?id='+id,
                         type: 'get',
                         dataType:'json',
                         success: function (json, statusText, xhr, $form) {
@@ -132,7 +132,7 @@ $(function(){
     })
 
     $.ajax({
-        url: '/role/getSelect.json',
+        url: pageRootPath+'/role/getSelect.json',
         type: 'get',
         cache: false,
         success: function (data) {
@@ -161,7 +161,7 @@ $(function(){
     $("#submitBtn").bind("click", function(){
         var obj = {id:$("#id").val(),roleId:$("#roleId").val()};
         $.ajax({
-            url: '/user/updateRole.json',
+            url: pageRootPath+'/user/updateRole.json',
             data: obj,
             type: 'post',
             dataType: 'json',
@@ -192,7 +192,7 @@ function search() {
     $('#view-btn').addClass('disabled');
 
     jQuery("#grid-table").jqGrid('setGridParam',{
-        url: '/user/list.json',
+        url: pageRootPath+'/user/list.json',
         datatype: "json",
         height: '100%',
         mtype: 'post',

@@ -111,7 +111,7 @@
     </div>
 
 </ot:layout>
-<script src="/statics/pages/send/add.js"></script>
+<script src="${rootPath}/statics/pages/send/add.js"></script>
 <script type="text/javascript">
     var entity = '${entity}';
     var students = '${students}';

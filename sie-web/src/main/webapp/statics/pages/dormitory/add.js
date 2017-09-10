@@ -3,7 +3,7 @@ $(function(){
         submitHandler: function() {
             var formData = $("#data-form").serializeJson();
             $.ajax({
-                url: '/dormitory/addOrupdate.json',
+                url: pageRootPath+'/dormitory/addOrupdate.json',
                 data: formData,
                 type: 'post',
                 dataType: 'json',
@@ -26,7 +26,7 @@ $(function(){
 
     //加载项目
     $.ajax({
-        url: '/project/getAllProject.json',
+        url: pageRootPath+'/project/getAllProject.json',
         data: {},
         type: 'post',
         async: false,

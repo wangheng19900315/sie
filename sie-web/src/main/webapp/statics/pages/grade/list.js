@@ -22,7 +22,7 @@ $(function(){
     var pager_selector = "#grid-pager";
 
     jQuery(grid_selector).jqGrid({
-        url: '/grade/list.json',
+        url: pageRootPath+'/grade/list.json',
         datatype: "json",
         height: '100%',
         mtype: 'post',
@@ -81,7 +81,7 @@ $(function(){
 
     $("#editBtn").bind("click",function(){
         var id = $("#grid-table").jqGrid('getGridParam', 'selrow');
-        window.location.href="/grade/addOrUpdate.html?id="+id;
+        window.location.href=pageRootPath+"/grade/addOrUpdate.html?id="+id;
     })
 
 
@@ -94,7 +94,7 @@ $(function(){
             message: "确认要导出excel?",
             callback: function(result) {
                 if(result){
-                    var url = "/grade/export.json";
+                    var url = pageRootPath+"/grade/export.json";
                     var params = $("#search-form").getGetMethodUrl();
                     if(params != ''){
                         url += "?" + params;

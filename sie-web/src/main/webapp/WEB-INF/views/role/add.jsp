@@ -46,7 +46,7 @@
 
 
 </ot:layout>
-<script src="/statics/pages/role/add.js"></script>
+<script src="${rootPath}/statics/pages/role/add.js"></script>
 <script type="text/javascript">
     var roleEntity = '${roleEntity}';
 </script>

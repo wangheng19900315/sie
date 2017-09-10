@@ -209,4 +209,4 @@
         </div>
     </div>
 </ot:layout>
-<script src="/statics/pages/role/list.js"></script>
+<script src="${rootPath}/statics/pages/role/list.js"></script>

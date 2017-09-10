@@ -26,7 +26,7 @@ $(function(){
     var pager_selector = "#grid-pager";
 
     jQuery(grid_selector).jqGrid({
-        url: '/project/list.json',
+        url: pageRootPath+'/project/list.json',
         datatype: "json",
         height: '100%',
         mtype: 'post',
@@ -82,13 +82,13 @@ $(function(){
     })
 
     $("#addBtn").bind("click",function(){
-        window.location.href="/project/addOrUpdate.html"
+        window.location.href=pageRootPath+"/project/addOrUpdate.html"
     })
 
 
     $("#editBtn").bind("click",function(){
         var id = $("#grid-table").jqGrid('getGridParam', 'selrow');
-        window.location.href="/project/addOrUpdate.html?id="+id;
+        window.location.href=pageRootPath+"/project/addOrUpdate.html?id="+id;
     })
 
     $("#deleteBtn").bind("click",function(){
@@ -103,7 +103,7 @@ $(function(){
                 if(result){
 
                     $.ajax({
-                        url: '/project/delete.json?id='+id,
+                        url: pageRootPath+'/project/delete.json?id='+id,
                         type: 'get',
                         dataType:'json',
                         success: function (json, statusText, xhr, $form) {
@@ -127,7 +127,7 @@ $(function(){
             message: "确认要导出excel?",
             callback: function(result) {
                 if(result){
-                    var url = "/project/export.json";
+                    var url = pageRootPath+"/project/export.json";
                     var params = $("#search-form").getGetMethodUrl();
                     if(params != ''){
                         url += "?" + params;

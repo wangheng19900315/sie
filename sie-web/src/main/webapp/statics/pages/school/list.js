@@ -28,7 +28,7 @@ $(function(){
     var pager_selector = "#grid-pager";
 
     jQuery(grid_selector).jqGrid({
-        url: '/school/list.json',
+        url: pageRootPath+'/school/list.json',
         datatype: "json",
         height: '100%',
         mtype: 'post',
@@ -85,13 +85,13 @@ $(function(){
     })
 
     $("#addBtn").bind("click",function(){
-        window.location.href="/school/addOrUpdate.html"
+        window.location.href=pageRootPath+"/school/addOrUpdate.html"
     })
 
 
     $("#editBtn").bind("click",function(){
         var id = $("#grid-table").jqGrid('getGridParam', 'selrow');
-        window.location.href="/school/addOrUpdate.html?id="+id;
+        window.location.href=pageRootPath+"/school/addOrUpdate.html?id="+id;
     })
 
     $("#deleteBtn").bind("click",function(){
@@ -106,7 +106,7 @@ $(function(){
                 if(result){
 
                     $.ajax({
-                        url: '/school/delete.json?id='+id,
+                        url: pageRootPath+'/school/delete.json?id='+id,
                         type: 'get',
                         dataType:'json',
                         success: function (json, statusText, xhr, $form) {

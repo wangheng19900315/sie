@@ -139,7 +139,7 @@
     </div>
 
 </ot:layout>
-<script src="/statics/pages/course/add.js"></script>
+<script src="${rootPath}/statics/pages/course/add.js"></script>
 <script type="text/javascript">
     var entity = '${entity}';
     var projects = '${projects}';

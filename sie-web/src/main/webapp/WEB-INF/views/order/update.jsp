@@ -266,7 +266,7 @@
     </div>
 
 </ot:layout>
-<script src="/statics/pages/order/update.js"></script>
+<script src="${rootPath}/statics/pages/order/update.js"></script>
 <script type="text/javascript">
     var id = "${id}";
 </script>

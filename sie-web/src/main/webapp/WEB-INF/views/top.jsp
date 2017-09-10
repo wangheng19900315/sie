@@ -10,7 +10,7 @@
 
             <!-- Logo -->
             <a href="index.html" class="navbar-brand">
-                <div><img alt="SIE网站管理系统" src="/statics/assets/images/pixel-admin/main-navbar-logo.png"></div>
+                <div><img alt="SIE网站管理系统" src="${rootPath}/statics/assets/images/pixel-admin/main-navbar-logo.png"></div>
                 SIE网站管理系统
             </a>
 
@@ -83,7 +83,7 @@
 
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle user-menu" data-toggle="dropdown">
-                                <img src="/statics/assets/demo/avatars/1.jpg" alt="">
+                                <img src="${rootPath}/statics/assets/demo/avatars/1.jpg" alt="">
                                 <span>${USER_NAME}</span>
                             </a>
                             <ul class="dropdown-menu">

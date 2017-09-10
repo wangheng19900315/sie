@@ -24,7 +24,7 @@ $(function(){
     var pager_selector = "#grid-pager";
 
     jQuery(grid_selector).jqGrid({
-        url: '/dormitory/list.json',
+        url: pageRootPath+'/dormitory/list.json',
         datatype: "json",
         height: '100%',
         mtype: 'post',
@@ -82,13 +82,13 @@ $(function(){
     })
 
     $("#addBtn").bind("click",function(){
-        window.location.href="/dormitory/addOrUpdate.html"
+        window.location.href=pageRootPath+"/dormitory/addOrUpdate.html"
     })
 
 
     $("#editBtn").bind("click",function(){
         var id = $("#grid-table").jqGrid('getGridParam', 'selrow');
-        window.location.href="/dormitory/addOrUpdate.html?id="+id;
+        window.location.href=pageRootPath+"/dormitory/addOrUpdate.html?id="+id;
     })
 
     $("#deleteBtn").bind("click",function(){
@@ -103,7 +103,7 @@ $(function(){
                 if(result){
 
                     $.ajax({
-                        url: '/dormitory/delete.json?id='+id,
+                        url: pageRootPath+'/dormitory/delete.json?id='+id,
                         type: 'get',
                         dataType:'json',
                         success: function (json, statusText, xhr, $form) {
@@ -127,7 +127,7 @@ $(function(){
             message: "确认要导出excel?",
             callback: function(result) {
                 if(result){
-                    var url = "/dormitory/export.json";
+                    var url = pageRootPath+"/dormitory/export.json";
                     var params = $("#search-form").getGetMethodUrl();
                     if(params != ''){
                         url += "?" + params;
@@ -150,7 +150,7 @@ function search() {
     $('#view-btn').addClass('disabled');
 
     jQuery("#grid-table").jqGrid('setGridParam',{
-        url: '/dormitory/list.json',
+        url: pageRootPath+'/dormitory/list.json',
         datatype: "json",
         height: '100%',
         mtype: 'post',

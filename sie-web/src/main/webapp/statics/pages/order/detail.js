@@ -19,7 +19,7 @@ $(function(){
 
     var jsonData = "";
     $.ajax({
-        url: '/order/detail.json?orderId='+id,
+        url: pageRootPath+'/order/detail.json?orderId='+id,
         type: 'get',
         dataType:'json',
         async:false,

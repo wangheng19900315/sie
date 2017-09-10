@@ -6,7 +6,7 @@ $(function(){
     var pager_selector = "#grid-pager";
 
     jQuery(grid_selector).jqGrid({
-        url: '/price/list.json',
+        url:pageRootPath+ '/price/list.json',
         datatype: "json",
         height: '100%',
         mtype: 'post',
@@ -41,7 +41,7 @@ $(function(){
                 var rowData = $(grid_selector).jqGrid("getRowData", id);
                 $(grid_selector).jqGrid('editRow',id,{
                     keys : true,        //这里按[enter]保存
-                    url: "/price/update.json",
+                    url: pageRootPath+"/price/update.json",
                     mtype : "POST",
                     extraparam: {
                         "id": rowData.id,

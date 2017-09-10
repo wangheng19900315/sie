@@ -31,7 +31,7 @@ $(function(){
     var pager_selector = "#grid-pager";
 
     jQuery(grid_selector).jqGrid({
-        url: '/role/list.json',
+        url: pageRootPath+'/role/list.json',
         datatype: "json",
         height: '100%',
         mtype: 'post',
@@ -93,13 +93,13 @@ $(function(){
     })
 
     $("#addBtn").bind("click",function(){
-        window.location.href="/role/addOrUpdate.html"
+        window.location.href=pageRootPath+"/role/addOrUpdate.html"
     })
 
 
     $("#editBtn").bind("click",function(){
         var id = $("#grid-table").jqGrid('getGridParam', 'selrow');
-        window.location.href="/role/addOrUpdate.html?id="+id;
+        window.location.href=pageRootPath+"/role/addOrUpdate.html?id="+id;
     })
 
     $("#deleteBtn").bind("click",function(){
@@ -114,7 +114,7 @@ $(function(){
                 if(result){
 
                     $.ajax({
-                        url: '/role/delete.json?id='+id,
+                        url: pageRootPath+'/role/delete.json?id='+id,
                         type: 'get',
                         dataType:'json',
                         success: function (json, statusText, xhr, $form) {
@@ -204,7 +204,7 @@ $(function(){
 
         var obj ={"id":$("#id").val(),"menuIds":menuIds}
         $.ajax({
-            url: '/role/updateMenu.json',
+            url: pageRootPath+'/role/updateMenu.json',
             data: obj,
             type: 'post',
             dataType: 'json',
@@ -238,7 +238,7 @@ function search() {
     $('#view-btn').addClass('disabled');
 
     jQuery("#grid-table").jqGrid('setGridParam',{
-        url: '/role/list.json',
+        url:pageRootPath+ '/role/list.json',
         datatype: "json",
         height: '100%',
         mtype: 'post',

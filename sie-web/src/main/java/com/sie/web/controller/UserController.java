@@ -13,6 +13,7 @@ import org.apache.http.HttpRequest;
 import org.apache.log4j.Logger;
 import org.apache.xpath.operations.Number;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -33,6 +34,8 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+
+
 
     @RequestMapping("/addOrUpdate")
     public String showUserInfo(){
@@ -144,6 +147,7 @@ public class UserController {
                 session.setAttribute(Constant.SYSTEM_USER_ID,userEntity.getId());
                 session.setAttribute(Constant.SYSTEM_USER_NAME_KEY,userEntity.getName());
                 session.setAttribute(Constant.SYSTEM_MENU_LIST, JSON.toJSON(userEntity.getRoleEntity().getMenuList()));
+                session.setAttribute("rootPath", request.getContextPath());
 
             }
         }catch (Exception e){

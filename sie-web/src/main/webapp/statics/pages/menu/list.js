@@ -28,7 +28,7 @@ $(function(){
     var pager_selector = "#grid-pager";
 
     jQuery(grid_selector).jqGrid({
-        url: '/menu/list.json',
+        url: pageRootPath+'/menu/list.json',
         datatype: "json",
         height: '100%',
         mtype: 'post',
@@ -88,7 +88,7 @@ $(function(){
     })
 
     $("#addBtn").bind("click",function(){
-        window.location.href="/menu/add.html"
+        window.location.href=pageRootPath+"/menu/add.html"
     })
 
 

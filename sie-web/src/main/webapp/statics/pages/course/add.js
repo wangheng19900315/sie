@@ -4,7 +4,7 @@ $(function(){
             var formData = $("#data-form").serializeJson();
             console.log(formData);
             $.ajax({
-                url: '/course/addOrupdate.json',
+                url: pageRootPath+'/course/addOrupdate.json',
                 data: formData,
                 type: 'post',
                 dataType: 'json',
@@ -65,7 +65,7 @@ var initProjectOption = function(){
     $("#projectId").empty();
     //加载项目
     $.ajax({
-        url: '/project/getAllProject.json',
+        url: pageRootPath+'/project/getAllProject.json',
         data: {"system":$("#system").val()},
         type: 'post',
         async: false,

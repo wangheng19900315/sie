@@ -55,4 +55,4 @@
     </div>
 
 </ot:layout>
-<script src="/statics/pages/project/list.js"></script>
+<script src="${rootPath}/statics/pages/project/list.js"></script>

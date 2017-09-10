@@ -20,4 +20,4 @@
     </div>
 
 </ot:layout>
-<script src="/statics/pages/price/list.js"></script>
+<script src="${rootPath}/statics/pages/price/list.js"></script>

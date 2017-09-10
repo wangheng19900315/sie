@@ -24,7 +24,7 @@ $(function(){
     var pager_selector = "#grid-pager";
 
     jQuery(grid_selector).jqGrid({
-        url: '/send/list.json',
+        url: pageRootPath+'/send/list.json',
         datatype: "json",
         height: '100%',
         mtype: 'post',
@@ -82,13 +82,13 @@ $(function(){
     })
 
     $("#addBtn").bind("click",function(){
-        window.location.href="/send/addOrUpdate.html"
+        window.location.href=pageRootPath+"/send/addOrUpdate.html"
     })
 
 
     $("#editBtn").bind("click",function(){
         var id = $("#grid-table").jqGrid('getGridParam', 'selrow');
-        window.location.href="/send/addOrUpdate.html?id="+id;
+        window.location.href=pageRootPath+"/send/addOrUpdate.html?id="+id;
     })
 
     $("#deleteBtn").bind("click",function(){
@@ -103,7 +103,7 @@ $(function(){
                 if(result){
 
                     $.ajax({
-                        url: '/send/delete.json?id='+id,
+                        url: pageRootPath+'/send/delete.json?id='+id,
                         type: 'get',
                         dataType:'json',
                         success: function (json, statusText, xhr, $form) {
@@ -134,7 +134,7 @@ $(function(){
     $("#submitBtn").bind("click", function(){
             var formData = new FormData(document.getElementById("fileFrom"));
             $.ajax({
-                url: '/send/import.json',
+                url: pageRootPath+'/send/import.json',
                 data: formData,
                 type: 'post',
                 dataType: 'json',
@@ -167,7 +167,7 @@ function search() {
     $('#view-btn').addClass('disabled');
 
     jQuery("#grid-table").jqGrid('setGridParam',{
-        url: '/send/list.json',
+        url: pageRootPath+'/send/list.json',
         datatype: "json",
         height: '100%',
         mtype: 'post',

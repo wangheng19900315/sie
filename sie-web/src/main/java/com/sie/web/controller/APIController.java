@@ -161,5 +161,92 @@ public class APIController {
     }
 
 
+    /**
+     * 获取项目信息
+     * @return
+     */
+    public String  getProjects(String params, String accessToken){
+        logger.info("getSchool.json params="+params +" accessToken="+accessToken);
+        return null;
+    }
+
+
+    /**
+     * 获取课程信息
+     * @return
+     */
+    public String  getCourses(String params, String accessToken){
+        logger.info("getSchool.json params="+params +" accessToken="+accessToken);
+        return null;
+    }
+
+    /**
+     * 获取价格信息
+     * @return
+     */
+    public String  getPrices(String params, String accessToken){
+        logger.info("getSchool.json params="+params +" accessToken="+accessToken);
+        return null;
+    }
+
+
+    /**
+     * 获取用户订单
+     * @return
+     */
+    public String  getOrderList(String params, String accessToken){
+        logger.info("getSchool.json params="+params +" accessToken="+accessToken);
+        return null;
+    }
+
+    /**
+     * 获取用户订单详情
+     * @return
+     */
+    public String  getOrderInfo(String params, String accessToken){
+        logger.info("getSchool.json params="+params +" accessToken="+accessToken);
+        return null;
+    }
+
+
+    /**
+     * 用户下单
+     * @return
+     */
+    public String  createOrder(String params, String accessToken){
+        logger.info("getSchool.json params="+params +" accessToken="+accessToken);
+        return null;
+    }
+
+
+    /**
+     * 用户支付
+     * @return
+     */
+    public String  payOrder(String params, String accessToken){
+        logger.info("getSchool.json params="+params +" accessToken="+accessToken);
+        return null;
+    }
+
+    /**
+     * 完成支付
+     * @return
+     */
+    public String  paySucess(String params, String accessToken){
+        logger.info("getSchool.json params="+params +" accessToken="+accessToken);
+        return null;
+    }
+
+    /**
+     * 用户提交退课
+     * @return
+     */
+    public String  refundOrder(String params, String accessToken){
+        logger.info("refundOrder.json params="+params +" accessToken="+accessToken);
+        return null;
+    }
+
+
+
 
 }

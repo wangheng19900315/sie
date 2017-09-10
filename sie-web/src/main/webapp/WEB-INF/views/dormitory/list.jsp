@@ -55,4 +55,4 @@
     </div>
 
 </ot:layout>
-<script src="/statics/pages/dormitory/list.js"></script>
+<script src="${rootPath}/statics/pages/dormitory/list.js"></script>

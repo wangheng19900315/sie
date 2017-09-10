@@ -229,7 +229,7 @@
     </div>
 
 </ot:layout>
-<script src="/statics/pages/student/update.js"></script>
+<script src="${rootPath}/statics/pages/student/update.js"></script>
 <script type="text/javascript">
     var entity = '${entity}';
 

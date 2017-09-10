@@ -74,7 +74,7 @@
 
 
 </ot:layout>
-<script src="/statics/pages/user/add.js"></script>
+<script src="${rootPath}/statics/pages/user/add.js"></script>
 <script type="text/javascript">
     var userEntity = '${userEntity}';
 </script>

@@ -4,7 +4,7 @@ $(function(){
         submitHandler: function() {
             var formData = $("#data-form").serializeJson();
             $.ajax({
-                url: '/grade/addOrupdate.json',
+                url: pageRootPath+'/grade/addOrupdate.json',
                 data: formData,
                 type: 'post',
                 dataType: 'json',

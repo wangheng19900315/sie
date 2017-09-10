@@ -4,7 +4,7 @@ $(function(){
             var formData = new FormData(document.getElementById("data-form"));
             //var formData = $("#data-form").serializeJson();
             $.ajax({
-                url: '/student/addOrupdate.json',
+                url:pageRootPath+ '/student/addOrupdate.json',
                 data: formData,
                 type: 'post',
                 dataType: 'json',
@@ -28,7 +28,7 @@ $(function(){
 
     //加载学校列表
     $.ajax({
-        url: '/student/university_list.json',
+        url: pageRootPath+'/student/university_list.json',
         type: 'post',
         dataType: 'json',
         async:false,
@@ -57,7 +57,7 @@ $(function(){
         json.birthday=birthDay;
         $("#data-form").loadJson(json);
         //加载照片
-        $('#ImgPr').attr('src','/student/loadImage?image='+json.image);
+        $('#ImgPr').attr('src',pageRootPath+'/student/loadImage?image='+json.image);
     }
 
 })

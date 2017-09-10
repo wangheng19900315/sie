@@ -73,7 +73,7 @@
 
 
 </ot:layout>
-<script src="/statics/pages/grade/add.js"></script>
+<script src="${rootPath}/statics/pages/grade/add.js"></script>
 <script type="text/javascript">
     var bean = '${bean}';
 </script>

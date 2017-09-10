@@ -26,7 +26,7 @@ $(function(){
     var pager_selector = "#grid-pager";
 
     jQuery(grid_selector).jqGrid({
-        url: '/course/list.json',
+        url: pageRootPath+'/course/list.json',
         datatype: "json",
         height: '100%',
         mtype: 'post',
@@ -94,13 +94,13 @@ $(function(){
     })
 
     $("#addBtn").bind("click",function(){
-        window.location.href="/course/addOrUpdate.html"
+        window.location.href=pageRootPath+"/course/addOrUpdate.html"
     })
 
 
     $("#editBtn").bind("click",function(){
         var id = $("#grid-table").jqGrid('getGridParam', 'selrow');
-        window.location.href="/course/addOrUpdate.html?id="+id;
+        window.location.href=pageRootPath+"/course/addOrUpdate.html?id="+id;
     })
 
     $("#deleteBtn").bind("click",function(){
@@ -115,7 +115,7 @@ $(function(){
                 if(result){
 
                     $.ajax({
-                        url: '/course/delete.json?id='+id,
+                        url: pageRootPath+'/course/delete.json?id='+id,
                         type: 'get',
                         dataType:'json',
                         success: function (json, statusText, xhr, $form) {
@@ -149,7 +149,7 @@ function search() {
     $('#view-btn').addClass('disabled');
 
     jQuery("#grid-table").jqGrid('setGridParam',{
-        url: '/project/list.json',
+        url: pageRootPath+'/project/list.json',
         datatype: "json",
         height: '100%',
         mtype: 'post',

@@ -55,4 +55,4 @@
 
 
 </ot:layout>
-<script src="/statics/pages/school/list.js"></script>
+<script src="${rootPath}/statics/pages/school/list.js"></script>
