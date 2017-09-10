@@ -483,6 +483,14 @@ public class OrderServiceImpl extends BaseServiceImpl<OrderEntity,Integer> imple
         OrderBean orderBean = new OrderBean();
         orderBean.setStudentId(studentEntities.get(0).getId());
 
+        //订单的来源系统
+        String orderSystemTypeName = orderImports.get(start).getSystemTypeName();
+        //系统信息
+        SystemType systemType = SystemType.valueOfName(orderSystemTypeName);
+        if (systemType != null) {
+            orderBean.setSystemType(systemType.value());
+        }
+
         String payTypeName = orderImports.get(start).getPayTypeName();
         //支付信息
         PayType payType = PayType.valueOfName(payTypeName);
