@@ -3,6 +3,8 @@ package com.sie.web.controller;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sie.framework.base.HqlOperateVo;
 import com.sie.framework.entity.*;
+import com.sie.framework.type.OrderStatus;
+import com.sie.framework.type.OrderType;
 import com.sie.service.*;
 import com.sie.service.bean.OrderBean;
 import com.sie.service.bean.OrderDetailBean;
@@ -454,8 +456,25 @@ public class APIController {
      * @return
      */
     public ResultBean  createOrder(String params, String accessToken){
-        logger.info("getSchool.json params="+params +" accessToken="+accessToken);
-        return null;
+        logger.info("createOrder.json params="+params +" accessToken="+accessToken);
+        ResultBean resultBean = new ResultBean();
+
+        try{
+            if(StringUtil.isBlank(accessToken) || !accessToken.equals(SYSTEM_ACCESS_TOKEN)){
+                resultBean.setMessage("token 为空，请检查参数");
+                return resultBean;
+            }
+
+            ObjectMapper mapper = new ObjectMapper();
+            OrderBean orderBean = mapper.readValue(params, OrderBean.class);
+            orderBean.setOrderType(OrderType.USER.value());
+            orderBean.setStatus(OrderStatus.SUBMIT.value());
+            resultBean =this.orderService.addOrder(orderBean);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+
+        return resultBean;
     }
 
 

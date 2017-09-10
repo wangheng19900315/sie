@@ -91,8 +91,8 @@
                                 <%--<li><a href="#"><span class="badge badge-primary pull-right">New</span>Account</a></li>--%>
                                 <%--<li><a href="#"><i class="dropdown-icon fa fa-cog"></i>&nbsp;&nbsp;Settings</a></li>--%>
                                 <%--<li class="divider"></li>--%>
-                                <li><a href="/user/logout.html"><i class="dropdown-icon fa fa-power-off"></i>&nbsp;&nbsp;Log Out</a></li>
-                                <li><a data-toggle="modal" data-target="#modify-password"><i class="dropdown-icon fa fa-power-off"></i>&nbsp;&nbsp;修改密码</a></li>
+                                <li><a href="/user/logout.html"><i class="dropdown-icon fa fa-power-off"></i>&nbsp;&nbsp;退出系统</a></li>
+                                <li><a data-toggle="modal" data-target="#modify-password"><i class="dropdown-icon fa fa-user"></i>&nbsp;&nbsp;修改密码</a></li>
                                     <%--<button type="button" class="btn btn-success disabled"  id="refundBtn" data-toggle="modal" data-target="#refund">退课</button> &nbsp;&nbsp;--%>
                             </ul>
 

@@ -321,7 +321,7 @@ public class OrderServiceImpl extends BaseServiceImpl<OrderEntity,Integer> imple
         if(NumberUtil.isSignless(orderBean.getStatus())){
             orderEntity.setStatus(orderBean.getStatus());
         }else{
-            orderEntity.setStatus(orderBean.getStatus());
+            orderEntity.setStatus(OrderStatus.SUBMIT.value());
         }
 
         orderEntity.setSystemType(orderBean.getSystemType());
@@ -329,7 +329,7 @@ public class OrderServiceImpl extends BaseServiceImpl<OrderEntity,Integer> imple
         if(NumberUtil.isSignless(orderBean.getPayType())){
             orderEntity.setPayType(orderBean.getPayType());
         }else{
-            orderEntity.setPayType(PayStatus.SUBMIT.value());
+            orderEntity.setPayType(PayType.MANUAL.value());
         }
 
         orderEntity.setMoney(orderBean.getMoney());

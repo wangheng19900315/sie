@@ -230,7 +230,7 @@
 
         <!-- 获取用户订单 -->
         <div class="panel panel-default">
-            <div class="panel-heading">1.获取用户订单(/api/getOrderDetail.json)</div>
+            <div class="panel-heading">2.获取用户订单(/api/getOrderDetail.json)</div>
             <div class="panel-body">
                 <form id="test_getOrderDetail_form" class="form-inline" onsubmit="return false"
                       url="/api/getOrderDetail.json">
@@ -245,6 +245,27 @@
                 </form>
                 <h5>输出结果</h5>
                 <pre id="getOrderDetail_result"></pre>
+            </div>
+        </div>
+
+
+        <!-- 提交订单 -->
+        <div class="panel panel-default">
+            <div class="panel-heading">2.提交订单(/api/createOrder.json)</div>
+            <div class="panel-body">
+                <form id="test_createOrder_form" class="form-inline" onsubmit="return false"
+                      url="/api/getOrderDetail.json">
+                    <div class="form-group">
+                        <label>orderId</label>
+                        <input type="number" class="form-control" name="orderId"  required>
+                    </div>
+                    <button class="btn btn-default"
+                            onclick="dhcc.Unit.submit('#test_createOrder_form', '#createOrder_result',  accessToken)">
+                        提交
+                    </button>
+                </form>
+                <h5>输出结果</h5>
+                <pre id="createOrder_result"></pre>
             </div>
         </div>
 
