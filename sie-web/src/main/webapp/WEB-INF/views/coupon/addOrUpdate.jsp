@@ -32,12 +32,23 @@
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="form-group ">
+                                <label for="total" class="col-sm-2 control-label">总数量</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="total" name="total" placeholder="total" required data-msg-required="请输入总数量" data-rule-number="true" data-msg-number="请输入正确的整数" >
+                                </div>
+                            </div>
+                        </div><!-- col-sm-6 -->
+                        <div class="col-sm-6">
+                            <div class="form-group ">
                                 <label for="rmbDiscount" class="col-sm-2 control-label">RMB优惠</label>
                                 <div class="col-sm-9">
                                     <input type="text" class="form-control" id="rmbDiscount" name="rmbDiscount" placeholder="rmbDiscount" required data-msg-required="请输入RMB优惠" data-rule-number="true" data-msg-number="请输入正确的数字" >
                                 </div>
                             </div>
                         </div><!-- col-sm-6 -->
+                    </div>
+                    <div class="row">
+
                         <div class="col-sm-6">
                             <div class="form-group ">
                                 <label for="dollarDiscount" class="col-sm-2 control-label">美元优惠</label>
@@ -47,8 +58,6 @@
                             </div>
 
                         </div><!-- col-sm-6 -->
-                    </div><!-- row -->
-                    <div class="row">
                         <div class="col-sm-6">
                             <div class="form-group ">
                                 <label for="canadianDiscount" class="col-sm-2 control-label">加币优惠</label>
@@ -57,6 +66,9 @@
                                 </div>
                             </div>
                         </div><!-- col-sm-6 -->
+                    </div><!-- row -->
+                    <div class="row">
+
                         <div class="col-sm-6">
                             <div class="form-group ">
                                 <label for="enabled" class="col-sm-2 control-label">是否有效</label>

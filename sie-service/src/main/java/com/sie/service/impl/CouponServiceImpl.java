@@ -27,12 +27,14 @@ public class CouponServiceImpl extends BaseServiceImpl<CouponEntity,Integer> imp
             CouponEntity oldCouponEntity = this.couponDao.getEntity(couponEntity.getId());
             oldCouponEntity.setName(couponEntity.getName());
             oldCouponEntity.setCode(couponEntity.getCode());
+            oldCouponEntity.setTotal(couponEntity.getTotal());
             oldCouponEntity.setRmbDiscount(couponEntity.getRmbDiscount());
             oldCouponEntity.setDollarDiscount(couponEntity.getDollarDiscount());
             oldCouponEntity.setCanadianDiscount(couponEntity.getCanadianDiscount());
             oldCouponEntity.setEnabled(couponEntity.getEnabled());
             this.couponDao.updateEntity(oldCouponEntity);
         }else{
+            couponEntity.setUsed(0);
             this.couponDao.createEntity(couponEntity);
         }
 

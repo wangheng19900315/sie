@@ -18,6 +18,8 @@ public class CouponEntity extends BaseEntity{
     private String name;
     private String code;
 //    private Integer status;
+    private Integer total;//总数量
+    private Integer used;//使用数量
     private Double rmbDiscount;
     private Double dollarDiscount;
     private Double canadianDiscount;
@@ -53,8 +55,25 @@ public class CouponEntity extends BaseEntity{
         this.code = code;
     }
 
+    @Column(name = "total")
+    public Integer getTotal() {
+        return total;
+    }
 
-//    @Column(name = "status")
+    public void setTotal(Integer total) {
+        this.total = total;
+    }
+
+    @Column(name = "used")
+    public Integer getUsed() {
+        return used;
+    }
+
+    public void setUsed(Integer used) {
+        this.used = used;
+    }
+
+    //    @Column(name = "status")
 //    public Integer getStatus() {
 //        return status;
 //    }

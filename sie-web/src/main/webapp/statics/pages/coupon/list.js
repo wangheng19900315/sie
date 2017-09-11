@@ -29,11 +29,16 @@ $(function(){
         height: '100%',
         mtype: 'post',
         postData: {},
-        colNames: ['ID', '名称','优惠码' ,'RMB优惠' ,'美金优惠' ,'加币优惠','是否有效','创建时间' ],
+        colNames: ['ID', '名称','优惠码' ,'总数量' ,'使用数量' ,'剩余数量' ,'RMB优惠' ,'美金优惠' ,'加币优惠','是否有效','创建时间' ],
         colModel: [
             {name: 'id', index: 'id', width: 20, hidden: true,  sortable: false},
             {name: 'name', index: 'name', width: 20,   sortable: false},
             {name: 'code', index: 'code', width: 20,   sortable: false},
+            {name: 'total', index: 'total', width: 20,   sortable: false},
+            {name: 'used', index: 'used', width: 20,   sortable: false},
+            {name: 'remainder', index: 'remainder', width: 20,   sortable: false,formatter:function(cellvalue, options, rowObject){
+                return rowObject.total - rowObject.used;
+            }},
             {name: 'rmbDiscount', index: 'rmbDiscount', width: 20,  sortable: false},
             {name: 'dollarDiscount', index: 'dollarDiscount', width: 20,  sortable: false},
             {name: 'canadianDiscount', index: 'canadianDiscount', width: 20,  sortable: false},
