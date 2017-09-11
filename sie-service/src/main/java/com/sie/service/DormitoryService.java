@@ -25,5 +25,5 @@ public interface DormitoryService extends BaseService<DormitoryEntity, Integer> 
      * @param sex 表示性别
      * @param flag 1，表示人数加1； -1表示人数减1
      */
-    public void updateStudentCount(Integer id, String sex, Integer flag);
+    public void updateStudentCount(Integer id, Integer systemType, String sex, Integer flag);
 }

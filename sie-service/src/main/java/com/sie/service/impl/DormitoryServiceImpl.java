@@ -5,6 +5,7 @@ import com.sie.framework.dao.DormitoryDao;
 import com.sie.framework.dao.ProjectDao;
 import com.sie.framework.entity.DormitoryEntity;
 import com.sie.framework.entity.ProjectEntity;
+import com.sie.framework.type.SystemType;
 import com.sie.service.DormitoryService;
 import com.sie.service.bean.DormitoryBean;
 import com.sie.service.bean.PageInfo;
@@ -121,7 +122,8 @@ public class DormitoryServiceImpl extends BaseServiceImpl<DormitoryEntity,Intege
     }
 
 
-    public void updateStudentCount(Integer id, String sex, Integer flag){
+    @Override
+    public void updateStudentCount(Integer id, Integer systemType, String sex, Integer flag){
         if(!NumberUtil.isSignless(id)){
             return;
         }
@@ -134,6 +136,12 @@ public class DormitoryServiceImpl extends BaseServiceImpl<DormitoryEntity,Intege
             dormitoryEntity.setManNumber(dormitoryEntity.getManNumber()+flag);
         }else{
             dormitoryEntity.setWomanNumber(dormitoryEntity.getWomanNumber()+flag);
+        }
+
+        if(systemType == SystemType.SIE.value()){
+            dormitoryEntity.setSieNumber(dormitoryEntity.getSieNumber()+flag);
+        }else{
+            dormitoryEntity.setTruNumber(dormitoryEntity.getTruNumber()+flag);
         }
     }
 }
