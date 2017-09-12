@@ -127,24 +127,26 @@ public class StudentController {
     public String loadImage(String image, HttpServletRequest request, HttpServletResponse response) throws IOException {
         ServletOutputStream out = null;
         FileInputStream ips = null;
-        try {
-            //获取图片存放路径
-            String imgPath = image;
-            ips = new FileInputStream(new File(imgPath));
-            response.setContentType("multipart/form-data");
-            out = response.getOutputStream();
-            //读取文件流
-            int len = 0;
-            byte[] buffer = new byte[1024 * 10];
-            while ((len = ips.read(buffer)) != -1){
-                out.write(buffer,0,len);
+        if(image != null){
+            try {
+                //获取图片存放路径
+                String imgPath = image;
+                ips = new FileInputStream(new File(imgPath));
+                response.setContentType("multipart/form-data");
+                out = response.getOutputStream();
+                //读取文件流
+                int len = 0;
+                byte[] buffer = new byte[1024 * 10];
+                while ((len = ips.read(buffer)) != -1){
+                    out.write(buffer,0,len);
+                }
+                out.flush();
+            }catch (Exception e){
+                e.printStackTrace();
+            }finally {
+                out.close();
+                ips.close();
             }
-            out.flush();
-        }catch (Exception e){
-            e.printStackTrace();
-        }finally {
-            out.close();
-            ips.close();
         }
         return null;
     }
