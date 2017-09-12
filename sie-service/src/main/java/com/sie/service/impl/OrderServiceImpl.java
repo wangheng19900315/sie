@@ -15,6 +15,7 @@ import com.sie.service.vo.OrderVo;
 import com.sie.util.DateUtil;
 import com.sie.util.NumberUtil;
 import com.sie.util.PageUtil;
+import com.sie.util.StringUtil;
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -352,6 +353,17 @@ public class OrderServiceImpl extends BaseServiceImpl<OrderEntity,Integer> imple
         }
         orderEntity.setStudentEntity(studentEntity);
 
+        //设置支付时间
+        if(orderBean.getPayTime() != null){
+            orderEntity.setPayTime(orderBean.getPayTime());
+        }
+
+        if(orderBean.getOrderTime() != null){
+            orderEntity.setOrderTime(orderBean.getOrderTime());
+        }else{
+            orderEntity.setPayTime(orderEntity.getCreateTime());
+        }
+
         if(NumberUtil.isSignless(orderBean.getCouponId())){
             CouponEntity couponEntity = this.couponDao.getEntity(orderBean.getCouponId());
             if(couponEntity == null){
@@ -470,14 +482,11 @@ public class OrderServiceImpl extends BaseServiceImpl<OrderEntity,Integer> imple
         return resultBean;
     }
 
-    @Override
-    public String importBean(List<OrderImport> orderImports, int start, int end) {
-        String result = null;
-
+    public OrderBean excelBeanToOrderBean(List<OrderImport> orderImports,int start,int end) throws Exception{
         String hql = "from StudentEntity where idNumber='" + orderImports.get(start).getStudentID() + "' or passportNumber='" + orderImports.get(start).getStudentID() + "'";
         List<StudentEntity> studentEntities = this.studentDao.getList(hql);
         if (studentEntities.size() == 0) {
-            return "学生信息不存在";
+            throw new Exception("学生信息不存在");
         }
 
         //设置orderbean的值
@@ -490,6 +499,8 @@ public class OrderServiceImpl extends BaseServiceImpl<OrderEntity,Integer> imple
         SystemType systemType = SystemType.valueOfName(orderSystemTypeName);
         if (systemType != null) {
             orderBean.setSystemType(systemType.value());
+        }else{
+            throw new Exception("下单系统不是SIE或者TRU");
         }
 
         String payTypeName = orderImports.get(start).getPayTypeName();
@@ -517,7 +528,7 @@ public class OrderServiceImpl extends BaseServiceImpl<OrderEntity,Integer> imple
             hql = "from CrEntity where code='" + crCode + "'";
             List<CrEntity> crEntities = crDao.getList(hql);
             if (crEntities.size() != 1) {
-                return "CR推荐码有误";
+                throw new Exception("CR推荐码有误");
             }
             orderBean.setCrId(crEntities.get(0).getId());
         }
@@ -529,7 +540,7 @@ public class OrderServiceImpl extends BaseServiceImpl<OrderEntity,Integer> imple
             hql = "from CouponEntity where code='" + couponCode + "'";
             List<CouponEntity> couponEntities = couponDao.getList(hql);
             if (couponEntities.size() != 1) {
-                return "优惠码有误";
+                throw new Exception("优惠码有误");
             }
             orderBean.setCouponId(couponEntities.get(0).getId());
         }
@@ -549,7 +560,7 @@ public class OrderServiceImpl extends BaseServiceImpl<OrderEntity,Integer> imple
                 hql = "from DormitoryEntity where code='" + projectCode + "'";
                 List<DormitoryEntity> dormitoryEntities = dormitoryDao.getList(hql);
                 if (dormitoryEntities.size() != 1) {
-                    return orderImports.get(i).getProjectCode() + "宿舍信息有误";
+                    throw new Exception(orderImports.get(i).getProjectCode() + "宿舍信息有误");
                 }
                 detailBean.setDormitoryId(dormitoryEntities.get(0).getId());
                 detailBean.setProjectId(dormitoryEntities.get(0).getProjectId());
@@ -558,7 +569,7 @@ public class OrderServiceImpl extends BaseServiceImpl<OrderEntity,Integer> imple
                 hql = "from ProjectEntity where code='" + projectCode + "'";
                 List<ProjectEntity> projectEntities = projectDao.getList(hql);
                 if (projectEntities.size() != 1) {
-                    return orderImports.get(i).getProjectCode() + "项目信息有误";
+                    throw new Exception(orderImports.get(i).getProjectCode() + "项目信息有误");
                 }
                 detailBean.setProjectId(projectEntities.get(0).getId());
                 //处理课程
@@ -569,10 +580,10 @@ public class OrderServiceImpl extends BaseServiceImpl<OrderEntity,Integer> imple
                     hql = "from CourseEntity where courseID='" + courseID + "'";
                     List<CourseEntity> courseEntities = courseDao.getList(hql);
                     if (courseEntities.size() != 1) {
-                        return courseID + "课程不存在 ";
+                        throw new Exception(courseID + "课程不存在 ");
                     }
                     if (!projectEntities.get(0).getId().equals(courseEntities.get(0).getProjectId())) {
-                        return courseID + "课程不在" + projectCode + "项目下 ";
+                        throw new Exception(courseID + "课程不在" + projectCode + "项目下 ");
                     }
                     courseIds.add(courseEntities.get(0).getId());
                 }
@@ -582,15 +593,21 @@ public class OrderServiceImpl extends BaseServiceImpl<OrderEntity,Integer> imple
 
         }
         orderBean.setOrderDetailBean(orderDetailBean);
+        return orderBean;
+    }
 
-        try {
-            addOrder(orderBean);
-            //判断添加的订单是否为已经完成
-        } catch (Exception e) {
-            result = "信息出错";
-            e.printStackTrace();
+
+    @Override
+    public boolean importBean(List<OrderBean> orderBeanList) {
+        for(OrderBean orderBean : orderBeanList){
+            try {
+                addOrder(orderBean);
+            } catch (Exception e) {
+                e.printStackTrace();
+                return false;
+            }
         }
-        return result;
+        return true;
     }
 
     @Override
