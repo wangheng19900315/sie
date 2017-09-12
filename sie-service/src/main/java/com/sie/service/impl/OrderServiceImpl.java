@@ -15,15 +15,14 @@ import com.sie.service.vo.OrderVo;
 import com.sie.util.DateUtil;
 import com.sie.util.NumberUtil;
 import com.sie.util.PageUtil;
+import com.sie.util.StringUtil;
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by wangheng on 2017/8/9.
@@ -80,6 +79,9 @@ public class OrderServiceImpl extends BaseServiceImpl<OrderEntity,Integer> imple
 
     @Autowired
     private CouponService couponService;
+
+    @Autowired
+    private PackagePriceService packagePriceService;
 
 
     @Override
@@ -331,10 +333,15 @@ public class OrderServiceImpl extends BaseServiceImpl<OrderEntity,Integer> imple
         }
     }
 
-    @Override
-    public ResultBean addOrder(OrderBean orderBean) {
+
+    private  ResultBean initOrderBean(OrderBean orderBean, OrderEntity orderEntity){
         ResultBean resultBean = new ResultBean();
-        OrderEntity orderEntity = new OrderEntity();
+
+        if(orderBean.getOrderDetailBean() == null || orderBean.getOrderDetailBean().size() == 0){
+            resultBean.setMessage("订单明细为空，请确认提交信息");
+            return resultBean;
+        }
+
         orderEntity.setCode(DateUtil.format(new Date(), "yyyyMMddHHmmss"));
         if(NumberUtil.isSignless(orderBean.getOrderType())){
             orderEntity.setOrderType(orderBean.getOrderType());
@@ -358,11 +365,6 @@ public class OrderServiceImpl extends BaseServiceImpl<OrderEntity,Integer> imple
 
         orderEntity.setMoney(orderBean.getMoney());
 
-        if(orderBean.getOrderDetailBean() == null || orderBean.getOrderDetailBean().size() == 0){
-            resultBean.setMessage("订单明细为空，请确认提交信息");
-            return resultBean;
-        }
-
         if(NumberUtil.isSignless(orderBean.getDiscount())){
             orderEntity.setDiscount(0.0);
         }else{
@@ -385,11 +387,6 @@ public class OrderServiceImpl extends BaseServiceImpl<OrderEntity,Integer> imple
 
             orderEntity.setCouponEntity(couponEntity);
             orderEntity.setCouponDiscount(couponEntity.getRmbDiscount());
-
-            //验证优惠卷信息
-            if(orderEntity.getOrderType() == OrderType.USER.value()){
-
-            }
         }else{
             orderEntity.setCouponEntity(null);
             orderEntity.setCouponDiscount(0.0);
@@ -414,8 +411,64 @@ public class OrderServiceImpl extends BaseServiceImpl<OrderEntity,Integer> imple
 
 
 
-
         orderEntity.setRemark(orderBean.getRemark());
+
+        //如果是用户提交，自动计算金额
+        if(orderEntity.getOrderType() == OrderType.USER.value()  && orderEntity.getStatus() == OrderStatus.SUBMIT.value()){
+            int projectCount = 0;
+            int courseCount = 0;
+
+            Map<Integer, Integer>  maps = new HashMap<>();
+
+            for(OrderDetailBean orderDetailBean : orderBean.getOrderDetailBean()){
+
+                if(!NumberUtil.isSignless(orderDetailBean.getDormitoryId())){
+                    if(maps.get(orderDetailBean.getProjectId()) == null){
+                        projectCount ++;
+                        maps.put(orderDetailBean.getProjectId(), 0);
+                    }
+                    Integer count = orderDetailBean.getCourseIds().split(",").length;
+
+                    maps.put(orderDetailBean.getProjectId(), maps.get(orderDetailBean.getProjectId())+count);
+                    courseCount += count;
+                }
+
+                for(Map.Entry<Integer,Integer> entry:maps.entrySet()){
+                    ProjectEntity projectEntity = this.projectDao.getEntity(entry.getKey());
+                    if(projectEntity == null){
+                        resultBean.setMessage("查找不到项目信息，请确认提交信息");
+                        return resultBean;
+                    }
+                    Integer totalCourseNumber = 0;
+                    if(orderBean.getSystemType() == SystemType.SIE.value()){
+                        totalCourseNumber = projectEntity.getSieMaxCourse();
+                    }else{
+                        totalCourseNumber = projectEntity.getTruMaxCourse();
+                    }
+                    if(entry.getValue() > totalCourseNumber){
+                        resultBean.setMessage("项目"+projectEntity.getCode()+"所报的课程数大于规定课程数");
+                        return resultBean;
+                    }
+                }
+
+                if(courseCount == 0){
+                    resultBean.setMessage("订单没有课程数，请确认提交信息");
+                    return resultBean;
+                }
+
+                ProjectPriceEntity priceEntity =  packagePriceService.getEntityByCourse(projectCount, courseCount, orderEntity.getSystemType());
+                if(priceEntity == null){
+                    resultBean.setMessage("查找不到与订单对应的价格信息，请确认提交信息");
+                    return resultBean;
+                }
+                orderBean.setMoney(priceEntity.getRmbPrice());
+
+            }
+
+
+        }
+
+
         //Fixme 实际支付金额=总金额-cr优惠金额-优惠活动金额
         if(NumberUtil.isSignless(orderBean.getPayMoney())){
             orderEntity.setPayMoney(orderBean.getPayMoney());
@@ -426,6 +479,22 @@ public class OrderServiceImpl extends BaseServiceImpl<OrderEntity,Integer> imple
             Double payMoney = NumberUtil.getDoubleScale(orderEntity.getMoney()-orderEntity.getCouponDiscount()-orderEntity.getCrDiscount(),0);
             orderEntity.setPayMoney(payMoney);
         }
+        resultBean.setSuccess(true);
+        return resultBean;
+    }
+
+    @Override
+    public ResultBean addOrder(OrderBean orderBean) {
+
+        OrderEntity orderEntity = new OrderEntity();
+
+        ResultBean resultBean = initOrderBean(orderBean, orderEntity);
+        if(!resultBean.isSuccess()){
+            return resultBean;
+        }
+        resultBean.setSuccess(false);
+
+
         this.orderDao.createEntity(orderEntity);
 
         //创建支付信息
@@ -508,9 +577,9 @@ public class OrderServiceImpl extends BaseServiceImpl<OrderEntity,Integer> imple
             }
         }
 
-        gradeService.updateStudentGradeList(studentEntity.getId());
+        gradeService.updateStudentGradeList(orderEntity.getStudentEntity().getId());
 
-        gradeSendService.updateStudentGradeSend(studentEntity.getId());
+        gradeSendService.updateStudentGradeSend(orderEntity.getStudentEntity().getId());
 
         resultBean.setMessage("添加成功");
         resultBean.setSuccess(true);

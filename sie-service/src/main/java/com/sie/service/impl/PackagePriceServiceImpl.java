@@ -89,4 +89,17 @@ public class PackagePriceServiceImpl extends BaseServiceImpl<ProjectPriceEntity,
             e.printStackTrace();
         }
     }
+
+
+    public ProjectPriceEntity getEntityByCourse(Integer projectCount, Integer courseCount, Integer systType){
+        List<HqlOperateVo> list = new ArrayList<>();
+        list.add(new HqlOperateVo("projectNumber","=",projectCount+""));
+        list.add(new HqlOperateVo("courseNumber","=",courseCount+""));
+        list.add(new HqlOperateVo("system","=",systType+""));
+        List<ProjectPriceEntity> priceEntities = this.getList(list);
+        if(priceEntities != null && priceEntities.size() > 0){
+            return priceEntities.get(0);
+        }
+        return null;
+    }
 }
