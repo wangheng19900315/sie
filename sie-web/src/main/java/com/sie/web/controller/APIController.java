@@ -8,9 +8,11 @@ import com.sie.framework.type.OrderType;
 import com.sie.framework.type.SystemType;
 import com.sie.service.*;
 import com.sie.service.bean.OrderBean;
+import com.sie.service.bean.OrderDetailBean;
 import com.sie.service.bean.ResultBean;
 import com.sie.service.vo.*;
 import com.sie.util.DateUtil;
+import com.sie.util.NumberUtil;
 import com.sie.util.StringUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -468,7 +470,9 @@ public class APIController {
             ObjectMapper mapper = new ObjectMapper();
             OrderBean orderBean = mapper.readValue(params, OrderBean.class);
             orderBean.setOrderType(OrderType.USER.value());
-            orderBean.setStatus(OrderStatus.SUBMIT.value());
+            if(!NumberUtil.isSignless(orderBean.getStatus())){
+                orderBean.setStatus(OrderStatus.SUBMIT.value());
+            }
             resultBean =this.orderService.addOrder(orderBean);
         }catch(Exception e){
             e.printStackTrace();

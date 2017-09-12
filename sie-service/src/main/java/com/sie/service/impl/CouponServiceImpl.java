@@ -2,11 +2,13 @@ package com.sie.service.impl;
 
 import com.sie.framework.dao.CouponDao;
 import com.sie.framework.entity.CouponEntity;
-import com.sie.framework.entity.CrEntity;
 import com.sie.service.CouponService;
 import com.sie.util.NumberUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.Date;
+
 
 /**
  * Created by wangheng on 2017/8/9.
@@ -39,5 +41,22 @@ public class CouponServiceImpl extends BaseServiceImpl<CouponEntity,Integer> imp
         }
 
         return couponEntity.getId();
+    }
+
+    @Override
+    public boolean isAviableUse(CouponEntity couponEntity, Integer flag) {
+        if(couponEntity.getEnabled() == 0){
+            return false;
+        }
+
+        Date date = new Date();
+
+        if(couponEntity.getStartTime().getTime() > date.getTime() ||  couponEntity.getEndTime().getTime()<date.getTime()){
+            return false;
+        }
+        if((couponEntity.getTotal() ) <  (flag  + couponEntity.getUsed())){
+            return false;
+        }
+        return true;
     }
 }

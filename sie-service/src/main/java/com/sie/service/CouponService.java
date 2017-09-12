@@ -8,4 +8,5 @@ import com.sie.framework.entity.CouponEntity;
  */
 public interface CouponService extends BaseService<CouponEntity, Integer> {
 
+    public boolean isAviableUse(CouponEntity couponEntity, Integer flag);
 }
