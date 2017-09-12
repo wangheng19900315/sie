@@ -78,6 +78,9 @@ public class OrderServiceImpl extends BaseServiceImpl<OrderEntity,Integer> imple
     @Autowired
     private GradeSendService gradeSendService;
 
+    @Autowired
+    private CouponService couponService;
+
 
     @Override
     public PageInfo<OrderBean> getOrderList(Integer page, Integer rows, List<HqlOperateVo> hqlOperateVoList) {
@@ -298,6 +301,27 @@ public class OrderServiceImpl extends BaseServiceImpl<OrderEntity,Integer> imple
                         this.courseService.updateCourseCount(detailEntity.getCourseIds(), oldEntity.getSystemType(),oldEntity.getOrderType(), 1);
                     }
                 }
+
+
+                if(oldEntity.getCouponEntity() != null){
+                    CouponEntity couponEntity = this.couponDao.getEntity(oldEntity.getCouponEntity().getId());
+                    if(oldEntity.getOrderType() == OrderType.USER.value()){
+                        if(!couponService.isAviableUse(couponEntity, flag)){
+                            throw new RuntimeException("优惠卷已过期或者已使用完，请核对信息");
+                        }
+                    }
+
+                    couponEntity.setUsed( couponEntity.getUsed()+flag);
+                    int use = couponEntity.getUsed();
+                    this.couponDao.updateEntity(couponEntity);
+                }
+
+                if(oldEntity.getCrEntity() != null){
+                    CrEntity crEntity = oldEntity.getCrEntity();
+                    crEntity.setUsed( crEntity.getUsed()+flag);
+                    this.crDao.updateEntity(crEntity);
+                }
+
             }
 
 
@@ -361,6 +385,11 @@ public class OrderServiceImpl extends BaseServiceImpl<OrderEntity,Integer> imple
 
             orderEntity.setCouponEntity(couponEntity);
             orderEntity.setCouponDiscount(couponEntity.getRmbDiscount());
+
+            //验证优惠卷信息
+            if(orderEntity.getOrderType() == OrderType.USER.value()){
+
+            }
         }else{
             orderEntity.setCouponEntity(null);
             orderEntity.setCouponDiscount(0.0);
@@ -382,6 +411,8 @@ public class OrderServiceImpl extends BaseServiceImpl<OrderEntity,Integer> imple
             orderEntity.setCrEntity(null);
             orderEntity.setCrDiscount(0.0);
         }
+
+
 
 
         orderEntity.setRemark(orderBean.getRemark());
@@ -458,6 +489,22 @@ public class OrderServiceImpl extends BaseServiceImpl<OrderEntity,Integer> imple
                 }else{
                     this.courseService.updateCourseCount(detailEntity.getCourseIds(), orderEntity.getSystemType(),orderEntity.getOrderType(), flag);
                 }
+            }
+
+            if(orderEntity.getCrEntity() != null){
+                orderEntity.getCrEntity().setUsed( orderEntity.getCrEntity().getUsed()+flag);
+                this.crDao.updateEntity(orderEntity);
+            }
+
+            if(orderEntity.getCouponEntity() != null){
+                if(orderEntity.getOrderType() == OrderType.USER.value()){
+                    if(!couponService.isAviableUse(orderEntity.getCouponEntity(), flag)){
+                        throw new RuntimeException("优惠卷已过期或者已使用完，请核对信息");
+                    }
+                }
+
+                orderEntity.getCouponEntity().setUsed( orderEntity.getCouponEntity().getUsed()+flag);
+                this.couponDao.updateEntity(orderEntity.getCouponEntity());
             }
         }
 
