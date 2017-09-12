@@ -3,6 +3,7 @@ package com.sie.service.excel;
 import com.sie.util.annotation.ExcelField;
 
 import java.sql.Time;
+import java.sql.Timestamp;
 import java.util.Date;
 
 /**
@@ -24,7 +25,6 @@ public class OrderImport {
     private String payTypeName;
     private Date orderDate;
     private Date payDate;
-    private Time payTime;
 
     @ExcelField(title="学生ID", align=2, sort=1)
     public String getStudentID() {
@@ -150,14 +150,5 @@ public class OrderImport {
 
     public void setPayDate(Date payDate) {
         this.payDate = payDate;
-    }
-
-    @ExcelField(title="支付时间", align=2, sort=15)
-    public Time getPayTime() {
-        return payTime;
-    }
-
-    public void setPayTime(Time payTime) {
-        this.payTime = payTime;
     }
 }

@@ -24,6 +24,8 @@ import java.util.*;
 public class StudentServiceImpl extends BaseServiceImpl<StudentEntity,Integer> implements StudentService {
     private StudentDao studentDao;
 
+    private static final String defaultPassword = "123456";
+
     @Autowired
     public StudentServiceImpl(StudentDao studentDao){
         super(studentDao);
@@ -145,6 +147,8 @@ public class StudentServiceImpl extends BaseServiceImpl<StudentEntity,Integer> i
             for(int i=0; i<beanList.size(); i++){
                 StudentEntity  entity = new StudentEntity();
                 BeanUtils.copyProperties(entity, beanList.get(i));
+                //设置默认的登录密码为123456
+                entity.setPassword(Md5Util.getMD5(defaultPassword, ApplicationHelp.MD5_SHA1));
                 this.saveOrUpdate(entity);
             }
 

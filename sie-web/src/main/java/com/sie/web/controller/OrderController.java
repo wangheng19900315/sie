@@ -238,7 +238,6 @@ public class OrderController {
     public ResultBean importFile(@RequestParam("excelFile") MultipartFile file, RedirectAttributes redirectAttributes) {
         ResultBean resultBean = new ResultBean();
         try {
-            int successNum = 0;
             int failureNum = 0;
             StringBuilder failureMsg = new StringBuilder();
             ImportExcel ei = new ImportExcel(file, 0, 0);
@@ -248,6 +247,7 @@ public class OrderController {
                 return resultBean;
             }
             int start,end;//订单开始和结束的位置
+            List<OrderBean> orderBeanList = new ArrayList<>();
             for(int i=0; i<list.size(); ){
                 String studentID = list.get(i).getStudentID();
                 start = i;
@@ -256,17 +256,26 @@ public class OrderController {
                 while (end < list.size() && studentID.equals(list.get(end).getStudentID())){
                     end++;
                 }
-                String flag = this.orderService.importBean(list,start,end);
-                if(StringUtil.isNotBlank(flag)){
-                    failureMsg.append("<p>第"+(i+2)+"行:"+flag+"</p>") ;
+                try{
+                    OrderBean orderBean = this.orderService.excelBeanToOrderBean(list,start,end);
+                    orderBeanList.add(orderBean);
+                }catch (Exception orderException){
+                    failureMsg.append("<p>第"+(i+2)+"行:"+orderException.getMessage()+"</p>") ;
                     failureNum ++;
-                }else{
-                    successNum++;
                 }
                 i = end;
             }
-            resultBean.setSuccess(true);
-            resultBean.setMessage("导入完毕，成功导入"+successNum+"条,导入失败"+failureNum+"条;"+failureMsg.toString());
+
+            if(failureNum == 0){
+                //没有失败记录
+                if(this.orderService.importBean(orderBeanList)){
+                    resultBean.setSuccess(true);
+                    resultBean.setMessage("数据导入成功,共"+orderBeanList.size()+"条");
+                }
+            }else{
+                resultBean.setMessage("数据"+failureNum+"条错误;"+failureMsg.toString());
+            }
+
         } catch (Exception e) {
             e.printStackTrace();
         }

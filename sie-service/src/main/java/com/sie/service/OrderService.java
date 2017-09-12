@@ -44,11 +44,19 @@ public interface OrderService extends BaseService<OrderEntity, Integer> {
     /**
      * 导入订单
      * @param orderImports
+     * @return 返回成功的导入的条数 要不都导入成功要不都失败
+     */
+    boolean importBean(List<OrderBean> orderImports);
+
+    /**
+     * 将orderExcel转化成orderBean信息
+     * @param orderImports
      * @param start
      * @param end
      * @return
+     * @throws Exception
      */
-    String importBean(List<OrderImport> orderImports,int start,int end);
+    OrderBean excelBeanToOrderBean(List<OrderImport> orderImports,int start,int end) throws Exception;
 
     /*
      *  * 取消订单

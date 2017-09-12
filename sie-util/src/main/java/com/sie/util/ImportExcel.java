@@ -198,7 +198,7 @@ public class ImportExcel {
 						double d = cell.getNumericCellValue();
 						Date date = HSSFDateUtil.getJavaDate(d);
 						SimpleDateFormat dformat = new SimpleDateFormat(
-								"yyyy-MM-dd");
+								"yyyy-MM-dd HH:mm:ss");
 						val = dformat.format(date);
 					} else {
 						NumberFormat nf = NumberFormat.getInstance();
@@ -426,7 +426,7 @@ public class ImportExcel {
 						}else if (valType == Float.class){
 							val = Float.valueOf(val.toString());
 						}else if (valType == Date.class){
-							SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
+							SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 							val=sdf.parse(val.toString()); 
 //						}else if (valType == User.class){
 //							val = UserUtils.getByUserName(val.toString());

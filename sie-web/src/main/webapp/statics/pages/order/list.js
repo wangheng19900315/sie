@@ -14,14 +14,19 @@ function selectRow() {
         $('#editBtn').removeClass('disabled');
         $('#infoBtn').removeClass('disabled');
         var status = $("#grid-table").jqGrid('getRowData', ids[0]).status;
-        //Fixme 已经完成的订单才可以进行退款和加课
+
         if(status == '2'){
+            //已经完成的订单才可以进行退款和加课
             $('#refundBtn').removeClass('disabled');
             $('#addOrderBtn').removeClass('disabled');
-        }
-        //已经取消的订单可以进行删除
-        if(status == '5'){
+        }else if(status == '1'){
+            //已经提交的订单可以进行加课
+            $('#addOrderBtn').removeClass('disabled');
+        }else if (status == '5'){
+            //已经取消的订单可以进行删除
             $('#deleteBtn').removeClass('disabled');
+        }else{
+
         }
     } else {
         $('#editBtn').addClass('disabled');

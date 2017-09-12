@@ -214,6 +214,7 @@
 
                             <div class="panel-footer text-center">
                                 <button class="btn btn-primary" id="submitBtn" type="button" >提交</button>
+                                <button class="btn btn-danger" type="button" onclick="window.history.go(-1)">取消</button>
                             </div>
                         </form>
                     </div>
