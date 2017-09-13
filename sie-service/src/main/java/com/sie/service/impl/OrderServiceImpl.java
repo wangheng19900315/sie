@@ -298,9 +298,9 @@ public class OrderServiceImpl extends BaseServiceImpl<OrderEntity,Integer> imple
                 List<OrderDetailEntity> orderDetailEntities = oldEntity.getOrderDetailEntityList();
                 for(OrderDetailEntity detailEntity:orderDetailEntities){
                     if(detailEntity.getDormitoryEntity() != null){
-                        this.dormitoryService.updateStudentCount(detailEntity.getDormitoryEntity().getId(), oldEntity.getSystemType(),oldEntity.getStudentEntity().getSex(), 1);
+                        this.dormitoryService.updateStudentCount(detailEntity.getDormitoryEntity().getId(), oldEntity.getSystemType(),oldEntity.getStudentEntity().getSex(), flag,oldEntity.getOrderType());
                     }else{
-                        this.courseService.updateCourseCount(detailEntity.getCourseIds(), oldEntity.getSystemType(),oldEntity.getOrderType(), 1);
+                        this.courseService.updateCourseCount(detailEntity.getCourseIds(), oldEntity.getSystemType(),oldEntity.getOrderType(), flag);
                     }
                 }
 
@@ -565,7 +565,7 @@ public class OrderServiceImpl extends BaseServiceImpl<OrderEntity,Integer> imple
             List<OrderDetailEntity> orderDetailEntities = orderEntity.getOrderDetailEntityList();
             for(OrderDetailEntity detailEntity:orderDetailEntities){
                 if(detailEntity.getDormitoryEntity() != null){
-                    this.dormitoryService.updateStudentCount(detailEntity.getDormitoryEntity().getId(), orderEntity.getSystemType(),orderEntity.getStudentEntity().getSex(), flag);
+                    this.dormitoryService.updateStudentCount(detailEntity.getDormitoryEntity().getId(), orderEntity.getSystemType(),orderEntity.getStudentEntity().getSex(), flag,orderEntity.getOrderType());
                 }else{
                     this.courseService.updateCourseCount(detailEntity.getCourseIds(), orderEntity.getSystemType(),orderEntity.getOrderType(), flag);
                 }
