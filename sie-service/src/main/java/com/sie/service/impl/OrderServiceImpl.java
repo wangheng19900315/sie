@@ -732,6 +732,7 @@ public class OrderServiceImpl extends BaseServiceImpl<OrderEntity,Integer> imple
         String date = DateUtil.format(DateUtil.addMinutes(new Date(), mins), "yyyy-MM-dd HH:mm:ss");
         operateVos.add(new HqlOperateVo("createTime","<=",date));
         operateVos.add(new HqlOperateVo("status","=",OrderStatus.SUBMIT.value()+""));
+        operateVos.add(new HqlOperateVo("orderType","=", OrderType.USER.value()+""));
 
         List<OrderEntity> orderEntities = this.orderDao.getList(operateVos, 0, 10);
         if(orderEntities != null && orderEntities.size() > 0){
@@ -741,7 +742,7 @@ public class OrderServiceImpl extends BaseServiceImpl<OrderEntity,Integer> imple
                 List<OrderDetailEntity> orderDetailEntities = orderEntity.getOrderDetailEntityList();
                 for(OrderDetailEntity detailEntity:orderDetailEntities){
                     if(detailEntity.getDormitoryEntity() != null){
-                        this.dormitoryService.updateStudentCount(detailEntity.getDormitoryEntity().getId(),  orderEntity.getSystemType(),orderEntity.getStudentEntity().getSex(), -1);
+                        this.dormitoryService.updateStudentCount(detailEntity.getDormitoryEntity().getId(),  orderEntity.getSystemType(),orderEntity.getStudentEntity().getSex(), -1,orderEntity.getOrderType());
                     }else{
                         this.courseService.updateCourseCount(detailEntity.getCourseIds(), orderEntity.getSystemType(),orderEntity.getOrderType(), -1);
                     }
