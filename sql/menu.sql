@@ -2,7 +2,7 @@ INSERT INTO sie.t_menu_info (id, create_user_id, h_version, h_delete, h_create_t
 INSERT INTO sie.t_menu_info (id, create_user_id, h_version, h_delete, h_create_time, h_update_time, name, modify_user_id, action, parent_id) VALUES (2, null, 0, 0, null, null, '学生管理', null, '', null);
 INSERT INTO sie.t_menu_info (id, create_user_id, h_version, h_delete, h_create_time, h_update_time, name, modify_user_id, action, parent_id) VALUES (3, null, 0, 0, null, null, '项目管理', null, '', null);
 INSERT INTO sie.t_menu_info (id, create_user_id, h_version, h_delete, h_create_time, h_update_time, name, modify_user_id, action, parent_id) VALUES (4, null, 0, 0, null, null, '优惠管理', null, '', null);
-INSERT INTO sie.t_menu_info (id, create_user_id, h_version, h_delete, h_create_time, h_update_time, name, modify_user_id, action, parent_id) VALUES (5, null, 0, 0, null, null, '报表管理', null, '', null);
+INSERT INTO sie.t_menu_info (id, create_user_id, h_version, h_delete, h_create_time, h_update_time, name, modify_user_id, action, parent_id) VALUES (5, null, 0, 0, null, null, '日志管理', null, '', null);
 INSERT INTO sie.t_menu_info (id, create_user_id, h_version, h_delete, h_create_time, h_update_time, name, modify_user_id, action, parent_id) VALUES (6, null, 0, 0, null, null, '数据字典', null, '', null);
 INSERT INTO sie.t_menu_info (id, create_user_id, h_version, h_delete, h_create_time, h_update_time, name, modify_user_id, action, parent_id) VALUES (7, null, 0, 0, null, null, '权限管理', null, '', null);
 INSERT INTO sie.t_menu_info (id, create_user_id, h_version, h_delete, h_create_time, h_update_time, name, modify_user_id, action, parent_id) VALUES (8, null, 0, 0, null, null, '订单管理', null, '/order/list.html', 1);
@@ -15,7 +15,7 @@ INSERT INTO sie.t_menu_info (id, create_user_id, h_version, h_delete, h_create_t
 INSERT INTO sie.t_menu_info (id, create_user_id, h_version, h_delete, h_create_time, h_update_time, name, modify_user_id, action, parent_id) VALUES (15, null, 0, 0, null, null, '组合价格', null, '/packagePrice/list.html', 3);
 INSERT INTO sie.t_menu_info (id, create_user_id, h_version, h_delete, h_create_time, h_update_time, name, modify_user_id, action, parent_id) VALUES (16, null, 0, 0, null, null, 'CR管理', null, '/cr/list.html', 4);
 INSERT INTO sie.t_menu_info (id, create_user_id, h_version, h_delete, h_create_time, h_update_time, name, modify_user_id, action, parent_id) VALUES (17, null, 0, 0, null, null, '优惠码管理', null, '/coupon/list.html', 4);
-INSERT INTO sie.t_menu_info (id, create_user_id, h_version, h_delete, h_create_time, h_update_time, name, modify_user_id, action, parent_id) VALUES (18, null, 0, 0, null, null, '订单报表', null, '/layouts-grid.html', 5);
+INSERT INTO sie.t_menu_info (id, create_user_id, h_version, h_delete, h_create_time, h_update_time, name, modify_user_id, action, parent_id) VALUES (18, null, 0, 0, null, null, '日志', null, '/log/list.html', 5);
 INSERT INTO sie.t_menu_info (id, create_user_id, h_version, h_delete, h_create_time, h_update_time, name, modify_user_id, action, parent_id) VALUES (19, null, 0, 0, null, null, '学校管理', null, '/school/list.html', 6);
 INSERT INTO sie.t_menu_info (id, create_user_id, h_version, h_delete, h_create_time, h_update_time, name, modify_user_id, action, parent_id) VALUES (20, null, 0, 0, null, null, '用户管理', null, '/user/list.html', 7);
 INSERT INTO sie.t_menu_info (id, create_user_id, h_version, h_delete, h_create_time, h_update_time, name, modify_user_id, action, parent_id) VALUES (21, null, 0, 0, null, null, '角色管理', null, '/role/list.html', 7);

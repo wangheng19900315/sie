@@ -10,7 +10,7 @@ import javax.persistence.*;
 public class LogEntity extends BaseEntity{
 //    private Integer id;
     private Integer userId;
-    private String operate;
+    private String operateUrl;
     private String comment;
 
 //    @Id
@@ -34,13 +34,13 @@ public class LogEntity extends BaseEntity{
     }
 
     @Basic
-    @Column(name = "operate")
-    public String getOperate() {
-        return operate;
+    @Column(name = "operate_url")
+    public String getOperateUrl() {
+        return operateUrl;
     }
 
-    public void setOperate(String operate) {
-        this.operate = operate;
+    public void setOperateUrl(String operateUrl) {
+        this.operateUrl = operateUrl;
     }
 
     @Basic
