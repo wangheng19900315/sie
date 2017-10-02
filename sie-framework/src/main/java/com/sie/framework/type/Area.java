@@ -1,35 +1,25 @@
 package com.sie.framework.type;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Created by wangheng on 2017/8/16.
  */
 public enum Area {
 
-    /** ---------------- 电商 --------------------- */
+    /** ---------------- 学校地区 --------------------- */
 
     /**
-     * 微信支付
+     * 北京
      */
-    WECHAT(1),
-
-
-    /**
-     * 支付宝
-     */
-    AIPAY(2),
+    BJ(1),
 
 
     /**
-     * 银联支付
+     * 上海
      */
-    UNION(3),
-
-    /**
-     * 人工支付
-     */
-    MANUAL(4);
-
-
+    SH(2);
 
 
     public static Area valueOf(int i) {
@@ -39,24 +29,6 @@ public enum Area {
             }
         }
         return null;
-    }
-
-    public static Area valueOfName(String value) {
-        value = value.trim();
-        switch (value) {
-
-            case "微信":
-                return WECHAT;
-            case "支付宝":
-                return AIPAY;
-            case "银联":
-                return UNION;
-            case "人工":
-                return MANUAL;
-
-            default:
-                return null;
-        }
     }
 
     private int value;
@@ -80,15 +52,10 @@ public enum Area {
     public String getName() {
         switch (this) {
 
-            case WECHAT:
-                return "微信";
-            case AIPAY:
-                return "支付宝";
-            case UNION:
-                return "银联";
-            case MANUAL:
-                return "人工";
-
+            case BJ:
+                return "北京校区";
+            case SH:
+                return "上海校区";
             default:
                 return "未定义";
         }
@@ -96,6 +63,14 @@ public enum Area {
 
     public int value() {
         return this.value;
+    }
+
+    public static Map<Integer,String> getAll(){
+        Map<Integer,String> areas = new HashMap<>();
+        for (Area value : values()) {
+            areas.put(value.value,value.getName());
+        }
+        return areas;
     }
 
 }

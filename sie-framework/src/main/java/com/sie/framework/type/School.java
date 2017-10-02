@@ -1,5 +1,8 @@
 package com.sie.framework.type;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Created by wangheng on 2017/8/16.
  */
@@ -8,15 +11,15 @@ public enum School {
     /** ---------------- 学校地区 --------------------- */
 
     /**
-     * 北京
+     * 北京交通大学
      */
-    BJ(1),
+    BJUT(1),
 
 
     /**
-     * 上海
+     * 华东师范大学
      */
-    SH(2);
+    ECNU(2);
 
 
     public static School valueOf(int i) {
@@ -49,10 +52,10 @@ public enum School {
     public String getName() {
         switch (this) {
 
-            case BJ:
-                return "北京校区";
-            case SH:
-                return "上海校区";
+            case BJUT:
+                return "北京交通大学";
+            case ECNU:
+                return "华东师范大学";
             default:
                 return "未定义";
         }
@@ -60,6 +63,14 @@ public enum School {
 
     public int value() {
         return this.value;
+    }
+
+    public static Map<Integer,String> getAll(){
+        Map<Integer,String> schools = new HashMap<>();
+        for (School value : values()) {
+            schools.put(value.value,value.getName());
+        }
+        return schools;
     }
 
 }

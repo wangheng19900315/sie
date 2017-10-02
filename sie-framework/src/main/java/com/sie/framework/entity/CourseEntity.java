@@ -17,8 +17,9 @@ public class CourseEntity extends BaseEntity{
     private String chineseName;
     private String englishName;
     private Integer professorId;
-    private Timestamp startTime;
-    private Timestamp endTime;
+    private String professorName;// 教授名称
+    private String startTime;
+    private String endTime;
     private Integer projectId;
 //    private Integer isSie;
     private String sieCode;
@@ -28,6 +29,9 @@ public class CourseEntity extends BaseEntity{
     private String truCode;
 //    private Integer truMaxStudent;
     private Integer truTotalNumber;
+
+    private Integer school;//校区
+    private String classroom;//上课地点
 
 //    @Id
 //    @GeneratedValue(strategy= GenerationType.IDENTITY)
@@ -92,21 +96,21 @@ public class CourseEntity extends BaseEntity{
 
     @Basic
     @Column(name = "start_time")
-    public Timestamp getStartTime() {
+    public String getStartTime() {
         return startTime;
     }
 
-    public void setStartTime(Timestamp startTime) {
+    public void setStartTime(String startTime) {
         this.startTime = startTime;
     }
 
     @Basic
     @Column(name = "end_time")
-    public Timestamp getEndTime() {
+    public String getEndTime() {
         return endTime;
     }
 
-    public void setEndTime(Timestamp endTime) {
+    public void setEndTime(String endTime) {
         this.endTime = endTime;
     }
 
@@ -118,6 +122,16 @@ public class CourseEntity extends BaseEntity{
 
     public void setProjectId(Integer projectId) {
         this.projectId = projectId;
+    }
+
+    @Basic
+    @Column(name = "project_name")
+    public String getProfessorName() {
+        return professorName;
+    }
+
+    public void setProfessorName(String professorName) {
+        this.professorName = professorName;
     }
 
     @Basic
@@ -168,5 +182,27 @@ public class CourseEntity extends BaseEntity{
 
     public void setTruTotalNumber(Integer truTotalNumber) {
         this.truTotalNumber = truTotalNumber;
+    }
+
+
+    @Basic
+    @Column(name = "school")
+    public Integer getSchool() {
+        return school;
+    }
+
+    public void setSchool(Integer school) {
+        this.school = school;
+    }
+
+
+    @Basic
+    @Column(name = "classroom")
+    public String getClassroom() {
+        return classroom;
+    }
+
+    public void setClassroom(String classroom) {
+        this.classroom = classroom;
     }
 }

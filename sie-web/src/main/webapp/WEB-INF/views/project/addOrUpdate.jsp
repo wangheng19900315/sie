@@ -59,6 +59,33 @@
                         </div><!-- col-sm-6 -->
 
                     </div><!-- row -->
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group ">
+                                <label for="area" class="col-sm-2 control-label">地区</label>
+                                <div class="col-sm-9">
+                                    <select class="form-control" id="area" name="area">
+                                        <option value="1">是</option>
+                                        <option value="2">否</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                        </div><!-- col-sm-6 -->
+                        <div class="col-sm-6">
+                            <div class="form-group ">
+                                <label for="enabled" class="col-sm-2 control-label">是否有效</label>
+                                <div class="col-sm-9">
+                                    <select class="form-control" id="enabled" name="enabled">
+                                        <option value="1">是</option>
+                                        <option value="0">否</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                        </div><!-- col-sm-6 -->
+                    </div><!-- row -->
+
                     <div id="sie" hidden>
                         <div class="row">
                             <div class="col-sm-6">
@@ -280,4 +307,5 @@
 <script src="${rootPath}/statics/pages/project/add.js"></script>
 <script type="text/javascript">
     var entity = '${entity}';
+    var areas = '${areas}';
 </script>

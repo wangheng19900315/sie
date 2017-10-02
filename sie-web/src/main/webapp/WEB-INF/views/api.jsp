@@ -111,6 +111,112 @@
             </div>
         </div>
 
+        <!-- 修改学生信息 -->
+        <div class="panel panel-default">
+            <div class="panel-heading">4.修改学生信息(/api/updateStudent.json)</div>
+            <div class="panel-body">
+                <form id="test_updateStudent_form" class="form-inline" onsubmit="return false"
+                      url="/api/updateStudent.json">
+                    <div class="form-group">
+                        <label>学生ID(id)</label>
+                        <input type="text" class="form-control" name="id" placeholder="id"  required>
+                    </div>
+                    <div class="form-group">
+                        <label>中文名称(chineseName)</label>
+                        <input type="text" class="form-control" name="chineseName" placeholder="chineseName"  required>
+                    </div>
+                    <div class="form-group">
+                        <label>姓-LastNam(lastName)</label>
+                        <input type="text" class="form-control" name="lastName" placeholder="lastName"  required>
+                    </div>
+                    <div class="form-group">
+                        <label>名-FirstName(firstName)</label>
+                        <input type="text" class="form-control" name="firstName" placeholder="firstName"  required>
+                    </div>
+                    <div class="form-group">
+                        <label>出生日期(birthday)</label>
+                        <input type="text" class="form-control" name="birthday" placeholder="birthday(yyyy-MM-dd)"  required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Email(email)</label>
+                        <input type="text" class="form-control" name="email" placeholder="email"  required>
+                    </div>
+                    <div class="form-group">
+                        <label>微信号(weiXin)</label>
+                        <input type="text" class="form-control" name="weiXin" placeholder="weiXin"  required>
+                    </div>
+                    <div class="form-group">
+                        <label>国籍(nationality)</label>
+                        <input type="text" class="form-control" name="nationality" placeholder="nationality"  required>
+                    </div>
+                    <div class="form-group">
+                        <label>国内联系电话(telephone)</label>
+                        <input type="text" class="form-control" name="telephone" placeholder="telephone"  required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>身份证号(idNumber)</label>
+                        <input type="text" class="form-control" name="idNumber" placeholder="idNumber"  required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>护照号(passportNumber)</label>
+                        <input type="text" class="form-control" name="passportNumber" placeholder="passportNumber" >
+                    </div>
+                    <div class="form-group">
+                        <label>在读大学(schoolName)</label>
+                        <input type="text" class="form-control" name="schoolName" placeholder="schoolName"  required>
+                    </div>
+                    <div class="form-group">
+                        <label>专业(profession)</label>
+                        <input type="text" class="form-control" name="profession" placeholder="profession"  required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>GAP(gpa)</label>
+                        <input type="text" class="form-control" name="gpa" placeholder="gpa"  required>
+                    </div>
+                    <div class="form-group">
+                        <label>寄送联系人/部门(sendPerson)</label>
+                        <input type="text" class="form-control" name="sendPerson" placeholder="sendPerson"  required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>寄送电话(sendTel)</label>
+                        <input type="text" class="form-control" name="sendTel" placeholder="sendTel"  required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>寄送邮编(sendPostCode)</label>
+                        <input type="text" class="form-control" name="sendPostCode" placeholder="sendPostCode"  required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>寄送街道(sendStreet)</label>
+                        <input type="text" class="form-control" name="sendStreet" placeholder="sendStreet"  required>
+                    </div>
+                    <div class="form-group">
+                        <label>寄送州/省(sendProvince)</label>
+                        <input type="text" class="form-control" name="sendProvince" placeholder="sendProvince"  required>
+                    </div>
+                    <div class="form-group">
+                        <label>寄送县/市(sendCountry)</label>
+                        <input type="text" class="form-control" name="sendCountry" placeholder="sendCountry"  required>
+                    </div>
+                    <%--<div class="form-group">--%>
+                        <%--<label>头像</label>--%>
+                        <%--<input type="file" class="form-control" name="headImage" placeholder="headImage"  required>--%>
+                    <%--</div>--%>
+                    <button class="btn btn-default"
+                            onclick="dhcc.Unit.submit('#test_updateStudent_form', '#updateStudent_result',  accessToken)">
+                        提交
+                    </button>
+                </form>
+                <h5>输出结果</h5>
+                <pre id="updateStudent_result"></pre>
+            </div>
+        </div>
 
 
 

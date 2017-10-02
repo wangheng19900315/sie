@@ -45,11 +45,11 @@ $(function(){
             {name: 'sieTotalNumber', index: 'sieTotalNumber', width: 20,  sortable: false},
             {name: 'truTotalNumber', index: 'truTotalNumber', width: 20,  sortable: false},
             {name: 'start_end', index: 'start_end', width: 20,  sortable: false,formatter:function(cellvalue, options, rowObject){
-                var startTime = new Date(rowObject.startTime).Format("hh:mm:ss");
-                var endTime = new Date(rowObject.endTime).Format("hh:mm:ss");
-                return startTime + "-" + endTime;
+                //var startTime = new Date(rowObject.startTime).Format("hh:mm:ss");
+                //var endTime = new Date(rowObject.endTime).Format("hh:mm:ss");
+                return rowObject.startTime + "-" + rowObject.endTime;
             }},
-            {name: 'projectId', index: 'projectId', width: 20,  sortable: false},
+            {name: 'professorName', index: 'professorName', width: 20,  sortable: false},
             {name: 'systemName', index: 'systemName', width: 20,   sortable: false},
             {name: 'sieCode', index: 'sieCode', width: 20,  sortable: false},
             {name: 'truCode', index: 'truCode', width: 20,  sortable: false}

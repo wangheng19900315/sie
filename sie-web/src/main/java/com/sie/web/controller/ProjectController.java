@@ -1,6 +1,7 @@
 package com.sie.web.controller;
 
 import com.alibaba.fastjson.JSON;
+import com.sie.framework.type.Area;
 import com.sie.service.ProjectService;
 import com.sie.service.bean.*;
 import com.sie.util.DateUtil;
@@ -45,6 +46,7 @@ public class ProjectController {
             ProjectBean bean = this.projectService.getBean(id);
             model.addAttribute("entity", JSON.toJSON(bean));
         }
+        model.addAttribute("areas", JSON.toJSON(Area.getAll()));
         return "/project/addOrUpdate";
     }
 

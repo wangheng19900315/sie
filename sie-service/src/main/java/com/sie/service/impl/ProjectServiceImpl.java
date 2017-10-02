@@ -137,6 +137,8 @@ public class ProjectServiceImpl extends BaseServiceImpl<ProjectEntity,Integer> i
             oldProjectEntity.setSieMaxCourse(projectEntity.getSieMaxCourse());
             oldProjectEntity.setTruName(projectEntity.getTruName());
             oldProjectEntity.setTruMaxCourse(projectEntity.getTruMaxCourse());
+            oldProjectEntity.setArea(projectEntity.getArea());
+            oldProjectEntity.setEnabled(projectEntity.getEnabled());
             this.projectDao.updateEntity(oldProjectEntity);
 //            return oldProjectEntity.getId();
         }else{
