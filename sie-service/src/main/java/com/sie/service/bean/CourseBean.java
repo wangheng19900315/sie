@@ -12,10 +12,11 @@ public class CourseBean  extends BaseBean{
     private String chineseName;
     private String englishName;
     private Integer professorId;
-    private Timestamp startTime;
-    private String startTimeFormat;
-    private Timestamp endTime;
-    private String endTimeFormat;
+    private String professorName;
+    private String startTime;
+//    private String startTimeFormat;
+    private String endTime;
+//    private String endTimeFormat;
     private Integer projectId;
     private String projectName;
     private String sieCode;
@@ -23,6 +24,8 @@ public class CourseBean  extends BaseBean{
     private Integer sieTotalNumber;
     private String truCode;
     private Integer truTotalNumber;
+    private Integer school;//校区
+    private String classroom;//上课地点
 
     public Integer getSystem() {
         return system;
@@ -72,19 +75,19 @@ public class CourseBean  extends BaseBean{
         this.professorId = professorId;
     }
 
-    public Timestamp getStartTime() {
+    public String getStartTime() {
         return startTime;
     }
 
-    public void setStartTime(Timestamp startTime) {
+    public void setStartTime(String startTime) {
         this.startTime = startTime;
     }
 
-    public Timestamp getEndTime() {
+    public String getEndTime() {
         return endTime;
     }
 
-    public void setEndTime(Timestamp endTime) {
+    public void setEndTime(String endTime) {
         this.endTime = endTime;
     }
 
@@ -136,21 +139,21 @@ public class CourseBean  extends BaseBean{
         this.projectName = projectName;
     }
 
-    public String getStartTimeFormat() {
-        return startTimeFormat;
-    }
-
-    public void setStartTimeFormat(String startTimeFormat) {
-        this.startTimeFormat = startTimeFormat;
-    }
-
-    public String getEndTimeFormat() {
-        return endTimeFormat;
-    }
-
-    public void setEndTimeFormat(String endTimeFormat) {
-        this.endTimeFormat = endTimeFormat;
-    }
+//    public String getStartTimeFormat() {
+//        return startTimeFormat;
+//    }
+//
+//    public void setStartTimeFormat(String startTimeFormat) {
+//        this.startTimeFormat = startTimeFormat;
+//    }
+//
+//    public String getEndTimeFormat() {
+//        return endTimeFormat;
+//    }
+//
+//    public void setEndTimeFormat(String endTimeFormat) {
+//        this.endTimeFormat = endTimeFormat;
+//    }
 
     public Integer getMaxStudent() {
         return maxStudent;
@@ -158,5 +161,29 @@ public class CourseBean  extends BaseBean{
 
     public void setMaxStudent(Integer maxStudent) {
         this.maxStudent = maxStudent;
+    }
+
+    public String getProfessorName() {
+        return professorName;
+    }
+
+    public void setProfessorName(String professorName) {
+        this.professorName = professorName;
+    }
+
+    public Integer getSchool() {
+        return school;
+    }
+
+    public void setSchool(Integer school) {
+        this.school = school;
+    }
+
+    public String getClassroom() {
+        return classroom;
+    }
+
+    public void setClassroom(String classroom) {
+        this.classroom = classroom;
     }
 }

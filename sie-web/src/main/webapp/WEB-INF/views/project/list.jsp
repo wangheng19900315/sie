@@ -28,6 +28,7 @@
                         <button type="button"  class="btn btn-primary disabled" id="editBtn">修改</button> &nbsp;&nbsp;
                         <button type="button"  class="btn btn-danger disabled" id="deleteBtn">删除</button> &nbsp;&nbsp;
                         <button type="button"  class="btn btn-primary" id="exportBtn"  >导出</button> &nbsp;&nbsp;
+                        <button type="button" class="btn btn-success"  id="registrationProjectBtn" data-toggle="modal" data-target="#registrationProject">报名项目</button> &nbsp;&nbsp;
                     </form>
                 </div>
             </div>
@@ -53,6 +54,57 @@
 
          </div>
     </div>
+
+
+    <%--报名项目弹出框--%>
+    <div id="registrationProject" class="modal fade" tabindex="-1" role="dialog" style="display: none;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title">项目报名设置</h4>
+                </div>
+                <div class="modal-body" >
+                    <form   class="form-horizontal" novalidate="novalidate" id="registration-form">
+                        <table class="table table-bordered table-middle">
+                            <tbody>
+                            <tr>
+                                <td><input type="checkbox"/></td>
+                                <td>
+                                    项目名称
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox"/></td>
+                                <td>
+                                    北京BJUT4周课程
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox"/></td>
+                                <td>
+                                    上海ENCU5周
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td><input type="checkbox"/></td>
+                                <td>
+                                    北京BJUT4周课程+上海ENCU5周
+                                </td>
+                            </tr>
+                            </tbody></table>
+                    </form>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="refundCanclBtn" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    <button type="button" id="refundSubmitBtn" class="btn btn-primary">提交</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
 </ot:layout>
 <script src="${rootPath}/statics/pages/project/list.js"></script>

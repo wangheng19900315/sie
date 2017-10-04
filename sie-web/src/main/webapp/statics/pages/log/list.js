@@ -71,7 +71,10 @@ $(function(){
  */
 function search() {
     jQuery("#grid-table").jqGrid('setGridParam',{
+        url: pageRootPath+'/log/list.json',
+        datatype: "json",
+        height: '100%',
+        mtype: 'post',
         postData: $("#search-form").serializeJson()
     }).trigger('reloadGrid');
-
 }

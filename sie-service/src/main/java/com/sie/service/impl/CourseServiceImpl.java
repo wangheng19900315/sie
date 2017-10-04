@@ -82,11 +82,11 @@ public class CourseServiceImpl extends BaseServiceImpl<CourseEntity,Integer> imp
         CourseEntity courseEntity = new CourseEntity();
         try {
             BeanUtils.copyProperties(courseEntity,courseBean);
-            //设置时间格式
-            date = DateUtil.parse(courseBean.getStartTimeFormat(),formString);
-            courseEntity.setStartTime(new Timestamp(date.getTime()));
-            date = DateUtil.parse(courseBean.getEndTimeFormat(),formString);
-            courseEntity.setEndTime(new Timestamp(date.getTime()));
+//            //设置时间格式
+//            date = DateUtil.parse(courseBean.getStartTimeFormat(),formString);
+//            courseEntity.setStartTime(new Timestamp(date.getTime()));
+//            date = DateUtil.parse(courseBean.getEndTimeFormat(),formString);
+//            courseEntity.setEndTime(new Timestamp(date.getTime()));
         } catch (Exception e) {
             e.printStackTrace();
             return null;
@@ -103,6 +103,9 @@ public class CourseServiceImpl extends BaseServiceImpl<CourseEntity,Integer> imp
             oldCourseEntity.setMaxStudent(courseEntity.getMaxStudent());
             oldCourseEntity.setSieCode(courseEntity.getSieCode());
             oldCourseEntity.setTruCode(courseEntity.getTruCode());
+            oldCourseEntity.setProfessorName(courseEntity.getProfessorName());
+            oldCourseEntity.setSchool(courseEntity.getSchool());
+            oldCourseEntity.setClassroom(courseEntity.getClassroom());
             this.courseDao.updateEntity(oldCourseEntity);
             return oldCourseEntity.getId();
         }else{
@@ -151,12 +154,12 @@ public class CourseServiceImpl extends BaseServiceImpl<CourseEntity,Integer> imp
             bean.setProjectName(projectEntity.getSieName());
 
             //设置时间格式的字符串
-            if(bean.getStartTime() != null){
-                bean.setStartTimeFormat(format.format(bean.getStartTime()));
-            }
-            if(bean.getEndTime() != null){
-                bean.setEndTimeFormat(format.format(bean.getEndTime()));
-            }
+//            if(bean.getStartTime() != null){
+//                bean.setStartTimeFormat(format.format(bean.getStartTime()));
+//            }
+//            if(bean.getEndTime() != null){
+//                bean.setEndTimeFormat(format.format(bean.getEndTime()));
+//            }
         }catch (Exception e){
             e.printStackTrace();
         }

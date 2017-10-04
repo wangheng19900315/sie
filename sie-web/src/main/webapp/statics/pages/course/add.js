@@ -53,6 +53,7 @@ $(function(){
     //}
     //$('.form_time').timepicker(options);
 
+    initSchoolOption();
     if(entity.length > 0){
         $("#data-form").loadJson(eval("("+entity+")"));
     }
@@ -60,6 +61,16 @@ $(function(){
     $("#system").change();
 
 });
+
+var initSchoolOption = function(){
+    //初始化校区
+    var html = '';
+    $.each(JSON.parse(schools),function(key,value){
+        html = html + '<option value="'+ key + '">' + value + '</option>';
+    });
+    $("#school").empty();
+    $("#school").append(html);
+}
 
 var initProjectOption = function(){
     $("#projectId").empty();

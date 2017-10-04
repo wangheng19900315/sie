@@ -308,12 +308,12 @@ public class APIController {
                 for(CourseEntity courseEntity:courseEntities){
                     CourseVo vo = new CourseVo();
                     BeanUtils.copyProperties(courseEntity, vo);
-                    if(courseEntity.getStartTime() != null){
-                        vo.setStartTime(DateUtil.format(courseEntity.getStartTime(), "yyyy-MM-dd"));
-                    }
-                    if(courseEntity.getEndTime() != null){
-                        vo.setEndTime(DateUtil.format(courseEntity.getEndTime(), "yyyy-MM-dd"));
-                    }
+//                    if(courseEntity.getStartTime() != null){
+//                        vo.setStartTime(DateUtil.format(courseEntity.getStartTime(), "yyyy-MM-dd"));
+//                    }
+//                    if(courseEntity.getEndTime() != null){
+//                        vo.setEndTime(DateUtil.format(courseEntity.getEndTime(), "yyyy-MM-dd"));
+//                    }
                     courseVos.add(vo);
                 }
                 resultBean.setMessage("查找成功");

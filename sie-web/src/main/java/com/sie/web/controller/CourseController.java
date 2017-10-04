@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.sie.framework.entity.CourseEntity;
 import com.sie.framework.entity.ProjectEntity;
 import com.sie.framework.entity.StudentEntity;
+import com.sie.framework.type.School;
 import com.sie.service.CourseService;
 import com.sie.service.ProjectService;
 import com.sie.service.bean.CourseBean;
@@ -47,6 +48,7 @@ public class CourseController {
             CourseBean bean = this.courseService.getBean(id);
             model.addAttribute("entity", JSON.toJSON(bean));
         }
+        model.addAttribute("schools", JSON.toJSON(School.getAll()));
         return "/course/addOrUpdate";
     }
 

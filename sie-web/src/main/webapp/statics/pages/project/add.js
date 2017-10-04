@@ -68,6 +68,8 @@ $(function(){
         }
     });
 
+    initAreaOption();
+
     if(entity.length > 0){
         $("#data-form").loadJson(eval("("+entity+")"));
         //var jsonObj = eval("("+entity+")");
@@ -98,3 +100,12 @@ $(function(){
 
 })
 
+var initAreaOption = function(){
+    //初始化校区
+    var html = '';
+    $.each(JSON.parse(areas),function(key,value){
+        html = html + '<option value="'+ key + '">' + value + '</option>';
+    });
+    $("#area").empty();
+    $("#area").append(html);
+}

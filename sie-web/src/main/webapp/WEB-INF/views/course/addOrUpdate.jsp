@@ -46,23 +46,20 @@
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="form-group ">
-                                <label for="startTimeFormat" class="col-sm-2 control-label">开始时间</label>
+                                <label for="startTime" class="col-sm-2 control-label">开始时间</label>
                                 <div class="col-sm-9">
-                                    <div class="input-group date">
-                                        <input type="text" class="form-control  form_time" id="startTimeFormat" name="startTimeFormat"  value=""  required data-msg-required="请输入开始时间">
-                                        <span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
-                                    </div>
+                                    <input type="text" class="form-control " id="startTime" name="startTime"  value=""  required data-msg-required="请输入开始时间">
                                 </div>
                             </div>
                         </div><!-- col-sm-6 -->
                         <div class="col-sm-6">
                             <div class="form-group ">
-                                <label for="endTimeFormat" class="col-sm-2 control-label">结束时间</label>
+                                <label for="endTime" class="col-sm-2 control-label">结束时间</label>
                                 <div class="col-sm-9">
-                                    <div class="input-group date">
-                                        <input type="text" class="form-control  form_time" id="endTimeFormat" name="endTimeFormat"  value=""  required data-msg-required="请输入结束时间">
-                                        <span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
-                                    </div>
+                                    <%--<div class="input-group">--%>
+                                    <input type="text" class="form-control" id="endTime" name="endTime"  value=""  required data-msg-required="请输入结束时间">
+                                        <%--<span class="input-group-addon"><i class="fa fa-clock-o"></i></span>--%>
+                                    <%--</div>--%>
                                 </div>
                             </div>
                         </div><!-- col-sm-6 -->
@@ -80,9 +77,13 @@
                         </div><!-- col-sm-6 -->
                         <div class="col-sm-6">
                             <div class="form-group ">
-                                <label for="system" class="col-sm-2 control-label">教授名称ID</label>
+                                <%--<label for="professorId" class="col-sm-2 control-label">教授名称ID</label>--%>
+                                <%--<div class="col-sm-9">--%>
+                                    <%--<input type="text" class="form-control" id="professorId" name="professorId" placeholder="professorId" required data-msg-required="请输入教授ID">--%>
+                                <%--</div>--%>
+                                <label for="professorName" class="col-sm-2 control-label">教授名称</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="professorId" name="professorId" placeholder="professorId" required data-msg-required="请输入教授ID">
+                                    <input type="text" class="form-control" id="professorName" name="professorName" placeholder="professorName">
                                 </div>
                             </div>
                         </div><!-- col-sm-6 -->
@@ -102,6 +103,26 @@
                                 <label for="chineseName" class="col-sm-2 control-label">英文名称</label>
                                 <div class="col-sm-9">
                                     <input type="text" class="form-control" id="englishName" name="englishName" placeholder="englishName" required data-msg-required="请输入中文名称">
+                                </div>
+                            </div>
+                        </div><!-- col-sm-6 -->
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group ">
+                                <label for="school" class="col-sm-2 control-label">校区</label>
+                                <div class="col-sm-9">
+                                    <select class="form-control" id="school" name="school">
+                                    </select>
+                                </div>
+                            </div>
+                        </div><!-- col-sm-6 -->
+                        <div class="col-sm-6">
+                            <div class="form-group ">
+                                <label for="classroom" class="col-sm-2 control-label">上课地点</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="classroom" name="classroom" placeholder="classroom">
                                 </div>
                             </div>
                         </div><!-- col-sm-6 -->
@@ -143,4 +164,5 @@
 <script type="text/javascript">
     var entity = '${entity}';
     var projects = '${projects}';
+    var schools = '${schools}';
 </script>

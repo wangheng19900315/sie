@@ -21,6 +21,8 @@ public class ProjectEntity extends BaseEntity {
     private Integer truMaxCourse;
     private Timestamp startTime;
     private Timestamp endTime;
+    private Integer area;//项目所在区域
+    private Integer enabled;//项目是否有效
 
 //    @Id
 //    @GeneratedValue(strategy= GenerationType.IDENTITY)
@@ -145,5 +147,26 @@ public class ProjectEntity extends BaseEntity {
 
     public void setCode(String code) {
         this.code = code;
+    }
+
+
+    @Basic
+    @Column(name = "area")
+    public Integer getArea() {
+        return area;
+    }
+
+    public void setArea(Integer area) {
+        this.area = area;
+    }
+
+    @Basic
+    @Column(name = "enabled")
+    public Integer getEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(Integer enabled) {
+        this.enabled = enabled;
     }
 }

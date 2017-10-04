@@ -20,7 +20,8 @@ public class ProjectBean extends BaseBean{
     private Timestamp endTime;
     private String startTimeFormat;
     private String endTimeFormat;
-
+    private Integer area;//项目所在区域
+    private Integer enabled;//项目是否有效
     //导出Excel人数统计用
     private Integer sieNumber;
     private Integer truNumber;
@@ -174,4 +175,19 @@ public class ProjectBean extends BaseBean{
         this.endTimeFormat = endTimeFormat;
     }
 
+    public Integer getArea() {
+        return area;
+    }
+
+    public void setArea(Integer area) {
+        this.area = area;
+    }
+
+    public Integer getEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(Integer enabled) {
+        this.enabled = enabled;
+    }
 }
