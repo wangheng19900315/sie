@@ -1,6 +1,8 @@
 package com.sie.web.interceptor;
 
+import com.sie.framework.entity.LogEntity;
 import com.sie.framework.type.Constant;
+import com.sie.service.LogService;
 import com.sie.service.UserService;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.time.DateFormatUtils;
@@ -14,6 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.Date;
+import java.util.Map;
 
 /**
  * 用戶权限拦截器<br>
@@ -30,6 +33,8 @@ public class UserLoginInterceptor implements HandlerInterceptor {
 
   private static final String VERSION = DateFormatUtils.format(new Date(System.currentTimeMillis()), "yyyyMMddHH");
 
+  @Autowired
+  private LogService logService;
 
   /**
    * 日志
@@ -41,10 +46,32 @@ public class UserLoginInterceptor implements HandlerInterceptor {
 
     HttpSession session = request.getSession();
 
-    String url = request.getRequestURI();
+    String url = request.getRequestURL().toString();
     String userName = (String)session.getAttribute(Constant.SYSTEM_USER_NAME_KEY);
     if(StringUtils.isBlank(userName)){
       response.sendRedirect("/login.html");
+    }
+    if(url.indexOf("addOrupdate.json") > -1 && url.indexOf("delete.json") > -1){
+      //记录日志
+      LogEntity logEntity = new LogEntity();
+      logEntity.setOperateUrl(request.getRequestURI());
+      logEntity.setUserId((Integer)session.getAttribute(Constant.SYSTEM_USER_ID));
+      //获取参数
+      Map<String, String[]> params  = request.getParameterMap();
+      if(!params.isEmpty()){
+        StringBuilder sb = new StringBuilder();
+        for(Map.Entry<String, String[]> entry : params.entrySet()){
+          if("_".equals(entry.getKey())){
+            continue;
+          }
+          sb.append(entry.getKey()+":"+entry.getValue()[0]+",");
+        }
+        if(sb.length() > 0){
+          logEntity.setComment(sb.substring(0, sb.length()-1));
+        }
+      }
+
+     this.logService.saveOrUpdate(logEntity);
     }
     return true;
   }

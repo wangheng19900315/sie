@@ -29,7 +29,7 @@ public class SessionUtil {
             return request.getSession().getAttribute(name);
         } else {
             // 一般出现这个异常原因是没有部署RequestContextListener且启用了JSF环境
-            throw new IllegalStateException("当前上下文环境非Servlet环境");
+            return null;
         }
 
     }

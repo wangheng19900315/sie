@@ -18,7 +18,10 @@ $(function(){
             {name: 'id', index: 'id', width: 20, hidden: true,  sortable: false},
             {name: 'userId', index: 'userId', width: 20,   sortable: false},
             {name: 'operateUrl', index: 'operateUrl', width: 20,   sortable: false},
-            {name: 'comment', index: 'comment', width: 20,   sortable: false},
+            {name: 'comment', index: 'comment', width: 100,    formatter:function(cellvalue, options, rowObject){
+                return "<span>"+cellvalue+"</span>";
+             }
+            },
             {name: 'createTime', index: 'createTime', width: 20 , sortable: false, formatter:function(cellvalue, options, rowObject){
                 var time1 = new Date(cellvalue).Format("yyyy-MM-dd hh:mm:ss");
                 return time1;
