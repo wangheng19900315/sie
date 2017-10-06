@@ -66,40 +66,19 @@
                 </div>
                 <div class="modal-body" >
                     <form   class="form-horizontal" novalidate="novalidate" id="registration-form">
-                        <table class="table table-bordered table-middle">
-                            <tbody>
-                            <tr>
-                                <td><input type="checkbox"/></td>
-                                <td>
-                                    项目名称
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><input type="checkbox"/></td>
-                                <td>
-                                    北京BJUT4周课程
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><input type="checkbox"/></td>
-                                <td>
-                                    上海ENCU5周
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td><input type="checkbox"/></td>
-                                <td>
-                                    北京BJUT4周课程+上海ENCU5周
-                                </td>
-                            </tr>
-                            </tbody></table>
+                        <div class="form-group">
+                            <div class="col-sm-12 twoProject">
+                                <input type="hidden" name="projectOneId" value="1">
+                                <input type="hidden" name="projectTwoId" value="1">
+                                <input name="dormitoryid" type="checkbox" value="1">ECNU 4周 校内住宿
+                            </div>
+                        </div>
                     </form>
 
                 </div>
                 <div class="modal-footer">
-                    <button type="button" id="refundCanclBtn" class="btn btn-default" data-dismiss="modal">关闭</button>
-                    <button type="button" id="refundSubmitBtn" class="btn btn-primary">提交</button>
+                    <button type="button" id="registrationCancelBtn" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    <button type="button" id="registrationProjectSubmitBtn" class="btn btn-primary">提交</button>
                 </div>
             </div>
         </div>

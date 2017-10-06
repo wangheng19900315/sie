@@ -15,6 +15,8 @@ public class RegistrationProjectEntity extends BaseEntity {
 //    private Integer projectNumber;//只能为1或者2
 //    private ProjectEntity projectEntityOne;
 //    private ProjectEntity projectEntityTwo;
+    private Integer projectOneId;
+    private Integer projectTwoId;
 //
 //    @Basic
 //    @Column(name = "project_number")
@@ -27,25 +29,24 @@ public class RegistrationProjectEntity extends BaseEntity {
 //        this.projectNumber = projectNumber;
 //    }
 //
-//    @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
-//    @JoinColumn(name = "project_one_id", nullable = true, columnDefinition = "COMMENT 'project id'")
-//    @Where(clause = "h_delete=0")
-//    public ProjectEntity getProjectEntityOne() {
-//        return projectEntityOne;
-//    }
-//
-//    public void setProjectEntityOne(ProjectEntity projectEntityOne) {
-//        this.projectEntityOne = projectEntityOne;
-//    }
-//
-//    @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
-//    @JoinColumn(name = "project_two_id", nullable = true, columnDefinition = "COMMENT 'project id'")
-//    @Where(clause = "h_delete=0")
-//    public ProjectEntity getProjectEntityTwo() {
-//        return projectEntityTwo;
-//    }
-//
-//    public void setProjectEntityTwo(ProjectEntity projectEntityTwo) {
-//        this.projectEntityTwo = projectEntityTwo;
-//    }
+
+    @Basic
+    @Column(name = "project_one_id")
+    public Integer getProjectOneId() {
+        return projectOneId;
+    }
+
+    public void setProjectOneId(Integer projectOneId) {
+        this.projectOneId = projectOneId;
+    }
+
+    @Basic
+    @Column(name = "project_two_id")
+    public Integer getProjectTwoId() {
+        return projectTwoId;
+    }
+
+    public void setProjectTwoId(Integer projectTwoId) {
+        this.projectTwoId = projectTwoId;
+    }
 }

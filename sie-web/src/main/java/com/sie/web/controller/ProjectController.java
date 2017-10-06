@@ -1,8 +1,10 @@
 package com.sie.web.controller;
 
 import com.alibaba.fastjson.JSON;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sie.framework.type.Area;
 import com.sie.service.ProjectService;
+import com.sie.service.RegistrationProjectService;
 import com.sie.service.bean.*;
 import com.sie.util.DateUtil;
 import com.sie.util.ExportExcel;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -32,7 +35,8 @@ public class ProjectController {
     @Autowired
     private ProjectService projectService;
 
-
+    @Autowired
+    private RegistrationProjectService registrationProjectService;
 
 
     @RequestMapping("/list.html")
@@ -125,6 +129,43 @@ public class ProjectController {
             e.printStackTrace();
         }
         return "redirect:/student/list.html";
+    }
+
+    /**
+     *项目组合操作
+     */
+    @RequestMapping(value = "getProjects.json")
+    @ResponseBody
+    public List<RegistrationProjectBean> getProjects() {
+        List<RegistrationProjectBean> beans = null;
+        try {
+            beans = registrationProjectService.getTwoProjectCheckbox();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return beans;
+    }
+
+    @RequestMapping(value = "saveRegistrationProjects.json")
+    @ResponseBody
+    public ResultBean saveRegistrationProjects(String registrationProjects) {
+        ObjectMapper mapper = new ObjectMapper();
+        ResultBean resultBean = new ResultBean();
+        try {
+            List<RegistrationProjectBean> beans = new ArrayList<>();
+            List<Object> objects = mapper.readValue(registrationProjects,List.class);
+
+            for (int i = 0; i < objects.size(); i++) {
+                RegistrationProjectBean bean = mapper.convertValue(objects.get(i), RegistrationProjectBean.class);
+                beans.add(bean);
+            }
+            registrationProjectService.saveTwoProjects(beans);
+            resultBean.setMessage("保存成功");
+            resultBean.setSuccess(true);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return resultBean;
     }
 
 }

@@ -141,52 +141,82 @@ $(function(){
 
     //报名项目获取后台可报名项目数据
     $("#registrationProjectBtn").bind("click",function(){
-        //var id = $("#grid-table").jqGrid('getGridParam', 'selrow');
-        //var objRow =$("#grid-table").jqGrid('getRowData', id);
-        //$.ajax({
-        //    url: pageRootPath+'/order/detail.json?orderId='+id,
-        //    type: 'get',
-        //    dataType:'json',
-        //    async:false,
-        //    success: function (json, statusText, xhr, $form) {
-        //        if(json != null){
-        //            var detail = json.orderDetailBean;
-        //            $("#studentId").val(json.studentId);
-        //            $("#status").val(4);//申请退款
-        //            $("#systemType").val(json.systemType);//订单系统
-        //            var html;
-        //            $("#details").empty();
-        //            $.each(detail,function(i,item){
-        //                html = '<div class="form-group">' +
-        //                    '<label  class="col-sm-2 control-label">';
-        //                if($.trim(item.dormitoryId)==''){
-        //                    //课程明细需要提起课程列表
-        //                    html = html + item.projectName+'</label>';
-        //                    html = html + '<div class="col-sm-10 courses">';
-        //                    html = html + '<input type="hidden" name="projectId" value="'+item.projectId+'">';
-        //                    if(item.courseIds != ''){
-        //                        var courseIds = item.courseIds.split(",");
-        //                        var courseNames = item.custerNames.split(",");
-        //                        //遍历课程列表
-        //                        $.each(courseIds,function(i,courseId){
-        //                            html = html + '<input name="courseids" type="checkbox" value="'+courseId+'"/>'+ courseNames[i]+'&nbsp;&nbsp;&nbsp;&nbsp;';
-        //                        });
-        //                    }
-        //
-        //                }else{
-        //                    html = html + item.projectName+'</label>';
-        //                    html = html + '<div class="col-sm-10 dormitory">';
-        //                    html = html + '<input type="hidden" name="projectId" value="'+item.projectId+'">';
-        //                    html = html + '<input name="dormitoryid" type="checkbox" value="'+item.dormitoryId+'"/>' + item.dormitoryName;
-        //                }
-        //                html = html + '</div></div>';
-        //
-        //                $("#details").append(html);
-        //            });
-        //        }
-        //    }
-        //});
+        $.ajax({
+           url: pageRootPath+'/project/getProjects.json',
+           type: 'get',
+           dataType:'json',
+           async:false,
+           success: function (json, statusText, xhr, $form) {
+               var html = '';
+               var checked = '';
+               if(json != null){
+                   // console.log(json);
+                   $.each(json,function (i,item) {
+                        if(item.checked){
+                            checked = 'checked';
+                        }else{
+                            checked = '';
+                        }
+                       html = html +
+                             '<div class="form-group">' +
+                                 '<div class="col-sm-12 twoProject">' +
+                                    '<input type="hidden" name="projectOneId" value="'+ item.projectOneId +'">' +
+                                    '<input type="hidden" name="projectTwoId" value="' + item.projectTwoId + '">' +
+                                    '<input type="checkbox" '+ checked +'>'+ item.projectsName +
+                                 '</div>'+
+                             '</div>';
+
+                   });
+                   $('#registration-form').empty();
+                   $('#registration-form').append(html);
+               }
+           }
+        });
     });
+
+    $("#registrationProjectSubmitBtn").bind("click",function(){
+        if($("#registration-form").find("input[type='checkbox']:checked").length == 0){
+            alert("请选择组合项目");
+            return;
+        }
+        var twoProject = {};
+        twoProject["projectOneId"] = $("#studentId").val();
+        twoProject["projectTwoId"] = $("#money").val();
+        var twoProjects = [];
+        $("#registration-form").find(".twoProject").each(function(){
+            var checkBox = $(this).find("input[type='checkbox']");
+            console.log(checkBox);
+            if(checkBox.is(':checked')){
+                var twoProject = {};
+                twoProject["projectOneId"] = $(this).find("input[name='projectOneId']").val();
+                twoProject["projectTwoId"] = $(this).find("input[name='projectTwoId']").val();
+                twoProjects.push(twoProject);
+            }
+        });
+
+        console.log(twoProjects);
+
+        $.ajax({
+            url: pageRootPath+'/project/saveRegistrationProjects.json',
+            type: 'post',
+            async:false,
+            dataType:'json',
+            data: {"registrationProjects":JSON.stringify(twoProjects)},
+            tranditional:true,
+            success: function (data) {
+                if (data.success) {
+                    alert("保存成功！");
+                    $("#registrationCancelBtn").click();
+                    //window.location.reload();
+                } else {
+                    alert("保存数据出现错误，请稍候重试！");
+                }
+            },
+            error: function () {
+                alert("提交保存信息出现错误！");
+            }
+        });
+    })
 
 })
 
