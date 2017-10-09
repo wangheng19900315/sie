@@ -119,6 +119,21 @@
                     </div><!-- row -->
 
                     <div class="row">
+
+                        <div class="col-sm-6">
+                            <div class="form-group ">
+                                <label for="sex" class="col-sm-2 control-label">性别</label>
+                                <div class="col-sm-9">
+                                    <select class="form-control" id="sex" name="sex">
+                                        <option value="男">男</option>
+                                        <option value="女">女</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div><!-- col-sm-6 -->
+                    </div><!-- row -->
+
+                    <div class="row">
                         <div class="col-sm-6">
                             <div class="form-group ">
                                 <label for="schoolName" class="col-sm-2 control-label">在读大学</label>

@@ -108,7 +108,7 @@ public class StudentController {
                 String fileUrl = FileUtil.saveToServer(headImage, fileUploadUrl);
                 studentEntity.setImage(fileUrl);
             }
-            Integer id = this.studentService.saveOrUpdate(studentEntity);
+            Integer id = this.studentService.saveOrUpdate(studentEntity,1);
             if(NumberUtil.isSignless(id)){
                 resultBean.setMessage("保存成功");
                 resultBean.setSuccess(true);

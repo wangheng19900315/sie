@@ -32,35 +32,51 @@ public class StudentServiceImpl extends BaseServiceImpl<StudentEntity,Integer> i
         this.studentDao = studentDao;
     }
 
-    public Integer saveOrUpdate(StudentEntity studentEntity){
+    /**
+     *
+     * @param studentEntity
+     * @param flag 1代表从后台信息进行修改  2代表前台修改申请表 3代表前台修改寄送地址
+     * @return
+     */
+    public Integer saveOrUpdate(StudentEntity studentEntity,int flag){
 
         if(NumberUtil.isSignless(studentEntity.getId())){
             StudentEntity oldStudentEntity = this.studentDao.getEntity(studentEntity.getId());
-            if(StringUtil.isNotBlank(studentEntity.getImage())){
-                oldStudentEntity.setImage(studentEntity.getImage());
+
+            if(flag == 2 || flag == 1){
+                //修改学生的申请表
+                if(StringUtil.isNotBlank(studentEntity.getImage())){
+                    oldStudentEntity.setImage(studentEntity.getImage());
+                }
+                oldStudentEntity.setSex(studentEntity.getSex());
+                oldStudentEntity.setBirthday(studentEntity.getBirthday());
+                oldStudentEntity.setChineseName(studentEntity.getChineseName());
+                oldStudentEntity.setLastName(studentEntity.getLastName());
+                oldStudentEntity.setFirstName(studentEntity.getFirstName());
+                oldStudentEntity.setNationality(studentEntity.getNationality());
+                oldStudentEntity.setIdNumber(studentEntity.getIdNumber());
+                oldStudentEntity.setPassportNumber(studentEntity.getPassportNumber());
+                oldStudentEntity.setTelephone(studentEntity.getTelephone());
+                oldStudentEntity.setEmail(studentEntity.getEmail());
+                oldStudentEntity.setWeiXin(studentEntity.getWeiXin());
+
+                oldStudentEntity.setSchoolName(studentEntity.getSchoolName());
+                oldStudentEntity.setProfession(studentEntity.getProfession());
+                oldStudentEntity.setGpa(studentEntity.getGpa());
+                oldStudentEntity.setGraduationYear(studentEntity.getGraduationYear());
             }
-            oldStudentEntity.setBirthday(studentEntity.getBirthday());
-            oldStudentEntity.setChineseName(studentEntity.getChineseName());
 //            oldStudentEntity.setUserName(studentEntity.getUserName());
 //            oldStudentEntity.setUserID(studentEntity.getUserID());
-            oldStudentEntity.setEmail(studentEntity.getEmail());
-            oldStudentEntity.setWeiXin(studentEntity.getWeiXin());
-            oldStudentEntity.setLastName(studentEntity.getLastName());
-            oldStudentEntity.setFirstName(studentEntity.getFirstName());
-            oldStudentEntity.setNationality(studentEntity.getNationality());
-            oldStudentEntity.setIdNumber(studentEntity.getIdNumber());
-            oldStudentEntity.setPassportNumber(studentEntity.getPassportNumber());
-            oldStudentEntity.setTelephone(studentEntity.getTelephone());
-            oldStudentEntity.setSchoolName(studentEntity.getSchoolName());
-            oldStudentEntity.setProfession(studentEntity.getProfession());
-            oldStudentEntity.setGpa(studentEntity.getGpa());
-            oldStudentEntity.setGraduationYear(studentEntity.getGraduationYear());
-            oldStudentEntity.setSendPerson(studentEntity.getSendPerson());
-            oldStudentEntity.setSendTel(studentEntity.getSendTel());
-            oldStudentEntity.setSendStreet(studentEntity.getSendStreet());
-            oldStudentEntity.setSendProvince(studentEntity.getSendProvince());
-            oldStudentEntity.setSendCountry(studentEntity.getSendCountry());
-            oldStudentEntity.setSendPostCode(studentEntity.getSendPostCode());
+
+            if(flag == 3 || flag == 1){
+                //修改学生寄送信息
+                oldStudentEntity.setSendPerson(studentEntity.getSendPerson());
+                oldStudentEntity.setSendTel(studentEntity.getSendTel());
+                oldStudentEntity.setSendStreet(studentEntity.getSendStreet());
+                oldStudentEntity.setSendProvince(studentEntity.getSendProvince());
+                oldStudentEntity.setSendCountry(studentEntity.getSendCountry());
+                oldStudentEntity.setSendPostCode(studentEntity.getSendPostCode());
+            }
             this.studentDao.updateEntity(oldStudentEntity);
         }else{
             studentEntity.setUserID(DateUtil.format(new Date(), "yyyyMMddHHmmss")+ NumberUtil.randomInt(1000, 9999));
@@ -149,7 +165,7 @@ public class StudentServiceImpl extends BaseServiceImpl<StudentEntity,Integer> i
                 BeanUtils.copyProperties(entity, beanList.get(i));
                 //设置默认的登录密码为123456
                 entity.setPassword(Md5Util.getMD5(defaultPassword, ApplicationHelp.MD5_SHA1));
-                this.saveOrUpdate(entity);
+                this.saveOrUpdate(entity,1);
             }
 
         } catch (Exception e) {

@@ -12,6 +12,9 @@ import java.util.Map;
  * Created by wangheng on 2017/8/9.
  */
 public interface StudentService extends BaseService<StudentEntity, Integer> {
+
+    Integer saveOrUpdate(StudentEntity studentEntity,int flag);
+
     Map<Integer,String> getAllStudent();
 
     ResultBean register(String email, String weiXin, String password);
