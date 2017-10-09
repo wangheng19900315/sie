@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="ot" tagdir="/WEB-INF/tags" %>
-<ot:layout title="菜单学校">
+<ot:layout title="学校学校" home="学校管理">
 
 
 
