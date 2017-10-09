@@ -1,7 +1,9 @@
 <%@tag pageEncoding="UTF-8"%>
 <%@tag trimDirectiveWhitespaces="true"%>
 <%@tag body-content="scriptless"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ attribute name="title" required="true" type="java.lang.String" %>
+<%@ attribute name="home" required="false" type="java.lang.String" %>
 <c:set var="rootPath" value="${pageContext.request.contextPath}" scope="session" />
 <%
     request.setAttribute("rootPath",request.getContextPath());
@@ -43,7 +45,14 @@
     <div id="content-wrapper">
         <ul class="breadcrumb breadcrumb-page">
             <div class="breadcrumb-label text-light-gray">You are here: </div>
-            <li><a href="/index">Home</a></li>
+
+            <c:if test="${empty home}">
+                <li><a href="/index.html">Home</a></li>
+            </c:if>
+            <c:if test="${not empty home}">
+                <li><a href="javascript:window.history.go(-1)">${home}</a></li>
+            </c:if>
+
             <li class="active"><a href="#">${title}</a></li>
 
         </ul>
