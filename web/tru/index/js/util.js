@@ -1,3 +1,7 @@
+//全局变量请求地址
+var rootPath = 'http://120.27.13.112/api/';
+var accessToken='un23n4no2bu4bs34';
+
 /**
  * 时间格式化
  * @param fmt 格式
@@ -31,17 +35,6 @@ $.fn.serializeJson=function(){
     });
     return serializeObj;
 };
-
-//验证当前值和目标val的值相等 相等返回为 false
-jQuery.validator.addMethod("equalTo2",function(value, element){
-    var returnVal = true;
-    var id = $(element).attr("data-rule-equalto2");
-    var targetVal = $(id).val();
-    if(value === targetVal){
-        returnVal = false;
-    }
-    return returnVal;
-},"不能和原始密码相同");
 
 //上传照片后可以进行文件展示功能
 jQuery.fn.extend({
@@ -132,5 +125,59 @@ $.fn.loadJson = function(jsonValue) {
     });
 };
 
-//全局变量请求地址
-var urlPath = 'http://localhost:8080/api/';
+
+
+//JS操作cookies方法!
+//写cookies
+function setCookie(name,value) {
+    var Days = 30;
+    var exp = new Date();
+    exp.setTime(exp.getTime() + Days*24*60*60*1000);
+    document.cookie = name + "="+ escape (value) + ";expires=" + exp.toGMTString();
+}
+
+/**
+ * 获取cookie
+ * @param name
+ * @returns {null}
+ */
+function getCookie(name) {
+    var arr,reg=new RegExp("(^| )"+name+"=([^;]*)(;|$)");
+    if(arr=document.cookie.match(reg))
+        return unescape(arr[2]);
+    else
+        return null;
+}
+
+/**
+ * 删除cookie
+ * @param name
+ */
+function delCookie(name)
+{
+    var exp = new Date();
+    exp.setTime(exp.getTime() - 1);
+    var cval=getCookie(name);
+    if(cval!=null)
+        document.cookie= name + "="+cval+";expires="+exp.toGMTString();
+}
+
+
+dhcc={};
+dhcc.Unit = {}
+/** 提交的form, 显示输出结果的renderer */
+dhcc.Unit.ajaxUtil = function (attrs, api, successBack, errorBack) {
+
+    var params = {
+        params:  JSON.stringify(attrs),
+        accessToken: accessToken,
+    };
+    $.post(rootPath+api, params, function(result){
+        if(result.success  && typeof(eval(successBack))=="function"){
+            successBack(result.data);
+        }else if(!result.success  && typeof(eval(errorBack))=="function") {
+            errorBack(result.message);
+        }
+    });
+
+};
