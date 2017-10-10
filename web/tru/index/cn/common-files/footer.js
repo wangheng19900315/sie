@@ -61,3 +61,136 @@ document.writeln("	<div class=\'ad-box\'>");
 document.writeln("		<a href=\'#top-a\' class=\'to-a-link\'><i class=\'fa fa-angle-up\'></i></a>");
 document.writeln("	</div>");
 document.writeln("</div>");
+
+
+document.writeln('<!-- modal-box -->'+
+    '<div class="modal modal-userBox fade" id="modal-id" tabindex="-1" role="dialog" data-backdrop="static">'+
+      '<div class="modal-dialog">'+
+        '<div class="modal-content">'+
+            ' <div class="modal-header">'+
+                ' <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>'+
+                '<h4 class="modal-title text-center">身份认证</h4>'+
+            ' </div>'+
+            ' <div class="modal-body">'+
+                ' <div class="form-list form-list-inline">'+
+                    '<div class="form-group">'+
+                        ' <label>用户名：</label>'+
+                        '<input type="text" class="form-control" placeholder="请输入您的邮箱">'+
+                    '  </div>'+
+                    '   <div class="text-right mt30">'+
+                        '   <input type="submit" class="btn btn-wd-sm btn-primary" value="确认" />'+
+                        '   </div>'+
+                 '   </div>'+
+            '   </div>'+
+         '   </div>'+
+        '   </div>'+
+    '   </div>'+
+
+'   <div class="modal modal-userBox fade" id="modal-wechat" tabindex="-1" role="dialog" data-backdrop="static">'+
+      ' <div class="modal-dialog">'+
+        ' <div class="modal-content">'+
+        '    <div class="modal-header">'+
+            '    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>'+
+                '<h4 class="modal-title">注册/登录账户</h4>'+
+            '    <p class="text-light">快速安全注册/登录</p>'+
+            '   </div>'+
+            '   <div class="modal-body">'+
+            '    <div class="txt-p text-light text-center">'+
+            '    <img class="img-responsive auto" src="../../public/img/wechat-consult.png" alt="" />'+
+             '   <p>请打开微信，扫描二维码注册/登录</p>'+
+            '</div>'+
+            '<div class="txt-p">'+
+            '   <p class="text-right mt30">'+
+            '   <a class="pull-left" data-dismiss="modal" data-toggle="modal" data-target="#modal-register">其他注册</a>'+
+                '   <a data-dismiss="modal" data-toggle="modal" data-target="#modal-login">邮箱登录 &gt;</a>'+
+            '   </p>'+
+            ' </div>'+
+        ' </div>'+
+    '   </div>'+
+'    </div>'+
+'   </div>'+
+
+'  <div class="modal modal-userBox fade" id="modal-register" tabindex="-1" role="dialog" data-backdrop="static">'+
+'    <div class="modal-dialog">'+
+'       <div class="modal-content">'+
+'           <div class="modal-header">'+
+        '   <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>'+
+        ' <h4 class="modal-title">注册账户</h4>'+
+        '   </div>'+
+        '   <div class="modal-body">'+
+        '   <div class="form-list">'+
+        '   <div class="form-group">'+
+        '   <i class="fa fa-envelope-o"></i>'+
+        '   <input type="text" class="form-control" placeholder="请输入邮箱">'+
+        '   </div>'+
+        '   <div class="form-group">'+
+        '   <i class="ico ico-lock"></i>'+
+        '   <input type="password" class="form-control" placeholder="请输入密码">'+
+        '   </div>'+
+        '   <div class="form-group">'+
+        '   <i class="ico ico-lock"></i>'+
+        '   <input type="password" class="form-control" placeholder="请输入密码">'+
+        '   <label class="error">&times; 密码不一致</label>'+
+        ' </div>'+
+        ' <div class="mt30">'+
+        '   <input type="submit" class="btn btn-block btn-primary" value="注册" />'+
+        '   </div>'+
+        '   <div class="txt-p">'+
+        '   <div class="radio-box mt10">'+
+        '   <label>'+
+        '   <input type="checkbox" name="projectSelectshanghai" id="projectSelectshanghai9" value="9" />'+
+        '   <i class="fa"></i>'+
+        '   <span>同意《服务条款》</span>'+
+        ' </label>'+
+        ' </div>'+
+        ' <p class="text-right mt10">'+
+        '    <a data-dismiss="modal" data-toggle="modal" data-target="#modal-login">已有账户？ 登录 &gt;</a>'+
+        ' </p>'+
+        ' </div>'+
+    ' </div>'+
+    ' </div>'+
+    ' </div>'+
+    ' </div>'+
+' </div>'+
+
+' <div class="modal modal-userBox fade" id="modal-login" tabindex="-1" role="dialog" data-backdrop="static">'+
+'     <div class="modal-dialog">'+
+    '   <div class="modal-content">'+
+        '   <div class="modal-header">'+
+            '   <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>'+
+                '<h4 class="modal-title">登录账户</h4>'+
+                '   </div>'+
+                '   <div class="modal-body">'+
+                '   <div class="form-list">'+
+                '   <div class="form-group">'+
+                '    <i class="fa fa-envelope-o"></i>'+
+                '    <input type="text" class="form-control" placeholder="请输入邮箱">'+
+                '    </div>'+
+                '    <div class="form-group">'+
+                '   <i class="ico ico-lock"></i>'+
+                '   <input type="password" class="form-control" placeholder="请输入密码">'+
+                '   </div>'+
+                '   <div class="mt30">'+
+                '   <input type="submit" class="btn btn-block btn-primary" value="登录" />'+
+                '   </div>'+
+                '   <div class="txt-p">'+
+                '   <p class="mt10">'+
+                '   <a href="#">忘记密码？</a>'+
+                '</p>'+
+                '<p class="text-right mt10">'+
+                '    <a data-dismiss="modal" data-toggle="modal" data-target="#modal-register">还未注册账户？ 注册 &gt;</a>'+
+                '</p>'+
+        '</div>'+
+'</div>'+
+'</div>'+
+'</div>'+
+'</div>'+
+'</div>');
+
+
+document.writeln('<script src="../../public/js/jquery.min.js"></script>'+
+'<script src="../../public/js/bootstrap.min.js"></script>'+
+'<script src="../../public/js/bootstrap-datetimepicker.js"></script>'+
+'<script src="../../public/js/swiper.jquery.min.js"></script>'+
+' <script src="../../public/js/chosen.jquery.min.js"></script>'+
+' <script src="../../public/js/common.js"></script>');
