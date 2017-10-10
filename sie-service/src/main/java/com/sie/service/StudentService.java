@@ -21,7 +21,7 @@ public interface StudentService extends BaseService<StudentEntity, Integer> {
 
     StudentEntity login(String userName, String password);
 
-    ResultBean updateEntity(StudentEntity studentEntity);
+    ResultBean updateEntity(StudentEntity studentEntity,int flag);
 
     boolean importBean(List<StudentExcelBean> beanList);
 

@@ -143,7 +143,7 @@ public class StudentServiceImpl extends BaseServiceImpl<StudentEntity,Integer> i
     }
 
     @Override
-    public ResultBean updateEntity(StudentEntity studentEntity) {
+    public ResultBean updateEntity(StudentEntity studentEntity,int flag) {
         ResultBean resultBean = new ResultBean();
         StudentEntity oldEntity = this.studentDao.getEntity(studentEntity.getId());
         if(oldEntity == null){
@@ -151,7 +151,7 @@ public class StudentServiceImpl extends BaseServiceImpl<StudentEntity,Integer> i
             return resultBean;
         }
 
-        this.saveOrUpdate(studentEntity);
+        this.saveOrUpdate(studentEntity,flag);
         resultBean.setMessage("修改成功");
         resultBean.setSuccess(true);
         return resultBean;

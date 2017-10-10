@@ -1,7 +1,7 @@
 //全局变量请求地址
-var rootPath = 'http://120.27.13.112/api/';
+var rootPath = 'http://localhost:81/api/';
 var accessToken='un23n4no2bu4bs34';
-
+var systemType = "1";//sie系统
 /**
  * 时间格式化
  * @param fmt 格式
@@ -175,8 +175,9 @@ dhcc.Unit.ajaxUtil = function (attrs, api, successBack, errorBack) {
     $.post(rootPath+api, params, function(result){
         if(result.success  && typeof(eval(successBack))=="function"){
             successBack(result.data);
-        }else if(!result.success  && typeof(eval(errorBack))=="function") {
-            errorBack(result.message);
+        }else if(!result.success) {
+            //errorBack(result.message);
+            alert(result.message);
         }
     });
 

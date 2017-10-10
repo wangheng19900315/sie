@@ -45,6 +45,7 @@ public class OrderBean  extends BaseBean{
 
     private String projectNames;
     private Integer courseNumber;
+    private String dormitoryNames;
     private List<OrderDetailBean> orderDetailBean = new ArrayList<>();
 
 
@@ -318,5 +319,13 @@ public class OrderBean  extends BaseBean{
 
     public void setOrderTime(Timestamp orderTime) {
         this.orderTime = orderTime;
+    }
+
+    public String getDormitoryNames() {
+        return dormitoryNames;
+    }
+
+    public void setDormitoryNames(String dormitoryNames) {
+        this.dormitoryNames = dormitoryNames;
     }
 }

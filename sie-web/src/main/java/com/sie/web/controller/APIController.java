@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -63,6 +64,67 @@ public class APIController {
     }
 
     private static final String SYSTEM_ACCESS_TOKEN="un23n4no2bu4bs34";
+
+    /**
+     * 学生填报申请单
+     * @return
+     */
+    @RequestMapping("/saveApplicationForm.json")
+    @ResponseBody
+    public ResultBean  updateStudent(String params, String accessToken){
+
+        logger.info("updateStudent.json params="+params +" accessToken="+accessToken);
+        ResultBean resultBean = new ResultBean();
+
+        try{
+            if(StringUtil.isBlank(accessToken) || !accessToken.equals(SYSTEM_ACCESS_TOKEN)){
+                resultBean.setMessage("token 为空，请检查参数");
+                return resultBean;
+            }
+
+            ObjectMapper mapper = new ObjectMapper();
+            StudentEntity studentEntity = mapper.readValue(params, StudentEntity.class);
+
+
+            resultBean = this.studentService.updateEntity(studentEntity,2);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+
+        return resultBean;
+
+    }
+
+    /**
+     * 学生填报成绩单寄送地址
+     * @return
+     */
+    @RequestMapping("/saveGradeSend.json")
+    @ResponseBody
+    public ResultBean  saveGradeSend(String params, String accessToken){
+
+        logger.info("updateStudent.json params="+params +" accessToken="+accessToken);
+        ResultBean resultBean = new ResultBean();
+
+        try{
+            if(StringUtil.isBlank(accessToken) || !accessToken.equals(SYSTEM_ACCESS_TOKEN)){
+                resultBean.setMessage("token 为空，请检查参数");
+                return resultBean;
+            }
+
+            ObjectMapper mapper = new ObjectMapper();
+            StudentEntity studentEntity = mapper.readValue(params, StudentEntity.class);
+
+
+            resultBean = this.studentService.updateEntity(studentEntity,3);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+
+        return resultBean;
+
+    }
+
     /**
      * 学生注册
      * @return
@@ -151,35 +213,7 @@ public class APIController {
         return resultBean;
     }
 
-    /**
-     * 学生修改信息
-     * @return
-     */
-    @RequestMapping("/updateStudent.json")
-    @ResponseBody
-    public ResultBean  updateStudent(String params, String accessToken){
 
-        logger.info("updateStudent.json params="+params +" accessToken="+accessToken);
-        ResultBean resultBean = new ResultBean();
-
-        try{
-            if(StringUtil.isBlank(accessToken) || !accessToken.equals(SYSTEM_ACCESS_TOKEN)){
-                resultBean.setMessage("token 为空，请检查参数");
-                return resultBean;
-            }
-
-            ObjectMapper mapper = new ObjectMapper();
-            StudentEntity studentEntity = mapper.readValue(params, StudentEntity.class);
-
-
-            resultBean = this.studentService.updateEntity(studentEntity);
-        }catch(Exception e){
-            e.printStackTrace();
-        }
-
-        return resultBean;
-
-    }
 
     /**
      * 获取学校信息
@@ -409,7 +443,17 @@ public class APIController {
             List<OrderVo> orderVos = this.orderService.getOrderListVo(systemType, studentId);
             resultBean.setMessage("查找成功");
             resultBean.setSuccess(true);
-            resultBean.setData(orderVos);
+            Map<String,List<OrderVo>> orderVoMap = new HashMap<>();
+            for(OrderVo orderVo : orderVos){
+                if(orderVoMap.get(orderVo.getTerm()) == null){
+                    List<OrderVo> vos = new ArrayList<>();
+                    vos.add(orderVo);
+                    orderVoMap.put(orderVo.getTerm(),vos);
+                }else{
+                    orderVoMap.get(orderVo.getTerm()).add(orderVo);
+                }
+            }
+            resultBean.setData(orderVoMap);
         }catch(Exception e){
             e.printStackTrace();
         }
