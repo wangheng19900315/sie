@@ -1,0 +1,160 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="keywords" content="TRU国际暑期项目">
+    <meta name="description" content="TRU国际暑期项目">
+    	
+	<title>TRU国际暑期项目</title>
+	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" type="text/css" href="../../public/css/bootstrap.min.css" media="all" />
+    <link rel="stylesheet" type="text/css" href="../../public/css/bootstrap-datetimepicker.min.css" media="all" />
+    <link rel="stylesheet" type="text/css" href="../../public/css/font-awesome.min.css" media="all" />
+    <link rel="stylesheet" type="text/css" href="../../public/css/swiper.min.css" media="all" />
+    <link rel="stylesheet" type="text/css" href="../css/base.css" media="all" />
+</head>
+<body>
+<a name="top-a" id="top-a"></a>
+<!-- top -->
+<script src="../common-files/header.js" type="text/javascript" charset="utf-8"></script>
+
+<!-- banner -->
+<div class="banner banner-pages banner-campus"></div>
+
+<!-- areabox -->
+<div class="areabox">
+	<div class="container">
+		<div class="areabox-lf">
+			<h2>校区选择</h2>
+        	<ul>
+		    	<li><a href="campus-ecnu.html">华东师范大学(ECNU)</a></li>
+		    	<li class="active"><a href="campus-bjtu.html">北京交通大学(BJTU)</a></li>
+        	</ul>
+        </div>
+		<div class="areabox-rg">
+			<div class="areabox-span">
+				<h3>校区简介</h3>
+				<div class="img-inline img-inline-3">
+					<img class="img-responsive" src="../../public/img/pic03.jpg" />
+					<img class="img-responsive" src="../../public/img/pic04.jpg" />
+					<img class="img-responsive" src="../../public/img/pic05.jpg" />
+				</div>
+				<p>华东师范大学（East China Normal University），简称“华东师大”，位于上海由中华人民共和国教育部直属，位列“211工程”“985工程”，入选国家“2011计划”、“111计划”、“千人计划”，“长三角高校合作联盟”、“金砖国家大学联盟”“亚太高校书院联盟”成员，设有研究生院，是中华人民共和国教育部、上海市人民政府和国家海洋局共建的综合性全国重点大学。[1] </p>
+				<p>华东师范大学成立于1951年10月16日，是以大夏大学（1924年）、光华大学（1925年）为基础，同时调进复旦大学、浙江大学、同济大学和圣约翰大学等高校的部分系科，在大夏大学原址上创办的。1972年，与上海师范学院、上海体育学院等院校合并，改名上海师范大学。1980年，恢复华东师范大学校名。1996年，被列入“211工程”国家重点建设大学行列。1997、1998年，上海幼儿师范高等专科学校、上海教育学院和上海第二教育学院并入。2006年，教育部和上海市决定共建华东师范大学，学校进入国家“985工程”高校行列。</p>
+			</div>
+			<hr />
+			
+			<div class="areabox-span">
+				<h3>地理位置</h3>
+    			<div style="width:100%;height:380px;border:#eee solid 1px;font-size:12px" id="map"></div>
+    			<p class="map-tip"><i class="fa fa-map-marker"></i> 上海市普陀区中山北路3663号</p>
+	    		<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=5jnKKHvbulkVUTFpVhLwQHsafxMrUs0x"></script>
+    			<script type="text/javascript">
+				    //创建和初始化地图函数：
+				    function initMap(){
+				      createMap();//创建地图
+				      setMapEvent();//设置地图事件
+				      addMapControl();//向地图添加控件
+				      addMapOverlay();//向地图添加覆盖物
+				    }
+				    function createMap(){ 
+				      map = new BMap.Map("map"); 
+				      map.centerAndZoom(new BMap.Point(121.412119,31.235515),15);
+				    }
+				    function setMapEvent(){
+				      map.enableDragging();
+				      map.enableDoubleClickZoom()
+				    }
+				    function addClickHandler(target,window){
+				      target.addEventListener("click",function(){
+				        target.openInfoWindow(window);
+				      });
+				    }
+				    function addMapOverlay(){
+				      var markers = [
+				        {content:"",title:"华东师范大学(ECNU)",imageOffset: {width:-46,height:-21},position:{lat:31.234279,lng:121.412047}}
+				      ];
+				      for(var index = 0; index < markers.length; index++ ){
+				        var point = new BMap.Point(markers[index].position.lng,markers[index].position.lat);
+				        var marker = new BMap.Marker(point,{icon:new BMap.Icon("http://api.map.baidu.com/lbsapi/createmap/images/icon.png",new BMap.Size(20,25),{
+				          imageOffset: new BMap.Size(markers[index].imageOffset.width,markers[index].imageOffset.height)
+				        })});
+				        var label = new BMap.Label(markers[index].title,{offset: new BMap.Size(25,5)});
+				        var opts = {
+				          width: 200,
+				          title: markers[index].title,
+				          enableMessage: false
+				        };
+				        var infoWindow = new BMap.InfoWindow(markers[index].content,opts);
+				        marker.setLabel(label);
+				        addClickHandler(marker,infoWindow);
+				        map.addOverlay(marker);
+				      };
+				    }
+				    //向地图添加控件
+				    function addMapControl(){
+				      var scaleControl = new BMap.ScaleControl({anchor:BMAP_ANCHOR_BOTTOM_LEFT});
+				      scaleControl.setUnit(BMAP_UNIT_IMPERIAL);
+				      map.addControl(scaleControl);
+				      var navControl = new BMap.NavigationControl({anchor:BMAP_ANCHOR_BOTTOM_RIGHT,type:3});
+				      map.addControl(navControl);
+				    }
+				    var map;
+				      initMap();
+				  </script>
+			</div>
+			<hr />
+			
+			<div class="areabox-span">
+				<h3>开课时间</h3>
+				<p>华东师范大学暑期课程课表已经出炉，小伙伴们是不是因为最近的考试忙的晕头转向的，哎为什么时间过得如此之快呢，想想分考研时间日益逼近，不好好利用好暑期怎么恩能对的起自己的良心呢</p>
+				<p>顶级名师开课课表如图所示。同学们对应好了哦，学硕班课程适用于所有学术型硕士，还有工程类，文法、体、教、历史、医、艺的专硕 哦！</p>
+			</div>
+			<hr />
+			
+			<div class="areabox-span bg-grey">
+				<h3>周边娱乐</h3>
+				<div class="img-inline img-inline-3">
+					<img class="img-responsive" src="../../public/img/pic03.jpg" />
+					<img class="img-responsive" src="../../public/img/pic04.jpg" />
+					<img class="img-responsive" src="../../public/img/pic05.jpg" />
+				</div>
+				<p>中国驻美大使崔天凯9月15日表示，台湾是中国的一部分。我们决不允许、坚决反对任何人企图利用任何借口把核武器引进台湾。对于美国国会有时候通过一些议案，或者美国有些政客发表一些言论，要提升美台军事关系，我们也同样坚决反对。美方必须恪守一个中国原则，遵循中美三个联合公报。任何人要破坏这一基础，就是对中美关系的严重挑战。崔大使是星期五晚上在驻美使馆举行的庆祝中华人民共和国成立68周年侨学界招待会上接受采访时做上述表示的。</p>
+				<p>当地时间15日，中国驻美大使崔天凯就目前朝鲜半岛局势接受中外媒体采访。崔天凯表示，中国在半岛核问题上的立场是非分明、一以贯之。中国始终致力于推动实现半岛无核化，也一直尽最大努力全面完整地执行联合国安理会有关决议，并致力于推动和平谈判来解决问题。</p>
+			</div>
+			<hr />
+			
+			<div class="areabox-span">
+				<h3>住宿环境</h3>
+				<div class="img-inline img-inline-3">
+					<img class="img-responsive" src="../../public/img/pic03.jpg" />
+					<img class="img-responsive" src="../../public/img/pic04.jpg" />
+					<img class="img-responsive" src="../../public/img/pic05.jpg" />
+				</div>
+				<p>中国驻美大使崔天凯9月15日表示，台湾是中国的一部分。我们决不允许、坚决反对任何人企图利用任何借口把核武器引进台湾。对于美国国会有时候通过一些议案，或者美国有些政客发表一些言论，要提升美台军事关系，我们也同样坚决反对。美方必须恪守一个中国原则，遵循中美三个联合公报。任何人要破坏这一基础，就是对中美关系的严重挑战。崔大使是星期五晚上在驻美使馆举行的庆祝中华人民共和国成立68周年侨学界招待会上接受采访时做上述表示的。</p>
+				<p>当地时间15日，中国驻美大使崔天凯就目前朝鲜半岛局势接受中外媒体采访。崔天凯表示，中国在半岛核问题上的立场是非分明、一以贯之。中国始终致力于推动实现半岛无核化，也一直尽最大努力全面完整地执行联合国安理会有关决议，并致力于推动和平谈判来解决问题。</p>
+			</div>
+			<hr />
+			
+		</div>
+   	</div>
+</div>
+
+<!-- footer -->
+<script src="../common-files/footer.js" type="text/javascript" charset="utf-8"></script>
+
+	
+<script src="../../public/js/jquery.min.js"></script>
+<script src="../../public/js/bootstrap.min.js"></script>
+<script src="../../public/js/bootstrap-datetimepicker.js"></script>
+<script src="../../public/js/swiper.jquery.min.js"></script>
+<script src="../../public/js/chosen.jquery.min.js"></script>
+<script src="../../public/js/common.js"></script>
+
+<script type="text/javascript">
+	$(".nav>ul>li:eq(1)").addClass("active").siblings().removeClass("active");
+</script>
+
+</body>
+</html>
