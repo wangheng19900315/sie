@@ -20,8 +20,15 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -64,6 +71,90 @@ public class APIController {
     }
 
     private static final String SYSTEM_ACCESS_TOKEN="un23n4no2bu4bs34";
+
+    //加载头像
+    @RequestMapping(value = "/loadImage", method = RequestMethod.GET)
+    @ResponseBody
+    public ResultBean loadImage(String params, String accessToken, HttpServletRequest request, HttpServletResponse response) throws IOException {
+        logger.info("updateStudent.json params="+params +" accessToken="+accessToken);
+        ResultBean resultBean = new ResultBean();
+        try{
+            if(StringUtil.isBlank(accessToken) || !accessToken.equals(SYSTEM_ACCESS_TOKEN)){
+                resultBean.setMessage("token 为空，请检查参数");
+                return resultBean;
+            }
+
+            ObjectMapper mapper = new ObjectMapper();
+            Map<String,String > maps = mapper.readValue(params, Map.class);
+            String image = maps.get("image");
+            ServletOutputStream out = null;
+            FileInputStream ips = null;
+            if(image != null){
+                try {
+                    //获取图片存放路径
+                    String imgPath = image;
+                    ips = new FileInputStream(new File(imgPath));
+                    response.setContentType("multipart/form-data");
+                    out = response.getOutputStream();
+                    //读取文件流
+                    int len = 0;
+                    byte[] buffer = new byte[1024 * 10];
+                    while ((len = ips.read(buffer)) != -1){
+                        out.write(buffer,0,len);
+                    }
+                    out.flush();
+                }catch (Exception e){
+                    e.printStackTrace();
+                }finally {
+                    out.close();
+                    ips.close();
+                }
+            }
+            resultBean.setSuccess(true);
+            resultBean.setData(null);
+
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return resultBean;
+    }
+
+    @RequestMapping("/getStudnetInfo.json")
+    @ResponseBody
+    public ResultBean  getStudnetInfo(String params, String accessToken){
+
+        logger.info("updateStudent.json params="+params +" accessToken="+accessToken);
+        ResultBean resultBean = new ResultBean();
+
+        try{
+            if(StringUtil.isBlank(accessToken) || !accessToken.equals(SYSTEM_ACCESS_TOKEN)){
+                resultBean.setMessage("token 为空，请检查参数");
+                return resultBean;
+            }
+
+            ObjectMapper mapper = new ObjectMapper();
+            Map<String,String > maps = mapper.readValue(params, Map.class);
+            String studentId = maps.get("studentId");
+            if(StringUtil.isBlank(studentId)){
+                resultBean.setMessage("studentId 为空，请检查参数");
+                return resultBean;
+            }
+            StudentEntity studentEntity = this.studentService.get(Integer.valueOf(studentId));
+
+            if(studentEntity == null){
+                resultBean.setMessage("用户不存在");
+                return resultBean;
+            }
+            resultBean.setSuccess(true);
+            resultBean.setData(studentEntity);
+
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+
+        return resultBean;
+
+    }
 
     /**
      * 学生填报申请单
@@ -465,36 +556,36 @@ public class APIController {
      * 获取用户订单详情
      * @return
      */
-    @RequestMapping("/getOrderDetail.json")
-    @ResponseBody
-    public ResultBean  getOrderInfo(String params, String accessToken){
-        logger.info("getOrderDetail.json params="+params +" accessToken="+accessToken);
-        ResultBean resultBean = new ResultBean();
-
-        try{
-            if(StringUtil.isBlank(accessToken) || !accessToken.equals(SYSTEM_ACCESS_TOKEN)){
-                resultBean.setMessage("token 为空，请检查参数");
-                return resultBean;
-            }
-
-            ObjectMapper mapper = new ObjectMapper();
-            Map<String,String >maps = mapper.readValue(params, Map.class);
-            String orderId = maps.get("orderId");
-            if(StringUtil.isBlank(orderId)){
-                resultBean.setMessage("orderId 为空，请检查参数");
-                return resultBean;
-            }
-
-            List<OrderDetailVo> orderDetailVos = this.orderDetailService.getDetailVoList(orderId);
-            resultBean.setMessage("查找成功");
-            resultBean.setSuccess(true);
-            resultBean.setData(orderDetailVos);
-        }catch(Exception e){
-            e.printStackTrace();
-        }
-
-        return resultBean;
-    }
+//    @RequestMapping("/getOrderDetail.json")
+//    @ResponseBody
+//    public ResultBean  getOrderInfo(String params, String accessToken){
+//        logger.info("getOrderDetail.json params="+params +" accessToken="+accessToken);
+//        ResultBean resultBean = new ResultBean();
+//
+//        try{
+//            if(StringUtil.isBlank(accessToken) || !accessToken.equals(SYSTEM_ACCESS_TOKEN)){
+//                resultBean.setMessage("token 为空，请检查参数");
+//                return resultBean;
+//            }
+//
+//            ObjectMapper mapper = new ObjectMapper();
+//            Map<String,String >maps = mapper.readValue(params, Map.class);
+//            String orderId = maps.get("orderId");
+//            if(StringUtil.isBlank(orderId)){
+//                resultBean.setMessage("orderId 为空，请检查参数");
+//                return resultBean;
+//            }
+//
+//            List<OrderDetailVo> orderDetailVos = this.orderDetailService.getDetailVoList(orderId);
+//            resultBean.setMessage("查找成功");
+//            resultBean.setSuccess(true);
+//            resultBean.setData(orderDetailVos);
+//        }catch(Exception e){
+//            e.printStackTrace();
+//        }
+//
+//        return resultBean;
+//    }
 
 
     /**

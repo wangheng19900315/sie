@@ -103,7 +103,7 @@ jQuery.fn.extend({
 $.fn.loadJson = function(jsonValue) {
     var obj = this;
     $.each(jsonValue, function(name, ival) {
-        var $oinput = obj.find(":input [name=" + name + "]");
+        var $oinput = obj.find(":input[name=" + name + "]");
         if ($oinput.attr("type") == "radio"
             || $oinput.attr("type") == "checkbox") {
             $oinput.each(function() {

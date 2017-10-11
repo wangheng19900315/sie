@@ -39,6 +39,7 @@
         	</ul>
         </div>
 		<div class="user-rg">
+			<form id="data-form">
 			<div class="plate-box w900">
 				<h3><i class="ico ico-user-info"></i> 个人基本信息<span class="text-danger">*</span></h3>
 				<div class="area">
@@ -46,9 +47,9 @@
 						<div class="form-group">
 							<label>照片</label>
 						    <div class="fileCard clearfix">
-	                        	<a href="javascript:;" class="btn photo-add" id="uploadCard">
+	                        	<a href="" class="btn photo-add" id="uploadCard">
 	                        		<i class="ico ico-upload"></i>上传照片
-								    <input type="file" class="file-input" accept="image/*" />
+								    <input type="file" class="file-input" accept="image/*" name="headImg"/>
 								    <div class="file-img"></div>
 								</a>
 								<span>格式: jpg, jpeg, png  尺寸：1M以内</span>
@@ -56,20 +57,20 @@
 						</div>
 						<div class="form-group">
 							<label>姓</label>
-							<input type="text" class="form-control" placeholder="">
+							<input type="text" class="form-control" placeholder="" name="lastName">
 						</div>
 						<div class="form-group">
 							<label>名</label>
-							<input type="text" class="form-control" placeholder="">
+							<input type="text" class="form-control" placeholder="" name="firstName">
 						</div>
 						<div class="form-group">
 							<label>中文名字</label>
-							<input type="text" class="form-control" placeholder="">
+							<input type="text" class="form-control" placeholder="" name="chineseName">
 						</div>
 						<div class="form-group">
 							<label>出生日期</label>
 						    <div class="input-group date date-days">
-	                    		<input class="form-control" type="text" value="" readonly="readonly" />
+	                    		<input class="form-control" type="text" value="" readonly="readonly" name="birthday"/>
 								<span class="input-group-addon"><span class="fa fa-remove"></span></span>
 								<span class="input-group-addon"><span class="fa fa-calendar"></span></span>
 	                		</div>
@@ -78,12 +79,12 @@
 							<label>性别</label>
 							<div class="radio-box">
 								<label>
-									<input type="radio" name="sex" id="sex1" value="1" checked>
+									<input type="radio" name="sex" id="sex1" value="男">
 									<i class="fa"></i>
 									<span>男</span>
 								</label>
 								<label>
-									<input type="radio" name="sex" id="sex2" value="2">
+									<input type="radio" name="sex" id="sex2" value="女">
 									<i class="fa"></i>
 									<span>女</span>
 								</label>
@@ -93,33 +94,38 @@
 							<label>国籍</label>
 							<div class="radio-box">
 								<label>
-									<input type="radio" name="nationality" id="nationality1" value="1" checked>
+									<input type="radio" name="nationality" id="nationality1" value="中国">
 									<i class="fa"></i>
 									<span>中国</span>
 								</label>
 								<label>
-									<input type="radio" name="nationality" id="nationality2" value="2">
+									<input type="radio" name="nationality" id="nationality2" value="非中国">
 									<i class="fa"></i>
 									<span>非中国</span>
 								</label>
 							</div>
 						</div>
-						<div class="form-group">
+						<div class="form-group" hidden>
 							<label>身份证号</label>
-							<input type="text" class="form-control" placeholder="">
+							<input type="text" class="form-control" placeholder="" name="idNumber">
+							<label class="error">&times; 必填项</label>
+						</div>
+						<div class="form-group" hidden>
+							<label>护照号</label>
+							<input type="text" class="form-control" placeholder="" name="passportNumber">
 							<label class="error">&times; 必填项</label>
 						</div>
 						<div class="form-group">
 							<label>邮箱</label>
-							<input type="text" class="form-control" placeholder="">
+							<input type="text" class="form-control" placeholder="" name="email">
 						</div>
 						<div class="form-group">
 							<label>国内联系电话</label>
-							<input type="text" class="form-control" placeholder="">
+							<input type="text" class="form-control" placeholder="" name="telephone">
 						</div>
 						<div class="form-group">
 							<label>微信ID</label>
-							<input type="text" class="form-control" placeholder="">
+							<input type="text" class="form-control" placeholder="" name="weiXin">
 						</div>
 						<div class="form-group">
 							<label>了解我们的途径 <i class="text-tips">（可选填）</i></label>
@@ -141,32 +147,36 @@
 					<div class="form-list form-list-inline form-list-lg">
 						<div class="form-group">
 							<label>在读大学</label>
-							<input type="text" class="form-control" placeholder="请填写学校全称" data-toggle="modal" data-target="#modal-college" readonly>
+							<input type="text" class="form-control" placeholder="请填写学校全称" data-toggle="modal" data-target="#modal-college" readonly name="schoolName" >
 						</div>
 						<div class="form-group">
 							<label>专业</label>
-							<input type="text" class="form-control" placeholder="">
+							<input type="text" class="form-control" placeholder="" name="profession">
 						</div>
 						<div class="form-group">
 							<label>GPA</label>
-							<input type="text" class="form-control" placeholder="">
+							<input type="text" class="form-control" placeholder="" name="gpa">
 						</div>
 						<div class="form-group">
 							<label>预计毕业年份</label>
-							<input type="text" class="form-control" placeholder="">
+							<input type="text" class="form-control" placeholder="" name="graduationYear">
 						</div>
 					</div>
 				</div>
 				<div class="mt50 text-center">
-					<input type="submit" class="btn btn-wd-lg btn-info" value="保存" data-toggle="modal" data-target="#modal-success" />
+					<input type="button" class="btn btn-wd-lg btn-info" value="保存" data-toggle="modal" data-target="#modal-success" />
 				</div>
 			</div>
+			</form>
         </div>
    	</div>
 </div>
 
 <!-- footer -->
 <script src="../common-files/footer.js" type="text/javascript" charset="utf-8"></script>
+
+<script src="../../js/util.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/application.js" type="text/javascript" charset="utf-8"></script>
 
 
 <!-- modal-box -->
