@@ -25,6 +25,7 @@ public class CourseBean  extends BaseBean{
     private String truCode;
     private Integer truTotalNumber;
     private Integer school;//校区
+    private String schoolName;//校区
     private String classroom;//上课地点
 
     public Integer getSystem() {
@@ -185,5 +186,13 @@ public class CourseBean  extends BaseBean{
 
     public void setClassroom(String classroom) {
         this.classroom = classroom;
+    }
+
+    public String getSchoolName() {
+        return schoolName;
+    }
+
+    public void setSchoolName(String schoolName) {
+        this.schoolName = schoolName;
     }
 }

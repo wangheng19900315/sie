@@ -1,6 +1,7 @@
 package com.sie.service.vo;
 
 import com.sie.framework.entity.*;
+import com.sie.service.bean.CourseBean;
 import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
@@ -13,6 +14,7 @@ import java.util.List;
  */
 
 public class OrderVo  {
+    private String term;//学期
     private Integer id;
     private String code;
     private Double money;
@@ -37,6 +39,10 @@ public class OrderVo  {
 
     private String projectNames;
     private Integer courseNumber;
+
+    private String dormitoryNames;
+
+    List<CourseBean> courses;
 
     public String getCode() {
         return code;
@@ -220,5 +226,29 @@ public class OrderVo  {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public String getTerm() {
+        return term;
+    }
+
+    public void setTerm(String term) {
+        this.term = term;
+    }
+
+    public String getDormitoryNames() {
+        return dormitoryNames;
+    }
+
+    public void setDormitoryNames(String dormitoryNames) {
+        this.dormitoryNames = dormitoryNames;
+    }
+
+    public List<CourseBean> getCourses() {
+        return courses;
+    }
+
+    public void setCourses(List<CourseBean> courses) {
+        this.courses = courses;
     }
 }
