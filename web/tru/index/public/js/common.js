@@ -119,7 +119,7 @@ $(function() {
 			});
 			//modal
 			$(function() {
-				$('a[data-toggle="modal"]').click(function () {
+				$('[data-toggle="modal"]').click(function () {
 					var target = $(this).attr("data-target");
 					var modal = $(target);
 					if(modal.length > 0){
@@ -128,6 +128,7 @@ $(function() {
 							"padding-right":0
 						});
 					}
+					setTimeout("$('.modal-tips').modal('hide')",2000);
 				});
 				$('button[data-dismiss="modal"]').click(function () {
 					$("body").removeClass("modal-scroll").css({

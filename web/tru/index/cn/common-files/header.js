@@ -53,10 +53,11 @@ document.writeln("			</ul>");
 document.writeln("		</div>");
 document.writeln("		<div class=\'pull-right\'>");
 document.writeln("			<div class=\'login-box pull-left\'>");
-document.writeln("				<!--<div>");
-document.writeln("					<a class=\'btn btn-warning-ghost\' href=\'#\' title=\'登录\'>登录</a>");
-document.writeln("					<a class=\'btn btn-reg\' href=\'#\' title=\'注册\'>注册</a>");
-document.writeln("				</div>-->");
+document.writeln("				<div>");
+
+document.writeln('				<a class="btn btn-warning-ghost" title="登录" data-toggle="modal" data-target="#modal-wechat">登录</a>');
+document.writeln('               <a class="btn btn-reg" title="注册" data-toggle="modal" data-target="#modal-wechat">注册</a>    ' );
+document.writeln("				</div>");
 document.writeln("				<div class=\'dropdown\'>");
 document.writeln("					<a id=\'user-head\' class=\'user-head\' href=\'javascript:;\' data-toggle=\'dropdown\' role=\'button\' aria-haspopup=\'true\' aria-expanded=\'false\'></a>");
 document.writeln("					<div class=\'user-head-box dropdown-menu\' aria-labelledby=\'user-head\'>");

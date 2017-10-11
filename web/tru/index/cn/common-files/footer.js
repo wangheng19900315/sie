@@ -164,14 +164,14 @@ document.writeln('<!-- modal-box -->'+
                 '   <div class="form-list">'+
                 '   <div class="form-group">'+
                 '    <i class="fa fa-envelope-o"></i>'+
-                '    <input type="text" class="form-control" placeholder="请输入邮箱">'+
+                '    <input type="text" class="form-control" id="login_emiail" placeholder="请输入邮箱">'+
                 '    </div>'+
                 '    <div class="form-group">'+
                 '   <i class="ico ico-lock"></i>'+
-                '   <input type="password" class="form-control" placeholder="请输入密码">'+
+                '   <input type="password" class="form-control" id="login_password" placeholder="请输入密码">'+
                 '   </div>'+
                 '   <div class="mt30">'+
-                '   <input type="submit" class="btn btn-block btn-primary" value="登录" />'+
+                '   <input type="submit" class="btn btn-block btn-primary" id="loginBtn" value="登录" />'+
                 '   </div>'+
                 '   <div class="txt-p">'+
                 '   <p class="mt10">'+
@@ -187,10 +187,43 @@ document.writeln('<!-- modal-box -->'+
 '</div>'+
 '</div>');
 
+document.writeln('<!-- modal-box -->'+
+'  <div class="modal modal-userBox fade" id="modal-psd" tabindex="-1" role="dialog" data-backdrop="static">'+
+'   <div class="modal-dialog">'+
+'    <div class="modal-content">'+
+'    <div class="modal-header">'+
+'   <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>'+
+'<h4 class="modal-title">密码修改</h4>'+
+'    </div>'+
+'    <div class="modal-body">'+
+'   <div class="form-list">'+
+'   <div class="form-group">'+
+'   <i class="ico ico-lock"></i>'+
+'   <input type="password" class="form-control" placeholder="原密码">'+
+'   </div>'+
+'   <div class="form-group">'+
+'   <i class="ico ico-lock"></i>'+
+'   <input type="password" class="form-control" placeholder="新密码">'+
+'   </div>'+
+'   <div class="form-group">'+
+'   <i class="ico ico-lock"></i>'+
+'   <input type="password" class="form-control" placeholder="确认密码">'+
+'   <label class="error">&times; 密码不一致</label>'+
+'</div>'+
+'<div class="mt30">'+
+'   <input type="submit" class="btn btn-block btn-primary" value="确认" />'+
+'   </div>'+
+'   </div>'+
+'   </div>'+
+'   </div>'+
+'   </div>'+
+'   </div>');
 
 document.writeln('<script src="../../public/js/jquery.min.js"></script>'+
 '<script src="../../public/js/bootstrap.min.js"></script>'+
 '<script src="../../public/js/bootstrap-datetimepicker.js"></script>'+
 '<script src="../../public/js/swiper.jquery.min.js"></script>'+
 ' <script src="../../public/js/chosen.jquery.min.js"></script>'+
-' <script src="../../public/js/common.js"></script>');
+' <script src="../../public/js/common.js"></script>'+
+' <script src="../../js/util.js"></script>'+
+' <script src="../../js/user-operate.js"></script>');
