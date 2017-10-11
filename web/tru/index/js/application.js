@@ -28,36 +28,21 @@ $(function(){
         $("input[name='nationality'][value='" + data.nationality + "']").change();//出发change事件
         //加载照片
         if (data.image != null && data.image != undefined && data.image != '') {
-            //$('#uploadCard').attr('href', rootPath + 'loadImage?image=' + data.image + '&accessToken='+ );
-            $("#uploadCard").trigger("click")
+            var params = {"image":data.image};
+            //$('#uploadCard').attr('src', rootPath + 'loadImage?params=' + JSON.stringify(params) + '&accessToken='+accessToken );
+            //$("#test").trigger("click")
         }
     });
-    //$("#data-form").validate({
-    //    submitHandler: function() {
-    //        var formData = new FormData(document.getElementById("data-form"));
-    //        //var formData = $("#data-form").serializeJson();
-    //        $.ajax({
-    //            url:pageRootPath+ '/student/addOrupdate.json',
-    //            data: formData,
-    //            type: 'post',
-    //            dataType: 'json',
-    //            cache: false,
-    //            processData:false,
-    //            contentType:false,
-    //            success: function (data) {
-    //                if (data.success) {
-    //                    alert("数据保存成功！");
-    //                    history.go(-1);
-    //                } else {
-    //                    alert("保存数据出现错误，请稍候重试！");
-    //                }
-    //            },
-    //            error: function () {
-    //                alert("提交保存信息出现错误！");
-    //            }
-    //        });
-    //    }
-    //});
+
+    $("#saveApplication").bind("click",function(){
+        var params = $("#data-form").serializeJson();
+        console.log(params)
+        attrs=params;
+        dhcc.Unit.ajaxUtil(attrs,"saveApplicationForm.json",function(data){
+
+        });
+    });
+
     //
     ////加载学校列表
     //$.ajax({
@@ -101,7 +86,3 @@ $(function(){
 
 
 })
-
-function nationalityChange(){
-
-}

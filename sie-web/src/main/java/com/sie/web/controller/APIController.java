@@ -12,16 +12,20 @@ import com.sie.service.bean.OrderDetailBean;
 import com.sie.service.bean.ResultBean;
 import com.sie.service.vo.*;
 import com.sie.util.DateUtil;
+import com.sie.util.FileUtil;
 import com.sie.util.NumberUtil;
 import com.sie.util.StringUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
@@ -61,6 +65,9 @@ public class APIController {
 
     @Autowired
     private PackagePriceService packagePriceService;
+
+    @Value("${file.upload.url}")
+    private String fileUploadUrl;
 
 
     private static final Logger logger = LoggerFactory.getLogger(APIController.class);
@@ -116,7 +123,7 @@ public class APIController {
         }catch(Exception e){
             e.printStackTrace();
         }
-        return resultBean;
+        return null;
     }
 
     @RequestMapping("/getStudnetInfo.json")
@@ -162,7 +169,7 @@ public class APIController {
      */
     @RequestMapping("/saveApplicationForm.json")
     @ResponseBody
-    public ResultBean  updateStudent(String params, String accessToken){
+    public ResultBean  updateStudent(String params, String accessToken,@RequestParam("headImage") MultipartFile headImage){
 
         logger.info("updateStudent.json params="+params +" accessToken="+accessToken);
         ResultBean resultBean = new ResultBean();
@@ -175,7 +182,10 @@ public class APIController {
 
             ObjectMapper mapper = new ObjectMapper();
             StudentEntity studentEntity = mapper.readValue(params, StudentEntity.class);
-
+            if(headImage != null && !headImage.isEmpty()){
+                String fileUrl = FileUtil.saveToServer(headImage, fileUploadUrl);
+                studentEntity.setImage(fileUrl);
+            }
 
             resultBean = this.studentService.updateEntity(studentEntity,2);
         }catch(Exception e){
