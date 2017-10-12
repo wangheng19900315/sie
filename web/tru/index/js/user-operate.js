@@ -4,6 +4,8 @@ $(function(){
     if(userInfo){
         $($(".login-box").children("div").get(0)).hide();
         $($(".login-box").children("div").get(1)).show();
+        userInfo = eval("("+userInfo+")")
+        $(".username").html(userInfo.email);
     }else{
         $($(".login-box").children("div").get(0)).show();
         $($(".login-box").children("div").get(1)).hide();
@@ -29,7 +31,7 @@ $(function(){
         var attrs={"userName":email,"password":password};
 
         dhcc.Unit.ajaxUtil(attrs,"login.json",function(data){
-            setCookie("loginUser",data);
+            setCookie("loginUser",JSON.stringify(data));
             $($(".login-box").children("div").get(0)).hide();
             $($(".login-box").children("div").get(1)).show();
             $("#loginCloseBtn").click();
@@ -65,5 +67,12 @@ $(function(){
         },function(data){
             $("#reggsiter_repeat_password").next().html(data);
         })
+    })
+
+    $(".userout").bind("click", function(){
+        $("#user-head").click();
+        delCookie("loginUser");
+        $($(".login-box").children("div").get(0)).show();
+        $($(".login-box").children("div").get(1)).hide();
     })
 })

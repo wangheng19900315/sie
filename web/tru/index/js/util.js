@@ -2,6 +2,7 @@
 var rootPath = 'http://localhost:8085/api/';
 var accessToken='un23n4no2bu4bs34';
 var systemType = "1";//sie系统
+var studentId = "1";
 /**
  * 时间格式化
  * @param fmt 格式
@@ -103,7 +104,7 @@ jQuery.fn.extend({
 $.fn.loadJson = function(jsonValue) {
     var obj = this;
     $.each(jsonValue, function(name, ival) {
-        var $oinput = obj.find(":input [name=" + name + "]");
+        var $oinput = obj.find(":input[name=" + name + "]");
         if ($oinput.attr("type") == "radio"
             || $oinput.attr("type") == "checkbox") {
             $oinput.each(function() {
@@ -130,10 +131,10 @@ $.fn.loadJson = function(jsonValue) {
 //JS操作cookies方法!
 //写cookies
 function setCookie(name,value) {
-    var Days = 30;
+    var Days = 1;
     var exp = new Date();
     exp.setTime(exp.getTime() + Days*24*60*60*1000);
-    document.cookie = name + "="+ escape (value) + ";expires=" + exp.toGMTString();
+    document.cookie = name + "="+ escape (value) + ";expires=" + exp.toGMTString()+";path=/";
 }
 
 /**

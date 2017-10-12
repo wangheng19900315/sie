@@ -43,9 +43,9 @@
 				<h3><i class="ico ico-report"></i> 我的成绩单</h3>
 				<div class="area">
 					<div class="report-info">
-						<span>姓名：<label>Yi Li</label></span>
-						<span>性别：<label>Female</label></span>
-						<span>出生日期：<label>2012-05-05</label></span>
+						<span>姓名：<label id="chineseName">Yi Li</label></span>
+						<span>性别：<label id="sex">Female</label></span>
+						<span>出生日期：<label id="birthday">2012-05-05</label></span>
 						<div class="form-list user-rg-select user-rg-select-in">
 							<label>学期</label>
 							<div class="dropdown dropdown-select">
@@ -74,55 +74,71 @@
 					</table>
 				</div>
 			</div>
-			<div class="plate-box w900">
-				<h3><i class="ico ico-report-address"></i> 成绩单寄送地址<span class="text-danger">*</span></h3>
-				<div class="area">
-					<div class="report-address">
-				    	<div class="form-list">
-				    		<div class="col-xs-6">
-								<div class="form-group">
-									<label>街道</label>
-									<input type="text" class="form-control" placeholder="街道">
+			<form id="data-form">
+				<input type="hidden" name="id">
+				<div class="plate-box w900">
+					<h3><i class="ico ico-report-address"></i> 成绩单寄送地址<span class="text-danger">*</span></h3>
+					<div class="area">
+						<div class="report-address">
+							<div class="form-list">
+								<div class="col-xs-6">
+									<div class="form-group">
+										<label>街道</label>
+										<input type="text" class="form-control" placeholder="街道" name="sendStreet">
+									</div>
+									<div class="form-group">
+										<label>州/省</label>
+										<input type="text" class="form-control" placeholder="州/省" name="sendProvince">
+									</div>
+									<div class="form-group">
+										<label>联系人/部门</label>
+										<input type="text" class="form-control" placeholder="联系人/部门" name="sendPerson">
+									</div>
 								</div>
-								<div class="form-group">
-									<label>州/省</label>
-									<input type="text" class="form-control" placeholder="州/省">
+								<div class="col-xs-6">
+									<div class="form-group">
+										<label>县/市</label>
+										<input type="text" class="form-control" placeholder="县/市" name="sendCountry">
+									</div>
+									<div class="form-group">
+										<label>邮政编码</label>
+										<input type="text" class="form-control" placeholder="邮政编码" name="sendPostCode">
+									</div>
+									<div class="form-group">
+										<label>电话号码</label>
+										<input type="text" class="form-control" placeholder="电话号码" name="sendTel">
+									</div>
 								</div>
-								<div class="form-group">
-									<label>联系人/部门</label>
-									<input type="text" class="form-control" placeholder="联系人/部门">
-								</div>
-				    		</div>
-				    		<div class="col-xs-6">
-								<div class="form-group">
-									<label>县/市</label>
-									<input type="text" class="form-control" placeholder="县/市">
-								</div>
-								<div class="form-group">
-									<label>邮政编码</label>
-									<input type="text" class="form-control" placeholder="邮政编码">
-								</div>
-								<div class="form-group">
-									<label>电话号码</label>
-									<input type="text" class="form-control" placeholder="电话号码">
-								</div>
-				    		</div>
-				    	</div>
-						<div class="mt40 text-right">
-							<input type="submit" class="btn btn-wd-md btn-info" value="确认" />
+							</div>
+							<div class="mt40 text-right">
+								<input type="button" class="btn btn-wd-md btn-info" value="确认" id="saveSendInfo" />
+							</div>
 						</div>
 					</div>
 				</div>
-			</div>
+			</form>
 		</div>
    	</div>
+</div>
+
+<!-- modal-box -->
+<div class="modal modal-xs modal-tips fade" id="modal-success" tabindex="-1" role="dialog">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-body">
+				<i class="ico ico-success"></i>
+				<h3 class="mt10">保存成功</h3>
+			</div>
+		</div>
+	</div>
 </div>
 
 <!-- footer -->
 <script src="../common-files/footer.js" type="text/javascript" charset="utf-8"></script>
 
-	
 
+<script src="../../js/util.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/report.js" type="text/javascript" charset="utf-8"></script>
 
 </body>
 </html>
