@@ -2,6 +2,7 @@
 var rootPath = 'http://localhost:81/api/';
 var accessToken='un23n4no2bu4bs34';
 var systemType = "1";//sie系统
+var studentId = "1";
 /**
  * 时间格式化
  * @param fmt 格式

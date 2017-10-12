@@ -126,7 +126,7 @@ public class APIController {
         return null;
     }
 
-    @RequestMapping("/getStudnetInfo.json")
+    @RequestMapping(value = "/getStudnetInfo.json", method = RequestMethod.POST)
     @ResponseBody
     public ResultBean  getStudnetInfo(String params, String accessToken){
 
@@ -167,9 +167,9 @@ public class APIController {
      * 学生填报申请单
      * @return
      */
-    @RequestMapping("/saveApplicationForm.json")
+    @RequestMapping(value = "/saveApplicationForm.json", method = RequestMethod.POST)
     @ResponseBody
-    public ResultBean  updateStudent(String params, String accessToken,@RequestParam("headImage") MultipartFile headImage){
+    public ResultBean  updateStudent(String params, String accessToken){
 
         logger.info("updateStudent.json params="+params +" accessToken="+accessToken);
         ResultBean resultBean = new ResultBean();
@@ -181,7 +181,13 @@ public class APIController {
             }
 
             ObjectMapper mapper = new ObjectMapper();
+            Map<String,Object> paramsMap = mapper.readValue(params,Map.class);
+            MultipartFile headImage = (MultipartFile)paramsMap.get("headImage");
+
+            paramsMap.remove("headImage");
+            params = mapper.writeValueAsString(paramsMap);
             StudentEntity studentEntity = mapper.readValue(params, StudentEntity.class);
+
             if(headImage != null && !headImage.isEmpty()){
                 String fileUrl = FileUtil.saveToServer(headImage, fileUploadUrl);
                 studentEntity.setImage(fileUrl);
@@ -200,7 +206,7 @@ public class APIController {
      * 学生填报成绩单寄送地址
      * @return
      */
-    @RequestMapping("/saveGradeSend.json")
+    @RequestMapping(value = "/saveGradeSend.json", method = RequestMethod.POST)
     @ResponseBody
     public ResultBean  saveGradeSend(String params, String accessToken){
 
@@ -516,7 +522,7 @@ public class APIController {
      * 获取用户订单
      * @return
      */
-    @RequestMapping("/getOrderList.json")
+    @RequestMapping(value = "/getOrderList.json", method = RequestMethod.POST)
     @ResponseBody
     public ResultBean  getOrderList(String params, String accessToken){
         logger.info("getOrderList.json params="+params +" accessToken="+accessToken);

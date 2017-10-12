@@ -36,10 +36,11 @@ $(function(){
 
     $("#saveApplication").bind("click",function(){
         var params = $("#data-form").serializeJson();
-        console.log(params)
+        //var formData = new FormData(document.getElementById("data-form"));
+        //TODO 表单里面的image没有提交
         attrs=params;
         dhcc.Unit.ajaxUtil(attrs,"saveApplicationForm.json",function(data){
-
+            $('#modal-success').modal('show')
         });
     });
 
