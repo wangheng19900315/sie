@@ -1,5 +1,5 @@
 //全局变量请求地址
-var rootPath = 'http://localhost:81/api/';
+var rootPath = 'http://localhost:8085/api/';
 var accessToken='un23n4no2bu4bs34';
 var systemType = "1";//sie系统
 /**
@@ -176,8 +176,7 @@ dhcc.Unit.ajaxUtil = function (attrs, api, successBack, errorBack) {
         if(result.success  && typeof(eval(successBack))=="function"){
             successBack(result.data);
         }else if(!result.success) {
-            //errorBack(result.message);
-            alert(result.message);
+            errorBack(result.message);
         }
     });
 
