@@ -4,6 +4,7 @@ import com.sie.framework.base.HqlOperateVo;
 import com.sie.framework.entity.GradeEntity;
 import com.sie.service.bean.GradeBean;
 import com.sie.service.bean.PageInfo;
+import com.sie.service.vo.GradeVo;
 
 import java.util.List;
 
@@ -26,4 +27,6 @@ public interface GradeService extends BaseService<GradeEntity, Integer> {
 
 
     public void updateStudentGradeList(Integer studentId);
+
+    List<GradeVo> getGradeListVo(String systemType, String studentId);
 }
