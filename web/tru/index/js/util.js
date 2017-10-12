@@ -182,3 +182,10 @@ dhcc.Unit.ajaxUtil = function (attrs, api, successBack, errorBack) {
     });
 
 };
+
+
+dhcc.Unit.successMessage=function(message){
+    $("#modal-success").find(".mt10").html(message);
+    $('#modal-success').modal('show');
+    setTimeout(function(){$('#modal-success').modal('hide');}, 1500);
+}

@@ -35,6 +35,7 @@ $(function(){
             $($(".login-box").children("div").get(0)).hide();
             $($(".login-box").children("div").get(1)).show();
             $("#loginCloseBtn").click();
+            dhcc.Unit.successMessage("登录成功");
         },function(data){
             $("#login_password").next().html(data);
         })
@@ -63,6 +64,7 @@ $(function(){
         var attrs={"email":email,"password":password};
 
         dhcc.Unit.ajaxUtil(attrs,"register.json",function(data){
+            dhcc.Unit.successMessage("注册成功");
             $('a[title="注册"]').click();
         },function(data){
             $("#reggsiter_repeat_password").next().html(data);
@@ -72,6 +74,7 @@ $(function(){
     $(".userout").bind("click", function(){
         $("#user-head").click();
         delCookie("loginUser");
+        dhcc.Unit.successMessage("退出登录");
         $($(".login-box").children("div").get(0)).show();
         $($(".login-box").children("div").get(1)).hide();
     })
