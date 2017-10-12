@@ -121,24 +121,26 @@ document.writeln('<!-- modal-box -->'+
         '   <div class="form-list">'+
         '   <div class="form-group">'+
         '   <i class="fa fa-envelope-o"></i>'+
-        '   <input type="text" class="form-control" placeholder="请输入邮箱">'+
+        '   <input type="text" class="form-control" id="reggsiter_email" placeholder="请输入邮箱">'+
+    '   <label class="error"> </label>'+
         '   </div>'+
         '   <div class="form-group">'+
         '   <i class="ico ico-lock"></i>'+
-        '   <input type="password" class="form-control" placeholder="请输入密码">'+
+        '   <input type="password" class="form-control" id="reggsiter_password" placeholder="请输入密码">'+
+    '   <label class="error"> </label>'+
         '   </div>'+
         '   <div class="form-group">'+
         '   <i class="ico ico-lock"></i>'+
-        '   <input type="password" class="form-control" placeholder="请输入密码">'+
-        '   <label class="error">&times; 密码不一致</label>'+
+        '   <input type="password" class="form-control" id="reggsiter_repeat_password"  placeholder="请输入密码">'+
+        '   <label class="error"> </label>'+
         ' </div>'+
         ' <div class="mt30">'+
-        '   <input type="submit" class="btn btn-block btn-primary" value="注册" />'+
+        '   <input type="submit" class="btn btn-block btn-primary" id="registerBtn" value="注册" />'+
         '   </div>'+
         '   <div class="txt-p">'+
         '   <div class="radio-box mt10">'+
         '   <label>'+
-        '   <input type="checkbox" name="projectSelectshanghai" id="projectSelectshanghai9" value="9" />'+
+        '   <input type="checkbox" name="projectSelectshanghai" checked id="projectSelectshanghai9" value="9" />'+
         '   <i class="fa"></i>'+
         '   <span>同意《服务条款》</span>'+
         ' </label>'+
@@ -157,7 +159,7 @@ document.writeln('<!-- modal-box -->'+
 '     <div class="modal-dialog">'+
     '   <div class="modal-content">'+
         '   <div class="modal-header">'+
-            '   <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>'+
+            '   <button type="button" class="close" data-dismiss="modal" id="loginCloseBtn" aria-label="Close"><span aria-hidden="true">&times;</span></button>'+
                 '<h4 class="modal-title">登录账户</h4>'+
                 '   </div>'+
                 '   <div class="modal-body">'+
@@ -165,10 +167,12 @@ document.writeln('<!-- modal-box -->'+
                 '   <div class="form-group">'+
                 '    <i class="fa fa-envelope-o"></i>'+
                 '    <input type="text" class="form-control" id="login_emiail" placeholder="请输入邮箱">'+
+    '   <label class="error"></label>'+
                 '    </div>'+
                 '    <div class="form-group">'+
                 '   <i class="ico ico-lock"></i>'+
                 '   <input type="password" class="form-control" id="login_password" placeholder="请输入密码">'+
+    '   <label class="error"></label>'+
                 '   </div>'+
                 '   <div class="mt30">'+
                 '   <input type="submit" class="btn btn-block btn-primary" id="loginBtn" value="登录" />'+
@@ -217,6 +221,18 @@ document.writeln('<!-- modal-box -->'+
 '   </div>'+
 '   </div>'+
 '   </div>'+
+'   </div>');
+
+document.writeln('<!-- modal-box -->'+
+' <div class="modal modal-xs modal-tips fade" id="modal-success" tabindex="-1" role="dialog" data-backdrop="static">'+
+' <div class="modal-dialog">'+
+'  <div class="modal-content">'+
+    '  <div class="modal-body">'+
+'  <i class="ico ico-success"></i>'+
+'   <h3 class="mt10">保存成功</h3>'+
+'   </div>'+
+'   </div>'+
+'    </div>'+
 '   </div>');
 
 document.writeln('<script src="../../public/js/jquery.min.js"></script>'+

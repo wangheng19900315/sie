@@ -23,9 +23,7 @@ $(function(){
         var params = $("#data-form").serializeJson();
         attrs=params;
         dhcc.Unit.ajaxUtil(attrs,"saveGradeSend.json",function(data){
-            $('#modal-success').modal('show');
-            //等待1.5秒后消失
-            setTimeout(function(){$('#modal-success').modal('hide');}, 1500);
+            dhcc.Unit.successMessage("提交陈工");
         });
         $("#saveSendInfo").attr("disabled", false);
     });

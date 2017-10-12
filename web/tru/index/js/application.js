@@ -41,9 +41,9 @@ $(function(){
         //TODO 表单里面的image没有提交
         attrs=params;
         dhcc.Unit.ajaxUtil(attrs,"saveApplicationForm.json",function(data){
-            $('#modal-success').modal('show');
+
             //等待1.5秒后消失
-            setTimeout(function(){$('#modal-success').modal('hide');}, 1500);
+            dhcc.Unit.successMessage("提交成功");
         });
         $("#saveApplication").attr("disabled", true);
     });

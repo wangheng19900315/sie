@@ -8,7 +8,6 @@ import com.sie.framework.type.OrderType;
 import com.sie.framework.type.SystemType;
 import com.sie.service.*;
 import com.sie.service.bean.OrderBean;
-import com.sie.service.bean.OrderDetailBean;
 import com.sie.service.bean.ResultBean;
 import com.sie.service.vo.*;
 import com.sie.util.DateUtil;
@@ -404,7 +403,7 @@ public class APIController {
      * 学生注册
      * @return
      */
-    @RequestMapping("/register.json")
+    @RequestMapping(value = "/register.json",method=RequestMethod.POST)
     @ResponseBody
     public ResultBean register(String params, String accessToken){
         logger.info("register.json params="+params +" accessToken="+accessToken);
@@ -445,7 +444,7 @@ public class APIController {
     * 学生登录
     * @return
     */
-    @RequestMapping("/login.json")
+    @RequestMapping(value = "/login.json",method=RequestMethod.POST)
     @ResponseBody
     public ResultBean login(String params, String accessToken){
         logger.info("login.json params="+params +" accessToken="+accessToken);

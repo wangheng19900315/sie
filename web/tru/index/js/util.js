@@ -1,5 +1,5 @@
 //全局变量请求地址
-var rootPath = 'http://localhost:81/api/';
+var rootPath = 'http://localhost:8085/api/';
 var accessToken='un23n4no2bu4bs34';
 var systemType = "1";//sie系统
 var studentId = "1";
@@ -131,10 +131,10 @@ $.fn.loadJson = function(jsonValue) {
 //JS操作cookies方法!
 //写cookies
 function setCookie(name,value) {
-    var Days = 30;
+    var Days = 1;
     var exp = new Date();
     exp.setTime(exp.getTime() + Days*24*60*60*1000);
-    document.cookie = name + "="+ escape (value) + ";expires=" + exp.toGMTString();
+    document.cookie = name + "="+ escape (value) + ";expires=" + exp.toGMTString()+";path=/";
 }
 
 /**
@@ -177,9 +177,15 @@ dhcc.Unit.ajaxUtil = function (attrs, api, successBack, errorBack) {
         if(result.success  && typeof(eval(successBack))=="function"){
             successBack(result.data);
         }else if(!result.success) {
-            //errorBack(result.message);
-            alert(result.message);
+            errorBack(result.message);
         }
     });
 
 };
+
+
+dhcc.Unit.successMessage=function(message){
+    $("#modal-success").find(".mt10").html(message);
+    $('#modal-success').modal('show');
+    setTimeout(function(){$('#modal-success').modal('hide');}, 1500);
+}
