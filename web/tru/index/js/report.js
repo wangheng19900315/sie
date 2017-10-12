@@ -1,51 +1,33 @@
-var school;
+
 $(function(){
 
-    //绑定国籍变化事件
-    $('input[type=radio][name=nationality]').change(function() {
-        if (this.value == '中国') {
-            $("input[name='idNumber']").parent().show();
-            $("input[name='passportNumber']").parent().hide();
-        }
-        else if (this.value == '非中国') {
-            $("input[name='idNumber']").parent().hide();
-            $("input[name='passportNumber']").parent().show();
-        }
-    });
-
     /**
-     * 加载学生信息
+     * 加载成绩单寄送信息
      */
     var attrs={};
-    attrs.studentId="1";
+    attrs.studentId=studentId;
     /**
-     * 获取我的订单
+     * 获取学生信息
      */
     dhcc.Unit.ajaxUtil(attrs,"getStudnetInfo.json",function(data){
-        var birthDay =    new Date(data.birthday).Format("yyyy-MM-dd");
-        data.birthday=birthDay;
         $("#data-form").loadJson(data);
-        $("input[name='nationality'][value='" + data.nationality + "']").change();//出发change事件
-        //加载照片
-        if (data.image != null && data.image != undefined && data.image != '') {
-            var params = {"image":data.image};
-            //$('#uploadCard').attr('src', rootPath + 'loadImage?params=' + JSON.stringify(params) + '&accessToken='+accessToken );
-            //$("#test").trigger("click")
-        }
+        //设置中文姓名 性别 出生日期信息
+        $("#chineseName").text(data.chineseName);
+        $("#sex").text(data.sex);
+        $("#birthday").text(new Date(data.birthday).Format("yyyy-MM-dd"));
     });
 
-    $("#saveApplication").bind("click",function(){
-        $("#saveApplication").attr("disabled", true);
+    $("#saveSendInfo").bind("click",function(){
+        //按钮不可用
+        $("#saveSendInfo").attr("disabled", true);
         var params = $("#data-form").serializeJson();
-        //var formData = new FormData(document.getElementById("data-form"));
-        //TODO 表单里面的image没有提交
         attrs=params;
-        dhcc.Unit.ajaxUtil(attrs,"saveApplicationForm.json",function(data){
+        dhcc.Unit.ajaxUtil(attrs,"saveGradeSend.json",function(data){
             $('#modal-success').modal('show');
             //等待1.5秒后消失
             setTimeout(function(){$('#modal-success').modal('hide');}, 1500);
         });
-        $("#saveApplication").attr("disabled", true);
+        $("#saveSendInfo").attr("disabled", false);
     });
 
     //
