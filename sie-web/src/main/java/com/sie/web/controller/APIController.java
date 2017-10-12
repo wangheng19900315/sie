@@ -22,7 +22,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -172,7 +171,7 @@ public class APIController {
      */
     @RequestMapping(value = "/saveApplicationForm.json", method = RequestMethod.POST)
     @ResponseBody
-    public ResultBean  updateStudent(String params, String accessToken){
+    public ResultBean  updateStudent(String params, String accessToken,MultipartFile headImage){
 
         logger.info("updateStudent.json params="+params +" accessToken="+accessToken);
         ResultBean resultBean = new ResultBean();
@@ -185,9 +184,6 @@ public class APIController {
 
             ObjectMapper mapper = new ObjectMapper();
             Map<String,Object> paramsMap = mapper.readValue(params,Map.class);
-            MultipartFile headImage = (MultipartFile)paramsMap.get("headImage");
-
-            paramsMap.remove("headImage");
             params = mapper.writeValueAsString(paramsMap);
             StudentEntity studentEntity = mapper.readValue(params, StudentEntity.class);
 

@@ -17,7 +17,7 @@ $(function(){
      * 加载学生信息
      */
     var attrs={};
-    attrs.studentId="1";
+    attrs.studentId=userInfo.id+"";
     /**
      * 获取我的订单
      */
@@ -37,11 +37,10 @@ $(function(){
     $("#saveApplication").bind("click",function(){
         $("#saveApplication").attr("disabled", true);
         var params = $("#data-form").serializeJson();
-        //var formData = new FormData(document.getElementById("data-form"));
+
         //TODO 表单里面的image没有提交
         attrs=params;
-        dhcc.Unit.ajaxUtil(attrs,"saveApplicationForm.json",function(data){
-
+        dhcc.Unit.ajaxFile(attrs,"headImage","saveApplicationForm.json",function(data){
             //等待1.5秒后消失
             dhcc.Unit.successMessage("提交成功");
         });

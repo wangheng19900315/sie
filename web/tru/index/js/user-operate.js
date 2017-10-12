@@ -1,6 +1,6 @@
 $(function(){
 
-    var userInfo = getCookie("loginUser");
+    userInfo = getCookie("loginUser");
     if(userInfo){
         $($(".login-box").children("div").get(0)).hide();
         $($(".login-box").children("div").get(1)).show();
@@ -32,6 +32,7 @@ $(function(){
 
         dhcc.Unit.ajaxUtil(attrs,"login.json",function(data){
             setCookie("loginUser",JSON.stringify(data));
+            userInfo = data;
             $($(".login-box").children("div").get(0)).hide();
             $($(".login-box").children("div").get(1)).show();
             $("#loginCloseBtn").click();

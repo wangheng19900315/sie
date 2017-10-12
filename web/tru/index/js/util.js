@@ -3,6 +3,7 @@ var rootPath = 'http://localhost:8085/api/';
 var accessToken='un23n4no2bu4bs34';
 var systemType = "1";//sie系统
 var studentId = "1";
+var userInfo;
 /**
  * 时间格式化
  * @param fmt 格式
@@ -176,10 +177,40 @@ dhcc.Unit.ajaxUtil = function (attrs, api, successBack, errorBack) {
     $.post(rootPath+api, params, function(result){
         if(result.success  && typeof(eval(successBack))=="function"){
             successBack(result.data);
-        }else if(!result.success) {
+        }else if(!result.success && typeof(eval(errorBack))=="function") {
             errorBack(result.message);
         }
     });
+
+};
+
+
+/** 提交的form, 显示输出结果的renderer */
+dhcc.Unit.ajaxFile = function (attrs,fileId, api, successBack, errorBack) {
+    var formData = new FormData();
+    var name = $("input").val();
+    formData.append("headImage",$("#"+fileId)[0].files[0]);
+    formData.append("params",JSON.stringify(attrs));
+    formData.append("accessToken",accessToken);
+    $.ajax({
+        url : rootPath+api,
+        type : 'POST',
+        data : formData,
+        processData : false,
+        contentType : false,
+        success : function(result) {
+            if(result.success  && typeof(eval(successBack))=="function"){
+                successBack(result.data);
+            }else if(!result.success && typeof(eval(errorBack))=="function") {
+                errorBack(result.message);
+            }
+        },
+        error : function(responseStr) {
+            console.log("error");
+        }
+    });
+
+
 
 };
 
