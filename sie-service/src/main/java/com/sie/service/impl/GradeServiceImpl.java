@@ -237,7 +237,13 @@ public class GradeServiceImpl extends BaseServiceImpl<GradeEntity,Integer> imple
 
         List<GradeEntity> gradeEntities = this.getList(list);
 
-        return null;
+        List<GradeVo> gradeVos = new ArrayList<>();
+        for(GradeEntity gradeEntity : gradeEntities){
+            GradeVo gradeVo = new GradeVo();
+            setDetailVoValues(gradeEntity,gradeVo);
+            gradeVos.add(gradeVo);
+        }
+        return gradeVos;
     }
 
     private void setDetailVoValues(GradeEntity gradeEntity, GradeVo gradeVo){
