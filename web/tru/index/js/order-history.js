@@ -59,6 +59,7 @@ function changeTerm(term){
 					'<th>课程名称</th>' +
 					'<th>校区</th> </tr>';
 	$.each(termOrders,function(i,order){
+		order = removeNull(order);
 		orders = orders +
 			'<tr><td><label>'+ order.code + '</label></td>'+
 			'<td><label>' + order.statusName + '</label></td>'+
@@ -68,6 +69,7 @@ function changeTerm(term){
 			'<td><label>' + order.dormitoryNames + '</label></td>'+
 			'<td><label>' + order.payMoney + '</label></td></tr>';
 		$.each(order.courses,function(ii,course){
+			course = removeNull(course);
 			courses = courses +
 					'<tr> <td><label>' + course.courseID + '</label></td>' +
 					'<td><label>' + course.truCode + '</label></td>' +

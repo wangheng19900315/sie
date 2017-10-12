@@ -8,6 +8,8 @@ import com.sie.framework.type.SystemType;
 import com.sie.service.GradeService;
 import com.sie.service.bean.GradeBean;
 import com.sie.service.bean.PageInfo;
+import com.sie.service.vo.GradeVo;
+import com.sie.util.DateUtil;
 import com.sie.util.NumberUtil;
 import com.sie.util.PageUtil;
 import com.sie.util.StringUtil;
@@ -225,13 +227,48 @@ public class GradeServiceImpl extends BaseServiceImpl<GradeEntity,Integer> imple
                 this.gradeDao.createEntity(gradeEntity);
             }
         }
+    }
 
+    @Override
+    public List<GradeVo> getGradeListVo(String systemType, String studentId) {
+        List<HqlOperateVo> list = new  ArrayList<HqlOperateVo>();
+        list.add(new HqlOperateVo("systemType", "=", systemType));
+        list.add(new HqlOperateVo("studentEntity.id", "=", studentId));
 
+        List<GradeEntity> gradeEntities = this.getList(list);
 
+        List<GradeVo> gradeVos = new ArrayList<>();
+        for(GradeEntity gradeEntity : gradeEntities){
+            GradeVo gradeVo = new GradeVo();
+            setDetailVoValues(gradeEntity,gradeVo);
+            gradeVos.add(gradeVo);
+        }
+        return gradeVos;
+    }
 
-
-
-
-
+    private void setDetailVoValues(GradeEntity gradeEntity, GradeVo gradeVo){
+        try{
+            BeanUtils.copyProperties(gradeVo, gradeEntity);
+            if(gradeEntity.getCourseEntity() != null){
+                gradeVo.setCourseChineseName(gradeEntity.getCourseEntity().getChineseName());
+                gradeVo.setCourseEnglishName(gradeEntity.getCourseEntity().getEnglishName());
+                //gradeVo.setCourseCode(gradeEntity.getCourseEntity().getCourseID());
+            }
+            if(gradeEntity.getProjectEntity() != null){
+                //设置学期
+                gradeVo.setTerm(DateUtil.format(gradeEntity.getProjectEntity().getStartTime(), "yyyy"));
+            }
+            if(NumberUtil.isSignless(gradeEntity.getSystemType())){
+                SystemType type = SystemType.valueOf(gradeEntity.getSystemType());
+                //设置课程编号
+                if(type == SystemType.SIE){
+                    gradeVo.setCourseCode(gradeEntity.getCourseEntity().getSieCode());
+                }else{
+                    gradeVo.setCourseCode(gradeEntity.getCourseEntity().getTruCode());
+                }
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 }
