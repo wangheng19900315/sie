@@ -66,6 +66,9 @@ public class APIController {
     @Autowired
     private PackagePriceService packagePriceService;
 
+    @Autowired
+    private GradeService gradeService;
+
     @Value("${file.upload.url}")
     private String fileUploadUrl;
 
@@ -316,20 +319,20 @@ public class APIController {
                 return resultBean;
             }
 
-            List<OrderVo> orderVos = this.orderService.getOrderListVo(systemType, studentId);
+            List<GradeVo> gradeVos = this.gradeService.getGradeListVo(systemType, studentId);
             resultBean.setMessage("查找成功");
             resultBean.setSuccess(true);
-            Map<String,List<OrderVo>> orderVoMap = new HashMap<>();
-            for(OrderVo orderVo : orderVos){
-                if(orderVoMap.get(orderVo.getTerm()) == null){
-                    List<OrderVo> vos = new ArrayList<>();
-                    vos.add(orderVo);
-                    orderVoMap.put(orderVo.getTerm(),vos);
+            Map<String,List<GradeVo>> gradeVoMap = new HashMap<>();
+            for(GradeVo gradeVo : gradeVos){
+                if(gradeVoMap.get(gradeVo.getTerm()) == null){
+                    List<GradeVo> vos = new ArrayList<>();
+                    vos.add(gradeVo);
+                    gradeVoMap.put(gradeVo.getTerm(),vos);
                 }else{
-                    orderVoMap.get(orderVo.getTerm()).add(orderVo);
+                    gradeVoMap.get(gradeVo.getTerm()).add(gradeVo);
                 }
             }
-            resultBean.setData(orderVoMap);
+            resultBean.setData(gradeVoMap);
         }catch(Exception e){
             e.printStackTrace();
         }
