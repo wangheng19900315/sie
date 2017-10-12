@@ -1,5 +1,5 @@
 //全局变量请求地址
-var rootPath = 'http://localhost:81/api/';
+var rootPath = 'http://localhost:8085/api/';
 var accessToken='un23n4no2bu4bs34';
 var systemType = "1";//sie系统
 var studentId = "1";
@@ -161,7 +161,7 @@ function delCookie(name)
     exp.setTime(exp.getTime() - 1);
     var cval=getCookie(name);
     if(cval!=null)
-        document.cookie= name + "="+cval+";expires="+exp.toGMTString();
+        document.cookie= name + "="+cval+";expires="+exp.toGMTString()+";path=/";
 }
 
 
@@ -230,4 +230,18 @@ function removeNull(json){
         }
     });
     return json;
+}
+
+/**
+ * 判断是否登录
+ * @returns {boolean}
+ */
+function judgeLogin(){
+    if(userInfo && userInfo.id && userInfo.id>0){
+        return true;
+    }
+    else{
+        $("#login_modal_btn").click();
+        return false;
+    }
 }

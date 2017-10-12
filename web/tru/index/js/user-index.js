@@ -3,6 +3,6 @@ function application(){
     if(userInfo){
         window.location.href="../user/application.html";
     }else{
-        $("#login_modal_btn").click()
+        $("#login_modal_btn").click();
     }
 }

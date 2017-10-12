@@ -13,6 +13,10 @@ $(function(){
         }
     });
 
+    if(!judgeLogin()){
+        return;
+    }
+
     /**
      * 加载学生信息
      */
