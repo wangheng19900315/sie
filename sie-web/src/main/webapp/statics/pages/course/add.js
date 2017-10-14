@@ -55,10 +55,14 @@ $(function(){
 
     initSchoolOption();
     if(entity.length > 0){
-        $("#data-form").loadJson(eval("("+entity+")"));
+        var entityJson = eval("("+entity+")");
+        $("#data-form").loadJson(entityJson);
+        //出发select选中事件
+        $("#system").change();
+        $("#projectId").val(entityJson.projectId);
+    }else{
+        $("#system").change();
     }
-    //出发select选中事件
-    $("#system").change();
 
 });
 

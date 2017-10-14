@@ -67,6 +67,9 @@ public class APIController {
     @Autowired
     private GradeService gradeService;
 
+    @Autowired
+    private RegistrationProjectService registrationProjectService;
+
     @Value("${file.upload.url}")
     private String fileUploadUrl;
 
@@ -335,6 +338,131 @@ public class APIController {
         return resultBean;
     }
 
+    /**
+     * 获取报名项目信息
+     * @return
+     */
+    @RequestMapping("/getProjects.json")
+    @ResponseBody
+    public ResultBean  getProjects(String params, String accessToken){
+        logger.info("getProjects.json params="+params +" accessToken="+accessToken);
+        ResultBean resultBean = new ResultBean();
+
+        try{
+            if(StringUtil.isBlank(accessToken) || !accessToken.equals(SYSTEM_ACCESS_TOKEN)){
+                resultBean.setMessage("token 为空，请检查参数");
+                return resultBean;
+            }
+
+            ObjectMapper mapper = new ObjectMapper();
+            Map<String,String >maps = mapper.readValue(params, Map.class);
+            String systemType = maps.get("systemType");
+            SystemType type;
+            if(StringUtil.isBlank(systemType)){
+                resultBean.setMessage("systemType 为空，请检查参数");
+                return resultBean;
+            }
+            type = SystemType.valueOf(Integer.parseInt(systemType));
+            if(type == null){
+                resultBean.setMessage("systemType不存在");
+                return resultBean;
+            }
+            List<HqlOperateVo> list = new  ArrayList<HqlOperateVo>();
+            list.add(new HqlOperateVo("system", "in", systemType+","+ SystemType.SIEANDTRU.value()));
+            list.add(new HqlOperateVo("enabled", "=", "1"));//可用项目信息
+            List<ProjectEntity> projectEntities = this.projectService.getList(list);
+            List<ProjectVo> projectVos = new ArrayList<>();
+            if(projectEntities.size() > 0){
+
+                for(ProjectEntity projectEntity:projectEntities){
+                    ProjectVo vo = new ProjectVo();
+//                    BeanUtils.copyProperties(projectEntity, vo);
+//                    if(projectEntity.getStartTime() != null){
+//                        vo.setStartTime(DateUtil.format(projectEntity.getStartTime(), "yyyy-MM-dd"));
+//                    }
+//                    if(projectEntity.getEndTime() != null){
+//                        vo.setEndTime(DateUtil.format(projectEntity.getEndTime(), "yyyy-MM-dd"));
+//                    }
+                    //根据系统设置项目的名称和最大课程数
+                    if(type == SystemType.SIE){
+                        //sie系统
+                        vo.setName(projectEntity.getSieName());
+                        vo.setMaxCourse(projectEntity.getSieMaxCourse());
+                    }else{
+                        //tru系统
+                        vo.setName(projectEntity.getTruName());
+                        vo.setMaxCourse(projectEntity.getTruMaxCourse());
+                    }
+                    //设置项目为单个项目
+                    vo.setIds(projectEntity.getId().toString());
+                    projectVos.add(vo);
+                }
+
+            }
+
+            //组合项目
+            List<ProjectVo> registrationVos = registrationProjectService.getRegistrationProjectVo(systemType);
+            projectVos.addAll(registrationVos);
+            resultBean.setMessage("查找成功");
+            resultBean.setSuccess(true);
+            resultBean.setData(projectVos);
+
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return resultBean;
+    }
+
+    /**
+     * 获取报名项目下的课程和住宿信息
+     * @return
+     */
+    @RequestMapping("/getProjectDetails.json")
+    @ResponseBody
+    public ResultBean getProjectDetails(String params, String accessToken){
+        logger.info("getProjects.json params="+params +" accessToken="+accessToken);
+        ResultBean resultBean = new ResultBean();
+
+        try{
+            if(StringUtil.isBlank(accessToken) || !accessToken.equals(SYSTEM_ACCESS_TOKEN)){
+                resultBean.setMessage("token 为空，请检查参数");
+                return resultBean;
+            }
+
+            ObjectMapper mapper = new ObjectMapper();
+            Map<String,String >maps = mapper.readValue(params, Map.class);
+            String systemType = maps.get("systemType");
+            SystemType type;
+            if(StringUtil.isBlank(systemType)){
+                resultBean.setMessage("systemType 为空，请检查参数");
+                return resultBean;
+            }
+            type = SystemType.valueOf(Integer.parseInt(systemType));
+            if(type == null){
+                resultBean.setMessage("systemType不存在");
+                return resultBean;
+            }
+            String projectIds = maps.get("projectIds");
+            if(StringUtil.isBlank(projectIds)){
+                resultBean.setMessage("projectIds 为空，请检查参数");
+                return resultBean;
+            }
+            List<ProjectVo> projectVos = new ArrayList<>();
+            String[] ids = projectIds.split(",");
+            for(String id : ids){
+                //获取项目的信息
+                ProjectVo vo = this.projectService.getProjectVoDetail(Integer.parseInt(id),type);
+                projectVos.add(vo);
+            }
+            resultBean.setMessage("查找成功");
+            resultBean.setSuccess(true);
+            resultBean.setData(projectVos);
+
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return resultBean;
+    }
 
     ///////////////
     /**未用接口**/
@@ -522,58 +650,6 @@ public class APIController {
             e.printStackTrace();
         }
 
-        return resultBean;
-    }
-
-
-    /**
-     * 获取项目信息
-     * @return
-     */
-    @RequestMapping("/getProjects.json")
-    @ResponseBody
-    public ResultBean  getProjects(String params, String accessToken){
-        logger.info("getProjects.json params="+params +" accessToken="+accessToken);
-        ResultBean resultBean = new ResultBean();
-
-        try{
-            if(StringUtil.isBlank(accessToken) || !accessToken.equals(SYSTEM_ACCESS_TOKEN)){
-                resultBean.setMessage("token 为空，请检查参数");
-                return resultBean;
-            }
-
-            ObjectMapper mapper = new ObjectMapper();
-            Map<String,String >maps = mapper.readValue(params, Map.class);
-            String systemType = maps.get("systemType");
-            if(StringUtil.isBlank(systemType)){
-                resultBean.setMessage("systemType 为空，请检查参数");
-                return resultBean;
-            }
-            List<HqlOperateVo> list = new  ArrayList<HqlOperateVo>();
-            list.add(new HqlOperateVo("system", "in", systemType+","+ SystemType.SIEANDTRU.value()));
-            List<ProjectEntity> projectEntities = this.projectService.getList(list);
-            if(projectEntities.size() > 0){
-
-                List<ProjectVo> schoolVos = new ArrayList<>();
-                for(ProjectEntity projectEntity:projectEntities){
-                    ProjectVo vo = new ProjectVo();
-                    BeanUtils.copyProperties(projectEntity, vo);
-                    if(projectEntity.getStartTime() != null){
-                        vo.setStartTime(DateUtil.format(projectEntity.getStartTime(), "yyyy-MM-dd"));
-                    }
-                    if(projectEntity.getEndTime() != null){
-                        vo.setEndTime(DateUtil.format(projectEntity.getEndTime(), "yyyy-MM-dd"));
-                    }
-                    schoolVos.add(vo);
-                }
-                resultBean.setMessage("查找成功");
-                resultBean.setSuccess(true);
-                resultBean.setData(schoolVos);
-            }
-
-        }catch(Exception e){
-            e.printStackTrace();
-        }
         return resultBean;
     }
 

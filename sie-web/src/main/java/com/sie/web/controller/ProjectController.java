@@ -159,7 +159,7 @@ public class ProjectController {
                 RegistrationProjectBean bean = mapper.convertValue(objects.get(i), RegistrationProjectBean.class);
                 beans.add(bean);
             }
-            registrationProjectService.saveTwoProjects(beans);
+            registrationProjectService.updateTwoProjects(beans);
             resultBean.setMessage("保存成功");
             resultBean.setSuccess(true);
         } catch (Exception e) {

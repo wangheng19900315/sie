@@ -6,6 +6,7 @@ import com.sie.framework.entity.RegistrationProjectEntity;
 import com.sie.service.bean.PageInfo;
 import com.sie.service.bean.ProjectBean;
 import com.sie.service.bean.RegistrationProjectBean;
+import com.sie.service.vo.ProjectVo;
 
 import java.util.List;
 import java.util.Map;
@@ -16,5 +17,6 @@ import java.util.Map;
 public interface RegistrationProjectService extends BaseService<RegistrationProjectEntity, Integer> {
 
     List<RegistrationProjectBean> getTwoProjectCheckbox();
-    void saveTwoProjects(List<RegistrationProjectBean> beans);
+    void updateTwoProjects(List<RegistrationProjectBean> beans);
+    List<ProjectVo> getRegistrationProjectVo(String systemType);
 }

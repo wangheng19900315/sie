@@ -82,11 +82,9 @@ public class CourseServiceImpl extends BaseServiceImpl<CourseEntity,Integer> imp
         CourseEntity courseEntity = new CourseEntity();
         try {
             BeanUtils.copyProperties(courseEntity,courseBean);
-//            //设置时间格式
-//            date = DateUtil.parse(courseBean.getStartTimeFormat(),formString);
-//            courseEntity.setStartTime(new Timestamp(date.getTime()));
-//            date = DateUtil.parse(courseBean.getEndTimeFormat(),formString);
-//            courseEntity.setEndTime(new Timestamp(date.getTime()));
+            //开始时间和结束时间用英文的:分开
+            courseEntity.setStartTime(courseBean.getStartTime().replace("：", ":"));
+            courseEntity.setEndTime(courseBean.getEndTime().replace("：", ":"));
         } catch (Exception e) {
             e.printStackTrace();
             return null;

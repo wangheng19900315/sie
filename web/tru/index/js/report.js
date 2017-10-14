@@ -39,7 +39,7 @@ $(function(){
 
         //默认选中第一个学期
         if(termLi != ''){
-            term.find("li").click();
+            term.find("li:first").click();
         }
     });
 

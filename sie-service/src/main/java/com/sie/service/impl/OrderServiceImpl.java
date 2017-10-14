@@ -8,12 +8,14 @@ import com.sie.framework.type.*;
 import com.sie.service.*;
 import com.sie.service.bean.*;
 import com.sie.service.excel.OrderImport;
+import com.sie.service.vo.CourseVo;
 import com.sie.service.vo.OrderVo;
 import com.sie.util.DateUtil;
 import com.sie.util.NumberUtil;
 import com.sie.util.PageUtil;
 import com.sie.util.StringUtil;
 import org.apache.commons.beanutils.BeanUtils;
+import org.apache.commons.beanutils.converters.IntegerConverter;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -783,7 +785,7 @@ public class OrderServiceImpl extends BaseServiceImpl<OrderEntity,Integer> imple
                     vo.setPayTime(DateUtil.format(orderEntity.getPayTime(), "yyyy-MM-dd"));
                 }
                 //遍历order的明细
-                List<CourseBean> courses = new ArrayList<>();
+                List<CourseVo> courses = new ArrayList<>();
                 for(OrderDetailEntity detailEntity:orderEntity.getOrderDetailEntityList()){
                     ProjectEntity projectEntity = detailEntity.getProjectEntity();
                     if(projectEntity != null){
@@ -796,19 +798,26 @@ public class OrderServiceImpl extends BaseServiceImpl<OrderEntity,Integer> imple
                             //得到项目下的课程
                             String[] courseIds = detailEntity.getCourseIds().split(",");
                             for(String courseId : courseIds){
-                                CourseBean courseBean = new CourseBean();
+                                CourseVo courseVo = new CourseVo();
                                 CourseEntity courseEntity = courseDao.getEntity(Integer.valueOf(courseId));
                                 try {
-                                    BeanUtils.copyProperties(courseBean,courseEntity);
+                                    BeanUtils.copyProperties(courseVo,courseEntity);
                                     if(courseEntity.getSchool() != null){
                                         //设置校区名称
                                         School school = School.valueOf(courseEntity.getSchool());
-                                        courseBean.setSchoolName(school.getName());
+                                        courseVo.setSchoolName(school.getName());
                                     }
                                 } catch (Exception e) {
                                     e.printStackTrace();
                                 }
-                                courses.add(courseBean);
+                                //设置课程编码
+                                SystemType type = SystemType.valueOf(Integer.parseInt(systemType));
+                                if(type == SystemType.SIE){
+                                    courseVo.setCode(courseEntity.getSieCode());
+                                }else{
+                                    courseVo.setCode(courseEntity.getTruCode());
+                                }
+                                courses.add(courseVo);
                             }
                         }
                     }

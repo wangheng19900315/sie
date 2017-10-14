@@ -25,7 +25,7 @@ $(function(){
 
 		//默认选中第一个学期
 		if(termLi != ''){
-			term.find("li").click();
+			term.find("li:first").click();
 		}
 	});
 })
@@ -71,8 +71,8 @@ function changeTerm(term){
 		$.each(order.courses,function(ii,course){
 			course = removeNull(course);
 			courses = courses +
-					'<tr> <td><label>' + course.courseID + '</label></td>' +
-					'<td><label>' + course.truCode + '</label></td>' +
+					'<tr> <td><label>' + course.code + '</label></td>' +
+					'<td><label>' + course.englishName + '</label></td>' +
 					'<td><label>' +course.schoolName + '</label></td> </tr>';
 		});
 

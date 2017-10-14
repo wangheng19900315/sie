@@ -15,8 +15,10 @@ public class RegistrationProjectEntity extends BaseEntity {
 //    private Integer projectNumber;//只能为1或者2
 //    private ProjectEntity projectEntityOne;
 //    private ProjectEntity projectEntityTwo;
-    private Integer projectOneId;
-    private Integer projectTwoId;
+//    private Integer projectOneId;
+    private ProjectEntity projectOneEntity;
+//    private Integer projectTwoId;
+    private ProjectEntity projectTwoEntity;
 //
 //    @Basic
 //    @Column(name = "project_number")
@@ -30,23 +32,45 @@ public class RegistrationProjectEntity extends BaseEntity {
 //    }
 //
 
-    @Basic
-    @Column(name = "project_one_id")
-    public Integer getProjectOneId() {
-        return projectOneId;
+//    @Basic
+//    @Column(name = "project_one_id")
+//    public Integer getProjectOneId() {
+//        return projectOneId;
+//    }
+//
+//    public void setProjectOneId(Integer projectOneId) {
+//        this.projectOneId = projectOneId;
+//    }
+//
+//    @Basic
+//    @Column(name = "project_two_id")
+//    public Integer getProjectTwoId() {
+//        return projectTwoId;
+//    }
+
+//    public void setProjectTwoId(Integer projectTwoId) {
+//        this.projectTwoId = projectTwoId;
+//    }
+
+    @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
+    @JoinColumn(name = "project_one_id", nullable = true, columnDefinition = "COMMENT 'project id'")
+    @Where(clause = "h_delete=0")
+    public ProjectEntity getProjectOneEntity() {
+        return projectOneEntity;
     }
 
-    public void setProjectOneId(Integer projectOneId) {
-        this.projectOneId = projectOneId;
+    public void setProjectOneEntity(ProjectEntity projectOneEntity) {
+        this.projectOneEntity = projectOneEntity;
     }
 
-    @Basic
-    @Column(name = "project_two_id")
-    public Integer getProjectTwoId() {
-        return projectTwoId;
+    @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
+    @JoinColumn(name = "project_two_id", nullable = true, columnDefinition = "COMMENT 'project id'")
+    @Where(clause = "h_delete=0")
+    public ProjectEntity getProjectTwoEntity() {
+        return projectTwoEntity;
     }
 
-    public void setProjectTwoId(Integer projectTwoId) {
-        this.projectTwoId = projectTwoId;
+    public void setProjectTwoEntity(ProjectEntity projectTwoEntity) {
+        this.projectTwoEntity = projectTwoEntity;
     }
 }

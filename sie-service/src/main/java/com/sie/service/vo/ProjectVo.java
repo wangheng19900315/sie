@@ -7,22 +7,25 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import java.sql.Timestamp;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by x on 2017/8/12.
  */
 
 public class ProjectVo {
+    private String ids;
     private Integer id;
     private Integer system;
     private String code;
-    private String sieName;
-    private String truName;
+    private String name;
     private String mark;
-    private Integer sieMaxCourse;
-    private Integer truMaxCourse;
-    private String startTime;
-    private String endTime;
+    private Integer maxCourse;
+    private String startTimeStr;
+    private String endTimeStr;
+    Map<String,List<CourseVo>> courseVos;
+    List<DormitoryVo> dormitoryVos;
 
 
     public Integer getSystem() {
@@ -41,22 +44,6 @@ public class ProjectVo {
         this.code = code;
     }
 
-    public String getSieName() {
-        return sieName;
-    }
-
-    public void setSieName(String sieName) {
-        this.sieName = sieName;
-    }
-
-    public String getTruName() {
-        return truName;
-    }
-
-    public void setTruName(String truName) {
-        this.truName = truName;
-    }
-
     public String getMark() {
         return mark;
     }
@@ -65,36 +52,44 @@ public class ProjectVo {
         this.mark = mark;
     }
 
-    public Integer getSieMaxCourse() {
-        return sieMaxCourse;
+    public String getStartTimeStr() {
+        return startTimeStr;
     }
 
-    public void setSieMaxCourse(Integer sieMaxCourse) {
-        this.sieMaxCourse = sieMaxCourse;
+    public void setStartTimeStr(String startTimeStr) {
+        this.startTimeStr = startTimeStr;
     }
 
-    public Integer getTruMaxCourse() {
-        return truMaxCourse;
+    public String getEndTimeStr() {
+        return endTimeStr;
     }
 
-    public void setTruMaxCourse(Integer truMaxCourse) {
-        this.truMaxCourse = truMaxCourse;
+    public void setEndTimeStr(String endTimeStr) {
+        this.endTimeStr = endTimeStr;
     }
 
-    public String getStartTime() {
-        return startTime;
+    public String getIds() {
+        return ids;
     }
 
-    public void setStartTime(String startTime) {
-        this.startTime = startTime;
+    public void setIds(String ids) {
+        this.ids = ids;
     }
 
-    public String getEndTime() {
-        return endTime;
+    public String getName() {
+        return name;
     }
 
-    public void setEndTime(String endTime) {
-        this.endTime = endTime;
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Integer getMaxCourse() {
+        return maxCourse;
+    }
+
+    public void setMaxCourse(Integer maxCourse) {
+        this.maxCourse = maxCourse;
     }
 
     public Integer getId() {
@@ -103,5 +98,21 @@ public class ProjectVo {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public Map<String, List<CourseVo>> getCourseVos() {
+        return courseVos;
+    }
+
+    public void setCourseVos(Map<String, List<CourseVo>> courseVos) {
+        this.courseVos = courseVos;
+    }
+
+    public List<DormitoryVo> getDormitoryVos() {
+        return dormitoryVos;
+    }
+
+    public void setDormitoryVos(List<DormitoryVo> dormitoryVos) {
+        this.dormitoryVos = dormitoryVos;
     }
 }

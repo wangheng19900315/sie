@@ -42,7 +42,7 @@ public class OrderVo  {
 
     private String dormitoryNames;
 
-    List<CourseBean> courses;
+    List<CourseVo> courses;
 
     public String getCode() {
         return code;
@@ -244,11 +244,11 @@ public class OrderVo  {
         this.dormitoryNames = dormitoryNames;
     }
 
-    public List<CourseBean> getCourses() {
+    public List<CourseVo> getCourses() {
         return courses;
     }
 
-    public void setCourses(List<CourseBean> courses) {
+    public void setCourses(List<CourseVo> courses) {
         this.courses = courses;
     }
 }

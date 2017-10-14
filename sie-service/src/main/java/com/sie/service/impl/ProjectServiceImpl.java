@@ -2,16 +2,22 @@ package com.sie.service.impl;
 
 import com.sie.framework.base.HqlOperateVo;
 import com.sie.framework.dao.CourseDao;
+import com.sie.framework.dao.DormitoryDao;
 import com.sie.framework.dao.ProjectDao;
 import com.sie.framework.dao.ProjectPriceDao;
 import com.sie.framework.entity.CourseEntity;
+import com.sie.framework.entity.DormitoryEntity;
 import com.sie.framework.entity.ProjectEntity;
 import com.sie.framework.entity.ProjectPriceEntity;
+import com.sie.framework.type.School;
 import com.sie.framework.type.SystemType;
 import com.sie.service.ProjectService;
 import com.sie.service.bean.ProjectPriceBean;
 import com.sie.service.bean.PageInfo;
 import com.sie.service.bean.ProjectBean;
+import com.sie.service.vo.CourseVo;
+import com.sie.service.vo.DormitoryVo;
+import com.sie.service.vo.ProjectVo;
 import com.sie.util.DateUtil;
 import com.sie.util.NumberUtil;
 import org.apache.commons.beanutils.BeanUtils;
@@ -22,10 +28,7 @@ import org.springframework.stereotype.Service;
 import java.lang.reflect.InvocationTargetException;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by wangheng on 2017/8/9.
@@ -43,6 +46,9 @@ public class ProjectServiceImpl extends BaseServiceImpl<ProjectEntity,Integer> i
 
     @Autowired
     private CourseDao courseDao;
+
+    @Autowired
+    private DormitoryDao dormitoryDao;
 
     @Autowired
     ProjectServiceImpl(ProjectDao projectDao) {
@@ -199,6 +205,93 @@ public class ProjectServiceImpl extends BaseServiceImpl<ProjectEntity,Integer> i
 //        bean.setSiePrice(siePrice);
 //        bean.setTruPrice(truPrice);
         return bean;
+    }
+
+    @Override
+    public ProjectVo getProjectVoDetail(Integer id,SystemType systemType) {
+        ProjectEntity projectEntity = projectDao.getEntity(id);
+        ProjectVo vo = new ProjectVo();
+        try {
+            BeanUtils.copyProperties(vo,projectEntity);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        if(projectEntity.getStartTime() != null){
+            vo.setStartTimeStr(DateUtil.format(projectEntity.getStartTime(), "yyyy/MM/dd"));
+        }
+        if(projectEntity.getEndTime() != null){
+            vo.setEndTimeStr(DateUtil.format(projectEntity.getEndTime(), "yyyy/MM/dd"));
+        }
+        //根据系统设置项目的名称和最大课程数
+        if(systemType == SystemType.SIE){
+            //sie系统
+            vo.setName(projectEntity.getSieName());
+            vo.setMaxCourse(projectEntity.getSieMaxCourse());
+        }else{
+            //tru系统
+            vo.setName(projectEntity.getTruName());
+            vo.setMaxCourse(projectEntity.getTruMaxCourse());
+        }
+        //设置项目为单个项目
+        vo.setIds(projectEntity.getId().toString());
+
+        //设置项目的课程信息
+        List<HqlOperateVo> list = new  ArrayList<HqlOperateVo>();
+        list.add(new HqlOperateVo("system", "in", systemType.value()+","+ SystemType.SIEANDTRU.value()));
+        list.add(new HqlOperateVo("projectId", "=", id.toString()));
+        List<CourseEntity> courseEntities = courseDao.getList(list);
+        Map<String,List<CourseVo>> courseVoMap = new HashMap<>();
+        for(CourseEntity courseEntity : courseEntities){
+            CourseVo courseVo = new CourseVo();
+            try {
+                BeanUtils.copyProperties(courseVo,courseEntity);
+                if(courseEntity.getSchool() != null){
+                    //设置校区名称
+                    School school = School.valueOf(courseEntity.getSchool());
+                    courseVo.setSchoolName(school.getName());
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            //设置课程编码
+            if(systemType == SystemType.SIE){
+                courseVo.setCode(courseEntity.getSieCode());
+            }else{
+                courseVo.setCode(courseEntity.getTruCode());
+            }
+            //判断课程人数是否报满
+            if((courseEntity.getSieTotalNumber() + courseEntity.getTruTotalNumber()) >= courseEntity.getMaxStudent()){
+                courseVo.setReadonly(true);
+            }
+
+            //得到上课时间的key 8：30 -- 10：30
+            String key = courseVo.getStartTime() + " -- " + courseVo.getEndTime();
+            if(courseVoMap.get(key) == null){
+                List<CourseVo> vos = new ArrayList<>();
+                vos.add(courseVo);
+                courseVoMap.put(key,vos);
+            }else{
+                courseVoMap.get(key).add(courseVo);
+            }
+        }
+
+        vo.setCourseVos(courseVoMap);
+        //设置项目的住宿信息
+        list = new  ArrayList<HqlOperateVo>();
+        list.add(new HqlOperateVo("projectId", "=", id.toString()));
+        List<DormitoryEntity> dormitoryEntities = dormitoryDao.getList(list);
+        List<DormitoryVo> dormitoryVos = new ArrayList<>();
+        for(DormitoryEntity dormitoryEntity : dormitoryEntities){
+            DormitoryVo dormitoryVo = new DormitoryVo();
+            dormitoryVo.setName(dormitoryEntity.getName());
+            if(dormitoryEntity.getTotalNumber() >= dormitoryEntity.getMaxNumber()){
+                dormitoryVo.setReadonly(true);
+            }
+            dormitoryVos.add(dormitoryVo);
+        }
+        vo.setDormitoryVos(dormitoryVos);
+
+        return vo;
     }
 
     private void entityToBean(ProjectPriceEntity entity,ProjectPriceBean bean){
