@@ -218,9 +218,26 @@ dhcc.Unit.ajaxFile = function (attrs,fileId, api, successBack, errorBack) {
 dhcc.Unit.successMessage=function(message){
     $("#modal-success").find(".mt10").html(message);
     $('#modal-success').modal('show');
-    setTimeout(function(){$('#modal-success').modal('hide');}, 1500);
+    $("body").addClass("modal-scroll").css({
+        "overflow":"hidden",
+        "padding-right":0
+    });
+    setTimeout(function(){
+        $('#modal-success').modal('hide');
+        $("body").removeClass("modal-scroll").css({
+            "overflow":"auto"
+        });
+    }, 1500);
+
 }
 
+
+dhcc.Unit.hideModal=function(modalId){
+    $("#"+modalId).modal("hide");
+    $("body").removeClass("modal-scroll").css({
+        "overflow":"auto"
+    });
+}
 
 //判断json对象是否有控制 有设置为''
 function removeNull(json){

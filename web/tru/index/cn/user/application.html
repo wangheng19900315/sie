@@ -148,7 +148,7 @@
 						<div class="form-list form-list-inline form-list-lg">
 							<div class="form-group">
 								<label>在读大学</label>
-								<input type="text" class="form-control" placeholder="请填写学校全称" data-toggle="modal" data-target="#modal-college" readonly name="schoolName" >
+								<input type="text" class="form-control" placeholder="请填写学校全称" id="schoolName" data-toggle="modal" data-target="#modal-college" readonly name="schoolName" >
 							</div>
 							<div class="form-group">
 								<label>专业</label>
@@ -190,143 +190,47 @@
 		    <div class="modal-body">
 				<div class="college-list">
 					<div class="form-list form-inline">
-						<select id="president" name="president">
-					       	<option></option>
-					       	<option>Adelphi University</option>
-					       	<option>Agnes Scott College</option>
-					       	<option>Albion College</option>
-					       	<option>Albright College</option>
-					       	<option>Allegheny College</option>
-					       	<option>Allen University</option>
-					       	<option>Alliant International University</option>
-					       	<option>Alma College</option>
-					       	<option>American Jewish University</option>
-					       	<option>American University</option>
-					       	<option>Amherst College</option>
-					       	<option>Amridge University</option>
-					       	<option>Andrews University</option>
-					       	<option>Argosy University</option>
-					    </select>
-						<input type="button" class="btn btn-wd-sm btn-info" value="保存" />
+						<select id="president" name="president"  >
+							<option></option>
+						</select>
+						<input type="button" class="btn btn-wd-sm btn-info" id="select_school_btn" value="保存" />
 					</div>
 					<div class="tab-box college-tab">
 						<ul class="nav nav-tabs" role="tablist">
-						    <li role="presentation" class="active"><a href="#college01" aria-controls="college01" role="tab" data-toggle="tab">美国（US）</a></li>
-						    <li role="presentation"><a href="#college02" aria-controls="college02" role="tab" data-toggle="tab">加拿大（CAN）</a></li>
+						    <!--<li role="presentation" class="active"><a href="#college01" aria-controls="college01" role="tab" data-toggle="tab">美国（US）</a></li>-->
+						    <!--<li role="presentation"><a href="#college02" aria-controls="college02" role="tab" data-toggle="tab">加拿大（CAN）</a></li>-->
 					  	</ul>
 					  	<div class="tab-content">
-						    <div role="tabpanel" class="tab-pane active" id="college01">
-						    	<div class="college-a">
-						    		<a class="active" href="javascript:;">AK</a>
-						    		<a href="javascript:;">AK</a>
-						    		<a href="javascript:;">AK</a>
-						    		<a href="javascript:;">MI</a>
-						    		<a href="javascript:;">MO</a>
-						    		<a href="javascript:;">MS</a>
-						    		<a href="javascript:;">NM</a>
-						    		<a href="javascript:;">AK</a>
-						    		<a href="javascript:;">AK</a>
-						    		<a href="javascript:;">OH</a>
-						    		<a href="javascript:;">AK</a>
-						    		<a href="javascript:;">SD</a>
-						    		<a href="javascript:;">TN</a>
-						    		<a href="javascript:;">MN</a>
-						    		<a href="javascript:;">AK</a>
-						    		<a href="javascript:;">SD</a>
-						    		<a href="javascript:;">TN</a>
-						    		<a href="javascript:;">MN</a>
-						    		<a href="javascript:;">AK</a>
-						    		<a href="javascript:;">AK</a>
-						    		<a href="javascript:;">WV</a>
-						    		<a href="javascript:;">AK</a>
-						    		<a href="javascript:;">AK</a>
-						    		<a href="javascript:;">AK</a>
-						    		<a href="javascript:;">CA</a>
-						    		<a href="javascript:;">AK</a>
-						    	</div>
-						    	<div class="college-ul">
-							    	<ul class="clearfix">
-							    		<li><i class="fa fa-university"></i> McGill University</li>
-							    		<li><i class="fa fa-university"></i> McGill University</li>
-							    		<li><i class="fa fa-university"></i> McGill University</li>
-							    		<li><i class="fa fa-university"></i> McGill University</li>
-							    		<li><i class="fa fa-university"></i> McGill University</li>
-							    		<li><i class="fa fa-university"></i> McGill University</li>
-							    		<li><i class="fa fa-university"></i> McGill University</li>
-							    		<li><i class="fa fa-university"></i> Memorial University of Newfoundland</li>
-							    		<li><i class="fa fa-university"></i> McGill University</li>
-							    		<li><i class="fa fa-university"></i> McGill University</li>
-							    		<li><i class="fa fa-university"></i> McGill University</li>
-							    		<li><i class="fa fa-university"></i> McGill University</li>
-							    		<li><i class="fa fa-university"></i> McGill University</li>
-							    		<li><i class="fa fa-university"></i> McGill University</li>
-							    		<li><i class="fa fa-university"></i> McGill University</li>
-							    		<li><i class="fa fa-university"></i> McGill University</li>
-							    		<li><i class="fa fa-university"></i> McGill University</li>
-							    		<li><i class="fa fa-university"></i> McGill University</li>
-							    		<li><i class="fa fa-university"></i> McGill University</li>
-							    		<li><i class="fa fa-university"></i> McGill University</li>
-							    		<li><i class="fa fa-university"></i> McGill University</li>
-							    		<li><i class="fa fa-university"></i> McGill University</li>
-							    		<li><i class="fa fa-university"></i> McGill University</li>
-							    		<li><i class="fa fa-university"></i> McGill University</li>
-							    		<li><i class="fa fa-university"></i> McGill University</li>
-							    		<li><i class="fa fa-university"></i> McGill University</li>
-							    		<li><i class="fa fa-university"></i> McGill University</li>
-							    		<li><i class="fa fa-university"></i> McGill University</li>
-							    		<li><i class="fa fa-university"></i> McGill University</li>
-							    		<li><i class="fa fa-university"></i> McGill University</li>
-							    		<li><i class="fa fa-university"></i> McGill University</li>
-							    		<li><i class="fa fa-university"></i> McGill University</li>
-							    		<li><i class="fa fa-university"></i> McGill University</li>
-							    		<li><i class="fa fa-university"></i> McGill University</li>
-							    		<li><i class="fa fa-university"></i> McGill University</li>
-							    		<li><i class="fa fa-university"></i> McGill University</li>
-							    		<li><i class="fa fa-university"></i> McGill University</li>
-							    		<li><i class="fa fa-university"></i> McGill University</li>
-							    		<li><i class="fa fa-university"></i> McGill University</li>
-							    		<li><i class="fa fa-university"></i> McGill University</li>
-							    		<li><i class="fa fa-university"></i> McGill University</li>
-							    		<li><i class="fa fa-university"></i> McGill University</li>
-							    		<li><i class="fa fa-university"></i> McGill University</li>
-							    		<li><i class="fa fa-university"></i> McGill University</li>
-							    	</ul>
-						    	</div>
-						    </div>
-						    <div role="tabpanel" class="tab-pane" id="college02">
-						    	<div class="college-ul">
-							    	<ul class="clearfix">
-							    		<li><i class="fa fa-university"></i> McGill University</li>
-							    		<li><i class="fa fa-university"></i> Memorial University</li>
-							    		<li><i class="fa fa-university"></i> McGill University</li>
-							    		<li><i class="fa fa-university"></i> Memorial University</li>
-							    		<li><i class="fa fa-university"></i> McGill University</li>
-							    		<li><i class="fa fa-university"></i> McGill Newfoundland</li>
-							    		<li><i class="fa fa-university"></i> McGill University</li>
-							    		<li><i class="fa fa-university"></i> Memorial University of Newfoundland</li>
-							    		<li><i class="fa fa-university"></i> McGill University</li>
-							    		<li><i class="fa fa-university"></i> McGill University</li>
-							    		<li><i class="fa fa-university"></i> Memorial University</li>
-							    		<li><i class="fa fa-university"></i> McGill University</li>
-							    		<li><i class="fa fa-university"></i> McGill Newfoundland</li>
-							    		<li><i class="fa fa-university"></i> McGill University</li>
-							    		<li><i class="fa fa-university"></i> McGill University</li>
-							    		<li><i class="fa fa-university"></i> Memorial University</li>
-							    		<li><i class="fa fa-university"></i> McGill University</li>
-							    		<li><i class="fa fa-university"></i> Memorial University</li>
-							    		<li><i class="fa fa-university"></i> McGill University</li>
-							    		<li><i class="fa fa-university"></i> McGill Newfoundland</li>
-							    		<li><i class="fa fa-university"></i> McGill University</li>
-							    		<li><i class="fa fa-university"></i> Memorial University of Newfoundland</li>
-							    		<li><i class="fa fa-university"></i> McGill University</li>
-							    		<li><i class="fa fa-university"></i> McGill University</li>
-							    		<li><i class="fa fa-university"></i> Memorial University</li>
-							    		<li><i class="fa fa-university"></i> McGill University</li>
-							    		<li><i class="fa fa-university"></i> McGill Newfoundland</li>
-							    		<li><i class="fa fa-university"></i> McGill University</li>
-							    	</ul>
-						    	</div>
-						    </div>
+						    <!--<div role="tabpanel" class="tab-pane active" id="college01">-->
+						    	<!--<div class="college-a">-->
+						    		<!--<a class="active" href="javascript:;">AK</a>-->
+						    		<!--<a href="javascript:;">AK</a>-->
+						    		<!--<a href="javascript:;">AK</a>-->
+						    		<!--<a href="javascript:;">MI</a>-->
+						    	<!--</div>-->
+						    	<!--<div class="college-ul">-->
+							    	<!--<ul class="clearfix">-->
+							    		<!--<li><i class="fa fa-university"></i> McGill University</li>-->
+							    		<!--<li><i class="fa fa-university"></i> McGill University</li>-->
+							    		<!--<li><i class="fa fa-university"></i> McGill University</li>-->
+							    		<!--<li><i class="fa fa-university"></i> McGill University</li>-->
+							    	<!--</ul>-->
+						    	<!--</div>-->
+						    <!--</div>-->
+						    <!--<div role="tabpanel" class="tab-pane" id="college02">-->
+						    	<!--<div class="college-ul">-->
+							    	<!--<ul class="clearfix">-->
+							    		<!--<li><i class="fa fa-university"></i> McGill University</li>-->
+							    		<!--<li><i class="fa fa-university"></i> Memorial University</li>-->
+							    		<!--<li><i class="fa fa-university"></i> McGill University</li>-->
+							    		<!--<li><i class="fa fa-university"></i> Memorial University</li>-->
+							    		<!--<li><i class="fa fa-university"></i> McGill University</li>-->
+							    		<!--<li><i class="fa fa-university"></i> McGill Newfoundland</li>-->
+							    		<!--<li><i class="fa fa-university"></i> McGill University</li>-->
+							    		<!--<li><i class="fa fa-university"></i> Memorial University of Newfoundland</li>-->
+							    	<!--</ul>-->
+						    	<!--</div>-->
+						    <!--</div>-->
   						</div>
 					</div>
 				</div>

@@ -132,8 +132,7 @@ $(function(){
 
         dhcc.Unit.ajaxUtil(attrs,"modifyPassword.json",function(data){
             dhcc.Unit.successMessage("密码修改成功");
-            $('#modal-psd').modal('hide')
-
+            dhcc.Unit.hideModal("modal-psd");
         },function(data){
             $("#modifyNewPasswordRepeat").next().html(data);
         })
@@ -156,7 +155,7 @@ $(function(){
 
         dhcc.Unit.ajaxUtil(attrs,"resetPassword.json",function(data){
             dhcc.Unit.successMessage("新密码已发送至邮箱，请验收");
-            $('#modal_reseat_password').modal('hide')
+            dhcc.Unit.hideModal("modal_reseat_password");
         },function(data){
             $("#reset_email").next().html(data);
         })

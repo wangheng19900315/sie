@@ -576,18 +576,16 @@ public class APIController {
         ResultBean resultBean = new ResultBean();
 
         try{
-
             if(StringUtil.isBlank(accessToken) || !accessToken.equals(SYSTEM_ACCESS_TOKEN)){
                 resultBean.setMessage("token 为空，请检查参数");
                 return resultBean;
             }
 
-
-            List<SchoolEntity> studentEntityList = this.schoolService.getList(new ArrayList<HqlOperateVo>());
-            if(studentEntityList.size() > 0){
+            List<SchoolEntity> schoolEntities = this.schoolService.getList(new ArrayList<HqlOperateVo>());
+            if(schoolEntities.size() > 0){
 
                 List<SchoolVo> schoolVos = new ArrayList<>();
-                for(SchoolEntity schoolEntity:studentEntityList){
+                for(SchoolEntity schoolEntity:schoolEntities){
                     SchoolVo vo = new SchoolVo();
                     BeanUtils.copyProperties(schoolEntity, vo);
                     schoolVos.add(vo);
