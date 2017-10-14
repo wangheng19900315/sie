@@ -58,7 +58,7 @@ document.writeln("				<div>");
 document.writeln('				<a class="btn btn-warning-ghost" title="登录" id="login_modal_btn" data-toggle="modal" data-target="#modal-wechat">登录</a>');
 document.writeln('               <a class="btn btn-reg" title="注册" data-toggle="modal" data-target="#modal-wechat">注册</a>    ' );
 document.writeln("				</div>");
-document.writeln("				<div class=\'dropdown\'>");
+document.writeln("				<div class=\'dropdown\' style='display: none'>");
 document.writeln("					<a id=\'user-head\' class=\'user-head\' href=\'javascript:;\' data-toggle=\'dropdown\' role=\'button\' aria-haspopup=\'true\' aria-expanded=\'false\'></a>");
 document.writeln("					<div class=\'user-head-box dropdown-menu\' aria-labelledby=\'user-head\'>");
 document.writeln("						<em></em>");

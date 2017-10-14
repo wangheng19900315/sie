@@ -28,4 +28,14 @@ public interface StudentService extends BaseService<StudentEntity, Integer> {
     String repeatEntity(StudentExcelBean bean);
 
     String repeatEntity(StudentEntity entity);
+
+    /**
+     * 修改密码
+     * @param userName
+     * @param password
+     * @return
+     */
+    ResultBean updatePassword(String userName, String password, String newPassword);
+
+    ResultBean updateResetPassword(String userName);
 }

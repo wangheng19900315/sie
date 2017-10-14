@@ -7,10 +7,7 @@ import com.sie.framework.help.ApplicationHelp;
 import com.sie.service.StudentService;
 import com.sie.service.bean.ResultBean;
 import com.sie.service.excel.StudentExcelBean;
-import com.sie.util.DateUtil;
-import com.sie.util.Md5Util;
-import com.sie.util.NumberUtil;
-import com.sie.util.StringUtil;
+import com.sie.util.*;
 import org.apache.commons.beanutils.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -203,5 +200,53 @@ public class StudentServiceImpl extends BaseServiceImpl<StudentEntity,Integer> i
             return result;
         }
         return result;
+    }
+
+    @Override
+    public ResultBean updatePassword(String userName, String password, String newPassword) {
+        ResultBean resultBean = new ResultBean();
+        List<HqlOperateVo> hqlOperateVos = new ArrayList<>();
+        hqlOperateVos.add(new HqlOperateVo("userName", "=", userName));
+        hqlOperateVos.add(new HqlOperateVo("password", "=", Md5Util.getMD5(password, ApplicationHelp.MD5_SHA1)));
+
+        List<StudentEntity> studentEntityList = studentDao.getList(hqlOperateVos);
+        if(studentEntityList == null || studentEntityList.size() == 0){
+            resultBean.setMessage("原始密码不正确，请重新输入");
+            return resultBean;
+        }
+
+        StudentEntity studentEntity = studentEntityList.get(0);
+        studentEntity.setPassword(Md5Util.getMD5(newPassword, ApplicationHelp.MD5_SHA1));
+        resultBean.setMessage("修改成功");
+        resultBean.setSuccess(true);
+        return resultBean;
+    }
+
+    @Override
+    public ResultBean updateResetPassword(String userName) {
+        ResultBean resultBean = new ResultBean();
+        List<HqlOperateVo> hqlOperateVos = new ArrayList<>();
+        hqlOperateVos.add(new HqlOperateVo("userName", "=", userName));
+
+        List<StudentEntity> studentEntityList = studentDao.getList(hqlOperateVos);
+        if(studentEntityList == null || studentEntityList.size() == 0){
+            resultBean.setMessage("用户不存在，请重新输入");
+            return resultBean;
+        }
+
+        StudentEntity studentEntity = studentEntityList.get(0);
+        String newPassword = (int)((Math.random()*9+1)*100000)+"";
+        studentEntity.setPassword(Md5Util.getMD5(newPassword, ApplicationHelp.MD5_SHA1));
+
+        try {
+            SendMailUtil.sendEmail("smtp.163.com","wangheng19900315@163.com", "900315", "wangheng19900315@163.com","网站密码修改","您的新密码为"+newPassword, studentEntity.getEmail());
+        } catch (Exception e) {
+            resultBean.setMessage("发送邮件失败");
+            e.printStackTrace();
+            return resultBean;
+        }
+        resultBean.setMessage("修改成功,密码已发送邮箱");
+        resultBean.setSuccess(true);
+        return resultBean;
     }
 }
