@@ -64,7 +64,7 @@ document.writeln("</div>");
 
 
 document.writeln('<!-- modal-box -->'+
-    '<div class="modal modal-userBox fade" id="modal-id" tabindex="-1" role="dialog" data-backdrop="static">'+
+    '<div class="modal modal-userBox fade" id="modal_reseat_password" tabindex="-1" role="dialog" data-backdrop="static">'+
       '<div class="modal-dialog">'+
         '<div class="modal-content">'+
             ' <div class="modal-header">'+
@@ -72,13 +72,15 @@ document.writeln('<!-- modal-box -->'+
                 '<h4 class="modal-title text-center">身份认证</h4>'+
             ' </div>'+
             ' <div class="modal-body">'+
-                ' <div class="form-list form-list-inline">'+
+                ' <div class="form-list">'+
                     '<div class="form-group">'+
-                        ' <label>用户名：</label>'+
-                        '<input type="text" class="form-control" placeholder="请输入您的邮箱">'+
+                        //' <label>用户名：</label>'+
+    '   <i class="fa fa-envelope-o"></i>'+
+                        '<input type="text" class="form-control" id="reset_email" placeholder="请输入您的邮箱">'+
+    '   <label class="error"></label>'+
                     '  </div>'+
                     '   <div class="text-right mt30">'+
-                        '   <input type="submit" class="btn btn-wd-sm btn-primary" value="确认" />'+
+                        '   <input type="submit" class="btn btn-wd-sm btn-primary" id="resetPasswordBtn" value="确认" />'+
                         '   </div>'+
                  '   </div>'+
             '   </div>'+
@@ -179,7 +181,8 @@ document.writeln('<!-- modal-box -->'+
                 '   </div>'+
                 '   <div class="txt-p">'+
                 '   <p class="mt10">'+
-                '   <a href="#">忘记密码？</a>'+
+
+                '    <a data-dismiss="modal" data-toggle="modal" data-target="#modal_reseat_password">忘记密码</a>'+
                 '</p>'+
                 '<p class="text-right mt10">'+
                 '    <a data-dismiss="modal" data-toggle="modal" data-target="#modal-register">还未注册账户？ 注册 &gt;</a>'+
@@ -203,19 +206,22 @@ document.writeln('<!-- modal-box -->'+
 '   <div class="form-list">'+
 '   <div class="form-group">'+
 '   <i class="ico ico-lock"></i>'+
-'   <input type="password" class="form-control" placeholder="原密码">'+
+'   <input type="password" id="modifyPassword" class="form-control" placeholder="原密码">'+
+    '   <label class="error"></label>'+
 '   </div>'+
 '   <div class="form-group">'+
 '   <i class="ico ico-lock"></i>'+
-'   <input type="password" class="form-control" placeholder="新密码">'+
+'   <input type="password" id="modifyNewPassword"  class="form-control" placeholder="新密码">'+
+    '   <label class="error"></label>'+
 '   </div>'+
 '   <div class="form-group">'+
 '   <i class="ico ico-lock"></i>'+
-'   <input type="password" class="form-control" placeholder="确认密码">'+
-'   <label class="error">&times; 密码不一致</label>'+
+'   <input type="password" id="modifyNewPasswordRepeat" class="form-control" placeholder="确认密码">'+
+    '   <label class="error"></label>'+
+'   <label class="error"></label>'+
 '</div>'+
 '<div class="mt30">'+
-'   <input type="submit" class="btn btn-block btn-primary" value="确认" />'+
+'   <input type="submit" class="btn btn-block btn-primary" id="modifyPasswordBtn" value="确认" />'+
 '   </div>'+
 '   </div>'+
 '   </div>'+

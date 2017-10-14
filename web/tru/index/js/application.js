@@ -33,8 +33,10 @@ $(function(){
         //加载照片
         if (data.image != null && data.image != undefined && data.image != '') {
             var params = {"image":data.image};
-            //$('#uploadCard').attr('src', rootPath + 'loadImage?params=' + JSON.stringify(params) + '&accessToken='+accessToken );
+            //$('#uploadCard').attr('src',  );
             //$("#test").trigger("click")
+            $(".file-img").html('<img src="" class="img-responsive" alt="头像">')
+            $(".file-img").find("img").attr("src",rootPath + 'loadImage?params=' + JSON.stringify(params) + '&accessToken='+accessToken)
         }
     });
 

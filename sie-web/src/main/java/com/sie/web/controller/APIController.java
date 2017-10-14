@@ -486,6 +486,86 @@ public class APIController {
 
 
     /**
+     * 学生修改密码
+     * @return
+     */
+    @RequestMapping(value = "/modifyPassword.json",method=RequestMethod.POST)
+    @ResponseBody
+    public ResultBean modifyPassword(String params, String accessToken){
+        logger.info("modifyPassword.json params="+params +" accessToken="+accessToken);
+        ResultBean resultBean = new ResultBean();
+
+        try{
+            ObjectMapper mapper = new ObjectMapper();
+            Map<String,String >maps = mapper.readValue(params, Map.class);
+            String userName = maps.get("userName");
+            String password = maps.get("password");
+            String newPassword = maps.get("newPassword");
+
+            if(StringUtil.isBlank(accessToken) || !accessToken.equals(SYSTEM_ACCESS_TOKEN)){
+                resultBean.setMessage("token 为空，请检查参数");
+                return resultBean;
+            }
+
+            if(StringUtil.isBlank(userName)){
+                resultBean.setMessage("用户名 为空，请检查参数");
+                return resultBean;
+            }
+
+            if(StringUtil.isBlank(password)){
+                resultBean.setMessage("密码 为空，请检查参数");
+                return resultBean;
+            }
+
+            if(StringUtil.isBlank(newPassword)){
+                resultBean.setMessage("新密码 为空，请检查参数");
+                return resultBean;
+            }
+            resultBean  = this.studentService.updatePassword(userName, password, newPassword);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+
+        return resultBean;
+    }
+
+
+
+    /**
+     * 学生忘记密码密码
+     * @return
+     */
+    @RequestMapping(value = "/resetPassword.json",method=RequestMethod.POST)
+    @ResponseBody
+    public ResultBean resetPassword(String params, String accessToken){
+        logger.info("resetPassword.json params="+params +" accessToken="+accessToken);
+        ResultBean resultBean = new ResultBean();
+
+        try{
+            ObjectMapper mapper = new ObjectMapper();
+            Map<String,String >maps = mapper.readValue(params, Map.class);
+            String userName = maps.get("userName");
+
+            if(StringUtil.isBlank(accessToken) || !accessToken.equals(SYSTEM_ACCESS_TOKEN)){
+                resultBean.setMessage("token 为空，请检查参数");
+                return resultBean;
+            }
+
+            if(StringUtil.isBlank(userName)){
+                resultBean.setMessage("用户名 为空，请检查参数");
+                return resultBean;
+            }
+            resultBean  = this.studentService.updateResetPassword(userName);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+
+        return resultBean;
+    }
+
+
+
+    /**
      * 获取学校信息
      * @return
      */

@@ -59,8 +59,6 @@ public class SendMailUtil {
 
 
     public static void main(String[] args) throws Exception{
-
-        sendEmail("smtp.163.com","12312312@163.com", "90031511", "wangheng19900315@163.com","退款信息","我要退款","953125978@qq.com");
     }
 
 }
