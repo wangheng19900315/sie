@@ -1,5 +1,8 @@
-
+var orders;
 $(function(){
+	if(!judgeLogin()){
+		return;
+	}
 
 	/**
 	 * 加载报名项目信息
@@ -30,38 +33,47 @@ $(function(){
 	});
 
 	//绑定订单保存事件
-	$("input[type=button]").bind("click", function () {
+	$("#validOrder").bind("click", function () {
 		//判断最少每个项目选择一门课程 和总课程数必须是选择数
 		var num = $(".project-tab").find("input[type=checkbox]:checked").length;
 		var maxNum = $("#course-num").attr("li-value");
 		if(num != maxNum){
 			//TODO 进行提示
 			alert("课程总数不对");
+			return;
 		}
 		//判断每个项目必须最少选择一门课程
+		var flag = false;
+		var projectName="";
 		$(".project-tab").find("a").each(function() {
-			var projectId = $(this).attr("aria-controls");
-			var projectName = $(this).text();
-			//获取所有的课程
-			num = $("#" + projectId).find("input[type=checkbox]:checked").length;
-			if(num == 0){
-				//TODO 进行提示
-				alert(projectName + "必须选择一门课程");
-			}
+				var projectId = $(this).attr("aria-controls");
+				projectName = $(this).text();
+				//获取所有的课程
+				num = $("#" + projectId).find("input[type=checkbox]:checked").length;
+				if(num == 0){
+					//TODO 进行提示
+					flag=true;
+					return;
+				}
 		});
-		//Todo 设置model为隐藏状态
-		$("#modal-order").modal("hide");
+		if(flag){
+			alert(projectName + "必须选择一门课程");
+			return;
+		}
+		//触发按钮进行显示
+		$("#create-order").click();
+	});
 
-
+	$("#create-order").bind("click", function () {
 		var courseTr = '';
 		var dormitoryTr = '';
-		var orders = [];
+		orders = [];
 		$(".project-tab").find("a").each(function(){
-			var order = {};
+			var project = {};
 			//去掉coursetab得到projectid
 			var projectId = $(this).attr("aria-controls").substr(9);
 			var projectName = $(this).text();
-			order["projectId"] = projectId;
+			project["projectId"] = parseInt(projectId);
 
 			var courses = [];
 			//获取所有的课程
@@ -74,17 +86,20 @@ $(function(){
 					'<td><label>' + parentTr.prev().text() + '</label></td>'+
 					'<td><label>' + projectName + '</label></td></tr>';
 			});
-			order["courseIds"] = courses;
-
+			project["courseIds"] = courses.join(",");
+			orders.push(project);
 			//获取住宿
 			var dormitory = $("#dormitory").find("input[name=dormitory"+projectId+"]:checked");
-			debugger;
 			console.log(dormitory);
-			dormitoryTr = dormitoryTr + '<tr>'+
-				'<td><label>' + dormitory.next().next().text() + '</label></tr>';
-			order["dormitoryId"] = dormitory.val();
-
-			orders.push(order);
+			debugger;
+			if(dormitory.length > 0){
+				dormitoryTr = dormitoryTr + '<tr>'+
+					'<td><label>' + dormitory.next().next().text() + '</label></tr>';
+				project = {};
+				project["projectId"] = parseInt(projectId);
+				project["dormitoryId"] = parseInt(dormitory.val());
+				orders.push(project);
+			}
 		});
 
 		//显示课程信息
@@ -94,6 +109,20 @@ $(function(){
 		//显示住宿信息
 		$("#dormitory-list").empty();
 		$("#dormitory-list").append(dormitoryTr);
+	});
+	//确认下单功能
+	$("#firm-order").bind("click",function(){
+		attrs={};
+		attrs.systemType=parseInt(systemType);
+		attrs.studentId = parseInt(userInfo.id+"");
+		attrs.orderDetailBean = orders;
+		/**
+		 * 保存订单信息
+		 */
+		dhcc.Unit.ajaxUtil(attrs,"createOrder.json",function(data) {
+			$("#success-order-message").click();
+			//Todo 页面进行跳转
+		});
 	});
 
 })

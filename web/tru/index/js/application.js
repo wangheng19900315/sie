@@ -48,9 +48,11 @@ $(function(){
         attrs=params;
         dhcc.Unit.ajaxFile(attrs,"headImage","saveApplicationForm.json",function(data){
             //等待1.5秒后消失
-            dhcc.Unit.successMessage("提交成功");
+            dhcc.Unit.successMessage("提交成功",function(){
+                //页面进行跳转
+                window.location.href = "project-registration.html";
+            });
         });
-        $("#saveApplication").attr("disabled", true);
     });
 
     dhcc.Unit.ajaxUtil({}, "getSchool.json",function(data){

@@ -184,6 +184,11 @@ dhcc.Unit.ajaxUtil = function (attrs, api, successBack, errorBack) {
 
 };
 
+//TODO 错误处理公共函数
+function errorBack(message){
+    alert(message);
+}
+
 
 /** 提交的form, 显示输出结果的renderer */
 dhcc.Unit.ajaxFile = function (attrs,fileId, api, successBack, errorBack) {
@@ -215,7 +220,7 @@ dhcc.Unit.ajaxFile = function (attrs,fileId, api, successBack, errorBack) {
 };
 
 
-dhcc.Unit.successMessage=function(message){
+dhcc.Unit.successMessage=function(message,callBack){
     $("#modal-success").find(".mt10").html(message);
     $('#modal-success').modal('show');
     $("body").addClass("modal-scroll").css({
@@ -227,6 +232,9 @@ dhcc.Unit.successMessage=function(message){
         $("body").removeClass("modal-scroll").css({
             "overflow":"auto"
         });
+        if(typeof(eval(callBack))=="function"){
+            callBack();
+        }
     }, 1500);
 
 }

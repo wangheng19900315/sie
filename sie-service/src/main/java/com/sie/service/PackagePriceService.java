@@ -21,5 +21,7 @@ public interface PackagePriceService extends BaseService<ProjectPriceEntity, Int
 
     PageInfo<PackagePriceBean> getPriceList(Integer page, Integer rows, List<HqlOperateVo> hqlOperateVos);
 
-    public ProjectPriceEntity getEntityByCourse(Integer projectCount, Integer courseCount, Integer systType);
+    ProjectPriceEntity getEntityByCourse(Integer projectCount, Integer courseCount, Integer systType);
+
+    double getProjectPrice (int systemType,int projectNum,int courseNum);
 }

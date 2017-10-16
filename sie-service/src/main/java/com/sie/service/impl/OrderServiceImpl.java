@@ -538,8 +538,6 @@ public class OrderServiceImpl extends BaseServiceImpl<OrderEntity,Integer> imple
 
                 if(dormitoryEntity == null){
                     throw new RuntimeException("查找不到宿舍信息，请确认提交信息");
-//                    resultBean.setMessage("查找不到宿舍信息，请确认提交信息");
-//                    return resultBean;
                 }
                 orderDetailEntity.setDormitoryEntity(dormitoryEntity);
                 orderDetailEntity.setCourseCount(0);

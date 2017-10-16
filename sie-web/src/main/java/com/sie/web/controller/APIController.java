@@ -8,9 +8,9 @@ import com.sie.framework.type.OrderType;
 import com.sie.framework.type.SystemType;
 import com.sie.service.*;
 import com.sie.service.bean.OrderBean;
+import com.sie.service.bean.OrderDetailBean;
 import com.sie.service.bean.ResultBean;
 import com.sie.service.vo.*;
-import com.sie.util.DateUtil;
 import com.sie.util.FileUtil;
 import com.sie.util.NumberUtil;
 import com.sie.util.StringUtil;
@@ -63,6 +63,9 @@ public class APIController {
 
     @Autowired
     private PackagePriceService packagePriceService;
+
+    @Autowired
+    private DormitoryService  dormitoryService;
 
     @Autowired
     private GradeService gradeService;
@@ -417,7 +420,7 @@ public class APIController {
      * 获取报名项目下的课程和住宿信息
      * @return
      */
-    @RequestMapping("/getProjectDetails.json")
+    @RequestMapping(value="/getProjectDetails.json" , method = RequestMethod.POST)
     @ResponseBody
     public ResultBean getProjectDetails(String params, String accessToken){
         logger.info("getProjects.json params="+params +" accessToken="+accessToken);
@@ -461,6 +464,57 @@ public class APIController {
         }catch(Exception e){
             e.printStackTrace();
         }
+        return resultBean;
+    }
+
+    /**
+     * 用户下单
+     * @return
+     */
+    @RequestMapping("/createOrder.json")
+    @ResponseBody
+    public ResultBean  createOrder(String params, String accessToken){
+        logger.info("createOrder.json params="+params +" accessToken="+accessToken);
+        ResultBean resultBean = new ResultBean();
+
+        try{
+            if(StringUtil.isBlank(accessToken) || !accessToken.equals(SYSTEM_ACCESS_TOKEN)){
+                resultBean.setMessage("token 为空，请检查参数");
+                return resultBean;
+            }
+
+            ObjectMapper mapper = new ObjectMapper();
+            OrderBean orderBean = mapper.readValue(params, OrderBean.class);
+            orderBean.setOrderType(OrderType.USER.value());
+            if(!NumberUtil.isSignless(orderBean.getStatus())){
+                orderBean.setStatus(OrderStatus.SUBMIT.value());
+            }
+            //设置订单金额
+            int projectNum = orderBean.getOrderDetailBean().size();
+            int courseNum = 0;
+            double money = 0;
+            for(OrderDetailBean detailBean : orderBean.getOrderDetailBean()){
+                //添加住宿的价格
+                if(detailBean.getDormitoryId() != null){
+                    DormitoryEntity dormitoryEntity = dormitoryService.get(detailBean.getDormitoryId());
+                    if(dormitoryEntity != null){
+                        money += dormitoryEntity.getPrice();
+                    }
+                }else{
+                    String[] courses = detailBean.getCourseIds().split(",");
+                    courseNum += courses.length;
+                }
+            }
+            //添加课程的价格
+            money += packagePriceService.getProjectPrice(orderBean.getSystemType(),projectNum,courseNum);
+
+            //设置项目的总价格
+            orderBean.setMoney(money);
+            resultBean =this.orderService.addOrder(orderBean);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+
         return resultBean;
     }
 
@@ -811,35 +865,6 @@ public class APIController {
 //
 //        return resultBean;
 //    }
-
-
-    /**
-     * 用户下单
-     * @return
-     */
-    public ResultBean  createOrder(String params, String accessToken){
-        logger.info("createOrder.json params="+params +" accessToken="+accessToken);
-        ResultBean resultBean = new ResultBean();
-
-        try{
-            if(StringUtil.isBlank(accessToken) || !accessToken.equals(SYSTEM_ACCESS_TOKEN)){
-                resultBean.setMessage("token 为空，请检查参数");
-                return resultBean;
-            }
-
-            ObjectMapper mapper = new ObjectMapper();
-            OrderBean orderBean = mapper.readValue(params, OrderBean.class);
-            orderBean.setOrderType(OrderType.USER.value());
-            if(!NumberUtil.isSignless(orderBean.getStatus())){
-                orderBean.setStatus(OrderStatus.SUBMIT.value());
-            }
-            resultBean =this.orderService.addOrder(orderBean);
-        }catch(Exception e){
-            e.printStackTrace();
-        }
-
-        return resultBean;
-    }
 
 
     /**

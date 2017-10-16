@@ -102,4 +102,17 @@ public class PackagePriceServiceImpl extends BaseServiceImpl<ProjectPriceEntity,
         }
         return null;
     }
+
+    @Override
+    public double getProjectPrice(int systemType,int projectNum, int courseNum) {
+        List<HqlOperateVo> list = new  ArrayList<HqlOperateVo>();
+        list.add(new HqlOperateVo("system", "=", systemType+""));
+        list.add(new HqlOperateVo("projectNumber", "=", projectNum+""));
+        list.add(new HqlOperateVo("courseNumber", "=", courseNum+""));
+        List<ProjectPriceEntity> priceEntities = this.projectPriceDao.getList(list);
+        if(priceEntities.size() == 1){
+            return priceEntities.get(0).getRmbPrice();
+        }
+        return 0;
+    }
 }

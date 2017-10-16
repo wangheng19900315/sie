@@ -283,6 +283,7 @@ public class ProjectServiceImpl extends BaseServiceImpl<ProjectEntity,Integer> i
         List<DormitoryVo> dormitoryVos = new ArrayList<>();
         for(DormitoryEntity dormitoryEntity : dormitoryEntities){
             DormitoryVo dormitoryVo = new DormitoryVo();
+            dormitoryVo.setId(dormitoryEntity.getId());
             dormitoryVo.setName(dormitoryEntity.getName());
             if(dormitoryEntity.getTotalNumber() >= dormitoryEntity.getMaxNumber()){
                 dormitoryVo.setReadonly(true);

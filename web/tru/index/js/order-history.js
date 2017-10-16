@@ -5,7 +5,7 @@ $(function(){
 	 * 加载订单信息
 	 */
 	var attrs={};
-	attrs.studentId="1";
+	attrs.studentId=userInfo.id + "";
 	attrs.systemType=systemType;
 	/**
 	 * 获取我的订单

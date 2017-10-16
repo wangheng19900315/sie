@@ -373,7 +373,8 @@
 					</table>
 				</div>
 				<div class="mt50 text-center">
-					<input type="button" class="btn btn-wd-lg btn-info" value="保存" data-toggle="modal" data-target="#modal-order-list"/>
+					<input type="button" class="btn btn-wd-lg btn-info" value="保存" id="validOrder"/>
+					<input type="button" hidden data-toggle="modal" data-target="#modal-order-list" id="create-order"/>
 				</div>
 			</div>
 		</div>
@@ -428,7 +429,8 @@
 					</tr>
 				</table>
 				<div class="text-right">
-					<input type="submit" class="btn btn-wd-sm btn-info" value="确认" data-dismiss="modal" data-toggle="modal" data-target="#modal-order" />
+					<input type="button" class="btn btn-wd-sm btn-info" value="确认" data-dismiss="modal" id="firm-order"/>
+					<input type="button" hidden data-dismiss="modal" data-toggle="modal" data-target="#modal-order" id="success-order-message"/>
 				</div>
 		   </div>
 	    </div>
