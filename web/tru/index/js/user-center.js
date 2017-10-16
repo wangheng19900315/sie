@@ -1,10 +1,13 @@
 $(function(){
 
+    if(!judgeLogin()){
+        return;
+    }
     /**
      * 获取我的课程
      */
     var attrs={};
-    attrs.studentId="1";
+    attrs.studentId=userInfo.id+"";
     attrs.systemType="1";
     //dhcc.Unit.ajaxUtil(attrs,"getOrderList.json",function(data){
     //

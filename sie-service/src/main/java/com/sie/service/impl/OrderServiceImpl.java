@@ -432,56 +432,65 @@ public class OrderServiceImpl extends BaseServiceImpl<OrderEntity,Integer> imple
         if(orderEntity.getOrderType() == OrderType.USER.value()  && orderEntity.getStatus() == OrderStatus.SUBMIT.value()){
             int projectCount = 0;
             int courseCount = 0;
+            double money = 0;
 
             Map<Integer, Integer>  maps = new HashMap<>();
 
-            for(OrderDetailBean orderDetailBean : orderBean.getOrderDetailBean()){
+            for(OrderDetailBean orderDetailBean : orderBean.getOrderDetailBean()) {
 
-                if(!NumberUtil.isSignless(orderDetailBean.getDormitoryId())){
-                    if(maps.get(orderDetailBean.getProjectId()) == null){
-                        projectCount ++;
+                if (!NumberUtil.isSignless(orderDetailBean.getDormitoryId())) {
+                    if (maps.get(orderDetailBean.getProjectId()) == null) {
+                        projectCount++;
                         maps.put(orderDetailBean.getProjectId(), 0);
                     }
                     Integer count = orderDetailBean.getCourseIds().split(",").length;
 
-                    maps.put(orderDetailBean.getProjectId(), maps.get(orderDetailBean.getProjectId())+count);
+                    maps.put(orderDetailBean.getProjectId(), maps.get(orderDetailBean.getProjectId()) + count);
                     courseCount += count;
-                }
-
-                for(Map.Entry<Integer,Integer> entry:maps.entrySet()){
-                    ProjectEntity projectEntity = this.projectDao.getEntity(entry.getKey());
-                    if(projectEntity == null){
-                        resultBean.setMessage("查找不到项目信息，请确认提交信息");
+                } else {
+                    //住宿
+                    DormitoryEntity dormitoryEntity = dormitoryDao.getEntity(orderDetailBean.getDormitoryId());
+                    if (dormitoryEntity == null) {
+                        resultBean.setMessage("查找不到住宿项目信息，请确认提交信息");
                         return resultBean;
                     }
-                    Integer totalCourseNumber = 0;
-                    if(orderBean.getSystemType() == SystemType.SIE.value()){
-                        totalCourseNumber = projectEntity.getSieMaxCourse();
-                    }else{
-                        totalCourseNumber = projectEntity.getTruMaxCourse();
-                    }
-                    if(entry.getValue() > totalCourseNumber){
-                        resultBean.setMessage("项目"+projectEntity.getCode()+"所报的课程数大于规定课程数");
-                        return resultBean;
-                    }
+                    money += dormitoryEntity.getPrice();
                 }
-
-                if(courseCount == 0){
-                    resultBean.setMessage("订单没有课程数，请确认提交信息");
-                    return resultBean;
-                }
-
-                ProjectPriceEntity priceEntity =  packagePriceService.getEntityByCourse(projectCount, courseCount, orderEntity.getSystemType());
-                if(priceEntity == null){
-                    resultBean.setMessage("查找不到与订单对应的价格信息，请确认提交信息");
-                    return resultBean;
-                }
-                orderBean.setMoney(priceEntity.getRmbPrice());
-
             }
 
+            for(Map.Entry<Integer,Integer> entry:maps.entrySet()){
+                ProjectEntity projectEntity = this.projectDao.getEntity(entry.getKey());
+                if(projectEntity == null){
+                    resultBean.setMessage("查找不到项目信息，请确认提交信息");
+                    return resultBean;
+                }
+                Integer totalCourseNumber = 0;
+                if(orderBean.getSystemType() == SystemType.SIE.value()){
+                    totalCourseNumber = projectEntity.getSieMaxCourse();
+                }else{
+                    totalCourseNumber = projectEntity.getTruMaxCourse();
+                }
+                if(entry.getValue() > totalCourseNumber){
+                    resultBean.setMessage("项目"+projectEntity.getCode()+"所报的课程数大于规定课程数");
+                    return resultBean;
+                }
+            }
+
+            if(courseCount == 0){
+                resultBean.setMessage("订单没有课程数，请确认提交信息");
+                return resultBean;
+            }
+
+            ProjectPriceEntity priceEntity =  packagePriceService.getEntityByCourse(projectCount, courseCount, orderEntity.getSystemType());
+            if(priceEntity == null){
+                resultBean.setMessage("查找不到与订单对应的价格信息，请确认提交信息");
+                return resultBean;
+            }
+            money += priceEntity.getRmbPrice();
+            orderBean.setMoney(money);
 
         }
+
 
 
         //Fixme 实际支付金额=总金额-cr优惠金额-优惠活动金额

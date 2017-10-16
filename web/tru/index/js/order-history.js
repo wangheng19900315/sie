@@ -1,5 +1,8 @@
 var termOrder;
 $(function(){
+	if(!judgeLogin()){
+		return;
+	}
 
 	/**
 	 * 加载订单信息

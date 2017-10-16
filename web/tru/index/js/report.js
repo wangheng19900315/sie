@@ -1,11 +1,13 @@
 var termGrade;
 $(function(){
-
+    if(!judgeLogin()){
+        return;
+    }
     /**
      * 加载成绩单寄送信息
      */
     var attrs={};
-    attrs.studentId=studentId;
+    attrs.studentId=userInfo.id+"";
     /**
      * 获取学生信息
      */
