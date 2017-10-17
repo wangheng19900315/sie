@@ -65,5 +65,7 @@ public interface OrderService extends BaseService<OrderEntity, Integer> {
 
     public void setBeanValues(OrderEntity orderEntity, OrderBean bean);
 
-    List<OrderVo> getOrderListVo(String systemType, String studentId);
+    List<OrderVo> getOrderListVo(String systemType, String studentId,Integer orderStatus);
+
+    OrderVo getLatestOrderListVo(String systemType, String studentId);
 }

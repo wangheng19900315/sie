@@ -18,10 +18,12 @@ $(function(){
 		var term = $("#term").next();
 		var termLi = '';
 		//初始化学期
-		$.each(termOrder,function(key,item){
-			termLi = termLi +
+		if(data != null){
+			$.each(termOrder,function(key,item){
+				termLi = termLi +
 					'<li>' + key + '</li>';
-		});
+			});
+		}
 		term.empty();
 		term.append(termLi);
 		initSelect();
