@@ -1,0 +1,886 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="keywords" content="sieSchool-我要报名">
+    <meta name="description" content="sieSchool-我要报名">
+    	
+	<title>sieSchool-我要报名</title>
+	<link rel="shortcut icon" href="../favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" type="text/css" href="../../public/css/bootstrap.min.css" media="all">
+    <link rel="stylesheet" type="text/css" href="../../public/css/font-awesome.min.css" media="all">
+    <link rel="stylesheet" type="text/css" href="../css/base.css" media="all">
+</head>
+<body>
+<!-- top 
+================================================================================-->
+<script src="../common-files/header-user.js" type="text/javascript" charset="utf-8"></script>
+
+<!-- user 
+================================================================================-->
+<div class="user">
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-3 area-lf user-lf">
+	        	<ul>
+	        		<li><a href="user-center.html"><i class="fa fa-user"></i> 个人中心</a></li>
+	        		<li class="active"><a href="apply.html"><i class="fa fa-edit"></i> 我要报名</a></li>
+	        		<li><a href="project-selection.html"><i class="fa fa-list-ol"></i> 项目缴费</a></li>
+	        		<li><a href="start-course.html"><i class="fa fa-check-square-o"></i> 开始选课</a></li>
+	        		<li><a href="query-results.html"><i class="fa fa-search"></i> 成绩查询</a></li>
+	        	</ul>
+	        </div>
+			<div class="col-xs-9 area-rg">
+				<div class="user-rg">
+					<div class="user-rg-top"></div>
+					<div class="user-rg-cont">
+						<div class="tit mt-30"><h5>1. 个人信息</h5></div>
+						<div class="row">
+							<div class="col-xs-6">
+								<dl class="dl-horizontal">
+									<dt><label>姓（拼音/英文）*</label></dt>
+									<dd>
+										<input type="text" class="form-control">
+										<p>此项不能为空！</p>
+									</dd>
+								</dl>
+							</div>
+							<div class="col-xs-6">
+								<dl class="dl-horizontal">
+									<dt><label>名（拼音/英文）*</label></dt>
+									<dd>
+										<input type="text" class="form-control">
+										<p>此项不能为空！</p>
+									</dd>
+								</dl>
+							</div>
+							<div class="col-xs-6">
+								<dl class="dl-horizontal">
+									<dt><label>中文名字（中文）</label></dt>
+									<dd><input type="text" class="form-control"></dd>
+								</dl>
+							</div>
+							<div class="col-xs-6">
+								<dl class="dl-horizontal">
+									<dt><label>性别*</label></dt>
+									<dd>
+										<label><input type="radio" name="Gender" checked="checked" /> 男</label>
+										&nbsp;&nbsp;&nbsp;&nbsp;
+									    <label><input type="radio" name="Gender" /> 女</label>
+									</dd>
+								</dl>
+							</div>
+							<div class="col-xs-6">
+								<dl class="dl-horizontal">
+									<dt><label>出生日期*</label></dt>
+									<dd><input type="text" class="form-control"></dd>
+								</dl>
+							</div>
+							<div class="col-xs-6">
+								<dl class="dl-horizontal">
+									<dt><label>国籍*</label></dt>
+									<dd>
+										<input type="text" class="form-control">
+										<p>此项不能为空！</p>
+									</dd>
+								</dl>
+							</div>
+							<div class="col-xs-6">
+								<dl class="dl-horizontal">
+									<dt><label>护照号码*</label></dt>
+									<dd>
+										<input type="text" class="form-control">
+										<p>此项不能为空！</p>
+									</dd>
+								</dl>
+							</div>
+							<div class="col-xs-6">
+								<dl class="dl-horizontal">
+									<dt><label>身份证号码*</label></dt>
+									<dd>
+										<input type="text" class="form-control">
+										<p>此项不能为空！</p>
+									</dd>
+								</dl>
+							</div>
+							<div class="col-xs-6">
+								<dl class="dl-horizontal">
+									<dt><label>微信号</label></dt>
+									<dd><input type="text" class="form-control"></dd>
+								</dl>
+							</div>
+						</div>
+						
+						<div class="tit mt-30"><h5>2. 联系方式</h5></div>
+						<h6>（1）首选地址</h6>
+						<div class="row">
+							<div class="col-xs-6">
+								<dl class="dl-horizontal">
+									<dt><label>街道*</label></dt>
+									<dd><input type="text" class="form-control"></dd>
+								</dl>
+							</div>
+							<div class="col-xs-6">
+								<dl class="dl-horizontal">
+									<dt><label>县/市*</label></dt>
+									<dd><input type="text" class="form-control"></dd>
+								</dl>
+							</div>
+							<div class="col-xs-6">
+								<dl class="dl-horizontal">
+									<dt><label>州/省*</label></dt>
+									<dd><input type="text" class="form-control"></dd>
+								</dl>
+							</div>
+							<div class="col-xs-6">
+								<dl class="dl-horizontal">
+									<dt><label>邮政编码*</label></dt>
+									<dd><input type="text" class="form-control"></dd>
+								</dl>
+							</div>
+							<div class="col-xs-6">
+								<dl class="dl-horizontal">
+									<dt><label>电话号码*</label></dt>
+									<dd><input type="text" class="form-control"></dd>
+								</dl>
+							</div>
+							<div class="col-xs-6">
+								<dl class="dl-horizontal">
+									<dt><label>邮箱*</label></dt>
+									<dd><input type="text" class="form-control" placeholder="非GMail"></dd>
+								</dl>
+							</div>
+						</div>
+						<hr />						
+						<h6>（2）成绩单邮寄地址</h6>
+						<p class="text-danger">*因许多美国院校只承认直接邮寄到本院校的成绩单，此处建议填写学校相关部门办公司的地址和联系方式。</p>
+						<p class="text-danger">*高中生请填N/A</p>
+						<div class="address mt-20">
+							<div class="row">
+								<div class="col-xs-12">
+									<dl class="dl-horizontal">
+										<dt><label>院校全名*</label></dt>
+										<dd><input type="text" class="form-control"></dd>
+									</dl>
+								</div>
+								<div class="col-xs-6">
+									<dl class="dl-horizontal">
+										<dt><label>街道*</label></dt>
+										<dd><input type="text" class="form-control"></dd>
+									</dl>
+								</div>
+								<div class="col-xs-6">
+									<dl class="dl-horizontal">
+										<dt><label>县/市*</label></dt>
+										<dd><input type="text" class="form-control"></dd>
+									</dl>
+								</div>
+								<div class="col-xs-6">
+									<dl class="dl-horizontal">
+										<dt><label>州/省*</label></dt>
+										<dd><input type="text" class="form-control"></dd>
+									</dl>
+								</div>
+								<div class="col-xs-6">
+									<dl class="dl-horizontal">
+										<dt><label>邮政编码*</label></dt>
+										<dd><input type="text" class="form-control"></dd>
+									</dl>
+								</div>
+								<div class="col-xs-6">
+									<dl class="dl-horizontal">
+										<dt><label>联系人/部门*</label></dt>
+										<dd><input type="text" class="form-control"></dd>
+									</dl>
+								</div>
+								<div class="col-xs-6">
+									<dl class="dl-horizontal">
+										<dt><label>电话号码*</label></dt>
+										<dd><input type="text" class="form-control"></dd>
+									</dl>
+								</div>
+							</div>
+						</div>
+						<hr />
+						<h6>（3）紧急联系人信息（父母首选）</h6>
+						<div class="row">
+							<div class="col-xs-6">
+								<dl class="dl-horizontal">
+									<dt><label>姓名*</label></dt>
+									<dd><input type="text" class="form-control"></dd>
+								</dl>
+							</div>
+							<div class="col-xs-6">
+								<dl class="dl-horizontal">
+									<dt><label>电话号码*</label></dt>
+									<dd><input type="text" class="form-control"></dd>
+								</dl>
+							</div>
+							<div class="col-xs-6">
+								<dl class="dl-horizontal">
+									<dt><label>与申请人的关系*</label></dt>
+									<dd><input type="text" class="form-control"></dd>
+								</dl>
+							</div>
+						</div>
+						
+						<div class="tit mt-30"><h5>3. 教育背景</h5></div>
+						<div class="row">
+							<div class="col-xs-6">
+								<dl class="dl-horizontal">
+									<dt><label>就读学校*</label></dt>
+									<dd>
+										<div id="example1"></div>
+										<b>不在列表中？ 请在以下框中输入学校名称</b>
+										<input type="text" class="form-control" placeholder="其他学校">
+									</dd>
+								</dl>
+							</div>
+							<div class="col-xs-6">
+								<dl class="dl-horizontal">
+									<dt><label>专业*</label></dt>
+									<dd><input type="text" class="form-control"></dd>
+								</dl>
+							</div>
+							<div class="col-xs-6">
+								<dl class="dl-horizontal">
+									<dt><label>预期毕业年份*</label></dt>
+									<dd><input type="text" class="form-control"></dd>
+								</dl>
+							</div>
+							<div class="col-xs-6">
+								<dl class="dl-horizontal">
+									<dt><label>GPA(如3.15/4.00)*</label></dt>
+									<dd><input type="text" class="form-control"></dd>
+								</dl>
+							</div>
+							<div class="col-xs-6">
+								<dl class="dl-horizontal">
+									<dt><label>英语语言测试*</label></dt>
+									<dd>
+										<select class="form-control">
+											<option value="1">雅思</option>
+											<option value="2">雅思</option>
+											<option value="3">雅思</option>
+										</select>
+									</dd>
+								</dl>
+							</div>
+							<div class="col-xs-6">
+								<dl class="dl-horizontal">
+									<dt><label>成绩*</label></dt>
+									<dd><input type="text" class="form-control"></dd>
+								</dl>
+							</div>
+							<div class="col-xs-6">
+								<dl class="dl-horizontal">
+									<dt><label>了解我们的途径*</label></dt>
+									<dd>
+										<select class="form-control">
+											<option value="1">微信</option>
+											<option value="2">微信</option>
+											<option value="3">微信</option>
+										</select>
+									</dd>
+								</dl>
+							</div>
+							<div class="col-xs-6">
+								<dl class="dl-horizontal">
+									<dt><label>推荐人姓名</label></dt>
+									<dd><input type="text" class="form-control"></dd>
+								</dl>
+							</div>
+						</div>
+					</div>
+					<div class="user-rg-bot-btns clearfix">
+						<button class="btn btn-danger btn-lg btn-wd-md pull-right">提交</button>
+						<span class="text-danger">*必填项目请认真填写</span>
+					</div>
+				</div>
+	        </div>
+	    </div>
+	</div>
+</div>
+
+<!-- footer 
+================================================================================-->
+<script src="../common-files/footer-user.js" type="text/javascript" charset="utf-8"></script>
+	
+
+<!-- president 
+================================================================================-->
+<div style="display:none;">
+    <select id="president" name="president">
+       <option>Adelphi University</option>
+       <option>Agnes Scott College</option>
+       <option>Albion College</option>
+       <option>Albright College</option>
+       <option>Allegheny College</option>
+       <option>Allen University</option>
+       <option>Alliant International University</option>
+       <option>Alma College</option>
+       <option>American Jewish University</option>
+       <option>American University</option>
+       <option>Amherst College</option>
+       <option>Amridge University</option>
+       <option>Andrews University</option>
+       <option>Argosy University</option>
+       <option>Arizona State University- Tempe</option>
+       <option>Ashland University</option>
+       <option>Auburn University</option>
+       <option>Augustana College</option>
+       <option>Austin College</option>
+       <option>Ave Maria University</option>
+       <option>Azusa Pacific University</option>
+       <option>Ball State University</option>
+       <option>Bard College</option>
+       <option>Barnard College</option>
+       <option>Barry University</option>
+       <option>Bates College</option>
+       <option>Bay Path University</option>
+       <option>Baylor University</option>
+       <option>Beacon College</option>
+       <option>Beloit College</option>
+       <option>Benedictine University</option>
+       <option>Bennett College</option>
+       <option>Bennington College</option>
+       <option>Berea College</option>
+       <option>Berry College</option>
+       <option>Bethany College</option>
+       <option>Bethany Lutheran College</option>
+       <option>Binghamton University- SUNY</option>
+       <option>Biola University</option>
+       <option>Birmingham- ​Southern College</option>
+       <option>Bishop's University</option>
+       <option>Bloomfield College</option>
+       <option>Boston College</option>
+       <option>Boston University</option>
+       <option>Bowdoin College</option>
+       <option>Bowie State University</option>
+       <option>Bowling Green State University</option>
+       <option>Brandeis University</option>
+       <option>Brevard College</option>
+       <option>Bridgewater College</option>
+       <option>Brigham Young University- Provo</option>
+       <option>Brown University</option>
+       <option>Bryn Athyn College of the New Church</option>
+       <option>Bryn Mawr College</option>
+       <option>Bucknell University</option>
+       <option>Burlington College</option>
+       <option>California Institute of Integral Studies</option>
+       <option>California Institute of Technology</option>
+       <option>Calvin College</option>
+       <option>Capella University</option>
+       <option>Cardinal Stritch University</option>
+       <option>Carleton College</option>
+       <option>Carleton University</option>
+       <option>Carnegie Mellon University</option>
+       <option>Carthage College</option>
+       <option>Case Western Reserve University</option>
+       <option>Castleton State College</option>
+       <option>Centenary College of Louisiana</option>
+       <option>Central College</option>
+       <option>Central Michigan University</option>
+       <option>Centre College</option>
+       <option>Charter Oak State College</option>
+       <option>Claflin University</option>
+       <option>Claremont McKenna College</option>
+       <option>Clark Atlanta University</option>
+       <option>Clark University</option>
+       <option>Clarkson University</option>
+       <option>Clemson University</option>
+       <option>Cleveland State University</option>
+       <option>Coe College</option>
+       <option>Colby College</option>
+       <option>Colgate University</option>
+       <option>College of Idaho</option>
+       <option>College of St. Benedict</option>
+       <option>College of the Atlantic</option>
+       <option>College of the Holy Cross</option>
+       <option>College of William and Mary</option>
+       <option>College of Wooster</option>
+       <option>Colorado College</option>
+       <option>Colorado Mesa University</option>
+       <option>Colorado School of Mines</option>
+       <option>Colorado State University</option>
+       <option>Colorado Technical University</option>
+       <option>Columbia University</option>
+       <option>Concordia College- Moorhead</option>
+       <option>Connecticut College</option>
+       <option>Cornell College</option>
+       <option>Cornell University</option>
+       <option>Dalhousie University</option>
+       <option>Dartmouth College</option>
+       <option>Davidson College</option>
+       <option>Denison University</option>
+       <option>DePaul University</option>
+       <option>DePauw University</option>
+       <option>Dickinson College</option>
+       <option>Dillard University</option>
+       <option>Doane College</option>
+       <option>Drew University</option>
+       <option>Drexel University</option>
+       <option>Duke University</option>
+       <option>Duquesne University</option>
+       <option>Earlham College</option>
+       <option>East Carolina University</option>
+       <option>East Tennessee State University</option>
+       <option>East- ​West University</option>
+       <option>Eastern Mennonite University</option>
+       <option>Eastern Nazarene College</option>
+       <option>Eckerd College</option>
+       <option>Edgewood College</option>
+       <option>Emory and Henry College</option>
+       <option>Emory University</option>
+       <option>Erskine College</option>
+       <option>Fisk University</option>
+       <option>Florida A&M University</option>
+       <option>Florida Atlantic University</option>
+       <option>Florida Institute of Technology</option>
+       <option>Florida International University</option>
+       <option>Florida State University</option>
+       <option>Fordham University</option>
+       <option>Fort Lewis College</option>
+       <option>Franklin and Marshall College</option>
+       <option>Furman University</option>
+       <option>George Mason University</option>
+       <option>George Washington University</option>
+       <option>Georgetown College</option>
+       <option>Georgetown University</option>
+       <option>Georgia Institute of Technology</option>
+       <option>Georgia Southern University</option>
+       <option>Georgia State University</option>
+       <option>Gettysburg College</option>
+       <option>Gordon College</option>
+       <option>Goshen College</option>
+       <option>Goucher College</option>
+       <option>Granite State College</option>
+       <option>Green Mountain College</option>
+       <option>Grinnell College</option>
+       <option>Grove City College</option>
+       <option>Guilford College</option>
+       <option>Gustavus Adolphus College</option>
+       <option>Hamilton College</option>
+       <option>Hampden- ​Sydney College</option>
+       <option>Hampshire College</option>
+       <option>Hanover College</option>
+       <option>Harrisburg University of Science and Technology</option>
+       <option>Hartwick College</option>
+       <option>Harvard University</option>
+       <option>Harvey Mudd College</option>
+       <option>Haverford College</option>
+       <option>Hendrix College</option>
+       <option>Hillsdale College</option>
+       <option>Hiram College</option>
+       <option>Hobart and William Smith Colleges</option>
+       <option>Hofstra University</option>
+       <option>Hollins University</option>
+       <option>Holy Cross College</option>
+       <option>Hope College</option>
+       <option>Houghton College</option>
+       <option>Howard University</option>
+       <option>Huston- ​Tillotson University</option>
+       <option>Idaho State University</option>
+       <option>Illinois College</option>
+       <option>Illinois Institute of Technology</option>
+       <option>Illinois State University</option>
+       <option>Illinois Wesleyan University</option>
+       <option>Immaculata University</option>
+       <option>Indiana State University</option>
+       <option>Indiana University of Pennsylvania</option>
+       <option>Indiana University- Bloomington</option>
+       <option>Indiana University- ​Purdue University- Indianapolis</option>
+       <option>Iowa State University</option>
+       <option>Jackson State University</option>
+       <option>Johns Hopkins University</option>
+       <option>Johnson C. Smith University</option>
+       <option>Judson College</option>
+       <option>Juniata College</option>
+       <option>Kalamazoo College</option>
+       <option>Kansas State University</option>
+       <option>Kent State University</option>
+       <option>Kentucky State University</option>
+       <option>Kenyon College</option>
+       <option>Knox College</option>
+       <option>Lafayette College</option>
+       <option>Lake Forest College</option>
+       <option>Lamar University</option>
+       <option>Lane College</option>
+       <option>Lawrence University</option>
+       <option>Lehigh University</option>
+       <option>Lewis & Clark College</option>
+       <option>Life University</option>
+       <option>Linfield College</option>
+       <option>Louisiana State University- Alexandria</option>
+       <option>Louisiana State University- Baton Rouge</option>
+       <option>Louisiana Tech University</option>
+       <option>Loyola University Chicago</option>
+       <option>Luther College</option>
+       <option>Lycoming College</option>
+       <option>Lynn University</option>
+       <option>Lyon College</option>
+       <option>Macalester College</option>
+       <option>Marlboro College</option>
+       <option>Marquette University</option>
+       <option>Martin University</option>
+       <option>Marymount Manhattan College</option>
+       <option>Maryville College</option>
+       <option>Maryville University of St. Louis</option>
+       <option>Massachusetts College of Liberal Arts</option>
+       <option>Massachusetts Institute of Technology</option>
+       <option>McDaniel College</option>
+       <option>McGill University</option>
+       <option>McMaster University</option>
+       <option>Miami University- Oxford</option>
+       <option>Michigan State University</option>
+       <option>Michigan Technological University</option>
+       <option>Middle Tennessee State University</option>
+       <option>Middlebury College</option>
+       <option>Millsaps College</option>
+       <option>Mississippi State University</option>
+       <option>Missouri University of Science & Technology</option>
+       <option>Monmouth College</option>
+       <option>Montana State University</option>
+       <option>Moravian College</option>
+       <option>Morehouse College</option>
+       <option>Morgan State University</option>
+       <option>Mount Holyoke College</option>
+       <option>Mount Saint Vincent University</option>
+       <option>Muhlenberg College</option>
+       <option>National Hispanic University</option>
+       <option>National Louis University</option>
+       <option>Nebraska Wesleyan University</option>
+       <option>New College of Florida</option>
+       <option>New Jersey Institute of Technology</option>
+       <option>New Mexico State University</option>
+       <option>New School</option>
+       <option>New York University</option>
+       <option>North Carolina A&T State University</option>
+       <option>North Carolina State University- Raleigh</option>
+       <option>North Dakota State University</option>
+       <option>Northcentral University</option>
+       <option>Northeastern University</option>
+       <option>Northern Arizona University</option>
+       <option>Northern Illinois University</option>
+       <option>Northland College</option>
+       <option>Northwestern University</option>
+       <option>Nova Southeastern University</option>
+       <option>Oakland University</option>
+       <option>Oberlin College</option>
+       <option>Occidental College</option>
+       <option>Oglethorpe University</option>
+       <option>Ohio State University- Columbus</option>
+       <option>Ohio University</option>
+       <option>Ohio Wesleyan University</option>
+       <option>Oklahoma State University</option>
+       <option>Old Dominion University</option>
+       <option>Oregon State University</option>
+       <option>Ouachita Baptist University</option>
+       <option>Our Lady of the Lake University</option>
+       <option>Pace University</option>
+       <option>Pacific Union College</option>
+       <option>Pennsylvania State University- University Park</option>
+       <option>Pepperdine University</option>
+       <option>Pine Manor College</option>
+       <option>Pitzer College</option>
+       <option>Pomona College</option>
+       <option>Portland State University</option>
+       <option>Presbyterian College</option>
+       <option>Princeton University</option>
+       <option>Principia College</option>
+       <option>Purchase College- SUNY</option>
+       <option>Purdue University- West Lafayette</option>
+       <option>Queen's University</option>
+       <option>Randolph College</option>
+       <option>Randolph- ​Macon College</option>
+       <option>Reed College</option>
+       <option>Regent University</option>
+       <option>Rensselaer Polytechnic Institute</option>
+       <option>Rhodes College</option>
+       <option>Rice University</option>
+       <option>Ripon College</option>
+       <option>Roanoke College</option>
+       <option>Rust College</option>
+       <option>Rutgers, The State University of New Jersey- New Brunswick</option>
+       <option>Rutgers, The State University of New Jersey- Newark</option>
+       <option>Saint Louis University</option>
+       <option>Saint Mary's University</option>
+       <option>Saint Paul University</option>
+       <option>Saint Vincent College</option>
+       <option>Salem College</option>
+       <option>Sam Houston State University</option>
+       <option>San Diego Christian College</option>
+       <option>San Diego State University</option>
+       <option>Sarah Lawrence College</option>
+       <option>Savannah State University</option>
+       <option>Scripps College</option>
+       <option>Seton Hall University</option>
+       <option>Sewanee- University of the South</option>
+       <option>Shawnee State University</option>
+       <option>Shimer College</option>
+       <option>Shorter University</option>
+       <option>Siena College</option>
+       <option>Simon Fraser University</option>
+       <option>Simpson College</option>
+       <option>Simpson University</option>
+       <option>Skidmore College</option>
+       <option>Smith College</option>
+       <option>Soka University of America</option>
+       <option>South Carolina State University</option>
+       <option>South Dakota State University</option>
+       <option>Southern Illinois University- Carbondale</option>
+       <option>Southern Methodist University</option>
+       <option>Southwestern University</option>
+       <option>Spalding University</option>
+       <option>Spelman College</option>
+       <option>St. Anselm College</option>
+       <option>St. John Fisher College</option>
+       <option>St. John's College</option>
+       <option>St. John's College</option>
+       <option>St. John's University</option>
+       <option>St. John's University</option>
+       <option>St. Lawrence University</option>
+       <option>St. Mary's College of Maryland</option>
+       <option>St. Mary's College</option>
+       <option>St. Mary's University of Minnesota</option>
+       <option>St. Michael's College</option>
+       <option>St. Norbert College</option>
+       <option>St. Olaf College</option>
+       <option>St. Thomas University</option>
+       <option>Stanford University</option>
+       <option>Sterling College</option>
+       <option>Stevens Institute of Technology</option>
+       <option>Stillman College</option>
+       <option>Stonehill College</option>
+       <option>Stony Brook University- SUNY</option>
+       <option>SUNY College of Environmental Science and Forestry</option>
+       <option>SUNY College- Old Westbury</option>
+       <option>Susquehanna University</option>
+       <option>Swarthmore College</option>
+       <option>Syracuse University</option>
+       <option>Talladega College</option>
+       <option>Temple University</option>
+       <option>Tennessee State University</option>
+       <option>Texas A&M University- College Station</option>
+       <option>Texas A&M University- Commerce</option>
+       <option>Texas A&M University- Corpus Christi</option>
+       <option>Texas A&M University- Kingsville</option>
+       <option>Texas Christian University</option>
+       <option>Texas Southern University</option>
+       <option>Texas Tech University</option>
+       <option>Texas Woman's University</option>
+       <option>The Catholic University of America</option>
+       <option>The King's College</option>
+       <option>The University of British Columbia</option>
+       <option>Thomas Aquinas College</option>
+       <option>Thomas More College of Liberal Arts</option>
+       <option>Tougaloo College</option>
+       <option>Transylvania University</option>
+       <option>Trevecca Nazarene University</option>
+       <option>Trident University International</option>
+       <option>Trinity College</option>
+       <option>Trinity International University</option>
+       <option>Trinity Western University</option>
+       <option>Tufts University</option>
+       <option>Tulane University</option>
+       <option>Union College</option>
+       <option>Union Institute and University</option>
+       <option>United States Air Force Academy</option>
+       <option>United States Military Academy</option>
+       <option>United States Naval Academy</option>
+       <option>University at Albany- SUNY</option>
+       <option>University at Buffalo- SUNY</option>
+       <option>University of Akron</option>
+       <option>University of Alabama</option>
+       <option>University of Alabama- Birmingham</option>
+       <option>University of Alabama- Huntsville</option>
+       <option>University of Alaska- Fairbanks</option>
+       <option>University of Alberta</option>
+       <option>University of Arizona</option>
+       <option>University of Arkansas</option>
+       <option>University of Arkansas- Little Rock</option>
+       <option>University of Calgary</option>
+       <option>University of California- Berkeley</option>
+       <option>University of California- Davis</option>
+       <option>University of California- Irvine</option>
+       <option>University of California- Los Angeles</option>
+       <option>University of California- Riverside</option>
+       <option>University of California- San Diego</option>
+       <option>University of California- Santa Barbara</option>
+       <option>University of California- Santa Cruz</option>
+       <option>University of Central Florida</option>
+       <option>University of Chicago</option>
+       <option>University of Cincinnati</option>
+       <option>University of Colorado- Boulder</option>
+       <option>University of Colorado- Denver</option>
+       <option>University of Connecticut</option>
+       <option>University of Dayton</option>
+       <option>University of Delaware</option>
+       <option>University of Denver</option>
+       <option>University of Florida</option>
+       <option>University of Georgia</option>
+       <option>University of Guelph</option>
+       <option>University of Hawaii- Hilo</option>
+       <option>University of Hawaii- Manoa</option>
+       <option>University of Houston</option>
+       <option>University of Idaho</option>
+       <option>University of Illinois- Chicago</option>
+       <option>University of Illinois- Urbana- ​Champaign</option>
+       <option>University of Iowa</option>
+       <option>University of Kansas</option>
+       <option>University of Kentucky</option>
+       <option>University of La Verne</option>
+       <option>University of Louisiana- Lafayette</option>
+       <option>University of Louisville</option>
+       <option>University of Maine</option>
+       <option>University of Maine- Machias</option>
+       <option>University of Maryland- Baltimore County</option>
+       <option>University of Maryland- College Park</option>
+       <option>University of Massachusetts- Amherst</option>
+       <option>University of Massachusetts- Boston</option>
+       <option>University of Massachusetts- Lowell</option>
+       <option>University of Memphis</option>
+       <option>University of Miami</option>
+       <option>University of Michigan- Ann Arbor</option>
+       <option>University of Minnesota- Morris</option>
+       <option>University of Minnesota- Twin Cities</option>
+       <option>University of Mississippi</option>
+       <option>University of Missouri</option>
+       <option>University of Missouri- Kansas City</option>
+       <option>University of Missouri- St. Louis</option>
+       <option>University of Montana</option>
+       <option>University of Nebraska- Lincoln</option>
+       <option>University of Nebraska- Omaha</option>
+       <option>University of Nevada- Las Vegas</option>
+       <option>University of Nevada- Reno</option>
+       <option>University of New Brunswick</option>
+       <option>University of New Hampshire</option>
+       <option>University of New Mexico</option>
+       <option>University of New Orleans</option>
+       <option>University of North Carolina- Asheville</option>
+       <option>University of North Carolina- Chapel Hill</option>
+       <option>University of North Carolina- Charlotte</option>
+       <option>University of North Carolina- Greensboro</option>
+       <option>University of North Dakota</option>
+       <option>University of North Texas</option>
+       <option>University of Northern Colorado</option>
+       <option>University of Notre Dame</option>
+       <option>University of Oklahoma</option>
+       <option>University of Ontario Institute of Technology</option>
+       <option>University of Oregon</option>
+       <option>University of Ottawa</option>
+       <option>University of Pennsylvania</option>
+       <option>University of Phoenix</option>
+       <option>University of Pikeville</option>
+       <option>University of Pittsburgh</option>
+       <option>University of Puget Sound</option>
+       <option>University of Rhode Island</option>
+       <option>University of Richmond</option>
+       <option>University of Rochester</option>
+       <option>University of San Diego</option>
+       <option>University of San Francisco</option>
+       <option>University of Science and Arts of Oklahoma</option>
+       <option>University of South Alabama</option>
+       <option>University of South Carolina</option>
+       <option>University of South Dakota</option>
+       <option>University of South Florida</option>
+       <option>University of Southern California</option>
+       <option>University of Southern Mississippi</option>
+       <option>University of St. Thomas</option>
+       <option>University of Tennessee</option>
+       <option>University of Texas- Arlington</option>
+       <option>University of Texas- Austin</option>
+       <option>University of Texas- Dallas</option>
+       <option>University of Texas- El Paso</option>
+       <option>University of Texas- San Antonio</option>
+       <option>University of the Fraser Valley</option>
+       <option>University of the Pacific</option>
+       <option>University of Toledo</option>
+       <option>University of Toronto</option>
+       <option>University of Tulsa</option>
+       <option>University of Utah</option>
+       <option>University of Vermont</option>
+       <option>University of Victoria</option>
+       <option>University of Virginia</option>
+       <option>University of Virginia- Wise</option>
+       <option>University of Washington</option>
+       <option>University of Waterloo</option>
+       <option>University of West Florida</option>
+       <option>University of Western Ontario</option>
+       <option>University of Windsor</option>
+       <option>University of Wisconsin- Madison</option>
+       <option>University of Wisconsin- Milwaukee</option>
+       <option>University of Wisconsin- Parkside</option>
+       <option>University of Wyoming</option>
+       <option>Ursinus College</option>
+       <option>Utah State University</option>
+       <option>Vanderbilt University</option>
+       <option>Vassar College</option>
+       <option>Virginia Commonwealth University</option>
+       <option>Virginia Military Institute</option>
+       <option>Virginia Tech</option>
+       <option>Virginia Wesleyan College</option>
+       <option>Wabash College</option>
+       <option>Wake Forest University</option>
+       <option>Walden University</option>
+       <option>Warren Wilson College</option>
+       <option>Wartburg College</option>
+       <option>Washington and Jefferson College</option>
+       <option>Washington and Lee University</option>
+       <option>Washington College</option>
+       <option>Washington State University</option>
+       <option>Washington University in St. Louis</option>
+       <option>Wayne State University</option>
+       <option>Wellesley College</option>
+       <option>Wells College</option>
+       <option>Wesleyan College</option>
+       <option>Wesleyan University</option>
+       <option>West Virginia State University</option>
+       <option>West Virginia University</option>
+       <option>Western Michigan University</option>
+       <option>Western State Colorado University</option>
+       <option>Westminster College</option>
+       <option>Westminster College</option>
+       <option>Westmont College</option>
+       <option>Wheaton College</option>
+       <option>Wheaton College</option>
+       <option>Whitman College</option>
+       <option>Whittier College</option>
+       <option>Wichita State University</option>
+       <option>Widener University</option>
+       <option>Willamette University</option>
+       <option>William Jewell College</option>
+       <option>William Peace University</option>
+       <option>Williams College</option>
+       <option>Wilmington University</option>
+       <option>Wisconsin Lutheran College</option>
+       <option>Wittenberg University</option>
+       <option>Wofford College</option>
+       <option>Worcester Polytechnic Institute</option>
+       <option>Wright State University</option>
+       <option>Xavier University of Louisiana</option>
+       <option>Yale University</option>
+       <option>Yeshiva University</option>
+       <option>York University</option>
+    </select>
+</div>
+<script src="../../public/js/liquidmetal.js"></script>
+<script src="../../public/js/jquery.flexselect.js"></script>
+<script type="text/javascript">
+$.fn.example = function(select, type) {
+    var div = $("<div></div>").addClass(type).append(select.clone().attr({ id: select.attr("id") + "_" + type, "class": type }));
+    this.append(div);
+  };
+$(document).ready(function() {
+    var president = $("select#president");
+    $("#example1").example(president, "flexselect");
+    $("select[class*=flexselect]").flexselect();
+    $("input#president_flexselect_flexselect").val("").addClass("form-control");
+    $("select").attr("tabindex", -1);
+    $("input.flexselect").each(function(index) { $(this).attr("tabindex", index+1) });
+});
+</script>
+
+</body>
+</html>

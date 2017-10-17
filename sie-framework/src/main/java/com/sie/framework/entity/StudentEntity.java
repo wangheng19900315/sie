@@ -44,6 +44,11 @@ public class StudentEntity extends BaseEntity{
 
     private String password;
 
+    /**
+     * 微信id
+     */
+    private String openid;
+
 
 
     @Basic
@@ -357,5 +362,13 @@ public class StudentEntity extends BaseEntity{
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getOpenid() {
+        return openid;
+    }
+
+    public void setOpenid(String openid) {
+        this.openid = openid;
     }
 }

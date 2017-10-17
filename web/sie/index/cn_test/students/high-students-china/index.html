@@ -1,0 +1,219 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>国内高中生 - sieSchool</title>
+	<meta name="keywords" content="国内高中生">
+	<meta name="description" content="sieSchool">
+	<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" type="text/css" href="/public/css/bootstrap.min.css" media="all">
+    <link rel="stylesheet" type="text/css" href="/public/css/font-awesome.min.css" media="all">
+    <link rel="stylesheet" type="text/css" href="/cn/css/base.css" media="all">
+</head>
+<body>
+<div id="fixedMenu" class="top">
+	<div class="top-bar">
+		<div class="container">
+			<p>SIE<span>国际暑期学校</span>International Summer Sessions</p>
+		</div>
+	</div>
+	<div class="top-box">
+		<div class="container">
+			<div class="logo-box pull-left">
+				<a href="/cn/">
+					<img src="/public/img/logo.png" alt="sieSchool">
+				</a>
+			</div>
+			<div class="nav-box pull-right">
+				<div class="language text-right">
+					<a href='/cn/user/login.php' id="login" title='登录'>登录</a>
+					<span id="sep">/</span>
+					<a href='/cn/user/register.php' id="register" title='注册'>注册</a>
+					<a href="/cn/user/user_center.php" id="user_center" title="个人中心"></a>
+					<a id="logout" title="退出登录">退出</a>
+					
+					<a title="中文" style="cursor:pointer"><img src="/public/img/language-cn.png"></a>
+					<a title="English" style="cursor:pointer" onclick="window.location.href=window.location.href.replace('/cn','/en')"><img style="height:23px;" src="/public/img/language-en.svg"></a>
+				</div>
+				<div class="nav">
+					<ul>
+						<li class="dropdown active">
+						  	<a id="nav-01" class="nav-link btn" href="/cn/index.html" role="button">首页</a>
+						</li>
+						<li class="dropdown">
+						  	<a id="nav-01" class="nav-link btn" href="javascript:;" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">暑校介绍 <i class="fa fa-angle-down"></i></a>
+						  	<ul class="dropdown-menu" aria-labelledby="nav-01">
+													    	<li><a href="http://www.sieschool.org/cn/about-us/about-sie/">关于SIE</a></li>
+													    	<li><a href="http://www.sieschool.org/cn/about-us/about-ecnu/">关于ECNU</a></li>
+													    	<li><a href="http://www.sieschool.org/cn/about-us/about-bjtu/">关于BJTU</a></li>
+													  	</ul>
+						</li>
+						<li class="dropdown">
+						  	<a id="nav-02" class="nav-link btn" href="javascript:;" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">暑校课程 <i class="fa fa-angle-down"></i></a>
+						  	<ul class="dropdown-menu" aria-labelledby="nav-03">
+													    	<li><a href="http://www.sieschool.org/cn/courses/course-list/">课程列表</a></li>
+													    	<li><a href="http://www.sieschool.org/cn/courses/current-faculty/">现任教授</a></li>
+													    	<li><a href="http://www.sieschool.org/cn/courses/add-drop/">课程设置</a></li>
+													    	<li><a href="http://www.sieschool.org/cn/courses/academic-calendar/">暑校日程</a></li>
+													    	<li><a href="http://www.sieschool.org/cn/courses/course-format/">研究项目</a></li>
+													    	<li><a href="http://www.sieschool.org/cn/courses/former-faculty/">往届教授</a></li>
+													  	</ul>
+						</li>
+						<li class="dropdown">
+						  	<a id="nav-03" class="nav-link btn" href="javascript:;" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">学费详情 <i class="fa fa-angle-down"></i></a>
+						  	<ul class="dropdown-menu" aria-labelledby="nav-02">
+													    	<li><a href="http://www.sieschool.org/cn/application/tuition/">学费价格</a></li>
+													    	<li><a href="http://www.sieschool.org/cn/application/scholarship/">奖学金</a></li>
+													    	<li><a href="http://www.sieschool.org/cn/application/refund/">退款事宜</a></li>
+													    	<li><a href="http://www.sieschool.org/cn/application/paytype/">支付方式</a></li>
+								
+						  	</ul>
+						</li>
+						<li class="dropdown">
+						  	<a id="nav-04" class="nav-link btn" href="javascript:;" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">申请指南 <i class="fa fa-angle-down"></i></a>
+						  	<ul class="dropdown-menu" aria-labelledby="nav-04">
+													    	<li><a href="http://www.sieschool.org/cn/academics/how-to-apply/">申请流程</a></li>
+													    	<li><a href="http://www.sieschool.org/cn/academics/credit-transfer/">学分转换</a></li>
+													    	<li><a href="http://www.sieschool.org/cn/academics/cdgdc-verification/">CDGDC认证</a></li>
+													    	<li><a href="http://www.sieschool.org/cn/academics/wes-verification/">WES认证</a></li>
+													    	<li><a href="http://www.sieschool.org/cn/academics/order-transcript/">官方成绩单</a></li>
+													    	<li><a href="http://www.sieschool.org/cn/academics/eligibility/">申请要求</a></li>
+													  	</ul>
+						</li>
+						<li class="dropdown">
+						  	<a id="nav-05" class="nav-link btn" href="javascript:;" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">校园生活 <i class="fa fa-angle-down"></i></a>
+						  	<ul class="dropdown-menu" aria-labelledby="nav-06">
+													    	<li><a href="http://www.sieschool.org/cn/campus-life/housing/">校区住宿</a></li>
+													    	<li><a href="http://www.sieschool.org/cn/campus-life/highlights/">精彩瞬间</a></li>
+													  	</ul>
+						</li>
+						<li class="dropdown">
+						  	<a id="nav-06" class="nav-link btn" href="javascript:;" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">联系我们 <i class="fa fa-angle-down"></i></a>
+						  	<ul class="dropdown-menu" aria-labelledby="nav-07">
+													    	<li><a href="http://www.sieschool.org/cn/contact-us/contact-us/">联系我们</a></li>
+													    	<li><a href="http://www.sieschool.org/cn/contact-us/faq/">常见问题</a></li>
+													    	<li><a href="http://www.sieschool.org/cn/contact-us/internship/">实习招聘</a></li>
+													  	</ul>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</div><!-- page-banner 
+================================================================================-->
+<div class="banner page-banner">
+    <div class="page-banner-bg page-banner-bg01">
+    	<div class="container">
+        	<p><b>SIE ALLIANCE OF INTERNATIONAL</b></p>
+        	<p><b>SUMMER SESSIONS</b></p>
+    	</div>
+    </div>
+</div>
+
+<!-- area 
+================================================================================-->
+<div class="area">
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-3 area-lf">
+				<div class="list-group menu">
+					<h4 class="list-group-item">项目分类</h4>
+					<ul>
+											<li class="list-group-item ">
+				  			<a href="http://www.sieschool.org/cn/students/college-students-america/">北美留学生 <i class="fa fa-chevron-right"></i></a>
+						</li>
+											<li class="list-group-item ">
+				  			<a href="http://www.sieschool.org/cn/students/college-students-china/">国内大学生 <i class="fa fa-chevron-right"></i></a>
+						</li>
+											<li class="list-group-item active">
+				  			<a href="http://www.sieschool.org/cn/students/high-students-china/">国内高中生 <i class="fa fa-chevron-right"></i></a>
+						</li>
+										</ul>
+				</div>
+			</div>
+			<div class="col-xs-9 area-rg">
+				<h3>国内高中生</h3>
+<h5>提前感受北美课堂，收获超乎你想象</h5>
+<p>我们欢迎英语水平及学业成绩达到暑校要求的优秀高中生来申请SIE国际暑期学校。</p>
+<h6>
+	我们的课程：</h6>
+<p>所有课程均由北美高校的优秀教授任教，符合大多数美国大学的课程结构和教学标准。在课程设置的科目选取上本着&ldquo;积极借鉴、优势互补&rdquo;的原则，综合涵盖经济学、哲学、文学、法学、历史学、理学等学科门类。开设科目既是举办大学相关专业教学计划内课程，又与海外大学课程有所对应。学生可以自由选择4周和5周的课程，均为英语授课；北京交通大学每门课程64学时，华东师范大学每门课程72学时。</p>
+<p>SIE暑校在为学生提供标准的北美课程的同时，还融入了社交文化体验和商业领袖项目等环节，让学生在亲身感受常春藤教育的同时，获得留学生活与学术沟通力、批判性学术思维力、国际化领导力、人脉资源拓展力等诸多方面的全面提升。</p>
+<p>查询全部课程列表及课程大纲，请点击 <a href="http://www.sieschool.org/cn/courses/course-list/">课程列表</a> 。</p>
+<p>学费查询，请点击 <a href="http://www.sieschool.org/cn/application/tuition/">学费详情</a> 。</p>
+<p>社交文化体验与商业领袖项目，请点击 <a href="http://www.sieschool.org/cn/campus-life/highlights/">校园生活</a> 。</p>
+<h6>
+	课程的优势：</h6>
+<p>1. 如果您是计划出国上大学的高一高二学生，通过参加我们国际暑校，您可以：</p>
+<ul>
+<li>提前亲身感受北美大学授课氛围，适应英语教学环境。</li>
+<li>与名校教授，以及已经赴美的留学生进行面对面沟通。</li>
+<li>选修2到3门美国名校课程，获得课程成绩单。</li>
+<li>深入了解美国大学独特的学术背景、生活背景。</li>
+<li>了解美国大学申请相关信息。</li>
+<li>获得知名美国高校教授推荐信的机会。</li>
+<li>获得在未来北美大学转学分的机会。</li>
+</ul>
+<p>2. 如果您是已经手持北美大学录取信的准留学生，在远赴重洋前，暑校能让您：</p>
+<ul>
+<li>利用暑假期间先修2到3门美国名校课程，获得课程成绩单并将学分转回到美国大学。</li>
+<li>以低至1/3的成本提前获得课程学分，节省宝贵的留学开支。</li>
+<li>结识全球知名教授、行业精英、优秀校友，提前进行系统的未来职业规划。</li>
+</ul>
+<p>在线注册报名，请点击 <a href="http://www.sieschool.org/cn/user/login.php">在线申请</a>&nbsp;。</p>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="footer">
+	<div class="container">
+		<h2>SIE Alliance of International Summer Sessions</h2>
+		<em class="line"></em>
+		<div class="wechat mt-30">
+			<div class="row">
+				<div class="col-xs-6 col-xs-offset-3">
+					<div class="row">
+						<div class="col-xs-6">
+							<img src="/public/img/wechat-consultant.jpg">
+							<p>微信咨询号</p>
+						</div>
+						<div class="col-xs-6">
+							<img src="/public/img/wechat-official.jpg">
+							<p>微信公众号</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<p class="mt-30">
+			<span>(86)400-666-5576</span>
+			<em>/</em>
+			<span>iss@sieschool.org</span>
+		</p>
+		<p class="mt-5">
+			<span>BJTU: 010-53383118</span>
+			<em>/</em>
+			<span>bjtuiss@bjtu.edu.cn</span>
+		</p>
+		<p class="mt-5">
+			<span>ECNU:021-32514240</span>
+			<em>/</em>
+			<span>iss@ied.ecnu.edu.cn</span>
+		</p>
+		<div class="copyright">
+			<p>Copyright &copy; 2009 Sinoway International Education Group Limited &nbsp;&nbsp;&nbsp;&nbsp; 京ICP证000007</p>
+		</div>
+	</div>
+</div>
+	
+<script src="/public/js/jquery.min.js"></script>
+<script src="/public/js/bootstrap.min.js"></script>
+<script src="/public/js/jquery.SuperSlide.js"></script>
+<script src="/public/js/common.js"></script>
+<script src="/state.php"></script>
+
+</body>
+</html>

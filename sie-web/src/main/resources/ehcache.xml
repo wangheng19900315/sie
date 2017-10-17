@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../config/ehcache.xsd">
-    <diskStore path="E:/ehcache" />
+    <diskStore path="/soft/data/ehcache" />
     <!-- DefaultCache setting. -->
     <defaultCache
             maxElementsInMemory="1000"

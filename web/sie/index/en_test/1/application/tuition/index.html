@@ -1,0 +1,436 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Tuition - sieSchool</title>
+	<meta name="keywords" content="Tuition">
+	<meta name="description" content="sieSchool">
+	<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" type="text/css" href="/public/css/bootstrap.min.css" media="all">
+    <link rel="stylesheet" type="text/css" href="/public/css/font-awesome.min.css" media="all">
+    <link rel="stylesheet" type="text/css" href="/cn/css/base.css" media="all">
+</head>
+<body>
+<div id="fixedMenu" class="top">
+	<div class="top-bar">
+		<div class="container">
+			<p>SIE<span>国际暑期学校</span>International Summer Sessions</p>
+		</div>
+	</div>
+	<div class="top-box">
+		<div class="container">
+			<div class="logo-box pull-left">
+				<a href="/cn/">
+					<img src="/public/img/logo.png" alt="sieSchool">
+				</a>
+			</div>
+			<div class="nav-box pull-right">
+				<div class="language text-right">
+					<a href='/cn/user/login.php' id="login" title='Login'>Login</a>
+					<span id="sep">/</span>
+					<a href='/cn/user/register.php' id="register" title='register'>Register</a>
+					<a href="/cn/user/user_center.php" id="user_center" title="user center"></a>
+					<a id="logout" title="logout">Logout</a>
+					<a href="/cn/" title="中文" style="cursor:pointer" onclick="window.location.href=window.location.href.replace('/en','/cn')"><img src="/public/img/language-cn.png"></a>
+					<a href="/en/" title="English"><img src="/public/img/language-en.png"></a>
+				</div>
+				<div class="nav">
+					<ul>
+						<li class="dropdown active">
+						  	<a id="nav-01" class="nav-link btn" href="/cn/index.html" role="button">首页</a>
+						</li>
+						<li class="dropdown">
+						  	<a id="nav-01" class="nav-link btn" href="javascript:;" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About Us <i class="fa fa-angle-down"></i></a>
+						  	<ul class="dropdown-menu" aria-labelledby="nav-01">
+													    	<li><a href="http://www.sieschool.org/en/about-us/about-sie/">About SIE</a></li>
+													    	<li><a href="http://www.sieschool.org/en/about-us/about-ecnu/">About ECNU</a></li>
+													    	<li><a href="http://www.sieschool.org/en/about-us/about-bjtu/">About BJTU</a></li>
+													  	</ul>
+						</li>
+						<li class="dropdown">
+						  	<a id="nav-02" class="nav-link btn" href="javascript:;" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Courses <i class="fa fa-angle-down"></i></a>
+						  	<ul class="dropdown-menu" aria-labelledby="nav-03">
+													    	<li><a href="http://www.sieschool.org/en/courses/course-list/">Course List</a></li>
+													    	<li><a href="http://www.sieschool.org/en/courses/current-faculty/">Current Faculty</a></li>
+													    	<li><a href="http://www.sieschool.org/en/courses/add-drop/">Add/Drop</a></li>
+													    	<li><a href="http://www.sieschool.org/en/courses/academic-calendar/">Academic Calendar</a></li>
+													    	<li><a href="http://www.sieschool.org/en/courses/course-format/">Course Format</a></li>
+													    	<li><a href="http://www.sieschool.org/en/courses/former-faculty/">Former Faculty</a></li>
+													  	</ul>
+						</li>
+						<li class="dropdown">
+						  	<a id="nav-03" class="nav-link btn" href="javascript:;" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Application <i class="fa fa-angle-down"></i></a>
+						  	<ul class="dropdown-menu" aria-labelledby="nav-02">
+													    	<li><a href="http://www.sieschool.org/en/application/tuition/">Tuition</a></li>
+													    	<li><a href="http://www.sieschool.org/en/application/scholarship/">Scholarship</a></li>
+													    	<li><a href="http://www.sieschool.org/en/application/Refund/">refund</a></li>
+													    	<li><a href="http://www.sieschool.org/en/application/paytype/">Paytype</a></li>
+								
+						  	</ul>
+						</li>
+						<li class="dropdown">
+						  	<a id="nav-04" class="nav-link btn" href="javascript:;" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Academics <i class="fa fa-angle-down"></i></a>
+						  	<ul class="dropdown-menu" aria-labelledby="nav-04">
+													    	<li><a href="http://www.sieschool.org/en/academics/how-to-apply/">How to Apply</a></li>
+													    	<li><a href="http://www.sieschool.org/en/academics/credit-transfer/">Credit Transfer</a></li>
+													    	<li><a href="http://www.sieschool.org/en/academics/cdgdc-verification/">CDGDC Verification</a></li>
+													    	<li><a href="http://www.sieschool.org/en/academics/wes-verification/">WES Verification</a></li>
+													    	<li><a href="http://www.sieschool.org/en/academics/order-transcript/">Order Transcript</a></li>
+													    	<li><a href="http://www.sieschool.org/en/academics/eligibility/">Eligibility</a></li>
+													  	</ul>
+						</li>
+						<li class="dropdown">
+						  	<a id="nav-05" class="nav-link btn" href="javascript:;" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Campus Life <i class="fa fa-angle-down"></i></a>
+						  	<ul class="dropdown-menu" aria-labelledby="nav-06">
+													    	<li><a href="http://www.sieschool.org/en/campus-life/housing/">Housing</a></li>
+													    	<li><a href="http://www.sieschool.org/en/campus-life/highlights/">Highlights</a></li>
+													  	</ul>
+						</li>
+						<li class="dropdown">
+						  	<a id="nav-06" class="nav-link btn" href="javascript:;" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Contact Us <i class="fa fa-angle-down"></i></a>
+						  	<ul class="dropdown-menu" aria-labelledby="nav-07">
+													    	<li><a href="http://www.sieschool.org/en/contact-us/contact-us/">Contact Us</a></li>
+													    	<li><a href="http://www.sieschool.org/en/contact-us/faq/">FAQ</a></li>
+													    	<li><a href="http://www.sieschool.org/en/contact-us/internship/">Internship</a></li>
+													  	</ul>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</div><!-- page-banner 
+================================================================================-->
+<div class="banner page-banner">
+    <div class="page-banner-bg page-banner-bg01">
+    	<div class="container">
+        	<p><b>SIE ALLIANCE OF INTERNATIONAL</b></p>
+        	<p><b>SUMMER SESSIONS</b></p>
+    	</div>
+    </div>
+</div>
+
+<!-- area 
+================================================================================-->
+<div class="area">
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-3 area-lf">
+				<div class="list-group menu">
+					<h4 class="list-group-item">Application</h4>
+					<ul>
+											<li class="list-group-item active">
+				  			<a href="http://www.sieschool.org/en/application/tuition/">Tuition <i class="fa fa-chevron-right"></i></a>
+						</li>
+											<li class="list-group-item ">
+				  			<a href="http://www.sieschool.org/en/application/scholarship/">Scholarship <i class="fa fa-chevron-right"></i></a>
+						</li>
+											<li class="list-group-item ">
+				  			<a href="http://www.sieschool.org/en/application/Refund/">refund <i class="fa fa-chevron-right"></i></a>
+						</li>
+											<li class="list-group-item ">
+				  			<a href="http://www.sieschool.org/en/application/paytype/">Paytype <i class="fa fa-chevron-right"></i></a>
+						</li>
+										</ul>
+				</div>
+			</div>
+			<div class="col-xs-9 area-rg">
+				<h3>Tuition</h3>
+<div>
+<ul class="nav nav-tabs nav-justified" role="tablist">
+<li class="active" role="presentation"><a aria-controls="tuition-01" data-toggle="tab" href="#tuition-01" role="tab">Tuition &amp; Fees</a></li>
+<li role="presentation"><a aria-controls="tuition-02" data-toggle="tab" href="#tuition-02" role="tab">Payment Options</a></li>
+<li role="presentation"><a aria-controls="tuition-03" data-toggle="tab" href="#tuition-03" role="tab">Refund Policies</a></li>
+<li role="presentation"><a aria-controls="tuition-04" data-toggle="tab" href="#tuition-04" role="tab">Scholarship Opportunities</a></li>
+</ul>
+<div class="tab-content">
+<div class="tab-pane fade in active" id="tuition-01" role="tabpanel"><br />
+<img alt="" src="http://www.sieschool.org/uploadfile/2015/1218/20151218041612827.png" style="width: 856px; height: 216px;" /><br />
+<table class="table table-bordered text-center mt-30">
+<tbody>
+	<tr class="active">
+	<th class="text-center" colspan="4">
+		2016 ECNU/BJTU International Summer Sessions</th>
+	</tr>
+	<tr>
+	<td colspan="2">
+	<p>Stage of Application</p>
+	</td>
+	<td>
+	<p>Early Application</p>
+	</td>
+	<td>
+	<p>Regular Application</p>
+	</td>
+	</tr>
+	<tr>
+	<td rowspan="2">
+	<p>4-Week Session</p>
+	</td>
+	<td class="active" colspan="1">
+	<p>Full Payment Deadline</p>
+	</td>
+	<td class="active">
+	<p>March 2,2016</p>
+	</td>
+	<td class="active">
+	<p>May 16,2016<br />
+	/June 20,2016</p>
+	</td>
+	</tr>
+	<tr>
+	<td rowspan="1">
+	<p>2-course Package</p>
+	</td>
+	<td>
+	<p>$3,152/&nbsp;&yen;19,880</p>
+	</td>
+	<td>
+	<p>$3,332/&nbsp;&yen;21,016</p>
+	</td>
+	</tr>
+	<tr>
+	<td rowspan="3">
+	<p>5-Week Session</p>
+	</td>
+	<td class="active" colspan="1">
+	<p>Full Payment Deadline</p>
+	</td>
+	<td class="active">
+	<p>March 2,2016</p>
+	</td>
+	<td class="active">
+	<p>June 20,2016</p>
+	</td>
+	</tr>
+	<tr>
+	<td rowspan="1">
+	<p>2-course Package</p>
+	</td>
+	<td>
+	<p>$3,152/&nbsp;&yen;19,880</p>
+	</td>
+	<td>
+	<p>$3,332/&nbsp;&yen;21,016</p>
+	</td>
+	</tr>
+	<tr>
+	<td rowspan="1">
+	<p>3-course Package</p>
+	</td>
+	<td>
+	<p>$3,632/&nbsp;&yen;22,892</p>
+	</td>
+	<td>
+	<p>$3,812/&nbsp;&yen;24,028</p>
+	</td>
+	</tr>
+	<tr></tr>
+</tbody>
+</table>
+<hr />
+<p><br />
+Upon completing the payment, you can enjoy:</p>
+<ul>
+<li>Two or three accredited college-level courses taught by full-time professors from U.S. colleges and universities;</li>
+<li>No application and administration fee;</li>
+<li>Free business program and social events;</li>
+<li>Free student accident insurance;</li>
+<li>One-time official transcript delivery for free;</li>
+</ul>
+<p>Please note:</p>
+<p>1. The Alumni Students enjoy 5% discount of tuition fees.</p>
+<p>2. No late application fees. Students who apply after the deadline can be admitted only when the space is available.</p>
+<p>3. In the 5-week program, for applicants who register for two courses and want to add one more course, an extra fee of $480/￥3012 should be paid.</p>
+<p>4. In the 5-week program, for applicants who register three courses and want to drop one course, the refund is $480/￥3012.</p>
+</div>
+<div class="tab-pane fade" id="tuition-02" role="tabpanel">
+<h6>
+	<br />
+	<span style="font-size:14px;">BJTU/ECNU ISS offers four payment options: Online payment, bank transfer, or cash with Chinese RMB, or &ldquo;Alipay&rdquo;. Students who have applied for housing can also make the housing payment via these options.</span></h6>
+<hr />
+<h5>Method 1. Online Payment</h5>
+<p>You can make online payment of your tuition fees through your Student Account Center. The status of your order will be reviewed within two working days.</p>
+<ul>
+<li>For RMB payment, you can choose the &ldquo;一网通 Online Payment&rdquo;, in which most of the Chinese banks are available</li>
+<li>For USD payment, you can complete the payment through &ldquo;Paypal&rdquo;, in which case 3% service fee will be charged.</li>
+</ul>
+<hr />
+<h5>Method 2. Bank Transfer</h5>
+<p><strong>For US Dollars Only</strong></p>
+<p>Beneficiary Bank: HSBC, HONG KONG</p>
+<p>Bank Address: 1 Queen&rsquo;s Road Central, Hong Kong</p>
+<p>SWIFT Code: HSBCHKHHHKH</p>
+<p>Beneficiary Company Name: Sinoway International Education Group Limited</p>
+<p>Beneficiary Account Number: 801-006123-838</p>
+<p>Company Address: Unit 2508A, 25/F Bank of America Tower, Central, Hong Kong</p>
+<p>Please instruct the remitting bank to specify the deposit currency as US Dollars in the &ldquo;Bank to Bank Information&rdquo; field of their payment order.</p>
+<p><strong>For CNY Only</strong></p>
+<p><b>1. 招商银行</b></p>
+<p>1) 受款人姓名：通世华威国际教育咨询（北京）有限公司</p>
+<p>2) 受款银行名称：招商银行股份有限公司北京工体支行</p>
+<p>3) 账号：110908262610606</p>
+<p><b>2. 中信银行</b></p>
+<p>1）受款人姓名：通世华威国际教育咨询（北京）有限公司</p>
+<p>2）受款银行名：中信银行北京朝阳支行</p>
+<p>3）账号：7111110195700004511</p>
+<hr />
+<h5>Method 3. Cash Payment （CNY Cash Only）</h5>
+<p>Cash payment is available at BJTU/ECNU International Summer Session. Please complete your order in the online application system and prepare cash for the payment.</p>
+<p>BJTU Office Address:&nbsp;Beijing Jiaotong University, No.3 Shangyuancun, Haidian District, Beijing</p>
+<p>ECNU Office Address: Room 400, Physics Building, East China Normal University, 3663 Zhongshan North Road, Putuo District, Shanghai</p>
+<p>Office Hour: 9:30-11:30, 13:30&ndash;16:00, Monday to Friday except Tuesday. Closed on Saturday, Sunday and national holidays.</p>
+<hr />
+<h5>Method 4. Alipay</h5>
+<p>You can also scan QR Code below to complete the payment.&nbsp;<br />
+<br />
+<img alt="" src="http://www.sieschool.org/uploadfile/2015/1126/20151126045112884.png" style="width: 145px; height: 145px;" /></p>
+</div>
+<div class="tab-pane fade" id="tuition-03" role="tabpanel">
+<p><br />
+Students who apply for tuition fee refund need to fill out &nbsp;the&nbsp;<a href="http://www.sieschool.org/uploadfile/2015/1210/20151210062207750.docx">refund form</a>&nbsp;and send to us at&nbsp;<a href="mailto:iss@sieschool.org">iss@sieschool.org</a>&nbsp;(for BJTU applicants) or&nbsp;<a href="mailto:iss@ied.ecnu.edu.cn">iss@ied.ecnu.edu.cn</a>. (for ECNU applicants). Our staff will contact you and deal with your refund after receiving your refund form.&nbsp;Please check the following form for the detailed refund application date and refund percentage. &nbsp;</p>
+<table class="table table-bordered text-center mt-30">
+<tbody>
+	<tr class="active">
+	<th class="text-center" colspan="2">
+		Tuition Refund Schedule--ECNU 4-week Session</th>
+	</tr>
+	<tr>
+	<td width="50%">Date</td>
+	<td width="50%">Refund Percentage</td>
+	</tr>
+	<tr>
+	<td>Before May 22,2016</td>
+	<td>100%</td>
+	</tr>
+	<tr>
+	<td>May 23,2016 to May 30,2016</td>
+	<td>50%</td>
+	</tr>
+	<tr>
+	<td>After May 31,2016</td>
+	<td>0%</td>
+	</tr>
+	<tr class="active">
+	<th class="text-center" colspan="2">
+		Tuition Refund Schedule--ECNU 5-week Session</th>
+	</tr>
+	<tr>
+	<td>Date</td>
+	<td>Refund Percentage</td>
+	</tr>
+	<tr>
+	<td>Before June 26,2016</td>
+	<td>100%</td>
+	</tr>
+	<tr>
+	<td>June 27,2016 to July 4, 2016</td>
+	<td>50%</td>
+	</tr>
+	<tr>
+	<td>After July 5,2016</td>
+	<td>0%</td>
+	</tr>
+	<tr class="active">
+	<th class="text-center" colspan="2">
+		Tuition Refund Schedule--BJTU 4-week Session</th>
+	</tr>
+	<tr>
+	<td>Date</td>
+	<td>Refund Percentage</td>
+	</tr>
+	<tr>
+	<td>Before June 26,2016</td>
+	<td>100%</td>
+	</tr>
+	<tr>
+	<td>June 27, 2016 to July 4, 2016</td>
+	<td>50%</td>
+	</tr>
+	<tr>
+	<td>After July 5,2016</td>
+	<td>0%</td>
+	</tr>
+</tbody>
+</table>
+<p><strong>On-campus housing fee refund policies:</strong><br />
+<br />
+ECNU-4: &nbsp;If a student who has applied for on-campus housing wants to cancel his/her on-campus housing, he/ she must apply for cancellation before May 22, 2016 to get a full &nbsp;refund. If he/ she applys for cancellation after May 23, 2016, there will be no refund.<br />
+<br />
+ECNU-5: If a student who has applied for on-campus housing wants to cancel his/her on-campus housing, he/ she must apply for cancellation before June 26, 2016 to get a full &nbsp;refund. If he/ she applys for cancellation after June 27,2016, there will be no refund.<br />
+<br />
+BJTU-4: &nbsp;If a student who has applied for on-campus housing wants to cancel his/her on-campus housing, he/ she must apply for cancellation &nbsp;before June 26, 2016 to get a full refund. If he/ she applys for cancellation after June 27, 2016, there will be no refund.<br />
+<br />
+<strong>Notes: </strong><br />
+<br />
+We do not refund through cash. Transaction fees (if any) will be deducted from the total amount of refund.</p>
+<p>BJTU/ECNU International Summer Session reserves the right to cancel a course if it has enrolled less than five students two weeks before the beginning of the course&#39;s instruction. In the case of course cancellation, all enrolled students will be notified by email.</p>
+<p>All deadlines end at 11:59pm Beijing time unless indicated.</p>
+<p>All refunds will be processed within approximately one month.</p>
+</div>
+<div class="tab-pane fade" id="tuition-04" role="tabpanel">
+<h5>Scholarship Opportunities</h5>
+<p>BJTU/ECNU ISS offers the following scholarships for outstanding students:</p>
+<p><b>Premier Academic Scholarship:</b>$1,000/person for top 1% academic performance.</p>
+<p><b>Outstanding Academic Scholarship:</b>$500/person for top 2% (excluding top 1%) academic performance.</p>
+<p>Scholarships will be awarded on the basis of student&rsquo;s GPA in the summer programs, professors&rsquo; feedback, and attendance.</p>
+</div>
+</div>
+</div>
+<br />
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="footer">
+	<div class="container">
+		<h2>SIE Alliance of International Summer Sessions</h2>
+		<em class="line"></em>
+		<div class="wechat mt-30">
+			<div class="row">
+				<div class="col-xs-6 col-xs-offset-3">
+					<div class="row">
+						<div class="col-xs-6">
+							<img src="/public/img/wechat-consultant.jpg">
+							<p>微信咨询号</p>
+						</div>
+						<div class="col-xs-6">
+							<img src="/public/img/wechat-official.jpg">
+							<p>微信公众号</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<p class="mt-30">
+			<span>(86)18910194676</span>
+			<em>/</em>
+			<span>chongshan.wang@sieschool.org</span>
+		</p>
+		<p class="mt-5">
+			<span>BJTU: 010-53383118</span>
+			<em>/</em>
+			<span>bjtuiss@bjtu.edu.cn</span>
+		</p>
+		<p class="mt-5">
+			<span>ECNU: （86）400-666-5576</span>
+			<em>/</em>
+			<span>iss@ied.ecnu.edu.cn</span>
+		</p>
+		<div class="copyright">
+			<p>Copyright &copy; 2015 Sinoway International Education Group Limited &nbsp;&nbsp;&nbsp;&nbsp; 京ICP证000007</p>
+		</div>
+	</div>
+</div>
+	
+<script src="/public/js/jquery.min.js"></script>
+<script src="/public/js/bootstrap.min.js"></script>
+<script src="/public/js/jquery.SuperSlide.js"></script>
+<script src="/public/js/common.js"></script>
+<script src="/state.php"></script>
+
+
+</body>
+</html>

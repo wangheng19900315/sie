@@ -148,7 +148,7 @@ document.writeln('<!-- modal-box -->'+
         ' </label>'+
         ' </div>'+
         ' <p class="text-right mt10">'+
-        '    <a data-dismiss="modal" data-toggle="modal" data-target="#modal-login">已有账户？ 登录 &gt;</a>'+
+        '    <a data-dismiss="modal" id="register_login_btn" data-toggle="modal" data-target="#modal-login">已有账户？ 登录 &gt;</a>'+
         ' </p>'+
         ' </div>'+
     ' </div>'+

@@ -1,0 +1,254 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>商业领袖 - sieSchool</title>
+	<meta name="keywords" content="商业领袖">
+	<meta name="description" content="sieSchool">
+	<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" type="text/css" href="/public/css/bootstrap.min.css" media="all">
+    <link rel="stylesheet" type="text/css" href="/public/css/font-awesome.min.css" media="all">
+    <link rel="stylesheet" type="text/css" href="/cn/css/base.css" media="all">
+</head>
+<body>
+<div id="fixedMenu" class="top">
+	<div class="top-bar">
+		<div class="container">
+			<p>SIE<span>国际暑期学校</span>International Summer Sessions</p>
+		</div>
+	</div>
+	<div class="top-box">
+		<div class="container">
+			<div class="logo-box pull-left">
+				<a href="/cn/">
+					<img src="/public/img/logo.png" alt="sieSchool">
+				</a>
+			</div>
+			<div class="nav-box pull-right">
+				<div class="language text-right">
+					<a href='/cn/user/login.php' id="login" title='登录'>登录</a>
+					<span id="sep">/</span>
+					<a href='/cn/user/register.php' id="register" title='注册'>注册</a>
+					<a href="/cn/user/user_center.php" id="user_center" title="个人中心"></a>
+					<a id="logout" title="退出登录">退出</a>
+					
+					<a title="中文" style="cursor:pointer"><img src="/public/img/language-cn.png"></a>
+					<a title="English" style="cursor:pointer" onclick="window.location.href=window.location.href.replace('/cn','/en')"><img style="height:23px;" src="/public/img/language-en.svg"></a>
+				</div>
+				<div class="nav">
+					<ul>
+						<li class="dropdown active">
+						  	<a id="nav-01" class="nav-link btn" href="/cn/index.html" role="button">首页</a>
+						</li>
+						<li class="dropdown">
+						  	<a id="nav-01" class="nav-link btn" href="javascript:;" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">暑校介绍 <i class="fa fa-angle-down"></i></a>
+						  	<ul class="dropdown-menu" aria-labelledby="nav-01">
+													    	<li><a href="http://www.sieschool.org/cn/about-us/about-sie/">关于SIE</a></li>
+													    	<li><a href="http://www.sieschool.org/cn/about-us/about-ecnu/">关于ECNU</a></li>
+													    	<li><a href="http://www.sieschool.org/cn/about-us/about-bjtu/">关于BJTU</a></li>
+													  	</ul>
+						</li>
+						<li class="dropdown">
+						  	<a id="nav-02" class="nav-link btn" href="javascript:;" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">暑校课程 <i class="fa fa-angle-down"></i></a>
+						  	<ul class="dropdown-menu" aria-labelledby="nav-03">
+													    	<li><a href="http://www.sieschool.org/cn/courses/course-list/">课程列表</a></li>
+													    	<li><a href="http://www.sieschool.org/cn/courses/current-faculty/">现任教授</a></li>
+													    	<li><a href="http://www.sieschool.org/cn/courses/add-drop/">课程设置</a></li>
+													    	<li><a href="http://www.sieschool.org/cn/courses/academic-calendar/">暑校日程</a></li>
+													    	<li><a href="http://www.sieschool.org/cn/courses/course-format/">研究项目</a></li>
+													    	<li><a href="http://www.sieschool.org/cn/courses/former-faculty/">往届教授</a></li>
+													  	</ul>
+						</li>
+						<li class="dropdown">
+						  	<a id="nav-03" class="nav-link btn" href="javascript:;" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">学费详情 <i class="fa fa-angle-down"></i></a>
+						  	<ul class="dropdown-menu" aria-labelledby="nav-02">
+													    	<li><a href="http://www.sieschool.org/cn/application/tuition/">学费价格</a></li>
+													    	<li><a href="http://www.sieschool.org/cn/application/scholarship/">奖学金</a></li>
+													    	<li><a href="http://www.sieschool.org/cn/application/refund/">退款事宜</a></li>
+													    	<li><a href="http://www.sieschool.org/cn/application/paytype/">支付方式</a></li>
+								
+						  	</ul>
+						</li>
+						<li class="dropdown">
+						  	<a id="nav-04" class="nav-link btn" href="javascript:;" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">申请指南 <i class="fa fa-angle-down"></i></a>
+						  	<ul class="dropdown-menu" aria-labelledby="nav-04">
+													    	<li><a href="http://www.sieschool.org/cn/academics/how-to-apply/">申请流程</a></li>
+													    	<li><a href="http://www.sieschool.org/cn/academics/credit-transfer/">学分转换</a></li>
+													    	<li><a href="http://www.sieschool.org/cn/academics/cdgdc-verification/">CDGDC认证</a></li>
+													    	<li><a href="http://www.sieschool.org/cn/academics/wes-verification/">WES认证</a></li>
+													    	<li><a href="http://www.sieschool.org/cn/academics/order-transcript/">官方成绩单</a></li>
+													    	<li><a href="http://www.sieschool.org/cn/academics/eligibility/">申请要求</a></li>
+													  	</ul>
+						</li>
+						<li class="dropdown">
+						  	<a id="nav-05" class="nav-link btn" href="javascript:;" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">校园生活 <i class="fa fa-angle-down"></i></a>
+						  	<ul class="dropdown-menu" aria-labelledby="nav-06">
+													    	<li><a href="http://www.sieschool.org/cn/campus-life/housing/">校区住宿</a></li>
+													    	<li><a href="http://www.sieschool.org/cn/campus-life/highlights/">精彩瞬间</a></li>
+													  	</ul>
+						</li>
+						<li class="dropdown">
+						  	<a id="nav-06" class="nav-link btn" href="javascript:;" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">联系我们 <i class="fa fa-angle-down"></i></a>
+						  	<ul class="dropdown-menu" aria-labelledby="nav-07">
+													    	<li><a href="http://www.sieschool.org/cn/contact-us/contact-us/">联系我们</a></li>
+													    	<li><a href="http://www.sieschool.org/cn/contact-us/faq/">常见问题</a></li>
+													    	<li><a href="http://www.sieschool.org/cn/contact-us/internship/">实习招聘</a></li>
+													  	</ul>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</div><!-- page-banner 
+================================================================================-->
+<div class="banner page-banner">
+    <div class="page-banner-bg page-banner-bg01">
+    	<div class="container">
+        	<p><b>SIE ALLIANCE OF INTERNATIONAL</b></p>
+        	<p><b>SUMMER SESSIONS</b></p>
+    	</div>
+    </div>
+</div>
+
+<!-- area 
+================================================================================-->
+<div class="area">
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-3 area-lf">
+				<div class="list-group menu">
+					<h4 class="list-group-item">中文</h4>
+					<ul>
+											<li class="list-group-item ">
+				  			<a href="http://www.sieschool.org/cn/about-us/">暑校介绍 <i class="fa fa-chevron-right"></i></a>
+						</li>
+											<li class="list-group-item ">
+				  			<a href="http://www.sieschool.org/cn/courses/">暑校课程 <i class="fa fa-chevron-right"></i></a>
+						</li>
+											<li class="list-group-item ">
+				  			<a href="http://www.sieschool.org/cn/application/">学费详情 <i class="fa fa-chevron-right"></i></a>
+						</li>
+											<li class="list-group-item ">
+				  			<a href="http://www.sieschool.org/cn/academics/">申请指南 <i class="fa fa-chevron-right"></i></a>
+						</li>
+											<li class="list-group-item ">
+				  			<a href="http://www.sieschool.org/cn/campus-life/">校园生活 <i class="fa fa-chevron-right"></i></a>
+						</li>
+											<li class="list-group-item ">
+				  			<a href="http://www.sieschool.org/cn/contact-us/">联系我们 <i class="fa fa-chevron-right"></i></a>
+						</li>
+											<li class="list-group-item ">
+				  			<a href="http://www.sieschool.org/cn/faculty/">师资力量 <i class="fa fa-chevron-right"></i></a>
+						</li>
+											<li class="list-group-item ">
+				  			<a href="http://www.sieschool.org/cn/academic-standards/">学术准则 <i class="fa fa-chevron-right"></i></a>
+						</li>
+											<li class="list-group-item active">
+				  			<a href="http://www.sieschool.org/cn/business-program/">商业领袖 <i class="fa fa-chevron-right"></i></a>
+						</li>
+											<li class="list-group-item ">
+				  			<a href="http://www.sieschool.org/cn/student-union/">学生联盟 <i class="fa fa-chevron-right"></i></a>
+						</li>
+											<li class="list-group-item ">
+				  			<a href="http://www.sieschool.org/cn/students/">项目分类 <i class="fa fa-chevron-right"></i></a>
+						</li>
+											<li class="list-group-item ">
+				  			<a href="http://www.sieschool.org/cn/index/">首页 <i class="fa fa-chevron-right"></i></a>
+						</li>
+										</ul>
+				</div>
+			</div>
+			<div class="col-xs-9 area-rg">
+				<h3>商业领袖项目</h3>
+<h5>1、简介</h5>
+<p><b>SIE国际暑期学校的商业领袖项目（Business Program，简称B.P.）</b>，是专为帮助留学生明确职业发展和就业前景而打造的高端项目&mdash;&mdash;给同学们送上最前沿的商业理念、最贴心的职业指导，绝对是留学生不容错过的商业视听盛宴！<b>商业领袖项目</b>结合北美留学生们的专业、兴趣以及实用性等多方面因素，为留学生群体量身打造的高端职业项目，为大家提供职业发展指导、商业理念启蒙、人生方向导航等全方位指导。自2012年开始，每年的暑校期间，SIE均请来包括高盛、KKR、摩根大通、中金、路易威登、德勤等在内的行业高管和杰出代表们与暑校学员们一起进行交流和互动。从投行、私募基金到咨询、律所再到互联网、政府等各行各业，带给暑校学生们多角度、全方位资讯，是暑校学生们在北美不容易接触到的活动。</p>
+<h5>2、B.P风采之领袖讲演</h5>
+<h6>
+	精华演讲NO.1</h6>
+<p>探讨如何成为一名合格的世界公民：洛杉矶前副市长陈愉（Joy Chen）女士</p>
+<p><img src="/public/img/business-program01.jpg" /></p>
+<p>作为一个在美国成长奋斗，最终成功融入美国社会并取得巨大成功的美籍华裔女性，陈愉女士通过分享自身的奋斗历程以及心得体会，给刚到美国、内心仍旧十分忐忑的留学生们上了一堂生动的美国文化融入课程。</p>
+<p>陈愉女士从切身经历出发，紧扣&ldquo;如何成为世界公民&rdquo;的主题，为SIE国际暑校的同学讲述了自己作为美籍华裔在美国政界、商界的奋斗历程，包括她如何奋斗成为众人瞩目的洛杉矶副市长的独特历程，以及其在政界、商界获得成功的法则。陈愉女士认为，虽然自己身为美籍华裔，属于美国少数人群体，但她通过自己的努力获得诸多方面的成功，得到社会的认可，其秘诀在于她培养了个人的重要技能和拓展了个人交际圈等。她分享的如何融入美国社会的经验和心得体会，得到了所有同学的共鸣，反响异常热烈。</p>
+<h6>
+	精华演讲NO.2</h6>
+<p>讲述中国互联网人的成长故事：人人网董事长兼首席执行官陈一舟先生</p>
+<p><img src="/public/img/business-program02.jpg" /></p>
+<p>作为一名在网络大潮中崛起的成功的创业人士，陈一舟先生自然也被很多同学们问到了他的创业史。陈一舟先生轻松的讲述了他前两次失败的创业经历，随后总结出一条宝贵的创业经验：不要做自己不擅长的事情。并且告诫有创业冲动的同学们，一定要认准自己擅长的事情，而且不要轻易离开，因为一个人是否成功就是要看他是否在某一个专业领域里做到了最好！</p>
+<p>陈一舟先生以平等的姿态与同学们分享着自己的创业故事、个人经历和商业思路等，不仅给SIE国际暑期学校的同学们带来职场和未来人生的启示，更是让大家感受到了一位商界领袖的人格魅力。同时，陈一舟先生也对SIE国际暑校开设的B.P.项目给予了高度评价，他认为这样的形式是对学分课程一个特别好的补充，特别是对于留学生来说，早一步对未来规划，便能早一步把握未来。</p>
+<h5>3、B.P风采之企业参观</h5>
+<p>SIE国际暑校举办的商业领袖项目还经常带领同学们进入各大企业进行参观。例如曾组织同学们参观人人网北京总部，直观了解互联网企业的工作流程和状态；也曾组织同学们去到全球四大会计师事务所之一的德勤上海总部，体验一名审计师忙碌的一天。</p>
+<p>还未踏入职场的你，对每天出入摩天大楼的高级白领的一日有了解的兴趣吗？对各大公司的氛围有探寻的意向吗？感受一次作为学生感受不到的特殊经历，是不是会让你Feel Awesome？</p>
+<p>通过SIE的商业领袖项目，同学们可以直接且平等的与商界翘楚、政界精英进行沟通，在他们给同学们答疑解惑的同时，也会真诚的给与相关的职业发展指导、商业理念启蒙等独特且珍贵的经验。能听到互联网、金融、投资、创业等行业最顶尖企业CEO们的分享、与商界大佬们亲密交流，SIE的商业领袖项目早已成为暑期学校中最令人期待的明星项目，深受每届暑校学生的好评。想知道今年的Business Program会给大家带来什么惊喜吗？请拭目以待吧。</p>
+<h5>4、以往嘉宾</h5>
+<p><b>田天</b> 路易&middot;威登中国总部公共关系部，媒体覆盖/中国区开店/活动策划/执行</p>
+<p><b>徐一林</b> 世达律所（美国排名前三律所），律师</p>
+<p><b>赵亿阳</b> 摩根大通投行部亚太工业组，资深分析师</p>
+<p><b>舒韡</b> C2，创始人/CEO</p>
+<p><b>王威扬</b> 脉可寻，创始人/CEO</p>
+<p><b>Jack Cao</b> 新加坡主权投资基金淡马锡，投资副总监</p>
+<p><b>Tayler Cox</b> 哈佛大学商学院MBA与法学院JD；真格基金，投资经理；斯坦福大学硕士</p>
+<p><b>司维</b> 时差网，创始人/CEO</p>
+<p><b>李黎</b> 华兴风险投资，副总裁</p>
+<p><b>杨晓颖</b> 走秀网，战略发展总监</p>
+<p><b>梁驰</b> 长江商学院、哥伦比亚大学、北京大学硕士，复兴昆仲资本，高级投资经理</p>
+<p><b>孟繁中</b> 北京外国语大学双学士，华兴资本投资经理。曾任职于麦肯锡咨询公司、德勤会计师事务所等</p>
+<p><b>余跃</b> 南加州大学商学院学士，华创资本数字新媒体投资经理</p>
+<p><b>陈露</b> 毕业于耶鲁大学经济系，任职于世界顶尖管理咨询公司波士顿咨询公司</p>
+<p><b>谭尚轩</b> 创立海外房地产众筹平台&ldquo;海众网&rdquo;，曾任职于工商银行（中国）、Wall Street without Walls (WSWW)（美国）、汇丰银行（美国）</p>
+<p><b>Tiger Yang</b> 毕业于美国加州大学伯克利分校，Chinapex（创略中国）联合创始人</p>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="footer">
+	<div class="container">
+		<h2>SIE Alliance of International Summer Sessions</h2>
+		<em class="line"></em>
+		<div class="wechat mt-30">
+			<div class="row">
+				<div class="col-xs-6 col-xs-offset-3">
+					<div class="row">
+						<div class="col-xs-6">
+							<img src="/public/img/wechat-consultant.jpg">
+							<p>微信咨询号</p>
+						</div>
+						<div class="col-xs-6">
+							<img src="/public/img/wechat-official.jpg">
+							<p>微信公众号</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<p class="mt-30">
+			<span>(86)400-666-5576</span>
+			<em>/</em>
+			<span>iss@sieschool.org</span>
+		</p>
+		<p class="mt-5">
+			<span>BJTU: 010-53383118</span>
+			<em>/</em>
+			<span>bjtuiss@bjtu.edu.cn</span>
+		</p>
+		<p class="mt-5">
+			<span>ECNU:021-32514240</span>
+			<em>/</em>
+			<span>iss@ied.ecnu.edu.cn</span>
+		</p>
+		<div class="copyright">
+			<p>Copyright &copy; 2009 Sinoway International Education Group Limited &nbsp;&nbsp;&nbsp;&nbsp; 京ICP证000007</p>
+		</div>
+	</div>
+</div>
+	
+<script src="/public/js/jquery.min.js"></script>
+<script src="/public/js/bootstrap.min.js"></script>
+<script src="/public/js/jquery.SuperSlide.js"></script>
+<script src="/public/js/common.js"></script>
+<script src="/state.php"></script>
+
+</body>
+</html>

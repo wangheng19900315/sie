@@ -1,0 +1,215 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Business Program - sieSchool</title>
+	<meta name="keywords" content="Business,Program">
+	<meta name="description" content="sieSchool">
+	<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" type="text/css" href="/public/css/bootstrap.min.css" media="all">
+    <link rel="stylesheet" type="text/css" href="/public/css/font-awesome.min.css" media="all">
+    <link rel="stylesheet" type="text/css" href="/en/css/base.css" media="all">
+</head>
+<body>
+<!-- top 
+================================================================================-->
+<div class="top top-absolute" id="fixedMenu" otop="0">
+	<div class="container">
+		<div class="top-box">
+			<div class="logo-box pull-left">
+				<a target="_blank" href="/">
+					<img alt="sieSchool" src="/public/img/logo.svg">
+					<p>SIE ALLIANCE</p>
+				</a>
+			</div>
+			<div class="nav-box pull-right">
+				<div class="language text-right">
+					<a target="_blank" title="个人中心"  id="user_center"></a>
+					<a title="退出登录" id="logout">Logout</a>
+					<a title="English" style="cursor:pointer"><img src="/public/img/language-en.svg"></a>
+					<a title="中文" style="cursor:pointer" onclick="window.location.href=window.location.href.replace('/en','/cn')"><img src="/public/img/language-cn.svg"></a>
+				</div>
+				<div class="nav">
+					<ul>
+						<li class="dropdown">
+						  	<a aria-expanded="false" aria-haspopup="true" role="button" data-toggle="dropdown" href="javascript:;" class="nav-link btn btn-ghost" id="nav-01">About Us</a>
+						  	<ul aria-labelledby="nav-01" class="dropdown-menu">
+													    	<li><a target="_blank" href="http://sies.55dm.cn/en/about-us/about-sie/">About SIE</a></li>
+													    	<li><a target="_blank" href="http://sies.55dm.cn/en/about-us/about-ecnu/">About ECNU</a></li>
+													    	<li><a target="_blank" href="http://sies.55dm.cn/en/about-us/about-bjtu/">About BJTU</a></li>
+													  	</ul>
+						</li>
+						<li class="dropdown">
+						  	<a aria-expanded="false" aria-haspopup="true" role="button" data-toggle="dropdown" href="javascript:;" class="nav-link btn btn-ghost" id="nav-02">Faculty</a>
+						  	<ul aria-labelledby="nav-02" class="dropdown-menu">
+													    	<li><a target="_blank" href="http://sies.55dm.cn/en/faculty/current-faculty/">Current Faculty</a></li>
+													    	<li><a target="_blank" href="http://sies.55dm.cn/en/faculty/former-faculty/">Former Faculty</a></li>
+													  	</ul>
+						</li>
+						<li class="dropdown">
+						  	<a aria-expanded="false" aria-haspopup="true" role="button" data-toggle="dropdown" href="javascript:;" class="nav-link btn btn-ghost" id="nav-03">Courses</a>
+						  	<ul aria-labelledby="nav-03" class="dropdown-menu">
+													    	<li><a target="_blank" href="http://sies.55dm.cn/en/courses/course-list/">Course List</a></li>
+													    	<li><a target="_blank" href="http://sies.55dm.cn/en/courses/course-format/">Course Format</a></li>
+													  	</ul>
+						</li>
+						<li class="dropdown">
+						  	<a aria-expanded="false" aria-haspopup="true" role="button" data-toggle="dropdown" href="javascript:;" class="nav-link btn btn-ghost" id="nav-04">Application</a>
+						  	<ul aria-labelledby="nav-04" class="dropdown-menu">
+													    	<li><a target="_blank" href="http://sies.55dm.cn/en/application/how-to-apply/">How to Apply</a></li>
+													    	<li><a target="_blank" href="http://sies.55dm.cn/en/application/eligibility/">Eligibility</a></li>
+													    	<li><a target="_blank" href="http://sies.55dm.cn/en/application/tuition/">Tuition</a></li>
+													  	</ul>
+						</li>
+						<li class="dropdown">
+						  	<a aria-expanded="false" aria-haspopup="true" role="button" data-toggle="dropdown" href="javascript:;" class="nav-link btn btn-ghost" id="nav-05">Academics</a>
+						  	<ul aria-labelledby="nav-05" class="dropdown-menu">
+													    	<li><a target="_blank" href="http://sies.55dm.cn/en/academics/academic-standards/">Academic Standards</a></li>
+													    	<li><a target="_blank" href="http://sies.55dm.cn/en/academics/academic-calendar/">Academic Calendar</a></li>
+													    	<li><a target="_blank" href="http://sies.55dm.cn/en/academics/add-drop/">Add/Drop</a></li>
+													    	<li><a target="_blank" href="http://sies.55dm.cn/en/academics/order-transcript/">Order Transcript</a></li>
+													    	<li><a target="_blank" href="http://sies.55dm.cn/en/academics/credit-transfer/">Credit Transfer</a></li>
+													    	<li><a target="_blank" href="http://sies.55dm.cn/en/academics/cdgdc-verification/">CDGDC Verification</a></li>
+													    	<li><a target="_blank" href="http://sies.55dm.cn/en/academics/wes-verification/">WES Verification</a></li>
+													  	</ul>
+						</li>
+						<li class="dropdown">
+						  	<a aria-expanded="false" aria-haspopup="true" role="button" data-toggle="dropdown" href="javascript:;" class="nav-link btn btn-ghost" id="nav-06">Campus Life</a>
+						  	<ul aria-labelledby="nav-06" class="dropdown-menu">
+													    	<li><a target="_blank" href="http://sies.55dm.cn/en/campus-life/housing/">Housing</a></li>
+													    	<li><a target="_blank" href="http://sies.55dm.cn/en/campus-life/highlights/">Highlights</a></li>
+													    	<li><a target="_blank" href="http://sies.55dm.cn/en/campus-life/business-program/">Business Program</a></li>
+													    	<li><a target="_blank" href="http://sies.55dm.cn/en/campus-life/student-union/">Student Union</a></li>
+													  	</ul>
+						</li>
+						<li class="dropdown">
+						  	<a aria-expanded="false" aria-haspopup="true" role="button" data-toggle="dropdown" href="javascript:;" class="nav-link btn btn-ghost" id="nav-07">Contact Us</a>
+						  	<ul aria-labelledby="nav-07" class="dropdown-menu">
+													    	<li><a target="_blank" href="http://sies.55dm.cn/en/contact-us/contact-us/">Contact Us</a></li>
+													    	<li><a target="_blank" href="http://sies.55dm.cn/en/contact-us/faq/">FAQ</a></li>
+													  	</ul>
+						</li>
+						<li>
+							<a href="/en/user/login.php" class="btn btn-ghost" id="login">Login</a>
+						</li>
+						<li>
+							<a href="/en/user/apply.php" class="btn btn-danger">Apply</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</div><link rel="stylesheet" href="/statics/poshytip/tip-yellow/tip-yellow.css" type="text/css" />
+<!-- page-banner 
+================================================================================-->
+<div class="banner page-banner">
+    <div class="page-banner-bg page-banner-bg01" style="background-image:url('http://www.sieschool.org/uploadfile/2015/1021/20151021110811757.jpg')">
+    	<div class="container">
+        	<p><b>SIE ALLIANCE OF INTERNATIONAL</b></p>
+        	<p><b>SUMMER SESSIONS</b></p>
+    	</div>
+    </div>
+    <div class="anchor bread-bg">
+	    <div class="container">
+	    	<div class="row">
+	    		<div class="col-xs-9">
+		            <ol class="breadcrumb">
+					  	<li><a href="/en">Home</a></li>
+					  	<li class="active">Campus Life</li>
+					  	
+						<li class="active">Business Program</li>
+					</ol>
+	    		</div>
+	    		<div class="col-xs-3">
+	    			<a class="anchor-link" href="https://www.facebook.com/SIE-International-Summer-School-151383091583687/" title="Facebook"><i class="fa fa-facebook"></i></a>
+	    			<a class="anchor-link" href="http://wpa.qq.com/msgrd?v=3&uin=3294588405&site=qq&menu=yes" title="QQ"><i class="fa fa-qq"></i></a>
+	    			<a class="anchor-link" href="http://weibo.com/sieiss" title="新浪微博"><i class="fa fa-weibo"></i></a>
+	    			<a class="anchor-link" href="javascript:;" title="微信"><i class="fa fa-wechat"></i>
+						<span class="we-chat"><span class="arrow"></span><img src="/public/img/official-wechat.jpg" alt="扫一扫" /></span>
+					</a>
+	    		</div>
+	    	</div>
+	    </div>
+    </div>
+</div>
+
+<!-- area 
+================================================================================-->
+<div class="area">
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-3 area-lf">
+				<div class="list-group menu">
+					<h4 class="list-group-item">Campus Life</h4>
+								  	<a href="http://sies.55dm.cn/en/campus-life/housing/" class="list-group-item ">Housing <i class="fa fa-long-arrow-right"></i></a>
+	
+								  	<a href="http://sies.55dm.cn/en/campus-life/highlights/" class="list-group-item ">Highlights <i class="fa fa-long-arrow-right"></i></a>
+	
+								  	<a href="http://sies.55dm.cn/en/campus-life/business-program/" class="list-group-item active">Business Program <i class="fa fa-long-arrow-right"></i></a>
+	
+								  	<a href="http://sies.55dm.cn/en/campus-life/student-union/" class="list-group-item ">Student Union <i class="fa fa-long-arrow-right"></i></a>
+	
+								</div>
+				<div class="adver mt-30">
+					<h2>IN BEIJING / IN SHANGHAI</h2>
+					<img src="/public/img/area-lf-pic02.jpg" alt="" />
+					<div class="adver-txt">						
+						<h3>Colin McLarty</h3>
+						<h3><em>Case Western Reserve University</em></h3>
+						<p>"I was happily surprised to find the best students were extremely good and interesting to teach, and the colleagues truly fine company."</p>
+					</div>
+					<div class="adver-bot">WELCOME TO SIE ALLIANCE</div>
+				</div>
+				<div class="mt-30"><img src="/public/img/area-lf-pic01.jpg" alt="" /></div>
+			</div>
+			
+			<div class="col-xs-9 area-rg">
+				<h3>Business Program</h3>
+<p>Business Program (BP) of SIE Alliance is a high-end project, which aims to assist students on their career path. Every year, by attending hosting lectures, networking sessions, students learn a lot in their summer sessions, even being offered internship opportunities in banks, accounting agencies, consulting companies, law offices, private equity funds and the IT industry.<br />
+In the past years, we have invited many successful business leaders and outstanding graduates to give lectures and advice to the students. With the opportunities provided by BP, SIE students are able to familiarize themselves with business operation in China, and acquire the necessary skills for job hunting.</p>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- footer 
+================================================================================-->
+<div id="footer">
+<div class="container">
+<h2>SIE Alliance of International Summer Sessions</h2>
+<h3>Contact Us</h3>
+<p class="mt-30"><span><b>BJTU:</b> 010-53383118</span> <em>/</em> <span>iss@sieschool.org</span></p>
+<p class="mt-10"><span><b>ECNU:</b> 021-32514240</span> <em>/</em> <span>iss@ied.ecnu.edu.cn</span></p>
+<p class="mt-30 clearfix">
+
+			<a class="anchor-link" href="https://www.facebook.com/SIE-International-Summer-School-151383091583687/" target="_blank" title="Facebook"><i class="fa fa-facebook"></i></a>
+			<a class="anchor-link" href="http://wpa.qq.com/msgrd?v=3&amp;uin=3294588405&amp;site=qq&amp;menu=yes" target="_blank" title="QQ"><i class="fa fa-qq"></i></a>
+			<a class="anchor-link" href="http://weibo.com/sieiss" target="_blank" title="新浪微博"><i class="fa fa-weibo"></i></a>
+			<a class="anchor-link" href="javascript:;" title="微信">
+				<i class="fa fa-wechat"></i>
+				<span class="we-chat"><span class="arrow"></span><img src="/public/img/official-wechat.jpg" alt="扫一扫"></span>
+			</a></p>
+<hr />
+<div class="copyright">
+<p><a href="http://www.sieschool.org/en/about-us/about-sie/">About Us</a>&nbsp;<em>/</em><a href="http://www.sieschool.org/en/academics/academic-calendar/"> Academic Calendar&nbsp;</a><em>/</em>&nbsp;<a href="http://www.sieschool.org/en/application/how-to-apply/">Application</a>&nbsp;<em>/</em>&nbsp;<a href="http://www.sieschool.org/en/academics/cdgdc-verification/">CDGDC Verification</a>&nbsp;<em>/</em><a href="http://www.sieschool.org/en/faculty/current-faculty/">&nbsp;Current Faculty</a>&nbsp;<em>/</em>&nbsp;<a href="http://www.sieschool.org/en/courses/course-list/">Course List&nbsp;</a><em>/</em><a href="http://www.sieschool.org/en/campus-life/highlights/">&nbsp;Highlights</a><em>/</em><a href="http://www.sieschool.org/en/contact-us/faq/">&nbsp;FAQ</a></p>
+<p class="mt-20">Copyright &copy; 2015 Sinoway International Education Group Limited &nbsp;&nbsp;&nbsp;&nbsp;京ICP证000007</p>
+</div>
+</div>
+</div>
+<br />	
+<script src="/public/js/jquery.min.js"></script>
+<script src="/public/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/statics/poshytip/jquery.poshytip.min.js"></script>
+<script>
+$(function(){
+	$('.mtips').poshytip();
+})
+</script>
+<script src="/state.php"></script>
+<div style="display:none;">
+<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1257019998'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s11.cnzz.com/z_stat.php%3Fid%3D1257019998' type='text/javascript'%3E%3C/script%3E"));</script>
+</div>
+</body>
+</html>

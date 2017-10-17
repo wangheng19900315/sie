@@ -1,0 +1,1157 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Course List - sieSchool</title>
+	<meta name="keywords" content="Course,List">
+	<meta name="description" content="sieSchool">
+	<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" type="text/css" href="/public/css/bootstrap.min.css" media="all">
+    <link rel="stylesheet" type="text/css" href="/public/css/font-awesome.min.css" media="all">
+    <link rel="stylesheet" type="text/css" href="/cn/css/base.css" media="all">
+</head>
+<body>
+<div id="fixedMenu" class="top">
+	<div class="top-bar">
+		<div class="container">
+			<p>SIE<span>国际暑期学校</span>International Summer Sessions</p>
+		</div>
+	</div>
+	<div class="top-box">
+		<div class="container">
+			<div class="logo-box pull-left">
+				<a href="/en/">
+					<img src="/public/img/logo.png" alt="sieSchool">
+				</a>
+			</div>
+			<div class="nav-box pull-right">
+				<div class="language text-right">
+					<a href='/cn/user/login.php' id="login" title='Login'>Login</a>
+					<span id="sep">/</span>
+					<a href='/cn/user/register.php' id="register" title='register'>Register</a>
+					<a href="/cn/user/user_center.php" id="user_center" title="user center"></a>
+					<a id="logout" title="logout">Logout</a>
+					<a title="中文" style="cursor:pointer" onclick="window.location.href=window.location.href.replace('/en','/cn')"><img src="/public/img/language-cn.png"></a>
+					<a title="English"><img src="/public/img/language-en.png"></a>
+				</div>
+				<div class="nav">
+					<ul>
+						<li class="dropdown active">
+						  	<a id="nav-01" class="nav-link btn" href="/en/" role="button">Home</a>
+						</li>
+						<li class="dropdown">
+						  	<a id="nav-01" class="nav-link btn" href="javascript:;" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About Us <i class="fa fa-angle-down"></i></a>
+						  	<ul class="dropdown-menu" aria-labelledby="nav-01">
+													    	<li><a href="http://www.sieschool.org/en/about-us/about-sie/">About SIE</a></li>
+													    	<li><a href="http://www.sieschool.org/en/about-us/about-ecnu/">About ECNU</a></li>
+													    	<li><a href="http://www.sieschool.org/en/about-us/about-bjtu/">About BJTU</a></li>
+													  	</ul>
+						</li>
+						<li class="dropdown">
+						  	<a id="nav-02" class="nav-link btn" href="javascript:;" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Courses <i class="fa fa-angle-down"></i></a>
+						  	<ul class="dropdown-menu" aria-labelledby="nav-03">
+													    	<li><a href="http://www.sieschool.org/en/courses/course-list/">Course List</a></li>
+													    	<li><a href="http://www.sieschool.org/en/courses/current-faculty/">Current Faculty</a></li>
+													    	<li><a href="http://www.sieschool.org/en/courses/course-format/">Course Format</a></li>
+													    	<li><a href="http://www.sieschool.org/en/courses/academic-calendar/">Academic Calendar</a></li>
+													    	<li><a href="http://www.sieschool.org/en/courses/research_program/">Research Program</a></li>
+													    	<li><a href="http://www.sieschool.org/en/courses/former-faculty/">Former Faculty</a></li>
+													  	</ul>
+						</li>
+						<li class="dropdown">
+						  	<a id="nav-03" class="nav-link btn" href="javascript:;" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Tuition <i class="fa fa-angle-down"></i></a>
+						  	<ul class="dropdown-menu" aria-labelledby="nav-02">
+													    	<li><a href="http://www.sieschool.org/en/application/tuition/">Tuition</a></li>
+													    	<li><a href="http://www.sieschool.org/en/application/scholarship/">Scholarship</a></li>
+													    	<li><a href="http://www.sieschool.org/en/application/refund/">Refund</a></li>
+													    	<li><a href="http://www.sieschool.org/en/application/payment_option/">Payment Option</a></li>
+								
+						  	</ul>
+						</li>
+						<li class="dropdown">
+						  	<a id="nav-04" class="nav-link btn" href="javascript:;" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Application <i class="fa fa-angle-down"></i></a>
+						  	<ul class="dropdown-menu" aria-labelledby="nav-04">
+													    	<li><a href="http://www.sieschool.org/en/academics/how-to-apply/">How to Apply</a></li>
+													    	<li><a href="http://www.sieschool.org/en/academics/credit-transfer/">Credit Transfer</a></li>
+													    	<li><a href="http://www.sieschool.org/en/academics/cdgdc-verification/">CDGDC Verification</a></li>
+													    	<li><a href="http://www.sieschool.org/en/academics/wes-verification/">WES Verification</a></li>
+													    	<li><a href="http://www.sieschool.org/en/academics/order-transcript/">Order Transcript</a></li>
+													    	<li><a href="http://www.sieschool.org/en/academics/eligibility/">Eligibility</a></li>
+													  	</ul>
+						</li>
+						<li class="dropdown">
+						  	<a id="nav-05" class="nav-link btn" href="javascript:;" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Campus Life <i class="fa fa-angle-down"></i></a>
+						  	<ul class="dropdown-menu" aria-labelledby="nav-06">
+													    	<li><a href="http://www.sieschool.org/en/campus-life/housing/">Housing</a></li>
+													    	<li><a href="http://www.sieschool.org/en/campus-life/highlights/">Highlights</a></li>
+													  	</ul>
+						</li>
+						<li class="dropdown">
+						  	<a id="nav-06" class="nav-link btn" href="javascript:;" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Contact Us <i class="fa fa-angle-down"></i></a>
+						  	<ul class="dropdown-menu" aria-labelledby="nav-07">
+													    	<li><a href="http://www.sieschool.org/en/contact-us/contact-us/">Contact Us</a></li>
+													    	<li><a href="http://www.sieschool.org/en/contact-us/faq/">FAQ</a></li>
+													    	<li><a href="http://www.sieschool.org/en/contact-us/internship/">Internship</a></li>
+													  	</ul>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</div><!-- page-banner 
+================================================================================-->
+<div class="banner page-banner">
+    <div class="page-banner-bg page-banner-bg01">
+    	<div class="container">
+        	<p><b>SIE ALLIANCE OF INTERNATIONAL</b></p>
+        	<p><b>SUMMER SESSIONS</b></p>
+    	</div>
+    </div>
+</div>
+
+<!-- area 
+================================================================================-->
+<div class="area">
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-3 area-lf">
+				<div class="list-group menu">
+					<h4 class="list-group-item">Courses</h4>
+					<ul>
+											<li class="list-group-item active">
+				  			<a href="http://www.sieschool.org/en/courses/course-list/">Course List <i class="fa fa-chevron-right"></i></a>
+						</li>
+											<li class="list-group-item ">
+				  			<a href="http://www.sieschool.org/en/courses/current-faculty/">Current Faculty <i class="fa fa-chevron-right"></i></a>
+						</li>
+											<li class="list-group-item ">
+				  			<a href="http://www.sieschool.org/en/courses/course-format/">Course Format <i class="fa fa-chevron-right"></i></a>
+						</li>
+											<li class="list-group-item ">
+				  			<a href="http://www.sieschool.org/en/courses/academic-calendar/">Academic Calendar <i class="fa fa-chevron-right"></i></a>
+						</li>
+											<li class="list-group-item ">
+				  			<a href="http://www.sieschool.org/en/courses/research_program/">Research Program <i class="fa fa-chevron-right"></i></a>
+						</li>
+											<li class="list-group-item ">
+				  			<a href="http://www.sieschool.org/en/courses/former-faculty/">Former Faculty <i class="fa fa-chevron-right"></i></a>
+						</li>
+										</ul>
+				</div>
+			</div>
+			<div class="col-xs-9 area-rg">
+				<h3>Course List</h3>
+<p>*Course List and Syllabi are on constant updating.</p>
+<p>*Please check the syllabus first for detailed information on required texts before you purchase.</p>
+<div class="mt-50">
+<ul class="nav nav-tabs nav-justified" role="tablist">
+<li class="active" role="presentation"><a aria-controls="course-list-01" data-toggle="tab" href="#course-list-01" role="tab">ECNU-4</a></li>
+<li role="presentation"><a aria-controls="course-list-02" data-toggle="tab" href="#course-list-02" role="tab">ECNU-5</a></li>
+<li role="presentation"><a aria-controls="course-list-03" data-toggle="tab" href="#course-list-03" role="tab">BJTU-4</a></li>
+</ul>
+<div class="tab-content">
+<div class="tab-pane fade active in" id="course-list-01" role="tabpanel">
+<table class="table table-bordered mt-30">
+<tbody>
+	<tr>
+	<td rowspan="7"><strong>8:30 &ndash; 10:45</strong></td>
+	</tr>
+	<tr>
+	<td>
+	<h6>
+		FIN 21</h6>
+	<p>Introduction to Finance&nbsp;</p>
+	<p><span style="color: rgb(255, 0, 0); font-size: 8px;">（Please check the&nbsp;</span><span style="color: rgb(255, 0, 0); font-size: 10.9091px;">prerequisite in the&nbsp;</span><span style="color: rgb(255, 0, 0); font-size: 8px;">syllabus before you select</span><span style="font-size: 8px; color: rgb(255, 0, 0);">）</span></p>
+	</td>
+	<td>
+	<div class="course-list-faculty"><a href="javascript:;">Shantaram Hegde</a></div>
+	</td>
+	<td><a href="https://www.amazon.com/Corporate-Finance-10th-Stephen-Ross/dp/0078034779/ref=sr_1_1?ie=UTF8&amp;qid=1476258112&amp;sr=8-1&amp;keywords=Corporate+Finance" target="_blank">Textbook</a></td>
+	<td><a href="http://www.sieschool.org/uploadfile/2016/1026/20161026044722501.pdf" target="_blank"><span class="mtips" title="Prerequisite">Syllabus</span></a></td>
+	</tr>
+	<tr>
+	<td>
+	<h6>
+		MAT 12</h6>
+	<p>Calculus II<br />
+	<span style="color: rgb(255, 0, 0); font-size: 8px;">（Please check the&nbsp;</span><span style="color: rgb(255, 0, 0); font-size: 10.9091px;">prerequisite in the&nbsp;</span><span style="color: rgb(255, 0, 0); font-size: 8px;">syllabus before you select</span><span style="font-size: 8px; color: rgb(255, 0, 0);">）</span></p>
+	</td>
+	<td>
+	<div class="course-list-faculty"><a href="javascript:;">Bernard Brooks</a></div>
+	</td>
+	<td><a href="https://www.amazon.com/Thomas-Calculus-Transcendentals-Maurice-Weir-ebook/dp/B00HVLBS7K/ref=sr_1_1?ie=UTF8&amp;qid=1476259059&amp;sr=8-1&amp;keywords=9780321588760" target="_blank">Textbook</a></td>
+	<td><a href="http://www.sieschool.org/uploadfile/2016/1226/20161226034830289.pdf" target="_blank"><span class="mtips" title="Prerequisite">Syllabus</span></a></td>
+	</tr>
+	<tr>
+	<td>
+	<h6>
+		PSY 11</h6>
+	<p>Principles of Psychology</p>
+	</td>
+	<td>
+	<div class="course-list-faculty"><a href="javascript:;">Bianca Cody Murphy</a></div>
+	</td>
+	<td><a href="https://www.amazon.com/Exploring-Psychology-David-G%20Myers/dp/1464154074/ref=sr_1_1?ie=UTF8&amp;qid=1461016209&amp;sr=8-1&amp;keywords=exploring+psychology+10th+edition" target="_blank">Textbook</a></td>
+	<td><a href="http://www.sieschool.org/uploadfile/2016/1103/20161103120602398.pdf" target="_blank">Syllabus</a></td>
+	</tr>
+	<tr>
+	<td>
+	<h6>
+		ECO 11</h6>
+	<p>Microeconomics</p>
+	</td>
+	<td>
+	<div class="course-list-faculty"><a href="javascript:;">Liang Ding</a></div>
+	</td>
+	<td><a href="https://www.amazon.com/Principles-Microeconomics-7th-Mankiws-Economics/dp/128516590X/ref=sr_1_1?ie=UTF8&amp;qid=1477633624&amp;sr=8-1&amp;keywords=ISBN-10%3A+128516590X" target="_blank">Textbook</a></td>
+	<td><a href="http://www.sieschool.org/uploadfile/2016/1026/20161026045059138.pdf" target="_blank">Syllabus</a></td>
+	</tr>
+	<tr>
+	<td>
+	<h6>
+		SOC 11</h6>
+	<p>Introduction to Sociology</p>
+	</td>
+	<td>
+	<div class="course-list-faculty"><a href="javascript:;">Sampson Lee Blair</a></div>
+	</td>
+	<td><a href="https://www.amazon.com/Essentials-Sociology-12th-James-Henslin/dp/0134205588/ref=sr_1_1?ie=UTF8&amp;qid=1477633761&amp;sr=8-1&amp;keywords=ISBN+13%3A+9780134205588" target="_blank">Textbook</a></td>
+	<td><a href="http://www.sieschool.org/uploadfile/2016/1116/20161116024156922.pdf" target="_blank">Syllabus</a></td>
+	</tr>
+	<tr>
+	<td>
+	<h6>
+		HIS 17</h6>
+	<p>American History since 1865</p>
+	</td>
+	<td>
+	<div class="course-list-faculty"><a href="javascript:;">Michael G. Vann</a></div>
+	</td>
+	<td><a href="https://www.amazon.com/Give-Me-Liberty-American-History/dp/0393920313/ref=sr_1_1?ie=UTF8&amp;qid=1479361775&amp;sr=8-1&amp;keywords=ISBN-13%3A+978-0393920314">Textbook</a></td>
+	<td><a href="http://www.sieschool.org/uploadfile/2016/1123/20161123050354327.pdf">Syllabus</a></td>
+	</tr>
+	<tr>
+	<td rowspan="7"><strong>10:55 &ndash; 13:10</strong></td>
+	</tr>
+	<tr>
+	<td>
+	<h6>
+		ECO 12</h6>
+	<p>Macroeconomics</p>
+	</td>
+	<td>
+	<div class="course-list-faculty"><a href="javascript:;">Liang Ding</a></div>
+	</td>
+	<td><a href="https://www.amazon.com/Principles-Macroeconomics-Mankiws-Economics/dp/1285165918/ref=sr_1_1?ie=UTF8&amp;qid=1477633809&amp;sr=8-1&amp;keywords=ISBN-13%3A+978-1285165912" target="_blank">Textbook</a></td>
+	<td><a href="http://www.sieschool.org/uploadfile/2016/1026/20161026045155162.pdf" target="_blank">Syllabus</a></td>
+	</tr>
+	<tr>
+	<td>
+	<h6>
+		FIN 23</h6>
+	<p>Introduction to Investment&nbsp;</p>
+	<p><span style="color: rgb(255, 0, 0); font-size: 8px;">（Please check the&nbsp;</span><span style="color: rgb(255, 0, 0); font-size: 10.9091px;">prerequisite in the&nbsp;</span><span style="color: rgb(255, 0, 0); font-size: 8px;">syllabus before you select</span><span style="font-size: 8px; color: rgb(255, 0, 0);">）</span></p>
+	</td>
+	<td>
+	<div class="course-list-faculty"><a href="javascript:;">Shantaram Hegde</a></div>
+	</td>
+	<td><a href="https://www.amazon.com/Investments-10th-Zvi-Bodie/dp/0077861671/ref=sr_1_1?ie=UTF8&amp;qid=1476258352&amp;sr=8-1&amp;keywords=Investments" target="_blank">Textbook 1</a><br />
+	<a href="https://www.vitalsource.com/products/investments-zvi-bodie-alex-kane-alan-v1259023044" target="_blank">Textbook 2</a></td>
+	<td><a href="http://www.sieschool.org/uploadfile/2016/1103/20161103020502871.pdf" target="_blank"><span class="mtips" title="Prerequisite">Syllabus</span></a></td>
+	</tr>
+	<tr>
+	<td>
+	<h6>
+		MAT 11</h6>
+	<p>Calculus I</p>
+	</td>
+	<td>
+	<div class="course-list-faculty"><a href="javascript:;">Bernard Brooks</a></div>
+	</td>
+	<td><a href="https://www.amazon.com/Thomas-Calculus-Transcendentals-Maurice-Weir-ebook/dp/B00HVLBS7K/ref=sr_1_1?ie=UTF8&amp;qid=1476259059&amp;sr=8-1&amp;keywords=9780321588760" target="_blank">Textbook</a></td>
+	<td><a href="http://www.sieschool.org/uploadfile/2016/1026/20161026045553488.pdf" target="_blank">Syllabus</a></td>
+	</tr>
+	<tr>
+	<td>
+	<h6>
+		PSY 14</h6>
+	<p>Social Psychology&nbsp;</p>
+	<p><span style="color: rgb(255, 0, 0); font-size: 8px;">（Please check the&nbsp;</span><span style="color: rgb(255, 0, 0); font-size: 10.9091px;">prerequisite in the&nbsp;</span><span style="color: rgb(255, 0, 0); font-size: 8px;">syllabus before you select</span><span style="font-size: 8px; color: rgb(255, 0, 0);">）</span></p>
+	</td>
+	<td>
+	<div class="course-list-faculty"><a href="javascript:;">Bianca Cody Murphy</a></div>
+	</td>
+	<td><a href="https://www.amazon.com/Social-Psychology-11th-David-Myersebook/dp/B00DC91ONS/ref=mt_kindle?_encoding=UTF8&amp;me=" target="_blank">Textbook</a></td>
+	<td><a href="http://www.sieschool.org/uploadfile/2016/1103/20161103020542833.pdf" target="_blank"><span class="mtips" title="Prerequisite">Syllabus</span></a></td>
+	</tr>
+	<tr>
+	<td>
+	<h6>
+		HIS 13</h6>
+	<p>20th-21st Century World History</p>
+	</td>
+	<td>
+	<div class="course-list-faculty"><a href="javascript:;">Michael G. Vann</a></div>
+	</td>
+	<td><a href="https://www.amazon.com/Twentieth-Century-Voices-Selected-Readings/dp/1621312321/ref=sr_1_1?s=books&amp;ie=UTF8&amp;qid=1480384882&amp;sr=1-1&amp;keywords=9781621312321">Textbook 1</a><br />
+	<a href="https://www.amazon.com/World-Twentieth-Century-7th/dp/0136052010/ref=pd_cp_14_1?_encoding=UTF8&amp;psc=1&amp;refRID=TY11NXJ1YDB6X7AC2CSY">Textbook 2</a></td>
+	<td><a href="http://www.sieschool.org/uploadfile/2016/1123/20161123050441938.pdf">Syllabus</a></td>
+	</tr>
+	<tr>
+	<td>
+	<h6>
+		SOC 31</h6>
+	<p>Sociology of the Family&nbsp;</p>
+	</td>
+	<td>
+	<div class="course-list-faculty"><a href="javascript:;">Sampson Lee Blair</a></div>
+	</td>
+	<td><a href="https://www.amazon.com/Marriages-Families-8th-Nijole-Benokraitis/dp/0205918190/ref=sr_1_1?ie=UTF8&amp;qid=1477633862&amp;sr=8-1&amp;keywords=ISBN+13+%E2%80%93+9780205918195" target="_blank">Textbook</a></td>
+	<td><a href="http://www.sieschool.org/uploadfile/2016/1116/20161116024545688.pdf" target="_blank">Syllabus</a></td>
+	</tr>
+	<tr>
+	<td rowspan="7"><strong>14:00 &ndash; 16:15</strong></td>
+	</tr>
+	<tr>
+	<td>
+	<h6>
+		PHI 11</h6>
+	<p>Classical Western Philosophy</p>
+	</td>
+	<td>
+	<div class="course-list-faculty"><a href="javascript:;">Keith McPartland</a></div>
+	</td>
+	<td><a href="https://www.amazon.com/Plato-Dialogues-Euthyphro-Apology-Classics/dp/0872206335/ref=sr_1_1?s=books&amp;ie=UTF8&amp;qid=1480385084&amp;sr=1-1&amp;keywords=9780872206335">Textbook 1</a><br />
+	<a href="https://www.amazon.com/Republic-Hackett-Classics-Plato/dp/0872201368/ref=sr_1_1?s=books&amp;ie=UTF8&amp;qid=1480385357&amp;sr=1-1&amp;keywords=9780872201361">Textbook 2</a><br />
+	<a href="https://www.amazon.com/Nicomachean-Ethics-Hackett-Classics-Aristotle/dp/1624661173/ref=sr_1_1?s=books&amp;ie=UTF8&amp;qid=1480385601&amp;sr=1-1&amp;keywords=9781624661174">Textbook 3</a></td>
+	<td><a href="http://www.sieschool.org/uploadfile/2016/1123/20161123050621433.pdf">Syllabus</a></td>
+	</tr>
+	<tr>
+	<td>
+	<h6>
+		PTT 11-A</h6>
+	<p>Basic Photography-A</p>
+	</td>
+	<td>
+	<div class="course-list-faculty"><a href="javascript:;">Benjamin Donaldson</a></div>
+	</td>
+	<td><a href="https://www.amazon.com/Short-Course-Photography-Digital-Books/dp/0205998283/ref=sr_1_1?ie=UTF8&amp;qid=1477633937&amp;sr=8-1&amp;keywords=ISBN+13%3A+978-0205998289" target="_blank">Textbook</a></td>
+	<td><a href="http://www.sieschool.org/uploadfile/2016/1026/20161026045703887.pdf" target="_blank">Syllabus</a></td>
+	</tr>
+	<tr>
+	<td>
+	<h6>
+		FIM 11</h6>
+	<p>Introduction to Film Studies</p>
+	</td>
+	<td>
+	<div class="course-list-faculty"><a href="javascript:;">Mark David Stephenson</a></div>
+	</td>
+	<td><a href="https://www.amazon.com/Film-Art-Introduction-David-Bordwell/dp/1259534952/ref=sr_1_1?ie=UTF8&amp;qid=1477894170&amp;sr=8-1&amp;keywords=Film+Art%3A+An+Introduction" target="_blank">Textbook</a></td>
+	<td><a href="http://www.sieschool.org/uploadfile/2016/1103/20161103031101255.pdf" target="_blank">Syllabus</a></td>
+	</tr>
+	<tr>
+	<td>
+	<h6>
+		ART 11</h6>
+	<p>Introduction to Western Art: Ancient and Medieval Art</p>
+	</td>
+	<td>
+	<div class="course-list-faculty"><a href="javascript:;">Marion Lee</a></div>
+	</td>
+	<td><span class="mtips" title="Provided by the professor">Textbook</span></td>
+	<td><a href="http://www.sieschool.org/uploadfile/2016/1109/20161109121053449.pdf" target="_blank">Syllabus</a></td>
+	</tr>
+	<tr>
+	<td>
+	<h6>
+		ACC 11</h6>
+	<p>Financial Accounting</p>
+	</td>
+	<td>
+	<div class="course-list-faculty"><a href="javascript:;">Stephen Douglas Beets</a></div>
+	</td>
+	<td><a href="http://bcs.wiley.com/he-bcs/Books?action=index&amp;bcsId=6824&amp;itemId=111800423X" target="_blank">Textbook</a></td>
+	<td><a href="http://www.sieschool.org/uploadfile/2016/1103/20161103031133354.pdf" target="_blank">Syllabus</a></td>
+	</tr>
+	<tr>
+	<td>
+	<h6>
+		PSC 12</h6>
+	<p>Introduction to World Politics</p>
+	</td>
+	<td>
+	<div class="course-list-faculty"><a href="javascript:;">Myra leann Brown</a></div>
+	</td>
+	<td><a href="https://www.amazon.com/World-Politics-Transformation-CourseMate-Printed/dp/1285437276/ref=sr_1_1?ie=UTF8&amp;qid=1476259164&amp;sr=8-1&amp;keywords=ISBN-13%3A+978-1285437279" target="_blank">Textbook</a></td>
+	<td><a href="http://www.sieschool.org/uploadfile/2016/1026/20161026045752110.pdf" target="_blank">Syllabus</a></td>
+	</tr>
+	<tr>
+	<td rowspan="7"><strong>16:25 &ndash; 18:40</strong></td>
+	</tr>
+	<tr>
+	<td>
+	<h6>
+		ART 12</h6>
+	<p>Introduction to Western Art: Renaissance to the Present</p>
+	</td>
+	<td>
+	<div class="course-list-faculty"><a href="javascript:;">Marion Lee</a></div>
+	</td>
+	<td><span class="mtips" title="Provided by the professor">Textbook</span></td>
+	<td><a href="http://www.sieschool.org/uploadfile/2016/1109/20161109121137742.pdf" target="_blank">Syllabus</a></td>
+	</tr>
+	<tr>
+	<td>
+	<h6>
+		PHI 12</h6>
+	<p>Introduction to Philosophy</p>
+	</td>
+	<td>
+	<div class="course-list-faculty"><a href="javascript:;">Keith McPartland</a></div>
+	</td>
+	<td>Textbook</td>
+	<td><a href="http://www.sieschool.org/uploadfile/2016/1123/20161123050703874.pdf">Syllabus</a></td>
+	</tr>
+	<tr>
+	<td>
+	<h6>
+		ENG12/COM11</h6>
+	<p>Public Speaking</p>
+	</td>
+	<td>
+	<div class="course-list-faculty"><a href="javascript:;">Mark David Stephenson</a></div>
+	</td>
+	<td><a href="https://www.amazon.com/Concise-Public-Speaking-Handbook-4th/dp/0205897215/ref=mt_spiral_bound?_encoding=UTF8&amp;me=" target="_blank">Textbook</a></td>
+	<td><a href="http://www.sieschool.org/uploadfile/2016/1103/20161103031238409.pdf" target="_blank">Syllabus</a></td>
+	</tr>
+	<tr>
+	<td>
+	<h6>
+		PTT 11-B</h6>
+	<p>Basic Photography-B</p>
+	</td>
+	<td>
+	<div class="course-list-faculty"><a href="javascript:;">Benjamin Donaldson</a></div>
+	</td>
+	<td><a href="https://www.amazon.com/Short-Course-Photography-Digital-Books/dp/0205998283/ref=sr_1_1?ie=UTF8&amp;qid=1477633937&amp;sr=8-1&amp;keywords=ISBN+13%3A+978-0205998289" target="_blank">Textbook</a></td>
+	<td><a href="http://www.sieschool.org/uploadfile/2016/1026/20161026045840831.pdf" target="_blank">Syllabus</a></td>
+	</tr>
+	<tr>
+	<td>
+	<h6>
+		ACC 12</h6>
+	<p>Managerial Accounting</p>
+	</td>
+	<td>
+	<div class="course-list-faculty"><a href="javascript:;">Stephen Douglas&nbsp;Beets</a></div>
+	</td>
+	<td><a href="http://bcs.wiley.com/he-bcs/Books?action=index&amp;bcsId=6824&amp;itemId=111800423X" target="_blank">Textbook</a></td>
+	<td><a href="http://www.sieschool.org/uploadfile/2016/1103/20161103031305916.pdf" target="_blank">Syllabus</a></td>
+	</tr>
+	<tr>
+	<td>
+	<h6>
+		PSC 13</h6>
+	<p>Introduction to Comparative Politics</p>
+	</td>
+	<td>
+	<div class="course-list-faculty"><a href="javascript:;">Myra leann Brown</a></div>
+	</td>
+	<td><a href="https://www.amazon.com/Current-Debates-Comparative-Politics-Dickovick/dp/0199341354/ref=sr_1_1?ie=UTF8&amp;qid=1476259270&amp;sr=8-1&amp;keywords=ISBN-13%3A+978-0199341351%0a" target="_blank">Textbook</a></td>
+	<td><a href="http://www.sieschool.org/uploadfile/2016/1026/20161026050157434.pdf" target="_blank">Syllabus</a></td>
+	</tr>
+	<tr></tr>
+</tbody>
+</table>
+</div>
+<div class="tab-pane fade" id="course-list-02" role="tabpanel">
+<table class="table table-bordered mt-30">
+<tbody>
+	<tr>
+	<td rowspan="8"><strong>8:45 &ndash; 10:35</strong></td>
+	</tr>
+	<tr>
+	<td>
+	<h6>
+		MAT 11</h6>
+	<p>Calculus I</p>
+	</td>
+	<td>
+	<div class="course-list-faculty"><a href="javascript:;">Edward Butz</a></div>
+	</td>
+	<td><a href="https://www.amazon.com/Multivariable-Calculus-7th-James-Stewart/dp/0538497874/ref=sr_1_1?ie=UTF8&amp;qid=1477635032&amp;sr=8-1&amp;keywords=ISBN-13%3A+978-0538497879" target="_blank">Textbook</a></td>
+	<td><a href="http://www.sieschool.org/uploadfile/2016/1116/20161116052538723.pdf" target="_blank">Syllabus</a></td>
+	</tr>
+	<tr>
+	<td>
+	<h6>
+		PSC 11</h6>
+	<p>Introduction to American Government</p>
+	</td>
+	<td>
+	<div class="course-list-faculty"><a href="javascript:;">Melissa Butler</a></div>
+	</td>
+	<td><a href="https://www.amazon.com/Challenge-Democracy-American-Government-Politics-ebook/dp/B00QXKGIGG/ref=mt_kindle?_encoding=UTF8&amp;me=" target="_blank">Textbook</a></td>
+	<td><a href="http://www.sieschool.org/uploadfile/2016/1026/20161026050510199.pdf" target="_blank">Syllabus</a></td>
+	</tr>
+	<tr>
+	<td>
+	<h6>
+		MKT 21</h6>
+	<p>Introduction to Marketing&nbsp;</p>
+	<p><span style="color: rgb(255, 0, 0); font-size: 8px;">（Please check the&nbsp;</span><span style="color: rgb(255, 0, 0); font-size: 10.9091px;">prerequisite in the&nbsp;</span><span style="color: rgb(255, 0, 0); font-size: 8px;">syllabus before you select</span><span style="font-size: 8px; color: rgb(255, 0, 0);">）</span></p>
+	</td>
+	<td>
+	<div class="course-list-faculty"><a href="javascript:;">Mike Chao</a></div>
+	</td>
+	<td><a href="http://www.amazon.com/Marketing-Dhruv-Grewal/dp/0078028833/ref=sr_1_3?ie=UTF8&amp;qid=1448605197&amp;sr=8-3&amp;keywords=Marketing%2C+Dhruv+Grewal+and+Michael+Levy" target="_blank">Textbook</a></td>
+	<td><a href="http://www.sieschool.org/uploadfile/2016/1116/20161116030402781.pdf" target="_blank"><span class="mtips" title="Prerequisite">Syllabus</span></a></td>
+	</tr>
+	<tr>
+	<td>
+	<h6>
+		ACC 11</h6>
+	<p>Financial Accounting</p>
+	</td>
+	<td>
+	<div class="course-list-faculty"><a href="javascript:;">Michael Petersen</a></div>
+	</td>
+	<td><a href="https://www.amazon.com/Financial-Accounting-11th-Walter-Harrison/dp/0134127625/ref=sr_1_1?ie=UTF8&amp;qid=1477025693&amp;sr=8-1&amp;keywords=ISBN-13+978-0-13-412762-0" target="_blank">Textbook</a></td>
+	<td><a href="http://www.sieschool.org/uploadfile/2016/1026/20161026050601161.pdf" target="_blank">Syllabus</a></td>
+	</tr>
+	<tr>
+	<td>
+	<h6>
+		SOC 11</h6>
+	<p>Introduction to Sociology</p>
+	</td>
+	<td>
+	<div class="course-list-faculty"><a href="javascript:;">Sampson Lee Blair</a></div>
+	</td>
+	<td><a href="https://www.amazon.com/Essentials-Sociology-12th-James-Henslin/dp/0134205588/ref=sr_1_1?ie=UTF8&amp;qid=1477633761&amp;sr=8-1&amp;keywords=ISBN+13%3A+9780134205588" target="_blank">Textbook</a></td>
+	<td><a href="http://www.sieschool.org/uploadfile/2016/1103/20161103020143343.pdf" target="_blank">Syllabus</a></td>
+	</tr>
+	<tr>
+	<td>
+	<h6>
+		HIS 11</h6>
+	<p>Introduction to World History：<br />
+	The Modern World 1900-2000</p>
+	</td>
+	<td>
+	<div class="course-list-faculty"><a href="javascript:;">George Esenwein</a></div>
+	</td>
+	<td><a href="https://www.amazon.com/International-History-Twentieth-Century-Beyond/dp/0415656427/ref=sr_1_1?ie=UTF8&amp;qid=1477635079&amp;sr=8-1&amp;keywords=International+History+of+the+Twentieth+Century" target="_blank">Textbook 1</a><br />
+	<a href="https://www.amazon.com/Sources-Twentieth-Century-Global-History-Overfield/dp/0395904072/ref=sr_1_1?ie=UTF8&amp;qid=1477635149&amp;sr=8-1&amp;keywords=Sources+of+Twentieth+Century+Global+History" target="_blank">Textbook 2</a></td>
+	<td><a href="http://www.sieschool.org/uploadfile/2016/1116/20161116030632925.pdf" target="_blank">Syllabus</a></td>
+	</tr>
+	<tr>
+	<td>
+	<h6>
+		ART 11</h6>
+	<p>Introduction to Western Art:<br />
+	Prehistory to the Middles Ages</p>
+	</td>
+	<td>
+	<div class="course-list-faculty"><a href="javascript:;">Christine Neal</a></div>
+	</td>
+	<td><a href="https://www.amazon.com/Gardners-Art-through-Ages-Perspective/dp/1305633946/ref=sr_1_1?ie=UTF8&amp;qid=1477635267&amp;sr=8-1&amp;keywords=ISBN-13%3A+978-1305633940" target="_blank">Textbook</a></td>
+	<td><a href="http://www.sieschool.org/uploadfile/2016/1116/20161116030758546.pdf" target="_blank">Syllabus</a></td>
+	</tr>
+	<tr>
+	<td rowspan="9"><strong>10:45 &ndash; 12:35</strong></td>
+	</tr>
+	<tr>
+	<td>
+	<h6>
+		PSC 12</h6>
+	<p>Introduction to World Politics</p>
+	</td>
+	<td>
+	<div class="course-list-faculty"><a href="javascript:;">Melissa Butler</a></div>
+	</td>
+	<td><a href="https://www.vitalsource.com/products/issues-in-21st-century-world-politics-beeson-mark-bisley-nick-v9781137310606" target="_blank">Textbook</a></td>
+	<td><a href="http://www.sieschool.org/uploadfile/2016/1026/20161026050826819.pdf" target="_blank">Syllabus</a></td>
+	</tr>
+	<tr>
+	<td>
+	<h6>
+		MKT 22</h6>
+	<p>Introduction to Consumer Behavior&nbsp;</p>
+	<p><span style="color: rgb(255, 0, 0); font-size: 8px;">（Please check the&nbsp;</span><span style="color: rgb(255, 0, 0); font-size: 10.9091px;">prerequisite in the&nbsp;</span><span style="color: rgb(255, 0, 0); font-size: 8px;">syllabus before you select</span><span style="font-size: 8px; color: rgb(255, 0, 0);">）</span></p>
+	</td>
+	<td>
+	<div class="course-list-faculty"><a href="javascript:;">Mike Chao</a></div>
+	</td>
+	<td><a href="https://www.amazon.com/Marketing-Dhruv-Grewal/dp/0078028833/ref=sr_1_1?ie=UTF8&amp;qid=1477635208&amp;sr=8-1&amp;keywords=ISBN%23%3A+978-0-07-802883-0" target="_blank">Textbook</a></td>
+	<td><a href="http://www.sieschool.org/uploadfile/2016/1116/20161116023559174.pdf" target="_blank"><span class="mtips" title="Prerequisite">Syllabus</span></a></td>
+	</tr>
+	<tr>
+	<td>
+	<h6>
+		SPAN 11</h6>
+	<p>Beginning Spanish</p>
+	</td>
+	<td>
+	<div class="course-list-faculty"><a href="javascript:;">Jane E. Hardy</a></div>
+	</td>
+	<td><a href="http://connect.mheducation.com/connect/shortUrl.do?accessUrl=j-hardy-introductory-spanish" target="_blank">Textbook</a></td>
+	<td><a href="http://www.sieschool.org/uploadfile/2016/1116/20161116030951360.pdf" target="_blank">Syllabus</a></td>
+	</tr>
+	<tr>
+	<td>
+	<h6>
+		ACC 12</h6>
+	<p>Managerial Accounting&nbsp;</p>
+	<p><span style="color: rgb(255, 0, 0); font-size: 8px;">（Please check the&nbsp;</span><span style="color: rgb(255, 0, 0); font-size: 10.9091px;">prerequisite in the&nbsp;</span><span style="color: rgb(255, 0, 0); font-size: 8px;">syllabus before you select</span><span style="font-size: 8px; color: rgb(255, 0, 0);">）</span></p>
+	</td>
+	<td>
+	<div class="course-list-faculty"><a href="javascript:;">Michael Petersen</a></div>
+	</td>
+	<td><a href="https://www.amazon.com/Managerial-Accounting-Ray-Garrison/dp/1259307417/ref=sr_1_1?ie=UTF8&amp;qid=1477025892&amp;sr=8-1&amp;keywords=9781259307416" target="_blank">Textbook</a></td>
+	<td><a href="http://www.sieschool.org/uploadfile/2016/1026/20161026051032232.pdf" target="_blank"><span class="mtips" title="Prerequisite">Syllabus</span></a></td>
+	</tr>
+	<tr>
+	<td>
+	<h6>
+		SOC 31</h6>
+	<p>Sociology of Family</p>
+	</td>
+	<td>
+	<div class="course-list-faculty"><a href="javascript:;">Sampson Lee Blair</a></div>
+	</td>
+	<td><a href="https://www.amazon.com/Marriages-Families-8th-Nijole-Benokraitis/dp/0205918190/ref=sr_1_1?ie=UTF8&amp;qid=1477633862&amp;sr=8-1&amp;keywords=ISBN+13+%E2%80%93+9780205918195" target="_blank">Textbook</a></td>
+	<td><a href="http://www.sieschool.org/uploadfile/2016/1116/20161116023835886.pdf" target="_blank">Syllabus</a></td>
+	</tr>
+	<tr>
+	<td>
+	<h6>
+		HIS 17</h6>
+	<p>American History from 1865</p>
+	</td>
+	<td>
+	<div class="course-list-faculty"><a href="javascript:;">George Esenwein</a></div>
+	</td>
+	<td><a href="https://www.amazon.com/American-Promise-Compact-History-1865/dp/0312534086/ref=sr_1_1?ie=UTF8&amp;qid=1477635346&amp;sr=8-1&amp;keywords=The+American+Promise%3A+A+Compact+History+volume+two%2C+from+1865" target="_blank">Textbook 1</a><br />
+	<a href="https://www.amazon.com/Reading-American-Past-Historical-Documents/dp/0312563779/ref=sr_1_2?ie=UTF8&amp;qid=1477635403&amp;sr=8-2&amp;keywords=Reading+the+American+Past%3A+Selected+Historical+Documents" target="_blank">Textbook 2</a></td>
+	<td><a href="http://www.sieschool.org/uploadfile/2016/1026/20161026051121112.pdf" target="_blank">Syllabus</a></td>
+	</tr>
+	<tr>
+	<td>
+	<h6>
+		ART 12</h6>
+	<p>Introduction to Western Art:<br />
+	Renaissance to the Present</p>
+	</td>
+	<td>
+	<div class="course-list-faculty"><a href="javascript:;">Christine Neal</a></div>
+	</td>
+	<td><a href="https://www.amazon.com/Gardners-Art-through-Ages-Perspective/dp/1133954804/ref=sr_1_1?ie=UTF8&amp;qid=1477967551&amp;sr=8-1&amp;keywords=ISBN-13%3A+978-1133954804">Textbook</a></td>
+	<td><a href="http://www.sieschool.org/uploadfile/2017/0330/20170330104841321.pdf" target="_blank">Syllabus</a></td>
+	</tr>
+	<tr>
+	<td>
+	<h6>
+		ENG 11</h6>
+	<p>College Composition</p>
+	</td>
+	<td>
+	<div class="course-list-faculty"><a href="javascript:;">Mark David Stephenson</a></div>
+	</td>
+	<td><a href="https://www.amazon.com/College-Writing-Hackett-Student-Handbooks/dp/1603848983/ref=sr_1_1?s=books&amp;ie=UTF8&amp;qid=1477894819&amp;sr=1-1&amp;keywords=The+Nuts+and+Bolts+of+College+Writing" target="_blank">Textbook</a></td>
+	<td><a href="http://www.sieschool.org/uploadfile/2016/1103/20161103120734824.pdf" target="_blank">Syllabus</a></td>
+	</tr>
+	<tr>
+	<td rowspan="9"><strong>13:35 &ndash; 15:25</strong></td>
+	</tr>
+	<tr>
+	<td>
+	<h6>
+		MAT 22</h6>
+	<p>Introduction to Statistics</p>
+	</td>
+	<td>
+	<div class="course-list-faculty"><a href="javascript:;">Edward Butz</a></div>
+	</td>
+	<td><a href="https://www.amazon.com/Statistics-12th-James-T-McClave/dp/0321755936/ref=sr_1_1?ie=UTF8&amp;qid=1477635526&amp;sr=8-1&amp;keywords=0321755936" target="_blank">Textbook</a></td>
+	<td><a href="http://www.sieschool.org/uploadfile/2016/1116/20161116031207896.pdf" target="_blank">Syllabus</a></td>
+	</tr>
+	<tr>
+	<td>
+	<h6>
+		FIM 11</h6>
+	<p>Introduction to Film Studies</p>
+	</td>
+	<td>
+	<div class="course-list-faculty"><a href="javascript:;">Mark David Stephenson</a></div>
+	</td>
+	<td><a href="https://www.amazon.com/Film-Art-Introduction-David-Bordwell/dp/1259534952/ref=sr_1_1?ie=UTF8&amp;qid=1477894170&amp;sr=8-1&amp;keywords=Film+Art%3A+An+Introduction" target="_blank">Textbook</a></td>
+	<td><a href="http://www.sieschool.org/uploadfile/2016/1116/20161116031258574.pdf" target="_blank">Syllabus</a></td>
+	</tr>
+	<tr>
+	<td>
+	<h6>
+		BUS 21</h6>
+	<p>Introduction to International Business</p>
+	</td>
+	<td>
+	<div class="course-list-faculty"><a href="javascript:;">Mike Chao</a></div>
+	</td>
+	<td><a href="https://www.amazon.com/International-Business-New-Realities-2nd/dp/0136090982/ref=sr_1_2?ie=UTF8&amp;qid=1477635632&amp;sr=8-2&amp;keywords=International+Business%3A+The+New+Realities" target="_blank">Textbook</a></td>
+	<td><a href="http://www.sieschool.org/uploadfile/2016/1026/20161026051333435.pdf" target="_blank">Syllabus</a></td>
+	</tr>
+	<tr>
+	<td>
+	<h6>
+		MUS 16</h6>
+	<p>Elementary Music Theory</p>
+	</td>
+	<td>
+	<div class="course-list-faculty"><a href="javascript:;">William Post</a></div>
+	</td>
+	<td><a href="https://www.amazon.com/Fundamentals-Music-Rudiments-Musicianship-Composition/dp/020511833X/ref=sr_1_1?ie=UTF8&amp;qid=1477635795&amp;sr=8-1&amp;keywords=ISBN-13+978-0205118335" target="_blank">Textbook</a></td>
+	<td><a href="http://www.sieschool.org/uploadfile/2016/1026/20161026051603946.pdf" target="_blank">Syllabus</a></td>
+	</tr>
+	<tr>
+	<td>
+	<h6>
+		PHI 20/GST 20</h6>
+	<p>Philosophy of Gender</p>
+	</td>
+	<td>
+	<div class="course-list-faculty"><a href="javascript:;">Shannon Dea</a></div>
+	</td>
+	<td><a href="https://www.vitalsource.com/products/beyond-the-binary-shannon-dea-v9781460405871https:/broadviewpress.com/product/beyond-the-binary-thinking-about-" target="_blank">Textbook</a></td>
+	<td><a href="http://www.sieschool.org/uploadfile/2016/1116/20161116031405668.pdf" target="_blank">Syllabus</a></td>
+	</tr>
+	<tr>
+	<td>
+	<h6>
+		PSY 11</h6>
+	<p>Principles to Psychology</p>
+	</td>
+	<td>
+	<div class="course-list-faculty"><a href="javascript:;">Ron Sheese</a></div>
+	</td>
+	<td><a href="https://www.amazon.com/Great-Ideas-Psychology-Historical-Introduction/dp/1851683798/ref=sr_1_1?s=books&amp;ie=UTF8&amp;qid=1477894948&amp;sr=1-1&amp;keywords=9781851683796" target="_blank">Textbook</a></td>
+	<td><a href="http://www.sieschool.org/uploadfile/2016/1116/20161116031600220.pdf" target="_blank">Syllabus</a></td>
+	</tr>
+	<tr>
+	<td>
+	<h6>
+		COM11/ENG 12</h6>
+	<p>Public Speaking</p>
+	</td>
+	<td>
+	<div class="course-list-faculty"><a href="javascript:;">Jane E. Hardy</a></div>
+	</td>
+	<td><a href="https://www.amazon.com/Art-Public-Speaking-11th/dp/0073406732/ref=sr_1_2?ie=UTF8&amp;qid=1478152581&amp;sr=8-2&amp;keywords=The+Art+of+Public+Speaking" target="_blank">Textbook</a></td>
+	<td><a href="http://www.sieschool.org/uploadfile/2016/1026/20161026051721996.pdf" target="_blank">Syllabus</a></td>
+	</tr>
+	<tr>
+	<td>
+	<h6>
+		ECO 11</h6>
+	<p>Microeconomics</p>
+	</td>
+	<td>
+	<div class="course-list-faculty"><a href="javascript:;">Peter Mikek</a></div>
+	</td>
+	<td><a href="https://www.amazon.com/Principles-Microeconomics-7th-Mankiws-Economics/dp/128516590X/ref=sr_1_1?ie=UTF8&amp;qid=1477635861&amp;sr=8-1&amp;keywords=9781285165905" target="_blank">Textbook</a></td>
+	<td><a href="http://www.sieschool.org/uploadfile/2016/1026/20161026051750664.pdf" target="_blank">Syllabus</a></td>
+	</tr>
+	<tr>
+	<td rowspan="7"><strong>15:35 &ndash; 17:25</strong></td>
+	</tr>
+	<tr>
+	<td>
+	<h6>
+		MAT 12</h6>
+	<p>Calculus&nbsp;II<br />
+	<span style="color: rgb(255, 0, 0); font-size: 8px;">（Please check the&nbsp;</span><span style="color: rgb(255, 0, 0); font-size: 10.9091px;">prerequisite in the&nbsp;</span><span style="color: rgb(255, 0, 0); font-size: 8px;">syllabus before you select</span><span style="font-size: 8px; color: rgb(255, 0, 0);">）</span></p>
+	</td>
+	<td>
+	<div class="course-list-faculty"><a href="javascript:;">Edward Butz</a></div>
+	</td>
+	<td><a href="https://www.amazon.com/Multivariable-Calculus-7th-James-Stewart/dp/0538497874/ref=sr_1_1?ie=UTF8&amp;qid=1477635032&amp;sr=8-1&amp;keywords=ISBN-13%3A+978-0538497879" target="_blank">Textbook</a></td>
+	<td><a href="http://www.sieschool.org/uploadfile/2016/1026/20161026051833103.pdf" target="_blank"><span class="mtips" title="该课程有基础课程要求，选课前请仔细阅读大纲！">Syllabus</span></a></td>
+	</tr>
+	<tr>
+	<td>
+	<h6>
+		ECO 12</h6>
+	<p>Macroeconomics</p>
+	</td>
+	<td>
+	<div class="course-list-faculty"><a href="javascript:;">Peter Mikek</a></div>
+	</td>
+	<td><a href="https://www.amazon.com/Principles-Macroeconomics-N-Gregory-Mankiw/dp/130508165X/ref=sr_1_2?ie=UTF8&amp;qid=1477635947&amp;sr=8-2&amp;keywords=9781305081659" target="_blank">Textbook</a></td>
+	<td><a href="http://www.sieschool.org/uploadfile/2016/1115/20161115023402587.pdf" target="_blank">Syllabus</a></td>
+	</tr>
+	<tr>
+	<td>
+	<h6>
+		MUS 18</h6>
+	<p>History of Jazz</p>
+	</td>
+	<td>
+	<div class="course-list-faculty"><a href="javascript:;">William Post</a></div>
+	</td>
+	<td><a href="https://www.amazon.com/Listening-Jazz-Benjamin-Bierman/dp/0199975612/ref=sr_1_1?ie=UTF8&amp;qid=1477636025&amp;sr=8-1&amp;keywords=ISBN-13%3A+9780199975617" target="_blank">Textbook</a></td>
+	<td><a href="http://www.sieschool.org/uploadfile/2016/1026/20161026052007198.pdf" target="_blank">Syllabus</a></td>
+	</tr>
+	<tr>
+	<td>
+	<h6>
+		FIN 21</h6>
+	<p>Introduction to Finance</p>
+	<p><span style="color: rgb(255, 0, 0); font-size: 8px;">（Please check the&nbsp;</span><span style="color: rgb(255, 0, 0); font-size: 10.9091px;">prerequisite in the&nbsp;</span><span style="color: rgb(255, 0, 0); font-size: 8px;">syllabus before you select</span><span style="font-size: 8px; color: rgb(255, 0, 0);">）</span></p>
+	</td>
+	<td>
+	<div class="course-list-faculty"><a href="javascript:;">Michael Petersen</a></div>
+	</td>
+	<td><a href="http://Amazon.com: Corporate Finance (The Mcgraw-Hill/Irwin Series in Finance, Insurance, and Real Estate) (9780077861759): Stephen Ross, Randolph Westerfield, Jeffrey Jaffe, Bradford Jordan: Books https://www.amazon.com/Corporate-Finance-Mcgraw-Hill-Insurance-Estate/dp/0077861752/ref=sr_1_5?ie=UTF8&amp;qid=1478675604&amp;sr=8-5&amp;keywords=Corporate+Finance">Textbook</a></td>
+	<td><a href="http://www.sieschool.org/uploadfile/2016/1104/20161104105248869.pdf" target="_blank"><span class="mtips" title="Prerequisite">Syllabus</span></a></td>
+	</tr>
+	<tr>
+	<td>
+	<h6>
+		PSY 14</h6>
+	<p>Social Psychology&nbsp;</p>
+	<p><span style="color: rgb(255, 0, 0); font-size: 8px;">（Please check the&nbsp;</span><span style="color: rgb(255, 0, 0); font-size: 10.9091px;">prerequisite in the&nbsp;</span><span style="color: rgb(255, 0, 0); font-size: 8px;">syllabus before you select</span><span style="font-size: 8px; color: rgb(255, 0, 0);">）</span></p>
+	</td>
+	<td>
+	<div class="course-list-faculty"><a href="javascript:;">Ron Sheese</a></div>
+	</td>
+	<td><a href="http://open.lib.umn.edu/socialpsychology/" target="_blank">Textbook 1</a><br />
+	<a href="https://http://www.radpsynet.org/teaching/fran_cherry/" target="_blank">Textbook 2</a></td>
+	<td><a href="http://www.sieschool.org/uploadfile/2016/1103/20161103123048911.pdf" target="_blank"><span class="mtips" title="Prerequisite">Syllabus</span></a></td>
+	</tr>
+	<tr>
+	<td>
+	<h6>
+		PHI 12</h6>
+	<p>Introduction to Philosophy</p>
+	</td>
+	<td>
+	<div class="course-list-faculty"><a href="javascript:;">Shannon Dea</a></div>
+	</td>
+	<td><span class="mtips" title="Provided by the professor">Textbook</span></td>
+	<td><a href="http://www.sieschool.org/uploadfile/2016/1116/20161116032149338.pdf" target="_blank">Syllabus</a></td>
+	</tr>
+	<tr></tr>
+</tbody>
+</table>
+</div>
+<div class="tab-pane fade" id="course-list-03" role="tabpanel">
+<table class="table table-bordered mt-30">
+<tbody>
+	<tr>
+	<td rowspan="6"><strong>8:30 &ndash; 10:45</strong></td>
+	</tr>
+	<tr>
+	<td>
+	<h6>
+		PSY 14</h6>
+	<p>Social Psychology&nbsp;</p>
+	<p><span style="color: rgb(255, 0, 0); font-size: 8px;">（</span><span style="color:#ff0000;">Co-register with Principles of Psychology</span><span style="font-size: 8px; color: rgb(255, 0, 0);">）</span></p>
+	</td>
+	<td>
+	<div class="course-list-faculty"><a href="javascript:;">Edward Chang</a></div>
+	</td>
+	<td><a href="https://www.amazon.com/Social-Psychology-Elliot-Aronson-ebook/dp/B011SX8TZ0/ref=mt_kindle?_encoding=UTF8&amp;me=" target="_blank">Textbook</a></td>
+	<td><a href="http://www.sieschool.org/uploadfile/2016/1115/20161115101304231.pdf" target="_blank"><span class="mtips" title="该课程有基础课程要求，选课前请仔细阅读大纲！">Syllabus</span></a></td>
+	</tr>
+	<tr>
+	<td>
+	<h6>
+		MAT 11</h6>
+	<p>Calculus I</p>
+	</td>
+	<td>
+	<div class="course-list-faculty"><a href="javascript:;">Sergei V. Shabanov</a></div>
+	</td>
+	<td><span class="mtips" title="Provided by the professor">Textbook</span></td>
+	<td><a href="http://www.sieschool.org/uploadfile/2016/1115/20161115101449615.pdf" target="_blank">Syllabus</a></td>
+	</tr>
+	<tr>
+	<td>
+	<h6>
+		REL 11</h6>
+	<p>The Religions of China</p>
+	</td>
+	<td>
+	<div class="course-list-faculty"><a href="javascript:;">Thomas Michael</a></div>
+	</td>
+	<td><span class="mtips" title="Provided by the professor">Textbook</span></td>
+	<td><a href="http://www.sieschool.org/uploadfile/2016/1115/20161115101519949.pdf" target="_blank">Syllabus</a></td>
+	</tr>
+	<tr>
+	<td>
+	<h6>
+		COM 11/ENG 12</h6>
+	<p>Public Speaking</p>
+	</td>
+	<td>
+	<div class="course-list-faculty"><a href="javascript:;">Huiling Ding</a></div>
+	</td>
+	<td><a href="https://www.amazon.com/Art-Public-Speaking-11th/dp/0073406732/ref=sr_1_2?ie=UTF8&amp;qid=1478152581&amp;sr=8-2&amp;keywords=The+Art+of+Public+Speaking" target="_blank">Textbook 1</a><br />
+	<span class="mtips" title="China Daily, 21st Century, and local Chinese and English newspapers in Beijing">Textbook 2</span></td>
+	<td><a href="https://www.amazon.com/Public-Speaking-Communication-Standalone-Book/dp/0073523917/ref=mt_paperback?_encoding=UTF8&amp;me=" target="_blank">Syllabus</a></td>
+	</tr>
+	<tr>
+	<td>
+	<h6>
+		BUS 22</h6>
+	<p>Organizational Behavior</p>
+	</td>
+	<td>
+	<div class="course-list-faculty"><a href="javascript:;">Victoria Digby</a></div>
+	</td>
+	<td><a href="http://connect.mheducation.com/connect/shortUrl.do?accessUrl=v-digby-beijing-jiaotong-univ-summer-2017&amp;logout=true&amp;navclick=true"><span class="mtips" title="Please find details in syllabus">Textbook</span></a></td>
+	<td><a href="http://www.sieschool.org/uploadfile/2017/0216/20170216103904732.pdf">Syllabus</a></td>
+	</tr>
+	<tr></tr>
+	<tr>
+	<td rowspan="6"><strong>10:55 &ndash; 13:10</strong></td>
+	</tr>
+	<tr>
+	<td>
+	<h6>
+		PSY 13</h6>
+	<p>Human Sexuality</p>
+	</td>
+	<td>
+	<div class="course-list-faculty"><a href="javascript:;">Edward Chang</a></div>
+	</td>
+	<td><a href="https://www.amazon.com/Human-Sexuality-Roger-Hock-Ph-D-ebook/dp/B00SZECNAI/ref=mt_kindle?_encoding=UTF8&amp;me=" target="_blank">Textbook</a></td>
+	<td><a href="http://www.sieschool.org/uploadfile/2016/1115/20161115101855441.pdf" target="_blank">Syllabus</a></td>
+	</tr>
+	<tr>
+	<td>
+	<h6>
+		MAT 13</h6>
+	<p>Calculus III</p>
+	</td>
+	<td>
+	<div class="course-list-faculty"><a href="javascript:;">Sergei V. Shabanov</a></div>
+	</td>
+	<td><span class="mtips" title="Provided by the professor">Textbook</span></td>
+	<td><a href="http://www.sieschool.org/uploadfile/2016/1115/20161115102043105.pdf" target="_blank">Syllabus</a></td>
+	</tr>
+	<tr>
+	<td>
+	<h6>
+		HIS 22/REL 28</h6>
+	<p>World History: World Religions in Historical Perspective</p>
+	</td>
+	<td>
+	<div class="course-list-faculty"><a href="javascript:;">Thomas Michael</a></div>
+	</td>
+	<td><span class="mtips" title="Provided by the professor">Textbook</span></td>
+	<td><a href="http://www.sieschool.org/uploadfile/2016/1115/20161115102107405.pdf" target="_blank">Syllabus</a></td>
+	</tr>
+	<tr>
+	<td>
+	<h6>
+		HIS 24</h6>
+	<p>Modern World History: 1914 to Present</p>
+	</td>
+	<td>
+	<div class="course-list-faculty"><a href="javascript:;">Ting Ni</a></div>
+	</td>
+	<td><a href="https://www.amazon.com/Twentieth-Century-World-Beyond-International-History/dp/B0042NIYF4/ref=sr_1_2?ie=UTF8&amp;qid=1478057044&amp;sr=8-2&amp;keywords=The+Twentieth-CEntury+World+and+Beyond%3AAn+International+History+since+1900" target="_blank">Textbook</a></td>
+	<td><a href="http://www.sieschool.org/uploadfile/2016/1115/20161115102133597.pdf" target="_blank">Syllabus</a></td>
+	</tr>
+	<tr>
+	<td>
+	<h6>
+		BUS 24</h6>
+	<p>Business Law</p>
+	</td>
+	<td>
+	<div class="course-list-faculty"><a href="javascript:;">Philip King</a></div>
+	</td>
+	<td><a href="http://www.nelson.com/catalogue/productOverview.do?Ntt=duplessis||12764994983196607052117213985227983681&amp;N=197&amp;Ntk=nelson%7C%7CP_EPI&amp;Ntx=mode+matchallpartial">Textbook</a></td>
+	<td><a href="http://www.sieschool.org/uploadfile/2016/1206/20161206055628295.pdf" target="_blank">Syllabus</a></td>
+	</tr>
+	<tr></tr>
+	<tr>
+	<td rowspan="6"><strong>14:00 &ndash; 16:15</strong></td>
+	</tr>
+	<tr>
+	<td>
+	<h6>
+		PSY 11</h6>
+	<p>Principles of Psychology</p>
+	</td>
+	<td>
+	<div class="course-list-faculty"><a href="javascript:;">Edward Chang</a></div>
+	</td>
+	<td><a href="https://www.amazon.com/Psychology-Concepts-Philip-G-Zimbardo-ebook/dp/B01L9K8RYA/ref=mt_kindle?_encoding=UTF8&amp;me=" target="_blank">Textbook</a></td>
+	<td><a href="http://www.sieschool.org/uploadfile/2016/1115/20161115102517877.pdf" target="_blank">Syllabus</a></td>
+	</tr>
+	<tr>
+	<td>
+	<h6>
+		MUS 16</h6>
+	<p>Elementary Music Theory</p>
+	</td>
+	<td>
+	<div class="course-list-faculty"><a href="javascript:;">Rika Asai</a></div>
+	</td>
+	<td><a href="https://www.amazon.com/Cengage-Advantage-Creative-Approach-Fundamentals-ebook/dp/B00J4W0IIO/ref=sr_1_4?s=digital-text&amp;ie=UTF8&amp;qid=1478153993&amp;sr=1-4&amp;keywords=William+Duckworth%2C+A+Creative+Approach+to+Music+Fundamentals" target="_blank">Textbook</a></td>
+	<td><a href="http://www.sieschool.org/uploadfile/2016/1115/20161115102619235.pdf" target="_blank">Syllabus</a></td>
+	</tr>
+	<tr>
+	<td>
+	<h6>
+		SOC 11</h6>
+	<p>Introduction to Sociology</p>
+	</td>
+	<td>
+	<div class="course-list-faculty"><a href="javascript:;">Xiaoling Shu</a></div>
+	</td>
+	<td><a href="https://www.amazon.com/Introduction-Sociology-Eighth-Anthony-Giddens/dp/0393912132/ref=sr_1_1?ie=UTF8&amp;qid=1478156543&amp;sr=8-1&amp;keywords=introduction+to+sociology+8th+edition" target="_blank">Textbook</a></td>
+	<td><a href="http://www.sieschool.org/uploadfile/2016/1115/20161115102814469.pdf" target="_blank">Syllabus</a></td>
+	</tr>
+	<tr>
+	<td>
+	<h6>
+		PHI 11</h6>
+	<p>Introduction to Philosophy</p>
+	</td>
+	<td>
+	<div class="course-list-faculty"><a href="javascript:;">Colin McLarty</a></div>
+	</td>
+	<td><span class="mtips" title="Provided by the professor">Textbook</span></td>
+	<td><a href="http://www.sieschool.org/uploadfile/2016/1115/20161115102847966.pdf" target="_blank">Syllabus</a></td>
+	</tr>
+	<tr>
+	<td>
+	<h6>
+		ECO 11</h6>
+	<p>Microeconomics</p>
+	</td>
+	<td>
+	<div class="course-list-faculty"><a href="javascript:;">Joseph Petry</a></div>
+	</td>
+	<td><a href="http://www.cengagebrain.com/course/2052403"><span class="mtips" title="Please find details in syllabus">Textbook</span></a></td>
+	<td><a href="http://www.sieschool.org/uploadfile/2016/1219/20161219011652934.pdf" target="_blank">Syllabus</a></td>
+	</tr>
+	<tr>
+	<td rowspan="5"><strong>16:25 &ndash; 18:40</strong></td>
+	</tr>
+	<tr>
+	<td>
+	<h6>
+		MUS 20</h6>
+	<p>World Music</p>
+	</td>
+	<td>
+	<div class="course-list-faculty"><a href="javascript:;">Rika Asai</a></div>
+	</td>
+	<td><a href="https://www.amazon.com/Music-Peoples-World-William-Alves-ebook/dp/B00B63MBI4/ref=mt_kindle?_encoding=UTF8&amp;me=" target="_blank">Textbook</a></td>
+	<td><a href="http://www.sieschool.org/uploadfile/2016/1115/20161115103032430.pdf" target="_blank">Syllabus</a></td>
+	</tr>
+	<tr>
+	<td>
+	<h6>
+		ART 12</h6>
+	<p>Introduction to Western Art: Renaissance to the Present</p>
+	</td>
+	<td>
+	<div class="course-list-faculty"><a href="javascript:;">Andrew Nedd</a></div>
+	</td>
+	<td><a href="https://www.amazon.com/Jansons-Basic-History-Western-Art/dp/0205242634/ref=sr_1_1?ie=UTF8&amp;qid=1478152479&amp;sr=8-1&amp;keywords=Janson%27s+Basic+History+of+Western+Art" target="_blank">Textbook</a></td>
+	<td><a href="http://www.sieschool.org/uploadfile/2016/1115/20161115103130361.pdf" target="_blank">Syllabus</a></td>
+	</tr>
+	<tr>
+	<td>
+	<h6>
+		PHI 12</h6>
+	<p>Introduction to Logic</p>
+	</td>
+	<td>
+	<div class="course-list-faculty"><a href="javascript:;">Colin McLarty</a></div>
+	</td>
+	<td><a href="https://www.amazon.com/Logic-Book-6th-Merrie-Bergmann-ebook/dp/B00DC6XRTU/ref=sr_1_1?s=digital-text&amp;ie=UTF8&amp;qid=1477892966&amp;sr=1-1&amp;keywords=The+Logic+Book" target="_blank">Textbook</a></td>
+	<td><a href="http://www.sieschool.org/uploadfile/2016/1115/20161115103202345.pdf" target="_blank">Syllabus</a></td>
+	</tr>
+	<tr>
+	<td>
+	<h6>
+		ECO 12</h6>
+	<p>Macroeconomics</p>
+	</td>
+	<td>
+	<div class="course-list-faculty"><a href="javascript:;">Joseph Petry</a></div>
+	</td>
+	<td><a href="http://www.cengagebrain.com/course/2037321"><span class="mtips" title="Please find details in syllabus">Textbook</span></a></td>
+	<td><a href="http://www.sieschool.org/uploadfile/2016/1219/20161219011721893.pdf" target="_blank">Syllabus</a></td>
+	</tr>
+	<tr></tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<br />
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="footer">
+	<div class="container">
+		<h2>SIE Alliance of International Summer Sessions</h2>
+		<em class="line"></em>
+		<div class="wechat mt-30">
+			<div class="row">
+				<div class="col-xs-6 col-xs-offset-3">
+					<div class="row">
+						<div class="col-xs-6">
+							<img src="/public/img/wechat-consultant.jpg">
+							<p>微信咨询号</p>
+						</div>
+						<div class="col-xs-6">
+							<img src="/public/img/wechat-official.jpg">
+							<p>微信公众号</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<p class="mt-30">
+			<span>(86)18910194676</span>
+			<em>/</em>
+			<span>chongshan.wang@sieschool.org</span>
+		</p>
+		<p class="mt-5">
+			<span>BJTU: 010-53383118</span>
+			<em>/</em>
+			<span>bjtuiss@bjtu.edu.cn</span>
+		</p>
+		<p class="mt-5">
+			<span>ECNU: （86）400-666-5576</span>
+			<em>/</em>
+			<span>iss@ied.ecnu.edu.cn</span>
+		</p>
+		<div class="copyright">
+			<p>Copyright &copy; 2015 Sinoway International Education Group Limited &nbsp;&nbsp;&nbsp;&nbsp; 京ICP证000007</p>
+		</div>
+	</div>
+</div>
+	
+<script src="/public/js/jquery.min.js"></script>
+<script src="/public/js/bootstrap.min.js"></script>
+<script src="/public/js/jquery.SuperSlide.js"></script>
+<script src="/public/js/common.js"></script>
+<script src="/state.php"></script>
+
+
+</body>
+</html>

@@ -207,4 +207,6 @@ public class XmlUtil {
 		String firstLetter = fieldName.substring(0, 1).toLowerCase();
 		return firstLetter + fieldName.substring(1);
 	}
+
+
 }

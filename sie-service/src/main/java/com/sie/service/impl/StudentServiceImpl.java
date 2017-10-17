@@ -8,6 +8,7 @@ import com.sie.service.StudentService;
 import com.sie.service.bean.ResultBean;
 import com.sie.service.excel.StudentExcelBean;
 import com.sie.util.*;
+import com.sie.util.model.OAuthInfo;
 import org.apache.commons.beanutils.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -248,5 +249,22 @@ public class StudentServiceImpl extends BaseServiceImpl<StudentEntity,Integer> i
         resultBean.setMessage("修改成功,密码已发送邮箱");
         resultBean.setSuccess(true);
         return resultBean;
+    }
+
+    @Override
+    public StudentEntity loginByOpenid(OAuthInfo info) {
+
+        List<HqlOperateVo> hqlOperateVos = new ArrayList<>();
+        hqlOperateVos.add(new HqlOperateVo("openid", "=", info.getOpenid()));
+
+        List<StudentEntity> studentEntityList = studentDao.getList(hqlOperateVos);
+        if(studentEntityList != null && studentEntityList.size() > 0){
+            return studentEntityList.get(0);
+        }else{
+            StudentEntity studentEntity = new StudentEntity();
+            studentEntity.setOpenid(info.getOpenid());
+            this.studentDao.createEntity(studentEntity);
+            return studentEntity;
+        }
     }
 }

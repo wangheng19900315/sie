@@ -3,6 +3,7 @@ package com.sie.service;
 import com.sie.framework.entity.StudentEntity;
 import com.sie.service.bean.ResultBean;
 import com.sie.service.excel.StudentExcelBean;
+import com.sie.util.model.OAuthInfo;
 
 import java.util.List;
 import java.util.Map;
@@ -38,4 +39,6 @@ public interface StudentService extends BaseService<StudentEntity, Integer> {
     ResultBean updatePassword(String userName, String password, String newPassword);
 
     ResultBean updateResetPassword(String userName);
+
+    StudentEntity loginByOpenid(OAuthInfo info);
 }
