@@ -775,6 +775,10 @@ public class OrderServiceImpl extends BaseServiceImpl<OrderEntity,Integer> imple
                         this.courseService.updateCourseCount(detailEntity.getCourseIds(), orderEntity.getSystemType(),orderEntity.getOrderType(), -1);
                     }
                 }
+
+                gradeService.updateStudentGradeList(orderEntity.getStudentEntity().getId());
+
+                gradeSendService.updateStudentGradeSend(orderEntity.getStudentEntity().getId());
                 this.orderDao.updateEntity(orderEntity);
             }
         }

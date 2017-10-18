@@ -33,6 +33,8 @@ public class PaymentController {
     private OrderService orderService;
 
 
+    public static int defaultWidthAndHeight=200;
+
     private static final Logger logger = LoggerFactory.getLogger(PaymentController.class);
 
     private static final String SYSTEM_ACCESS_TOKEN = "un23n4no2bu4bs34";
@@ -42,10 +44,9 @@ public class PaymentController {
 
     @ResponseBody
     @RequestMapping("/getWechatCode.json")
-    public String getWechatCode(String orderNo) throws Exception {
+    public String getWechatCode(Integer orderId) throws Exception {
         // 账号信息
         String appid = PayConfigUtil.APP_ID;  // appid
-        //String appsecret = PayConfigUtil.APP_SECRET; // appsecret
         String mch_id = PayConfigUtil.MCH_ID; // 商业号
         String key = PayConfigUtil.API_KEY; // key
 
@@ -56,7 +57,7 @@ public class PaymentController {
 
         String order_price = 1+""; // 价格   注意：价格的单位是分
         String body = "购买课程";   // 商品名称
-        String out_trade_no = orderNo; // 订单号
+        String out_trade_no = "111111"; // 订单号
 
         // 获取发起电脑 ip
         String spbill_create_ip = PayConfigUtil.CREATE_IP;
@@ -85,15 +86,13 @@ public class PaymentController {
 
 
         Map map = JDomXMLUtil.doXMLParse(resXml);
-        //String return_code = (String) map.get("return_code");
-        //String prepay_id = (String) map.get("prepay_id");
         String urlCode = (String) map.get("code_url");
 
         return WechatCodeUtil.QRfromGoogle(urlCode);
     }
 
 
-    @RequestMapping("/weixinCallback")
+    @RequestMapping("/nodify")
     public void weixinCallback(HttpServletRequest request, HttpServletResponse response) throws Exception{
 
         //读取参数
