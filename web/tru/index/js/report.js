@@ -20,7 +20,7 @@ $(function(){
     });
 
     attrs={};
-    attrs.studentId=studentId;
+    attrs.studentId=userInfo.id+"";
     attrs.systemType = systemType;
     /**
      * 获取学生成绩单

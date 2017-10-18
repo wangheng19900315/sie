@@ -89,6 +89,11 @@ $(function() {
 		},
 		
 		others: function() {
+		    $(".nav .dropdown").hover(function() {
+		    	$(this).find(".dropdown-menu").show().end().siblings().find(".dropdown-menu").hide();
+		    }, function() {
+		    	$(this).removeClass("open").find(".dropdown-menu").hide()
+		    });
 		    $(".dropdown-select li").click(function() {
 		    	if ($(this).attr("class") !="disabled") {
 			    	var txt = $(this).text();
@@ -97,6 +102,13 @@ $(function() {
 		    		$("#" + cl).show().siblings().hide();
 		    	}
 		    });
+			$(function(){
+				$('#president').chosen({allow_single_deselect: true});
+				var chosen = $(".chosen-single");
+				var setinput = $(".chosen-search").find("input");
+				chosen.addClass('form-control');
+				setinput.addClass('form-control');
+			});
 			$(function(){
 				var inputTxt = $(".report-address input.form-control");
 			    inputTxt.focus(function() {
@@ -121,7 +133,7 @@ $(function() {
 							"padding-right":0
 						});
 					}
-					setTimeout("$('.modal-tips').modal('hide')",2000);
+					setTimeout('if ($(".modal-tips.in").length > 0) {$(".modal-tips").modal("hide");$("body").removeClass("modal-scroll").css({"overflow":"auto"});}',2000);
 				});
 				$('button[data-dismiss="modal"]').click(function () {
 					$("body").removeClass("modal-scroll").css({

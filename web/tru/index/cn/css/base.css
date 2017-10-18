@@ -176,18 +176,32 @@ div:after,.clearfix:after{content:"";display:table;width: 0;height: 0;visibility
 .areabox-rg .map-tip{margin-top: 20px;font-size: 24px;}
 .areabox-rg .map-tip i{font-size: 30px;color: #ffcb00;}
 .areabox-rg table{margin: 0;font-size: 20px;}
-.areabox-rg table>tbody>tr>th{padding: 20px;text-align:center;font-weight:normal;color: #fff;background: #13b0b9;}
-.areabox-rg table>tbody>tr>td{padding: 20px;color: #666;background: #f7f7f7;}
+.areabox-rg table>tbody>tr>th{padding: 13px;text-align:center;font-weight:normal;color: #fff;background: #13b0b9;}
+.areabox-rg table>tbody>tr>td{padding: 15px;color: #666;background: #f7f7f7;}
 .areabox-area{float: none;width: 1440px;padding: 20px 40px 50px;}
-.areabox-area h3{font-size: 32px;}
-.areabox-area p{font-size: 20px;}
-.areabox-area .wechat{margin: 20px -12px 0;}
-.areabox-area .wechat-cont{float: left;width: 210px;margin-right: 80px;}
-.areabox-area .wechat-cont p{text-align: center;font-size: 20px;letter-spacing: 10px;}
+.areabox-area h3{margin-bottom: 15px;font-weight: bold;color: #083747;}
+.areabox-area p{font-size: 16px;}
+.areabox-area .wechat{margin-top: 20px;}
+.areabox-area .wechat-cont{float: left;width: 210px;padding: 20px 20px 10px 20px;margin-right: 80px;border: 1px solid #ddd;border-radius: 4px;}
+.areabox-area .wechat-cont img{padding-bottom: 15px;margin-bottom: 10px;border-bottom: 1px solid #ddd;}
+.areabox-area .wechat-cont p{text-align: center;font-size: 14px;}
+.areabox-area .contact{margin-top: 20px;}
+.areabox-area .contact-cont{float: left;width: 600px;padding: 20px;margin-right: 50px;border: 1px solid #ddd;border-radius: 4px;}
+.areabox-area .contact-cont h4{padding-bottom: 15px;margin: 0 0 15px 0;font-weight: bold;border-bottom: 1px solid #ddd;}
+.areabox-area .recruit{}
+.areabox-area .recruit-tit{float: left;width: 20%;padding: 20px 0 0 20px;}
+.areabox-area .recruit-tit h2{position: relative;font-size: 46px;margin-bottom: 20px;color: #ffcb00;}
+.areabox-area .recruit-tit h2:after{position: absolute;bottom: -5px;left: 2px;display: block;content: "";width: 24px;height: 4px;background: #ffcb00;}
+.areabox-area .recruit-tit h3{margin: 0;}
+.areabox-area .recruit-tit p{font-size: 18px;}
+.areabox-area .recruit-cont{float: left;width: 80%;}
 .areabox-span{padding: 30px 15px;}
-.areabox-span a.link{color: #0f8390;}
+.areabox-span a{color: #13b0b9;text-decoration: underline;}
+.areabox-span a.link{color: #0f8390;text-decoration: none;}
+.areabox-span a.link:hover{color: #13b0b9;text-decoration: underline;}
 .areabox-span.bg-grey{background: #f7f7f7;}
 .areabox-span.bg-grey h3{color: #0f8390;border-bottom: 1px solid #0f8390;}
+.contact-bg{background-image:url(../../public/img/contact-bg.png);background-repeat: no-repeat;background-position: right top;}
 
 /* form-list */
 .form-group input.form-control{height: 46px;line-height: 46px;font-size: 16px;}
@@ -252,8 +266,6 @@ div:after,.clearfix:after{content:"";display:table;width: 0;height: 0;visibility
 #footer .wechat-cont:first-child{margin-right: 25px;}
 #footer .wechat-cont img{width: 100px;}
 #footer .wechat-cont p{text-align: center;font-size: 12px;letter-spacing: 9px;color: #fff;}
-
-/* login-box */
 
 
 /* float-ad */
@@ -380,6 +392,7 @@ td.active.disabled:hover:active, .datetimepicker table tr td.active.active, .dat
 .ico{vertical-align: middle;display: inline-block;background-repeat:no-repeat;background-size: cover;}
 .ico-ok{width: 14px;height: 12px;background-image: url(../../public/img/ico-ok.png);}
 .ico-success{width: 30px;height: 30px;background-image: url(../../public/img/ico-success.svg);}
+.ico-fail{width: 30px;height: 30px;background-image: url(../../public/img/ico-fail.svg);}
 .ico-user-info{width: 20px;height: 20px;background-image: url(../../public/img/ico-user-info.svg);}
 .ico-college{width: 20px;height: 18px;background-image: url(../../public/img/ico-college.svg);}
 .ico-upload{width: 18px;height: 21px;background-image: url(../../public/img/ico-upload.svg);}
