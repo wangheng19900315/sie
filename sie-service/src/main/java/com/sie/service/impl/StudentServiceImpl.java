@@ -75,7 +75,18 @@ public class StudentServiceImpl extends BaseServiceImpl<StudentEntity,Integer> i
                 oldStudentEntity.setSendCountry(studentEntity.getSendCountry());
                 oldStudentEntity.setSendPostCode(studentEntity.getSendPostCode());
             }
+
+            if(flag == 1){
+                oldStudentEntity.setApplicationStep(studentEntity.getApplicationStep());
+            }
             this.studentDao.updateEntity(oldStudentEntity);
+            if(flag != 1){
+                //学生进行修改需要更新步骤
+                ResultBean resultBean = updateApplicationStep(studentEntity.getId(),studentEntity.getApplicationStep());
+                if(!resultBean.isSuccess()){
+                    throw new RuntimeException(resultBean.getMessage());
+                }
+            }
         }else{
             studentEntity.setUserID(DateUtil.format(new Date(), "yyyyMMddHHmmss")+ NumberUtil.randomInt(1000, 9999));
             this.studentDao.createEntity(studentEntity);
@@ -218,6 +229,7 @@ public class StudentServiceImpl extends BaseServiceImpl<StudentEntity,Integer> i
 
         StudentEntity studentEntity = studentEntityList.get(0);
         studentEntity.setPassword(Md5Util.getMD5(newPassword, ApplicationHelp.MD5_SHA1));
+        this.studentDao.updateEntity(studentEntity);
         resultBean.setMessage("修改成功");
         resultBean.setSuccess(true);
         return resultBean;
@@ -238,7 +250,7 @@ public class StudentServiceImpl extends BaseServiceImpl<StudentEntity,Integer> i
         StudentEntity studentEntity = studentEntityList.get(0);
         String newPassword = (int)((Math.random()*9+1)*100000)+"";
         studentEntity.setPassword(Md5Util.getMD5(newPassword, ApplicationHelp.MD5_SHA1));
-
+        this.studentDao.updateEntity(studentEntity);
         try {
             SendMailUtil.sendEmail("smtp.163.com","wangheng19900315@163.com", "900315", "wangheng19900315@163.com","网站密码修改","您的新密码为"+newPassword, studentEntity.getEmail());
         } catch (Exception e) {
@@ -266,5 +278,29 @@ public class StudentServiceImpl extends BaseServiceImpl<StudentEntity,Integer> i
             this.studentDao.createEntity(studentEntity);
             return studentEntity;
         }
+    }
+
+    @Override
+    public ResultBean updateApplicationStep(Integer studentId, Integer applicatioStep) {
+        ResultBean resultBean = new ResultBean();
+        StudentEntity studentEntity = studentDao.getEntity(studentId);
+        Integer oldApplicationStep = studentEntity.getApplicationStep();
+        if(oldApplicationStep == null){
+            oldApplicationStep = 0;//默认为注册成功
+        }
+        if(applicatioStep > oldApplicationStep){
+            if(applicatioStep == (oldApplicationStep + 1)){
+                //下一步的动作
+                studentEntity.setApplicationStep(applicatioStep);
+                this.studentDao.updateEntity(studentEntity);
+            }else{
+                resultBean.setMessage("学生申请步骤失败");
+                return resultBean;
+            }
+
+        }
+        resultBean.setMessage("设置步骤成功");
+        resultBean.setSuccess(true);
+        return resultBean;
     }
 }
