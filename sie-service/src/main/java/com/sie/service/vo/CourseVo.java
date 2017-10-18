@@ -24,6 +24,7 @@ public class CourseVo {
     private String code;
     private Integer school;
     private String schoolName;
+    private String classroom;//上课地点
     private boolean readonly;
 
 
@@ -129,5 +130,13 @@ public class CourseVo {
 
     public void setReadonly(boolean readonly) {
         this.readonly = readonly;
+    }
+
+    public String getClassroom() {
+        return classroom;
+    }
+
+    public void setClassroom(String classroom) {
+        this.classroom = classroom;
     }
 }

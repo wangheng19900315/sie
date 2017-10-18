@@ -165,6 +165,12 @@ public class OrderServiceImpl extends BaseServiceImpl<OrderEntity,Integer> imple
                     bean.setStatusName(status.getName());
                 }
             }
+            if(NumberUtil.isSignless(bean.getPayType())){
+                PayType payType = PayType.valueOf(bean.getPayType());
+                if(payType != null){
+                    bean.setPayTypeName(payType.getName());
+                }
+            }
             if(orderEntity.getCouponEntity() != null){
                 bean.setCouponId(orderEntity.getCouponEntity().getId());
                 bean.setCouponName(orderEntity.getCouponEntity().getName());
@@ -771,11 +777,14 @@ public class OrderServiceImpl extends BaseServiceImpl<OrderEntity,Integer> imple
 
 
     @Override
-    public List<OrderVo> getOrderListVo(String systemType, String studentId) {
+    public List<OrderVo> getOrderListVo(String systemType, String studentId,Integer orderStatus) {
         List<OrderVo> orderVos = new ArrayList<>();
         List<HqlOperateVo> list = new  ArrayList<HqlOperateVo>();
         list.add(new HqlOperateVo("systemType", "=", systemType));
         list.add(new HqlOperateVo("studentEntity.id", "=", studentId));
+        if(orderStatus != null){
+            list.add(new HqlOperateVo("status", "=", orderStatus.toString()));
+        }
         List<OrderEntity> orderEntities = this.getList(list);
         if(orderEntities.size() > 0) {
             for (OrderEntity orderEntity : orderEntities) {
@@ -838,5 +847,71 @@ public class OrderServiceImpl extends BaseServiceImpl<OrderEntity,Integer> imple
             }
         }
         return orderVos;
+    }
+
+    @Override
+    public OrderVo getLatestOrderListVo(String systemType, String studentId) {
+        OrderVo orderVo = null;
+        String hql = "from OrderEntity where hdelete=0 and systemType=" + systemType + " and studentEntity.id=" + studentId + " order by updateTime desc";
+        List<OrderEntity> orderEntities = this.getList(hql);
+        if(orderEntities.size() > 0) {
+            OrderEntity orderEntity = orderEntities.get(0);
+
+            OrderBean orderBean = new OrderBean();
+            this.setBeanValues(orderEntity, orderBean);
+            orderVo = new OrderVo();
+            try {
+                BeanUtils.copyProperties(orderVo,orderBean);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            if (orderEntity.getOrderTime() != null) {
+                orderVo.setOrderTime(DateUtil.format(orderEntity.getOrderTime(), "yyyy-MM-dd"));
+            }
+            if (orderEntity.getPayTime() != null) {
+                orderVo.setPayTime(DateUtil.format(orderEntity.getPayTime(), "yyyy-MM-dd"));
+            }
+            //遍历order的明细
+//            List<CourseVo> courses = new ArrayList<>();
+//            for(OrderDetailEntity detailEntity:orderEntity.getOrderDetailEntityList()){
+//                ProjectEntity projectEntity = detailEntity.getProjectEntity();
+//                if(projectEntity != null){
+//                    //明细为项目
+//                    if(vo.getTerm() == null){
+//                        //设置学期
+//                        vo.setTerm(DateUtil.format(projectEntity.getStartTime(), "yyyy"));
+//                    }
+//                    if(detailEntity.getCourseIds() != null){
+//                        //得到项目下的课程
+//                        String[] courseIds = detailEntity.getCourseIds().split(",");
+//                        for(String courseId : courseIds){
+//                            CourseVo courseVo = new CourseVo();
+//                            CourseEntity courseEntity = courseDao.getEntity(Integer.valueOf(courseId));
+//                            try {
+//                                BeanUtils.copyProperties(courseVo,courseEntity);
+//                                if(courseEntity.getSchool() != null){
+//                                    //设置校区名称
+//                                    School school = School.valueOf(courseEntity.getSchool());
+//                                    courseVo.setSchoolName(school.getName());
+//                                }
+//                            } catch (Exception e) {
+//                                e.printStackTrace();
+//                            }
+//                            //设置课程编码
+//                            SystemType type = SystemType.valueOf(Integer.parseInt(systemType));
+//                            if(type == SystemType.SIE){
+//                                courseVo.setCode(courseEntity.getSieCode());
+//                            }else{
+//                                courseVo.setCode(courseEntity.getTruCode());
+//                            }
+//                            courses.add(courseVo);
+//                        }
+//                    }
+//                }
+//            }
+//            vo.setCourses(courses);
+        }
+        return orderVo;
     }
 }

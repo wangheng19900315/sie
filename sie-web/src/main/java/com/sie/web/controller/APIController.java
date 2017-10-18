@@ -270,7 +270,7 @@ public class APIController {
                 return resultBean;
             }
 
-            List<OrderVo> orderVos = this.orderService.getOrderListVo(systemType, studentId);
+            List<OrderVo> orderVos = this.orderService.getOrderListVo(systemType, studentId,null);
             resultBean.setMessage("查找成功");
             resultBean.setSuccess(true);
             Map<String,List<OrderVo>> orderVoMap = new HashMap<>();
@@ -345,7 +345,7 @@ public class APIController {
      * 获取报名项目信息
      * @return
      */
-    @RequestMapping("/getProjects.json")
+    @RequestMapping(value = "/getProjects.json", method = RequestMethod.POST)
     @ResponseBody
     public ResultBean  getProjects(String params, String accessToken){
         logger.info("getProjects.json params="+params +" accessToken="+accessToken);
@@ -471,7 +471,7 @@ public class APIController {
      * 用户下单
      * @return
      */
-    @RequestMapping("/createOrder.json")
+    @RequestMapping(value = "/createOrder.json", method = RequestMethod.POST)
     @ResponseBody
     public ResultBean  createOrder(String params, String accessToken){
         logger.info("createOrder.json params="+params +" accessToken="+accessToken);
@@ -521,14 +521,69 @@ public class APIController {
     ///////////////
     /**未用接口**/
     //////////////
+//    /**
+//     * 获取课程信息
+//     * @return
+//     */
+//    @RequestMapping("/getCourses.json")
+//    @ResponseBody
+//    public ResultBean  getCourses(String params, String accessToken){
+//        logger.info("getCourses.json params="+params +" accessToken="+accessToken);
+//        ResultBean resultBean = new ResultBean();
+//
+//        try{
+//            if(StringUtil.isBlank(accessToken) || !accessToken.equals(SYSTEM_ACCESS_TOKEN)){
+//                resultBean.setMessage("token 为空，请检查参数");
+//                return resultBean;
+//            }
+//
+//            ObjectMapper mapper = new ObjectMapper();
+//            Map<String,String >maps = mapper.readValue(params, Map.class);
+//            String systemType = maps.get("systemType");
+//            String projectId = maps.get("projectId");
+//            if(StringUtil.isBlank(systemType)){
+//                resultBean.setMessage("systemType 为空，请检查参数");
+//                return resultBean;
+//            }
+//            List<HqlOperateVo> list = new  ArrayList<HqlOperateVo>();
+//            list.add(new HqlOperateVo("system", "in", systemType+","+ SystemType.SIEANDTRU.value()));
+//            list.add(new HqlOperateVo("projectId", "=", projectId));
+//            List<CourseEntity> courseEntities = this.courseService.getList(list);
+//            if(courseEntities.size() > 0){
+//
+//                List<CourseVo> courseVos = new ArrayList<>();
+//                for(CourseEntity courseEntity:courseEntities){
+//                    CourseVo vo = new CourseVo();
+//                    BeanUtils.copyProperties(courseEntity, vo);
+////                    if(courseEntity.getStartTime() != null){
+////                        vo.setStartTime(DateUtil.format(courseEntity.getStartTime(), "yyyy-MM-dd"));
+////                    }
+////                    if(courseEntity.getEndTime() != null){
+////                        vo.setEndTime(DateUtil.format(courseEntity.getEndTime(), "yyyy-MM-dd"));
+////                    }
+//                    courseVos.add(vo);
+//                }
+//                resultBean.setMessage("查找成功");
+//                resultBean.setSuccess(true);
+//                resultBean.setData(courseVos);
+//            }
+//
+//
+//        }catch(Exception e){
+//            e.printStackTrace();
+//        }
+//
+//        return resultBean;
+//    }
+
     /**
-     * 获取课程信息
+     * 获得最近的一条订单
      * @return
      */
-    @RequestMapping("/getCourses.json")
+    @RequestMapping(value = "/getLatestOrderInfo.json", method = RequestMethod.POST)
     @ResponseBody
-    public ResultBean  getCourses(String params, String accessToken){
-        logger.info("getCourses.json params="+params +" accessToken="+accessToken);
+    public ResultBean  getLatestOrderInfo(String params, String accessToken){
+        logger.info("getLatestOrderInfo.json params="+params +" accessToken="+accessToken);
         ResultBean resultBean = new ResultBean();
 
         try{
@@ -539,36 +594,68 @@ public class APIController {
 
             ObjectMapper mapper = new ObjectMapper();
             Map<String,String >maps = mapper.readValue(params, Map.class);
+            String studentId = maps.get("studentId");
+            if(StringUtil.isBlank(studentId)){
+                resultBean.setMessage("studentId 为空，请检查参数");
+                return resultBean;
+            }
             String systemType = maps.get("systemType");
-            String projectId = maps.get("projectId");
             if(StringUtil.isBlank(systemType)){
                 resultBean.setMessage("systemType 为空，请检查参数");
                 return resultBean;
             }
-            List<HqlOperateVo> list = new  ArrayList<HqlOperateVo>();
-            list.add(new HqlOperateVo("system", "in", systemType+","+ SystemType.SIEANDTRU.value()));
-            list.add(new HqlOperateVo("projectId", "=", projectId));
-            List<CourseEntity> courseEntities = this.courseService.getList(list);
-            if(courseEntities.size() > 0){
 
-                List<CourseVo> courseVos = new ArrayList<>();
-                for(CourseEntity courseEntity:courseEntities){
-                    CourseVo vo = new CourseVo();
-                    BeanUtils.copyProperties(courseEntity, vo);
-//                    if(courseEntity.getStartTime() != null){
-//                        vo.setStartTime(DateUtil.format(courseEntity.getStartTime(), "yyyy-MM-dd"));
-//                    }
-//                    if(courseEntity.getEndTime() != null){
-//                        vo.setEndTime(DateUtil.format(courseEntity.getEndTime(), "yyyy-MM-dd"));
-//                    }
-                    courseVos.add(vo);
-                }
-                resultBean.setMessage("查找成功");
-                resultBean.setSuccess(true);
-                resultBean.setData(courseVos);
+            OrderVo orderVos = this.orderService.getLatestOrderListVo(systemType, studentId);
+            resultBean.setMessage("查找成功");
+            resultBean.setSuccess(true);
+            resultBean.setData(orderVos);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return resultBean;
+    }
+
+    /**
+     * 学生已经完成和已提交的订单的课程信息
+     * @return
+     */
+    @RequestMapping(value = "/getComAndSubOrderCourse.json", method = RequestMethod.POST)
+    @ResponseBody
+    public ResultBean  getComAndSubOrderCourse(String params, String accessToken){
+        logger.info("getComAndSubOrderCourse.json params="+params +" accessToken="+accessToken);
+        ResultBean resultBean = new ResultBean();
+
+        try{
+            if(StringUtil.isBlank(accessToken) || !accessToken.equals(SYSTEM_ACCESS_TOKEN)){
+                resultBean.setMessage("token 为空，请检查参数");
+                return resultBean;
             }
 
+            ObjectMapper mapper = new ObjectMapper();
+            Map<String,String >maps = mapper.readValue(params, Map.class);
+            String studentId = maps.get("studentId");
+            if(StringUtil.isBlank(studentId)){
+                resultBean.setMessage("studentId 为空，请检查参数");
+                return resultBean;
+            }
+            String systemType = maps.get("systemType");
+            if(StringUtil.isBlank(systemType)){
+                resultBean.setMessage("systemType 为空，请检查参数");
+                return resultBean;
+            }
 
+            List<OrderVo> subOrderVos = this.orderService.getOrderListVo(systemType, studentId,OrderStatus.SUBMIT.value());
+            List<OrderVo> comOrderVos = this.orderService.getOrderListVo(systemType, studentId,OrderStatus.COMPLETE.value());
+            subOrderVos.addAll(comOrderVos);
+            List<CourseVo> courseVos = new ArrayList<>();
+            for(OrderVo orderVo : subOrderVos){
+                if(orderVo.getCourses() != null && orderVo.getCourses().size() > 0){
+                    courseVos.addAll(orderVo.getCourses());
+                }
+            }
+            resultBean.setMessage("查找成功");
+            resultBean.setSuccess(true);
+            resultBean.setData(courseVos);
         }catch(Exception e){
             e.printStackTrace();
         }
@@ -576,6 +663,56 @@ public class APIController {
         return resultBean;
     }
 
+    /**
+     * 得到申请流程
+     * @return
+     */
+    @RequestMapping(value = "/getApplicationStep.json", method = RequestMethod.POST)
+    @ResponseBody
+    public ResultBean  getApplicationStep(String params, String accessToken){
+        logger.info("createOrder.json params="+params +" accessToken="+accessToken);
+        ResultBean resultBean = new ResultBean();
+
+        try{
+            if(StringUtil.isBlank(accessToken) || !accessToken.equals(SYSTEM_ACCESS_TOKEN)){
+                resultBean.setMessage("token 为空，请检查参数");
+                return resultBean;
+            }
+
+            ObjectMapper mapper = new ObjectMapper();
+            OrderBean orderBean = mapper.readValue(params, OrderBean.class);
+            orderBean.setOrderType(OrderType.USER.value());
+            if(!NumberUtil.isSignless(orderBean.getStatus())){
+                orderBean.setStatus(OrderStatus.SUBMIT.value());
+            }
+            //设置订单金额
+            int projectNum = orderBean.getOrderDetailBean().size();
+            int courseNum = 0;
+            double money = 0;
+            for(OrderDetailBean detailBean : orderBean.getOrderDetailBean()){
+                //添加住宿的价格
+                if(detailBean.getDormitoryId() != null){
+                    DormitoryEntity dormitoryEntity = dormitoryService.get(detailBean.getDormitoryId());
+                    if(dormitoryEntity != null){
+                        money += dormitoryEntity.getPrice();
+                    }
+                }else{
+                    String[] courses = detailBean.getCourseIds().split(",");
+                    courseNum += courses.length;
+                }
+            }
+            //添加课程的价格
+            money += packagePriceService.getProjectPrice(orderBean.getSystemType(),projectNum,courseNum);
+
+            //设置项目的总价格
+            orderBean.setMoney(money);
+            resultBean =this.orderService.addOrder(orderBean);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+
+        return resultBean;
+    }
 
     /**
      * 学生注册
