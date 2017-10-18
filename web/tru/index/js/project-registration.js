@@ -5,6 +5,11 @@ $(function(){
 	}
 
 	/**
+	 * 不可用的申请功能初始化
+	 */
+	initApplicationStep();
+
+	/**
 	 * 加载报名项目信息
 	 */
 	var attrs={};

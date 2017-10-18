@@ -3,11 +3,18 @@ $(function(){
     if(!judgeLogin()){
         return;
     }
+
+    /**
+     * 不可用的申请功能初始化
+     */
+    initApplicationStep();
+
     /**
      * 加载成绩单寄送信息
      */
     var attrs={};
     attrs.studentId=userInfo.id+"";
+
     /**
      * 获取学生信息
      */

@@ -673,7 +673,7 @@ public class APIController {
     @RequestMapping(value = "/getApplicationStep.json", method = RequestMethod.POST)
     @ResponseBody
     public ResultBean  getApplicationStep(String params, String accessToken){
-        logger.info("createOrder.json params="+params +" accessToken="+accessToken);
+        logger.info("getApplicationStep.json params="+params +" accessToken="+accessToken);
         ResultBean resultBean = new ResultBean();
 
         try{
@@ -683,33 +683,24 @@ public class APIController {
             }
 
             ObjectMapper mapper = new ObjectMapper();
-            OrderBean orderBean = mapper.readValue(params, OrderBean.class);
-            orderBean.setOrderType(OrderType.USER.value());
-            if(!NumberUtil.isSignless(orderBean.getStatus())){
-                orderBean.setStatus(OrderStatus.SUBMIT.value());
+            Map<String,String >maps = mapper.readValue(params, Map.class);
+            String studentId = maps.get("studentId");
+            if(StringUtil.isBlank(studentId)){
+                resultBean.setMessage("studentId 为空，请检查参数");
+                return resultBean;
             }
-            //设置订单金额
-            int projectNum = orderBean.getOrderDetailBean().size();
-            int courseNum = 0;
-            double money = 0;
-            for(OrderDetailBean detailBean : orderBean.getOrderDetailBean()){
-                //添加住宿的价格
-                if(detailBean.getDormitoryId() != null){
-                    DormitoryEntity dormitoryEntity = dormitoryService.get(detailBean.getDormitoryId());
-                    if(dormitoryEntity != null){
-                        money += dormitoryEntity.getPrice();
-                    }
-                }else{
-                    String[] courses = detailBean.getCourseIds().split(",");
-                    courseNum += courses.length;
-                }
+            StudentEntity studentEntity = studentService.get(Integer.parseInt(studentId));
+            if(studentEntity == null){
+                resultBean.setMessage("学生信息错误");
+                return resultBean;
             }
-            //添加课程的价格
-            money += packagePriceService.getProjectPrice(orderBean.getSystemType(),projectNum,courseNum);
-
-            //设置项目的总价格
-            orderBean.setMoney(money);
-            resultBean =this.orderService.addOrder(orderBean);
+            resultBean.setSuccess(true);
+            resultBean.setMessage("成功");
+            Integer applicationStep = studentEntity.getApplicationStep();
+            if(applicationStep == null){
+                applicationStep = 0;
+            }
+            resultBean.setData(applicationStep);
         }catch(Exception e){
             e.printStackTrace();
         }

@@ -1,5 +1,5 @@
 //全局变量请求地址
-var rootPath = 'http://localhost:8085/api/';
+var rootPath = 'http://localhost:81/api/';
 var accessToken='un23n4no2bu4bs34';
 var systemType = "1";//sie系统
 var studentId = "1";
@@ -186,6 +186,23 @@ dhcc.Unit.ajaxUtil = function (attrs, api, successBack, errorBack) {
     });
 
 };
+
+//设置学生申请功能步骤哪些不可用
+function initApplicationStep(){
+    var attrs={};
+    attrs.studentId=userInfo.id+"";
+    /**
+     * 不可用的申请功能初始化
+     */
+    dhcc.Unit.ajaxUtil(attrs,"getApplicationStep.json",function(data){
+        var step = $("#application-step").find("a");
+        //不可用的功能
+        for(var i=data+2; i<5; i++){
+            $(step[i]).attr("href","#");
+        }
+        step = data;
+    });
+}
 
 //TODO 错误处理公共函数
 function publicErrorBack(message){

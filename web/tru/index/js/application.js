@@ -22,6 +22,9 @@ $(function(){
      */
     var attrs={};
     attrs.studentId=userInfo.id+"";
+
+    initApplicationStep();
+
     /**
      * 获取我的订单
      */
