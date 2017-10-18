@@ -179,13 +179,16 @@ dhcc.Unit.ajaxUtil = function (attrs, api, successBack, errorBack) {
             successBack(result.data);
         }else if(!result.success && typeof(eval(errorBack))=="function") {
             errorBack(result.message);
+        }else{
+            //公共错误处理函数
+            publicErrorBack(result.message);
         }
     });
 
 };
 
 //TODO 错误处理公共函数
-function errorBack(message){
+function publicErrorBack(message){
     alert(message);
 }
 

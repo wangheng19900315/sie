@@ -83,6 +83,9 @@ public class OrderServiceImpl extends BaseServiceImpl<OrderEntity,Integer> imple
     @Autowired
     private PackagePriceService packagePriceService;
 
+    @Autowired
+    private StudentService studentService;
+
     @Override
     public PageInfo<OrderBean> getOrderList(Integer page, Integer rows, List<HqlOperateVo> hqlOperateVoList) {
 
@@ -436,6 +439,12 @@ public class OrderServiceImpl extends BaseServiceImpl<OrderEntity,Integer> imple
 
         //如果是用户提交，自动计算金额
         if(orderEntity.getOrderType() == OrderType.USER.value()  && orderEntity.getStatus() == OrderStatus.SUBMIT.value()){
+            //更新学生的步骤为2
+            ResultBean stepResultBean = studentService.updateApplicationStep(studentEntity.getId(),2);
+            if(!stepResultBean.isSuccess()){
+                return stepResultBean;
+            }
+
             int projectCount = 0;
             int courseCount = 0;
             double money = 0;
