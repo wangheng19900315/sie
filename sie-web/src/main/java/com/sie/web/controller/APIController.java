@@ -521,64 +521,6 @@ public class APIController {
         return resultBean;
     }
 
-    ///////////////
-    /**未用接口**/
-    //////////////
-//    /**
-//     * 获取课程信息
-//     * @return
-//     */
-//    @RequestMapping("/getCourses.json")
-//    @ResponseBody
-//    public ResultBean  getCourses(String params, String accessToken){
-//        logger.info("getCourses.json params="+params +" accessToken="+accessToken);
-//        ResultBean resultBean = new ResultBean();
-//
-//        try{
-//            if(StringUtil.isBlank(accessToken) || !accessToken.equals(SYSTEM_ACCESS_TOKEN)){
-//                resultBean.setMessage("token 为空，请检查参数");
-//                return resultBean;
-//            }
-//
-//            ObjectMapper mapper = new ObjectMapper();
-//            Map<String,String >maps = mapper.readValue(params, Map.class);
-//            String systemType = maps.get("systemType");
-//            String projectId = maps.get("projectId");
-//            if(StringUtil.isBlank(systemType)){
-//                resultBean.setMessage("systemType 为空，请检查参数");
-//                return resultBean;
-//            }
-//            List<HqlOperateVo> list = new  ArrayList<HqlOperateVo>();
-//            list.add(new HqlOperateVo("system", "in", systemType+","+ SystemType.SIEANDTRU.value()));
-//            list.add(new HqlOperateVo("projectId", "=", projectId));
-//            List<CourseEntity> courseEntities = this.courseService.getList(list);
-//            if(courseEntities.size() > 0){
-//
-//                List<CourseVo> courseVos = new ArrayList<>();
-//                for(CourseEntity courseEntity:courseEntities){
-//                    CourseVo vo = new CourseVo();
-//                    BeanUtils.copyProperties(courseEntity, vo);
-////                    if(courseEntity.getStartTime() != null){
-////                        vo.setStartTime(DateUtil.format(courseEntity.getStartTime(), "yyyy-MM-dd"));
-////                    }
-////                    if(courseEntity.getEndTime() != null){
-////                        vo.setEndTime(DateUtil.format(courseEntity.getEndTime(), "yyyy-MM-dd"));
-////                    }
-//                    courseVos.add(vo);
-//                }
-//                resultBean.setMessage("查找成功");
-//                resultBean.setSuccess(true);
-//                resultBean.setData(courseVos);
-//            }
-//
-//
-//        }catch(Exception e){
-//            e.printStackTrace();
-//        }
-//
-//        return resultBean;
-//    }
-
     /**
      * 获得最近的一条订单
      * @return
@@ -659,6 +601,85 @@ public class APIController {
             resultBean.setMessage("查找成功");
             resultBean.setSuccess(true);
             resultBean.setData(courseVos);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+
+        return resultBean;
+    }
+
+    /**
+     * 得到学生可以申请退款的订单
+     * @return
+     */
+    @RequestMapping(value = "/getCompleteOrderList.json", method = RequestMethod.POST)
+    @ResponseBody
+    public ResultBean  getCompleteOrderList(String params, String accessToken){
+        logger.info("getCompleteOrderList.json params="+params +" accessToken="+accessToken);
+        ResultBean resultBean = new ResultBean();
+
+        try{
+            if(StringUtil.isBlank(accessToken) || !accessToken.equals(SYSTEM_ACCESS_TOKEN)){
+                resultBean.setMessage("token 为空，请检查参数");
+                return resultBean;
+            }
+
+            ObjectMapper mapper = new ObjectMapper();
+            Map<String,String >maps = mapper.readValue(params, Map.class);
+            String studentId = maps.get("studentId");
+            if(StringUtil.isBlank(studentId)){
+                resultBean.setMessage("studentId 为空，请检查参数");
+                return resultBean;
+            }
+            String systemType = maps.get("systemType");
+            if(StringUtil.isBlank(systemType)){
+                resultBean.setMessage("systemType 为空，请检查参数");
+                return resultBean;
+            }
+            List<OrderVo> comOrderVos = this.orderService.getOrderListVo(systemType, studentId,OrderStatus.COMPLETE.value());
+            resultBean.setMessage("查找成功");
+            resultBean.setSuccess(true);
+            resultBean.setData(comOrderVos);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+
+        return resultBean;
+    }
+
+
+    /**
+     * 提交退款申请
+     * @return
+     */
+    @RequestMapping(value = "/refundOrder.json", method = RequestMethod.POST)
+    @ResponseBody
+    public ResultBean  refundOrder(String params, String accessToken){
+        logger.info("refundOrder.json params="+params +" accessToken="+accessToken);
+        ResultBean resultBean = new ResultBean();
+
+        try{
+            if(StringUtil.isBlank(accessToken) || !accessToken.equals(SYSTEM_ACCESS_TOKEN)){
+                resultBean.setMessage("token 为空，请检查参数");
+                return resultBean;
+            }
+
+            ObjectMapper mapper = new ObjectMapper();
+//            Map<String,String >maps = mapper.readValue(params, Map.class);
+//            String studentId = maps.get("studentId");
+//            if(StringUtil.isBlank(studentId)){
+//                resultBean.setMessage("studentId 为空，请检查参数");
+//                return resultBean;
+//            }
+//            String systemType = maps.get("systemType");
+//            if(StringUtil.isBlank(systemType)){
+//                resultBean.setMessage("systemType 为空，请检查参数");
+//                return resultBean;
+//            }
+//            List<OrderVo> comOrderVos = this.orderService.getOrderListVo(systemType, studentId,OrderStatus.COMPLETE.value());
+            resultBean.setMessage("查找成功");
+            resultBean.setSuccess(true);
+            resultBean.setData(null);
         }catch(Exception e){
             e.printStackTrace();
         }
@@ -1015,17 +1036,5 @@ public class APIController {
         logger.info("getSchool.json params="+params +" accessToken="+accessToken);
         return null;
     }
-
-    /**
-     * 用户提交退课
-     * @return
-     */
-    public ResultBean  refundOrder(String params, String accessToken){
-        logger.info("refundOrder.json params="+params +" accessToken="+accessToken);
-        return null;
-    }
-
-
-
 
 }

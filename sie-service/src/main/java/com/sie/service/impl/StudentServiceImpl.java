@@ -174,6 +174,8 @@ public class StudentServiceImpl extends BaseServiceImpl<StudentEntity,Integer> i
                 BeanUtils.copyProperties(entity, beanList.get(i));
                 //设置默认的登录密码为123456
                 entity.setPassword(Md5Util.getMD5(defaultPassword, ApplicationHelp.MD5_SHA1));
+                //设置默认的步骤为第4步
+                entity.setApplicationStep(4);
                 this.saveOrUpdate(entity,1);
             }
 
