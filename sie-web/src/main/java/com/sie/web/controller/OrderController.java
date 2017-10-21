@@ -1,10 +1,15 @@
 package com.sie.web.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.sie.framework.base.HqlOperateVo;
+import com.sie.framework.entity.CouponEntity;
+import com.sie.framework.entity.CrEntity;
 import com.sie.framework.entity.OrderDetailEntity;
 import com.sie.framework.entity.OrderEntity;
 import com.sie.framework.type.OrderStatus;
 import com.sie.framework.vo.OrderSearchVo;
+import com.sie.service.CouponService;
+import com.sie.service.CrService;
 import com.sie.service.OrderDetailService;
 import com.sie.service.OrderService;
 import com.sie.service.bean.*;
@@ -45,6 +50,12 @@ public class OrderController {
     @Autowired
     private OrderDetailService orderDetailService;
 
+    @Autowired
+    private CrService crService;
+
+    @Autowired
+    private CouponService couponService;
+
     @RequestMapping("/list.html")
     public String list() {
         return "/order/list";
@@ -61,6 +72,20 @@ public class OrderController {
     public String update(Model model, Integer id) {
         model.addAttribute("id", id);
         return "/order/update";
+    }
+
+    @RequestMapping("/crAndCouponList.json")
+    @ResponseBody
+    public Map<String, Object> crAndCouponList() {
+        Map<String,Object> result = new HashMap<>();
+        List<HqlOperateVo> vo = new ArrayList<>();//空的条件
+        //获取cr优惠列表
+        List<CrEntity> crs = crService.getList(vo);
+        //获取优惠券列表
+        List<CouponEntity> coupons = couponService.getList(vo);
+        result.put("crs",crs);
+        result.put("coupons",coupons);
+        return result;
     }
 
 
@@ -145,11 +170,11 @@ public class OrderController {
 
     @RequestMapping("/updateOrderInfo.json")
     @ResponseBody
-    public ResultBean updateOrderInfo(OrderEntity orderEntity) {
+    public ResultBean updateOrderInfo(OrderBean orderBean) {
 
         ResultBean resultBean = new ResultBean();
         try {
-            this.orderService.updateOrderInfo(orderEntity);
+            this.orderService.updateOrderInfo(orderBean);
             resultBean.setSuccess(true);
             resultBean.setMessage("修改成功");
         }catch(RuntimeException e){

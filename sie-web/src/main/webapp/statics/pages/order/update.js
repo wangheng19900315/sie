@@ -13,6 +13,52 @@ $(function(){
         $("#"+ariaId).show();
     });
 
+    $("#status").bind("change",function(){
+        $("#refund-div").hide();
+        var status = $("#status option:selected").val();
+        if(status == '3' || status == '4'){
+            $("#refund-div").show();
+        }
+
+    });
+
+    //绑定cr优惠变化事件
+    $("#crId").bind("change",function(){
+        var option = $("#crId option:selected");
+        $("#crDiscount").val(option.attr("money"));
+
+        $("#discount").change();
+    });
+    //绑定coupon优惠变化事件
+    $("#couponId").bind("change",function(){
+        var option = $("#couponId option:selected");
+        $("#couponDiscount").val(option.attr("money"));
+
+        $("#discount").change();
+    });
+
+    $.ajax({
+        url: pageRootPath+'/order/crAndCouponList.json',
+        type: 'get',
+        async:false,
+        dataType:'json',
+        success: function (json, statusText, xhr, $form) {
+            if(json != null){
+                var option = '';
+                $.each(json.crs,function(i,item){
+                    option = option + '<option value="' + item.id + '" money="' + item.rmbPrice + '">'+ item.code +'</option>';
+                });
+                $("#crId").append(option);
+                option = '';
+                $.each(json.coupons,function(i,item){
+                    option = option + '<option value="' + item.id + '" money="' + item.rmbDiscount + '">'+ item.name +'</option>';
+                });
+                $("#couponId").append(option);
+            }
+        }
+    });
+
+
     var jsonData = "";
     $.ajax({
         url: pageRootPath+'/order/detail.json?orderId='+id,
@@ -26,6 +72,7 @@ $(function(){
                 $("#data-form").loadJson(json);
                 $("#userInfo").loadJson(json);
                 $("#refundType").change();
+                $("#status").change();
                 jsonData = json.orderDetailBean;
             }
         }

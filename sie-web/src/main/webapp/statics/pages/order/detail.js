@@ -4,6 +4,24 @@
 
 $(function(){
 
+    $("#refundType").bind("change",function(){
+        var ariaId = $("#refundType option:selected").attr("aria-id");
+        $("#refundWayBank").hide();
+        $("#refundWayAlipay").hide();
+        $("#refundWayWechat").hide();
+        $("#refundWayEMT").hide();
+        $("#"+ariaId).show();
+    });
+
+    $("#status").bind("change",function(){
+        $("#refund-div").hide();
+        var status = $("#status option:selected").val();
+        if(status == '3' || status == '4'){
+            $("#refund-div").show();
+        }
+
+    });
+
     $("#orderBtn").click(function(){
         $("#orderInfo").show();
         $("#orderDetailInfo").hide();
@@ -29,6 +47,8 @@ $(function(){
                 json.payTime = new Date(json.payTime).Format("yyyy-MM-dd hh:mm:ss");
                 $("#data-form").loadJson(json);
                 $("#userInfo").loadJson(json);
+                $("#refundType").change();
+                $("#status").change();
                 jsonData = json.orderDetailBean;
             }
         }
