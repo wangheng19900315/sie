@@ -4,6 +4,15 @@
 var selectCourseId;
 $(function(){
 
+    $("#refundType").bind("change",function(){
+        var ariaId = $("#refundType option:selected").attr("aria-id");
+        $("#refundWayBank").hide();
+        $("#refundWayAlipay").hide();
+        $("#refundWayWechat").hide();
+        $("#refundWayEMT").hide();
+        $("#"+ariaId).show();
+    });
+
     var jsonData = "";
     $.ajax({
         url: pageRootPath+'/order/detail.json?orderId='+id,
@@ -16,6 +25,7 @@ $(function(){
                 json.payTime = new Date(json.payTime).Format("yyyy-MM-dd hh:mm:ss");
                 $("#data-form").loadJson(json);
                 $("#userInfo").loadJson(json);
+                $("#refundType").change();
                 jsonData = json.orderDetailBean;
             }
         }
@@ -135,6 +145,13 @@ $(function(){
         }
 
         var formData = $("#data-form").serializeJson();
+        if(formData.refundType == '1'){
+            formData.payee = $("#bank-payee").val();
+        }else if(formData.refundType == '2'){
+            formData.payee = $("#alipay-payee").val();
+        }else{
+            formData.payee = null;
+        }
         $.ajax({
             url: pageRootPath+'/order/updateOrderInfo.json',
             type: 'post',

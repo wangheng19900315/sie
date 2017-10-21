@@ -305,6 +305,14 @@ public class OrderServiceImpl extends BaseServiceImpl<OrderEntity,Integer> imple
             oldEntity.setStatus(orderEntity.getStatus());
             oldEntity.setPayType(orderEntity.getPayType());
             oldEntity.setRemark(orderEntity.getRemark());
+            oldEntity.setRefundMoney(orderEntity.getRefundMoney());
+            oldEntity.setRefundReason(orderEntity.getRefundReason());
+            oldEntity.setRefundType(orderEntity.getRefundType());
+            oldEntity.setDepositBank(orderEntity.getDepositBank());
+            oldEntity.setAccount(orderEntity.getAccount());
+            oldEntity.setPayee(orderEntity.getPayee());
+            oldEntity.setAlipay(orderEntity.getAlipay());
+            oldEntity.setRefundEmail(orderEntity.getRefundEmail());
             this.orderDao.updateEntity(oldEntity);
 
             if(flag != 0){
@@ -922,5 +930,67 @@ public class OrderServiceImpl extends BaseServiceImpl<OrderEntity,Integer> imple
 //            vo.setCourses(courses);
         }
         return orderVo;
+    }
+
+    @Override
+    public ResultBean refundOrder(OrderBean orderBean) {
+        ResultBean resultBean = new ResultBean();
+        OrderEntity oldEntity = this.orderDao.getEntity(orderBean.getId());
+        if(oldEntity != null){
+            //判断是不是本学生下的单
+            if(!oldEntity.getStudentEntity().getId().equals(orderBean.getStudentId())){
+                resultBean.setMessage("不是本学生的订单");
+                return resultBean;
+            }
+            //申请退款
+            RefundType refundType = RefundType.valueOf(orderBean.getRefundType());
+            switch (refundType){
+                case BANK:
+                    oldEntity.setDepositBank(orderBean.getDepositBank());
+                    oldEntity.setAccount(orderBean.getAccount());
+                    oldEntity.setPayee(orderBean.getPayee());
+                    break;
+                case AIPAY:
+                    oldEntity.setPayee(orderBean.getPayee());
+                    oldEntity.setAlipay(orderBean.getAlipay());
+                    break;
+                case CANADIANDOLLARS:
+                    oldEntity.setRefundEmail(orderBean.getRefundEmail());
+                    break;
+                case WECHAT:
+                    break;
+            }
+        }
+        //设置订单状态为退款
+        oldEntity.setStatus(OrderStatus.APPLY.value());
+        oldEntity.setRefundMoney(orderBean.getRefundMoney());
+        oldEntity.setRefundReason(orderBean.getRefundReason());
+        oldEntity.setRefundType(orderBean.getRefundType());
+        updateOrderInfo(oldEntity);
+        resultBean.setSuccess(true);
+        resultBean.setMessage("退款已提交");
+        return resultBean;
+    }
+
+    private void setOrderEntityValue(OrderEntity entity,OrderBean bean){
+        try {
+            BeanUtils.copyProperties(entity,bean);
+            //设置cr优惠实体
+            if(NumberUtil.isSignless(bean.getCrId())){
+                CrEntity crEntity = crDao.getEntity(bean.getCrId());
+                entity.setCrEntity(crEntity);
+                entity.setCrDiscount(crEntity.getRmbPrice());
+            }
+            //设置优惠券
+            if(NumberUtil.isSignless(bean.getCouponId())){
+                CouponEntity couponEntity = couponDao.getEntity(bean.getCouponId());
+                entity.setCouponEntity(couponEntity);
+                entity.setCouponDiscount(couponEntity.getRmbDiscount());
+            }
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

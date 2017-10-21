@@ -665,7 +665,8 @@ public class APIController {
             }
 
             ObjectMapper mapper = new ObjectMapper();
-//            Map<String,String >maps = mapper.readValue(params, Map.class);
+            OrderBean orderBean = mapper.readValue(params, OrderBean.class);
+            resultBean = orderService.refundOrder(orderBean);
 //            String studentId = maps.get("studentId");
 //            if(StringUtil.isBlank(studentId)){
 //                resultBean.setMessage("studentId 为空，请检查参数");
@@ -677,9 +678,9 @@ public class APIController {
 //                return resultBean;
 //            }
 //            List<OrderVo> comOrderVos = this.orderService.getOrderListVo(systemType, studentId,OrderStatus.COMPLETE.value());
-            resultBean.setMessage("查找成功");
-            resultBean.setSuccess(true);
-            resultBean.setData(null);
+//            resultBean.setMessage("查找成功");
+//            resultBean.setSuccess(true);
+//            resultBean.setData(null);
         }catch(Exception e){
             e.printStackTrace();
         }

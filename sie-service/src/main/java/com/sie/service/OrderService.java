@@ -68,4 +68,6 @@ public interface OrderService extends BaseService<OrderEntity, Integer> {
     List<OrderVo> getOrderListVo(String systemType, String studentId,Integer orderStatus);
 
     OrderVo getLatestOrderListVo(String systemType, String studentId);
+
+    ResultBean refundOrder(OrderBean orderBean);
 }

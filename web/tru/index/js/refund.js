@@ -17,11 +17,11 @@ $(function(){
 			orderCodeLi = orderCodeLi +
 				'<li li-value="'+ item.id +'">' + item.code + '</li>';
 		});
-		orderCode.empty();
-		orderCode.append(orderCodeLi);
-		initSelect();
 
 		if(orderCodeLi != ''){
+			orderCode.empty();
+			orderCode.append(orderCodeLi);
+			initSelect();
 			orderCode.find("li:first").click();
 		}
 	});
@@ -29,6 +29,18 @@ $(function(){
 	$("#refund-button").bind("click",function(){
 		var params = $("#data-form").serializeJson();
 		params.id = $("#order-code").attr("li-value");
+		var refundType = $("input[name=refundType]").attr("li-value");
+		params.refundType = refundType;
+		if(refundType == '1'){
+			//收款人
+			params.payee = $("#bank-payee").val();
+
+		}else if(refundType == '2'){
+			//收款人
+			params.payee = $("#alipay-payee").val();
+		}else{
+
+		}
 		params.studentId=userInfo.id + "";
 		params.systemType=systemType;
 		console.log(params);
@@ -47,8 +59,8 @@ $(function(){
 
 //初始化select方法
 function initSelect(){
-	var orderCode = $("#order-code");
-	orderCode.next().find("li").click(function() {
+	//var orderCode = $("#order-code");
+	$(".dropdown-select li").click(function() {
 		if ($(this).attr("class") !="disabled") {
 			var txt = $(this).text();
 			var key = $(this).attr("li-value");

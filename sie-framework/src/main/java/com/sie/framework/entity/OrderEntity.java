@@ -29,8 +29,20 @@ public class OrderEntity extends BaseEntity {
     private Integer systemType;
     private StudentEntity studentEntity;
     private Timestamp orderTime;
+    //订单退款信息
+    private Double refundMoney;
+    private String refundReason;
+    private Integer refundType;
+    private String payee;//收款人姓名
+    //银行转账信息
+    private String depositBank;//开户行
+    private String account;//账号
 
+    //支付宝账号
+    private String alipay;
 
+    //加币邮件
+    private String refundEmail;
 
     private List<OrderDetailEntity> orderDetailEntityList = new ArrayList<>();
 
@@ -202,5 +214,86 @@ public class OrderEntity extends BaseEntity {
 
     public void setOrderTime(Timestamp orderTime) {
         this.orderTime = orderTime;
+    }
+
+    @Basic
+    @Column(name = "refund_money")
+
+    public Double getRefundMoney() {
+        return refundMoney;
+    }
+
+    public void setRefundMoney(Double refundMoney) {
+        this.refundMoney = refundMoney;
+    }
+
+    @Basic
+    @Column(name = "refund_reason")
+    public String getRefundReason() {
+        return refundReason;
+    }
+
+    public void setRefundReason(String refundReason) {
+        this.refundReason = refundReason;
+    }
+
+    @Basic
+    @Column(name = "refund_type")
+    public Integer getRefundType() {
+        return refundType;
+    }
+
+    public void setRefundType(Integer refundType) {
+        this.refundType = refundType;
+    }
+
+    @Basic
+    @Column(name = "payee")
+    public String getPayee() {
+        return payee;
+    }
+
+    public void setPayee(String payee) {
+        this.payee = payee;
+    }
+
+    @Basic
+    @Column(name = "deposit_bank")
+    public String getDepositBank() {
+        return depositBank;
+    }
+
+    public void setDepositBank(String depositBank) {
+        this.depositBank = depositBank;
+    }
+
+    @Basic
+    @Column(name = "account")
+    public String getAccount() {
+        return account;
+    }
+
+    public void setAccount(String account) {
+        this.account = account;
+    }
+
+    @Basic
+    @Column(name = "alipay")
+    public String getAlipay() {
+        return alipay;
+    }
+
+    public void setAlipay(String alipay) {
+        this.alipay = alipay;
+    }
+
+    @Basic
+    @Column(name = "refund_email")
+    public String getRefundEmail() {
+        return refundEmail;
+    }
+
+    public void setRefundEmail(String refundEmail) {
+        this.refundEmail = refundEmail;
     }
 }
