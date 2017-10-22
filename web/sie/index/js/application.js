@@ -96,8 +96,9 @@ $(function(){
             var params = {"image":data.image};
             //$('#uploadCard').attr('src',  );
             //$("#test").trigger("click")
+            var imgHref = encodeURI(rootPath + 'loadImage?params=' + JSON.stringify(params) + '&accessToken='+accessToken);
             $(".file-img").html('<img src="" class="img-responsive" alt="头像">')
-            $(".file-img").find("img").attr("src",rootPath + 'loadImage?params=' + JSON.stringify(params) + '&accessToken='+accessToken)
+            $(".file-img").find("img").attr("src",imgHref)
         }
     });
 
