@@ -1,6 +1,67 @@
 var school;
 $(function(){
 
+    if(!judgeLogin()){
+        window.location.href="login.html";
+    }
+
+    //身份证号校验规则
+    $.validator.addMethod('card', function( value, element ){
+
+        // 身份证号码为15位或者18位，15位时全为数字，18位前17位为数字，最后一位是校验位，可能为数字或字符X
+        var reg = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/;
+        return reg.test(value);
+
+    }, '非法身份证');
+
+    //添加校验规则
+    $("#data-form").validate({
+        rules : {
+            lastName:{
+                required: true
+            },
+            firstName:{
+                required: true
+            },
+            chineseName :{
+                required: true,
+                minlength: 2
+            },
+            birthday:{
+                required: true
+            },
+            email:{
+                email:true
+            },
+            idNumber:{
+                required: true,
+                card:true
+            },
+            passportNumber:{
+                required: true
+            },
+            telephone:{
+                required: true
+            },
+            weiXin:{
+                required: true
+            },
+            schoolName:{
+                required: true
+            },
+            profession:{
+                required: true
+            },
+            gpa:{
+                required: true
+            },
+            graduationYear:{
+                required: true,
+                digits:true
+            }
+        }
+    });
+
     //绑定国籍变化事件
     $('input[type=radio][name=nationality]').change(function() {
         if (this.value == '中国') {
@@ -13,15 +74,15 @@ $(function(){
         }
     });
 
-    if(!judgeLogin()){
-        window.location.href="login.html";
-    }
 
     /**
      * 加载学生信息
      */
     var attrs={};
     attrs.studentId=userInfo.id+"";
+
+    initApplicationStep();
+
     /**
      * 获取我的订单
      */
@@ -41,10 +102,12 @@ $(function(){
     });
 
     $("#saveApplication").bind("click",function(){
+        if(!$("#data-form").valid()){
+            return;
+        }
         $("#saveApplication").attr("disabled", true);
         var params = $("#data-form").serializeJson();
 
-        //TODO 表单里面的image没有提交
         attrs=params;
         dhcc.Unit.ajaxFile(attrs,"headImage","saveApplicationForm.json",function(data){
             //等待1.5秒后消失

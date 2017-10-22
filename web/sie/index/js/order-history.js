@@ -1,7 +1,7 @@
 var termOrder;
 $(function(){
 	if(!judgeLogin()){
-		window.location.href="login.html";
+		return;
 	}
 
 	/**
