@@ -274,7 +274,13 @@ public class APIController {
                 return resultBean;
             }
 
-            List<OrderVo> orderVos = this.orderService.getOrderListVo(systemType, studentId,null);
+            String status = maps.get("orderStatus");
+            Integer orderStatus = 0;
+            if(StringUtil.isNotBlank(status)){
+                orderStatus = Integer.parseInt(status);
+            }
+
+            List<OrderVo> orderVos = this.orderService.getOrderListVo(systemType, studentId,orderStatus);
             resultBean.setMessage("查找成功");
             resultBean.setSuccess(true);
             Map<String,List<OrderVo>> orderVoMap = new HashMap<>();

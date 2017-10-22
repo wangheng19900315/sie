@@ -821,7 +821,7 @@ public class OrderServiceImpl extends BaseServiceImpl<OrderEntity,Integer> imple
         List<HqlOperateVo> list = new  ArrayList<HqlOperateVo>();
         list.add(new HqlOperateVo("systemType", "=", systemType));
         list.add(new HqlOperateVo("studentEntity.id", "=", studentId));
-        if(orderStatus != null){
+        if(orderStatus != null && orderStatus > 0){
             list.add(new HqlOperateVo("status", "=", orderStatus.toString()));
         }
         List<OrderEntity> orderEntities = this.getList(list);
