@@ -1,6 +1,67 @@
 var school;
 $(function(){
 
+    (function ($) {
+        $.extend($.validator.messages, {
+            required: "× 必填项",
+            remote: "请修正该信息",
+            email: "非法邮件",
+            url: "请输入合法的网址",
+            date: "请输入合法的日期",
+            dateISO: "请输入合法的日期 (ISO).",
+            number: "请输入合法的数字",
+            digits: "只能输入整数",
+            creditcard: "请输入合法的信用卡号",
+            equalTo: "请再次输入相同的值",
+            accept: "请输入拥有合法后缀名的字符串",
+            maxlength: $.validator.format("请输入一个长度最多是 {0} 的字符串"),
+            minlength: $.validator.format("请输入一个长度最少是 {0} 的字符串"),
+            rangelength: $.validator.format("请输入一个长度介于 {0} 和 {1} 之间的字符串"),
+            range: $.validator.format("请输入一个介于 {0} 和 {1} 之间的值"),
+            max: $.validator.format("请输入一个最大为 {0} 的值"),
+            min: $.validator.format("请输入一个最小为 {0} 的值")
+        });
+    }(jQuery));
+
+    if(!judgeLogin()){
+        return;
+    }
+
+    //添加校验规则
+    $("#data-form").validate({
+        //errorPlacement: function(error, element){
+        //    if(element.attr("id")=="province"||element.attr("id")=="city"||element.attr("id")=="area"){
+        //        var error_td = element.parent().parent('dd').next();
+        //    }else{
+        //        var error_td = element.parent('dd').next();
+        //    }
+        //    error_td.html("");
+        //    error_td.append(error);
+        //    element.addClass("user_regNok");
+        //},
+        //error:function(label,element){
+        //    element.addClass("user_regNok");
+        //},
+        //success       : function(label,element){
+        //    label.addClass('reg_validate_right').text('');
+        //    element.removeClass("user_regNok");
+        //},
+        //submitHandler:function(form){
+        //    console.info("submit:"+$(form).serializeArray());
+        //    form.submit();
+        //},
+        //onkeyup: false,
+        rules : {
+            chineseName :{
+                required: true,
+                minlength: 2
+            },
+            email:{
+                email:true
+            }
+        }
+    });
+
     //绑定国籍变化事件
     $('input[type=radio][name=nationality]').change(function() {
         if (this.value == '中国') {
@@ -13,15 +74,15 @@ $(function(){
         }
     });
 
-    if(!judgeLogin()){
-        return;
-    }
 
     /**
      * 加载学生信息
      */
     var attrs={};
     attrs.studentId=userInfo.id+"";
+
+    initApplicationStep();
+
     /**
      * 获取我的订单
      */
@@ -41,18 +102,22 @@ $(function(){
     });
 
     $("#saveApplication").bind("click",function(){
-        $("#saveApplication").attr("disabled", true);
-        var params = $("#data-form").serializeJson();
-
-        //TODO 表单里面的image没有提交
-        attrs=params;
-        dhcc.Unit.ajaxFile(attrs,"headImage","saveApplicationForm.json",function(data){
-            //等待1.5秒后消失
-            dhcc.Unit.successMessage("提交成功",function(){
-                //页面进行跳转
-                window.location.href = "project-registration.html";
-            });
-        });
+        if(!$("#data-form").valid()){
+            alert("验证失败");
+            return;
+        }
+        //$("#saveApplication").attr("disabled", true);
+        //var params = $("#data-form").serializeJson();
+        //
+        ////TODO 表单里面的image没有提交
+        //attrs=params;
+        //dhcc.Unit.ajaxFile(attrs,"headImage","saveApplicationForm.json",function(data){
+        //    //等待1.5秒后消失
+        //    dhcc.Unit.successMessage("提交成功",function(){
+        //        //页面进行跳转
+        //        window.location.href = "project-registration.html";
+        //    });
+        //});
     });
 
     dhcc.Unit.ajaxUtil({}, "getSchool.json",function(data){

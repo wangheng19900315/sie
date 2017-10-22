@@ -83,6 +83,9 @@ public class OrderServiceImpl extends BaseServiceImpl<OrderEntity,Integer> imple
     @Autowired
     private PackagePriceService packagePriceService;
 
+    @Autowired
+    private StudentService studentService;
+
     @Override
     public PageInfo<OrderBean> getOrderList(Integer page, Integer rows, List<HqlOperateVo> hqlOperateVoList) {
 
@@ -244,8 +247,6 @@ public class OrderServiceImpl extends BaseServiceImpl<OrderEntity,Integer> imple
 
     }
 
-
-    @Override
     public void updateOrderInfo(OrderEntity orderEntity) {
         OrderEntity oldEntity = this.orderDao.getEntity(orderEntity.getId());
         if(oldEntity != null){
@@ -298,10 +299,25 @@ public class OrderServiceImpl extends BaseServiceImpl<OrderEntity,Integer> imple
             }
 
             oldEntity.setDiscount(orderEntity.getDiscount());
+            //cr优惠
+            oldEntity.setCrEntity(orderEntity.getCrEntity());
+            oldEntity.setCrDiscount(orderEntity.getCrDiscount());
+            //优惠券
+            oldEntity.setCouponEntity(orderEntity.getCouponEntity());
+            oldEntity.setCouponDiscount(orderEntity.getCouponDiscount());
+
             oldEntity.setPayMoney(orderEntity.getPayMoney());
             oldEntity.setStatus(orderEntity.getStatus());
             oldEntity.setPayType(orderEntity.getPayType());
             oldEntity.setRemark(orderEntity.getRemark());
+            oldEntity.setRefundMoney(orderEntity.getRefundMoney());
+            oldEntity.setRefundReason(orderEntity.getRefundReason());
+            oldEntity.setRefundType(orderEntity.getRefundType());
+            oldEntity.setDepositBank(orderEntity.getDepositBank());
+            oldEntity.setAccount(orderEntity.getAccount());
+            oldEntity.setPayee(orderEntity.getPayee());
+            oldEntity.setAlipay(orderEntity.getAlipay());
+            oldEntity.setRefundEmail(orderEntity.getRefundEmail());
             this.orderDao.updateEntity(oldEntity);
 
             if(flag != 0){
@@ -436,6 +452,12 @@ public class OrderServiceImpl extends BaseServiceImpl<OrderEntity,Integer> imple
 
         //如果是用户提交，自动计算金额
         if(orderEntity.getOrderType() == OrderType.USER.value()  && orderEntity.getStatus() == OrderStatus.SUBMIT.value()){
+            //更新学生的步骤为2
+            ResultBean stepResultBean = studentService.updateApplicationStep(studentEntity.getId(),2);
+            if(!stepResultBean.isSuccess()){
+                return stepResultBean;
+            }
+
             int projectCount = 0;
             int courseCount = 0;
             double money = 0;
@@ -957,4 +979,94 @@ public class OrderServiceImpl extends BaseServiceImpl<OrderEntity,Integer> imple
         orderEntity.setStatus(OrderStatus.COMPLETE.value());
         this.updateOrderInfo(orderEntity);
     }
+    @Override
+    public ResultBean refundOrder(OrderBean orderBean) {
+        ResultBean resultBean = new ResultBean();
+        OrderEntity oldEntity = this.orderDao.getEntity(orderBean.getId());
+        if(oldEntity != null){
+            //判断是不是本学生下的单
+            if(!oldEntity.getStudentEntity().getId().equals(orderBean.getStudentId())){
+                resultBean.setMessage("不是本学生的订单");
+                return resultBean;
+            }
+            //申请退款
+            RefundType refundType = RefundType.valueOf(orderBean.getRefundType());
+            switch (refundType){
+                case BANK:
+                    oldEntity.setDepositBank(orderBean.getDepositBank());
+                    oldEntity.setAccount(orderBean.getAccount());
+                    oldEntity.setPayee(orderBean.getPayee());
+                    break;
+                case AIPAY:
+                    oldEntity.setPayee(orderBean.getPayee());
+                    oldEntity.setAlipay(orderBean.getAlipay());
+                    break;
+                case CANADIANDOLLARS:
+                    oldEntity.setRefundEmail(orderBean.getRefundEmail());
+                    break;
+                case WECHAT:
+                    break;
+            }
+        }
+        //设置订单状态为退款
+        oldEntity.setStatus(OrderStatus.APPLY.value());
+        oldEntity.setRefundMoney(orderBean.getRefundMoney());
+        oldEntity.setRefundReason(orderBean.getRefundReason());
+        oldEntity.setRefundType(orderBean.getRefundType());
+        updateOrderInfo(oldEntity);
+        resultBean.setSuccess(true);
+        resultBean.setMessage("退款已提交");
+        return resultBean;
+    }
+
+    @Override
+    public void updateOrderInfo(OrderBean orderBean) {
+        OrderEntity entity = new OrderEntity();
+        try {
+            BeanUtils.copyProperties(entity,orderBean);
+            //设置cr优惠实体
+            if(NumberUtil.isSignless(orderBean.getCrId())){
+                CrEntity crEntity = crDao.getEntity(orderBean.getCrId());
+                entity.setCrEntity(crEntity);
+                entity.setCrDiscount(crEntity.getRmbPrice());
+            }else{
+                entity.setCrDiscount(0.0);
+            }
+            //设置优惠券
+            if(NumberUtil.isSignless(orderBean.getCouponId())){
+                CouponEntity couponEntity = couponDao.getEntity(orderBean.getCouponId());
+                entity.setCouponEntity(couponEntity);
+                entity.setCouponDiscount(couponEntity.getRmbDiscount());
+            }else{
+                entity.setCouponDiscount(0.0);
+            }
+            updateOrderInfo(entity);
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+//    private void setOrderEntityValue(OrderEntity entity,OrderBean bean){
+//        try {
+//            BeanUtils.copyProperties(entity,bean);
+//            //设置cr优惠实体
+//            if(NumberUtil.isSignless(bean.getCrId())){
+//                CrEntity crEntity = crDao.getEntity(bean.getCrId());
+//                entity.setCrEntity(crEntity);
+//                entity.setCrDiscount(crEntity.getRmbPrice());
+//            }
+//            //设置优惠券
+//            if(NumberUtil.isSignless(bean.getCouponId())){
+//                CouponEntity couponEntity = couponDao.getEntity(bean.getCouponId());
+//                entity.setCouponEntity(couponEntity);
+//                entity.setCouponDiscount(couponEntity.getRmbDiscount());
+//            }
+//
+//
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//    }
 }

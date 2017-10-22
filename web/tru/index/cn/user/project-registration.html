@@ -27,7 +27,7 @@
 <!-- cooperate-colleges -->
 <div class="user">
 	<div class="container">
-		<div class="user-lf">
+		<div class="user-lf" id="application-step">
         	<ul>
         		<li><a href="user-center.html">个人中心</a></li>
         		<li><a href="application.html">申请表</a></li>
@@ -48,11 +48,11 @@
 							<div class="dropdown dropdown-select inline-block">
 								<input type="text" class="form-control w300" id="project" data-toggle="dropdown">
 								<ul class="dropdown-menu" aria-labelledby="project">
-									<li>上海 ECNU 4周</li>
-									<li>上海 ECNU 5周</li>
-									<li>上海 ECNU 4周+上海 ECNU 5周</li>
-									<li>上海 ECNU 4周+上海 ECNU 4周</li>
-									<li>北京 ECNU 4周</li>
+									<!--<li>上海 ECNU 4周</li>-->
+									<!--<li>上海 ECNU 5周</li>-->
+									<!--<li>上海 ECNU 4周+上海 ECNU 5周</li>-->
+									<!--<li>上海 ECNU 4周+上海 ECNU 4周</li>-->
+									<!--<li>北京 ECNU 4周</li>-->
 								</ul>
 							</div>
 						</div>
@@ -60,11 +60,6 @@
 							<div class="dropdown dropdown-select inline-block">
 								<input type="text" class="form-control w300" id="course-num" data-toggle="dropdown" value="选课门数">
 								<ul class="dropdown-menu" aria-labelledby="course-num">
-									<li>1门</li>
-									<li>2门</li>
-									<li>3门</li>
-									<li class="disabled">4门</li>
-									<li class="disabled">5门</li>
 								</ul>
 							</div>
 						</div>
@@ -84,117 +79,117 @@
 										<th>课程名称</th>
 										<th>选择</th>
 									</tr>
-									<tr>
-										<td rowspan="3"><label>8：30 -- 10：30</label></td>
-										<td><label>FIN21</label></td>
-										<td><label>Introduction to Finance</label></td>
-										<td>
-											<div class="radio-box">
-												<label>
-													<input type="checkbox" name="projectSelectshanghai" id="projectSelectshanghai1" value="1" checked />
-													<i class="fa"></i>
-												</label>
-											</div>
-										</td>
-									</tr>
-									<tr>
-										<td><label>MAT 12</label></td>
-										<td><label>Calculus II</label></td>
-										<td>
-											<div class="radio-box">
-												<label>
-													<input type="checkbox" name="projectSelectshanghai" id="projectSelectshanghai2" value="2"  />
-													<i class="fa"></i>
-												</label>
-											</div>
-										</td>
-									</tr>
-									<tr>
-										<td><label>PSY 11</label></td>
-										<td><label>Principles of Psychology</label></td>
-										<td>
-											<div class="radio-box">
-												<label>
-													<input type="checkbox" name="projectSelectshanghai" id="projectSelectshanghai3" value="3" />
-													<i class="fa"></i>
-												</label>
-											</div>
-										</td>
-									</tr>
-									<tr>
-										<td rowspan="3"><label>8：30 -- 10：30</label></td>
-										<td><label>FIN21</label></td>
-										<td><label>Introduction to Finance</label></td>
-										<td>
-											<div class="radio-box">
-												<label>
-													<input type="checkbox" name="projectSelectshanghai" id="projectSelectshanghai4" value="4"  />
-													<i class="fa"></i>
-												</label>
-											</div>
-										</td>
-									</tr>
-									<tr>
-										<td><label>MAT 12</label></td>
-										<td><label>Calculus II</label></td>
-										<td>
-											<div class="radio-box">
-												<label>
-													<input type="checkbox" name="projectSelectshanghai" id="projectSelectshanghai5" value="5" />
-													<i class="fa"></i>
-												</label>
-											</div>
-										</td>
-									</tr>
-									<tr>
-										<td><label>PSY 11</label></td>
-										<td><label>Principles of Psychology</label></td>
-										<td>
-											<div class="radio-box">
-												<label>
-													<input type="checkbox" name="projectSelectshanghai" id="projectSelectshanghai6" value="6" />
-													<i class="fa"></i>
-												</label>
-											</div>
-										</td>
-									</tr>
-									<tr>
-										<td rowspan="3"><label>8：30 -- 10：30</label></td>
-										<td><label>FIN21</label></td>
-										<td><label>Introduction to Finance</label></td>
-										<td>
-											<div class="radio-box">
-												<label>
-													<input type="checkbox" name="projectSelectshanghai" id="projectSelectshanghai7" value="7" />
-													<i class="fa"></i>
-												</label>
-											</div>
-										</td>
-									</tr>
-									<tr>
-										<td><label>MAT 12</label></td>
-										<td><label>Calculus II</label></td>
-										<td>
-											<div class="radio-box">
-												<label>
-													<input type="checkbox" name="projectSelectshanghai" id="projectSelectshanghai8" value="8"  />
-													<i class="fa"></i>
-												</label>
-											</div>
-										</td>
-									</tr>
-									<tr>
-										<td><label>PSY 11</label></td>
-										<td><label>Principles of Psychology</label></td>
-										<td>
-											<div class="radio-box">
-												<label>
-													<input type="checkbox" name="projectSelectshanghai" id="projectSelectshanghai9" value="9" />
-													<i class="fa"></i>
-												</label>
-											</div>
-										</td>
-									</tr>
+									<!--<tr>-->
+										<!--<td rowspan="3"><label>8：30 &#45;&#45; 10：30</label></td>-->
+										<!--<td><label>FIN21</label></td>-->
+										<!--<td><label>Introduction to Finance</label></td>-->
+										<!--<td>-->
+											<!--<div class="radio-box">-->
+												<!--<label>-->
+													<!--<input type="checkbox" name="projectSelectshanghai" id="projectSelectshanghai1" value="1" checked />-->
+													<!--<i class="fa"></i>-->
+												<!--</label>-->
+											<!--</div>-->
+										<!--</td>-->
+									<!--</tr>-->
+									<!--<tr>-->
+										<!--<td><label>MAT 12</label></td>-->
+										<!--<td><label>Calculus II</label></td>-->
+										<!--<td>-->
+											<!--<div class="radio-box">-->
+												<!--<label>-->
+													<!--<input type="checkbox" name="projectSelectshanghai" id="projectSelectshanghai2" value="2"  />-->
+													<!--<i class="fa"></i>-->
+												<!--</label>-->
+											<!--</div>-->
+										<!--</td>-->
+									<!--</tr>-->
+									<!--<tr>-->
+										<!--<td><label>PSY 11</label></td>-->
+										<!--<td><label>Principles of Psychology</label></td>-->
+										<!--<td>-->
+											<!--<div class="radio-box">-->
+												<!--<label>-->
+													<!--<input type="checkbox" name="projectSelectshanghai" id="projectSelectshanghai3" value="3" />-->
+													<!--<i class="fa"></i>-->
+												<!--</label>-->
+											<!--</div>-->
+										<!--</td>-->
+									<!--</tr>-->
+									<!--<tr>-->
+										<!--<td rowspan="3"><label>8：30 &#45;&#45; 10：30</label></td>-->
+										<!--<td><label>FIN21</label></td>-->
+										<!--<td><label>Introduction to Finance</label></td>-->
+										<!--<td>-->
+											<!--<div class="radio-box">-->
+												<!--<label>-->
+													<!--<input type="checkbox" name="projectSelectshanghai" id="projectSelectshanghai4" value="4"  />-->
+													<!--<i class="fa"></i>-->
+												<!--</label>-->
+											<!--</div>-->
+										<!--</td>-->
+									<!--</tr>-->
+									<!--<tr>-->
+										<!--<td><label>MAT 12</label></td>-->
+										<!--<td><label>Calculus II</label></td>-->
+										<!--<td>-->
+											<!--<div class="radio-box">-->
+												<!--<label>-->
+													<!--<input type="checkbox" name="projectSelectshanghai" id="projectSelectshanghai5" value="5" />-->
+													<!--<i class="fa"></i>-->
+												<!--</label>-->
+											<!--</div>-->
+										<!--</td>-->
+									<!--</tr>-->
+									<!--<tr>-->
+										<!--<td><label>PSY 11</label></td>-->
+										<!--<td><label>Principles of Psychology</label></td>-->
+										<!--<td>-->
+											<!--<div class="radio-box">-->
+												<!--<label>-->
+													<!--<input type="checkbox" name="projectSelectshanghai" id="projectSelectshanghai6" value="6" />-->
+													<!--<i class="fa"></i>-->
+												<!--</label>-->
+											<!--</div>-->
+										<!--</td>-->
+									<!--</tr>-->
+									<!--<tr>-->
+										<!--<td rowspan="3"><label>8：30 &#45;&#45; 10：30</label></td>-->
+										<!--<td><label>FIN21</label></td>-->
+										<!--<td><label>Introduction to Finance</label></td>-->
+										<!--<td>-->
+											<!--<div class="radio-box">-->
+												<!--<label>-->
+													<!--<input type="checkbox" name="projectSelectshanghai" id="projectSelectshanghai7" value="7" />-->
+													<!--<i class="fa"></i>-->
+												<!--</label>-->
+											<!--</div>-->
+										<!--</td>-->
+									<!--</tr>-->
+									<!--<tr>-->
+										<!--<td><label>MAT 12</label></td>-->
+										<!--<td><label>Calculus II</label></td>-->
+										<!--<td>-->
+											<!--<div class="radio-box">-->
+												<!--<label>-->
+													<!--<input type="checkbox" name="projectSelectshanghai" id="projectSelectshanghai8" value="8"  />-->
+													<!--<i class="fa"></i>-->
+												<!--</label>-->
+											<!--</div>-->
+										<!--</td>-->
+									<!--</tr>-->
+									<!--<tr>-->
+										<!--<td><label>PSY 11</label></td>-->
+										<!--<td><label>Principles of Psychology</label></td>-->
+										<!--<td>-->
+											<!--<div class="radio-box">-->
+												<!--<label>-->
+													<!--<input type="checkbox" name="projectSelectshanghai" id="projectSelectshanghai9" value="9" />-->
+													<!--<i class="fa"></i>-->
+												<!--</label>-->
+											<!--</div>-->
+										<!--</td>-->
+									<!--</tr>-->
 								</table>
 							</div>
 						    <div role="tabpanel" class="tab-pane" id="project02">
@@ -205,117 +200,117 @@
 										<th>课程名称</th>
 										<th>选择</th>
 									</tr>
-									<tr>
-										<td rowspan="3"><label>8：30 -- 10：30</label></td>
-										<td><label>FIN21</label></td>
-										<td><label>Introduction to Finance</label></td>
-										<td>
-											<div class="radio-box">
-												<label>
-													<input type="checkbox" name="projectSelectBeijing" id="projectSelectBeijing1" value="1" />
-													<i class="fa"></i>
-												</label>
-											</div>
-										</td>
-									</tr>
-									<tr>
-										<td><label>MAT 12</label></td>
-										<td><label>Calculus II</label></td>
-										<td>
-											<div class="radio-box">
-												<label>
-													<input type="checkbox" name="projectSelectBeijing" id="projectSelectBeijing2" value="2"  />
-													<i class="fa"></i>
-												</label>
-											</div>
-										</td>
-									</tr>
-									<tr>
-										<td><label>PSY 11</label></td>
-										<td><label>Principles of Psychology</label></td>
-										<td>
-											<div class="radio-box">
-												<label>
-													<input type="checkbox" name="projectSelectBeijing" id="projectSelectBeijing3" value="3" />
-													<i class="fa"></i>
-												</label>
-											</div>
-										</td>
-									</tr>
-									<tr>
-										<td rowspan="3"><label>8：30 -- 10：30</label></td>
-										<td><label>FIN21</label></td>
-										<td><label>Introduction to Finance</label></td>
-										<td>
-											<div class="radio-box">
-												<label>
-													<input type="checkbox" name="projectSelectBeijing" id="projectSelectBeijing4" value="4"  />
-													<i class="fa"></i>
-												</label>
-											</div>
-										</td>
-									</tr>
-									<tr>
-										<td><label>MAT 12</label></td>
-										<td><label>Calculus II</label></td>
-										<td>
-											<div class="radio-box">
-												<label>
-													<input type="checkbox" name="projectSelectBeijing" id="projectSelectBeijing5" value="5"  />
-													<i class="fa"></i>
-												</label>
-											</div>
-										</td>
-									</tr>
-									<tr>
-										<td><label>PSY 11</label></td>
-										<td><label>Principles of Psychology</label></td>
-										<td>
-											<div class="radio-box">
-												<label>
-													<input type="checkbox" name="projectSelectBeijing" id="projectSelectBeijing6" value="6" />
-													<i class="fa"></i>
-												</label>
-											</div>
-										</td>
-									</tr>
-									<tr>
-										<td rowspan="3"><label>8：30 -- 10：30</label></td>
-										<td><label>FIN21</label></td>
-										<td><label>Introduction to Finance</label></td>
-										<td>
-											<div class="radio-box">
-												<label>
-													<input type="checkbox" name="projectSelectBeijing" id="projectSelectBeijing7" value="7"  />
-													<i class="fa"></i>
-												</label>
-											</div>
-										</td>
-									</tr>
-									<tr>
-										<td><label>MAT 12</label></td>
-										<td><label>Calculus II</label></td>
-										<td>
-											<div class="radio-box">
-												<label>
-													<input type="checkbox" name="projectSelectBeijing" id="projectSelectBeijing8" value="8" />
-													<i class="fa"></i>
-												</label>
-											</div>
-										</td>
-									</tr>
-									<tr>
-										<td><label>PSY 11</label></td>
-										<td><label>Principles of Psychology</label></td>
-										<td>
-											<div class="radio-box">
-												<label>
-													<input type="checkbox" name="projectSelectBeijing" id="projectSelectBeijing9" value="9" />
-													<i class="fa"></i>
-												</label>
-											</div>
-										</td>
-									</tr>
+									<!--<tr>-->
+										<!--<td rowspan="3"><label>8：30 &#45;&#45; 10：30</label></td>-->
+										<!--<td><label>FIN21</label></td>-->
+										<!--<td><label>Introduction to Finance</label></td>-->
+										<!--<td>-->
+											<!--<div class="radio-box">-->
+												<!--<label>-->
+													<!--<input type="checkbox" name="projectSelectBeijing" id="projectSelectBeijing1" value="1" />-->
+													<!--<i class="fa"></i>-->
+												<!--</label>-->
+											<!--</div>-->
+										<!--</td>-->
+									<!--</tr>-->
+									<!--<tr>-->
+										<!--<td><label>MAT 12</label></td>-->
+										<!--<td><label>Calculus II</label></td>-->
+										<!--<td>-->
+											<!--<div class="radio-box">-->
+												<!--<label>-->
+													<!--<input type="checkbox" name="projectSelectBeijing" id="projectSelectBeijing2" value="2"  />-->
+													<!--<i class="fa"></i>-->
+												<!--</label>-->
+											<!--</div>-->
+										<!--</td>-->
+									<!--</tr>-->
+									<!--<tr>-->
+										<!--<td><label>PSY 11</label></td>-->
+										<!--<td><label>Principles of Psychology</label></td>-->
+										<!--<td>-->
+											<!--<div class="radio-box">-->
+												<!--<label>-->
+													<!--<input type="checkbox" name="projectSelectBeijing" id="projectSelectBeijing3" value="3" />-->
+													<!--<i class="fa"></i>-->
+												<!--</label>-->
+											<!--</div>-->
+										<!--</td>-->
+									<!--</tr>-->
+									<!--<tr>-->
+										<!--<td rowspan="3"><label>8：30 &#45;&#45; 10：30</label></td>-->
+										<!--<td><label>FIN21</label></td>-->
+										<!--<td><label>Introduction to Finance</label></td>-->
+										<!--<td>-->
+											<!--<div class="radio-box">-->
+												<!--<label>-->
+													<!--<input type="checkbox" name="projectSelectBeijing" id="projectSelectBeijing4" value="4"  />-->
+													<!--<i class="fa"></i>-->
+												<!--</label>-->
+											<!--</div>-->
+										<!--</td>-->
+									<!--</tr>-->
+									<!--<tr>-->
+										<!--<td><label>MAT 12</label></td>-->
+										<!--<td><label>Calculus II</label></td>-->
+										<!--<td>-->
+											<!--<div class="radio-box">-->
+												<!--<label>-->
+													<!--<input type="checkbox" name="projectSelectBeijing" id="projectSelectBeijing5" value="5"  />-->
+													<!--<i class="fa"></i>-->
+												<!--</label>-->
+											<!--</div>-->
+										<!--</td>-->
+									<!--</tr>-->
+									<!--<tr>-->
+										<!--<td><label>PSY 11</label></td>-->
+										<!--<td><label>Principles of Psychology</label></td>-->
+										<!--<td>-->
+											<!--<div class="radio-box">-->
+												<!--<label>-->
+													<!--<input type="checkbox" name="projectSelectBeijing" id="projectSelectBeijing6" value="6" />-->
+													<!--<i class="fa"></i>-->
+												<!--</label>-->
+											<!--</div>-->
+										<!--</td>-->
+									<!--</tr>-->
+									<!--<tr>-->
+										<!--<td rowspan="3"><label>8：30 &#45;&#45; 10：30</label></td>-->
+										<!--<td><label>FIN21</label></td>-->
+										<!--<td><label>Introduction to Finance</label></td>-->
+										<!--<td>-->
+											<!--<div class="radio-box">-->
+												<!--<label>-->
+													<!--<input type="checkbox" name="projectSelectBeijing" id="projectSelectBeijing7" value="7"  />-->
+													<!--<i class="fa"></i>-->
+												<!--</label>-->
+											<!--</div>-->
+										<!--</td>-->
+									<!--</tr>-->
+									<!--<tr>-->
+										<!--<td><label>MAT 12</label></td>-->
+										<!--<td><label>Calculus II</label></td>-->
+										<!--<td>-->
+											<!--<div class="radio-box">-->
+												<!--<label>-->
+													<!--<input type="checkbox" name="projectSelectBeijing" id="projectSelectBeijing8" value="8" />-->
+													<!--<i class="fa"></i>-->
+												<!--</label>-->
+											<!--</div>-->
+										<!--</td>-->
+									<!--</tr>-->
+									<!--<tr>-->
+										<!--<td><label>PSY 11</label></td>-->
+										<!--<td><label>Principles of Psychology</label></td>-->
+										<!--<td>-->
+											<!--<div class="radio-box">-->
+												<!--<label>-->
+													<!--<input type="checkbox" name="projectSelectBeijing" id="projectSelectBeijing9" value="9" />-->
+													<!--<i class="fa"></i>-->
+												<!--</label>-->
+											<!--</div>-->
+										<!--</td>-->
+									<!--</tr>-->
 								</table>
 							</div>
 						</div>

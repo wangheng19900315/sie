@@ -49,6 +49,8 @@ public class StudentEntity extends BaseEntity{
      */
     private String openid;
 
+    private Integer applicationStep;//0为完成注册 1为填写完成申请单 2为下单完成 3为完成缴费 4为填写完成绩单寄送
+
 
 
     @Basic
@@ -370,5 +372,14 @@ public class StudentEntity extends BaseEntity{
 
     public void setOpenid(String openid) {
         this.openid = openid;
+    }
+
+    @Column(name = "application_step")
+    public Integer getApplicationStep() {
+        return applicationStep;
+    }
+
+    public void setApplicationStep(Integer applicationStep) {
+        this.applicationStep = applicationStep;
     }
 }

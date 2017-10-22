@@ -46,6 +46,19 @@ public class OrderBean  extends BaseBean{
     private String projectNames;
     private Integer courseNumber;
     private String dormitoryNames;
+
+    private Double refundMoney;
+    private String refundReason;
+    private Integer refundType;
+    private String payee;//收款人姓名
+    //银行转账信息
+    private String depositBank;//开户行
+    private String account;//账号
+    //支付宝账号
+    private String alipay;
+    //加币邮件
+    private String refundEmail;
+
     private List<OrderDetailBean> orderDetailBean = new ArrayList<>();
 
 
@@ -327,5 +340,69 @@ public class OrderBean  extends BaseBean{
 
     public void setDormitoryNames(String dormitoryNames) {
         this.dormitoryNames = dormitoryNames;
+    }
+
+    public Double getRefundMoney() {
+        return refundMoney;
+    }
+
+    public void setRefundMoney(Double refundMoney) {
+        this.refundMoney = refundMoney;
+    }
+
+    public String getRefundReason() {
+        return refundReason;
+    }
+
+    public void setRefundReason(String refundReason) {
+        this.refundReason = refundReason;
+    }
+
+    public Integer getRefundType() {
+        return refundType;
+    }
+
+    public void setRefundType(Integer refundType) {
+        this.refundType = refundType;
+    }
+
+    public String getPayee() {
+        return payee;
+    }
+
+    public void setPayee(String payee) {
+        this.payee = payee;
+    }
+
+    public String getDepositBank() {
+        return depositBank;
+    }
+
+    public void setDepositBank(String depositBank) {
+        this.depositBank = depositBank;
+    }
+
+    public String getAccount() {
+        return account;
+    }
+
+    public void setAccount(String account) {
+        this.account = account;
+    }
+
+    public String getAlipay() {
+        return alipay;
+    }
+
+    public void setAlipay(String alipay) {
+        this.alipay = alipay;
+    }
+
+    public String getRefundEmail() {
+        return refundEmail;
+    }
+
+    public void setRefundEmail(String refundEmail) {
+        this.refundEmail = refundEmail;
     }
 }

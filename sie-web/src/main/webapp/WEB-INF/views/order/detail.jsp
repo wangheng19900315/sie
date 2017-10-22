@@ -178,9 +178,11 @@
                         <div class="row">
                             <div class="col-sm-4">
                                 <div class="form-group ">
-                                    <label   class="col-sm-3 control-label">CR优惠:</label>
+                                    <label   class="col-sm-3 control-label">CR码:</label>
                                     <div class="col-sm-8">
-                                        <input type="text" class="form-control" id="crDiscount" name="crDiscount"  readonly>
+                                        <select class="form-control" id="crId" name="crId" disabled>
+                                            <option value=""></option>
+                                        </select>
                                     </div>
                                 </div>
                             </div><!-- col-sm-6 -->
@@ -188,7 +190,9 @@
                                 <div class="form-group ">
                                     <label   class="col-sm-3 control-label">优惠券:</label>
                                     <div class="col-sm-8">
-                                        <input type="text" class="form-control" id="couponDiscount" name="couponDiscount"  readonly >
+                                        <select class="form-control" id="couponId" name="couponId" disabled>
+                                            <option value=""></option>
+                                        </select>
                                     </div>
                                 </div>
                             </div><!-- col-sm-6 -->
@@ -205,12 +209,122 @@
                         <div class="row">
                             <div class="col-sm-4">
                                 <div class="form-group ">
-                                    <label   class="col-sm-3 control-label">备注:</label>
+                                    <label   class="col-sm-3 control-label">CR优惠:</label>
                                     <div class="col-sm-8">
-                                        <textarea type="text" class="form-control" id="remark" name="remark" style="resize: none"></textarea>
+                                        <input type="text" class="form-control" id="crDiscount" name="crDiscount"  readonly>
                                     </div>
                                 </div>
                             </div><!-- col-sm-6 -->
+                            <div class="col-sm-4">
+                                <div class="form-group ">
+                                    <label   class="col-sm-3 control-label">优惠券金额:</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" class="form-control" id="couponDiscount" name="couponDiscount"  readonly >
+                                    </div>
+                                </div>
+                            </div><!-- col-sm-6 -->
+                            <div class="col-sm-4">
+                                <div class="form-group ">
+                                    <label   class="col-sm-3 control-label">备注:</label>
+                                    <div class="col-sm-8">
+                                        <textarea type="text" class="form-control" id="remark" name="remark" style="resize: none" disabled></textarea>
+                                    </div>
+                                </div>
+                            </div><!-- col-sm-6 -->
+                        </div>
+                        <div id="refund-div" hidden>
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <div class="form-group ">
+                                        <label   class="col-sm-3 control-label">退款方式:</label>
+                                        <div class="col-sm-8">
+                                            <select class="form-control" id="refundType" name="refundType" disabled>
+                                                <option value=""></option>
+                                                <option value="1" aria-id="refundWayBank">银行转账</option>
+                                                <option value="2" aria-id="refundWayAlipay">支付宝</option>
+                                                <option value="3" aria-id="refundWayWechat">微信</option>
+                                                <option value="4" aria-id="refundWayEMT">加币EMT</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-4">
+                                    <div class="form-group ">
+                                        <label   class="col-sm-3 control-label">退款金额:</label>
+                                        <div class="col-sm-8">
+                                            <input type="text" class="form-control" id="refundMoney" name="refundMoney" readonly>
+                                        </div>
+                                    </div>
+                                </div><!-- col-sm-6 -->
+                            </div>
+
+                            <div class="row"  id="refundWayBank" hidden>
+                                <div class="col-sm-4">
+                                    <div class="form-group ">
+                                        <label   class="col-sm-3 control-label">开户行:</label>
+                                        <div class="col-sm-8">
+                                            <input type="text" class="form-control" id="depositBank" name="depositBank" readonly>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="form-group ">
+                                        <label   class="col-sm-3 control-label">收款人:</label>
+                                        <div class="col-sm-8">
+                                            <input type="text" class="form-control" id="bank-payee" name="payee" readonly>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="form-group ">
+                                        <label   class="col-sm-3 control-label">账号:</label>
+                                        <div class="col-sm-8">
+                                            <input type="text" class="form-control" name="account" readonly>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row"  id="refundWayAlipay" hidden>
+                                <div class="col-sm-4">
+                                    <div class="form-group ">
+                                        <label   class="col-sm-3 control-label">账号:</label>
+                                        <div class="col-sm-8">
+                                            <input type="text" class="form-control" id="alipay" name="alipay" readonly>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="form-group ">
+                                        <label   class="col-sm-3 control-label">收款人:</label>
+                                        <div class="col-sm-8">
+                                            <input type="text" class="form-control" id="alipay-payee" name="payee" readonly>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="refundWayWechat"class="row" hidden></div>
+                            <div class="row"  id="refundWayEMT" hidden>
+                                <div class="col-sm-4">
+                                    <div class="form-group ">
+                                        <label   class="col-sm-3 control-label">邮箱:</label>
+                                        <div class="col-sm-8">
+                                            <input type="text" class="form-control" id="refundEmail" name="refundEmail" readonly>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <div class="form-group ">
+                                        <label   class="col-sm-3 control-label">退款原因:</label>
+                                        <div class="col-sm-8">
+                                            <textarea type="text" class="form-control" id="refundReason" name="refundReason" style="resize: none" disabled></textarea>
+                                        </div>
+                                    </div>
+                                </div><!-- col-sm-6 -->
+                            </div>
                         </div>
 
                     </form>

@@ -131,6 +131,21 @@
                                 </div>
                             </div>
                         </div><!-- col-sm-6 -->
+
+                        <div class="col-sm-6">
+                            <div class="form-group ">
+                                <label for="sex" class="col-sm-2 control-label">性别</label>
+                                <div class="col-sm-9">
+                                    <select class="form-control" id="applicationStep" name="applicationStep">
+                                        <option value="1">完成申请单</option>
+                                        <option value="2">完成项目和住宿下单</option>
+                                        <option value="3">完成缴费</option>
+                                        <option value="4">完成成绩单寄送</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div><!-- col-sm-6 -->
+
                     </div><!-- row -->
 
                     <div class="row">

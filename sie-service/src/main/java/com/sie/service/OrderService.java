@@ -32,7 +32,9 @@ public interface OrderService extends BaseService<OrderEntity, Integer> {
      */
     public OrderBean getAddDetail(Integer id);
 
-    void updateOrderInfo(OrderEntity orderEntity);
+//    void updateOrderInfo(OrderEntity orderEntity);
+
+    void updateOrderInfo(OrderBean orderBean);
 
     /**
      * 添加订单
@@ -78,4 +80,5 @@ public interface OrderService extends BaseService<OrderEntity, Integer> {
 
 
     void completePaymentInfo(Integer orderId);
+    ResultBean refundOrder(OrderBean orderBean);
 }
