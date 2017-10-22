@@ -1,7 +1,7 @@
 //全局变量请求地址
 var rootPath = 'http://localhost:81/api/';
 var accessToken='un23n4no2bu4bs34';
-var systemType = "1";//sie系统
+var systemType = "2";//tru系统
 var studentId = "1";
 var userInfo;
 /**
@@ -196,9 +196,22 @@ function initApplicationStep(){
      */
     dhcc.Unit.ajaxUtil(attrs,"getApplicationStep.json",function(data){
         var step = $("#application-step").find("a");
+        var erroMsg;
+        if(data == 0){
+            erroMsg = "请先填写申请表";
+        }else if(data == 1){
+            erroMsg = "请先完成项目报名";
+        }else if(data == 2){
+            erroMsg = "请先完成缴费";
+        }else{
+
+        }
         //不可用的功能
         for(var i=data+2; i<5; i++){
             $(step[i]).attr("href","#");
+            $(step[i]).bind("click",function(){
+                dhcc.Unit.successMessage(erroMsg);
+            });
         }
         step = data;
     });

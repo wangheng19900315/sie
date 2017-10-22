@@ -356,6 +356,23 @@ public class OrderServiceImpl extends BaseServiceImpl<OrderEntity,Integer> imple
             gradeService.updateStudentGradeList(oldEntity.getStudentEntity().getId());
 
             gradeSendService.updateStudentGradeSend(oldEntity.getStudentEntity().getId());
+
+            //如果是已经完成的订单修改applicationstep的步骤 3
+            Integer step;
+            if(orderEntity.getStatus() == OrderStatus.SUBMIT.value()){
+                step = 2;
+            }else if(orderEntity.getStatus() == OrderStatus.COMPLETE.value()){
+                step = 3;
+            }else {
+                step = null;
+            }
+            if(step != null){
+                ResultBean stepResultBean = studentService.updateApplicationStep(oldEntity.getStudentEntity().getId(),step);
+                if(!stepResultBean.isSuccess()){
+                    throw new RuntimeException("更新学生申请步骤错误");
+                }
+            }
+
         }
     }
 
@@ -770,7 +787,7 @@ public class OrderServiceImpl extends BaseServiceImpl<OrderEntity,Integer> imple
     public void cancelOrder(Integer mins) {
         List<HqlOperateVo> operateVos = new ArrayList<>();
 
-        String date = DateUtil.format(DateUtil.addMinutes(new Date(), mins), "yyyy-MM-dd HH:mm:ss");
+        String date = DateUtil.format(DateUtil.addMinutes(new Date(), -mins), "yyyy-MM-dd HH:mm:ss");
         operateVos.add(new HqlOperateVo("createTime","<=",date));
         operateVos.add(new HqlOperateVo("status","=",OrderStatus.SUBMIT.value()+""));
         operateVos.add(new HqlOperateVo("orderType","=", OrderType.USER.value()+""));
