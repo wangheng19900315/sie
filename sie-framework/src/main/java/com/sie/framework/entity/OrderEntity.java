@@ -33,6 +33,7 @@ public class OrderEntity extends BaseEntity {
 
 
     private List<OrderDetailEntity> orderDetailEntityList = new ArrayList<>();
+    private List<OrderPayEntity> orderPayEntitiyList = new ArrayList<>();
 
 
     @Basic
@@ -92,8 +93,22 @@ public class OrderEntity extends BaseEntity {
         return orderDetailEntityList;
     }
 
+
     public void setOrderDetailEntityList(List<OrderDetailEntity> orderDetailEntityList) {
         this.orderDetailEntityList = orderDetailEntityList;
+    }
+
+//    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "orderEntity", orphanRemoval = true)
+//    @Where(clause = "h_delete=0")
+    public OrderPayEntity getOrderPayEntitiyList() {
+        if(orderPayEntitiyList != null && orderPayEntitiyList.size() > 0){
+            return orderPayEntitiyList.get(0);
+        }
+        return null;
+    }
+
+    public void setOrderPayEntitiyList(List<OrderPayEntity> orderPayEntitiyList) {
+        this.orderPayEntitiyList = orderPayEntitiyList;
     }
 
     @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)

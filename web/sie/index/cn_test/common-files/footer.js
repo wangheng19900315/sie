@@ -41,5 +41,9 @@ document.writeln('<div id="footer">'+
 
 document.writeln("<script src='../../public/js/jquery.min.js'></script>");
 document.writeln("<script src='../../public/js/bootstrap.min.js'></script>");
+document.writeln("<script src='../../public/js/bootstrap-datetimepicker.js'></script>");
 document.writeln("<script src='../../public/js/jquery.SuperSlide.js'></script>");
-document.writeln("<script src='../../public/js/common.js'></script>");
+document.writeln("<script src='../../public/js/chosen.jquery.min.js'></script>");
+document.writeln("<script src='../../public/js/user.js'></script>");
+document.writeln("<script src='../../js/util.js'></script>");
+document.writeln("<script src='../../js/user-operate.js'></script>");

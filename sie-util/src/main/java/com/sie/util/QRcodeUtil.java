@@ -21,29 +21,29 @@ public class QRcodeUtil {
     private QRcodeUtil() {
     }
 
-    public static void makeQRcode(String content, String savePath, String fileType, String fileName, String waterImage) {
+    public static void makeQRcode(String content,  String fileType, OutputStream outputStream) {
         try {
             MultiFormatWriter multiFormatWriter = new MultiFormatWriter();
             Map hints = new HashMap();
             hints.put(EncodeHintType.CHARACTER_SET, "UTF-8");
             BitMatrix bitMatrix = multiFormatWriter.encode(content, BarcodeFormat.QR_CODE, 400, 400, hints);
-            File dir = new File(savePath);
-            boolean mkResult = true;
-            if (!dir.exists()) {
-                mkResult = dir.mkdirs();
-            } else if (!dir.isDirectory()) {
-                dir.delete();
-                mkResult = dir.mkdirs();
-            }
-            if (!mkResult) {
-                System.out.println("makeQRcode - makedir error");
-            }
-            File file = new File(savePath, fileName + "." + fileType);
-            writeToFile(bitMatrix, fileType, file);
-            if (waterImage != null){
-                ImageUtil.resize(waterImage, 36, 36, false);
-                ImageUtil.pressImage(file.getAbsolutePath(),waterImage, -1, -1, 1f);
-            }
+//            File dir = new File(savePath);
+//            boolean mkResult = true;
+//            if (!dir.exists()) {
+//                mkResult = dir.mkdirs();
+//            } else if (!dir.isDirectory()) {
+//                dir.delete();
+//                mkResult = dir.mkdirs();
+//            }
+//            if (!mkResult) {
+//                System.out.println("makeQRcode - makedir error");
+//            }
+
+            writeToFile(bitMatrix, fileType, outputStream);
+//            if (waterImage != null){
+//                ImageUtil.resize(waterImage, 36, 36, false);
+//                ImageUtil.pressImage(file.getAbsolutePath(),waterImage, -1, -1, 1f);
+//            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -62,11 +62,11 @@ public class QRcodeUtil {
     }
 
 
-    public static void writeToFile(BitMatrix matrix, String format, File file)
+    public static void writeToFile(BitMatrix matrix, String format,  OutputStream outputStream)
             throws IOException {
         BufferedImage image = toBufferedImage(matrix);
-        if (!ImageIO.write(image, format, file)) {
-            throw new IOException("Could not write an image of format " + format + " to " + file);
+        if (!ImageIO.write(image, format, outputStream)) {
+            throw new IOException("Could not write an image of format " + format + " to " );
         }
     }
 

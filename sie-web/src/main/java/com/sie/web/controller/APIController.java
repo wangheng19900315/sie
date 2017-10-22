@@ -94,7 +94,7 @@ public class APIController {
     @RequestMapping(value = "/loadImage", method = RequestMethod.GET)
     @ResponseBody
     public ResultBean loadImage(String params, String accessToken, HttpServletRequest request, HttpServletResponse response) throws IOException {
-        logger.info("updateStudent.json params="+params +" accessToken="+accessToken);
+        logger.info("loadImage params="+params +" accessToken="+accessToken);
         ResultBean resultBean = new ResultBean();
         try{
             if(StringUtil.isBlank(accessToken) || !accessToken.equals(SYSTEM_ACCESS_TOKEN)){

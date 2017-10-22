@@ -914,4 +914,47 @@ public class OrderServiceImpl extends BaseServiceImpl<OrderEntity,Integer> imple
         }
         return orderVo;
     }
+
+
+    @Override
+    public void updatePaymentInfo(Integer orderId,Integer payType) {
+        OrderEntity orderEntity = this.orderDao.getEntity(orderId);
+        if(orderEntity == null){
+            throw new RuntimeException("订单不存在，请检查参数");
+        }
+        if(orderEntity.getStatus() != OrderStatus.SUBMIT.value()){
+            throw new RuntimeException("订单状态不是已提交，请检查参数");
+        }
+
+        OrderPayEntity payEntity = orderEntity.getOrderPayEntitiyList();
+        payEntity.setPayStatus(PayStatus.SUBMIT.value());
+        payEntity.setPayType(payType);
+        payEntity.setPayTotal(orderEntity.getPayMoney());
+        this.orderPayDao.updateEntity(payEntity);
+
+        orderEntity.setPayType(payType);
+        this.orderDao.updateEntity(orderEntity);
+    }
+
+    /**
+     * 支付成功
+     * @param orderId
+     */
+    @Override
+    public void completePaymentInfo(Integer orderId) {
+        OrderEntity orderEntity = this.orderDao.getEntity(orderId);
+        if(orderEntity == null){
+            throw new RuntimeException("订单不存在，请检查参数");
+        }
+        if(orderEntity.getStatus() != OrderStatus.SUBMIT.value()){
+            throw new RuntimeException("订单状态不是已提交，请检查参数");
+        }
+
+        OrderPayEntity payEntity = orderEntity.getOrderPayEntitiyList();
+        payEntity.setPayStatus(PayStatus.COMPLETE.value());
+        this.orderPayDao.updateEntity(payEntity);
+
+        orderEntity.setStatus(OrderStatus.COMPLETE.value());
+        this.updateOrderInfo(orderEntity);
+    }
 }

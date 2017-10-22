@@ -91,7 +91,7 @@ $(function() {
 							"padding-right":0
 						});
 					}
-					setTimeout("$('.modal-tips').modal('hide')",2000);
+					setTimeout('if ($(".modal-tips.in").length > 0) {$(".modal-tips").modal("hide");$("body").removeClass("modal-scroll").css({"overflow":"auto"});}',2000);
 				});
 				$('button[data-dismiss="modal"]').click(function () {
 					$("body").removeClass("modal-scroll").css({

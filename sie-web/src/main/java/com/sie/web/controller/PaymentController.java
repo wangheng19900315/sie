@@ -1,7 +1,9 @@
 package com.sie.web.controller;
 
+import com.sie.framework.type.PayType;
 import com.sie.service.OrderService;
 import com.sie.service.StudentService;
+import com.sie.service.bean.ResultBean;
 import com.sie.util.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,12 +12,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.BufferedOutputStream;
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.util.*;
 
 /**
@@ -33,7 +33,6 @@ public class PaymentController {
     private OrderService orderService;
 
 
-    public static int defaultWidthAndHeight=200;
 
     private static final Logger logger = LoggerFactory.getLogger(PaymentController.class);
 
@@ -44,51 +43,80 @@ public class PaymentController {
 
     @ResponseBody
     @RequestMapping("/getWechatCode.json")
-    public String getWechatCode(Integer orderId) throws Exception {
-        // 账号信息
-        String appid = PayConfigUtil.APP_ID;  // appid
-        String mch_id = PayConfigUtil.MCH_ID; // 商业号
-        String key = PayConfigUtil.API_KEY; // key
+    public ResultBean getWechatCode(Integer orderId, String accessToken, HttpServletResponse response) throws Exception {
+        logger.info("getWechatCode.json orderId=" + orderId + " accessToken=" + accessToken);
 
-        String currTime = PayCommonUtil.getCurrTime();
-        String strTime = currTime.substring(8, currTime.length());
-        String strRandom = PayCommonUtil.buildRandom(4) + "";
-        String nonce_str = strTime + strRandom;
+        ResultBean resultBean = new ResultBean();
 
-        String order_price = 1+""; // 价格   注意：价格的单位是分
-        String body = "购买课程";   // 商品名称
-        String out_trade_no = "111111"; // 订单号
+        if (StringUtil.isBlank(accessToken) || !accessToken.equals(SYSTEM_ACCESS_TOKEN)) {
+            resultBean.setMessage("token 为空，请检查参数");
+            return resultBean;
+        }
 
-        // 获取发起电脑 ip
-        String spbill_create_ip = PayConfigUtil.CREATE_IP;
-        // 回调接口
-        String notify_url = PayConfigUtil.NOTIFY_URL;
-        String trade_type = "NATIVE";
+        ServletOutputStream out = null;
 
-        SortedMap<Object,Object> packageParams = new TreeMap<Object,Object>();
-        packageParams.put("appid", appid);
-        packageParams.put("mch_id", mch_id);
-        packageParams.put("nonce_str", nonce_str);
-        packageParams.put("body", body);
-        packageParams.put("out_trade_no", out_trade_no);
-        packageParams.put("total_fee", order_price);
-        packageParams.put("spbill_create_ip", spbill_create_ip);
-        packageParams.put("notify_url", notify_url);
-        packageParams.put("trade_type", trade_type);
+        try {
+            //生成支付信息
+            orderService.updatePaymentInfo(orderId, PayType.WECHAT.value());
 
-        String sign = PayCommonUtil.createSign("UTF-8", packageParams,key);
-        packageParams.put("sign", sign);
+            // 账号信息
+            String appid = PayConfigUtil.APP_ID;  // appid
+            String mch_id = PayConfigUtil.MCH_ID; // 商业号
+            String key = PayConfigUtil.API_KEY; // key
 
-        String requestXML = PayCommonUtil.getRequestXml(packageParams);
-        System.out.println(requestXML);
+            String currTime = PayCommonUtil.getCurrTime();
+            String strTime = currTime.substring(8, currTime.length());
+            String strRandom = PayCommonUtil.buildRandom(4) + "";
+            String nonce_str = strTime + strRandom;
 
-        String resXml = HTTPUtil.postData(PayConfigUtil.UFDODER_URL, requestXML);
+            String order_price = 1 + ""; // 价格   注意：价格的单位是分
+            String body = "购买课程";   // 商品名称
+            String out_trade_no = "111111"; // 订单号
+
+            // 获取发起电脑 ip
+            String spbill_create_ip = PayConfigUtil.CREATE_IP;
+            // 回调接口
+            String notify_url = PayConfigUtil.NOTIFY_URL;
+            String trade_type = "NATIVE";
+
+            SortedMap<Object, Object> packageParams = new TreeMap<Object, Object>();
+            packageParams.put("appid", appid);
+            packageParams.put("mch_id", mch_id);
+            packageParams.put("nonce_str", nonce_str);
+            packageParams.put("body", body);
+            packageParams.put("out_trade_no", out_trade_no);
+            packageParams.put("total_fee", order_price);
+            packageParams.put("spbill_create_ip", spbill_create_ip);
+            packageParams.put("notify_url", notify_url);
+            packageParams.put("trade_type", trade_type);
+            String sign = PayCommonUtil.createSign("UTF-8", packageParams, key);
+            packageParams.put("sign", sign);
+            String requestXML = PayCommonUtil.getRequestXml(packageParams);
+            String resXml = HTTPUtil.postData(PayConfigUtil.UFDODER_URL, requestXML);
 
 
-        Map map = JDomXMLUtil.doXMLParse(resXml);
-        String urlCode = (String) map.get("code_url");
+            Map map = JDomXMLUtil.doXMLParse(resXml);
+            String urlCode = (String) map.get("code_url");
 
-        return WechatCodeUtil.QRfromGoogle(urlCode);
+            if (urlCode != null && urlCode.length() > 0) {
+                response.setContentType("multipart/form-data");
+                out = response.getOutputStream();
+                QRcodeUtil.makeQRcode(urlCode, "jpg", out);
+                out.flush();
+                resultBean.setSuccess(true);
+                resultBean.setMessage("获取成功");
+            }
+
+        } catch (RuntimeException e){
+            e.printStackTrace();
+            resultBean.setMessage(e.getMessage());
+         }catch (Exception e){
+            e.printStackTrace();
+        }finally {
+            out.close();
+        }
+
+        return resultBean;
     }
 
 

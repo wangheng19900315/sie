@@ -103,11 +103,11 @@ $(function() {
 		    	}
 		    });
 			$(function(){
-				$('#president').chosen({allow_single_deselect: true});
-				var chosen = $(".chosen-single");
-				var setinput = $(".chosen-search").find("input");
-				chosen.addClass('form-control');
-				setinput.addClass('form-control');
+				//$('#president').chosen({allow_single_deselect: true});
+				//var chosen = $(".chosen-single");
+				//var setinput = $(".chosen-search").find("input");
+				//chosen.addClass('form-control');
+				//setinput.addClass('form-control');
 			});
 			$(function(){
 				var inputTxt = $(".report-address input.form-control");

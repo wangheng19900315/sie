@@ -68,4 +68,14 @@ public interface OrderService extends BaseService<OrderEntity, Integer> {
     List<OrderVo> getOrderListVo(String systemType, String studentId,Integer orderStatus);
 
     OrderVo getLatestOrderListVo(String systemType, String studentId);
+
+    /**
+     * 发起支付
+     * @param orderId
+     * @param payType
+     */
+    void updatePaymentInfo(Integer orderId,Integer payType);
+
+
+    void completePaymentInfo(Integer orderId);
 }
