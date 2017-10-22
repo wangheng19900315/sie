@@ -54,11 +54,11 @@ $(function(){
             setCookie("loginUser",JSON.stringify(data));
             userInfo = data;
             dhcc.Unit.successMessage("登录成功", function(){
-                window.location.reload();
+                window.location.href="../index.html";
             });
 
         },function(data){
-            $("#login_password").next().html(data);
+            $("#login_password").next().html("<label>"+data+"</label>");
         })
     })
 
@@ -71,44 +71,46 @@ $(function(){
         $("#reggsiter_password").next().html("");
         $("#reggsiter_repeat_password").next().html("");
         if(email == ""){
-            $("#reggsiter_email").next().html("邮箱不能为空");
+            $("#reggsiter_email").next().html("<label>邮箱不能为空</label>");
             return;
         }
         if(!checkEmail(email)){
-            $("#reggsiter_email").next().html("邮箱格式不正确");
+            $("#reggsiter_email").next().html("<label>邮箱格式不正确</label>");
             return;
         }
         if(password == ""){
-            $("#reggsiter_password").next().html("密码不能为空");
+            $("#reggsiter_password").next().html("<label>密码不能为空</label>");
             return;
         }
         if(password.length < 6 ){
-            $("#reggsiter_password").next().html("密码长度不能小于6");
+            $("#reggsiter_password").next().html("<label>密码长度不能小于6</label>");
             return;
         }
         if(repeatPassword == ""||repeatPassword != password){
-            $("#reggsiter_repeat_password").next().html("密码不一致");
+            $("#reggsiter_repeat_password").next().html("<label>密码不一致</label>");
+            return;
+        }
+        if(!$("#reggsiter_checkbox").is(':checked')){
+            $("#reggsiter_repeat_password").next().html("<label>请同意服务条款</label>");
             return;
         }
         var attrs={"email":email,"password":password};
 
         dhcc.Unit.ajaxUtil(attrs,"register.json",function(data){
             dhcc.Unit.successMessage("注册成功", function(){
-                $('#register_login_btn').click();
+                //$('#register_login_btn').click();
             });
 
         },function(data){
-            $("#reggsiter_repeat_password").next().html(data);
+            $("#reggsiter_repeat_password").next().html("<label>"+data+"</label>");
         })
     })
 
     $(".userout").bind("click", function(){
-        $("#user-head").click();
         delCookie("loginUser");
-        dhcc.Unit.successMessage("退出登录");
-        $($(".login-box").children("div").get(0)).show();
-        $($(".login-box").children("div").get(1)).hide();
-        setTimeout(function(){  window.location.href="../index/index.html";}, 1500);
+        dhcc.Unit.successMessage("退出登录", function(){
+            window.location.href="../index.html";
+        });
     })
 
     $("#modifyPasswordBtn").bind("click", function(){
@@ -121,23 +123,23 @@ $(function(){
         $("#modifyNewPasswordRepeat").next().html("");
 
         if(password == ""){
-            $("#modifyPassword").next().html("密码不能为空");
+            $("#modifyPassword").next().html("<label>密码不能为空</label>");
             return;
         }
         if(password.length < 6 ){
-            $("#modifyPassword").next().html("密码长度不能小于6");
+            $("#modifyPassword").next().html("<label>密码长度不能小于6</label>");
             return;
         }
         if(newPassword == ""){
-            $("#modifyNewPassword").next().html("新密码不能为空");
+            $("#modifyNewPassword").next().html("<label>新密码不能为空</label>");
             return;
         }
         if(newPassword.length < 6 ){
-            $("#modifyNewPassword").next().html("新密码长度不能小于6");
+            $("#modifyNewPassword").next().html("<label>新密码长度不能小于6</label>");
             return;
         }
         if(repeatPassword == ""||repeatPassword != newPassword){
-            $("#modifyNewPasswordRepeat").next().html("密码不一致");
+            $("#modifyNewPasswordRepeat").next().html("<label>密码不一致</label>");
             return;
         }
         var attrs={"userName":userInfo.email,"password":password,"newPassword":newPassword};
@@ -146,7 +148,7 @@ $(function(){
             dhcc.Unit.successMessage("密码修改成功");
             dhcc.Unit.hideModal("modal-psd");
         },function(data){
-            $("#modifyNewPasswordRepeat").next().html(data);
+            $("#modifyNewPasswordRepeat").next().html("<label>"+data+"</label>");
         })
     })
 
@@ -156,20 +158,19 @@ $(function(){
         $("#reset_email").next().html("");
 
         if(email == ""){
-            $("#reset_email").next().html("邮箱不能为空");
+            $("#reset_email").next().html("<label>邮箱不能为空</label>");
             return;
         }
         if(!checkEmail(email)){
-            $("#reset_email").next().html("邮箱格式不正确");
+            $("#reset_email").next().html("<label>邮箱格式不正确</label>");
             return;
         }
         var attrs={"userName":email};
 
         dhcc.Unit.ajaxUtil(attrs,"resetPassword.json",function(data){
             dhcc.Unit.successMessage("新密码已发送至邮箱，请验收");
-            dhcc.Unit.hideModal("modal_reseat_password");
         },function(data){
-            $("#reset_email").next().html(data);
+            $("#reset_email").next().html("<label>"+data+"</label>");
         })
     })
 })

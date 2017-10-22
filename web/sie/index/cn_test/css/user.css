@@ -1,26 +1,4 @@
 @charset "utf-8";
-/* CSS Document */
-div,form,ul,ol,li,span,p,dl,dt,dd,img{margin:0;padding:0;border:0;}
-body,h1,h2,h3,h4,h5,h6,em,i,u{margin:0;padding:0;font-style:normal;}
-h1,h2,h3,h4,h5,h6{font-weight:bold;}
-body{background:#fff;color:#222;font:12px/1.5 "microsoft yahei",arial,"Hiragino Sans GB",sans-serif;}
-ul,ol,li{list-style:none;}
-table,td,input,textarea,button,select{font-size:100%;font-family:"microsoft yahei",arial,"Hiragino Sans GB",sans-serif;}
-textarea{resize: none;}
-a{color:#cfe6e5;text-decoration:none;cursor: pointer;}
-a:hover,a:focus{color:#14b0ba;text-decoration:underline;}
-img{color:transparent;font-size:0;-ms-interpolation-mode:bicubic;border:0;}
-label{font-weight: normal;margin: 0;}
-div,.clearfix{zoom: 1;}
-div:after,.clearfix:after{content:"";display:table;width: 0;height: 0;visibility:hidden;clear: both;}
-.auto{margin:0 auto;}
-.none{display:none;}
-.block{display:block;}
-.inline-block{display:inline-block;}
-.word-break{word-break:break-all;}
-.container{width:1440px;padding:0;}
-
-
 /* tab-box */
 .tab-box .nav-tabs{padding: 0 35px 10px;margin-bottom: 20px;}
 .tab-box .nav-tabs>li{margin: 0 20px 0 0;}
@@ -81,7 +59,7 @@ div:after,.clearfix:after{content:"";display:table;width: 0;height: 0;visibility
 .project-tab .project-time{position: absolute;top: 20px;right: 10px;font-size: 13px;color: #aaa;}
 
 /* form-list */
-.form-group input.form-control{height: 46px;line-height: 46px;font-size: 16px;}
+.form-group input.form-control{height: 46px;line-height: 46px;font-size: 15px;}
 .form-group input.form-control.w300{width: 300px;}
 .form-list.form-list-inline .form-group{padding-left: 140px;margin-bottom: 20px;}
 .form-list.form-list-inline .form-group label{position: absolute;left: 0;display: block;width: 120px;text-align: right;line-height: 46px;font-size: 14px;color: #000;}
@@ -146,21 +124,20 @@ div:after,.clearfix:after{content:"";display:table;width: 0;height: 0;visibility
 .modal-userBox .form-list-inline .form-group{padding-left: 80px;}
 .modal-userBox .form-list-inline .form-group label{width: 80px;font-size: 16px;color: #5f5f5f;}
 .modal-userBox .form-list-inline .form-group input.form-control{padding-left: 10px;padding-right: 10px;background: transparent;}
-.modal-xs{}
-.modal-xs .modal-dialog{max-width: 380px;margin-top: 200px;}
-.modal-xs .modal-header{height: 30px;padding: 10px 15px;border: none;}
-.modal-xs .modal-body{padding: 10px 40px 30px;text-align: center;}
-.modal-xs h3{font-size: 20px;font-weight: normal;color: #555;}
-.modal-xs h3.text-success{color: #06b75f;}
-.modal-xs p{margin-top: 10px;font-size: 14px;color: #555;}
-.modal-xs .fa-check-circle{font-size: 36px;}
-.modal-tips .modal-dialog{max-width: 180px;margin-top: 300px;}
-.modal-tips .modal-body{padding: 25px 40px;}
 .modal-college{}
 .modal-college .modal-dialog{width: 660px;margin-top: 150px;}
 .modal-college .modal-header{height: 30px;padding: 10px 15px;border: none;}
 .modal-college .modal-body{padding: 0;}
 .modal-order-list .modal-dialog{max-width: 580px;font-size: 14px;}
+.modal-pay{}
+.modal-pay .modal-dialog{width: 720px;margin-top: 150px;}
+.modal-pay .modal-header{color: #fff;background: #ae0c20;}
+.modal-pay .modal-header .close{color: #fff;opacity: 1;}
+.modal-pay .modal-body{padding: 40px;font-size: 14px;}
+.modal-pay .form-list.form-list-inline .form-group{padding-left: 90px;}
+.modal-pay .form-list.form-list-inline .form-group label{width: 80px;}
+.modal-pay .table-paytxt>tbody>tr>td{padding: 5px 0;border: none;}
+.modal-pay .table-paytxt>tbody>tr>td:first-child{color: #999;}
 
 /* college-list */
 .college-list{}
@@ -217,11 +194,6 @@ td.active.disabled:hover:active, .datetimepicker table tr td.active.active, .dat
 
 
 /* commons */
-.btn-danger{color:#fff;background-color:#ae0c20;border-color:#ae0c20}
-.btn-danger.active,.btn-danger.focus,.btn-danger:active,.btn-danger:focus,.btn-danger:hover,.open>.dropdown-toggle.btn-danger{color:#fff;background-color:#9d091b;border-color:#9d091b}
-.btn-danger.active,.btn-danger:active,.open>.dropdown-toggle.btn-danger{background-image:none}
-.btn-danger.disabled,.btn-danger.disabled.active,.btn-danger.disabled.focus,.btn-danger.disabled:active,.btn-danger.disabled:focus,.btn-danger.disabled:hover,.btn-danger[disabled],.btn-danger[disabled].active,.btn-danger[disabled].focus,.btn-danger[disabled]:active,.btn-danger[disabled]:focus,.btn-danger[disabled]:hover,fieldset[disabled] .btn-danger,fieldset[disabled] .btn-danger.active,fieldset[disabled] .btn-danger.focus,fieldset[disabled] .btn-danger:active,fieldset[disabled] .btn-danger:focus,fieldset[disabled] .btn-danger:hover{background-color:#ae0c20;border-color:#ae0c20}
-.btn-danger .badge{color:#ae0c20;background-color:#fff}
 .btn-primary{color:#fff;background-color:#083747;border-color:#083747}
 .btn-primary.active,.btn-primary.focus,.btn-primary:active,.btn-primary:focus,.btn-primary:hover,.open>.dropdown-toggle.btn-primary{color:#fff;background-color:#002e3d;border-color:#002e3d}
 
@@ -235,6 +207,7 @@ td.active.disabled:hover:active, .datetimepicker table tr td.active.active, .dat
 .ico{vertical-align: middle;display: inline-block;background-repeat:no-repeat;background-size: cover;}
 .ico-ok{width: 14px;height: 12px;background-image: url(../../public/img/ico-ok.png);}
 .ico-success{width: 30px;height: 30px;background-image: url(../../public/img/ico-success.svg);}
+.ico-fail{width: 30px;height: 30px;background-image: url(../../public/img/ico-fail.png);}
 .ico-user-info{width: 20px;height: 20px;background-image: url(../../public/img/ico-user-info.svg);}
 .ico-college{width: 20px;height: 18px;background-image: url(../../public/img/ico-college.svg);}
 .ico-upload{width: 18px;height: 21px;background-image: url(../../public/img/ico-upload.svg);}
@@ -248,14 +221,10 @@ td.active.disabled:hover:active, .datetimepicker table tr td.active.active, .dat
 .ico-lock{width: 20px;height: 26px;background-image: url(../../public/img/ico-lock.png);}
 
 .text-grey{color:#bbb;}
+.text-pink{color:#ff6e6e;}
 .text-danger{color:#d0011b;}
 .text-success{color:#06b75f;}
 .table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th{padding: 10px 8px;}
-.table-middle>tbody>tr>td{vertical-align:middle;}
-
-input::-webkit-input-placeholder{color:#ccc!important;}
-input::-moz-placeholder{color:#ccc!important;}
-input::-ms-input-placeholder{color:#ccc!important;}
 select{ appearance: none;
    -moz-appearance: none;
 -webkit-appearance: none;

@@ -14,7 +14,7 @@ $(function(){
     });
 
     if(!judgeLogin()){
-        return;
+        window.location.href="login.html";
     }
 
     /**

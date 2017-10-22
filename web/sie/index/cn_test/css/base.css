@@ -7,11 +7,17 @@ h1,h2,h3,h4,h5,h6{font-weight:bold;}
 body{padding-top:170px;background:#fff;color:#222;font:12px/1.5 "microsoft yahei",arial,"Hiragino Sans GB",sans-serif;}
 ul,ol,li{list-style:none;}
 table,td,input,textarea,button,select{font-size:100%;font-family:"microsoft yahei",arial,"Hiragino Sans GB",sans-serif;}
-a{color:#333;text-decoration:none;}
+a{color:#333;text-decoration:none;cursor: pointer;}
 a:hover,a:focus{color:#ae0c20;text-decoration:underline;}
 img{color:transparent;font-size:0;-ms-interpolation-mode:bicubic;border:0;}
+textarea{resize: none;}
+label{font-weight: normal;margin: 0;}
+div,.clearfix{zoom: 1;}
+div:after,.clearfix:after{content:"";display:table;width: 0;height: 0;visibility:hidden;clear: both;}
 .auto{margin:0 auto;}
 .none{display:none;}
+.block{display:block;}
+.inline-block{display:inline-block;}
 .word-break{word-break:break-all;}
 .container{width:1170px;}
 
@@ -218,6 +224,19 @@ body.scroll{padding-top:70px;}
 .login-body p{position:relative;z-index:2;}
 .login-body p label{position:absolute;z-index:3;bottom:-20px;left:0;line-height:20px;margin:0;font-weight:normal;color:#ae0c20;}
 .login-body hr{border-color:#ddd;}
+
+/*=== modal 
+ * =====================================================*/
+.modal-xs{}
+.modal-xs .modal-dialog{max-width: 380px;margin-top: 200px;}
+.modal-xs .modal-header{height: 30px;padding: 10px 15px;border: none;}
+.modal-xs .modal-body{padding: 10px 40px 30px;text-align: center;}
+.modal-xs h3{font-size: 20px;font-weight: normal;color: #555;}
+.modal-xs h3.text-success{color: #06b75f;}
+.modal-xs p{margin-top: 10px;font-size: 14px;color: #555;}
+.modal-xs .fa-check-circle{font-size: 36px;}
+.modal-tips .modal-dialog{max-width: 180px;margin-top: 300px;}
+.modal-tips .modal-body{padding: 25px 40px;}
 
 
 /*=== area 
