@@ -247,6 +247,72 @@ public class OrderServiceImpl extends BaseServiceImpl<OrderEntity,Integer> imple
 
     }
 
+    //判断现有订单和原来订单的cr和coupon是否相同
+    private void updateCrNumber(CrEntity crEntity,CrEntity oldEntity){
+        if(crEntity != null ){
+            Integer crId = crEntity.getId();
+            //现在有cr优惠
+            if(oldEntity == null){
+                //原来没有优惠活动
+                crEntity.setUsed(crEntity.getUsed() + 1);
+            }else if(oldEntity.getId() != crId){
+                //优惠活动不相同
+                oldEntity.setUsed(oldEntity.getUsed() - 1);
+                crEntity.setUsed(crEntity.getUsed() + 1);
+            }else{
+                //优惠活动相同不用进行修改
+            }
+
+        }else{
+            //本次没有优惠活动
+            if(oldEntity != null){
+                //原来有优惠活动人数减1
+                oldEntity.setUsed(oldEntity.getUsed() - 1);
+            }
+        }
+        //进行保存
+        if(crEntity != null){
+            crDao.updateEntity(crEntity);
+        }
+        if(oldEntity != null){
+            crDao.updateEntity(oldEntity);
+        }
+
+    }
+    //判断现有订单和原来订单的cr和coupon是否相同
+    private void updateCouponNumber(CouponEntity couponEntity,CouponEntity oldEntity){
+        if(couponEntity != null ){
+            Integer crId = couponEntity.getId();
+            //现在有cr优惠
+            if(oldEntity == null){
+                //原来没有优惠活动
+                couponEntity.setUsed(couponEntity.getUsed() + 1);
+            }else if(oldEntity.getId() != crId){
+                //优惠活动不相同
+                oldEntity.setUsed(oldEntity.getUsed() - 1);
+                couponEntity.setUsed(couponEntity.getUsed() + 1);
+            }else{
+                //优惠活动相同不用进行修改
+            }
+
+        }else{
+            //本次没有优惠活动
+            if(oldEntity != null){
+                //原来有优惠活动人数减1
+                oldEntity.setUsed(oldEntity.getUsed() - 1);
+            }
+        }
+        //进行保存
+        if(couponEntity != null){
+            couponDao.updateEntity(couponEntity);
+        }
+        if(oldEntity != null){
+            couponDao.updateEntity(oldEntity);
+        }
+
+    }
+
+
     public void updateOrderInfo(OrderEntity orderEntity) {
         OrderEntity oldEntity = this.orderDao.getEntity(orderEntity.getId());
         if(oldEntity != null){
@@ -277,6 +343,9 @@ public class OrderServiceImpl extends BaseServiceImpl<OrderEntity,Integer> imple
                      }
                 }
             }
+            //Fixme 修改cr优惠和优惠活动
+            updateCrNumber(orderEntity.getCrEntity(),oldEntity.getCrEntity());
+            updateCouponNumber(orderEntity.getCouponEntity(),oldEntity.getCouponEntity());
 
 
             //修改报名人数
@@ -329,7 +398,6 @@ public class OrderServiceImpl extends BaseServiceImpl<OrderEntity,Integer> imple
                         this.courseService.updateCourseCount(detailEntity.getCourseIds(), oldEntity.getSystemType(),oldEntity.getOrderType(), flag);
                     }
                 }
-
 
                 if(oldEntity.getCouponEntity() != null){
                     CouponEntity couponEntity = this.couponDao.getEntity(oldEntity.getCouponEntity().getId());
