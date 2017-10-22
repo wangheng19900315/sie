@@ -9,6 +9,22 @@ $(function(){
 	attrs.systemType=systemType;
 
 	/**
+	 * 个人中心申请步骤初始化
+	 */
+	dhcc.Unit.ajaxUtil(attrs,"getApplicationStep.json",function(data){
+		var step = $("#application-step").find("a");
+		//不可用的功能
+		for(var i=data+2; i<5; i++){
+			$(step[i]).attr("href","#");
+		}
+		//学生申请激活的步骤
+		var stepStatus = $("#step-status").find("li");
+		for(var i=0; i<data; i++){
+			$(stepStatus[i]).addClass("checked");
+		}
+	});
+
+	/**
 	 * 获取我的课程
 	 */
 	dhcc.Unit.ajaxUtil(attrs,"getComAndSubOrderCourse.json",function(data){
@@ -42,16 +58,18 @@ $(function(){
 			'<th>住宿</th>' +
 			'<th>总价</th> </tr>';
 		data = removeNull(data);
-		orders = orders +
-			'<tr><td><label>'+ data.code + '</label></td>'+
-			'<td><label>' + data.statusName + '</label></td>'+
-			'<td><label>' + data.payTypeName + '</label></td>'+
-			'<td><label>' + data.projectNames + '</label></td>'+
-			'<td><label>' + data.courseNumber + '</label></td>'+
-			'<td><label>' + data.dormitoryNames + '</label></td>'+
-			'<td><label>' + data.payMoney + '</label></td></tr>';
-		var orderTable = $($(".table")[1]);
-		orderTable.empty();
-		orderTable.append(orders);
+		if(data.code){
+			orders = orders +
+				'<tr><td><label>'+ data.code + '</label></td>'+
+				'<td><label>' + data.statusName + '</label></td>'+
+				'<td><label>' + data.payTypeName + '</label></td>'+
+				'<td><label>' + data.projectNames + '</label></td>'+
+				'<td><label>' + data.courseNumber + '</label></td>'+
+				'<td><label>' + data.dormitoryNames + '</label></td>'+
+				'<td><label>' + data.payMoney + '</label></td></tr>';
+			var orderTable = $($(".table")[1]);
+			orderTable.empty();
+			orderTable.append(orders);
+		}
 	});
 });

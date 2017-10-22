@@ -1,5 +1,5 @@
 //全局变量请求地址
-var rootPath = 'http://localhost:8085/api/';
+var rootPath = 'http://localhost:81/api/';
 var accessToken='un23n4no2bu4bs34';
 var systemType = "2";//tru系统
 var studentId = "1";
@@ -219,7 +219,21 @@ function initApplicationStep(){
 
 //TODO 错误处理公共函数
 function publicErrorBack(message){
-    alert(message);
+    $("#modal-fail").find(".mt10").html(message);
+    $('#modal-fail').modal('show');
+    $("body").addClass("modal-scroll").css({
+        "overflow":"hidden",
+        "padding-right":0
+    });
+    setTimeout(function(){
+        $('#modal-fail').modal('hide');
+        $("body").removeClass("modal-scroll").css({
+            "overflow":"auto"
+        });
+        if(typeof(eval(callBack))=="function"){
+            callBack();
+        }
+    }, 1500);
 }
 
 

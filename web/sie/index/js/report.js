@@ -3,11 +3,42 @@ $(function(){
     if(!judgeLogin()){
         window.location.href="login.html";
     }
+
+    /**
+     * 不可用的申请功能初始化
+     */
+    initApplicationStep();
+
+    //添加校验规则
+    $("#data-form").validate({
+        rules : {
+            sendStreet:{
+                required: true
+            },
+            sendProvince:{
+                required: true
+            },
+            sendPerson :{
+                required: true
+            },
+            sendCountry:{
+                required: true
+            },
+            sendPostCode:{
+                required: true
+            },
+            sendTel:{
+                required: true
+            }
+        }
+    });
+
     /**
      * 加载成绩单寄送信息
      */
     var attrs={};
     attrs.studentId=userInfo.id+"";
+
     /**
      * 获取学生信息
      */
@@ -46,12 +77,18 @@ $(function(){
     });
 
     $("#saveSendInfo").bind("click",function(){
+        if(!$("#data-form").valid()){
+            return;
+        }
         //按钮不可用
         $("#saveSendInfo").attr("disabled", true);
         var params = $("#data-form").serializeJson();
         attrs=params;
         dhcc.Unit.ajaxUtil(attrs,"saveGradeSend.json",function(data){
-            dhcc.Unit.successMessage("提交成功");
+            dhcc.Unit.successMessage("提交成功",function(){
+                //页面进行跳转
+                window.location.href = "user-center.html";
+            });
         });
         $("#saveSendInfo").attr("disabled", false);
     });

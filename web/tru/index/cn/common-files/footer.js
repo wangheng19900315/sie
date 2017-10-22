@@ -241,6 +241,19 @@ document.writeln('<!-- modal-box -->'+
 '    </div>'+
 '   </div>');
 
+document.writeln('<!-- modal-box -->'+
+    ' <div class="modal modal-xs modal-tips fade" id="modal-fail" tabindex="-1" role="dialog" data-backdrop="static">'+
+    '<div class="modal-dialog">'+
+    '<div class="modal-content">'+
+    ' <div class="modal-body">'+
+    ' <i class="ico ico-fail"></i>'+
+    ' <h3 class="mt10">提交失败</h3>'+
+    ' </div>'+
+    ' </div>'+
+    ' </div>'+
+    ' </div>');
+
+
 document.writeln('<script src="../../public/js/jquery.min.js"></script>'+
 '<script src="../../public/js/bootstrap.min.js"></script>'+
 '<script src="../../public/js/bootstrap-datetimepicker.js"></script>'+
