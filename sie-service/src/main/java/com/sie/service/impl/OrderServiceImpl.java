@@ -1041,28 +1041,26 @@ public class OrderServiceImpl extends BaseServiceImpl<OrderEntity,Integer> imple
         OrderEntity entity = new OrderEntity();
         try {
             BeanUtils.copyProperties(entity,orderBean);
-            //设置cr优惠实体
-            if(NumberUtil.isSignless(orderBean.getCrId())){
-                CrEntity crEntity = crDao.getEntity(orderBean.getCrId());
-                entity.setCrEntity(crEntity);
-                entity.setCrDiscount(crEntity.getRmbPrice());
-            }else{
-                entity.setCrDiscount(0.0);
-            }
-            //设置优惠券
-            if(NumberUtil.isSignless(orderBean.getCouponId())){
-                CouponEntity couponEntity = couponDao.getEntity(orderBean.getCouponId());
-                entity.setCouponEntity(couponEntity);
-                entity.setCouponDiscount(couponEntity.getRmbDiscount());
-            }else{
-                entity.setCouponDiscount(0.0);
-            }
-            updateOrderInfo(entity);
-
-
         } catch (Exception e) {
             e.printStackTrace();
         }
+        //设置cr优惠实体
+        if(NumberUtil.isSignless(orderBean.getCrId())){
+            CrEntity crEntity = crDao.getEntity(orderBean.getCrId());
+            entity.setCrEntity(crEntity);
+            entity.setCrDiscount(crEntity.getRmbPrice());
+        }else{
+            entity.setCrDiscount(0.0);
+        }
+        //设置优惠券
+        if(NumberUtil.isSignless(orderBean.getCouponId())){
+            CouponEntity couponEntity = couponDao.getEntity(orderBean.getCouponId());
+            entity.setCouponEntity(couponEntity);
+            entity.setCouponDiscount(couponEntity.getRmbDiscount());
+        }else{
+            entity.setCouponDiscount(0.0);
+        }
+        updateOrderInfo(entity);
     }
 
 //    private void setOrderEntityValue(OrderEntity entity,OrderBean bean){
