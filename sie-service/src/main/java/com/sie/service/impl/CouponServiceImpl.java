@@ -51,9 +51,9 @@ public class CouponServiceImpl extends BaseServiceImpl<CouponEntity,Integer> imp
 
         Date date = new Date();
 
-        if(couponEntity.getStartTime().getTime() > date.getTime() ||  couponEntity.getEndTime().getTime()<date.getTime()){
-            return false;
-        }
+//        if(couponEntity.getStartTime().getTime() > date.getTime() ||  couponEntity.getEndTime().getTime()<date.getTime()){
+//            return false;
+//        }
         if((couponEntity.getTotal() ) <  (flag  + couponEntity.getUsed())){
             return false;
         }
