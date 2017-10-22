@@ -58,16 +58,18 @@ $(function(){
 			'<th>住宿</th>' +
 			'<th>总价</th> </tr>';
 		data = removeNull(data);
-		orders = orders +
-			'<tr><td><label>'+ data.code + '</label></td>'+
-			'<td><label>' + data.statusName + '</label></td>'+
-			'<td><label>' + data.payTypeName + '</label></td>'+
-			'<td><label>' + data.projectNames + '</label></td>'+
-			'<td><label>' + data.courseNumber + '</label></td>'+
-			'<td><label>' + data.dormitoryNames + '</label></td>'+
-			'<td><label>' + data.payMoney + '</label></td></tr>';
-		var orderTable = $($(".table")[1]);
-		orderTable.empty();
-		orderTable.append(orders);
+		if(data.code){
+			orders = orders +
+				'<tr><td><label>'+ data.code + '</label></td>'+
+				'<td><label>' + data.statusName + '</label></td>'+
+				'<td><label>' + data.payTypeName + '</label></td>'+
+				'<td><label>' + data.projectNames + '</label></td>'+
+				'<td><label>' + data.courseNumber + '</label></td>'+
+				'<td><label>' + data.dormitoryNames + '</label></td>'+
+				'<td><label>' + data.payMoney + '</label></td></tr>';
+			var orderTable = $($(".table")[1]);
+			orderTable.empty();
+			orderTable.append(orders);
+		}
 	});
 });

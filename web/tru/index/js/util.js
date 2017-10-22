@@ -1,5 +1,5 @@
 //全局变量请求地址
-var rootPath = 'http://localhost:81/api/';
+var rootPath = 'http://localhost:8085/api/';
 var accessToken='un23n4no2bu4bs34';
 var systemType = "2";//tru系统
 var studentId = "1";
@@ -282,6 +282,9 @@ dhcc.Unit.hideModal=function(modalId){
 
 //判断json对象是否有控制 有设置为''
 function removeNull(json){
+    if(!json){
+        return {};
+    }
     $.each(json,function(key,value){
         if(value == null){
             json[key] = '';
