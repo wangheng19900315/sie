@@ -246,6 +246,7 @@ document.writeln('<script src="../../public/js/jquery.min.js"></script>'+
 '<script src="../../public/js/bootstrap-datetimepicker.js"></script>'+
 '<script src="../../public/js/swiper.jquery.min.js"></script>'+
 ' <script src="../../public/js/chosen.jquery.min.js"></script>'+
+'<script src="../../public/js/jquery.validate.min.js" type="text/javascript" charset="utf-8"></script>'+
 ' <script src="../../public/js/common.js"></script>'+
 ' <script src="../../js/util.js"></script>'+
 ' <script src="../../js/user-operate.js"></script>');
