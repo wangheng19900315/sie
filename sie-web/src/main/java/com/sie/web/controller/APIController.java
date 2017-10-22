@@ -232,8 +232,8 @@ public class APIController {
 
             ObjectMapper mapper = new ObjectMapper();
             StudentEntity studentEntity = mapper.readValue(params, StudentEntity.class);
-            //设置学生的步骤为3
-            studentEntity.setApplicationStep(3);
+            //设置学生的步骤为4
+            studentEntity.setApplicationStep(4);
 
             resultBean = this.studentService.updateEntity(studentEntity,3);
         }catch(Exception e){

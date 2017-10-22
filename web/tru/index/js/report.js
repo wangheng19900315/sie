@@ -85,7 +85,10 @@ $(function(){
         var params = $("#data-form").serializeJson();
         attrs=params;
         dhcc.Unit.ajaxUtil(attrs,"saveGradeSend.json",function(data){
-            dhcc.Unit.successMessage("提交成功");
+            dhcc.Unit.successMessage("提交成功",function(){
+                //页面进行跳转
+                window.location.href = "user-center.html";
+            });
         });
         $("#saveSendInfo").attr("disabled", false);
     });
