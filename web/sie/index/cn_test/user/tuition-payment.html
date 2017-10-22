@@ -16,6 +16,8 @@
 </head>
 <body>
 
+<script src="../common-files/header.js" type="text/javascript" charset="utf-8"></script>
+
 <!-- banner -->
 <div class="banner banner-user">
 	<p>学生中心</p>
@@ -39,7 +41,7 @@
 			<div class="plate-box w900">
 				<h3><i class="fa fa-credit-card"></i> 选择支付方式</h3>
 				<div class="area">
-					<table class="table table-bordered table-middle text-center">
+					<table class="table table-bordered table-middle text-center" id="orderTable">
 						<tr>
 							<th>订单编号</th>
 							<th>学生姓名</th>
@@ -47,23 +49,23 @@
 							<th>课程数目</th>
 							<th>住宿</th>
 							<th>总价</th>
-						</tr>
-						<tr>
-							<td><label>20170204104194669</label></td>
-							<td><label> </label></td>
-							<td><label>ECNU</label></td>
-							<td><label>2</label></td>
-							<td><label>无</label></td>
-							<td><label>$45,000 / ￥26,565</label></td>
-						</tr>
-						<tr>
-							<td><label>20170204104194669</label></td>
-							<td><label> </label></td>
-							<td><label>ECNU</label></td>
-							<td><label>2</label></td>
-							<td><label>无</label></td>
-							<td><label>$45,000 / ￥26,565</label></td>
-						</tr>
+						<!--</tr>-->
+						<!--<tr>-->
+							<!--<td><label>20170204104194669</label></td>-->
+							<!--<td><label> </label></td>-->
+							<!--<td><label>ECNU</label></td>-->
+							<!--<td><label>2</label></td>-->
+							<!--<td><label>无</label></td>-->
+							<!--<td><label>$45,000 / ￥26,565</label></td>-->
+						<!--</tr>-->
+						<!--<tr>-->
+							<!--<td><label>20170204104194669</label></td>-->
+							<!--<td><label> </label></td>-->
+							<!--<td><label>ECNU</label></td>-->
+							<!--<td><label>2</label></td>-->
+							<!--<td><label>无</label></td>-->
+							<!--<td><label>$45,000 / ￥26,565</label></td>-->
+						<!--</tr>-->
 					</table>
 				</div>
 				<div class="mt50 text-center">
@@ -74,6 +76,9 @@
         </div>
    	</div>
 </div>
+
+<script src="../common-files/footer.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/tuition-payment.js" type="text/javascript" charset="utf-8"></script>
 
 
 <!-- modal-box -->
@@ -87,13 +92,13 @@
 		    <div class="modal-body">
 		    	<div class="form-list form-list-inline">
 		    		<div class="form-group">
-						<label>退款途径</label>
+						<label>支付途径</label>
 						<div class="dropdown dropdown-select">
 							<input type="text" class="form-control" id="refundWay" data-toggle="dropdown" value="银行转账">
 							<ul class="dropdown-menu" aria-labelledby="refundWay">
 								<li aria-id="refundWayBank">银行转账</li>
-								<li aria-id="refundWayAlipay">支付宝</li>
-								<li aria-id="refundWayWechat">微信</li>
+								<!--<li aria-id="refundWayAlipay">支付宝</li>-->
+								<!--<li aria-id="refundWayWechat">微信</li>-->
 								<li aria-id="refundWayEMT">加币EMT</li>
 								<li aria-id="refundWayCash">现金付款</li>
 							</ul>
@@ -195,11 +200,7 @@
   	</div>
 </div>
 	
-<script src="../../public/js/jquery.min.js"></script>
-<script src="../../public/js/bootstrap.min.js"></script>
-<script src="../../public/js/bootstrap-datetimepicker.js"></script>
-<script src="../../public/js/chosen.jquery.min.js"></script>
-<script src="../../public/js/user.js"></script>
+
 
 </body>
 </html>
