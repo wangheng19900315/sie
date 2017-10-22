@@ -299,3 +299,16 @@ function checkEmail(value){
     }
     return true;
 }
+
+
+$.extend($.validator.messages, {
+    required: "× 必填项",
+    email: "非法邮件",
+    digits: "只能输入整数",
+    maxlength: $.validator.format("长度最大为{0}"),
+    minlength: $.validator.format("长度最小为{0}"),
+    rangelength: $.validator.format("长度介于{0}和{1}之间"),
+    range: $.validator.format("介于{0}和{1}之间的值"),
+    max: $.validator.format("最大为{0}"),
+    min: $.validator.format("最小为{0}")
+});
