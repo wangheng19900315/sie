@@ -180,13 +180,30 @@ dhcc.Unit.ajaxUtil = function (attrs, api, successBack, errorBack) {
         }else if(!result.success && typeof(eval(errorBack))=="function") {
             errorBack(result.message);
         }
+        else{
+            commonErrorBack(result.message);
+        }
     });
 
 };
 
 //TODO 错误处理公共函数
-function errorBack(message){
-    alert(message);
+function commonErrorBack(message){
+    $("#modal-fail").find(".mt10").html(message);
+    $('#modal-fail').modal('show');
+    $("body").addClass("modal-scroll").css({
+        "overflow":"hidden",
+        "padding-right":0
+    });
+    setTimeout(function(){
+        $('#modal-fail').modal('hide');
+        $("body").removeClass("modal-scroll").css({
+            "overflow":"auto"
+        });
+        if(typeof(eval(callBack))=="function"){
+            callBack();
+        }
+    }, 1500);
 }
 
 
@@ -208,10 +225,12 @@ dhcc.Unit.ajaxFile = function (attrs,fileId, api, successBack, errorBack) {
                 successBack(result.data);
             }else if(!result.success && typeof(eval(errorBack))=="function") {
                 errorBack(result.message);
+            }else{
+                commonErrorBack(result.message);
             }
         },
         error : function(responseStr) {
-            console.log("error");
+            commonErrorBack("获取不到信息");
         }
     });
 

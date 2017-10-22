@@ -1,7 +1,7 @@
 var termGrade;
 $(function(){
     if(!judgeLogin()){
-        return;
+        window.location.href="login.html";
     }
     /**
      * 加载成绩单寄送信息
