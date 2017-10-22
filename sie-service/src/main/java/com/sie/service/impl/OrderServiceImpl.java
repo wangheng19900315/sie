@@ -359,8 +359,8 @@ public class OrderServiceImpl extends BaseServiceImpl<OrderEntity,Integer> imple
                     if(oldEntity.getStatus() == OrderStatus.CANCEL.value()){
                         flag = 1;
                     }
-                }else if(orderEntity.getStatus() == OrderStatus.APPLY.value()){
-                    if(oldEntity.getStatus() == OrderStatus.COMPLETE.value()){
+                }else if(orderEntity.getStatus() == OrderStatus.REFUND.value()){
+                    if(oldEntity.getStatus() == OrderStatus.APPLY.value()){
                         flag = -1;
                     }
 

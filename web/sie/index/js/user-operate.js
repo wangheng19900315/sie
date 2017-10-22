@@ -14,7 +14,7 @@ $(function(){
         $(".username").html(userInfo.email);
     }else{
         $("#fixedMenu").find(".language a").each(function(i, data){
-            if(i<2){
+            if(i<2 || i>3){
                 $(this).show();
             }else{
                 $(this).hide();

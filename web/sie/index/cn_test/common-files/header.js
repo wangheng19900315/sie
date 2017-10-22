@@ -7,7 +7,7 @@ document.writeln("	</div>");
 document.writeln("	<div class=\'top-box\'>");
 document.writeln("		<div class=\'container\'>");
 document.writeln("			<div class=\'logo-box pull-left\'>");
-document.writeln("				<a href=\'index.html\' target=\'_blank\'>");
+document.writeln("				<a href=\'../index.html\' target=\'_blank\'>");
 document.writeln("					<img src=\'../../public/img/logo.png\' alt=\'sieSchool\' />");
 document.writeln("				</a>");
 document.writeln("			</div>");

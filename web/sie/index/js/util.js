@@ -299,6 +299,10 @@ dhcc.Unit.hideModal=function(modalId){
 
 //判断json对象是否有控制 有设置为''
 function removeNull(json){
+
+    if(!json){
+        return {};
+    }
     $.each(json,function(key,value){
         if(value == null){
             json[key] = '';
