@@ -21,7 +21,6 @@ $(function(){
 		//设置project下拉框
 		var project = $("#project").next();
 		var projectLi = '';
-		//初始化学期
 		$.each(data,function(i,item){
 			projectLi = projectLi +
 				'<li max-course="' + item.maxCourse + '" li-value="'+ item.ids +'">' + item.name + '</li>';
@@ -96,8 +95,8 @@ $(function(){
 			//获取住宿
 			var dormitory = $("#dormitory").find("input[name=dormitory"+projectId+"]:checked");
 			console.log(dormitory);
-			debugger;
-			if(dormitory.length > 0){
+
+			if(dormitory.val() != ''){
 				dormitoryTr = dormitoryTr + '<tr>'+
 					'<td><label>' + dormitory.next().next().text() + '</label></tr>';
 				project = {};
@@ -241,6 +240,15 @@ function getProjectCourseAndDormitory(projectIds){
 			//遍历dormitory
 			var dormitoryTr = '<tr>'+
 				'<td><label>'+item.name+'</label></td>';
+			//默认第一个为无
+			dormitoryTr = dormitoryTr + '<td>'+
+							'<div class="radio-box">' +
+							'<label>'+
+							'<input type="radio" name="dormitory'+item.id+'" value="" checked/>'+
+							'<i class="fa"></i>'+
+							'<span>无</span>'+
+							'</label>'+
+							'</div></td>';
 			$.each(item.dormitoryVos,function (j, dormitory) {
 				if(dormitory.readonly){
 					dormitoryTr = dormitoryTr+ '<td>'+

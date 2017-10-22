@@ -163,6 +163,7 @@ public class APIController {
                 resultBean.setMessage("用户不存在");
                 return resultBean;
             }
+            resultBean.setMessage("查找成功");
             resultBean.setSuccess(true);
             resultBean.setData(studentEntity);
 
@@ -904,7 +905,7 @@ public class APIController {
      * 获取学校信息
      * @return
      */
-    @RequestMapping("/getSchool.json")
+    @RequestMapping(value = "/getSchool.json",method=RequestMethod.POST)
     @ResponseBody
     public ResultBean  getSchool(String params, String accessToken){
         logger.info("getSchool.json params="+params +" accessToken="+accessToken);
@@ -929,7 +930,6 @@ public class APIController {
                 resultBean.setSuccess(true);
                 resultBean.setData(schoolVos);
             }
-
 
         }catch(Exception e){
             e.printStackTrace();

@@ -9,6 +9,30 @@ $(function(){
      */
     initApplicationStep();
 
+    //添加校验规则
+    $("#data-form").validate({
+        rules : {
+            sendStreet:{
+                required: true
+            },
+            sendProvince:{
+                required: true
+            },
+            sendPerson :{
+                required: true
+            },
+            sendCountry:{
+                required: true
+            },
+            sendPostCode:{
+                required: true
+            },
+            sendTel:{
+                required: true
+            }
+        }
+    });
+
     /**
      * 加载成绩单寄送信息
      */
@@ -53,6 +77,9 @@ $(function(){
     });
 
     $("#saveSendInfo").bind("click",function(){
+        if(!$("#data-form").valid()){
+            return;
+        }
         //按钮不可用
         $("#saveSendInfo").attr("disabled", true);
         var params = $("#data-form").serializeJson();
