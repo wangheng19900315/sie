@@ -10,6 +10,7 @@ import com.sie.service.*;
 import com.sie.service.bean.OrderBean;
 import com.sie.service.bean.OrderDetailBean;
 import com.sie.service.bean.ResultBean;
+import com.sie.service.bean.SchoolCategoryBean;
 import com.sie.service.vo.*;
 import com.sie.util.FileUtil;
 import com.sie.util.NumberUtil;
@@ -922,8 +923,14 @@ public class APIController {
                 resultBean.setMessage("token 为空，请检查参数");
                 return resultBean;
             }
-
-            List<SchoolEntity> schoolEntities = this.schoolService.getList(new ArrayList<HqlOperateVo>());
+            ObjectMapper mapper = new ObjectMapper();
+            Map<String,String >maps = mapper.readValue(params, Map.class);
+            String province = maps.get("province");
+            List<HqlOperateVo> vos = new ArrayList<HqlOperateVo>();
+            if(StringUtil.isNotBlank(province)){
+                vos.add(new HqlOperateVo("province", "=", province));
+            }
+            List<SchoolEntity> schoolEntities = this.schoolService.getList(vos);
             if(schoolEntities.size() > 0){
 
                 List<SchoolVo> schoolVos = new ArrayList<>();
@@ -936,6 +943,35 @@ public class APIController {
                 resultBean.setSuccess(true);
                 resultBean.setData(schoolVos);
             }
+
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+
+        return resultBean;
+    }
+
+
+    /**
+     * 获取学校信息
+     * @return
+     */
+    @RequestMapping(value = "/getSchoolCategory.json",method=RequestMethod.POST)
+    @ResponseBody
+    public ResultBean  getSchoolCategory(String params, String accessToken){
+        logger.info("getSchool.json params="+params +" accessToken="+accessToken);
+        ResultBean resultBean = new ResultBean();
+
+        try{
+            if(StringUtil.isBlank(accessToken) || !accessToken.equals(SYSTEM_ACCESS_TOKEN)){
+                resultBean.setMessage("token 为空，请检查参数");
+                return resultBean;
+            }
+
+            List<SchoolCategoryBean> schoolEntities = this.schoolService.getCategory();
+            resultBean.setMessage("查找成功");
+            resultBean.setSuccess(true);
+            resultBean.setData(schoolEntities);
 
         }catch(Exception e){
             e.printStackTrace();

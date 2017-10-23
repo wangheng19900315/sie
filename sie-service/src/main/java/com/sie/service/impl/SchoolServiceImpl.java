@@ -4,6 +4,7 @@ import com.sie.framework.dao.SchoolDao;
 import com.sie.framework.entity.SchoolEntity;
 import com.sie.framework.entity.UserEntity;
 import com.sie.service.SchoolService;
+import com.sie.service.bean.SchoolCategoryBean;
 import com.sie.util.NumberUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -46,5 +47,18 @@ public class SchoolServiceImpl extends BaseServiceImpl<SchoolEntity,Integer> imp
             schools.add(entity.getName());
         }
         return schools;
+    }
+
+    @Override
+    public List<SchoolCategoryBean> getCategory() {
+        List<SchoolCategoryBean> categoryBeanList = new ArrayList<>();
+        List<Object[]> objects = this.schoolDao.getByHql("select nationality,province from SchoolEntity group by nationality,province");
+        for(Object[] obj:objects){
+            SchoolCategoryBean bean = new SchoolCategoryBean();
+            bean.setNational(obj[0].toString());
+            bean.setProvince(obj[1].toString());
+            categoryBeanList.add(bean);
+        }
+        return categoryBeanList;
     }
 }

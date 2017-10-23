@@ -124,19 +124,6 @@ $(function(){
            var schools = {};
            for(var i=0; i<data.length; i++){
                var obj = data[i];
-               if(schools[obj.nationality]){
-                   if(schools[obj.nationality][obj.province]){
-                       schools[obj.nationality][obj.province].push(obj.name)
-                   }else{
-                       schools[obj.nationality][obj.province]=[];
-                       schools[obj.nationality][obj.province].push(obj.name);
-                   }
-               }else{
-                   schools[obj.nationality]={};
-                   schools[obj.nationality][obj.province]=[];
-                   schools[obj.nationality][obj.province].push(obj.name);
-               }
-
                $("#president").append("<option>"+obj.name+"</option>")
            }
 
@@ -146,36 +133,48 @@ $(function(){
             chosen.addClass('form-control');
             setinput.addClass('form-control');
 
-           var i=0;
-           for(var nationality in schools){
-               var active = "";
-               if(i==0){
-                   active = 'active'
-               }
-               $(".college-tab ul").append(' <li role="presentation" class="'+active+'" ><a href="#college'+i+'" onclick="selectNation('+i+')" aria-controls="#college'+i+'" role="tab" data-toggle="tab">'+nationality+'</a></li>');
-
-               $(".college-tab .tab-content").append(' <div role="tabpanel" class="tab-pane '+active+'" id="college'+i+'">'+
-                  ' <div class="college-a"></div></div>')
-               $("#college"+i).append('<div class="college-ul">'+
-                   '<ul class="clearfix">')
-
-                var n=0;
-               for(var province in schools[nationality]){
-                   $("#college"+i).find(".college-a").append('<a id="province'+i+n+'" onclick="seletProvince(\''+province+'\',\'province'+i+n+'\')" href="javascript:;">'+province+'</a>');
-                  for(var j=0; j< schools[nationality][province].length; j++){
-                      $("#college"+i).find(".clearfix").append('<li class="'+province+'"  onclick="selectSchool(\''+schools[nationality][province][j]+'\')"><i class="fa fa-university"></i>'+schools[nationality][province][j]+'</li>');
-                  }
-                  n++;
-               }
-               i++;
-           }
-
-            $("#college0").find(".college-a").children(":first").click();
         }
     });
 
+    dhcc.Unit.ajaxUtil({}, "getSchoolCategory.json",function(data){
+        if(data && data.length > 0) {
+            var schools = {};
+            for (var i = 0; i < data.length; i++) {
+                var obj = data[i];
+                if(schools[obj.national]){
+                    schools[obj.national].push(obj.province)
+                }else{
+                    schools[obj.national]=[];
+                    schools[obj.national].push(obj.province);
+                }
+            }
+
+            var i=0;
+            for(var nationality in schools){
+                var active = "";
+                if(i==0){
+                    active = 'active';
+                }
+
+                $(".college-tab ul.nav-tabs").append(' <li role="presentation" class="'+active+'" ><a href="#college'+i+'" onclick="selectNation('+i+')" aria-controls="#college'+i+'" role="tab" data-toggle="tab">'+nationality+'</a></li>');
+
+                $(".college-tab .tab-content").append(' <div role="tabpanel" class="tab-pane '+active+'" id="college'+i+'">'+
+                   ' <div class="college-a"></div></div>')
+                $("#college"+i).append('<div class="college-ul">'+
+                    '<ul class="clearfix">');
 
 
+                for(var n=0; n<schools[nationality].length;n ++){
+                    var province = schools[nationality][n];
+                    $("#college"+i).find(".college-a").append('<a id="province'+i+n+'" onclick="seletProvince(\''+province+'\',\'province'+i+n+'\')" href="javascript:;">'+province+'</a>');
+                }
+                i++;
+            }
+
+            selectNation(0);
+        }
+
+    });
 
     ////绑定学校保存按钮
     $("#select_school_btn").bind("click",function(){
@@ -194,8 +193,20 @@ function selectNation(index){
 function seletProvince(province, id){
     $("#"+id).parent().children().removeClass("active");
     $("#"+id).addClass("active");
-    $(".college-tab .tab-content").find(".clearfix li").hide();
-    $(".college-tab .tab-content").find(".clearfix ."+province).show();
+    $("#"+id).parent().parent().find(".clearfix li").remove();
+    var atts={"province":province}
+
+    dhcc.Unit.ajaxUtil(atts, "getSchool.json",function(data) {
+        if (data && data.length > 0) {
+            var schools = {};
+            for (var i = 0; i < data.length; i++) {
+                var obj = data[i];
+                $("#"+id).parent().parent().find(".clearfix").append('<li class="'+province+'"  onclick="selectSchool(\''+obj.name+'\')"><i class="fa fa-university"></i>'+obj.name+'</li>');
+
+            }
+        }
+    })
+
 
 
 }
