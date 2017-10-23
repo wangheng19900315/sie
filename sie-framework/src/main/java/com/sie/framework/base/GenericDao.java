@@ -21,6 +21,8 @@ public interface GenericDao<T extends BaseEntity, PK extends Serializable> {
 
 	public abstract List<T> getList();
 
+	public abstract List<Object[]> getByHql(String hql);
+
 	public abstract List<T> getList(int firstResult, int maxResults);
 
 	public List<T> getList(List<HqlOperateVo> hqlOperateVos, int firstResult, int maxResults);

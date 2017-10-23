@@ -72,6 +72,11 @@ public class GenericDaoImpl<T extends BaseEntity, PK extends Serializable> imple
 	}
 
 	@Override
+	public List<Object[]> getByHql(String hql) {
+		return this.sessionFactory.getCurrentSession().createQuery(hql).list();
+	}
+
+	@Override
 	public List<T> getList(int firstResult, int maxResults) {
 		Query query = this.sessionFactory.getCurrentSession().createQuery("from " + clazz.getName() +" where hdelete=0 order by id desc");
 		query.setFirstResult(firstResult);
