@@ -13,15 +13,22 @@ $(function(){
         return reg.test(value);
 
     }, '非法身份证');
+    //拼音校验规则
+    $.validator.addMethod('pinyin', function( value, element ){
+        var reg =  /[a-z]$/;
+        return reg.test(value);
 
+    }, '必须为拼音');
     //添加校验规则
     $("#data-form").validate({
         rules : {
             lastName:{
-                required: true
+                required: true,
+                pinyin:true
             },
             firstName:{
-                required: true
+                required: true,
+                pinyin:true
             },
             chineseName :{
                 required: true,

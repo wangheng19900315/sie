@@ -18,16 +18,19 @@
         <div class="col-sm-12">
             <div class="panel">
                 <div class="panel-body buttons-with-margins">
-                    <form class="form-inline">
+                    <form class="form-inline"  id="search-form">
                         <div class="form-group">
-                            <input type="text" class="form-control" id="name" placeholder="输入名称">
+                            <input type="text" class="form-control" name="chineseName" placeholder="中文名称">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="englishName" placeholder="英文名称">
                         </div>
                         <button type="button"  id="searchBtn" class="btn btn-primary" >查找</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
                         <button type="button"  class="btn" id="addBtn" >添加</button> &nbsp;&nbsp;
                         <button type="button"  class="btn btn-primary disabled" id="editBtn">修改</button> &nbsp;&nbsp;
                         <button type="button"  class="btn btn-danger disabled" id="deleteBtn">删除</button> &nbsp;&nbsp;
-                        <%--<button type="button" class="btn btn-success" id="infoBtn" >查看</button> &nbsp;&nbsp;--%>
+                        <button type="button" class="btn btn-success disabled" id="exportBtn"  >导出</button> &nbsp;&nbsp;
                     </form>
                 </div>
             </div>

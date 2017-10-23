@@ -19,6 +19,11 @@ function selectRow() {
         $('#deleteBtn').addClass('disabled');
         $('#infoBtn').addClass('disabled');
     }
+    if(ids && ids.length > 0){
+        $('#exportBtn').removeClass('disabled');
+    }else{
+        $('#exportBtn').addClass('disabled');
+    }
 };
 $(function(){
 
@@ -131,11 +136,40 @@ $(function(){
             },
             className: "bootbox-sm"
         });
-    })
+    });
 
     $("#infoBtn").bind("click",function(){
         search();
-    })
+    });
+
+    $("#exportBtn").bind("click", function(){
+        var ids = $("#grid-table").jqGrid('getGridParam', 'selarrrow');
+        bootbox.confirm({
+            message: "确认要导出excel?",
+            callback: function(result) {
+                if(result){
+                    console.log(ids);
+                    $.ajax({
+                        url: pageRootPath+'/course/export.json',
+                        type: 'post',
+                        dataType:'json',
+                        data:{
+                            ids:ids
+                        },
+                        success: function (json, statusText, xhr, $form) {
+                            if (json.success) {
+                                alert("删除完成!");
+                            } else {
+                                alert( json.message);
+                            }
+                        }
+                    });
+                }
+            },
+            className: "bootbox-sm"
+        });
+    });
+
 
 })
 
@@ -149,13 +183,11 @@ function search() {
     $('#view-btn').addClass('disabled');
 
     jQuery("#grid-table").jqGrid('setGridParam',{
-        url: pageRootPath+'/project/list.json',
+        url: pageRootPath+'/course/list.json',
         datatype: "json",
         height: '100%',
         mtype: 'post',
-        postData: {
-            //name: $("#name").val()
-        }
+        postData: $("#search-form").serializeJson()
     }).trigger('reloadGrid');
 
 }
