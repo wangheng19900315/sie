@@ -15,7 +15,7 @@ $(function(){
     }, '非法身份证');
     //拼音校验规则
     $.validator.addMethod('pinyin', function( value, element ){
-        var reg =  /[a-z]$/;
+        var reg =  /[a-zA-Z]$/;
         return reg.test(value);
 
     }, '必须为拼音');

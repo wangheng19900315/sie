@@ -616,7 +616,7 @@ public class APIController {
     }
 
     /**
-     * 得到学生可以申请退款的订单
+     * 得到学生已完成的订单
      * @return
      */
     @RequestMapping(value = "/getCompleteOrderList.json", method = RequestMethod.POST)
