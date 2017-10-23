@@ -467,7 +467,7 @@ public class ExportExcel {
 			Object val = this.getCellValue(row, mergeColumn);
 			if(!oldValue.equals(val)){
 				for (Object[] os : annotationList) {
-					if(maps.get(column+"") == null){
+					if(maps.get(column+"") == null  && (start+1) > i){
 						this.sheet.addMergedRegion(new CellRangeAddress((start),(i-1),column,column));
 					}
 					column++;
