@@ -299,7 +299,8 @@ div:after,.clearfix:after{content:"";display:table;width: 0;height: 0;visibility
 .modal-xs h3.text-success{color: #06b75f;}
 .modal-xs p{margin-top: 10px;font-size: 14px;color: #555;}
 .modal-xs .fa-check-circle{font-size: 36px;}
-.modal-tips .modal-dialog{max-width: 180px;margin-top: 300px;}
+.modal-tips{text-align: center;}
+.modal-tips .modal-dialog{display: inline-block;width: auto;margin-top: 300px;}
 .modal-tips .modal-body{padding: 25px 40px;}
 .modal-college{}
 .modal-college .modal-dialog{width: 660px;margin-top: 150px;}

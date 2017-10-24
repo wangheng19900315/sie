@@ -69,6 +69,11 @@ $(function() {
 			});
 			$(function(){
 				var inputTxt = $(".report-address input.form-control");
+				for(var i = 0; i < inputTxt.length; i++) {
+					if(inputTxt[i].value != ""){
+						inputTxt[i].previousElementSibling.style.opacity = "1";
+					}
+				}
 			    inputTxt.focus(function() {
 			    	$(this).attr("placeholder","");
 			    	$(this).prev().css("opacity","1");
