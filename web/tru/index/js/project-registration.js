@@ -69,6 +69,7 @@ $(function(){
 	});
 
 	$("#create-order").bind("click", function () {
+
 		var courseTr = '';
 		var dormitoryTr = '';
 		orders = [];
@@ -98,7 +99,7 @@ $(function(){
 
 			if(dormitory.val() != ''){
 				dormitoryTr = dormitoryTr + '<tr>'+
-					'<td><label>' + dormitory.next().next().text() + '</label></tr>';
+					'<td id="dormitoryId'+dormitory.val()+'"><label>' + dormitory.next().next().text() + '</label></tr>';
 				project = {};
 				project["projectId"] = parseInt(projectId);
 				project["dormitoryId"] = parseInt(dormitory.val());
@@ -111,8 +112,33 @@ $(function(){
 		$("#course-list").append(courseTr);
 
 		//显示住宿信息
+		if(dormitoryTr == ''){
+			//没有住宿信息
+			dormitoryTr = '<tr><td><label>无</label></tr>';
+		}
 		$("#dormitory-list").empty();
 		$("#dormitory-list").append(dormitoryTr);
+
+		//后台获取价格
+		attrs={};
+		attrs.systemType=parseInt(systemType);
+		attrs.orderDetailBean = orders;
+		/**
+		 * 保存订单信息
+		 */
+		dhcc.Unit.ajaxUtil(attrs,"getOrderPrice.json",function(data) {
+			//Fixme 根据前台进行修改
+			$("#course-price").text('￥' +data['coursePrice']);
+			$("#total-price").text('￥' + data['totalPrice']);
+
+			//住宿价格
+			if(data['dormitoryPrice'] != null){
+				$.each(data['dormitoryPrice'],function(key,value){
+					$("#dormitoryId"+key).append('<label class="pull-right">￥'+ value +'元</label>');
+				});
+			}
+		});
+
 	});
 	//确认下单功能
 	$("#firm-order").bind("click",function(){
@@ -316,7 +342,9 @@ function initCheckBoxClick(projectIds){
 				//所有tab限制
 				var num = $(".project-tab").find("input[type=checkbox]:checked").length;
 				var maxNum = $("#course-num").attr("li-value");
+
 				if(maxNum == 0){
+					$(this).attr("checked",false);
 					alert("请先选择课程门数");
 					return;
 				}
