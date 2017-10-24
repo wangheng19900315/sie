@@ -32,10 +32,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by wangheng on 2017/8/20.
@@ -475,6 +472,61 @@ public class APIController {
         }catch(Exception e){
             e.printStackTrace();
         }
+        return resultBean;
+    }
+
+    /**
+     * 得到用户订单金额
+     * @return
+     */
+    @RequestMapping(value = "/getOrderPrice.json", method = RequestMethod.POST)
+    @ResponseBody
+    public ResultBean  getOrderPrice(String params, String accessToken){
+        logger.info("getOrderPrice.json params="+params +" accessToken="+accessToken);
+        ResultBean resultBean = new ResultBean();
+
+        try{
+            if(StringUtil.isBlank(accessToken) || !accessToken.equals(SYSTEM_ACCESS_TOKEN)){
+                resultBean.setMessage("token 为空，请检查参数");
+                return resultBean;
+            }
+
+            ObjectMapper mapper = new ObjectMapper();
+            OrderBean orderBean = mapper.readValue(params, OrderBean.class);
+
+            //订单的金额 key 为course的为课程价格 key为total的为总价格 key为dormitory
+            OrderPriceVo money = new OrderPriceVo();
+            Map<Integer,Double> dormitoryPrice = new HashMap();
+            //设置订单金额
+            int projectNum = 0;
+            int courseNum = 0;
+            double totalMoney = 0;
+            for(OrderDetailBean detailBean : orderBean.getOrderDetailBean()){
+                //添加住宿的价格
+                if(detailBean.getDormitoryId() != null){
+                    DormitoryEntity dormitoryEntity = dormitoryService.get(detailBean.getDormitoryId());
+                    if(dormitoryEntity != null){
+                        dormitoryPrice.put(dormitoryEntity.getId(),dormitoryEntity.getPrice());
+                        totalMoney += dormitoryEntity.getPrice();
+                    }
+                }else{
+                    projectNum = projectNum + 1;
+                    String[] courses = detailBean.getCourseIds().split(",");
+                    courseNum += courses.length;
+                }
+            }
+            //添加课程的价格
+            money.setCoursePrice(packagePriceService.getProjectPrice(orderBean.getSystemType(),projectNum,courseNum));
+            totalMoney += packagePriceService.getProjectPrice(orderBean.getSystemType(),projectNum,courseNum);
+            money.setTotalPrice(totalMoney);
+            money.setDormitoryPrice(dormitoryPrice);
+            resultBean.setSuccess(true);
+            resultBean.setMessage("获取价格成功");
+            resultBean.setData(money);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+
         return resultBean;
     }
 
