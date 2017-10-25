@@ -137,7 +137,25 @@ $(function(){
             },
             className: "bootbox-sm"
         });
-    })
+    });
+
+    //绑定导出学生课程信息
+    $("#exportStudentCourseBtn").bind("click", function(){
+        bootbox.confirm({
+            message: "确认要导出excel?",
+            callback: function(result) {
+                if(result){
+                    var ids = $("#grid-table").jqGrid('getGridParam', 'selarrrow');
+                    $.each(ids,function(i,item){
+                        var url = pageRootPath+"/project/exportStudentCourse.json?projectId="+item;
+                        window.open(url, "学生课程下载"+i);
+                    });
+                }
+            },
+            className: "bootbox-sm"
+        });
+    });
+
 
     //报名项目获取后台可报名项目数据
     $("#registrationProjectBtn").bind("click",function(){

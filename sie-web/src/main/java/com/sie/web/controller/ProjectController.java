@@ -131,6 +131,26 @@ public class ProjectController {
         return "redirect:/student/list.html";
     }
 
+
+    @RequestMapping(value = "exportStudentCourse.json")
+    @ResponseBody
+    public String exportStudent(Integer projectId,HttpServletResponse response, RedirectAttributes redirectAttributes) {
+        try {
+//            DormitoryEntity dormitoryEntity = dormitoryService.get(dormitoryId);
+//            if(dormitoryEntity == null){
+//                throw new RuntimeException("住宿信息不存在");
+//            }
+//
+//            String fileName = dormitoryEntity.getName() + "-学生住宿信息-"+ DateUtil.format(new Date(), "yyyyMMddHHmmss")+".xlsx";
+//            List<StudentDormitoryExport> students = dormitoryService.getStudentInDormitory(dormitoryId);
+//            new ExportExcel(null, StudentDormitoryExport.class).setDataList(students).write(response, fileName).dispose();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+
     /**
      *项目组合操作
      */

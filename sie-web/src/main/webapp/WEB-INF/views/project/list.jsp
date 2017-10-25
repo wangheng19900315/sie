@@ -29,6 +29,7 @@
                         <button type="button"  class="btn btn-danger disabled" id="deleteBtn">删除</button> &nbsp;&nbsp;
                         <button type="button"  class="btn btn-primary" id="exportBtn"  >导出</button> &nbsp;&nbsp;
                         <button type="button" class="btn btn-success"  id="registrationProjectBtn" data-toggle="modal" data-target="#registrationProject">报名项目</button> &nbsp;&nbsp;
+                        <button type="button"  class="btn btn-primary disabled" id="exportStudentCourseBtn">导出学生课程</button> &nbsp;&nbsp;
                     </form>
                 </div>
             </div>

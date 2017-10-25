@@ -19,11 +19,6 @@ function selectRow() {
         $('#deleteBtn').addClass('disabled');
         $('#infoBtn').addClass('disabled');
     }
-    if(ids && ids.length > 0){
-        $('#exportBtn').removeClass('disabled');
-    }else{
-        $('#exportBtn').addClass('disabled');
-    }
 };
 $(function(){
 
@@ -142,33 +137,19 @@ $(function(){
         search();
     });
 
-    $("#exportBtn").bind("click", function(){
-        var ids = $("#grid-table").jqGrid('getGridParam', 'selarrrow');
-        bootbox.confirm({
-            message: "确认要导出excel?",
-            callback: function(result) {
-                if(result){
-                    console.log(ids);
-                    $.ajax({
-                        url: pageRootPath+'/course/export.json',
-                        type: 'post',
-                        dataType:'json',
-                        data:{
-                            ids:ids
-                        },
-                        success: function (json, statusText, xhr, $form) {
-                            if (json.success) {
-                                alert("删除完成!");
-                            } else {
-                                alert( json.message);
-                            }
-                        }
-                    });
-                }
-            },
-            className: "bootbox-sm"
-        });
-    });
+    //$("#exportBtn").bind("click", function(){
+    //    var ids = $("#grid-table").jqGrid('getGridParam', 'selarrrow');
+    //    bootbox.confirm({
+    //        message: "确认要导出excel?",
+    //        callback: function(result) {
+    //            if(result){
+    //                $("#search-form").attr("action", pageRootPath+"/course/export.json");
+    //                $("#search-form").submit();
+    //            }
+    //        },
+    //        className: "bootbox-sm"
+    //    });
+    //});
 
 
 })
