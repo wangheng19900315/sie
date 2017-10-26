@@ -15,6 +15,7 @@ import com.sie.service.ProjectService;
 import com.sie.service.bean.ProjectPriceBean;
 import com.sie.service.bean.PageInfo;
 import com.sie.service.bean.ProjectBean;
+import com.sie.service.excel.StudentCourseExport;
 import com.sie.service.vo.CourseVo;
 import com.sie.service.vo.DormitoryVo;
 import com.sie.service.vo.ProjectVo;
@@ -285,6 +286,7 @@ public class ProjectServiceImpl extends BaseServiceImpl<ProjectEntity,Integer> i
             DormitoryVo dormitoryVo = new DormitoryVo();
             dormitoryVo.setId(dormitoryEntity.getId());
             dormitoryVo.setName(dormitoryEntity.getName());
+            dormitoryVo.setPrice(dormitoryEntity.getPrice());
             if(dormitoryEntity.getTotalNumber() >= dormitoryEntity.getMaxNumber()){
                 dormitoryVo.setReadonly(true);
             }
@@ -293,6 +295,46 @@ public class ProjectServiceImpl extends BaseServiceImpl<ProjectEntity,Integer> i
         vo.setDormitoryVos(dormitoryVos);
 
         return vo;
+    }
+
+    @Override
+    public List<StudentCourseExport> getStudentInCourse(Integer projectId) {
+        String sql = "SELECT\n" +
+                "\tt2.system_type,t3.course_ids,t1.chinese_name,t1.first_name,t1.last_name,t1.telephone,t1.email,t1.wei_xin,t2.`code`,t1.sex\n" +
+                "FROM\n" +
+                "\tt_student_info t1\n" +
+                "JOIN t_order_info t2 ON t1.id = t2.student_id\n" +
+                "JOIN t_order_detail_info t3 ON t2.id = t3.order_id\n" +
+                "WHERE\n" +
+                "\tt1.h_delete = 0\n" +
+                "AND t2.h_delete = 0\n" +
+                "AND t3.h_delete = 0\n" +
+                "AND t2.`status` = '2'\n" +
+                "AND t3.dormitory_id IS NULL\n" +
+                "AND t3.project_id = '"+ projectId +"'";
+
+        List<Object[]> students = projectDao.getBySql(sql);
+        Map<Integer,List<StudentCourseExport>> studentMap = new HashedMap();
+        for(Object[] student : students){
+            Integer systemType = (Integer) student[0];
+            SystemType system = SystemType.valueOf(systemType);
+            String courses = (String)student[1];
+            String[] courseIds = courses.split(",");
+            for(String courseId : courseIds){
+                CourseEntity courseEntity = courseDao.getEntity(Integer.parseInt(courseId));
+                StudentCourseExport studentCourseExport = new StudentCourseExport();
+                //studentCourseExport.
+                studentCourseExport.setChineseName((String)student[0]);
+                studentCourseExport.setSex((String)student[1]);
+                studentCourseExport.setWeiXin((String)student[2]);
+                studentCourseExport.setTelephone((String)student[7]);
+                studentCourseExport.setEmail((String)student[8]);
+            }
+
+//            studentMap.add(studentCourseExport);
+        }
+        List<StudentCourseExport> studentCourseExports = new ArrayList<>();
+        return studentCourseExports;
     }
 
     private void entityToBean(ProjectPriceEntity entity,ProjectPriceBean bean){

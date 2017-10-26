@@ -5,6 +5,7 @@ import com.sie.framework.entity.ProjectEntity;
 import com.sie.framework.type.SystemType;
 import com.sie.service.bean.PageInfo;
 import com.sie.service.bean.ProjectBean;
+import com.sie.service.excel.StudentCourseExport;
 import com.sie.service.vo.ProjectVo;
 
 import java.util.List;
@@ -23,4 +24,5 @@ public interface ProjectService extends BaseService<ProjectEntity, Integer> {
     Map<Integer,String> getAllCourseProject(Integer system);
     ProjectBean getBean(Integer id);
     ProjectVo getProjectVoDetail(Integer id,SystemType systemType);
+    List<StudentCourseExport> getStudentInCourse(Integer dormitoryId);
 }
