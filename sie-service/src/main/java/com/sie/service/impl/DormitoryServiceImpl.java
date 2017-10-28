@@ -10,12 +10,16 @@ import com.sie.framework.type.SystemType;
 import com.sie.service.DormitoryService;
 import com.sie.service.bean.DormitoryBean;
 import com.sie.service.bean.PageInfo;
+import com.sie.service.excel.StudentDormitoryExport;
+import com.sie.util.DateUtil;
 import com.sie.util.NumberUtil;
 import org.apache.commons.beanutils.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -92,6 +96,41 @@ public class DormitoryServiceImpl extends BaseServiceImpl<DormitoryEntity,Intege
             dormitoryBeanList.add(bean);
         }
         return dormitoryBeanList;
+    }
+
+    @Override
+    public List<StudentDormitoryExport> getStudentInDormitory(Integer dormitoryId) {
+        //获取已经完成的订单的学生信息
+        String sql = "SELECT\n" +
+                "\tt1.chinese_name,t1.sex,t1.wei_xin,t1.birthday,t1.nationality,t1.passport_number,t1.id_number,t1.telephone,t1.email,t1.school_name\n" +
+                "FROM\n" +
+                "\tt_student_info t1\n" +
+                "JOIN t_order_info t2 ON t1.id = t2.student_id\n" +
+                "JOIN t_order_detail_info t3 ON t2.id = t3.order_id\n" +
+                "WHERE\n" +
+                "\tt3.dormitory_id = '"+ dormitoryId + "'\n" +
+                "AND t2.h_delete = 0\n" +
+                "AND t1.h_delete = 0\n" +
+                "AND t2.`status` = '2'";
+
+        List<Object[]> students = dormitoryDao.getBySql(sql);
+        List<StudentDormitoryExport> studentDormitoryExports = new ArrayList<>();
+        for(Object[] student : students){
+            StudentDormitoryExport studentDormitoryExport = new StudentDormitoryExport();
+            studentDormitoryExport.setChineseName((String)student[0]);
+            studentDormitoryExport.setSex((String)student[1]);
+            studentDormitoryExport.setWeiXin((String)student[2]);
+            Date bir = (Date)student[3];
+            studentDormitoryExport.setBirthday(DateUtil.format(new Date(bir.getTime()), "yyyy-MM-dd"));
+            studentDormitoryExport.setNationality((String)student[4]);
+            studentDormitoryExport.setPassportNumber((String)student[5]);
+            studentDormitoryExport.setIdNumber((String)student[6]);
+            studentDormitoryExport.setTelephone((String)student[7]);
+            studentDormitoryExport.setEmail((String)student[8]);
+            studentDormitoryExport.setSchoolName((String)student[9]);
+            studentDormitoryExports.add(studentDormitoryExport);
+        }
+        return studentDormitoryExports;
     }
 
     @Override

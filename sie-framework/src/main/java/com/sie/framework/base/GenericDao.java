@@ -35,6 +35,8 @@ public interface GenericDao<T extends BaseEntity, PK extends Serializable> {
 
 	public List<T> getList(String hql);
 
+	public List<Object[]> getBySql(String sql);
+
 	public List<T> getList(String hql, int firstResult, int maxResults);
 
 	public int getList_count(String hql);

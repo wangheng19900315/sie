@@ -72,8 +72,13 @@ public class GenericDaoImpl<T extends BaseEntity, PK extends Serializable> imple
 	}
 
 	@Override
-	public List<Object[]> getByHql(String hql) {
-		return this.sessionFactory.getCurrentSession().createQuery(hql).list();
+	public List<Object[]> getByHql(String sql) {
+		return this.sessionFactory.getCurrentSession().createQuery(sql).list();
+	}
+
+	@Override
+	public List<Object[]> getBySql(String sql) {
+		return this.sessionFactory.getCurrentSession().createSQLQuery(sql).list();
 	}
 
 	@Override
@@ -83,6 +88,7 @@ public class GenericDaoImpl<T extends BaseEntity, PK extends Serializable> imple
 		query.setMaxResults(maxResults);
 		return query.list();
 	}
+
 
 	@Override
 	public int getCount() {

@@ -9,6 +9,7 @@ import com.sie.util.annotation.ExcelField;
 public class DormitoryVo{
     private Integer id;
     private String name;
+    private double price;
     private boolean readonly;
 
     public Integer getId() {
@@ -33,5 +34,13 @@ public class DormitoryVo{
 
     public void setReadonly(boolean readonly) {
         this.readonly = readonly;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
     }
 }

@@ -2,10 +2,12 @@ package com.sie.web.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.sie.framework.entity.ProjectEntity;
 import com.sie.framework.type.Area;
 import com.sie.service.ProjectService;
 import com.sie.service.RegistrationProjectService;
 import com.sie.service.bean.*;
+import com.sie.service.excel.StudentCourseExport;
 import com.sie.util.DateUtil;
 import com.sie.util.ExportExcel;
 import com.sie.util.NumberUtil;
@@ -130,6 +132,26 @@ public class ProjectController {
         }
         return "redirect:/student/list.html";
     }
+
+
+    @RequestMapping(value = "exportStudentCourse.json")
+    @ResponseBody
+    public String exportStudent(Integer projectId,HttpServletResponse response, RedirectAttributes redirectAttributes) {
+        try {
+            ProjectEntity projectEntity = projectService.get(projectId);
+            if(projectEntity == null){
+                throw new RuntimeException("项目信息不存在");
+            }
+
+            String fileName = projectEntity.getCode() + "-学生课程信息-"+ DateUtil.format(new Date(), "yyyyMMddHHmmss")+".xlsx";
+            List<StudentCourseExport> students = projectService.getStudentInCourse(projectId);
+            new ExportExcel(null, StudentCourseExport.class).setDataList(students).write(response, fileName).dispose();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
 
     /**
      *项目组合操作

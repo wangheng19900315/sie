@@ -17,6 +17,11 @@ function selectRow() {
         $('#editBtn').addClass('disabled');
         $('#deleteBtn').addClass('disabled');
     }
+    if(ids && ids.length > 0){
+        $('#exportStudentBtn').removeClass('disabled');
+    }else{
+        $('#exportStudentBtn').addClass('disabled');
+    }
 };
 $(function(){
 
@@ -122,22 +127,38 @@ $(function(){
     })
 
     //绑定导出事件
-    $("#exportBtn").bind("click", function(){
+    //$("#exportBtn").bind("click", function(){
+    //    bootbox.confirm({
+    //        message: "确认要导出excel?",
+    //        callback: function(result) {
+    //            if(result){
+    //                var url = pageRootPath+"/dormitory/export.json";
+    //                var params = $("#search-form").getGetMethodUrl();
+    //                if(params != ''){
+    //                    url += "?" + params;
+    //                }
+    //                window.location.href = url;
+    //            }
+    //        },
+    //        className: "bootbox-sm"
+    //    });
+    //});
+    //绑定导出学生事件
+    $("#exportStudentBtn").bind("click", function(){
         bootbox.confirm({
             message: "确认要导出excel?",
             callback: function(result) {
                 if(result){
-                    var url = pageRootPath+"/dormitory/export.json";
-                    var params = $("#search-form").getGetMethodUrl();
-                    if(params != ''){
-                        url += "?" + params;
-                    }
-                    window.location.href = url;
+                    var ids = $("#grid-table").jqGrid('getGridParam', 'selarrrow');
+                    $.each(ids,function(i,item){
+                        var url = pageRootPath+"/dormitory/exportStudent.json?dormitoryId="+item;
+                        window.open(url, "学生下载"+i);
+                    });
                 }
             },
             className: "bootbox-sm"
         });
-    })
+    });
 })
 
 

@@ -7,6 +7,7 @@ import com.sie.service.ProjectService;
 import com.sie.service.bean.DormitoryBean;
 import com.sie.service.bean.PageInfo;
 import com.sie.service.bean.ResultBean;
+import com.sie.service.excel.StudentDormitoryExport;
 import com.sie.util.DateUtil;
 import com.sie.util.ExportExcel;
 import com.sie.util.NumberUtil;
@@ -132,7 +133,26 @@ public class DormitoryController {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return "redirect:/student/list.html";
+        return "redirect:/dormitory/list.html";
+    }
+
+    //导出住宿的学生信息
+    @RequestMapping(value = "exportStudent.json")
+    @ResponseBody
+    public String exportStudent(Integer dormitoryId,HttpServletResponse response, RedirectAttributes redirectAttributes) {
+        try {
+            DormitoryEntity dormitoryEntity = dormitoryService.get(dormitoryId);
+            if(dormitoryEntity == null){
+                throw new RuntimeException("住宿信息不存在");
+            }
+
+            String fileName = dormitoryEntity.getName() + "-学生住宿信息-"+ DateUtil.format(new Date(), "yyyyMMddHHmmss")+".xlsx";
+            List<StudentDormitoryExport> students = dormitoryService.getStudentInDormitory(dormitoryId);
+            new ExportExcel(null, StudentDormitoryExport.class).setDataList(students).write(response, fileName).dispose();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
 

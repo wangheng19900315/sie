@@ -537,6 +537,54 @@ public class APIController {
     }
 
     /**
+     * 得到课程的价格
+     * @return
+     */
+    @RequestMapping(value = "/getCoursePrice.json", method = RequestMethod.POST)
+    @ResponseBody
+    public ResultBean  getCoursePrice(String params, String accessToken){
+        logger.info("getCoursePrice.json params="+params +" accessToken="+accessToken);
+        ResultBean resultBean = new ResultBean();
+
+        try{
+            if(StringUtil.isBlank(accessToken) || !accessToken.equals(SYSTEM_ACCESS_TOKEN)){
+                resultBean.setMessage("token 为空，请检查参数");
+                return resultBean;
+            }
+
+            ObjectMapper mapper = new ObjectMapper();
+            Map<String,Object> paramsMap = mapper.readValue(params, Map.class);
+
+            Integer systemType = (Integer)paramsMap.get("systemType");
+            if(systemType == null){
+                resultBean.setMessage("系统参数为空");
+                return resultBean;
+            }
+
+            Integer projectNumber = (Integer)paramsMap.get("projectNumber");
+            if(projectNumber == null){
+                resultBean.setMessage("项目数量为空");
+                return resultBean;
+            }
+            Integer courseNumber = (Integer)paramsMap.get("courseNumber");
+            if(courseNumber == null){
+                resultBean.setMessage("课程数量为空");
+                return resultBean;
+            }
+
+            double money = packagePriceService.getProjectPrice(systemType,projectNumber,courseNumber);
+
+            resultBean.setSuccess(true);
+            resultBean.setMessage("获取价格成功");
+            resultBean.setData(money);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+
+        return resultBean;
+    }
+
+    /**
      * 用户下单
      * @return
      */

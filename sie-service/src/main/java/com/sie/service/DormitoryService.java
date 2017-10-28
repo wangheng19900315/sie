@@ -4,6 +4,7 @@ import com.sie.framework.base.HqlOperateVo;
 import com.sie.framework.entity.DormitoryEntity;
 import com.sie.service.bean.DormitoryBean;
 import com.sie.service.bean.PageInfo;
+import com.sie.service.excel.StudentDormitoryExport;
 
 import java.util.List;
 import java.util.Map;
@@ -16,6 +17,8 @@ public interface DormitoryService extends BaseService<DormitoryEntity, Integer> 
     PageInfo<DormitoryBean> getDormitoryList(Integer page, Integer rows,  List<HqlOperateVo> hqlOperateVos);
 
     List<DormitoryBean> getDormitoryList(List<HqlOperateVo> hqlOperateVos);
+
+    List<StudentDormitoryExport> getStudentInDormitory(Integer dormitoryId);
 
     DormitoryBean getDormitoryByProjectId(Integer projectId);
 
