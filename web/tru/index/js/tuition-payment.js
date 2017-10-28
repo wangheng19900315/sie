@@ -27,7 +27,7 @@ $(function(){
 					obj = removeNull(obj);
 					html = html +
 						'<tr><td><label>'+ obj.code + '</label></td>'+
-						'<tr><td><a class="btn btn-xs btn-danger" data-toggle="modal" data-target="#modal-pay">'+obj.statusName+'</a></td>'+
+						'<td><a class="btn btn-xs btn-danger" data-toggle="modal" data-target="#modal-pay">'+obj.statusName+'</a></td>'+
 						'<td><label>' + obj.payTypeName + '</label></td>'+
 						'<td><label>' + obj.projectNames + '</label></td>'+
 						'<td><label>' + obj.courseNumber + '</label></td>'+
