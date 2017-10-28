@@ -2,6 +2,7 @@ package com.sie.service;
 
 import com.sie.framework.base.HqlOperateVo;
 import com.sie.framework.entity.OrderEntity;
+import com.sie.framework.entity.OrderPayEntity;
 import com.sie.framework.vo.OrderSearchVo;
 import com.sie.service.bean.GradeSendBean;
 import com.sie.service.bean.OrderBean;
@@ -67,7 +68,7 @@ public interface OrderService extends BaseService<OrderEntity, Integer> {
 
     public void setBeanValues(OrderEntity orderEntity, OrderBean bean);
 
-    List<OrderVo> getOrderListVo(String systemType, String studentId,Integer orderStatus);
+    List<OrderVo> getOrderListVo(String systemType, String studentId,Integer orderStatus, Integer id);
 
     OrderVo getLatestOrderListVo(String systemType, String studentId);
 
@@ -76,9 +77,9 @@ public interface OrderService extends BaseService<OrderEntity, Integer> {
      * @param orderId
      * @param payType
      */
-    void updatePaymentInfo(Integer orderId,Integer payType);
+    OrderPayEntity updatePaymentInfo(Integer orderId, Integer payType);
 
+    void completePaymentInfo(Integer orderId,  Double payTotal);
 
-    void completePaymentInfo(Integer orderId);
     ResultBean refundOrder(OrderBean orderBean);
 }

@@ -884,13 +884,16 @@ public class OrderServiceImpl extends BaseServiceImpl<OrderEntity,Integer> imple
 
 
     @Override
-    public List<OrderVo> getOrderListVo(String systemType, String studentId,Integer orderStatus) {
+    public List<OrderVo> getOrderListVo(String systemType, String studentId,Integer orderStatus, Integer orderId) {
         List<OrderVo> orderVos = new ArrayList<>();
         List<HqlOperateVo> list = new  ArrayList<HqlOperateVo>();
         list.add(new HqlOperateVo("systemType", "=", systemType));
         list.add(new HqlOperateVo("studentEntity.id", "=", studentId));
         if(orderStatus != null && orderStatus > 0){
             list.add(new HqlOperateVo("status", "=", orderStatus.toString()));
+        }
+        if(orderId != null && orderId > 0){
+            list.add(new HqlOperateVo("id", "=", orderId.toString()));
         }
         List<OrderEntity> orderEntities = this.getList(list);
         if(orderEntities.size() > 0) {
@@ -1024,7 +1027,7 @@ public class OrderServiceImpl extends BaseServiceImpl<OrderEntity,Integer> imple
 
 
     @Override
-    public void updatePaymentInfo(Integer orderId,Integer payType) {
+    public OrderPayEntity updatePaymentInfo(Integer orderId,Integer payType) {
         OrderEntity orderEntity = this.orderDao.getEntity(orderId);
         if(orderEntity == null){
             throw new RuntimeException("订单不存在，请检查参数");
@@ -1033,14 +1036,17 @@ public class OrderServiceImpl extends BaseServiceImpl<OrderEntity,Integer> imple
             throw new RuntimeException("订单状态不是已提交，请检查参数");
         }
 
-        OrderPayEntity payEntity = orderEntity.getOrderPayEntitiyList();
+        OrderPayEntity payEntity = orderEntity.getOrderPayEntity();
         payEntity.setPayStatus(PayStatus.SUBMIT.value());
         payEntity.setPayType(payType);
-        payEntity.setPayTotal(orderEntity.getPayMoney());
+        //微信手续费0.6%
+        payEntity.setPayTotal(orderEntity.getPayMoney()*1.006);
         this.orderPayDao.updateEntity(payEntity);
 
         orderEntity.setPayType(payType);
         this.orderDao.updateEntity(orderEntity);
+
+        return payEntity;
     }
 
     /**
@@ -1048,7 +1054,7 @@ public class OrderServiceImpl extends BaseServiceImpl<OrderEntity,Integer> imple
      * @param orderId
      */
     @Override
-    public void completePaymentInfo(Integer orderId) {
+    public void completePaymentInfo(Integer orderId, Double payTotal) {
         OrderEntity orderEntity = this.orderDao.getEntity(orderId);
         if(orderEntity == null){
             throw new RuntimeException("订单不存在，请检查参数");
@@ -1056,11 +1062,13 @@ public class OrderServiceImpl extends BaseServiceImpl<OrderEntity,Integer> imple
         if(orderEntity.getStatus() != OrderStatus.SUBMIT.value()){
             throw new RuntimeException("订单状态不是已提交，请检查参数");
         }
+        OrderPayEntity payEntity = orderEntity.getOrderPayEntity();
+        if(payEntity.getPayTotal() != payTotal){
+            throw new RuntimeException("orderId="+orderId+"， 支付金额不一致");
+        }
 
-        OrderPayEntity payEntity = orderEntity.getOrderPayEntitiyList();
         payEntity.setPayStatus(PayStatus.COMPLETE.value());
         this.orderPayDao.updateEntity(payEntity);
-
         orderEntity.setStatus(OrderStatus.COMPLETE.value());
         this.updateOrderInfo(orderEntity);
     }

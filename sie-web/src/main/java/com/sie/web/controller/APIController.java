@@ -278,7 +278,13 @@ public class APIController {
                 orderStatus = Integer.parseInt(status);
             }
 
-            List<OrderVo> orderVos = this.orderService.getOrderListVo(systemType, studentId,orderStatus);
+            String orderId = maps.get("orderId");
+            Integer id = 0;
+            if(StringUtil.isNotBlank(orderId)){
+                id = Integer.parseInt(orderId);
+            }
+
+            List<OrderVo> orderVos = this.orderService.getOrderListVo(systemType, studentId,orderStatus,id);
             resultBean.setMessage("查找成功");
             resultBean.setSuccess(true);
             Map<String,List<OrderVo>> orderVoMap = new HashMap<>();
@@ -649,8 +655,8 @@ public class APIController {
                 return resultBean;
             }
 
-            List<OrderVo> subOrderVos = this.orderService.getOrderListVo(systemType, studentId,OrderStatus.SUBMIT.value());
-            List<OrderVo> comOrderVos = this.orderService.getOrderListVo(systemType, studentId,OrderStatus.COMPLETE.value());
+            List<OrderVo> subOrderVos = this.orderService.getOrderListVo(systemType, studentId,OrderStatus.SUBMIT.value(),null);
+            List<OrderVo> comOrderVos = this.orderService.getOrderListVo(systemType, studentId,OrderStatus.COMPLETE.value(),null);
             subOrderVos.addAll(comOrderVos);
             List<CourseVo> courseVos = new ArrayList<>();
             for(OrderVo orderVo : subOrderVos){
@@ -696,7 +702,7 @@ public class APIController {
                 resultBean.setMessage("systemType 为空，请检查参数");
                 return resultBean;
             }
-            List<OrderVo> comOrderVos = this.orderService.getOrderListVo(systemType, studentId,OrderStatus.COMPLETE.value());
+            List<OrderVo> comOrderVos = this.orderService.getOrderListVo(systemType, studentId,OrderStatus.COMPLETE.value(),null);
             resultBean.setMessage("查找成功");
             resultBean.setSuccess(true);
             resultBean.setData(comOrderVos);
@@ -1114,22 +1120,6 @@ public class APIController {
 //    }
 
 
-    /**
-     * 用户支付
-     * @return
-     */
-    public ResultBean  payOrder(String params, String accessToken){
-        logger.info("getSchool.json params="+params +" accessToken="+accessToken);
-        return null;
-    }
 
-    /**
-     * 完成支付
-     * @return
-     */
-    public ResultBean  paySucess(String params, String accessToken){
-        logger.info("getSchool.json params="+params +" accessToken="+accessToken);
-        return null;
-    }
 
 }

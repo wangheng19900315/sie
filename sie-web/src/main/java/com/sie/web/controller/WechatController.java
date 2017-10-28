@@ -58,7 +58,6 @@ public class WechatController {
      */
     @RequestMapping("/ownerCheck")
     public void ownerCheck(Model model, HttpServletRequest request, HttpServletResponse response) throws IOException {
-        System.out.println(111);
         boolean isGet = request.getMethod().toLowerCase().equals("get");
         PrintWriter print;
         if (isGet) {

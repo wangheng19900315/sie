@@ -110,11 +110,16 @@ public class OrderEntity extends BaseEntity {
         this.orderDetailEntityList = orderDetailEntityList;
     }
 
-//    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "orderEntity", orphanRemoval = true)
-//    @Where(clause = "h_delete=0")
-    public OrderPayEntity getOrderPayEntitiyList() {
-        if(orderPayEntitiyList != null && orderPayEntitiyList.size() > 0){
-            return orderPayEntitiyList.get(0);
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "orderEntity", orphanRemoval = true)
+    @Where(clause = "h_delete=0")
+    public List<OrderPayEntity> getOrderPayEntitiyList() {
+        return this.orderPayEntitiyList;
+    }
+
+    @Transient
+    public OrderPayEntity getOrderPayEntity() {
+        if(this.orderPayEntitiyList != null && this.orderDetailEntityList.size() > 0){
+            return this.orderPayEntitiyList.get(0);
         }
         return null;
     }
