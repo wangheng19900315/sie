@@ -1,6 +1,7 @@
 var coursePrice;
 var dormitorys;//是个map
 var orders;
+var courseTime;//所有的课程信息 key为课程id value 为上课时间
 $(function(){
 	if(!judgeLogin()){
 		return;
@@ -215,6 +216,8 @@ function getProjectCourseAndDormitory(projectIds){
 	 */
 	dhcc.Unit.ajaxUtil(attrs,"getProjectDetails.json",function(data) {
 		dormitorys = {};
+		timeCourse = {};
+		courseTime = {};
 		var ul = $(".project-tab").find("ul");
 		ul.empty();
 		var courseTab = ul.next();
@@ -245,6 +248,8 @@ function getProjectCourseAndDormitory(projectIds){
 			//遍历course
 			$.each(item.courseVos,function (key, value) {
 				$.each(value,function (j, courseInfo) {
+					//初始化课程时间
+					courseTime[courseInfo.id] = key;
 					course = course + '<tr>';
 					if (j == 0) {
 						//第一个要特殊处理一次下
@@ -344,6 +349,7 @@ function initCourseNumSelect(){
 			if(key != oldKey){
 				//价格变化事件
 				getCoursePrice(key);
+				courseCheckboxChange();
 			}
 		}
 	});
@@ -386,30 +392,7 @@ function initCheckBoxClick(projectIds){
 		courseTable.find("input[type=checkbox]").each(function () {
 			//绑定click事件
 			$(this).bind("click", function () {
-				//所有tab限制
-				var num = $(".project-tab").find("input[type=checkbox]:checked").length;
-				var maxNum = $("#course-num").attr("li-value");
-
-				if(maxNum == 0){
-					$(this).attr("checked",false);
-					alert("请先选择课程门数");
-					return;
-				}
-
-				if(num >= maxNum){
-					$("input[type=checkbox]").each(function () {
-						if($(this).is(':checked')){
-							$(this).attr('disabled', false);
-						}else{
-							//没选中的不让继续选择
-							$(this).attr('disabled', true);
-						}
-					});
-				}else{
-					$("input[type=checkbox]").each(function () {
-						$(this).attr('disabled', false);
-					});
-				}
+				courseCheckboxChange();
 				//本tab也的限制
 				var numOne = courseTable.find("input[type=checkbox]:checked").length;
 				var maxOne = 3;
@@ -422,12 +405,51 @@ function initCheckBoxClick(projectIds){
 							$(this).attr('disabled', true);
 						}
 					});
-				}else{
-					courseTable.find("input[type=checkbox]").each(function () {
-						$(this).attr('disabled', false);
-					});
 				}
 			});
 		});
 	});
+}
+
+//所有table的checkbox限制
+function courseCheckboxChange(){
+	//所有tab限制
+	var num = $(".project-tab").find("input[type=checkbox]:checked").length;
+	var maxNum = $("#course-num").attr("li-value");
+
+	if(maxNum == 0 && num != 0){
+		alert("请先选择课程门数");
+		return;
+	}
+
+	if(num >= maxNum){
+		$("input[type=checkbox]").each(function () {
+			if($(this).is(':checked')){
+				$(this).attr('disabled', false);
+			}else{
+				//没选中的不让继续选择
+				$(this).attr('disabled', true);
+			}
+		});
+	}else{
+		$("input[type=checkbox]").each(function () {
+			$(this).attr('disabled', false);
+		});
+		//得到选中的checkbox框的ids
+		var courseIds = [];
+		$(".project-tab").find("input[type=checkbox]:checked").each(function(){
+			//获得所在tab
+			var tableObj = $(this).parents("table:eq(0)");
+			var courseId = $(this).val();
+			var time = courseTime[courseId];
+			//选中后设置其余的不能进行选择
+			$.each(courseTime,function(key,value){
+				if(key != courseId && value == time){
+					//设置为不可用
+					tableObj.find("input[value="+key +"]").attr('disabled', true);
+				}
+			});
+		});
+
+	}
 }
