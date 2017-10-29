@@ -6,5 +6,4 @@ target
 .iml
 *.iml
 logs
-zfbinfo_sie.properties
-zfbinfo_tru.properties
+sie-web/src/main/resources/zfbinfo_*
