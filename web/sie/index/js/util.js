@@ -333,3 +333,4 @@ function checkEmail(value){
     }
     return true;
 }
+

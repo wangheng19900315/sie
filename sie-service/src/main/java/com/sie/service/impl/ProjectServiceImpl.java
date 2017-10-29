@@ -313,6 +313,7 @@ public class ProjectServiceImpl extends BaseServiceImpl<ProjectEntity,Integer> i
                 "AND t3.dormitory_id IS NULL\n" +
                 "AND t3.project_id = '"+ projectId +"'";
 
+        ProjectEntity projectEntity = projectDao.getEntity(projectId);
         List<Object[]> students = projectDao.getBySql(sql);
         Map<Integer,List<StudentCourseExport>> studentMap = new HashedMap();
         for(Object[] student : students){
@@ -323,17 +324,69 @@ public class ProjectServiceImpl extends BaseServiceImpl<ProjectEntity,Integer> i
             for(String courseId : courseIds){
                 CourseEntity courseEntity = courseDao.getEntity(Integer.parseInt(courseId));
                 StudentCourseExport studentCourseExport = new StudentCourseExport();
-                //studentCourseExport.
-                studentCourseExport.setChineseName((String)student[0]);
-                studentCourseExport.setSex((String)student[1]);
-                studentCourseExport.setWeiXin((String)student[2]);
-                studentCourseExport.setTelephone((String)student[7]);
-                studentCourseExport.setEmail((String)student[8]);
+                studentCourseExport.setCourseID(courseEntity.getCourseID());
+                if(system == SystemType.SIE){
+                    studentCourseExport.setCourseCode(courseEntity.getSieCode());
+                }else{
+                    studentCourseExport.setCourseCode(courseEntity.getTruCode());
+                }
+                studentCourseExport.setCourseEnglishName(courseEntity.getEnglishName());
+                studentCourseExport.setProjectCode(projectEntity.getCode());
+                studentCourseExport.setProfessor(courseEntity.getProfessorName());
+                studentCourseExport.setCourseTime(courseEntity.getStartTime() + "--" + courseEntity.getEndTime());
+                //学生总人数最后算
+
+                //学生信息
+                studentCourseExport.setChineseName((String)student[2]);
+                studentCourseExport.setFirstName((String)student[3]);
+                studentCourseExport.setLastName((String)student[4]);
+                studentCourseExport.setTelephone((String)student[5]);
+                studentCourseExport.setEmail((String)student[6]);
+                studentCourseExport.setWeiXin((String)student[7]);
+                studentCourseExport.setOrderCode((String)student[8]);
+                studentCourseExport.setSex((String)student[9]);
+                int otherCourseName = 1;
+                //设置其他课程
+                for(String otherCourse : courseIds){
+                    if(!otherCourse.equals(courseId)){
+                        CourseEntity otherCourseEntity = courseDao.getEntity(Integer.parseInt(otherCourse));
+                        if(otherCourseName == 1){
+                            studentCourseExport.setOtherCourse1(otherCourseEntity.getEnglishName());
+                            otherCourseName ++ ;
+                        }else if(otherCourseName == 2){
+                            studentCourseExport.setOtherCourse2(otherCourseEntity.getEnglishName());
+                            otherCourseName ++ ;
+                        }else{
+                            //目前不存在一个项目下报名4门课程
+                        }
+                    }
+                }
+                if(studentMap.get(courseEntity.getId()) == null){
+                    List<StudentCourseExport> studentList = new ArrayList<>();
+                    studentList.add(studentCourseExport);
+                    studentMap.put(courseEntity.getId(),studentList);
+                }else{
+                    studentMap.get(courseEntity.getId()).add(studentCourseExport);
+                }
+
             }
 
-//            studentMap.add(studentCourseExport);
         }
+        //设置课程数量
+        for(Integer key : studentMap.keySet()){
+            for(StudentCourseExport student : studentMap.get(key)){
+                student.setCourseNumber(studentMap.get(key).size());
+            }
+        }
+
         List<StudentCourseExport> studentCourseExports = new ArrayList<>();
+        for(Integer key : studentMap.keySet()){
+            studentCourseExports.addAll(studentMap.get(key));
+            //添加一行空格
+            studentCourseExports.add(new StudentCourseExport());
+        }
+        //去掉最后一行
+        studentCourseExports.remove(studentCourseExports.size() - 1);
         return studentCourseExports;
     }
 

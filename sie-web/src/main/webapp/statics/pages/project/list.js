@@ -19,6 +19,12 @@ function selectRow() {
         $('#deleteBtn').addClass('disabled');
         $('#infoBtn').addClass('disabled');
     }
+
+    if(ids && ids.length > 0){
+        $('#exportStudentCourseBtn').removeClass('disabled');
+    }else{
+        $('#exportStudentCourseBtn').addClass('disabled');
+    }
 };
 $(function(){
 

@@ -1063,7 +1063,8 @@ public class OrderServiceImpl extends BaseServiceImpl<OrderEntity,Integer> imple
             throw new RuntimeException("订单状态不是已提交，请检查参数");
         }
         OrderPayEntity payEntity = orderEntity.getOrderPayEntity();
-        if(payEntity.getPayTotal() != payTotal){
+
+        if(payTotal > 0 && payEntity.getPayTotal() != payTotal/100){
             throw new RuntimeException("orderId="+orderId+"， 支付金额不一致");
         }
 

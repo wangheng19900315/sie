@@ -1,5 +1,5 @@
 //全局变量请求地址
-var rootPath = 'http://localhost:81/api/';
+var rootPath = 'http://localhost:8085/api/';
 var accessToken='un23n4no2bu4bs34';
 var systemType = "2";//tru系统
 var studentId = "1";
@@ -342,3 +342,10 @@ $.extend($.validator.messages, {
     max: $.validator.format("最大为{0}"),
     min: $.validator.format("最小为{0}")
 });
+
+function isEmptyObject(e) {
+    var t;
+    for (t in e)
+        return !1;
+    return !0
+}

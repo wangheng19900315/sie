@@ -31,9 +31,10 @@ $(function(){
         height: '100%',
         mtype: 'post',
         postData: {},
-        colNames: ['ID', '项目名称','中文名','英文名' ,'最大报名人数','总报名人数','SIE报名人数','TRU报名人数','时间' ,'教授名称' ,'所在系统','SIE课程编码', 'TRU课程编码'],
+        colNames: ['ID','课程ID', '项目名称','中文名','英文名' ,'最大报名人数','总报名人数','SIE报名人数','TRU报名人数','时间' ,'教授名称' ,'所在系统','SIE课程编码', 'TRU课程编码'],
         colModel: [
             {name: 'id', index: 'id', width: 20, hidden: true,  sortable: false},
+            {name: 'courseID', index: 'courseID', width: 20,   sortable: false},
             {name: 'projectName', index: 'projectName', width: 20,   sortable: false},
             {name: 'chineseName', index: 'chineseName', width: 20,   sortable: false},
             {name: 'englishName', index: 'englishName', width: 20,   sortable: false},

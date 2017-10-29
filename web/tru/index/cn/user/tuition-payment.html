@@ -41,6 +41,7 @@
 		<div class="user-rg">
 			<div class="plate-box w900">
 				<h3><i class="fa fa-credit-card"></i> 选择支付方式</h3>
+				<input type="hidden" id="selectPayWay"  data-toggle="modal" data-target="#modal-pay">
 				<div class="area">
 					<table class="table table-bordered table-middle text-center" id="orderTable">
 						<tr>
@@ -156,20 +157,23 @@
 							<div class="form-group">
 								<p class="text-pink">注：微信支付将包含0.6%的手续费</p>
 							</div>
-							<div><img class="img-responsive auto" src="../../public/img/wechat-consult.png" /></div>
+							<div><img class="img-responsive auto" src="../../public/img/wechat-consult.png" style="width:40%"/></div>
 						</div>
 						<div id="refundWayAlipay" class="none">
 							<div class="form-group">
 								<label>支付宝账号</label>
-								<input type="text" class="form-control" placeholder="">
+								<!--<label></label>-->
+								<input type="text" class="form-control" placeholder="" value="iss@sieschool.org" readonly>
 								<p class="text-pink mt20">注： 支付途径二，扫码支付将包含0.6%的手续费</p>
 							</div>
-							<div><img class="img-responsive auto" src="../../public/img/wechat-consult.png" /></div>
+							<!--src="../../public/img/wechat-consult.png"-->
+							<div><img class="img-responsive auto"  /></div>
 						</div>
 						<div id="refundWayEMT" class="none">
 							<div class="form-group">
 								<label>EMT账号</label>
-								<input type="text" class="form-control" placeholder="">
+								<!--<label></label>-->
+								<input type="text" class="form-control" placeholder="" value="CADpay@sieschool.org" readonly>
 							</div>
 							<p class="text-pink">请将Security Question设置成为你的订单号，Security Answer设置为siecadpay.</p>
 							<p class="text-pink">支付完成后，我们会在两个工作日内完成订单状态的审核。</p>

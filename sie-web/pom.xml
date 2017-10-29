@@ -128,6 +128,12 @@
             <version>${jackson.version}</version>
         </dependency>
 
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
+
         <!-- aop -->
         <dependency>
             <groupId>org.aspectj</groupId>
@@ -153,6 +159,26 @@
             <artifactId>sie-service</artifactId>
             <groupId>sie</groupId>
             <version>1.0-SNAPSHOT</version>
+        </dependency>
+
+        <!--支付宝 -->
+        <dependency>
+            <groupId>com.alipay</groupId>
+            <artifactId>sdk-java</artifactId>
+            <version>20161213173952</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.alipay</groupId>
+            <artifactId>trade-sdk</artifactId>
+            <version>20161215</version>
+        </dependency>
+
+
+        <dependency>
+            <groupId>commons-configuration</groupId>
+            <artifactId>commons-configuration</artifactId>
+            <version>1.1</version>
         </dependency>
     </dependencies>
 
