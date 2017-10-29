@@ -6,21 +6,23 @@ import com.sie.framework.dao.*;
 import com.sie.framework.entity.*;
 import com.sie.framework.type.*;
 import com.sie.service.*;
-import com.sie.service.bean.*;
+import com.sie.service.bean.OrderBean;
+import com.sie.service.bean.OrderDetailBean;
+import com.sie.service.bean.PageInfo;
+import com.sie.service.bean.ResultBean;
 import com.sie.service.excel.OrderImport;
 import com.sie.service.vo.CourseVo;
 import com.sie.service.vo.OrderVo;
 import com.sie.util.DateUtil;
 import com.sie.util.NumberUtil;
 import com.sie.util.PageUtil;
-import com.sie.util.StringUtil;
 import org.apache.commons.beanutils.BeanUtils;
-import org.apache.commons.beanutils.converters.IntegerConverter;
+import org.apache.commons.beanutils.ConvertUtils;
+import org.apache.commons.beanutils.converters.SqlTimestampConverter;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.lang.reflect.InvocationTargetException;
 import java.sql.Timestamp;
 import java.util.*;
 
@@ -161,6 +163,7 @@ public class OrderServiceImpl extends BaseServiceImpl<OrderEntity,Integer> imple
 
     public void setBeanValues(OrderEntity orderEntity, OrderBean bean){
         try{
+            ConvertUtils.register(new SqlTimestampConverter(null), java.sql.Timestamp.class);
             BeanUtils.copyProperties(bean, orderEntity);
             if(NumberUtil.isSignless(bean.getStatus())){
                 OrderStatus status = OrderStatus.valueOf(bean.getStatus());

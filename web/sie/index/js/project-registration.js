@@ -1,4 +1,7 @@
+var coursePrice;
+var dormitorys;//是个map
 var orders;
+var courseTime;//所有的课程信息 key为课程id value 为上课时间
 $(function(){
 	if(!judgeLogin()){
 		window.location.href="login.html";
@@ -50,15 +53,15 @@ $(function(){
 		var flag = false;
 		var projectName="";
 		$(".project-tab").find("a").each(function() {
-				var projectId = $(this).attr("aria-controls");
-				projectName = $(this).text();
-				//获取所有的课程
-				num = $("#" + projectId).find("input[type=checkbox]:checked").length;
-				if(num == 0){
-					//TODO 进行提示
-					flag=true;
-					return;
-				}
+			var projectId = $(this).attr("aria-controls");
+			projectName = $(this).text();
+			//获取所有的课程
+			num = $("#" + projectId).find("input[type=checkbox]:checked").length;
+			if(num == 0){
+				//TODO 进行提示
+				flag=true;
+				return;
+			}
 		});
 		if(flag){
 			alert(projectName + "必须选择一门课程");
@@ -69,6 +72,7 @@ $(function(){
 	});
 
 	$("#create-order").bind("click", function () {
+		var dormitoryPrice = 0;
 		var courseTr = '';
 		var dormitoryTr = '';
 		orders = [];
@@ -98,7 +102,10 @@ $(function(){
 
 			if(dormitory.val() != ''){
 				dormitoryTr = dormitoryTr + '<tr>'+
-					'<td><label>' + dormitory.next().next().text() + '</label></tr>';
+					'<td id="dormitoryId'+dormitory.val()+'"><label>' + dormitorys[dormitory.val()].name + '</label></td>';
+				//获取住宿价格
+				dormitoryTr = dormitoryTr + '<td><label>￥'+dormitorys[dormitory.val()].price+'</label></td></tr>';
+				dormitoryPrice = dormitoryPrice + dormitorys[dormitory.val()].price;
 				project = {};
 				project["projectId"] = parseInt(projectId);
 				project["dormitoryId"] = parseInt(dormitory.val());
@@ -106,13 +113,43 @@ $(function(){
 			}
 		});
 
+		//设置课程价格
+		courseTr = courseTr + '<td colspan="3" class="text-right"><label>学费总价：￥ '+ coursePrice +'</label></td>';
 		//显示课程信息
 		$("#course-list").empty();
 		$("#course-list").append(courseTr);
 
 		//显示住宿信息
+		if(dormitoryTr == ''){
+			//没有住宿信息
+			dormitoryTr = '<tr><td><label>无</label></tr>';
+		}
 		$("#dormitory-list").empty();
 		$("#dormitory-list").append(dormitoryTr);
+
+		//总价格
+		var totalTr = '<p class="text-right"><b>总价：￥'+(coursePrice + dormitoryPrice)+'</b></p>';
+		$("#firm-order").parent().before(totalTr);
+		//后台获取价格
+		//attrs={};
+		//attrs.systemType=parseInt(systemType);
+		//attrs.orderDetailBean = orders;
+		/**
+		 * 保存订单信息
+		 */
+		//dhcc.Unit.ajaxUtil(attrs,"getOrderPrice.json",function(data) {
+		//	//Fixme 根据前台进行修改
+		//	$("#course-price").text('￥' +data['coursePrice']);
+		//	$("#total-price").text('￥' + data['totalPrice']);
+		//
+		//	//住宿价格
+		//	if(data['dormitoryPrice'] != null){
+		//		$.each(data['dormitoryPrice'],function(key,value){
+		//			$("#dormitoryId"+key).append('<label class="pull-right">￥'+ value +'元</label>');
+		//		});
+		//	}
+		//});
+
 	});
 	//确认下单功能
 	$("#firm-order").bind("click",function(){
@@ -163,6 +200,7 @@ function changeProject(maxCourse,project){
 	courseNum.empty();
 	courseNum.append(courseLi);
 
+	price = {};
 	//加载项目下的课程和住宿信息
 	getProjectCourseAndDormitory(project);
 
@@ -177,6 +215,9 @@ function getProjectCourseAndDormitory(projectIds){
 	 * 获取项目下的课程和住宿信息
 	 */
 	dhcc.Unit.ajaxUtil(attrs,"getProjectDetails.json",function(data) {
+		dormitorys = {};
+		timeCourse = {};
+		courseTime = {};
 		var ul = $(".project-tab").find("ul");
 		ul.empty();
 		var courseTab = ul.next();
@@ -207,6 +248,8 @@ function getProjectCourseAndDormitory(projectIds){
 			//遍历course
 			$.each(item.courseVos,function (key, value) {
 				$.each(value,function (j, courseInfo) {
+					//初始化课程时间
+					courseTime[courseInfo.id] = key;
 					course = course + '<tr>';
 					if (j == 0) {
 						//第一个要特殊处理一次下
@@ -234,6 +277,10 @@ function getProjectCourseAndDormitory(projectIds){
 					course = course + '</tr>';
 				});
 			});
+
+			course = course + '<tr>'+
+				'<td colspan="4" class="text-right hidden"><label></label></td>' +
+				' </tr>';
 			course = course + '</table></div>';
 			courseTab.append(course);
 
@@ -242,13 +289,13 @@ function getProjectCourseAndDormitory(projectIds){
 				'<td><label>'+item.name+'</label></td>';
 			//默认第一个为无
 			dormitoryTr = dormitoryTr + '<td>'+
-							'<div class="radio-box">' +
-							'<label>'+
-							'<input type="radio" name="dormitory'+item.id+'" value="" checked/>'+
-							'<i class="fa"></i>'+
-							'<span>无</span>'+
-							'</label>'+
-							'</div></td>';
+				'<div class="radio-box">' +
+				'<label>'+
+				'<input type="radio" name="dormitory'+item.id+'" value="" checked/>'+
+				'<i class="fa"></i>'+
+				'<span>无</span>'+
+				'</label>'+
+				'</div></td>';
 			$.each(item.dormitoryVos,function (j, dormitory) {
 				if(dormitory.readonly){
 					dormitoryTr = dormitoryTr+ '<td>'+
@@ -261,9 +308,11 @@ function getProjectCourseAndDormitory(projectIds){
 						'<label>'+
 						'<input type="radio" name="dormitory'+item.id+'" value="'+dormitory.id+'" />'+
 						'<i class="fa"></i>'+
-						'<span>'+dormitory.name +'</span>'+
+						'<span>'+dormitory.name +'（￥ ' + dormitory.price + '）</span>'+
 						'</label>'+
 						'</div></td>';
+					//保存价格
+					dormitorys[dormitory.id] = dormitory;
 				}
 			});
 			for(var jj=item.dormitoryVos.length+1;jj<=maxDorNum;jj++){
@@ -297,12 +346,42 @@ function initCourseNumSelect(){
 			var oldKey = $(this).parent().prev().attr("li-value");
 			$(this).parent().prev().val(txt);
 			$(this).parent().prev().attr("li-value",key);
-			//if(key != oldKey){
-			//}
+			if(key != oldKey){
+				//价格变化事件
+				getCoursePrice(key);
+				courseCheckboxChange();
+			}
 		}
 	});
 }
 
+function getCoursePrice(courseNumber){
+	var projectIds = $("#project").attr("li-value").split(',');
+	var projectNumber = projectIds.length;
+
+	//获取课程价格
+	attrs={};
+	attrs.systemType=parseInt(systemType);
+	attrs.projectNumber = parseInt(projectNumber);
+	attrs.courseNumber = parseInt(courseNumber);
+	/**
+	 * 保存订单信息
+	 */
+	dhcc.Unit.ajaxUtil(attrs,"getCoursePrice.json",function(data) {
+		var moneyTr = '<tr>'+
+			'<td colspan="4" class="text-right"><label>学费总价：￥ '+data+'</label></td>' +
+			' </tr>';
+
+		$(".project-tab").find("a").each(function () {
+			//插入价格
+			var tabId = $(this).attr("aria-controls");
+			var price = $("#" + tabId).find("td[colspan='4']").removeClass("hidden");
+			price.find("label").text('学费总价：￥ '+data);
+		});
+		coursePrice = data;
+	});
+
+}
 //课程选择事件变化
 function initCheckBoxClick(projectIds){
 	//得到所有的tab签
@@ -313,28 +392,7 @@ function initCheckBoxClick(projectIds){
 		courseTable.find("input[type=checkbox]").each(function () {
 			//绑定click事件
 			$(this).bind("click", function () {
-				//所有tab限制
-				var num = $(".project-tab").find("input[type=checkbox]:checked").length;
-				var maxNum = $("#course-num").attr("li-value");
-				if(maxNum == 0){
-					alert("请先选择课程门数");
-					return;
-				}
-
-				if(num >= maxNum){
-					$("input[type=checkbox]").each(function () {
-						if($(this).is(':checked')){
-							$(this).attr('disabled', false);
-						}else{
-							//没选中的不让继续选择
-							$(this).attr('disabled', true);
-						}
-					});
-				}else{
-					$("input[type=checkbox]").each(function () {
-						$(this).attr('disabled', false);
-					});
-				}
+				courseCheckboxChange();
 				//本tab也的限制
 				var numOne = courseTable.find("input[type=checkbox]:checked").length;
 				var maxOne = 3;
@@ -347,12 +405,51 @@ function initCheckBoxClick(projectIds){
 							$(this).attr('disabled', true);
 						}
 					});
-				}else{
-					courseTable.find("input[type=checkbox]").each(function () {
-						$(this).attr('disabled', false);
-					});
 				}
 			});
 		});
 	});
+}
+
+//所有table的checkbox限制
+function courseCheckboxChange(){
+	//所有tab限制
+	var num = $(".project-tab").find("input[type=checkbox]:checked").length;
+	var maxNum = $("#course-num").attr("li-value");
+
+	if(maxNum == 0 && num != 0){
+		alert("请先选择课程门数");
+		return;
+	}
+
+	if(num >= maxNum){
+		$("input[type=checkbox]").each(function () {
+			if($(this).is(':checked')){
+				$(this).attr('disabled', false);
+			}else{
+				//没选中的不让继续选择
+				$(this).attr('disabled', true);
+			}
+		});
+	}else{
+		$("input[type=checkbox]").each(function () {
+			$(this).attr('disabled', false);
+		});
+		//得到选中的checkbox框的ids
+		var courseIds = [];
+		$(".project-tab").find("input[type=checkbox]:checked").each(function(){
+			//获得所在tab
+			var tableObj = $(this).parents("table:eq(0)");
+			var courseId = $(this).val();
+			var time = courseTime[courseId];
+			//选中后设置其余的不能进行选择
+			$.each(courseTime,function(key,value){
+				if(key != courseId && value == time){
+					//设置为不可用
+					tableObj.find("input[value="+key +"]").attr('disabled', true);
+				}
+			});
+		});
+
+	}
 }

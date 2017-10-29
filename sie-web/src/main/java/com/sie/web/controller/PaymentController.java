@@ -1,12 +1,10 @@
 package com.sie.web.controller;
 
 import com.alipay.api.AlipayApiException;
-import com.alipay.api.AlipayResponse;
 import com.alipay.api.internal.util.AlipaySignature;
 import com.alipay.api.response.AlipayTradePrecreateResponse;
 import com.alipay.demo.trade.config.Configs;
 import com.alipay.demo.trade.model.ExtendParams;
-import com.alipay.demo.trade.model.GoodsDetail;
 import com.alipay.demo.trade.model.builder.AlipayTradePrecreateRequestBuilder;
 import com.alipay.demo.trade.model.result.AlipayF2FPrecreateResult;
 import com.alipay.demo.trade.service.AlipayTradeService;
@@ -17,13 +15,11 @@ import com.sie.framework.entity.OrderPayEntity;
 import com.sie.framework.type.PayType;
 import com.sie.framework.type.SystemType;
 import com.sie.service.OrderService;
-import com.sie.service.StudentService;
 import com.sie.service.bean.ResultBean;
 import com.sie.util.*;
 import com.sie.web.config.SieWechatPay;
 import com.sie.web.config.TruWechatPay;
 import com.sie.web.config.WechatPay;
-import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -95,7 +91,7 @@ public class PaymentController {
             String key = "";
             String notify_url = "";
             // 账号信息
-            if(systemType.equals(SystemType.SIE.value())){
+            if(systemType.equals(SystemType.SIE.value()+"")){
                 appid = SieWechatPay.APP_ID;  // appid
                 mch_id = SieWechatPay.MCH_ID; // 商业号
                 key = SieWechatPay.API_KEY; // key
@@ -114,7 +110,7 @@ public class PaymentController {
             String strRandom = PayCommonUtil.buildRandom(4) + "";
             String nonce_str = strTime + strRandom;
 //价格后面会放开
-            String order_price = Integer.parseInt(payEntity.getPayTotal()*100+"") + ""; // 价格   注意：价格的单位是分
+            String order_price = payEntity.getPayTotal().intValue()*100 + ""; // 价格   注意：价格的单位是分
 //            String order_price = 1 + ""; // 价格   注意：价格的单位是分
             String body = payName;   // 商品名称
             String out_trade_no =orderId; // 订单号
@@ -300,7 +296,7 @@ public class PaymentController {
             String nodidfyUrl = "";
             //生成支付信息
             OrderPayEntity payEntity = orderService.updatePaymentInfo(Integer.parseInt(orderId), PayType.AIPAY.value());
-            if(systemType.equals(SystemType.SIE.value())){
+            if(systemType.equals(SystemType.SIE.value()+"")){
                 subject = "购买SIE课程";
                 Configs.init("zfbinfo_sie.properties");
                 nodidfyUrl = "http://120.27.13.112/apply/sie/nodify";

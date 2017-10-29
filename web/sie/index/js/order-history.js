@@ -54,15 +54,15 @@ function initSelect(onChange){
 function changeTerm(term){
 	var termOrders = termOrder[term];
 	var orders = '<tr> <th>订单编号</th>' +
-				'<th>状态</th>' +
-				'<th>支付方式</th>' +
-				'<th>项目</th>' +
-				'<th>课程数目</th>' +
-				'<th>住宿</th>' +
-				'<th>总价</th> </tr>';
+		'<th>状态</th>' +
+		'<th>支付方式</th>' +
+		'<th>项目</th>' +
+		'<th>课程数目</th>' +
+		'<th>住宿</th>' +
+		'<th>总价</th> </tr>';
 	var courses = '<tr> <th>课程代码</th>' +
-					'<th>课程名称</th>' +
-					'<th>校区</th> </tr>';
+		'<th>课程名称</th>' +
+		'<th>校区</th> </tr>';
 	$.each(termOrders,function(i,order){
 		order = removeNull(order);
 		orders = orders +
@@ -76,9 +76,9 @@ function changeTerm(term){
 		$.each(order.courses,function(ii,course){
 			course = removeNull(course);
 			courses = courses +
-					'<tr> <td><label>' + course.code + '</label></td>' +
-					'<td><label>' + course.englishName + '</label></td>' +
-					'<td><label>' +course.schoolName + '</label></td> </tr>';
+				'<tr> <td><label>' + course.code + '</label></td>' +
+				'<td><label>' + course.englishName + '</label></td>' +
+				'<td><label>' +course.schoolName + '</label></td> </tr>';
 		});
 
 	});

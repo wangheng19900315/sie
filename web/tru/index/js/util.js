@@ -2,7 +2,6 @@
 var rootPath = 'http://localhost:8085/api/';
 var accessToken='un23n4no2bu4bs34';
 var systemType = "2";//tru系统
-var studentId = "1";
 var userInfo;
 /**
  * 时间格式化

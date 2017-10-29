@@ -39,12 +39,14 @@
         </div>
 		<div class="user-rg">
 			<div class="plate-box w900">
+				<input type="hidden" id="selectPayWay"  data-toggle="modal" data-target="#modal-pay">
 				<h3><i class="fa fa-credit-card"></i> 选择支付方式</h3>
 				<div class="area">
 					<table class="table table-bordered table-middle text-center" id="orderTable">
 						<tr>
 							<th>订单编号</th>
-							<th>学生姓名</th>
+							<th>状态</th>
+							<th>支付方式</th>
 							<th>项目</th>
 							<th>课程数目</th>
 							<th>住宿</th>
@@ -68,10 +70,10 @@
 						<!--</tr>-->
 					</table>
 				</div>
-				<div class="mt50 text-center">
-					<input type="submit" class="btn btn-wd-lg btn-danger" value="未付款" data-toggle="modal" data-target="#modal-pay" />
-					<input type="submit" class="btn btn-wd-lg btn-primary" value="已付款" data-toggle="modal" data-target="#modal-pay" />
-				</div>
+				<!--<div class="mt50 text-center">-->
+					<!--<input type="submit" class="btn btn-wd-lg btn-danger" value="未付款" data-toggle="modal" data-target="#modal-pay" />-->
+					<!--<input type="submit" class="btn btn-wd-lg btn-primary" value="已付款" data-toggle="modal" data-target="#modal-pay" />-->
+				<!--</div>-->
 			</div>
         </div>
    	</div>
@@ -97,8 +99,8 @@
 							<input type="text" class="form-control" id="refundWay" data-toggle="dropdown" value="银行转账">
 							<ul class="dropdown-menu" aria-labelledby="refundWay">
 								<li aria-id="refundWayBank">银行转账</li>
-								<!--<li aria-id="refundWayAlipay">支付宝</li>-->
-								<!--<li aria-id="refundWayWechat">微信</li>-->
+								<li aria-id="refundWayAlipay">支付宝</li>
+								<li aria-id="refundWayWechat">微信</li>
 								<li aria-id="refundWayEMT">加币EMT</li>
 								<li aria-id="refundWayCash">现金付款</li>
 							</ul>
@@ -154,12 +156,12 @@
 							<div class="form-group">
 								<p class="text-pink">注：微信支付将包含0.6%的手续费</p>
 							</div>
-							<div><img class="img-responsive auto" src="../../public/img/wechat-consult.png" /></div>
+							<div><img class="img-responsive auto" src="../../public/img/wechat-consult.png" style="width:40%"/></div>
 						</div>
 						<div id="refundWayAlipay" class="none">
 							<div class="form-group">
 								<label>支付宝账号</label>
-								<input type="text" class="form-control" placeholder="">
+								<input type="text" class="form-control" placeholder="" value="iss@sieschool.org" readonly>
 								<p class="text-pink mt20">注： 支付途径二，扫码支付将包含0.6%的手续费</p>
 							</div>
 							<div><img class="img-responsive auto" src="../../public/img/wechat-consult.png" /></div>
@@ -167,7 +169,7 @@
 						<div id="refundWayEMT" class="none">
 							<div class="form-group">
 								<label>EMT账号</label>
-								<input type="text" class="form-control" placeholder="">
+								<input type="text" class="form-control" placeholder="" value="CADpay@sieschool.org" readonly>
 							</div>
 							<p class="text-pink">请将Security Question设置成为你的订单号，Security Answer设置为siecadpay.</p>
 							<p class="text-pink">支付完成后，我们会在两个工作日内完成订单状态的审核。</p>

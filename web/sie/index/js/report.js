@@ -3,7 +3,6 @@ $(function(){
     if(!judgeLogin()){
         window.location.href="login.html";
     }
-
     /**
      * 不可用的申请功能初始化
      */
@@ -44,8 +43,13 @@ $(function(){
      */
     dhcc.Unit.ajaxUtil(attrs,"getStudnetInfo.json",function(data){
         $("#data-form").loadJson(data);
+        $("#data-form").find("input[type=text]").each(function () {
+            //触发事件
+            $(this).focus();
+            $(this).blur();
+        });
         //设置中文姓名 性别 出生日期信息
-        $("#chineseName").text(data.chineseName);
+        $("#name").text(data.lastName + ' ' + data.firstName);
         $("#sex").text(data.sex);
         $("#birthday").text(new Date(data.birthday).Format("yyyy-MM-dd"));
     });
