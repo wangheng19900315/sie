@@ -110,6 +110,9 @@ public class CourseServiceImpl extends BaseServiceImpl<CourseEntity,Integer> imp
             courseEntity.setSieTotalNumber(0);
             courseEntity.setTruTotalNumber(0);
             this.courseDao.createEntity(courseEntity);
+            //设置课程的ID
+            courseEntity.setCourseID(String.format("%04d", courseEntity.getId()));
+            courseDao.updateEntity(courseEntity);
             return courseEntity.getId();
         }
     }

@@ -24,16 +24,6 @@
                                 </div>
                             </div>
                         </div><!-- col-sm-6 -->
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <div class="form-group ">
-                                <label for="projectId" class="col-sm-2 control-label">课程ID</label>
-                                <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="courseID" name="courseID" placeholder="courseID" required data-msg-required="请输入课程ID">
-                                </div>
-                            </div>
-                        </div><!-- col-sm-6 -->
                         <div class="col-sm-6">
                             <div class="form-group ">
                                 <label for="maxStudent" class="col-sm-2 control-label">最大学生数</label>
@@ -42,7 +32,7 @@
                                 </div>
                             </div>
                         </div><!-- col-sm-6 -->
-                    </div><!-- row -->
+                    </div>
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="form-group ">
