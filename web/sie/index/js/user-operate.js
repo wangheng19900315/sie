@@ -98,6 +98,7 @@ $(function(){
 
         dhcc.Unit.ajaxUtil(attrs,"register.json",function(data){
             dhcc.Unit.successMessage("注册成功", function(){
+                windom.location.href="login.html";
                 //$('#register_login_btn').click();
             });
 

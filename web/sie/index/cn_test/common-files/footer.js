@@ -70,5 +70,6 @@ document.writeln("<script src='../../public/js/jquery.SuperSlide.js'></script>")
 document.writeln("<script src='../../public/js/chosen.jquery.min.js'></script>");
 document.writeln("<script src='../../public/js/jquery.validate.min.js'></script>");
 document.writeln("<script src='../../public/js/user.js'></script>");
+document.writeln("<script src='../../public/js/common.js'></script>");
 document.writeln("<script src='../../js/util.js'></script>");
 document.writeln("<script src='../../js/user-operate.js'></script>");
