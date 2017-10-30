@@ -19,7 +19,12 @@ public enum School {
     /**
      * 华东师范大学
      */
-    ECNU(2);
+    ECNU(2),
+
+    /**
+     * 南京航空航天大学
+     */
+    NUAA(3);
 
 
     public static School valueOf(int i) {
@@ -56,6 +61,8 @@ public enum School {
                 return "北京交通大学";
             case ECNU:
                 return "华东师范大学";
+            case NUAA:
+                return "南京航空航天大学";
             default:
                 return "未定义";
         }

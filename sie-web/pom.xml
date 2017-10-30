@@ -161,7 +161,7 @@
             <version>1.0-SNAPSHOT</version>
         </dependency>
 
-        <!--支付宝 -->
+        <!--支付宝-->
         <dependency>
             <groupId>com.alipay</groupId>
             <artifactId>sdk-java</artifactId>
@@ -172,7 +172,6 @@
             <groupId>com.alipay</groupId>
             <artifactId>trade-sdk</artifactId>
             <version>20161215</version>
-
         </dependency>
 
 
@@ -184,6 +183,22 @@
                 <exclusion>
                     <groupId>commons-lang</groupId>
                     <artifactId>commons-lang</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>commons-beanutils</groupId>
+                    <artifactId>commons-beanutils</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>commons-beanutils</groupId>
+                    <artifactId>commons-beanutils-core</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>commons-beanutils</groupId>
+                    <artifactId>commons-beanutils-bean-collections</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>commons-collections</groupId>
+                    <artifactId>commons-collections</artifactId>
                 </exclusion>
             </exclusions>
         </dependency>
