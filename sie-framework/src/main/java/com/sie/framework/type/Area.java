@@ -19,7 +19,12 @@ public enum Area {
     /**
      * 上海
      */
-    SH(2);
+    SH(2),
+
+    /**
+     * 南京
+     */
+    NJ(3);
 
 
     public static Area valueOf(int i) {
@@ -56,6 +61,8 @@ public enum Area {
                 return "北京校区";
             case SH:
                 return "上海校区";
+            case NJ:
+                return "南京校区";
             default:
                 return "未定义";
         }

@@ -162,7 +162,12 @@ $(function(){
 		 */
 		dhcc.Unit.ajaxUtil(attrs,"createOrder.json",function(data) {
 			$("#success-order-message").click();
-			//Todo 页面进行跳转
+
+			setTimeout(function(){
+				//页面进行跳转
+				window.location.href = "tuition-payment.html";
+			}, 1500);
+
 		});
 	});
 
