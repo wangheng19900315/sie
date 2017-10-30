@@ -1,5 +1,5 @@
 //全局变量请求地址
-var rootPath = 'http://localhost:8085/api/';
+var rootPath = 'http://120.27.13.112:81/api/';
 var accessToken='un23n4no2bu4bs34';
 var systemType = "1";//sie系统
 var studentId = "1";
