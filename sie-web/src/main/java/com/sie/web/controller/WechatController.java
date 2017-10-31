@@ -10,6 +10,7 @@ import com.sie.util.QrGenUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -37,6 +38,12 @@ public class WechatController {
 
     private static final Logger logger = LoggerFactory.getLogger(APIController.class);
 
+    /**
+     * 作业jar
+     */
+    @Value("${wechat.login.nodify.url}")
+    private String nodifyUrl;
+
 
     /**
      * 获取uuid及二维码图片地址
@@ -63,7 +70,7 @@ public class WechatController {
             map.put(randomUUID.toString(), null);
 
             //二维码图片扫描后的链接
-            String url = "http://120.27.13.112:81/api/wechat/loginByQr?uuid="+ randomUUID;
+            String url = nodifyUrl+"?uuid="+ randomUUID;
 
             //生成二维码图片
             ByteArrayOutputStream qrOut = QrGenUtil.createQrGen(url);

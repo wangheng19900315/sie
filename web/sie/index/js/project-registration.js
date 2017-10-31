@@ -6,7 +6,6 @@ $(function(){
 	if(!judgeLogin()){
 		window.location.href="login.html";
 	}
-
 	/**
 	 * 不可用的申请功能初始化
 	 */
@@ -128,8 +127,8 @@ $(function(){
 		$("#dormitory-list").append(dormitoryTr);
 
 		//总价格
-		var totalTr = '<p class="text-right"><b>总价：￥'+(coursePrice + dormitoryPrice)+'</b></p>';
-		$("#firm-order").parent().before(totalTr);
+		var totalTr = '总价：￥'+(coursePrice + dormitoryPrice);
+		$("p.text-right").find("b").text(totalTr);
 		//后台获取价格
 		//attrs={};
 		//attrs.systemType=parseInt(systemType);
@@ -167,7 +166,6 @@ $(function(){
 				//页面进行跳转
 				window.location.href = "tuition-payment.html";
 			}, 1500);
-
 		});
 	});
 
@@ -251,14 +249,14 @@ function getProjectCourseAndDormitory(projectIds){
 				'<th>选择</th>' +
 				'</tr>';
 			//遍历course
-			$.each(item.courseVos,function (key, value) {
-				$.each(value,function (j, courseInfo) {
+			$.each(item.courseVoMaps,function (ii, courses) {
+				$.each(courses.courseVos,function (j, courseInfo) {
 					//初始化课程时间
-					courseTime[courseInfo.id] = key;
+					courseTime[courseInfo.id] = courses.key;
 					course = course + '<tr>';
 					if (j == 0) {
 						//第一个要特殊处理一次下
-						course = course + '<td rowspan="' + value.length + '"><label>' + key + '</label></td>';
+						course = course + '<td rowspan="' + courses.courseVos.length + '"><label>' + courses.key + '</label></td>';
 					}
 					course = course +
 						'<td><label>' + courseInfo.code + '</label></td>' +
