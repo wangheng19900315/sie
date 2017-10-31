@@ -28,6 +28,7 @@ public class StudentExcelBean {
     private String profession;
     private String gpa;
     private String graduationYear;
+    private String understandWay;
 
     @ExcelField(title="用户ID", align=2, sort=1)
     public String getUserID() {
@@ -190,5 +191,14 @@ public class StudentExcelBean {
 
     public void setImage(String image) {
         this.image = image;
+    }
+
+    @ExcelField(title="了解我们的途径", align=2, sort=18)
+    public String getUnderstandWay() {
+        return understandWay;
+    }
+
+    public void setUnderstandWay(String understandWay) {
+        this.understandWay = understandWay;
     }
 }

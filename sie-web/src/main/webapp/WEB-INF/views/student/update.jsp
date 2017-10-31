@@ -132,19 +132,19 @@
                             </div>
                         </div><!-- col-sm-6 -->
 
-                        <div class="col-sm-6">
-                            <div class="form-group ">
-                                <label for="sex" class="col-sm-2 control-label">性别</label>
-                                <div class="col-sm-9">
-                                    <select class="form-control" id="applicationStep" name="applicationStep">
-                                        <option value="1">完成申请单</option>
-                                        <option value="2">完成项目和住宿下单</option>
-                                        <option value="3">完成缴费</option>
-                                        <option value="4">完成成绩单寄送</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div><!-- col-sm-6 -->
+                        <%--<div class="col-sm-6">--%>
+                            <%--<div class="form-group ">--%>
+                                <%--<label for="sex" class="col-sm-2 control-label">申请步骤</label>--%>
+                                <%--<div class="col-sm-9">--%>
+                                    <%--<select class="form-control" id="applicationStep" name="applicationStep">--%>
+                                        <%--<option value="1">完成申请单</option>--%>
+                                        <%--<option value="2">完成项目和住宿下单</option>--%>
+                                        <%--<option value="3">完成缴费</option>--%>
+                                        <%--<option value="4">完成成绩单寄送</option>--%>
+                                    <%--</select>--%>
+                                <%--</div>--%>
+                            <%--</div>--%>
+                        <%--</div><!-- col-sm-6 -->--%>
 
                     </div><!-- row -->
 
@@ -193,7 +193,7 @@
                             <div class="form-group ">
                                 <label for="sendPerson" class="col-sm-2 control-label">寄送联系人/部门</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="sendPerson" name="sendPerson" placeholder="sendPerson" required data-msg-required="请输入联系人/部门" >
+                                    <input type="text" class="form-control" id="sendPerson" name="sendPerson" placeholder="sendPerson">
                                 </div>
                             </div>
                         </div><!-- col-sm-6 -->
@@ -201,7 +201,7 @@
                             <div class="form-group ">
                                 <label for="sendTel" class="col-sm-2 control-label">寄送电话</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="sendTel" name="sendTel" placeholder="sendTel" required data-msg-required="请输入电话" data-rule-mobile="true"  data-msg-mobile="请输入正确格式">
+                                    <input type="text" class="form-control" id="sendTel" name="sendTel" placeholder="sendTel">
                                 </div>
                             </div>
 
@@ -212,7 +212,7 @@
                             <div class="form-group ">
                                 <label for="sendPostCode" class="col-sm-2 control-label">寄送邮编</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="sendPostCode" name="sendPostCode" placeholder="sendPostCode" required data-msg-required="请输入邮编">
+                                    <input type="text" class="form-control" id="sendPostCode" name="sendPostCode" placeholder="sendPostCode" >
                                 </div>
                             </div>
 
@@ -221,7 +221,7 @@
                             <div class="form-group ">
                                 <label for="sendProvince" class="col-sm-2 control-label">寄送街道</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="sendStreet" name="sendStreet" placeholder="sendStreet" required data-msg-required="请输入寄送街道" >
+                                    <input type="text" class="form-control" id="sendStreet" name="sendStreet" placeholder="sendStreet" >
                                 </div>
                             </div>
                         </div><!-- col-sm-6 -->
@@ -231,7 +231,7 @@
                             <div class="form-group ">
                                 <label for="sendProvince" class="col-sm-2 control-label">寄送州/省</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="sendProvince" name="sendProvince" placeholder="sendProvince" required data-msg-required="请输入州/市" >
+                                    <input type="text" class="form-control" id="sendProvince" name="sendProvince" placeholder="sendProvince" >
                                 </div>
                             </div>
                         </div><!-- col-sm-6 -->
@@ -239,12 +239,45 @@
                             <div class="form-group ">
                                 <label for="sendCountry" class="col-sm-2 control-label">寄送县/市</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="sendCountry" name="sendCountry" placeholder="sendCountry" required data-msg-required="请输入县/市">
+                                    <input type="text" class="form-control" id="sendCountry" name="sendCountry" placeholder="sendCountry" >
                                 </div>
                             </div>
 
                         </div><!-- col-sm-6 -->
                     </div><!-- row -->
+
+                    <div class="row">
+
+                        <div class="col-sm-6">
+                            <div class="form-group ">
+                                <label for="sex" class="col-sm-2 control-label">申请步骤</label>
+                                <div class="col-sm-9">
+                                    <select class="form-control" id="applicationStep" name="applicationStep">
+                                        <option value="1">完成申请单</option>
+                                        <option value="2">完成项目和住宿下单</option>
+                                        <option value="3">完成缴费</option>
+                                        <option value="4">完成成绩单寄送</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div><!-- col-sm-6 -->
+
+                        <div class="col-sm-6">
+                            <div class="form-group ">
+                                <label for="understandWay" class="col-sm-2 control-label">了解我们的途径</label>
+                                <div class="col-sm-9">
+                                    <select class="form-control" id="understandWay" name="understandWay">
+                                        <option value="宣传大使">宣传大使</option>
+                                        <option value="同学推荐">同学推荐</option>
+                                        <option value="其他">其他</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div><!-- col-sm-6 -->
+
+
+                    </div><!-- row -->
+
 
                     <div class="row">
                         <div class="col-sm-6">

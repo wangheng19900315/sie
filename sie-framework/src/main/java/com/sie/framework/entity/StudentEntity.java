@@ -44,6 +44,8 @@ public class StudentEntity extends BaseEntity{
 
     private String password;
 
+    private String understandWay;
+
     /**
      * 微信id
      */
@@ -381,5 +383,14 @@ public class StudentEntity extends BaseEntity{
 
     public void setApplicationStep(Integer applicationStep) {
         this.applicationStep = applicationStep;
+    }
+
+    @Column(name = "understand_way")
+    public String getUnderstandWay() {
+        return understandWay;
+    }
+
+    public void setUnderstandWay(String understandWay) {
+        this.understandWay = understandWay;
     }
 }
