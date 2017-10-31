@@ -174,6 +174,8 @@ public class StudentServiceImpl extends BaseServiceImpl<StudentEntity,Integer> i
                 BeanUtils.copyProperties(entity, beanList.get(i));
                 //设置默认的登录密码为123456
                 entity.setPassword(Md5Util.getMD5(defaultPassword, ApplicationHelp.MD5_SHA1));
+                //设置用户名为邮箱
+                entity.setUserName(beanList.get(i).getEmail());
                 //设置默认的步骤为第4步
                 entity.setApplicationStep(4);
                 this.saveOrUpdate(entity,1);
@@ -188,15 +190,15 @@ public class StudentServiceImpl extends BaseServiceImpl<StudentEntity,Integer> i
 
     @Override
     public String repeatEntity(StudentExcelBean bean) {
-        return repeat(bean.getIdNumber(),bean.getPassportNumber());
+        return repeat(bean.getIdNumber(),bean.getPassportNumber(),bean.getEmail());
     }
 
     @Override
     public String repeatEntity(StudentEntity entity) {
-        return repeat(entity.getIdNumber(),entity.getPassportNumber());
+        return repeat(entity.getIdNumber(),entity.getPassportNumber(),entity.getEmail());
     }
 
-    private String repeat(String idNumber,String passportNumber){
+    private String repeat(String idNumber,String passportNumber,String email){
         String result = null;
         String hql;
         if(StringUtil.isNotBlank(idNumber)){
@@ -207,10 +209,21 @@ public class StudentServiceImpl extends BaseServiceImpl<StudentEntity,Integer> i
             result = "学生身份证号和者护照号都为空";
             return result;
         }
+        if(!StringUtil.isNotBlank(email)){
+            result = "学生邮箱为空";
+            return result;
+        }
         //判断学生信息是否重复
         List<StudentEntity> studentEntities = this.studentDao.getList(hql);
         if(studentEntities.size() > 0){
             result = idNumber +" "+passportNumber+ "学生信息重复";
+            return result;
+        }
+        //判断用户邮箱是否重复
+        hql = "from StudentEntity where email='" + email + "' and hdelete=0";
+        studentEntities = this.studentDao.getList(hql);
+        if(studentEntities.size() > 0){
+            result = email + "已经被注册";
             return result;
         }
         return result;
