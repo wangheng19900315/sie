@@ -17,6 +17,7 @@ import com.sie.service.bean.PageInfo;
 import com.sie.service.bean.ProjectBean;
 import com.sie.service.excel.StudentCourseExport;
 import com.sie.service.vo.CourseVo;
+import com.sie.service.vo.CourseVoMap;
 import com.sie.service.vo.DormitoryVo;
 import com.sie.service.vo.ProjectVo;
 import com.sie.util.DateUtil;
@@ -266,7 +267,16 @@ public class ProjectServiceImpl extends BaseServiceImpl<ProjectEntity,Integer> i
             }
 
             //得到上课时间的key 8：30 -- 10：30
-            String key = courseVo.getStartTime() + " -- " + courseVo.getEndTime();
+            // 设置开始时间和结束时间都为5位
+            String startTime = courseVo.getStartTime();
+            if(startTime.length() == 4){
+                startTime = "0" + startTime;
+            }
+            String endTime = courseVo.getEndTime();
+            if(endTime.length() == 4){
+                endTime = "0" + endTime;
+            }
+            String key = startTime + " -- " + endTime;
             if(courseVoMap.get(key) == null){
                 List<CourseVo> vos = new ArrayList<>();
                 vos.add(courseVo);
@@ -276,7 +286,22 @@ public class ProjectServiceImpl extends BaseServiceImpl<ProjectEntity,Integer> i
             }
         }
 
-        vo.setCourseVos(courseVoMap);
+        //对上课时间进行排序
+        List<String> keys = new ArrayList<>();
+        for(String key : courseVoMap.keySet()){
+            keys.add(key);
+        }
+        Collections.sort(keys);
+        List<CourseVoMap> courseVoMaps = new ArrayList<>();
+        for(String key : keys){
+            CourseVoMap map = new CourseVoMap();
+            map.setCourseVos(courseVoMap.get(key));
+            CourseVo courseVo = courseVoMap.get(key).get(0);
+            map.setKey(courseVo.getStartTime() + " -- " + courseVo.getEndTime());
+            courseVoMaps.add(map);
+        }
+
+        vo.setCourseVoMaps(courseVoMaps);
         //设置项目的住宿信息
         list = new  ArrayList<HqlOperateVo>();
         list.add(new HqlOperateVo("projectId", "=", id.toString()));

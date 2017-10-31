@@ -250,14 +250,14 @@ function getProjectCourseAndDormitory(projectIds){
 				'<th>选择</th>' +
 				'</tr>';
 			//遍历course
-			$.each(item.courseVos,function (key, value) {
-				$.each(value,function (j, courseInfo) {
+			$.each(item.courseVoMaps,function (ii, courses) {
+				$.each(courses.courseVos,function (j, courseInfo) {
 					//初始化课程时间
-					courseTime[courseInfo.id] = key;
+					courseTime[courseInfo.id] = courses.key;
 					course = course + '<tr>';
 					if (j == 0) {
 						//第一个要特殊处理一次下
-						course = course + '<td rowspan="' + value.length + '"><label>' + key + '</label></td>';
+						course = course + '<td rowspan="' + courses.courseVos.length + '"><label>' + courses.key + '</label></td>';
 					}
 					course = course +
 						'<td><label>' + courseInfo.code + '</label></td>' +

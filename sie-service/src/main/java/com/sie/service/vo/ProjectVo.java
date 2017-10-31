@@ -24,7 +24,8 @@ public class ProjectVo {
     private Integer maxCourse;
     private String startTimeStr;
     private String endTimeStr;
-    Map<String,List<CourseVo>> courseVos;
+//    Map<String,List<CourseVo>> courseVos;
+    List<CourseVoMap> courseVoMaps;
     List<DormitoryVo> dormitoryVos;
 
 
@@ -100,12 +101,21 @@ public class ProjectVo {
         this.id = id;
     }
 
-    public Map<String, List<CourseVo>> getCourseVos() {
-        return courseVos;
+//    public Map<String, List<CourseVo>> getCourseVos() {
+//        return courseVos;
+//    }
+//
+//    public void setCourseVos(Map<String, List<CourseVo>> courseVos) {
+//        this.courseVos = courseVos;
+//    }
+
+
+    public List<CourseVoMap> getCourseVoMaps() {
+        return courseVoMaps;
     }
 
-    public void setCourseVos(Map<String, List<CourseVo>> courseVos) {
-        this.courseVos = courseVos;
+    public void setCourseVoMaps(List<CourseVoMap> courseVoMaps) {
+        this.courseVoMaps = courseVoMaps;
     }
 
     public List<DormitoryVo> getDormitoryVos() {
