@@ -128,8 +128,8 @@ $(function(){
 		$("#dormitory-list").append(dormitoryTr);
 
 		//总价格
-		var totalTr = '<p class="text-right"><b>总价：￥'+(coursePrice + dormitoryPrice)+'</b></p>';
-		$("#firm-order").parent().before(totalTr);
+		var totalTr = '总价：￥'+(coursePrice + dormitoryPrice);
+		$("p.text-right").find("b").text(totalTr);
 		//后台获取价格
 		//attrs={};
 		//attrs.systemType=parseInt(systemType);

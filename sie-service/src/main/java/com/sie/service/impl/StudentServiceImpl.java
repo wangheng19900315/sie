@@ -62,6 +62,7 @@ public class StudentServiceImpl extends BaseServiceImpl<StudentEntity,Integer> i
                 oldStudentEntity.setProfession(studentEntity.getProfession());
                 oldStudentEntity.setGpa(studentEntity.getGpa());
                 oldStudentEntity.setGraduationYear(studentEntity.getGraduationYear());
+                oldStudentEntity.setUnderstandWay(studentEntity.getUnderstandWay());
             }
 //            oldStudentEntity.setUserName(studentEntity.getUserName());
 //            oldStudentEntity.setUserID(studentEntity.getUserID());
