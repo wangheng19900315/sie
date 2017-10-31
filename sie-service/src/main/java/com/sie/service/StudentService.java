@@ -40,7 +40,7 @@ public interface StudentService extends BaseService<StudentEntity, Integer> {
 
     ResultBean updateResetPassword(String userName);
 
-    StudentEntity loginByOpenid(OAuthInfo info);
+    StudentEntity loginByOpenid(String openId);
 
     ResultBean updateApplicationStep(Integer studentId,Integer applicatioStep);
 }

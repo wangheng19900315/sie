@@ -11,6 +11,11 @@ $(function(){
         $($(".login-box").children("div").get(1)).hide();
     }
 
+    $("#login_modal_btn").bind("click", function(){
+        var imgHref = encodeURI(rootPath + 'wechat/showQrCode');
+        $("#modal-wechat").find("img").attr("src", imgHref);
+    })
+
 
     //登录按钮
 

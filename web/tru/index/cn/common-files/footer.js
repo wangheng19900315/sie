@@ -98,7 +98,7 @@ document.writeln('<!-- modal-box -->'+
             '   </div>'+
             '   <div class="modal-body">'+
             '    <div class="txt-p text-light text-center">'+
-            '    <img class="img-responsive auto" src="../../public/img/wechat-consult.png" alt="" />'+
+            '    <img class="img-responsive auto"  alt="" />'+
              '   <p>请打开微信，扫描二维码注册/登录</p>'+
             '</div>'+
             '<div class="txt-p">'+

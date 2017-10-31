@@ -266,17 +266,17 @@ public class StudentServiceImpl extends BaseServiceImpl<StudentEntity,Integer> i
     }
 
     @Override
-    public StudentEntity loginByOpenid(OAuthInfo info) {
+    public StudentEntity loginByOpenid(String openId) {
 
         List<HqlOperateVo> hqlOperateVos = new ArrayList<>();
-        hqlOperateVos.add(new HqlOperateVo("openid", "=", info.getOpenid()));
+        hqlOperateVos.add(new HqlOperateVo("openid", "=", openId));
 
         List<StudentEntity> studentEntityList = studentDao.getList(hqlOperateVos);
         if(studentEntityList != null && studentEntityList.size() > 0){
             return studentEntityList.get(0);
         }else{
             StudentEntity studentEntity = new StudentEntity();
-            studentEntity.setOpenid(info.getOpenid());
+            studentEntity.setOpenid(openId);
             this.studentDao.createEntity(studentEntity);
             return studentEntity;
         }
