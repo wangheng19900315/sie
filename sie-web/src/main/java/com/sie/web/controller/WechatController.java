@@ -99,12 +99,13 @@ public class WechatController {
      * @throws ServletException
      * @throws IOException
      */
-    @RequestMapping(value = "/loginByQr", method = RequestMethod.GET)
+    @RequestMapping(value = "/loginByQr", method = RequestMethod.GET, produces = "text/plain;charset=UTF-8")
     @ResponseBody
     public void loginByQr(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
         // 获取二维码链接中的uuid
         String uuid = req.getParameter("uuid");
+        logger.info("loginByQr uuid="+ uuid);
         // 通过应用获取共享的uuid集合
         Map uuidMap = (Map) req.getSession().getAttribute("UUID_MAP");
         // 如果集合内没有这个uuid，则响应结果
@@ -122,6 +123,7 @@ public class WechatController {
             Map map = gson.fromJson(HTTPUtil.sendGetHttpRequest(url),
                     new TypeToken<Map>() {}.getType());
             Object openID = map.get("openid");
+            logger.info("loginByQr openID="+ openID);
             if (openID != null && !"".equals(openID)) {
                 // 通过openID获取user对象
                 StudentEntity user = studentService.loginByOpenid(openID.toString());
@@ -135,6 +137,7 @@ public class WechatController {
             }
             // 如果没有openID参数，或查询不到openID对应的user对象，则移除该uuid，并响应结果
             uuidMap.remove(uuid);
+            logger.info("loginByQr 你还未绑定，请关注微信号并绑定账号！并使用微信客户端扫描");
             resp.getOutputStream().write("你还未绑定，请关注微信号并绑定账号！并使用微信客户端扫描！".getBytes());
         } catch (Exception e) {
             e.printStackTrace();

@@ -3,7 +3,6 @@ package com.sie.web.interceptor;
 import com.sie.framework.entity.LogEntity;
 import com.sie.framework.type.Constant;
 import com.sie.service.LogService;
-import com.sie.service.UserService;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.time.DateFormatUtils;
 import org.apache.commons.logging.Log;
@@ -51,7 +50,7 @@ public class UserLoginInterceptor implements HandlerInterceptor {
     if(StringUtils.isBlank(userName)){
       response.sendRedirect("/login.html");
     }
-    if(url.indexOf("addOrupdate.json") > -1 && url.indexOf("delete.json") > -1){
+    if(url.indexOf("addOrupdate.json") > -1 ||url.indexOf("delete.json") > -1){
       //记录日志
       LogEntity logEntity = new LogEntity();
       logEntity.setOperateUrl(request.getRequestURI());

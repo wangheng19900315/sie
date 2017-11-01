@@ -27,7 +27,7 @@ $(function(){
 					obj = removeNull(obj);
 					html = html +
 						'<tr><td><label>'+ obj.code + '</label></td>'+
-						'<td><a class="btn btn-xs btn-danger" onclick="selectPayWay('+obj.id+')">'+obj.statusName+'</a></td>'+
+						'<td><a class="btn btn-xs btn-danger" onclick="selectPayWay('+obj.id+')">未支付</a></td>'+
 						'<td><label>' + obj.payTypeName + '</label></td>'+
 						'<td><label>' + obj.projectNames + '</label></td>'+
 						'<td><label>' + obj.courseNumber + '</label></td>'+
@@ -55,11 +55,16 @@ $(function(){
 
 		}
 	})
+
+	$("#canclBtn").bind("click", function(){
+		dhcc.Unit.hideModal("modal-pay")
+	})
 });
 
 function  selectPayWay(id){
-	$("#selectPayWay").click();
 	payOrderId = id;
+	$("#selectPayWay").click();
+	$("#modal-pay li:first").click();
 }
 
 function confirmOrderFinish(orderId){

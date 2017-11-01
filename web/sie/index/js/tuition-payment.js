@@ -55,6 +55,10 @@ $(function(){
 
 		}
 	})
+
+	$("#canclBtn").bind("click", function(){
+		dhcc.Unit.hideModal("modal-pay")
+	})
 });
 
 function  selectPayWay(id){

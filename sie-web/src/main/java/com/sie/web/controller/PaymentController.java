@@ -5,6 +5,7 @@ import com.alipay.api.internal.util.AlipaySignature;
 import com.alipay.api.response.AlipayTradePrecreateResponse;
 import com.alipay.demo.trade.config.Configs;
 import com.alipay.demo.trade.model.ExtendParams;
+import com.alipay.demo.trade.model.GoodsDetail;
 import com.alipay.demo.trade.model.builder.AlipayTradePrecreateRequestBuilder;
 import com.alipay.demo.trade.model.result.AlipayF2FPrecreateResult;
 import com.alipay.demo.trade.service.AlipayTradeService;
@@ -334,11 +335,11 @@ public class PaymentController {
             String timeoutExpress = "120m";
 
             // 商品明细列表，需填写购买商品详细信息，
-//            List<GoodsDetail> goodsDetailList = new ArrayList<GoodsDetail>();
+            List<GoodsDetail> goodsDetailList = new ArrayList<GoodsDetail>();
 //            // 创建一个商品信息，参数含义分别为商品id（使用国标）、名称、单价（单位为分）、数量，如果需要添加商品类别，详见GoodsDetail
-//            GoodsDetail goods1 = GoodsDetail.newInstance("goods_id001", "xxx小面包", 1000, 1);
+            GoodsDetail goods1 = GoodsDetail.newInstance("goods_id001", "xxx小面包", 1, 1);
 //            // 创建好一个商品后添加至商品明细列表
-//            goodsDetailList.add(goods1);
+            goodsDetailList.add(goods1);
 //
 //            // 继续创建并添加第一条商品信息，用户购买的产品为“黑人牙刷”，单价为5.00元，购买了两件
 //            GoodsDetail goods2 = GoodsDetail.newInstance("goods_id002", "xxx牙刷", 500, 2);
@@ -350,8 +351,7 @@ public class PaymentController {
                     .setUndiscountableAmount(undiscountableAmount).setSellerId(sellerId).setBody(body)
                     .setOperatorId(operatorId).setStoreId(storeId).setExtendParams(extendParams)
                     .setTimeoutExpress(timeoutExpress)
-                    .setNotifyUrl(nodidfyUrl);//支付宝服务器主动通知商户服务器里指定的页面http路径,根据需要设置
-//                    .setGoodsDetailList(goodsDetailList);
+                    .setNotifyUrl(nodidfyUrl).setGoodsDetailList(goodsDetailList);//支付宝服务器主动通知商户服务器里指定的页面http路径,根据需要设置
 
             AlipayF2FPrecreateResult result = tradeService.tradePrecreate(builder);
             switch (result.getTradeStatus()) {

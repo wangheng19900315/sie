@@ -1043,7 +1043,7 @@ public class OrderServiceImpl extends BaseServiceImpl<OrderEntity,Integer> imple
         payEntity.setPayStatus(PayStatus.SUBMIT.value());
         payEntity.setPayType(payType);
         //微信手续费0.6%
-        payEntity.setPayTotal(orderEntity.getPayMoney()*1.006);
+        payEntity.setPayTotal(NumberUtil.getDoubleScale(orderEntity.getPayMoney()*1.006, 2));
         this.orderPayDao.updateEntity(payEntity);
 
         orderEntity.setPayType(payType);
@@ -1164,4 +1164,5 @@ public class OrderServiceImpl extends BaseServiceImpl<OrderEntity,Integer> imple
 //            e.printStackTrace();
 //        }
 //    }
+
 }

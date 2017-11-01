@@ -231,9 +231,6 @@ function commonErrorBack(message){
         $("body").removeClass("modal-scroll").css({
             "overflow":"auto"
         });
-        if(typeof(eval(callBack))=="function"){
-            callBack();
-        }
     }, 1500);
 }
 
