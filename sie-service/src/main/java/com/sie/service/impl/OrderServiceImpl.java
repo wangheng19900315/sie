@@ -146,7 +146,7 @@ public class OrderServiceImpl extends BaseServiceImpl<OrderEntity,Integer> imple
                 List<OrderDetailBean> detailList = new ArrayList<>();
                 for(OrderDetailEntity detailEntity:orderEntity.getOrderDetailEntityList()){
                     OrderDetailBean detailBean = new OrderDetailBean();
-                    orderDetailService.setDetailBeanValues(detailEntity, detailBean);
+                    orderDetailService.setDetailBeanValues(orderEntity.getSystemType(),detailEntity, detailBean);
                     detailList.add(detailBean);
                 }
                 orderBean.setOrderDetailBean(detailList);
@@ -239,7 +239,7 @@ public class OrderServiceImpl extends BaseServiceImpl<OrderEntity,Integer> imple
 
             for(OrderDetailEntity orderDetailEntity : orderEntity.getOrderDetailEntityList()){
                 OrderDetailBean orderDetailBean = new OrderDetailBean();
-                this.orderDetailService.setDetailBeanValues(orderDetailEntity,orderDetailBean);
+                this.orderDetailService.setDetailBeanValues(orderEntity.getSystemType(),orderDetailEntity,orderDetailBean);
                 bean.getOrderDetailBean().add(orderDetailBean);
             }
 
@@ -946,8 +946,12 @@ public class OrderServiceImpl extends BaseServiceImpl<OrderEntity,Integer> imple
                                 //设置课程编码
                                 SystemType type = SystemType.valueOf(Integer.parseInt(systemType));
                                 if(type == SystemType.SIE){
+                                    courseVo.setChineseName(courseEntity.getSieChineseName());
+                                    courseVo.setEnglishName(courseEntity.getSieEnglishName());
                                     courseVo.setCode(courseEntity.getSieCode());
                                 }else{
+                                    courseVo.setChineseName(courseEntity.getTruChineseName());
+                                    courseVo.setEnglishName(courseEntity.getTruEnglishName());
                                     courseVo.setCode(courseEntity.getTruCode());
                                 }
                                 courses.add(courseVo);

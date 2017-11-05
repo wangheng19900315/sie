@@ -79,24 +79,6 @@
                         </div><!-- col-sm-6 -->
 
                     </div><!-- row -->
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <div class="form-group ">
-                                <label for="chineseName" class="col-sm-2 control-label">中文名称</label>
-                                <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="chineseName" name="chineseName" placeholder="chineseName" required data-msg-required="请输入中文名称">
-                                </div>
-                            </div>
-                        </div><!-- col-sm-6 -->
-                        <div class="col-sm-6">
-                            <div class="form-group ">
-                                <label for="chineseName" class="col-sm-2 control-label">英文名称</label>
-                                <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="englishName" name="englishName" placeholder="englishName" required data-msg-required="请输入中文名称">
-                                </div>
-                            </div>
-                        </div><!-- col-sm-6 -->
-                    </div>
 
                     <div class="row">
                         <div class="col-sm-6">
@@ -118,24 +100,68 @@
                         </div><!-- col-sm-6 -->
                     </div>
 
-                    <div class="row">
-                        <div class="col-sm-6" id="sie" hidden>
-                            <div class="form-group ">
-                                <label for="sieCode" class="col-sm-2 control-label">SIE课程编码</label>
-                                <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="sieCode" name="sieCode" placeholder="sieCode" required data-msg-required="请输入SIE课程编码">
+                    <div id="sie" hidden>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group ">
+                                    <label for="sieChineseName" class="col-sm-2 control-label">SIE中文名称</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" id="sieChineseName" name="sieChineseName" placeholder="sieChineseName">
+                                    </div>
                                 </div>
-                            </div>
-                        </div><!-- col-sm-6 -->
+                            </div><!-- col-sm-6 -->
+                            <div class="col-sm-6">
+                                <div class="form-group ">
+                                    <label for="sieEnglishName" class="col-sm-2 control-label">SIE英文名称</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" id="sieEnglishName" name="sieEnglishName" placeholder="sieEnglishName">
+                                    </div>
+                                </div>
+                            </div><!-- col-sm-6 -->
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6" >
+                                <div class="form-group ">
+                                    <label for="sieCode" class="col-sm-2 control-label">SIE课程编码</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" id="sieCode" name="sieCode" placeholder="sieCode" required data-msg-required="请输入SIE课程编码">
+                                    </div>
+                                </div>
+                            </div><!-- col-sm-6 -->
+                        </div>
 
-                        <div class="col-sm-6" id="tru" hidden>
-                            <div class="form-group ">
-                                <label for="truCode" class="col-sm-2 control-label">TRU课程编码</label>
-                                <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="truCode" name="truCode" placeholder="truCode" required data-msg-required="请输入TRU课程编码">
+                    </div>
+
+                    <div id="tru" hidden>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group ">
+                                    <label for="truChineseName" class="col-sm-2 control-label">TRU中文名称</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" id="truChineseName" name="truChineseName" placeholder="truChineseName">
+                                    </div>
                                 </div>
-                            </div>
-                        </div><!-- col-sm-6 -->
+                            </div><!-- col-sm-6 -->
+                            <div class="col-sm-6">
+                                <div class="form-group ">
+                                    <label for="truEnglishName" class="col-sm-2 control-label">TRU英文名称</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" id="truEnglishName" name="truEnglishName" placeholder="truEnglishName">
+                                    </div>
+                                </div>
+                            </div><!-- col-sm-6 -->
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group ">
+                                    <label for="truCode" class="col-sm-2 control-label">TRU课程编码</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" id="truCode" name="truCode" placeholder="truCode" required data-msg-required="请输入TRU课程编码">
+                                    </div>
+                                </div>
+                            </div><!-- col-sm-6 -->
+                        </div>
 
                     </div>
                 </div>

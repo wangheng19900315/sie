@@ -102,14 +102,15 @@ public class GradeServiceImpl extends BaseServiceImpl<GradeEntity,Integer> imple
             BeanUtils.copyProperties(bean, gradeEntity);
             if(gradeEntity.getCourseEntity() != null){
                 bean.setCourseId(gradeEntity.getCourseEntity().getId());
-                bean.setCourseName(gradeEntity.getCourseEntity().getEnglishName());
             }
             if(gradeEntity.getProjectEntity() != null){
                 bean.setProjectId(gradeEntity.getProjectEntity().getId());
                 if(gradeEntity.getSystemType() == SystemType.SIE.value()){
                     bean.setProjectName(gradeEntity.getProjectEntity().getSieName());
+                    bean.setCourseName(gradeEntity.getCourseEntity().getSieEnglishName());
                 }else{
                     bean.setProjectName(gradeEntity.getProjectEntity().getTruName());
+                    bean.setCourseName(gradeEntity.getCourseEntity().getTruEnglishName());
                 }
                 bean.setProjectCode(gradeEntity.getProjectEntity().getCode());
             }
@@ -250,8 +251,7 @@ public class GradeServiceImpl extends BaseServiceImpl<GradeEntity,Integer> imple
         try{
             BeanUtils.copyProperties(gradeVo, gradeEntity);
             if(gradeEntity.getCourseEntity() != null){
-                gradeVo.setCourseChineseName(gradeEntity.getCourseEntity().getChineseName());
-                gradeVo.setCourseEnglishName(gradeEntity.getCourseEntity().getEnglishName());
+
                 //gradeVo.setCourseCode(gradeEntity.getCourseEntity().getCourseID());
             }
             if(gradeEntity.getProjectEntity() != null){
@@ -263,8 +263,12 @@ public class GradeServiceImpl extends BaseServiceImpl<GradeEntity,Integer> imple
                 //设置课程编号
                 if(type == SystemType.SIE){
                     gradeVo.setCourseCode(gradeEntity.getCourseEntity().getSieCode());
+                    gradeVo.setCourseChineseName(gradeEntity.getCourseEntity().getSieChineseName());
+                    gradeVo.setCourseEnglishName(gradeEntity.getCourseEntity().getSieEnglishName());
                 }else{
                     gradeVo.setCourseCode(gradeEntity.getCourseEntity().getTruCode());
+                    gradeVo.setCourseChineseName(gradeEntity.getCourseEntity().getTruChineseName());
+                    gradeVo.setCourseEnglishName(gradeEntity.getCourseEntity().getTruEnglishName());
                 }
             }
         }catch (Exception e){

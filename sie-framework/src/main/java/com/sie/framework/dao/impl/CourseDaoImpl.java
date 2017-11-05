@@ -3,6 +3,7 @@ package com.sie.framework.dao.impl;
 import com.sie.framework.base.GenericDaoImpl;
 import com.sie.framework.dao.CourseDao;
 import com.sie.framework.entity.CourseEntity;
+import com.sie.framework.type.SystemType;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -21,14 +22,24 @@ public class CourseDaoImpl extends GenericDaoImpl<CourseEntity, Integer> impleme
     }
 
     @Override
-    public String getNamesByIds(String courseIds) {
+    public String getNamesByIds(Integer systemType,String courseIds) {
         String hql = "from CourseEntity where id in ("+courseIds +")";
         List<CourseEntity>  courseEntities = this.getList(hql);
         String names = "";
-        if(courseEntities.size() > 0){
-            for(CourseEntity courseEntity:courseEntities){
-                names += courseEntity.getEnglishName()+",";
-            }
+        SystemType type = SystemType.valueOf(systemType);
+        switch (type){
+            case SIE:
+                if(courseEntities.size() > 0){
+                    for(CourseEntity courseEntity:courseEntities){
+                        names += courseEntity.getSieEnglishName()+",";
+                    }
+                }
+            case TRU:
+                if(courseEntities.size() > 0){
+                    for(CourseEntity courseEntity:courseEntities){
+                        names += courseEntity.getTruEnglishName()+",";
+                    }
+                }
         }
         if(names.length() > 0){
             names = names.substring(0, names.length()-1);

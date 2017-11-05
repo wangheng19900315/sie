@@ -9,6 +9,7 @@ import com.sie.framework.entity.OrderDetailEntity;
 import com.sie.framework.entity.OrderEntity;
 import com.sie.framework.type.OrderDetailStatus;
 import com.sie.framework.type.OrderStatus;
+import com.sie.framework.type.SystemType;
 import com.sie.service.CourseService;
 import com.sie.service.GradeService;
 import com.sie.service.OrderDetailService;
@@ -41,6 +42,9 @@ public class OrderDetailServiceImpl extends BaseServiceImpl<OrderDetailEntity,In
     private OrderDetailDao orderDetailDao;
 
     @Autowired
+    private OrderDao orderDao;
+
+    @Autowired
     private CourseService courseService;
 
     @Autowired
@@ -70,11 +74,12 @@ public class OrderDetailServiceImpl extends BaseServiceImpl<OrderDetailEntity,In
         Integer maxResults = PageUtil.getMaxResults(rows);
         List<OrderDetailEntity> entityList =  orderDetailDao.getDetailList(firstResult, maxResults, orderId);
 
+        Integer systemType = orderDao.getEntity(orderId).getSystemType();
         List<OrderDetailBean> orderBeanList = new ArrayList<>();
         if(entityList.size() > 0){
             for(OrderDetailEntity detailEntity:entityList){
                 OrderDetailBean detailBean = new OrderDetailBean();
-                setDetailBeanValues(detailEntity, detailBean);
+                setDetailBeanValues(systemType,detailEntity, detailBean);
                 orderBeanList.add(detailBean);
             }
             pageBean.setRows(orderBeanList);
@@ -88,7 +93,7 @@ public class OrderDetailServiceImpl extends BaseServiceImpl<OrderDetailEntity,In
 
     }
 
-    public void setDetailBeanValues(OrderDetailEntity detailEntity, OrderDetailBean detailBean){
+    public void setDetailBeanValues(Integer systemType,OrderDetailEntity detailEntity, OrderDetailBean detailBean){
         try{
             BeanUtils.copyProperties(detailBean, detailEntity);
             if(detailEntity.getDormitoryEntity() != null){
@@ -107,7 +112,7 @@ public class OrderDetailServiceImpl extends BaseServiceImpl<OrderDetailEntity,In
 //            }
 
             if(StringUtil.isNotBlank(detailEntity.getCourseIds())){
-                detailBean.setCusterNames(this.courseDao.getNamesByIds(detailEntity.getCourseIds()));
+                detailBean.setCusterNames(this.courseDao.getNamesByIds(systemType,detailEntity.getCourseIds()));
             }
 
 
@@ -142,11 +147,11 @@ public class OrderDetailServiceImpl extends BaseServiceImpl<OrderDetailEntity,In
         list.add(new HqlOperateVo("orderEntity.id", "=", orderId));
         List<OrderDetailEntity> orderEntities = this.getList(list);
         if(orderEntities.size() > 0) {
-
+            Integer system = orderDao.getEntity(Integer.parseInt(orderId)).getSystemType();
             for (OrderDetailEntity detailEntity : orderEntities) {
 
                 OrderDetailBean detailBean = new OrderDetailBean();
-                this.setDetailBeanValues(detailEntity, detailBean);
+                this.setDetailBeanValues(system,detailEntity, detailBean);
                 OrderDetailVo vo = new OrderDetailVo();
                 org.springframework.beans.BeanUtils.copyProperties(detailBean, vo);
 

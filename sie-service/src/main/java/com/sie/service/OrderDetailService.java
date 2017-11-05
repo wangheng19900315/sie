@@ -20,7 +20,7 @@ public interface OrderDetailService extends BaseService<OrderDetailEntity, Integ
 
     PageInfo<OrderDetailBean> getOrderDetailList(Integer page, Integer rows, Integer orderId);
 
-    public void setDetailBeanValues(OrderDetailEntity detailEntity, OrderDetailBean detailBean);
+    public void setDetailBeanValues(Integer systemType,OrderDetailEntity detailEntity, OrderDetailBean detailBean);
 
     public void updateCourseIds(OrderDetailEntity detailEntity);
 

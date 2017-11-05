@@ -31,13 +31,11 @@ $(function(){
         height: '100%',
         mtype: 'post',
         postData: {},
-        colNames: ['ID','课程ID', '项目名称','中文名','英文名' ,'最大报名人数','总报名人数','SIE报名人数','TRU报名人数','时间' ,'教授名称' ,'所在系统','SIE课程编码', 'TRU课程编码'],
+        colNames: ['ID','课程ID', '项目名称','最大报名人数','总报名人数','SIE报名人数','TRU报名人数','时间' ,'教授名称' ,'所在系统','SIE课程编码','SIE中文名','SIE英文名' , 'TRU课程编码','TRU中文名','TRU英文名' ],
         colModel: [
             {name: 'id', index: 'id', width: 20, hidden: true,  sortable: false},
             {name: 'courseID', index: 'courseID', width: 20,   sortable: false},
             {name: 'projectName', index: 'projectName', width: 20,   sortable: false},
-            {name: 'chineseName', index: 'chineseName', width: 20,   sortable: false},
-            {name: 'englishName', index: 'englishName', width: 20,   sortable: false},
             {name: 'maxStudent', index: 'maxStudent', width: 20,  sortable: false},
             {name: 'totalNumber', index: 'totalNumber', width: 20,   sortable: false,formatter:function(cellvalue, options, rowObject){
                 var total = rowObject.sieTotalNumber + rowObject.truTotalNumber;
@@ -53,7 +51,11 @@ $(function(){
             {name: 'professorName', index: 'professorName', width: 20,  sortable: false},
             {name: 'systemName', index: 'systemName', width: 20,   sortable: false},
             {name: 'sieCode', index: 'sieCode', width: 20,  sortable: false},
-            {name: 'truCode', index: 'truCode', width: 20,  sortable: false}
+            {name: 'sieChineseName', index: 'sieChineseName', width: 20,   sortable: false},
+            {name: 'sieEnglishName', index: 'sieEnglishName', width: 20,   sortable: false},
+            {name: 'truCode', index: 'truCode', width: 20,  sortable: false},
+            {name: 'truChineseName', index: 'truChineseName', width: 20,   sortable: false},
+            {name: 'truEnglishName', index: 'truEnglishName', width: 20,   sortable: false}
         ],
         rownumbers: true,
         hoverrows:false,
