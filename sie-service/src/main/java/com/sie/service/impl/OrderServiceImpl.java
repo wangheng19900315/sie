@@ -826,7 +826,7 @@ public class OrderServiceImpl extends BaseServiceImpl<OrderEntity,Integer> imple
                     if (courseEntities.size() != 1) {
                         throw new Exception(courseID + "课程不存在 ");
                     }
-                    if (!projectEntities.get(0).getId().equals(courseEntities.get(0).getProjectId())) {
+                    if (!projectEntities.get(0).getId().equals(courseEntities.get(0).getProjectEntity().getId())) {
                         throw new Exception(courseID + "课程不在" + projectCode + "项目下 ");
                     }
                     courseIds.add(courseEntities.get(0).getId());

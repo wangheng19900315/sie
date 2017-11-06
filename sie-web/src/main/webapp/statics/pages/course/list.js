@@ -31,11 +31,11 @@ $(function(){
         height: '100%',
         mtype: 'post',
         postData: $("#search-form").serializeJson(),
-        colNames: ['ID','课程ID', '项目名称','最大报名人数','总报名人数','SIE报名人数','TRU报名人数','时间' ,'教授名称' ,'所在系统','SIE课程编码','SIE中文名','SIE英文名' , 'TRU课程编码','TRU中文名','TRU英文名' ],
+        colNames: ['ID','课程ID', '项目编号','最大报名人数','总报名人数','SIE报名人数','TRU报名人数','时间' ,'教授名称' ,'所在系统','SIE课程编码','SIE中文名','SIE英文名' , 'TRU课程编码','TRU中文名','TRU英文名' ],
         colModel: [
             {name: 'id', index: 'id', width: 20, hidden: true,  sortable: false},
             {name: 'courseID', index: 'courseID', width: 20,   sortable: false},
-            {name: 'projectName', index: 'projectName', width: 20,   sortable: false},
+            {name: 'projectCode', index: 'projectCode', width: 20,   sortable: false},
             {name: 'maxStudent', index: 'maxStudent', width: 20,  sortable: false},
             {name: 'totalNumber', index: 'totalNumber', width: 20,   sortable: false,formatter:function(cellvalue, options, rowObject){
                 var total = rowObject.sieTotalNumber + rowObject.truTotalNumber;

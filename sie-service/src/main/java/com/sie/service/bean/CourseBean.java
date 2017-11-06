@@ -18,7 +18,7 @@ public class CourseBean  extends BaseBean{
     private String endTime;
 //    private String endTimeFormat;
     private Integer projectId;
-    private String projectName;
+    private String projectCode;
     private String sieCode;
     private String sieChineseName;
     private String sieEnglishName;
@@ -136,12 +136,12 @@ public class CourseBean  extends BaseBean{
         this.truTotalNumber = truTotalNumber;
     }
 
-    public String getProjectName() {
-        return projectName;
+    public String getProjectCode() {
+        return projectCode;
     }
 
-    public void setProjectName(String projectName) {
-        this.projectName = projectName;
+    public void setProjectCode(String projectCode) {
+        this.projectCode = projectCode;
     }
 
     public Integer getMaxStudent() {

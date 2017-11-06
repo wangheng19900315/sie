@@ -20,7 +20,8 @@ public class CourseEntity extends BaseEntity{
     private String professorName;// 教授名称
     private String startTime;
     private String endTime;
-    private Integer projectId;
+    private ProjectEntity projectEntity;
+//    private Integer projectId;
 //    private Integer isSie;
     private String sieCode;
     private String sieChineseName;
@@ -118,14 +119,15 @@ public class CourseEntity extends BaseEntity{
         this.endTime = endTime;
     }
 
-    @Basic
-    @Column(name = "project_id")
-    public Integer getProjectId() {
-        return projectId;
+    @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
+    @JoinColumn(name = "project_id", nullable = true, columnDefinition = "COMMENT '课程'")
+    @Where(clause = "h_delete=0")
+    public ProjectEntity getProjectEntity() {
+        return projectEntity;
     }
 
-    public void setProjectId(Integer projectId) {
-        this.projectId = projectId;
+    public void setProjectEntity(ProjectEntity projectEntity) {
+        this.projectEntity = projectEntity;
     }
 
     @Basic

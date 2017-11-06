@@ -223,7 +223,7 @@ public class GradeServiceImpl extends BaseServiceImpl<GradeEntity,Integer> imple
                 gradeEntity.setCourseEntity(courseEntity);
                 //gradeEntity.setGrade("0");
                 gradeEntity.setStudentEntity(studentEntity);
-                gradeEntity.setProjectEntity(this.projectDao.getEntity(courseEntity.getProjectId()));
+                gradeEntity.setProjectEntity(courseEntity.getProjectEntity());
                 gradeEntity.setSystemType(systeTypeMap.get(completeId));
                 this.gradeDao.createEntity(gradeEntity);
             }

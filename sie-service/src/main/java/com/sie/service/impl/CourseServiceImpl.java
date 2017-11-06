@@ -17,10 +17,12 @@ import com.sie.service.bean.PageInfo;
 import com.sie.service.bean.ProjectBean;
 import com.sie.util.DateUtil;
 import com.sie.util.NumberUtil;
+import com.sie.util.PageUtil;
 import com.sie.util.StringUtil;
 import org.apache.commons.beanutils.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
@@ -46,10 +48,68 @@ public class CourseServiceImpl extends BaseServiceImpl<CourseEntity,Integer> imp
         this.courseDao = courseDao;
     }
 
+    private String getHql(List<HqlOperateVo> hqlOperateVos){
+        String hql = "select distinct entity  from CourseEntity entity";
+        if(hqlOperateVos != null && hqlOperateVos.size() > 0){
+            for(HqlOperateVo vo:hqlOperateVos){
+                if("join".equals(vo.getOperate())){
+                    hql += vo.getName();
+                }
+                if(StringUtils.isEmpty(vo.getValue())){
+                    continue;
+                }
+
+
+                if(hql.indexOf("where") > -1){
+                    hql += " and ";
+                }else{
+                    hql += " where ";
+                }
+
+                if("like".equals(vo.getOperate())){
+                    hql += " "+vo.getName()+" like '%"+vo.getValue()+"%'";
+                }else if("in".equals(vo.getOperate())){
+                    hql += "  "+vo.getName()+" "+vo.getOperate()+" ("+vo.getValue()+") ";
+                }else{
+                    hql += "  "+vo.getName()+vo.getOperate()+" '"+vo.getValue()+"'";
+                }
+            }
+        }
+
+        if(hql.indexOf("where") > -1){
+            hql += " and entity.hdelete=0 ";
+        }else{
+            hql += " where entity.hdelete=0 ";
+        }
+
+        hql += " order by projectEntity.code asc,startTime asc";
+
+
+        return hql;
+    }
 
     @Override
     public PageInfo<CourseBean> getCourseList(Integer page, Integer rows,  List<HqlOperateVo> hqlOperateVos){
-        PageInfo<CourseEntity> pageInfo = this.getList(page,rows, hqlOperateVos);
+
+        //TODO 查询条件没有
+        if (!NumberUtil.isSignless(rows)) {
+            rows = Integer.MAX_VALUE;
+        }
+
+        if (!NumberUtil.isSignless(page)) {
+            page = 0;
+        }
+        Integer records = courseDao.getCount(hqlOperateVos);
+        PageInfo<CourseEntity> pageInfo = new PageInfo<>(records, PageUtil.getPageTotal(records, rows));
+        pageInfo.setPage(PageUtil.getPageNow(page, pageInfo.getTotal()));
+        Integer firstResult = PageUtil.getFirstResult(pageInfo.getPage(), rows);
+        Integer maxResults = PageUtil.getMaxResults(rows);
+        List<CourseEntity> entityList =  courseDao.getList(getHql(hqlOperateVos),firstResult,maxResults);
+        pageInfo.setRows(entityList);
+        pageInfo.setPage(page);
+
+
+//        PageInfo<CourseEntity> pageInfo = this.getList(page,rows, hqlOperateVos);
         PageInfo<CourseBean> result = new PageInfo<CourseBean>();
         result.setPage(pageInfo.getPage());
         result.setRecords(pageInfo.getRecords());
@@ -85,6 +145,7 @@ public class CourseServiceImpl extends BaseServiceImpl<CourseEntity,Integer> imp
             //开始时间和结束时间用英文的:分开
             courseEntity.setStartTime(courseBean.getStartTime().replace("：", ":"));
             courseEntity.setEndTime(courseBean.getEndTime().replace("：", ":"));
+            courseEntity.setProjectEntity(projectDao.getEntity(courseBean.getProjectId()));
         } catch (Exception e) {
             e.printStackTrace();
             return null;
@@ -93,7 +154,7 @@ public class CourseServiceImpl extends BaseServiceImpl<CourseEntity,Integer> imp
             CourseEntity oldCourseEntity = this.courseDao.getEntity(courseBean.getId());
             //设置值
             oldCourseEntity.setSystem(courseEntity.getSystem());
-            oldCourseEntity.setProjectId(courseEntity.getProjectId());
+            oldCourseEntity.setProjectEntity(courseEntity.getProjectEntity());
             oldCourseEntity.setStartTime(courseEntity.getStartTime());
             oldCourseEntity.setEndTime(courseEntity.getEndTime());
             oldCourseEntity.setMaxStudent(courseEntity.getMaxStudent());
@@ -157,8 +218,8 @@ public class CourseServiceImpl extends BaseServiceImpl<CourseEntity,Integer> imp
                 }
             }
             //设置projectname
-            ProjectEntity projectEntity = projectDao.getEntity(courseEntity.getProjectId());
-            bean.setProjectName(projectEntity.getSieName());
+           // ProjectEntity projectEntity = projectDao.getEntity(courseEntity.getProjectId());
+            bean.setProjectCode(courseEntity.getProjectEntity().getCode());
 
             //设置时间格式的字符串
 //            if(bean.getStartTime() != null){
@@ -178,7 +239,7 @@ public class CourseServiceImpl extends BaseServiceImpl<CourseEntity,Integer> imp
     public List<CourseEntity> getCourses(Integer projectId, Integer systemType) {
         Map<Integer,String> courses = new HashMap<>();
         //得到属于当前系统和同事属于两个系统的
-        String hql = "from CourseEntity where (system="+systemType+" or system="+SystemType.SIEANDTRU.value()+") and projectId="+projectId;
+        String hql = "from CourseEntity where (system="+systemType+" or system="+SystemType.SIEANDTRU.value()+") and projectEntity.id="+projectId;
         List<CourseEntity> courseEntities = this.courseDao.getList(hql);
 //        if(courseEntities.size()  >0){
 //            for(CourseEntity courseEntity:courseEntities){
@@ -206,6 +267,7 @@ public class CourseServiceImpl extends BaseServiceImpl<CourseEntity,Integer> imp
         CourseBean bean = new CourseBean();
         try {
             setBeanValues(entity,bean);
+            bean.setProjectId(entity.getProjectEntity().getId());
         } catch (Exception e) {
             e.printStackTrace();
             return null;
