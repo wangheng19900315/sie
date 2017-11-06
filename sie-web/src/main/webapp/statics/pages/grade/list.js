@@ -26,7 +26,7 @@ $(function(){
         datatype: "json",
         height: '100%',
         mtype: 'post',
-        postData:{},
+        postData:$("#search-form").serializeJson(),
         colNames: ['ID', 'studentId','学生ID' ,'学生姓名' ,'项目名称','课程编号' ,'课程名称' ,'成绩' ],
         colModel: [
             {name: 'id', index: 'id', width: 20, hidden: true,  sortable: false},
@@ -119,7 +119,8 @@ function search() {
     $('#view-btn').addClass('disabled');
 
     jQuery("#grid-table").jqGrid('setGridParam',{
-        postData: $("#search-form").serializeJson()
+        postData: $("#search-form").serializeJson(),
+        page:1
     }).trigger('reloadGrid');
 
 }

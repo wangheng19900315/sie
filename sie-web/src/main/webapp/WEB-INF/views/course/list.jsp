@@ -20,11 +20,18 @@
                 <div class="panel-body buttons-with-margins">
                     <form class="form-inline"  id="search-form">
                         <div class="form-group">
-                            <input type="text" class="form-control" name="chineseName" placeholder="中文名称">
+                            <input type="text" class="form-control" name="sieChineseName" placeholder="SIE中文名称">
                         </div>
                         <div class="form-group">
-                            <input type="text" class="form-control" name="englishName" placeholder="英文名称">
+                            <input type="text" class="form-control" name="sieEnglishName" placeholder="SIE英文名称">
                         </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="truChineseName" placeholder="TRU中文名称">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="truEnglishName" placeholder="TRU英文名称">
+                        </div>
+
                         <button type="button"  id="searchBtn" class="btn btn-primary" >查找</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
                         <button type="button"  class="btn" id="addBtn" >添加</button> &nbsp;&nbsp;

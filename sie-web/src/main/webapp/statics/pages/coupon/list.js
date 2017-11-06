@@ -28,7 +28,7 @@ $(function(){
         datatype: "json",
         height: '100%',
         mtype: 'post',
-        postData: {},
+        postData: $("#search-form").serializeJson(),
         colNames: ['ID', '名称','优惠码' ,'总数量' ,'使用数量' ,'剩余数量' ,'RMB优惠' ,'美金优惠' ,'加币优惠','是否有效','创建时间' ],
         colModel: [
             {name: 'id', index: 'id', width: 20, hidden: true,  sortable: false},
@@ -152,9 +152,8 @@ function search() {
         datatype: "json",
         height: '100%',
         mtype: 'post',
-        postData: {
-            //name: $("#name").val()
-        }
+        postData: $("#search-form").serializeJson(),
+        page:1
     }).trigger('reloadGrid');
 
 }

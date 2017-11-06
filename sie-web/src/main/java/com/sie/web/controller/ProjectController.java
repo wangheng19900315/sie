@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sie.framework.entity.ProjectEntity;
 import com.sie.framework.type.Area;
+import com.sie.framework.vo.ProjectSearchVo;
 import com.sie.service.ProjectService;
 import com.sie.service.RegistrationProjectService;
 import com.sie.service.bean.*;
@@ -60,11 +61,11 @@ public class ProjectController {
 
     @RequestMapping("/list.json")
     @ResponseBody
-    public PageInfo<ProjectBean> listJons(Integer page, Integer rows ){
+    public PageInfo<ProjectBean> listJons(ProjectSearchVo vo,Integer page, Integer rows ){
 
         PageInfo<ProjectBean> pageInfo = null;
         try{
-            pageInfo = this.projectService.getProjectList(page,rows, null);
+            pageInfo = this.projectService.getProjectList(page,rows, vo.transToHqlOperateVo());
         }catch (Exception e){
             e.printStackTrace();
         }

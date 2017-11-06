@@ -32,7 +32,7 @@ $(function(){
         datatype: "json",
         height: '100%',
         mtype: 'post',
-        postData: {},
+        postData: $("#search-form").serializeJson(),
         colNames: ['ID', '学校名称','国家','省份' ,'创建时间' ],
         colModel: [
             {name: 'id', index: 'id', width: 20, hidden: true, sorttype: "int", sortable: false},
@@ -137,7 +137,14 @@ function search() {
     $('#edit-btn').addClass('disabled');
     $('#del-btn').addClass('disabled');
     $('#view-btn').addClass('disabled');
-
+    jQuery("#grid-table").jqGrid('setGridParam',{
+        url:pageRootPath+ '/school/list.json',
+        datatype: "json",
+        height: '100%',
+        mtype: 'post',
+        postData: $("#search-form").serializeJson(),
+        page:1
+    }).trigger('reloadGrid');
 }
 
 

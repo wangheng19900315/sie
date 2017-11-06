@@ -30,7 +30,7 @@ $(function(){
         datatype: "json",
         height: '100%',
         mtype: 'post',
-        postData: {},
+        postData: $("#search-form").serializeJson(),
         colNames: ['ID','课程ID', '项目名称','最大报名人数','总报名人数','SIE报名人数','TRU报名人数','时间' ,'教授名称' ,'所在系统','SIE课程编码','SIE中文名','SIE英文名' , 'TRU课程编码','TRU中文名','TRU英文名' ],
         colModel: [
             {name: 'id', index: 'id', width: 20, hidden: true,  sortable: false},
@@ -171,7 +171,8 @@ function search() {
         datatype: "json",
         height: '100%',
         mtype: 'post',
-        postData: $("#search-form").serializeJson()
+        postData: $("#search-form").serializeJson(),
+        page:1
     }).trigger('reloadGrid');
 
 }

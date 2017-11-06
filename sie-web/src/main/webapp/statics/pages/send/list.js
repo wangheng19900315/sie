@@ -28,7 +28,7 @@ $(function(){
         datatype: "json",
         height: '100%',
         mtype: 'post',
-        postData: {},
+        postData: $("#search-form").serializeJson(),
         colNames: ['ID', '学生姓名','学生ID','街道' ,'寄送县/市' ,'寄送州/市' ,'寄送邮编' ,'寄送联系人/部门','寄送电话','快递公司' ,'寄送单号'  ],
         colModel: [
             {name: 'id', index: 'id', width: 20, hidden: true,  sortable: false},
@@ -185,9 +185,8 @@ function search() {
         datatype: "json",
         height: '100%',
         mtype: 'post',
-        postData: {
-            //name: $("#name").val()
-        }
+        postData: $("#search-form").serializeJson(),
+        page:1
     }).trigger('reloadGrid');
 
 }

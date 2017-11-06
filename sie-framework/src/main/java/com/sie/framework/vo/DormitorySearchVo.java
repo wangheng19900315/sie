@@ -10,20 +10,21 @@ import java.util.List;
  * Created by wangheng on 2017/8/23.
  */
 public class DormitorySearchVo implements SearchToHqlOperate{
-    private String studentName;
+    private String name;
 
-    public String getStudentName() {
-        return studentName;
+    public String getName() {
+        return name;
     }
 
-    public void setStudentName(String studentName) {
-        this.studentName = studentName;
+    public void setName(String name) {
+        this.name = name;
     }
+
     @Override
     public List<HqlOperateVo> transToHqlOperateVo(){
         List<HqlOperateVo> operateVos = new ArrayList<>();
-        if(StringUtil.isNotBlank(studentName)){
-            operateVos.add(new HqlOperateVo("studentEntity.chineseName","like",studentName));
+        if(StringUtil.isNotBlank(name)){
+            operateVos.add(new HqlOperateVo("name","like",name));
         }
         return operateVos;
     }

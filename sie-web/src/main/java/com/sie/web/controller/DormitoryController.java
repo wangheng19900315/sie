@@ -2,6 +2,7 @@ package com.sie.web.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.sie.framework.entity.DormitoryEntity;
+import com.sie.framework.vo.DormitorySearchVo;
 import com.sie.service.DormitoryService;
 import com.sie.service.ProjectService;
 import com.sie.service.bean.DormitoryBean;
@@ -61,11 +62,11 @@ public class DormitoryController {
 
     @RequestMapping("/list.json")
     @ResponseBody
-    public PageInfo<DormitoryBean> listJons(Integer page, Integer rows ){
+    public PageInfo<DormitoryBean> listJons(DormitorySearchVo vo,Integer page, Integer rows ){
 
         PageInfo<DormitoryBean> pageInfo = null;
         try{
-            pageInfo = this.dormitoryService.getDormitoryList(page,rows, null);
+            pageInfo = this.dormitoryService.getDormitoryList(page,rows, vo.transToHqlOperateVo());
         }catch (Exception e){
             e.printStackTrace();
         }

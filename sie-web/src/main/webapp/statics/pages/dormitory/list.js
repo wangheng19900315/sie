@@ -33,7 +33,7 @@ $(function(){
         datatype: "json",
         height: '100%',
         mtype: 'post',
-        postData: {},
+        postData: $("#search-form").serializeJson(),
         colNames: ['ID', '名称','编号','项目编号' ,'价格' ,'地址' ,'人数限制','总人数','女生人数' ,'男士人数'  ],
         colModel: [
             {name: 'id', index: 'id', width: 20, hidden: true,  sortable: false},
@@ -175,9 +175,8 @@ function search() {
         datatype: "json",
         height: '100%',
         mtype: 'post',
-        postData: {
-            //name: $("#name").val()
-        }
+        postData: $("#search-form").serializeJson(),
+        page:1
     }).trigger('reloadGrid');
 
 }

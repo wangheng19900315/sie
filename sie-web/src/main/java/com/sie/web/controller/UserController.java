@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.sie.framework.entity.UserEntity;
 import com.sie.framework.help.ApplicationHelp;
 import com.sie.framework.type.Constant;
+import com.sie.framework.vo.UserSearchVo;
 import com.sie.service.UserService;
 import com.sie.service.bean.PageInfo;
 import com.sie.service.bean.ResultBean;
@@ -80,11 +81,11 @@ public class UserController {
 
     @RequestMapping("/list.json")
     @ResponseBody
-    public PageInfo<UserEntity> listJons(Integer page, Integer rows ){
+    public PageInfo<UserEntity> listJons(UserSearchVo vo, Integer page, Integer rows ){
 
         PageInfo<UserEntity> pageInfo = null;
         try{
-            pageInfo = this.userService.getList(page,rows, null);
+            pageInfo = this.userService.getList(page,rows, vo.transToHqlOperateVo());
         }catch (Exception e){
             e.printStackTrace();
         }

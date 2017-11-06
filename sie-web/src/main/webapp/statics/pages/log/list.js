@@ -12,7 +12,7 @@ $(function(){
         datatype: "json",
         height: '100%',
         mtype: 'post',
-        postData: {},
+        postData: $("#search-form").serializeJson(),
         colNames: ['ID','操作人', '操作地址','备注' ,'时间'],
         colModel: [
             {name: 'id', index: 'id', width: 20, hidden: true,  sortable: false},
@@ -75,6 +75,7 @@ function search() {
         datatype: "json",
         height: '100%',
         mtype: 'post',
-        postData: $("#search-form").serializeJson()
+        postData: $("#search-form").serializeJson(),
+        page:1
     }).trigger('reloadGrid');
 }

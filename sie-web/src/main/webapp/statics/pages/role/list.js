@@ -35,7 +35,7 @@ $(function(){
         datatype: "json",
         height: '100%',
         mtype: 'post',
-        postData: {},
+        postData: $("#search-form").serializeJson(),
         colNames: ['ID','menuIds', '名称' ,'创建时间' ,'修改时间'],
         colModel: [
             {name: 'id', index: 'id', width: 20, hidden: true, sorttype: "int", sortable: false},
@@ -71,21 +71,21 @@ $(function(){
     });
 
 
-    /**
-     *  按enter搜索
-     */
-    $("#key").keypress(function (e) {
-        var keyCode;
-        if (e == null) {
-            keyCode = event.keyCode;
-        } else {
-            keyCode = e.keyCode;
-        }
-        if (keyCode == 13) {
-            search();
-            e.preventDefault();
-        }
-    });
+    ///**
+    // *  按enter搜索
+    // */
+    //$("#key").keypress(function (e) {
+    //    var keyCode;
+    //    if (e == null) {
+    //        keyCode = event.keyCode;
+    //    } else {
+    //        keyCode = e.keyCode;
+    //    }
+    //    if (keyCode == 13) {
+    //        search();
+    //        e.preventDefault();
+    //    }
+    //});
 
 
     $("#searchBtn").bind("click",function(){
@@ -237,16 +237,15 @@ function search() {
     $('#del-btn').addClass('disabled');
     $('#view-btn').addClass('disabled');
 
+
     jQuery("#grid-table").jqGrid('setGridParam',{
         url:pageRootPath+ '/role/list.json',
         datatype: "json",
         height: '100%',
         mtype: 'post',
-        postData: {
-            //name: $("#name").val()
-        }
+        postData: $("#search-form").serializeJson(),
+        page:1
     }).trigger('reloadGrid');
-
 }
 
 /**

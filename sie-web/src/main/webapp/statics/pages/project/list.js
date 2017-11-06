@@ -36,7 +36,7 @@ $(function(){
         datatype: "json",
         height: '100%',
         mtype: 'post',
-        postData: {},
+        postData: $("#search-form").serializeJson(),
         colNames: ['ID','项目编号', '所在系统','SIE系统名称' ,'SIE系统最多报课程数' ,'TRU系统名称' ,'TRU系统最多报课程数','开始时间' ],
         colModel: [
             {name: 'id', index: 'id', width: 20, hidden: true,  sortable: false},
@@ -254,7 +254,8 @@ function search() {
     $('#view-btn').addClass('disabled');
 
     jQuery("#grid-table").jqGrid('setGridParam',{
-        postData: $("#search-form").serializeJson()
+        postData: $("#search-form").serializeJson(),
+        page:1
     }).trigger('reloadGrid');
 
 }

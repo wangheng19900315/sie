@@ -3,6 +3,7 @@ package com.sie.web.controller;
 import com.alibaba.fastjson.JSON;
 import com.sie.framework.entity.RoleEntity;
 import com.sie.framework.entity.UserEntity;
+import com.sie.framework.vo.RoleSearchVo;
 import com.sie.service.RoleService;
 import com.sie.service.bean.PageInfo;
 import com.sie.service.bean.ResultBean;
@@ -75,11 +76,11 @@ public class RoleController {
 
     @RequestMapping("/list.json")
     @ResponseBody
-    public PageInfo<RoleBean> listJons(Integer page, Integer rows ){
+    public PageInfo<RoleBean> listJons(RoleSearchVo vo, Integer page, Integer rows ){
 
         PageInfo<RoleBean> pageInfo = null;
         try{
-            pageInfo = this.roleService.getRoleList(page,rows, null);
+            pageInfo = this.roleService.getRoleList(page,rows, vo.transToHqlOperateVo());
         }catch (Exception e){
             e.printStackTrace();
         }

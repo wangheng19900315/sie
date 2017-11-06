@@ -18,7 +18,7 @@ public class GradeSendDaoImpl extends GenericDaoImpl<GradeSendEntity, Integer> i
     public GradeSendEntity getRepeatEntity(GradeSendEntity entity) {
         String hql = "from GradeSendEntity where hdelete=0 ";
 
-        hql += " and studentId='"+entity.getStudentId()+"'";
+        hql += " and studentEntity.id='"+entity.getStudentEntity().getId()+"'";
         hql += " and trackingNumber='"+entity.getTrackingNumber()+"'";
 
         List<GradeSendEntity> list = this.getList(hql);

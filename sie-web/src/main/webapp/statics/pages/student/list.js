@@ -28,7 +28,7 @@ $(function(){
         datatype: "json",
         height: '100%',
         mtype: 'post',
-        postData: {},
+        postData: $("#search-form").serializeJson(),
         colNames: ['ID','用户ID','中文名称' ,'性别' ,'微信号' ,'在读大学','国内联系电话','Email' ],
         colModel: [
             {name: 'id', index: 'id', width: 20, hidden: true,  sortable: false},
@@ -156,13 +156,13 @@ function search() {
 }
 
 function reloadGrid(){
-    var searData = $("#search-form").serializeJson();
     jQuery("#grid-table").jqGrid('setGridParam',{
         url:pageRootPath+ '/student/list.json',
         datatype: "json",
         height: '100%',
         mtype: 'post',
-        postData: searData
+        postData: $("#search-form").serializeJson(),
+        page:1
     }).trigger('reloadGrid');
 }
 

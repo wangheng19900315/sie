@@ -3,6 +3,7 @@ package com.sie.web.controller;
 import com.alibaba.fastjson.JSON;
 import com.sie.framework.entity.SchoolEntity;
 import com.sie.framework.entity.UserEntity;
+import com.sie.framework.vo.SchoolSearchVo;
 import com.sie.service.SchoolService;
 import com.sie.service.bean.PageInfo;
 import com.sie.service.bean.ResultBean;
@@ -53,11 +54,11 @@ public class SchoolController {
 
     @RequestMapping("/list.json")
     @ResponseBody
-    public PageInfo<SchoolEntity> listJons(Integer page, Integer rows ){
+    public PageInfo<SchoolEntity> listJons(SchoolSearchVo vo, Integer page, Integer rows ){
 
         PageInfo<SchoolEntity> pageInfo = null;
         try{
-            pageInfo = this.schoolService.getList(page,rows, null);
+            pageInfo = this.schoolService.getList(page,rows, vo.transToHqlOperateVo());
         }catch (Exception e){
             e.printStackTrace();
         }

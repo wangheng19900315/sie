@@ -5,6 +5,7 @@ import com.sie.framework.base.HqlOperateVo;
 import com.sie.framework.entity.CouponEntity;
 import com.sie.framework.entity.GradeSendEntity;
 import com.sie.framework.entity.StudentEntity;
+import com.sie.framework.vo.GradeSendSearchVo;
 import com.sie.service.GradeSendService;
 import com.sie.service.StudentService;
 import com.sie.service.bean.GradeSendBean;
@@ -68,11 +69,11 @@ public class GradeSendController {
 
     @RequestMapping("/list.json")
     @ResponseBody
-    public PageInfo<GradeSendBean> listJons(Integer page, Integer rows ){
+    public PageInfo<GradeSendBean> listJons(GradeSendSearchVo vo,Integer page, Integer rows ){
 
         PageInfo<GradeSendBean> pageInfo = null;
         try{
-            pageInfo = this.gradeSendService.getGradeSendList(page,rows, null);
+            pageInfo = this.gradeSendService.getGradeSendList(page,rows, vo.transToHqlOperateVo());
         }catch (Exception e){
             e.printStackTrace();
         }

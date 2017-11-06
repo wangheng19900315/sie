@@ -1,5 +1,6 @@
 package com.sie.service.impl;
 
+import com.sie.framework.base.HqlOperateVo;
 import com.sie.framework.dao.MenuDao;
 import com.sie.framework.dao.RoleDao;
 import com.sie.framework.entity.MenuEntity;
@@ -38,8 +39,8 @@ public class RoleServiceImpl extends BaseServiceImpl<RoleEntity,Integer> impleme
     }
 
     @Override
-    public PageInfo<RoleBean> getRoleList(Integer page, Integer rows, Map<String, Object> parameter) {
-        PageInfo<RoleEntity> pageInfo = this.getList(page,rows, null);
+    public PageInfo<RoleBean> getRoleList(Integer page, Integer rows, List<HqlOperateVo> hqlOperateVos) {
+        PageInfo<RoleEntity> pageInfo = this.getList(page,rows, hqlOperateVos);
         PageInfo<RoleBean> result = new PageInfo<RoleBean>();
         result.setPage(pageInfo.getPage());
         result.setRecords(pageInfo.getRecords());

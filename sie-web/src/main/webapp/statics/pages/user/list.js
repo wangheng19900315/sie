@@ -30,7 +30,7 @@ $(function(){
         datatype: "json",
         height: '100%',
         mtype: 'post',
-        postData: {},
+        postData: $("#search-form").serializeJson(),
 
         colNames: ['ID','角色id', '名称' ,'角色名称' ,'Email','电话','创建时间' ],
         colModel: [
@@ -196,9 +196,8 @@ function search() {
         datatype: "json",
         height: '100%',
         mtype: 'post',
-        postData: {
-            //name: $("#name").val()
-        }
+        postData: $("#search-form").serializeJson(),
+        page:1
     }).trigger('reloadGrid');
 
 }

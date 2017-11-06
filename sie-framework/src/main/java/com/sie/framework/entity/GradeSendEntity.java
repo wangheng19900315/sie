@@ -1,9 +1,8 @@
 package com.sie.framework.entity;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import org.hibernate.annotations.Where;
+
+import javax.persistence.*;
 
 /**
  * Created by x on 2017/8/12.
@@ -11,7 +10,8 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "t_grade_send_info")
 public class GradeSendEntity extends BaseEntity{
-    private Integer studentId;
+//    private Integer studentId;
+    private StudentEntity studentEntity;
     private String sendStreet;//寄送街道
     private String sendCountry;//寄送县市
     private String sendProvince;//寄送州省
@@ -23,14 +23,15 @@ public class GradeSendEntity extends BaseEntity{
     private String comment;
     private Integer defaultSend;//是否是学生默认的寄送订单
 
-    @Basic
-    @Column(name = "student_id")
-    public Integer getStudentId() {
-        return studentId;
+    @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
+    @JoinColumn(name = "student_id", nullable = true, columnDefinition = "COMMENT '课程'")
+    @Where(clause = "h_delete=0")
+    public StudentEntity getStudentEntity() {
+        return studentEntity;
     }
 
-    public void setStudentId(Integer studentId) {
-        this.studentId = studentId;
+    public void setStudentEntity(StudentEntity studentEntity) {
+        this.studentEntity = studentEntity;
     }
 
     @Basic

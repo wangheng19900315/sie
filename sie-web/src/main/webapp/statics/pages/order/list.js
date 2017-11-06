@@ -46,7 +46,7 @@ $(function(){
         datatype: "json",
         height: '100%',
         mtype: 'post',
-        postData: {},
+        postData: $("#search-form").serializeJson(),
         colNames: ['ID','订单号','创建时间','systemType','提交系统','订单类型','学生姓名','学生ID','支付金额','订单状态','订单状态','支付时间','项目名称','课程数' ],
         colModel: [
             {name: 'id', index: 'id', width: 20, hidden: true, sorttype: "int", sortable: false},
@@ -433,7 +433,8 @@ function reloadGrid(){
         datatype: "json",
         height: '100%',
         mtype: 'post',
-        postData: $("#search-form").serializeJson()
+        postData: $("#search-form").serializeJson(),
+        page:1
     }).trigger('reloadGrid');
 
 }
