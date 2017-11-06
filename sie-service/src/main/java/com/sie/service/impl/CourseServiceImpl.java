@@ -94,13 +94,15 @@ public class CourseServiceImpl extends BaseServiceImpl<CourseEntity,Integer> imp
             //设置值
             oldCourseEntity.setSystem(courseEntity.getSystem());
             oldCourseEntity.setProjectId(courseEntity.getProjectId());
-            oldCourseEntity.setChineseName(courseEntity.getChineseName());
-            oldCourseEntity.setEnglishName(courseEntity.getEnglishName());
             oldCourseEntity.setStartTime(courseEntity.getStartTime());
             oldCourseEntity.setEndTime(courseEntity.getEndTime());
             oldCourseEntity.setMaxStudent(courseEntity.getMaxStudent());
             oldCourseEntity.setSieCode(courseEntity.getSieCode());
+            oldCourseEntity.setSieChineseName(courseEntity.getSieChineseName());
+            oldCourseEntity.setSieEnglishName(courseEntity.getSieEnglishName());
             oldCourseEntity.setTruCode(courseEntity.getTruCode());
+            oldCourseEntity.setTruChineseName(courseEntity.getTruChineseName());
+            oldCourseEntity.setTruEnglishName(courseEntity.getTruEnglishName());
             oldCourseEntity.setProfessorName(courseEntity.getProfessorName());
             oldCourseEntity.setSchool(courseEntity.getSchool());
             oldCourseEntity.setClassroom(courseEntity.getClassroom());
@@ -124,11 +126,15 @@ public class CourseServiceImpl extends BaseServiceImpl<CourseEntity,Integer> imp
             case SIE:
                 //将TRU的信息设置为空
                 courseBean.setTruCode(null);
+                courseBean.setTruChineseName(null);
+                courseBean.setTruEnglishName(null);
                 courseBean.setSieTotalNumber(0);
                 break;
             case TRU:
                 //将SIE的信息设置为空
                 courseBean.setSieCode(null);
+                courseBean.setSieChineseName(null);
+                courseBean.setSieEnglishName(null);
                 courseBean.setTruTotalNumber(0);
                 break;
             case SIEANDTRU:
@@ -219,6 +225,7 @@ public class CourseServiceImpl extends BaseServiceImpl<CourseEntity,Integer> imp
             return;
         }
         String[] strs = courseIds.split(",");
+        String courseEnglishName;
         for(String str:strs){
             CourseEntity courseEntity = this.courseDao.getEntity(Integer.parseInt(str));
             if(courseEntity == null){
@@ -227,12 +234,14 @@ public class CourseServiceImpl extends BaseServiceImpl<CourseEntity,Integer> imp
 
             if(systemType == SystemType.SIE.value()){
                 courseEntity.setSieTotalNumber(courseEntity.getSieTotalNumber()+flag);
+                courseEnglishName = courseEntity.getSieEnglishName();
             }else{
                 courseEntity.setTruTotalNumber(courseEntity.getTruTotalNumber()+flag);
+                courseEnglishName = courseEntity.getTruEnglishName();
             }
             if(orderType == OrderType.USER.value() && flag > 0){
                 if((courseEntity.getSieTotalNumber()+courseEntity.getTruTotalNumber()) > courseEntity.getMaxStudent()){
-                    throw new RuntimeException("课程["+courseEntity.getChineseName()+"]人数最高能报"+courseEntity.getMaxStudent()+"");
+                    throw new RuntimeException("课程["+courseEnglishName+"]人数最高能报"+courseEntity.getMaxStudent()+"");
                 }
             }
 

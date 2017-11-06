@@ -678,49 +678,49 @@ public class APIController {
      * 学生已经完成和已提交的订单的课程信息
      * @return
      */
-    @RequestMapping(value = "/getComAndSubOrderCourse.json", method = RequestMethod.POST)
-    @ResponseBody
-    public ResultBean  getComAndSubOrderCourse(String params, String accessToken){
-        logger.info("getComAndSubOrderCourse.json params="+params +" accessToken="+accessToken);
-        ResultBean resultBean = new ResultBean();
-
-        try{
-            if(StringUtil.isBlank(accessToken) || !accessToken.equals(SYSTEM_ACCESS_TOKEN)){
-                resultBean.setMessage("token 为空，请检查参数");
-                return resultBean;
-            }
-
-            ObjectMapper mapper = new ObjectMapper();
-            Map<String,String >maps = mapper.readValue(params, Map.class);
-            String studentId = maps.get("studentId");
-            if(StringUtil.isBlank(studentId)){
-                resultBean.setMessage("studentId 为空，请检查参数");
-                return resultBean;
-            }
-            String systemType = maps.get("systemType");
-            if(StringUtil.isBlank(systemType)){
-                resultBean.setMessage("systemType 为空，请检查参数");
-                return resultBean;
-            }
-
-            List<OrderVo> subOrderVos = this.orderService.getOrderListVo(systemType, studentId,OrderStatus.SUBMIT.value(),null);
-            List<OrderVo> comOrderVos = this.orderService.getOrderListVo(systemType, studentId,OrderStatus.COMPLETE.value(),null);
-            subOrderVos.addAll(comOrderVos);
-            List<CourseVo> courseVos = new ArrayList<>();
-            for(OrderVo orderVo : subOrderVos){
-                if(orderVo.getCourses() != null && orderVo.getCourses().size() > 0){
-                    courseVos.addAll(orderVo.getCourses());
-                }
-            }
-            resultBean.setMessage("查找成功");
-            resultBean.setSuccess(true);
-            resultBean.setData(courseVos);
-        }catch(Exception e){
-            e.printStackTrace();
-        }
-
-        return resultBean;
-    }
+//    @RequestMapping(value = "/getComAndSubOrderCourse.json", method = RequestMethod.POST)
+//    @ResponseBody
+//    public ResultBean  getComAndSubOrderCourse(String params, String accessToken){
+//        logger.info("getComAndSubOrderCourse.json params="+params +" accessToken="+accessToken);
+//        ResultBean resultBean = new ResultBean();
+//
+//        try{
+//            if(StringUtil.isBlank(accessToken) || !accessToken.equals(SYSTEM_ACCESS_TOKEN)){
+//                resultBean.setMessage("token 为空，请检查参数");
+//                return resultBean;
+//            }
+//
+//            ObjectMapper mapper = new ObjectMapper();
+//            Map<String,String >maps = mapper.readValue(params, Map.class);
+//            String studentId = maps.get("studentId");
+//            if(StringUtil.isBlank(studentId)){
+//                resultBean.setMessage("studentId 为空，请检查参数");
+//                return resultBean;
+//            }
+//            String systemType = maps.get("systemType");
+//            if(StringUtil.isBlank(systemType)){
+//                resultBean.setMessage("systemType 为空，请检查参数");
+//                return resultBean;
+//            }
+//
+//            List<OrderVo> subOrderVos = this.orderService.getOrderListVo(systemType, studentId,OrderStatus.SUBMIT.value(),null);
+//            List<OrderVo> comOrderVos = this.orderService.getOrderListVo(systemType, studentId,OrderStatus.COMPLETE.value(),null);
+//            subOrderVos.addAll(comOrderVos);
+//            List<CourseVo> courseVos = new ArrayList<>();
+//            for(OrderVo orderVo : subOrderVos){
+//                if(orderVo.getCourses() != null && orderVo.getCourses().size() > 0){
+//                    courseVos.addAll(orderVo.getCourses());
+//                }
+//            }
+//            resultBean.setMessage("查找成功");
+//            resultBean.setSuccess(true);
+//            resultBean.setData(courseVos);
+//        }catch(Exception e){
+//            e.printStackTrace();
+//        }
+//
+//        return resultBean;
+//    }
 
     /**
      * 得到学生已完成的订单

@@ -1,6 +1,5 @@
 package com.sie.util;
 
-import com.sun.javafx.iio.ImageStorage;
 import net.glxn.qrgen.core.image.ImageType;
 import net.glxn.qrgen.javase.QRCode;
 

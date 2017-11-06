@@ -257,8 +257,12 @@ public class ProjectServiceImpl extends BaseServiceImpl<ProjectEntity,Integer> i
             }
             //设置课程编码
             if(systemType == SystemType.SIE){
+                courseVo.setChineseName(courseEntity.getSieChineseName());
+                courseVo.setEnglishName(courseEntity.getSieEnglishName());
                 courseVo.setCode(courseEntity.getSieCode());
             }else{
+                courseVo.setChineseName(courseEntity.getTruChineseName());
+                courseVo.setEnglishName(courseEntity.getTruEnglishName());
                 courseVo.setCode(courseEntity.getTruCode());
             }
             //判断课程人数是否报满
@@ -352,10 +356,12 @@ public class ProjectServiceImpl extends BaseServiceImpl<ProjectEntity,Integer> i
                 studentCourseExport.setCourseID(courseEntity.getCourseID());
                 if(system == SystemType.SIE){
                     studentCourseExport.setCourseCode(courseEntity.getSieCode());
+                    studentCourseExport.setCourseEnglishName(courseEntity.getSieEnglishName());
                 }else{
                     studentCourseExport.setCourseCode(courseEntity.getTruCode());
+                    studentCourseExport.setCourseEnglishName(courseEntity.getTruEnglishName());
                 }
-                studentCourseExport.setCourseEnglishName(courseEntity.getEnglishName());
+
                 studentCourseExport.setProjectCode(projectEntity.getCode());
                 studentCourseExport.setProfessor(courseEntity.getProfessorName());
                 studentCourseExport.setCourseTime(courseEntity.getStartTime() + "--" + courseEntity.getEndTime());
@@ -376,10 +382,18 @@ public class ProjectServiceImpl extends BaseServiceImpl<ProjectEntity,Integer> i
                     if(!otherCourse.equals(courseId)){
                         CourseEntity otherCourseEntity = courseDao.getEntity(Integer.parseInt(otherCourse));
                         if(otherCourseName == 1){
-                            studentCourseExport.setOtherCourse1(otherCourseEntity.getEnglishName());
+                            if(system == SystemType.SIE){
+                                studentCourseExport.setOtherCourse1(otherCourseEntity.getSieEnglishName());
+                            }else{
+                                studentCourseExport.setOtherCourse1(otherCourseEntity.getTruEnglishName());
+                            }
                             otherCourseName ++ ;
                         }else if(otherCourseName == 2){
-                            studentCourseExport.setOtherCourse2(otherCourseEntity.getEnglishName());
+                            if(system == SystemType.SIE){
+                                studentCourseExport.setOtherCourse1(otherCourseEntity.getSieEnglishName());
+                            }else{
+                                studentCourseExport.setOtherCourse1(otherCourseEntity.getTruEnglishName());
+                            }
                             otherCourseName ++ ;
                         }else{
                             //目前不存在一个项目下报名4门课程

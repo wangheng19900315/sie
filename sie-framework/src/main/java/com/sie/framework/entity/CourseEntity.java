@@ -14,8 +14,8 @@ public class CourseEntity extends BaseEntity{
 //    private Integer id;
     private Integer system;
     private String courseID;
-    private String chineseName;
-    private String englishName;
+//    private String chineseName;
+//    private String englishName;
     private Integer professorId;
     private String professorName;// 教授名称
     private String startTime;
@@ -23,10 +23,14 @@ public class CourseEntity extends BaseEntity{
     private Integer projectId;
 //    private Integer isSie;
     private String sieCode;
+    private String sieChineseName;
+    private String sieEnglishName;
     private Integer maxStudent;
     private Integer sieTotalNumber;
 //    private Integer isTru;
     private String truCode;
+    private String truChineseName;
+    private String truEnglishName;
 //    private Integer truMaxStudent;
     private Integer truTotalNumber;
 
@@ -64,25 +68,25 @@ public class CourseEntity extends BaseEntity{
         this.courseID = courseID;
     }
 
-    @Basic
-    @Column(name = "chinese_name")
-    public String getChineseName() {
-        return chineseName;
-    }
-
-    public void setChineseName(String chineseName) {
-        this.chineseName = chineseName;
-    }
-
-    @Basic
-    @Column(name = "english_name")
-    public String getEnglishName() {
-        return englishName;
-    }
-
-    public void setEnglishName(String englishName) {
-        this.englishName = englishName;
-    }
+//    @Basic
+//    @Column(name = "chinese_name")
+//    public String getChineseName() {
+//        return chineseName;
+//    }
+//
+//    public void setChineseName(String chineseName) {
+//        this.chineseName = chineseName;
+//    }
+//
+//    @Basic
+//    @Column(name = "english_name")
+//    public String getEnglishName() {
+//        return englishName;
+//    }
+//
+//    public void setEnglishName(String englishName) {
+//        this.englishName = englishName;
+//    }
 
     @Basic
     @Column(name = "professor_id")
@@ -142,6 +146,46 @@ public class CourseEntity extends BaseEntity{
 
     public void setSieCode(String sieCode) {
         this.sieCode = sieCode;
+    }
+
+    @Basic
+    @Column(name = "sie_chinese_name")
+    public String getSieChineseName() {
+        return sieChineseName;
+    }
+
+    public void setSieChineseName(String sieChineseName) {
+        this.sieChineseName = sieChineseName;
+    }
+
+    @Basic
+    @Column(name = "sie_english_name")
+    public String getSieEnglishName() {
+        return sieEnglishName;
+    }
+
+    public void setSieEnglishName(String sieEnglishName) {
+        this.sieEnglishName = sieEnglishName;
+    }
+
+    @Basic
+    @Column(name = "tru_chinese_name")
+    public String getTruChineseName() {
+        return truChineseName;
+    }
+
+    public void setTruChineseName(String truChineseName) {
+        this.truChineseName = truChineseName;
+    }
+
+    @Basic
+    @Column(name = "tru_english_name")
+    public String getTruEnglishName() {
+        return truEnglishName;
+    }
+
+    public void setTruEnglishName(String truEnglishName) {
+        this.truEnglishName = truEnglishName;
     }
 
     @Basic

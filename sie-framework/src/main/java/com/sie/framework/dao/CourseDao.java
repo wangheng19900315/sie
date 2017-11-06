@@ -13,6 +13,6 @@ public interface CourseDao extends GenericDao<CourseEntity, Integer> {
     public List<CourseEntity> getList(Integer projectId, Integer systemType);
 
 
-    public String getNamesByIds(String courseIds);
+    public String getNamesByIds(Integer systemType,String courseIds);
 
 }
