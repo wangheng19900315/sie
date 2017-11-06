@@ -25,6 +25,7 @@
 <link href="${rootPath}/statics/assets/stylesheets/rtl.min.css" rel="stylesheet" type="text/css">
 <link href="${rootPath}/statics/assets/stylesheets/themes.min.css" rel="stylesheet" type="text/css">
 <link href="${rootPath}/statics/common/common.css" rel="stylesheet" type="text/css">
+<link href="${rootPath}/statics/common/sie.css" rel="stylesheet" type="text/css">
 
 <%--bootstrap datatime--%>
 <link href="${rootPath}/statics/datatime/css/bootstrap-datetimepicker.min.css" rel="stylesheet" type="text/css">

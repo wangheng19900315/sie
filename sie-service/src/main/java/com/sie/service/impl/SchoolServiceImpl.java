@@ -52,7 +52,7 @@ public class SchoolServiceImpl extends BaseServiceImpl<SchoolEntity,Integer> imp
     @Override
     public List<SchoolCategoryBean> getCategory() {
         List<SchoolCategoryBean> categoryBeanList = new ArrayList<>();
-        List<Object[]> objects = this.schoolDao.getByHql("select nationality,province from SchoolEntity group by nationality,province");
+        List<Object[]> objects = this.schoolDao.getByHql("select nationality,province from SchoolEntity where hdelete=0  group by nationality,province");
         for(Object[] obj:objects){
             SchoolCategoryBean bean = new SchoolCategoryBean();
             bean.setNational(obj[0].toString());
