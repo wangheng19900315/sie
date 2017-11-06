@@ -4,7 +4,30 @@ $(function(){
 		return;
 	}
 
+	initOrderPage();
+	$("#modal-pay li").bind("click", function(){
+		if($(this).attr("aria-id") == "refundWayWechat"){
+			var params = {"orderId":payOrderId+"", "systemType":systemType};
+			var imgHref = encodeURI(rootPath + 'payment/getWechatCode.json?params=' + JSON.stringify(params) + '&accessToken='+accessToken);
+			$("#refundWayWechat").find("img").attr("src", imgHref);
+			setInterval("confirmOrderFinish("+payOrderId+")",3000);
 
+		}else if($(this).attr("aria-id") == "refundWayAlipay"){
+			var params = {"orderId":payOrderId+"", "systemType":systemType};
+			var imgHref = encodeURI(rootPath + 'payment/getAipayCode.json?params=' + JSON.stringify(params) + '&accessToken='+accessToken);
+			$("#refundWayAlipay").find("img").attr("src", imgHref);
+			setInterval("confirmOrderFinish("+payOrderId+")",3000);
+
+		}
+	})
+
+	$("#canclBtn").bind("click", function(){
+		dhcc.Unit.hideModal("modal-pay");
+		initOrderPage();
+	})
+});
+
+function initOrderPage(){
 	/**
 	 * 加载订单信息
 	 */
@@ -19,6 +42,7 @@ $(function(){
 
 		if(data){
 			var html = "";
+			$("#orderTable tr:gt(0)").remove();
 			for(var name in data){
 				var objs = data[name];
 				for(var i=0; i<objs.length; i++){
@@ -38,28 +62,8 @@ $(function(){
 			$("#orderTable").append(html);
 		}
 	});
+}
 
-
-	$("#modal-pay li").bind("click", function(){
-		if($(this).attr("aria-id") == "refundWayWechat"){
-			var params = {"orderId":payOrderId+"", "systemType":systemType};
-			var imgHref = encodeURI(rootPath + 'payment/getWechatCode.json?params=' + JSON.stringify(params) + '&accessToken='+accessToken);
-			$("#refundWayWechat").find("img").attr("src", imgHref);
-			setInterval("confirmOrderFinish("+payOrderId+")",3000);
-
-		}else if($(this).attr("aria-id") == "refundWayAlipay"){
-			var params = {"orderId":payOrderId+"", "systemType":systemType};
-			var imgHref = encodeURI(rootPath + 'payment/getAipayCode.json?params=' + JSON.stringify(params) + '&accessToken='+accessToken);
-			$("#refundWayAlipay").find("img").attr("src", imgHref);
-			setInterval("confirmOrderFinish("+payOrderId+")",3000);
-
-		}
-	})
-
-	$("#canclBtn").bind("click", function(){
-		dhcc.Unit.hideModal("modal-pay")
-	})
-});
 
 function  selectPayWay(id){
 	payOrderId = id;
