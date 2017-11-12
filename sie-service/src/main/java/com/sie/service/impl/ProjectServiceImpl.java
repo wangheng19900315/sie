@@ -240,7 +240,7 @@ public class ProjectServiceImpl extends BaseServiceImpl<ProjectEntity,Integer> i
         //设置项目的课程信息
         List<HqlOperateVo> list = new  ArrayList<HqlOperateVo>();
         list.add(new HqlOperateVo("system", "in", systemType.value()+","+ SystemType.SIEANDTRU.value()));
-        list.add(new HqlOperateVo("projectId", "=", id.toString()));
+        list.add(new HqlOperateVo("projectEntity.id", "=", id.toString()));
         List<CourseEntity> courseEntities = courseDao.getList(list);
         Map<String,List<CourseVo>> courseVoMap = new HashMap<>();
         for(CourseEntity courseEntity : courseEntities){

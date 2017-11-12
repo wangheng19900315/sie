@@ -7,3 +7,4 @@ target
 *.iml
 logs
 sie-web/src/main/resources/zfbinfo_*
+sie-web/src/main/resources/wechat*

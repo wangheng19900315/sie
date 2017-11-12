@@ -48,46 +48,15 @@ public class WechatController {
     /**
      * 获取uuid及二维码图片地址
      * @param req
-     * @param resp
      * @throws ServletException
      * @throws IOException
      */
     @RequestMapping(value = "/showQrCode", method = RequestMethod.GET)
     @ResponseBody
-    public void showQrCode(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        //生成UUID随机数
-        OutputStream os = null;
-        UUID randomUUID = UUID.randomUUID();
-
-        try{
-            //通过应用获取共享的uuid集合
-            Map<String,StudentEntity> map = (Map) req.getSession().getAttribute("UUID_MAP");
-            if (map == null) {
-                map = new HashMap<String,StudentEntity>();
-                req.getSession().setAttribute("UUID_MAP", map);
-            }
-            //把uuid放入map中
-            map.put(randomUUID.toString(), null);
-
-            //二维码图片扫描后的链接
-            String url = nodifyUrl+"?uuid="+ randomUUID;
-
-            //生成二维码图片
-            ByteArrayOutputStream qrOut = QrGenUtil.createQrGen(url);
-            String fileName = randomUUID+ ".jpg";
-            os = resp.getOutputStream();
-            os.write(qrOut.toByteArray());
-            os.flush();
-            os.close();
-        }catch (Exception e){
-            e.printStackTrace();
-        }finally {
-            if(os != null){
-                os.close();
-            }
-        }
-
-
+    public String showQrCode(String systemType) throws IOException {
+        return "https://open.weixin.qq.com/connect/qrconnect?" +
+                "appid=wx3ad6a193b5d5b499&redirect_uri=https%3A%2F%2Fwww.sieschool.org%2Fcn%2Findex.html&response_type=code&scope=" +
+                "snsapi_login&state=3d6be0a4035d839573b04816624a415e#wechat_redirect";
     }
 
 

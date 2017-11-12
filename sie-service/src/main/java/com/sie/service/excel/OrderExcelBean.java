@@ -41,7 +41,7 @@ public class OrderExcelBean extends BaseBean{
     private Double payMoney;
     @ExcelField(title="支付类型", align=2, sort=13)
     private String payTypeName;
-    @ExcelField(title="所属心痛", align=2, sort=14)
+    @ExcelField(title="所属系统", align=2, sort=14)
     private String systemTypeName;
     @ExcelField(title="学生名称", align=2, sort=15)
     private String studentName;
