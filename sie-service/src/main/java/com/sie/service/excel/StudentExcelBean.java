@@ -19,7 +19,8 @@ public class StudentExcelBean {
     private String chineseName;
     private String sex;
     private String weiXin;
-    private Date birthday;
+//    private Date birthday;
+    private String birthdayFormate;
     private String nationality;
     private String passportNumber;
     private String idNumber;
@@ -99,13 +100,21 @@ public class StudentExcelBean {
     }
 
     @ExcelField(title="出生日期", align=2, sort=8)
-    public Date getBirthday() {
-        return birthday;
+    public String getBirthdayFormate() {
+        return birthdayFormate;
     }
 
-    public void setBirthday(Date birthday) {
-        this.birthday = birthday;
+    public void setBirthdayFormate(String birthdayFormate) {
+        this.birthdayFormate = birthdayFormate;
     }
+
+//    public Date getBirthday() {
+//        return birthday;
+//    }
+//
+//    public void setBirthday(Date birthday) {
+//        this.birthday = birthday;
+//    }
 
     @ExcelField(title="国籍", align=2, sort=9)
     public String getNationality() {

@@ -162,6 +162,8 @@ public class StudentController {
             for(StudentEntity studentEntity : studentEntities){
                 StudentExcelBean export = new StudentExcelBean();
                 BeanUtils.copyProperties(export, studentEntity);
+                //设置出生日期
+                export.setBirthdayFormate(DateUtil.format(studentEntity.getBirthday(),"yyyy-MM-dd"));
                 studentExports.add(export);
             }
             new ExportExcel(null, StudentExcelBean.class).setDataList(studentExports).write(response, fileName).dispose();
@@ -204,6 +206,7 @@ public class StudentController {
                 resultBean.setMessage("数据"+failureNum+"条错误;"+failureMsg.toString());
             }
         } catch (Exception e) {
+            resultBean.setMessage(e.getMessage());
             e.printStackTrace();
         }
         return resultBean;
