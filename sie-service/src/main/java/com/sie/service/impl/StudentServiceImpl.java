@@ -177,7 +177,7 @@ public class StudentServiceImpl extends BaseServiceImpl<StudentEntity,Integer> i
                 BeanUtils.copyProperties(entity, beanList.get(i));
                 //设置学生出生日期
                 if(StringUtil.isNotBlank(beanList.get(i).getBirthdayFormate())){
-                    entity.setBirthday(new java.sql.Date(DateUtil.parse(beanList.get(i).getBirthdayFormate(),"yyyy-MM-dd hh:mm:ss").getTime()));
+                    entity.setBirthday(new java.sql.Date(DateUtil.parse(beanList.get(i).getBirthdayFormate(),"yyyy-MM-dd").getTime()));
                 }
                 //设置默认的登录密码为123456
                 entity.setPassword(Md5Util.getMD5(defaultPassword, ApplicationHelp.MD5_SHA1));
@@ -336,4 +336,7 @@ public class StudentServiceImpl extends BaseServiceImpl<StudentEntity,Integer> i
         resultBean.setSuccess(true);
         return resultBean;
     }
+
 }
+
+
