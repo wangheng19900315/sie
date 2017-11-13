@@ -43,4 +43,6 @@ public interface StudentService extends BaseService<StudentEntity, Integer> {
     StudentEntity loginByOpenid(String openId);
 
     ResultBean updateApplicationStep(Integer studentId,Integer applicatioStep);
+
+    ResultBean setDefaultPassword(Integer id);
 }

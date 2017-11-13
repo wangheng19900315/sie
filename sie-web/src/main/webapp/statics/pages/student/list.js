@@ -13,9 +13,11 @@ function selectRow() {
     if (ids && ids.length == 1) {
         $('#editBtn').removeClass('disabled');
         $('#deleteBtn').removeClass('disabled');
+        $('#modifyPasswordBtn').removeClass('disabled');
     } else {
         $('#editBtn').addClass('disabled');
         $('#deleteBtn').addClass('disabled');
+        $('#modifyPasswordBtn').addClass('disabled');
     }
 };
 $(function(){
@@ -137,6 +139,30 @@ $(function(){
             },
             error: function () {
                 alert("导入数据失败！");
+            }
+        });
+    });
+
+    /**
+     * 修改密码
+     */
+    $("#modifyPasswordBtn").bind("click", function(){
+        var id = $("#grid-table").jqGrid('getGridParam', 'selrow');
+        console.log(id);
+        $.ajax({
+            url: pageRootPath+'/student/modifyPassword.json',
+            data: {studentId:id},
+            type: 'post',
+            dataType: 'json',
+            success: function (data) {
+                if (data.success) {
+                    alert("修改成功！");
+                } else {
+                    alert(data.message);
+                }
+            },
+            error: function () {
+                alert("参数错误！");
             }
         });
     });

@@ -29,6 +29,7 @@
                         <button type="button" class="btn btn-primary disabled" id="editBtn" >修改</button> &nbsp;&nbsp;
                         <button type="button" class="btn btn-primary" id="importBtn"  >导入</button> &nbsp;&nbsp;
                         <button type="button"  class="btn btn-primary" id="exportBtn"  >导出</button> &nbsp;&nbsp;
+                        <button type="button"  class="btn btn-warning disabled" id="modifyPasswordBtn"  >修改密码</button> &nbsp;&nbsp;
 
                         <button type="button"  id="showImportFile" style="display: none" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#importExcels"></button>
                         <%--<button type="btn" class="btn btn-danger disabled" id="deleteBtn"  onclick="return false;" >删除</button> &nbsp;&nbsp;--%>
