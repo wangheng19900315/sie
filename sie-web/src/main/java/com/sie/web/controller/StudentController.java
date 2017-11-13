@@ -163,7 +163,9 @@ public class StudentController {
                 StudentExcelBean export = new StudentExcelBean();
                 BeanUtils.copyProperties(export, studentEntity);
                 //设置出生日期
-                export.setBirthdayFormate(DateUtil.format(studentEntity.getBirthday(),"yyyy-MM-dd"));
+                if(studentEntity.getBirthday() != null){
+                    export.setBirthdayFormate(DateUtil.format(studentEntity.getBirthday(),"yyyy-MM-dd"));
+                }
                 studentExports.add(export);
             }
             new ExportExcel(null, StudentExcelBean.class).setDataList(studentExports).write(response, fileName).dispose();
