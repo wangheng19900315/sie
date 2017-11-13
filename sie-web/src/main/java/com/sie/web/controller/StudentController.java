@@ -212,4 +212,17 @@ public class StudentController {
         return resultBean;
     }
 
+    @RequestMapping(value = "modifyPassword.json")
+    @ResponseBody
+    public ResultBean modifyPassword(String studentId) {
+        ResultBean resultBean = new ResultBean();
+        try {
+            resultBean = studentService.setDefaultPassword(Integer.parseInt(studentId));
+        } catch (Exception e) {
+            resultBean.setMessage(e.getMessage());
+            e.printStackTrace();
+        }
+        return resultBean;
+    }
+
 }

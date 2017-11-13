@@ -323,4 +323,15 @@ public class StudentServiceImpl extends BaseServiceImpl<StudentEntity,Integer> i
         resultBean.setSuccess(true);
         return resultBean;
     }
+
+    @Override
+    public ResultBean setDefaultPassword(Integer id) {
+        ResultBean resultBean = new ResultBean();
+        StudentEntity studentEntity = studentDao.getEntity(id);
+        studentEntity.setPassword(Md5Util.getMD5(defaultPassword, ApplicationHelp.MD5_SHA1));
+        studentDao.updateEntity(studentEntity);
+        resultBean.setMessage("设置密码成功");
+        resultBean.setSuccess(true);
+        return resultBean;
+    }
 }
