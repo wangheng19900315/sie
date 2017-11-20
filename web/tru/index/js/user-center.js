@@ -38,7 +38,8 @@ $(function(){
 		var courses = '<tr><th>课程时间</th>' +
 			' <th>课程代码</th>' +
 			'<th>课程名称</th>' +
-			'<th>校区</th> ' +
+			//'<th>校区</th> ' +
+			'<th>项目名称</th> ' +
 			'<th>教室</th> </tr>';
 		$.each(data,function(i,order){
 			order = removeNull(order);
@@ -56,7 +57,8 @@ $(function(){
 					'<tr> <td><label>' + course.startTime + ' -- ' + course.endTime +'</label></td>' +
 					'<td><label>' + course.code + '</label></td>' +
 					'<td><label>' + course.englishName + '</label></td>' +
-					'<td><label>' +course.schoolName + '</label></td> ' +
+					//'<td><label>' +course.schoolName + '</label></td> ' +
+					'<td><label>' +course.projectName + '</label></td> ' +
 					'<td><label>' +course.classroom + '</label></td> </tr>';
 			});
 		});

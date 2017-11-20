@@ -21,6 +21,7 @@ public class CourseVo {
     private String startTime;
     private String endTime;
     private Integer projectId;
+    private String projectName;
     private String code;
     private Integer school;
     private String schoolName;
@@ -138,5 +139,13 @@ public class CourseVo {
 
     public void setClassroom(String classroom) {
         this.classroom = classroom;
+    }
+
+    public String getProjectName() {
+        return projectName;
+    }
+
+    public void setProjectName(String projectName) {
+        this.projectName = projectName;
     }
 }

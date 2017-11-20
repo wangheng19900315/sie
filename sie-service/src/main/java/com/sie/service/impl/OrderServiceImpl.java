@@ -949,10 +949,12 @@ public class OrderServiceImpl extends BaseServiceImpl<OrderEntity,Integer> imple
                                     courseVo.setChineseName(courseEntity.getSieChineseName());
                                     courseVo.setEnglishName(courseEntity.getSieEnglishName());
                                     courseVo.setCode(courseEntity.getSieCode());
+                                    courseVo.setProjectName(projectEntity.getSieName());
                                 }else{
                                     courseVo.setChineseName(courseEntity.getTruChineseName());
                                     courseVo.setEnglishName(courseEntity.getTruEnglishName());
                                     courseVo.setCode(courseEntity.getTruCode());
+                                    courseVo.setProjectName(projectEntity.getTruName());
                                 }
                                 courses.add(courseVo);
                             }
