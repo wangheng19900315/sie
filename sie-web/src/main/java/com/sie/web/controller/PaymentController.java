@@ -302,11 +302,11 @@ public class PaymentController {
             if (systemType.equals(SystemType.SIE.value() + "")) {
                 subject = "购买SIE课程";
                 Configs.init("zfbinfo_sie.properties");
-                nodidfyUrl = "http://120.27.13.112/apply/sie/nodify";
+                nodidfyUrl = "http://120.27.13.112/api/payment/apply/sie/nodify";
                 tradeService = new AlipayTradeServiceImpl.ClientBuilder().build();
             } else {
                 subject = "购买tru课程";
-                nodidfyUrl = "http://120.27.13.112/apply/tru/nodify";
+                nodidfyUrl = "http://120.27.13.112/api/payment/apply/tru/nodify";
                 Configs.init("zfbinfo_tru.properties");
                 tradeService = new AlipayTradeServiceImpl.ClientBuilder().build();
             }

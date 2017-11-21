@@ -91,7 +91,7 @@ $(function(){
         dhcc.Unit.ajaxUtil(attrs,"saveGradeSend.json",function(data){
             dhcc.Unit.successMessage("提交成功",function(){
                 //页面进行跳转
-                window.location.href = "user-center.html";
+                window.location.href = "user_center.html";
             });
         });
         $("#saveSendInfo").attr("disabled", false);

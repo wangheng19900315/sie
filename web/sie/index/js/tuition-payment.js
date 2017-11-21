@@ -81,7 +81,7 @@ function confirmOrderFinish(orderId){
 			dhcc.Unit.hideModal("modal-pay");
 			dhcc.Unit.successMessage("支付成功",function(){
 				//页面进行跳转
-				window.location.href = "user-center.html";
+				window.location.href = "user_center.html";
 			});
 		}
 	})
