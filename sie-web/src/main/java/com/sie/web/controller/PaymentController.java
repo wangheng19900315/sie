@@ -1,7 +1,11 @@
 package com.sie.web.controller;
 
 import com.alipay.api.AlipayApiException;
+import com.alipay.api.AlipayClient;
+import com.alipay.api.DefaultAlipayClient;
 import com.alipay.api.internal.util.AlipaySignature;
+import com.alipay.api.request.AlipayOpenPublicTemplateMessageIndustryModifyRequest;
+import com.alipay.api.response.AlipayOpenPublicTemplateMessageIndustryModifyResponse;
 import com.alipay.api.response.AlipayTradePrecreateResponse;
 import com.alipay.demo.trade.config.Configs;
 import com.alipay.demo.trade.model.ExtendParams;
@@ -308,8 +312,8 @@ public class PaymentController {
             }
             // (必填) 订单总金额，单位为元，不能超过1亿元
             // 如果同时传入了【打折金额】,【不可打折金额】,【订单总金额】三者,则必须满足如下条件:【订单总金额】=【打折金额】+【不可打折金额】
-            String totalAmount = "0.01";
-//            String totalAmount = payEntity.getPayTotal()+"";
+//            String totalAmount = "0.01";
+            String totalAmount = payEntity.getPayTotal()+"";
 
             // (可选) 订单不可打折金额，可以配合商家平台配置折扣活动，如果酒水不参与打折，则将对应金额填写至此字段
             // 如果该值未传入,但传入了【订单总金额】,【打折金额】,则该值默认为【订单总金额】-【打折金额】
@@ -337,7 +341,7 @@ public class PaymentController {
             // 商品明细列表，需填写购买商品详细信息，
             List<GoodsDetail> goodsDetailList = new ArrayList<GoodsDetail>();
 //            // 创建一个商品信息，参数含义分别为商品id（使用国标）、名称、单价（单位为分）、数量，如果需要添加商品类别，详见GoodsDetail
-            GoodsDetail goods1 = GoodsDetail.newInstance("goods_id001", "xxx小面包", 1, 1);
+            GoodsDetail goods1 = GoodsDetail.newInstance("goods_id001", subject, 1, 1);
 //            // 创建好一个商品后添加至商品明细列表
             goodsDetailList.add(goods1);
 //
@@ -365,7 +369,12 @@ public class PaymentController {
                     String filePath = String.format(fileUploadUrl + "/applycode/-%s.png",
                             response1.getOutTradeNo());
                     logger.info("filePath:" + filePath);
+
                     ZxingUtils.getQRCodeImge(response1.getQrCode(), 256, filePath);
+                    File file = new File(filePath);
+                    if(!file.exists()){
+                        file.mkdirs();
+                    }
                     response.setContentType("multipart/form-data");
                     out = response.getOutputStream();
                     FileInputStream ips = null;
@@ -465,5 +474,29 @@ public class PaymentController {
         out.write(message.getBytes());
         out.flush();
         out.close();
+    }
+
+
+    public static void main(String[] args) throws AlipayApiException {
+        //实例化客户端
+        Configs.init("zfbinfo_tru.properties");
+        AlipayClient alipayClient = new DefaultAlipayClient("https://openapi.alipay.com/gateway.do", Configs.getAppid(), Configs.getPrivateKey(), "json", "UTF-8", Configs.getAlipayPublicKey(), "RSA");
+//实例化具体API对应的request类,类名称和接口名称对应,当前调用接口名称：alipay.open.public.template.message.industry.modify
+        AlipayOpenPublicTemplateMessageIndustryModifyRequest request = new AlipayOpenPublicTemplateMessageIndustryModifyRequest();
+//SDK已经封装掉了公共参数，这里只需要传入业务参数
+//此次只是参数展示，未进行字符串转义，实际情况下请转义
+        request.setBizContent("  {" +
+                "    \"primary_industry_name\":\"IT科技/IT软件与服务\"," +
+                "    \"primary_industry_code\":\"10001/20102\"," +
+                "    \"secondary_industry_code\":\"10001/20102\"," +
+                "    \"secondary_industry_name\":\"IT科技/IT软件与服务\"" +
+                " }");
+        AlipayOpenPublicTemplateMessageIndustryModifyResponse response = alipayClient.execute(request);
+//调用成功，则处理业务逻辑
+        System.out.println(response.getCode());
+        System.out.println(response.getBody());
+        if(response.isSuccess()){
+            //.....
+        }
     }
 }
