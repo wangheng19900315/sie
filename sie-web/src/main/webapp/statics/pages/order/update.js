@@ -169,8 +169,8 @@ $(function(){
         //    alert("请输入折扣金额！");
         //    return;
         //}
-
         var payMonety = $("#money").val()-$("#crDiscount").val()-$("#couponDiscount").val()-$("#discount").val();
+        payMonety = parseFloat(payMonety.toFixed(2));
         if(payMonety  < 0){
             $("#payMoney").val(payMonety);
             alert("折扣金额大于总金额！");
