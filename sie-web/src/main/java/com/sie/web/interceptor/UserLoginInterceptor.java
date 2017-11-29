@@ -50,7 +50,8 @@ public class UserLoginInterceptor implements HandlerInterceptor {
     if(StringUtils.isBlank(userName)){
       response.sendRedirect("/login.html");
     }
-    if(url.indexOf("addOrupdate.json") > -1 ||url.indexOf("delete.json") > -1){
+    if(url.indexOf("addOrupdate.json") > -1 ||url.indexOf("delete.json") > -1 || url.indexOf("add.json") > -1 || url.indexOf("updateOrderInfo.json") > -1
+            || url.indexOf("updateCourseIds.json") > -1){
       //记录日志
       LogEntity logEntity = new LogEntity();
       logEntity.setOperateUrl(request.getRequestURI());
