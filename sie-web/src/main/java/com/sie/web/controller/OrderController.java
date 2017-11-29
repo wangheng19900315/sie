@@ -234,7 +234,7 @@ public class OrderController {
             List<OrderExcelBean> orderExcelBeanList = new ArrayList<>();
             for (OrderBean orderBean : gradeBeanList) {
 
-                for(OrderDetailBean orderDetailBean : orderBean.getOrderDetailBean()){
+//                for(OrderDetailBean orderDetailBean : orderBean.getOrderDetailBean()){
                     OrderExcelBean orderExcelBean = new OrderExcelBean();
                     BeanUtils.copyProperties(orderBean, orderExcelBean);
                     if (orderBean.getCreateTime() != null) {
@@ -243,10 +243,10 @@ public class OrderController {
                     if (orderBean.getPayTime() != null) {
                         orderExcelBean.setPayTimeString(DateUtil.format(orderBean.getPayTime(), "yyyy-MM-dd"));
                     }
-                    orderExcelBean.setProjectName(orderDetailBean.getProjectName());
-                    orderExcelBean.setCourseCount(orderDetailBean.getCourseCount()+"");
+//                    orderExcelBean.setProjectName(orderDetailBean.getProjectName());
+//                    orderExcelBean.setCourseCount(orderDetailBean.getCourseCount()+"");
                     orderExcelBeanList.add(orderExcelBean);
-                }
+//                }
 
             }
             new ExportExcel("订单信息", OrderExcelBean.class).setDataList(orderExcelBeanList).mergeCell(0, "2,3")

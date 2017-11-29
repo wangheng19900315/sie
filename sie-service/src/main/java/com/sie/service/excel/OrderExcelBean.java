@@ -20,9 +20,11 @@ public class OrderExcelBean extends BaseBean{
     @ExcelField(title="学生编号", align=2, sort=2)
     private String studentID;
     @ExcelField(title="详情-项目ID", align=2, sort=3)
-    private String projectName;
+    private String projectNames;
     @ExcelField(title="详情-课程数", align=2, sort=4)
-    private String courseCount;
+    private Integer courseNumber;
+    @ExcelField(title="详情-住宿ID", align=2, sort=3)
+    private String dormitoryNames;
     @ExcelField(title="CR推荐码", align=2, sort=5)
     private String crnName;
     @ExcelField(title="优惠码", align=2, sort=6)
@@ -156,19 +158,27 @@ public class OrderExcelBean extends BaseBean{
         this.createTimeString = createTimeString;
     }
 
-    public String getProjectName() {
-        return projectName;
+    public String getProjectNames() {
+        return projectNames;
     }
 
-    public void setProjectName(String projectName) {
-        this.projectName = projectName;
+    public void setProjectNames(String projectNames) {
+        this.projectNames = projectNames;
     }
 
-    public String getCourseCount() {
-        return courseCount;
+    public String getDormitoryNames() {
+        return dormitoryNames;
     }
 
-    public void setCourseCount(String courseCount) {
-        this.courseCount = courseCount;
+    public void setDormitoryNames(String dormitoryNames) {
+        this.dormitoryNames = dormitoryNames;
+    }
+
+    public Integer getCourseNumber() {
+        return courseNumber;
+    }
+
+    public void setCourseNumber(Integer courseNumber) {
+        this.courseNumber = courseNumber;
     }
 }
