@@ -16,6 +16,7 @@ import com.sie.service.bean.*;
 import com.sie.service.excel.OrderExcelBean;
 import com.sie.service.excel.OrderImport;
 import com.sie.util.*;
+import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
@@ -243,6 +244,15 @@ public class OrderController {
                     if (orderBean.getPayTime() != null) {
                         orderExcelBean.setPayTimeString(DateUtil.format(orderBean.getPayTime(), "yyyy-MM-dd"));
                     }
+                    List<String> courseNames = new ArrayList<>();
+                    //设置课程名称
+                    for(OrderDetailBean orderDetailBean : orderBean.getOrderDetailBean()){
+                        if(orderDetailBean.getDormitoryId() == null){
+                            //明细为课程
+                            courseNames.add(orderDetailBean.getCusterNames());
+                        }
+                    }
+                    orderExcelBean.setCourseNames(StringUtils.join(courseNames, ","));
 //                    orderExcelBean.setProjectName(orderDetailBean.getProjectName());
 //                    orderExcelBean.setCourseCount(orderDetailBean.getCourseCount()+"");
                     orderExcelBeanList.add(orderExcelBean);

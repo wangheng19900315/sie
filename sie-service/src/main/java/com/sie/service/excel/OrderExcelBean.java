@@ -23,6 +23,8 @@ public class OrderExcelBean extends BaseBean{
     private String projectNames;
     @ExcelField(title="详情-课程数", align=2, sort=4)
     private Integer courseNumber;
+    @ExcelField(title="详情-课程", align=2, sort=4)
+    private String courseNames;
     @ExcelField(title="详情-住宿ID", align=2, sort=3)
     private String dormitoryNames;
     @ExcelField(title="CR推荐码", align=2, sort=5)
@@ -180,5 +182,13 @@ public class OrderExcelBean extends BaseBean{
 
     public void setCourseNumber(Integer courseNumber) {
         this.courseNumber = courseNumber;
+    }
+
+    public String getCourseNames() {
+        return courseNames;
+    }
+
+    public void setCourseNames(String courseNames) {
+        this.courseNames = courseNames;
     }
 }
