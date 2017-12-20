@@ -36,104 +36,130 @@
 			<div class="areabox-span">
 				<h3>校区简介</h3>
 				<div class="img-inline img-inline-3">
-					<img class="img-responsive" src="../../public/img/pic03.jpg" />
-					<img class="img-responsive" src="../../public/img/pic04.jpg" />
-					<img class="img-responsive" src="../../public/img/pic05.jpg" />
+					<img class="img-responsive" src="../../public/img/bjtu/profiles01.jpg" />
+					<img class="img-responsive" src="../../public/img/bjtu/profiles02.jpg" />
+					<img class="img-responsive" src="../../public/img/bjtu/profiles03.jpg" />
 				</div>
-				<p>华东师范大学（East China Normal University），简称“华东师大”，位于上海由中华人民共和国教育部直属，位列“211工程”“985工程”，入选国家“2011计划”、“111计划”、“千人计划”，“长三角高校合作联盟”、“金砖国家大学联盟”“亚太高校书院联盟”成员，设有研究生院，是中华人民共和国教育部、上海市人民政府和国家海洋局共建的综合性全国重点大学。[1] </p>
-				<p>华东师范大学成立于1951年10月16日，是以大夏大学（1924年）、光华大学（1925年）为基础，同时调进复旦大学、浙江大学、同济大学和圣约翰大学等高校的部分系科，在大夏大学原址上创办的。1972年，与上海师范学院、上海体育学院等院校合并，改名上海师范大学。1980年，恢复华东师范大学校名。1996年，被列入“211工程”国家重点建设大学行列。1997、1998年，上海幼儿师范高等专科学校、上海教育学院和上海第二教育学院并入。2006年，教育部和上海市决定共建华东师范大学，学校进入国家“985工程”高校行列。</p>
+				<p>北京交通大学（Beijing Jiaotong University）是教育部直属，教育部、中国铁路总公司、北京市人民政府共建的全国重点大学，是国家“211工程”、“985工程优势学科创新平台”项目建设高校和具有研究生院的全国首批博士、硕士学位授予高校。学校牵头的“2011计划”“轨道交通安全协同创新中心”是国家首批14个认定的协同创新中心之一。</p>
+				<p>学校重视国际间的合作交流，以此作为提高办学水平的重要途径，国内外影响力不断提升。与美、英、德、法等38个国家的近205所大学及著名跨国企业建立了合作关系。</p>
 			</div>
 			<hr />
 			
 			<div class="areabox-span">
 				<h3>地理位置</h3>
-    			<div style="width:100%;height:380px;border:#eee solid 1px;font-size:12px" id="map"></div>
-    			<p class="map-tip"><i class="fa fa-map-marker"></i> 上海市普陀区中山北路3663号</p>
-	    		<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=5jnKKHvbulkVUTFpVhLwQHsafxMrUs0x"></script>
-    			<script type="text/javascript">
+    			<div style="width:100%;height:380px;border:#eee solid 1px;font-size:12px" id="dituContent"></div>
+    			<p class="map-tip"><i class="fa fa-map-marker"></i> 北京市海淀区上园村3号</p>
+				<script type="text/javascript" src="http://api.map.baidu.com/api?key=&v=1.1&services=true"></script>
+				<script type="text/javascript">
 				    //创建和初始化地图函数：
 				    function initMap(){
-				      createMap();//创建地图
-				      setMapEvent();//设置地图事件
-				      addMapControl();//向地图添加控件
-				      addMapOverlay();//向地图添加覆盖物
+				        createMap();//创建地图
+				        setMapEvent();//设置地图事件
+				        addMapControl();//向地图添加控件
+				        addMarker();//向地图中添加marker
 				    }
-				    function createMap(){ 
-				      map = new BMap.Map("map"); 
-				      map.centerAndZoom(new BMap.Point(121.412119,31.235515),15);
+				    function createMap(){
+				        var map = new BMap.Map("dituContent");//在百度地图容器中创建一个地图
+				        var point = new BMap.Point(116.35915,39.959011);//定义一个中心点坐标
+				        map.centerAndZoom(point,14);//设定地图的中心点和坐标并将地图显示在地图容器中
+				        window.map = map;//将map变量存储在全局
 				    }
 				    function setMapEvent(){
-				      map.enableDragging();
-				      map.enableDoubleClickZoom()
+				        map.enableDragging();
+				        map.enableDoubleClickZoom();
 				    }
-				    function addClickHandler(target,window){
-				      target.addEventListener("click",function(){
-				        target.openInfoWindow(window);
-				      });
+				    function addMapControl(){}
+				    var markerArr = [{title:"北京交通大学",content:"",point:"116.349646|39.958001",isOpen:0,icon:{w:23,h:25,l:46,t:21,x:9,lb:12}}];
+				    function addMarker(){
+				        for(var i=0;i<markerArr.length;i++){
+				            var json = markerArr[i];
+				            var p0 = json.point.split("|")[0];
+				            var p1 = json.point.split("|")[1];
+				            var point = new BMap.Point(p0,p1);
+							var iconImg = createIcon(json.icon);
+				            var marker = new BMap.Marker(point,{icon:iconImg});
+							var iw = createInfoWindow(i);
+							var label = new BMap.Label(json.title,{"offset":new BMap.Size(json.icon.lb-json.icon.x+10,-20)});
+							marker.setLabel(label);
+				            map.addOverlay(marker);
+				            label.setStyle({
+				                        borderColor:"#808080",
+				                        color:"#333",
+				                        cursor:"pointer"
+				            });
+							(function(){
+								var index = i;
+								var _iw = createInfoWindow(i);
+								var _marker = marker;
+								_marker.addEventListener("click",function(){
+								    this.openInfoWindow(_iw);
+							    });
+							    _iw.addEventListener("open",function(){
+								    _marker.getLabel().hide();
+							    })
+							    _iw.addEventListener("close",function(){
+								    _marker.getLabel().show();
+							    })
+								label.addEventListener("click",function(){
+								    _marker.openInfoWindow(_iw);
+							    })
+								if(!!json.isOpen){
+									label.hide();
+									_marker.openInfoWindow(_iw);
+								}
+							})()
+				        }
 				    }
-				    function addMapOverlay(){
-				      var markers = [
-				        {content:"",title:"华东师范大学(ECNU)",imageOffset: {width:-46,height:-21},position:{lat:31.234279,lng:121.412047}}
-				      ];
-				      for(var index = 0; index < markers.length; index++ ){
-				        var point = new BMap.Point(markers[index].position.lng,markers[index].position.lat);
-				        var marker = new BMap.Marker(point,{icon:new BMap.Icon("http://api.map.baidu.com/lbsapi/createmap/images/icon.png",new BMap.Size(20,25),{
-				          imageOffset: new BMap.Size(markers[index].imageOffset.width,markers[index].imageOffset.height)
-				        })});
-				        var label = new BMap.Label(markers[index].title,{offset: new BMap.Size(25,5)});
-				        var opts = {
-				          width: 200,
-				          title: markers[index].title,
-				          enableMessage: false
-				        };
-				        var infoWindow = new BMap.InfoWindow(markers[index].content,opts);
-				        marker.setLabel(label);
-				        addClickHandler(marker,infoWindow);
-				        map.addOverlay(marker);
-				      };
+				    function createInfoWindow(i){
+				        var json = markerArr[i];
+				        var iw = new BMap.InfoWindow("<b class='iw_poi_title' title='" + json.title + "'>" + json.title + "</b><div class='iw_poi_content'>"+json.content+"</div>");
+				        return iw;
 				    }
-				    //向地图添加控件
-				    function addMapControl(){
-				      var scaleControl = new BMap.ScaleControl({anchor:BMAP_ANCHOR_BOTTOM_LEFT});
-				      scaleControl.setUnit(BMAP_UNIT_IMPERIAL);
-				      map.addControl(scaleControl);
-				      var navControl = new BMap.NavigationControl({anchor:BMAP_ANCHOR_BOTTOM_RIGHT,type:3});
-				      map.addControl(navControl);
+				    function createIcon(json){
+				        var icon = new BMap.Icon("http://api.map.baidu.com/lbsapi/createmap/images/icon.png", new BMap.Size(json.w,json.h),{imageOffset: new BMap.Size(-json.l,-json.t),infoWindowOffset:new BMap.Size(json.lb+5,1),offset:new BMap.Size(json.x,json.h)})
+				        return icon;
 				    }
-				    var map;
-				      initMap();
-				  </script>
+				    initMap();//创建和初始化地图
+				</script>
 			</div>
 			<hr />
 			
 			<div class="areabox-span">
 				<h3>开课时间</h3>
-				<p>华东师范大学暑期课程课表已经出炉，小伙伴们是不是因为最近的考试忙的晕头转向的，哎为什么时间过得如此之快呢，想想分考研时间日益逼近，不好好利用好暑期怎么恩能对的起自己的良心呢</p>
-				<p>顶级名师开课课表如图所示。同学们对应好了哦，学硕班课程适用于所有学术型硕士，还有工程类，文法、体、教、历史、医、艺的专硕 哦！</p>
+				<p>TRU国际暑校的北京交通大学校区开课时间为2018年07月09日至2018年08月03日</p>
 			</div>
 			<hr />
 			
 			<div class="areabox-span bg-grey">
 				<h3>周边娱乐</h3>
 				<div class="img-inline img-inline-3">
-					<img class="img-responsive" src="../../public/img/pic03.jpg" />
-					<img class="img-responsive" src="../../public/img/pic04.jpg" />
-					<img class="img-responsive" src="../../public/img/pic05.jpg" />
+					<img class="img-responsive" src="../../public/img/bjtu/entertainment01.jpg" />
+					<img class="img-responsive" src="../../public/img/bjtu/entertainment02.jpg" />
+					<img class="img-responsive" src="../../public/img/bjtu/entertainment03.jpg" />
 				</div>
-				<p>中国驻美大使崔天凯9月15日表示，台湾是中国的一部分。我们决不允许、坚决反对任何人企图利用任何借口把核武器引进台湾。对于美国国会有时候通过一些议案，或者美国有些政客发表一些言论，要提升美台军事关系，我们也同样坚决反对。美方必须恪守一个中国原则，遵循中美三个联合公报。任何人要破坏这一基础，就是对中美关系的严重挑战。崔大使是星期五晚上在驻美使馆举行的庆祝中华人民共和国成立68周年侨学界招待会上接受采访时做上述表示的。</p>
-				<p>当地时间15日，中国驻美大使崔天凯就目前朝鲜半岛局势接受中外媒体采访。崔天凯表示，中国在半岛核问题上的立场是非分明、一以贯之。中国始终致力于推动实现半岛无核化，也一直尽最大努力全面完整地执行联合国安理会有关决议，并致力于推动和平谈判来解决问题。</p>
+				<p><strong>北交大周边</strong></p>
+				<p>北交大校内就有19个食堂。一餐厅的小火锅，二食堂的叉烧，四食堂的烤鱼，清真餐厅的烤羊排，西餐厅的意面披萨，还有其他的什么米粉，香锅，盖饭等等统统都既好吃又便宜。</p>
+				<p>如果要去校外，南门外的巫山烤全鱼，天外天烤鸭店，火烧石都很可以的；交通大学路晚上一路的小吃摊可供选择，辣尚瘾和第九味道也是学生平常去的比较多的餐厅。交大东路上的春饼店很劲道，还有一家很香浓宫廷奶酪。东区小西门的特色主要是面和抄手还有十个馄饨。相信你的味蕾总能在交大得到慰藉。</p>
+				<p><strong>五道口</strong></p>
+				<p>作为北京高等教育的聚集地，五道口也为天下的学子提供了一个校园外的世界。这里有世界各地的美食餐厅，别具特色的酒吧，大型商场和超市，以及国际知名的公司也坐落其中。五道口不仅仅是一个学生徜徉的时尚之地，也是一个成熟的商业圈。</p>
+				<p><strong>中关村科技园区</strong></p>
+				<p>中关村号称“中国硅谷”，是全中国科技、智力、人才、信息资源最秘籍的区域。其中囊括了北大、清华等重点高校39所，国家重点实验室112个，百度、联想等高新技术企业近2万家。同时，颐和园、圆明园、香山等历史和自然景观也位于园区内。中关村被许多科技青年当成理想的圣地。</p>
 			</div>
 			<hr />
 			
 			<div class="areabox-span">
 				<h3>住宿环境</h3>
 				<div class="img-inline img-inline-3">
-					<img class="img-responsive" src="../../public/img/pic03.jpg" />
-					<img class="img-responsive" src="../../public/img/pic04.jpg" />
-					<img class="img-responsive" src="../../public/img/pic05.jpg" />
+					<img class="img-responsive" src="../../public/img/bjtu/accommodation01.jpg" />
+					<img class="img-responsive" src="../../public/img/bjtu/accommodation02.jpg" />
+					<img class="img-responsive" src="../../public/img/bjtu/accommodation03.jpg" />
 				</div>
-				<p>中国驻美大使崔天凯9月15日表示，台湾是中国的一部分。我们决不允许、坚决反对任何人企图利用任何借口把核武器引进台湾。对于美国国会有时候通过一些议案，或者美国有些政客发表一些言论，要提升美台军事关系，我们也同样坚决反对。美方必须恪守一个中国原则，遵循中美三个联合公报。任何人要破坏这一基础，就是对中美关系的严重挑战。崔大使是星期五晚上在驻美使馆举行的庆祝中华人民共和国成立68周年侨学界招待会上接受采访时做上述表示的。</p>
-				<p>当地时间15日，中国驻美大使崔天凯就目前朝鲜半岛局势接受中外媒体采访。崔天凯表示，中国在半岛核问题上的立场是非分明、一以贯之。中国始终致力于推动实现半岛无核化，也一直尽最大努力全面完整地执行联合国安理会有关决议，并致力于推动和平谈判来解决问题。</p>
+				<p><strong>1、校内住宿：</strong></p>
+				<p>宿舍为两人标准间，配套设施齐全。</p>
+				<p><strong>2、桔子酒店（北京西直门北店）</strong></p>
+				<p>联系电话：010-52241010</p>
+				<p><strong>3、如家快捷酒店（北京交通大学东门店）</strong></p>
+				<p>联系电话：010-62222288</p>
 			</div>
 			<hr />
 			
@@ -144,7 +170,6 @@
 <!-- footer -->
 <script src="../common-files/footer.js" type="text/javascript" charset="utf-8"></script>
 
-	
 
 
 <script type="text/javascript">
