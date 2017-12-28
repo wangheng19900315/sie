@@ -34,12 +34,14 @@ public class CourseDaoImpl extends GenericDaoImpl<CourseEntity, Integer> impleme
                         names += courseEntity.getSieEnglishName()+",";
                     }
                 }
+                break;
             case TRU:
                 if(courseEntities.size() > 0){
                     for(CourseEntity courseEntity:courseEntities){
                         names += courseEntity.getTruEnglishName()+",";
                     }
                 }
+                break;
         }
         if(names.length() > 0){
             names = names.substring(0, names.length()-1);
