@@ -82,7 +82,8 @@ public class CourseServiceImpl extends BaseServiceImpl<CourseEntity,Integer> imp
             hql += " where entity.hdelete=0 ";
         }
 
-        hql += " order by projectEntity.code asc,startTime asc";
+        //Fixme 课程按照什么排序
+        hql += " order by projectEntity.code asc,startTime asc,courseID asc";
 
 
         return hql;
@@ -143,8 +144,17 @@ public class CourseServiceImpl extends BaseServiceImpl<CourseEntity,Integer> imp
         try {
             BeanUtils.copyProperties(courseEntity,courseBean);
             //开始时间和结束时间用英文的:分开
-            courseEntity.setStartTime(courseBean.getStartTime().replace("：", ":"));
-            courseEntity.setEndTime(courseBean.getEndTime().replace("：", ":"));
+            String startTime = courseBean.getStartTime().replace("：", ":");
+            String endTime = courseBean.getEndTime().replace("：", ":");
+            //判断开始时间和结束时间 时位置上必须为两位 为了以后进行排序 比如8点应该存成08
+            if(startTime.length() == 4){
+                startTime = "0" + startTime;
+            }
+            if(endTime.length() == 4){
+                endTime = "0" + endTime;
+            }
+            courseEntity.setStartTime(startTime);
+            courseEntity.setEndTime(endTime);
             courseEntity.setProjectEntity(projectDao.getEntity(courseBean.getProjectId()));
         } catch (Exception e) {
             e.printStackTrace();

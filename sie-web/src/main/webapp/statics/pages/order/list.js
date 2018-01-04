@@ -47,7 +47,7 @@ $(function(){
         height: '100%',
         mtype: 'post',
         postData: $("#search-form").serializeJson(),
-        colNames: ['ID','订单号','创建时间','systemType','提交系统','订单类型','学生姓名','学生ID','支付金额','订单状态','订单状态','支付时间','项目名称','课程数' ],
+        colNames: ['ID','订单号','创建时间','systemType','提交系统','订单类型','学生姓名','学生ID','支付金额','订单状态','订单状态','支付时间','项目名称','课程数','住宿名称' ],
         colModel: [
             {name: 'id', index: 'id', width: 20, hidden: true, sorttype: "int", sortable: false},
             {name: 'code', index: 'code', width: 120, sortable: false},
@@ -57,24 +57,25 @@ $(function(){
             }
             },
             {name: 'systemType', index: 'systemType', hidden: true,width: 120, sortable: false},
-            {name: 'systemTypeName', index: 'systemTypeName', width: 120, sortable: false},
-            {name: 'orderTypeName', index: 'orderTypeName', width: 120, sortable: false},
+            {name: 'systemTypeName', index: 'systemTypeName', width: 80, sortable: false},
+            {name: 'orderTypeName', index: 'orderTypeName', width: 80, sortable: false},
             {name: 'studentChineseName', index: 'studentChineseName', width: 120, sortable: false},
-            {name: 'studentID', index: 'studentID', width: 120, sortable: false},
+            {name: 'studentID', index: 'studentID', width: 150, sortable: false},
             //{name: 'money', index: 'money', width: 120, sortable: false},
             //{name: 'discount', index: 'discount', width: 120, sortable: false},
             //{name: 'couponDiscount', index: 'couponDiscount', width: 120, sortable: false},
             //{name: 'crDiscount', index: 'crDiscount', width: 120, sortable: false},
-            {name: 'payMoney', index: 'payMoney', width: 120, sortable: false},
+            {name: 'payMoney', index: 'payMoney', width: 80, sortable: false},
             {name: 'statusName', index: 'statusName', width: 120, sortable: false},
-            {name: 'status', index: 'status', width: 120,hidden: true,  sortable: false},
+            {name: 'status', index: 'status', width: 80,hidden: true,  sortable: false},
             {name: 'payTime', index: 'payTime', width: 160 , sortable: false, formatter:function(cellvalue, options, rowObject){
                 var time1 = new Date(cellvalue).Format("yyyy-MM-dd hh:mm:ss");
                 return time1;
             }
             },
             {name: 'projectNames', index: 'projectNames', width: 120, sortable: false},
-            {name: 'courseNumber', index: 'courseNumber', width: 80, sortable: false}
+            {name: 'courseNumber', index: 'courseNumber', width: 80, sortable: false},
+            {name: 'dormitoryNames', index: 'dormitoryNames', width: 200, sortable: false}
         ],
         //rowNum:0,
         rownumbers: true,
