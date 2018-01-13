@@ -189,7 +189,7 @@
 				cache: false,
 				success: function (data) {
 					if (data.success) {
-						window.location.href="${rootPath}/order/list.html";
+						window.location.href="${rootPath}" + data.data;
 					} else {
 						$("#errorMsg").html("登录失败，用户名或密码错误")
 					}

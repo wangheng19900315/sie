@@ -79,7 +79,8 @@
 
                                 <div id="orderInfo" class="panel-collapse collapse in" style="height: auto;">
                                     <div class="panel-body">
-                                        <input type="checkbox" name="menuId" value="8">订单管理
+                                        <input type="checkbox" name="menuId" value="8">订单管理&nbsp;&nbsp;
+                                        <input type="checkbox" name="menuId" value="22">订单查看
                                     </div> <!-- / .panel-body -->
                                 </div> <!-- / .collapse -->
                             </div>

@@ -27,8 +27,8 @@ $(function(){
     })
 
 
-    if(userEntity.length > 0){
-        $("#data-form").loadJson(eval("("+userEntity+")"));
+    if(roleEntity.length > 0){
+        $("#data-form").loadJson(eval("("+roleEntity+")"));
     }
 
     //

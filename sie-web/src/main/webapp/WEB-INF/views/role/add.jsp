@@ -21,6 +21,7 @@
                     <span class="panel-title">角色信息</span>
                 </div>
                 <div class="panel-body">
+                    <input type="hidden" id="id" name="id">
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="form-group ">
@@ -35,7 +36,7 @@
                 </div>
                 <div class="panel-footer text-center">
                     <button class="btn btn-primary" id="submitBtn" type="submit" >提交</button>
-                    <button class="btn btn-danger" onclick="window.history.go(-1)">取消</button>
+                    <button class="btn btn-danger" type="button" onclick="window.history.go(-1)">取消</button>
                 </div>
             </form>
         </div>

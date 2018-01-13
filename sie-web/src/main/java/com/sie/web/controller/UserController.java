@@ -1,6 +1,7 @@
 package com.sie.web.controller;
 
 import com.alibaba.fastjson.JSON;
+import com.sie.framework.entity.MenuEntity;
 import com.sie.framework.entity.UserEntity;
 import com.sie.framework.help.ApplicationHelp;
 import com.sie.framework.type.Constant;
@@ -10,6 +11,7 @@ import com.sie.service.bean.PageInfo;
 import com.sie.service.bean.ResultBean;
 import com.sie.util.Md5Util;
 import com.sie.util.NumberUtil;
+import org.apache.commons.lang.StringUtils;
 import org.apache.http.HttpRequest;
 import org.apache.log4j.Logger;
 import org.apache.xpath.operations.Number;
@@ -23,6 +25,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 /**
  * Created by wangheng on 2017/8/9.
@@ -145,11 +148,25 @@ public class UserController {
                 resultBean.setSuccess(true);
                 resultBean.setMessage("登录成功");
                 HttpSession session = request.getSession();
+                List<MenuEntity> menuList = userEntity.getRoleEntity().getMenuList();
                 session.setAttribute(Constant.SYSTEM_USER_ID,userEntity.getId());
                 session.setAttribute(Constant.SYSTEM_USER_NAME_KEY,userEntity.getName());
-                session.setAttribute(Constant.SYSTEM_MENU_LIST, JSON.toJSON(userEntity.getRoleEntity().getMenuList()));
+                session.setAttribute(Constant.SYSTEM_MENU_LIST, JSON.toJSON(menuList));
                 session.setAttribute("rootPath", request.getContextPath());
-
+                //获取默认第一个菜单的路径
+                MenuEntity firstMenu = null;
+                for(MenuEntity menuEntity : menuList){
+                    if(menuEntity.getParentId() == null){
+                        firstMenu = menuEntity;
+                        break;
+                    }
+                }
+                for(MenuEntity menuEntity : menuList){
+                    if(menuEntity.getParentId() != null && menuEntity.getParentId() == firstMenu.getId()){
+                        resultBean.setData(menuEntity.getAction());
+                        break;
+                    }
+                }
             }
         }catch (Exception e){
             e.printStackTrace();
