@@ -69,6 +69,9 @@ public class APIController {
     private GradeService gradeService;
 
     @Autowired
+    private CrService crService;
+
+    @Autowired
     private RegistrationProjectService registrationProjectService;
 
     @Value("${file.upload.url}")
@@ -529,6 +532,57 @@ public class APIController {
             resultBean.setSuccess(true);
             resultBean.setMessage("获取价格成功");
             resultBean.setData(money);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+
+        return resultBean;
+    }
+
+    /**
+     * 获取CR优惠码的价格
+     * @return
+     */
+    @RequestMapping(value = "/getCrPrice.json", method = RequestMethod.POST)
+    @ResponseBody
+    public ResultBean  getCrPrice(String params, String accessToken){
+        logger.info("getCrPrice.json params="+params +" accessToken="+accessToken);
+        ResultBean resultBean = new ResultBean();
+
+        try{
+            if(StringUtil.isBlank(accessToken) || !accessToken.equals(SYSTEM_ACCESS_TOKEN)){
+                resultBean.setMessage("token 为空，请检查参数");
+                return resultBean;
+            }
+
+            ObjectMapper mapper = new ObjectMapper();
+            Map<String,String>maps = mapper.readValue(params, Map.class);
+//            String systemType = maps.get("systemType");
+//            SystemType type;
+//            if(StringUtil.isBlank(systemType)){
+//                resultBean.setMessage("systemType 为空，请检查参数");
+//                return resultBean;
+//            }
+//            type = SystemType.valueOf(Integer.parseInt(systemType));
+//            if(type == null){
+//                resultBean.setMessage("systemType不存在");
+//                return resultBean;
+//            }
+            String crCode = maps.get("crCode");
+            if(StringUtil.isBlank(crCode)){
+                resultBean.setMessage("crCode 为空，请检查参数");
+                return resultBean;
+            }
+
+            CrEntity crEntity = crService.getCrByCode(crCode);
+            if(crEntity == null){
+                resultBean.setMessage("cr优惠不存在");
+                return resultBean;
+            }
+
+            resultBean.setSuccess(true);
+            resultBean.setMessage("获取Cr价格成功");
+            resultBean.setData(crEntity);
         }catch(Exception e){
             e.printStackTrace();
         }

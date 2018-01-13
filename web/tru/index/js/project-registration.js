@@ -1,4 +1,5 @@
 var coursePrice;
+var dormitoryPrice;
 var dormitorys;//是个map
 var orders;
 var courseTime;//所有的课程信息 key为课程id value 为上课时间
@@ -72,7 +73,7 @@ $(function(){
 	});
 
 	$("#create-order").bind("click", function () {
-		var dormitoryPrice = 0;
+		dormitoryPrice = 0;
 		var courseTr = '';
 		var dormitoryTr = '';
 		orders = [];
@@ -156,6 +157,7 @@ $(function(){
 		attrs={};
 		attrs.systemType=parseInt(systemType);
 		attrs.studentId = parseInt(userInfo.id+"");
+		attrs.crId = parseInt($("#crId").val());
 		attrs.orderDetailBean = orders;
 		/**
 		 * 保存订单信息
@@ -168,6 +170,28 @@ $(function(){
 				window.location.href = "tuition-payment.html";
 			}, 1500);
 		});
+	});
+
+	//校验Cr编码信息
+	$("#valid-cr").bind("click",function(){
+		$("#crId").val('');
+		attrs={};
+		attrs.crCode = $("#crCode").val();
+
+		/**
+		 * 获取Cr价格
+		 */
+		dhcc.Unit.ajaxUtil(attrs,"getCrPrice.json",function(data) {
+			$("#crId").val(data.id);
+			//总价格
+			var totalTr = '总价：￥'+(coursePrice + dormitoryPrice - data.rmbPrice);
+			$("p.text-right").find("b").text(totalTr);
+		},function(){
+			//总价格
+			var totalTr = '总价：￥'+(coursePrice + dormitoryPrice);
+			$("p.text-right").find("b").text(totalTr);
+		});
+
 	});
 
 })

@@ -8,4 +8,6 @@ import com.sie.framework.entity.CrEntity;
  */
 public interface CrService extends BaseService<CrEntity, Integer> {
 
+    CrEntity getCrByCode(String code);
+
 }

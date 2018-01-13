@@ -8,6 +8,8 @@ import com.sie.util.NumberUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * Created by wangheng on 2017/8/9.
  */
@@ -36,5 +38,15 @@ public class CrServiceImpl extends BaseServiceImpl<CrEntity,Integer> implements 
         }
 
         return crEntity.getId();
+    }
+
+    @Override
+    public CrEntity getCrByCode(String code) {
+        String hql = "from CrEntity where code='" + code +"'";
+        List<CrEntity> crEntities = crDao.getList(hql);
+        if(crEntities.size() == 1){
+            return crEntities.get(0);
+        }
+        return null;
     }
 }

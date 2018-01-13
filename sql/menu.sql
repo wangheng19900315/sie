@@ -19,3 +19,4 @@ INSERT INTO sie.t_menu_info (id, create_user_id, h_version, h_delete, h_create_t
 INSERT INTO sie.t_menu_info (id, create_user_id, h_version, h_delete, h_create_time, h_update_time, name, modify_user_id, action, parent_id) VALUES (19, null, 0, 0, null, null, '学校管理', null, '/school/list.html', 6);
 INSERT INTO sie.t_menu_info (id, create_user_id, h_version, h_delete, h_create_time, h_update_time, name, modify_user_id, action, parent_id) VALUES (20, null, 0, 0, null, null, '用户管理', null, '/user/list.html', 7);
 INSERT INTO sie.t_menu_info (id, create_user_id, h_version, h_delete, h_create_time, h_update_time, name, modify_user_id, action, parent_id) VALUES (21, null, 0, 0, null, null, '角色管理', null, '/role/list.html', 7);
+INSERT INTO sie.t_menu_info (id, create_user_id, h_version, h_delete, h_create_time, h_update_time, name, modify_user_id, action, parent_id) VALUES (22, null, 0, 0, null, null, '订单查看', null, '/see_order/list.html', 1);
