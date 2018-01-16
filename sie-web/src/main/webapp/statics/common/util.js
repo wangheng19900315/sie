@@ -4,9 +4,10 @@
  * @returns
  */
 Date.prototype.Format = function (fmt) {
-    if(!this  || !this.getMonth()){
-        return "";
-    }
+    //Fixme 这句话什么意思
+    //if(!this  || !this.getMonth()){
+    //    return "";
+    //}
     var o = {
         "M+": this.getMonth() + 1, //月份
         "d+": this.getDate(), //日
