@@ -198,6 +198,20 @@
 
                         </div>
 
+                        <div class="col-sm-6">
+                            <div class="panel">
+                                <div class="panel-heading">
+                                    <input type="checkbox" name="menuId" value="23">网站编辑
+                                    <a class="accordion-toggle" data-toggle="collapse"   href="#webEditor" style="float:left;width: 50%;position: initial;padding: 0 0"></a>
+                                </div>
+                                <div id="webEditor" class="panel-collapse collapse in" style="height: auto;">
+                                    <div class="panel-body">
+                                        <input type="checkbox" name="menuId" value="24">Tru网站编辑&nbsp;&nbsp;
+                                    </div> <!-- / .panel-body -->
+                                </div> <!-- / .cocollapse -->
+                            </div>
+
+                        </div>
 
 
                     </div>
