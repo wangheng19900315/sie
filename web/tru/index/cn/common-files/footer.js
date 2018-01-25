@@ -53,7 +53,7 @@ document.writeln("	<div class=\'ad-box\'>");
 document.writeln("		<a href=\'javascript:;\'><i class=\'fa fa-qrcode\'></i></a>");
 document.writeln("		<div class=\'ad-cont none\'>");
 document.writeln("			<em></em>");
-document.writeln("			<img class=\'img-responsive\' src=\'../../public/img/wechat-consult-service.png\' alt=\'\' />");
+document.writeln("			<img class=\'img-responsive\' src=\'../../public/img/wechat-consult.png\' alt=\'\' />");
 document.writeln("			<p>微信咨询号</p>");
 document.writeln("		</div>");
 document.writeln("	</div>");
