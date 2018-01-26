@@ -12,8 +12,9 @@ $(function(){
     }
 
     $("#login_modal_btn").bind("click", function(){
-        var imgHref = encodeURI(rootPath + 'wechat/showQrCode');
-        $("#modal-wechat").find("img").attr("src", imgHref);
+        //微信登录先取消
+        //var imgHref = encodeURI(rootPath + 'wechat/showQrCode');
+        //$("#modal-wechat").find("img").attr("src", imgHref);
     })
 
 

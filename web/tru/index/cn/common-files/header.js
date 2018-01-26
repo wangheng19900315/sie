@@ -55,7 +55,7 @@ document.writeln("		<div class=\'pull-right\'>");
 document.writeln("			<div class=\'login-box pull-left\'>");
 document.writeln("				<div>");
 
-document.writeln('				<a class="btn btn-warning-ghost" title="登录" id="login_modal_btn" data-toggle="modal" data-target="#modal-wechat">登录</a>');
+document.writeln('				<a class="btn btn-warning-ghost" title="登录" id="login_modal_btn" data-toggle="modal" data-target="#modal-login">登录</a>');
 document.writeln('               <a class="btn btn-reg" title="注册" data-toggle="modal" data-target="#modal-wechat">注册</a>    ' );
 document.writeln("				</div>");
 document.writeln("				<div class=\'dropdown\' style='display: none'>");
