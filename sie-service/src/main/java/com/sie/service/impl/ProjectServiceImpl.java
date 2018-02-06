@@ -543,7 +543,7 @@ public class ProjectServiceImpl extends BaseServiceImpl<ProjectEntity,Integer> i
 //        String hql = "update ProjectPriceEntity price set price.hdelete=1 where price.projectId="+id;
 //        projectPriceDao.updateByHql(hql);
         //删除项目下的课程
-        String hql = "update CourseEntity course set course.hdelete=1 where course.projectId="+id;
+        String hql = "update CourseEntity course set course.hdelete=1 where course.projectEntity.id="+id;
         courseDao.updateByHql(hql);
     }
 }
