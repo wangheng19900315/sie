@@ -10,6 +10,7 @@ import com.sie.service.TitleContentService;
 import com.sie.service.TitleService;
 import com.sie.service.bean.PageInfo;
 import com.sie.service.bean.ResultBean;
+import com.sie.service.bean.TitleBean;
 import com.sie.service.bean.TreeNode;
 import com.sie.util.NumberUtil;
 import org.apache.commons.lang.StringUtils;
@@ -45,14 +46,13 @@ public class TruWebEditorController {
         model.addAttribute("zNodes", JSON.toJSON(treeNodes));
         return "/truWebEditor/titleTree";
     }
-
-    @RequestMapping("/getTitle.json")
+    @RequestMapping("/getAllNode.json")
     @ResponseBody
-    public ResultBean saveTitleAndContent(Integer id){
+    public ResultBean getAllNode(){
         ResultBean resultBean = new ResultBean();
-        try{
-            TitleEntity titleEntity = titleService.get(id);
-            resultBean.setData(titleEntity);
+        try {
+            List<TreeNode> treeNodes = titleService.getTitleTree();
+            resultBean.setData(treeNodes);
             resultBean.setSuccess(true);
         }catch (Exception e){
             e.printStackTrace();
@@ -60,16 +60,30 @@ public class TruWebEditorController {
         return resultBean;
     }
 
-    @RequestMapping("/saveTitleAndContent.json")
+    @RequestMapping("/getTitle.json")
     @ResponseBody
-    public ResultBean  saveTitleAndContent(){
+    public ResultBean saveTitleAndContent(Integer id){
         ResultBean resultBean = new ResultBean();
         try{
-//            Integer id = this.couponService.saveOrUpdate(couponEntity);
-//            if(NumberUtil.isSignless(id)){
-//                resultBean.setMessage("保存成功");
-//                resultBean.setSuccess(true);
-//            }
+            TitleBean titleBean = titleService.getTitleBean(id);
+            resultBean.setData(titleBean);
+            resultBean.setSuccess(true);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return resultBean;
+    }
+
+    @RequestMapping("/addOrupdate.json")
+    @ResponseBody
+    public ResultBean  saveTitleAndContent(TitleBean bean){
+        ResultBean resultBean = new ResultBean();
+        try{
+            Integer id = titleService.saveTitle(bean);
+            if(NumberUtil.isSignless(id)){
+                resultBean.setMessage("保存成功");
+                resultBean.setSuccess(true);
+            }
         }catch (Exception e){
             e.printStackTrace();
         }

@@ -12,18 +12,26 @@
             <ul id="tree" class="ztree"></ul>
         </div>
         <div class="col-sm-9">
-            <form   class="panel form-horizontal" novalidate="novalidate" action="/student/addOrupdate.json" id="data-form" enctype="multipart/form-data">
-                    <input type="hidden" id="id" name="id">
+            <form id="data-form"  class="panel form-horizontal" novalidate="novalidate" id="data-form" enctype="multipart/form-data">
                     <div class="panel-heading">
                         <span class="panel-title">标题内容编辑</span>
                     </div>
                     <div class="panel-body">
+                        <input type="hidden" id="id" name="id">
                         <div class="row">
-                            <div class="col-sm-12">
+                            <div class="col-sm-6">
                                 <div class="form-group ">
-                                    <label for="chineseName" class="col-sm-2 control-label">标题</label>
-                                    <div class="col-sm-9">
-                                        <input type="text" class="form-control" id="chineseName" name="chineseName" placeholder="chineseName" required data-msg-required="请输入姓名" >
+                                    <label for="name" class="col-sm-4 control-label">标题</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" class="form-control" id="name" name="name" placeholder="name" >
+                                    </div>
+                                </div>
+                            </div><!-- col-sm-12 -->
+                            <div class="col-sm-6">
+                                <div class="form-group ">
+                                    <label for="sort" class="col-sm-2 control-label">排序</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" class="form-control" id="sort" name="sort" placeholder="name" >
                                     </div>
                                 </div>
                             </div><!-- col-sm-12 -->
@@ -31,36 +39,37 @@
                         <div class="row">
                             <div class="col-sm-12">
                                 <div class="form-group ">
-                                    <label for="chineseName" class="col-sm-2 control-label">副标题</label>
+                                    <label for="subName" class="col-sm-2 control-label">副标题</label>
                                     <div class="col-sm-9">
-                                        <input type="text" class="form-control" id="chineseName1" name="chineseName" placeholder="chineseName" required data-msg-required="请输入姓名" >
+                                        <input type="text" class="form-control" id="subName" name="subName" placeholder="subName">
                                     </div>
                                 </div>
                             </div><!-- col-sm-12 -->
                         </div><!-- row -->
-                        <div class="row">
+                        <div class="row" id="contentRow">
                             <div class="col-sm-12">
                                 <div class="form-group ">
-                                    <label for="chineseName" class="col-sm-2 control-label">内容</label>
+                                    <label for="content" class="col-sm-2 control-label">内容</label>
                                     <div class="col-sm-9">
-                                        <input type="text" class="form-control" id="chineseName2" name="chineseName" placeholder="chineseName" required data-msg-required="请输入姓名" >
+                                        <textarea name="content" id="content"></textarea>
+                                        <%--<input type="text" class="form-control" id="content" name="content" placeholder="content">--%>
                                     </div>
                                 </div>
                             </div><!-- col-sm-12 -->
                         </div><!-- row -->
-                        <div class="row">
-                            <div class="col-sm-12">
-                                <div class="form-group ">
-                                    <label for="chineseName" class="col-sm-2 control-label">图片</label>
-                                    <div class="col-sm-9">
-                                        <input type="text" class="form-control" id="chineseName3" name="chineseName" placeholder="chineseName" required data-msg-required="请输入姓名" >
-                                    </div>
-                                </div>
-                            </div><!-- col-sm-12 -->
-                        </div><!-- row -->
+                        <%--<div class="row">--%>
+                            <%--<div class="col-sm-12">--%>
+                                <%--<div class="form-group ">--%>
+                                    <%--<label for="chineseName" class="col-sm-2 control-label">图片</label>--%>
+                                    <%--<div class="col-sm-9">--%>
+                                        <%--<input type="text" class="form-control" id="chineseName3" name="chineseName" placeholder="chineseName" required data-msg-required="请输入姓名" >--%>
+                                    <%--</div>--%>
+                                <%--</div>--%>
+                            <%--</div><!-- col-sm-12 -->--%>
+                        <%--</div><!-- row -->--%>
                     </div>
                     <div class="panel-footer text-center">
-                        <button class="btn btn-primary" id="submitBtn" type="submit" >提交</button>
+                        <button class="btn btn-primary" id="submitBtn" type="button" >提交</button>
                     </div>
                 </form>
         </div>
@@ -93,8 +102,10 @@
         <%--</div>--%>
     <%--</div>--%>
 </ot:layout>
+<%--ckeditor文件引入--%>
+<script src="${rootPath}/statics/ckeditor/ckeditor.js"></script>
 <script src="${rootPath}/statics/pages/truWebEditor/titleTree.js"></script>
-
+<%--ztree文件引入--%>
 <script src="${rootPath}/statics/ztree/js/jquery.ztree.core.js"></script>
 
 
