@@ -246,7 +246,7 @@ public class CourseServiceImpl extends BaseServiceImpl<CourseEntity,Integer> imp
     }
 
     @Override
-    public List<CourseEntity> getCourses(Integer projectId, Integer systemType) {
+    public List<CourseBean> getCourses(Integer projectId, Integer systemType) {
         Map<Integer,String> courses = new HashMap<>();
         //得到属于当前系统和同事属于两个系统的
         String hql = "from CourseEntity where (system="+systemType+" or system="+SystemType.SIEANDTRU.value()+") and projectEntity.id="+projectId;
@@ -268,7 +268,15 @@ public class CourseServiceImpl extends BaseServiceImpl<CourseEntity,Integer> imp
 //            }
 //        }
 //        return courses;
-        return courseEntities;
+        List<CourseBean> courseBeans = new ArrayList<>();
+
+        for(CourseEntity courseEntity : courseEntities){
+            CourseBean bean = new CourseBean();
+            setBeanValues(courseEntity, bean);
+            courseBeans.add(bean);
+        }
+
+        return courseBeans;
     }
 
     @Override

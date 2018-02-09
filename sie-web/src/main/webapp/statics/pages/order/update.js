@@ -236,11 +236,16 @@ function selectCourses(id){
         url: pageRootPath+'/course/getCourses.json?projectId='+projectId+"&systemType=" +systemType,
         type: 'get',
         dataType:'json',
-        async:false,
-        success: function (data, statusText, xhr, $form) {
+        success: function (data) {
             $("#courseNameDivs").empty();
             var courseChecks;
             if(data != null){
+                //用sie的名称代替所有的名称 如果提交系统为tru 把tru的名称赋值给sie
+                if(systemType==2){
+                    $.each(data,function(i,course){
+                        course.sieEnglishName = course.truEnglishName;
+                    });
+                }
                 $.each(data,function(i,course){
                     courseChecks = '<div class="row" style="margin-bottom: 10px;">' +
                             '<input name="courseIds" type="checkbox" value="'+course.id+'"';
@@ -249,10 +254,13 @@ function selectCourses(id){
                     if($.inArray(course.id.toString(), courseIds) > -1){
                         courseChecks += 'checked';
                     }
-                    courseChecks += ' />'+course.chineseName + '</div>';
+                    courseChecks += ' />'+course.sieEnglishName + '</div>';
                     $("#courseNameDivs").append(courseChecks);
                 });
             }
+            $("#selectBtn").click();
+
+
             //绑定事件
             //$("input[name=courseIds]").each(function(){
             //    $(this).bind("click",function(){
@@ -276,9 +284,11 @@ function selectCourses(id){
             //        //}
             //    });
             //});
+        },
+        error: function () {
+            alert("提交信息出现错误！");
         }
     });
-    $("#selectBtn").click();
 }
 
 

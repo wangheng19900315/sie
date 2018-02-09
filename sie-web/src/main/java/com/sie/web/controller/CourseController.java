@@ -96,7 +96,7 @@ public class CourseController {
 
     @RequestMapping("/getCourses.json")
     @ResponseBody
-    public List<CourseEntity> getCourseCheckbox(Integer projectId, Integer systemType){
+    public List<CourseBean> getCourseCheckbox(Integer projectId, Integer systemType){
 //        Map<Integer,String> courses = new HashMap<>();
 //        try{
 //            courses = this.courseService.getCourses(projectId, systemType);
@@ -104,7 +104,8 @@ public class CourseController {
 //            e.printStackTrace();
 //        }
 
-        return this.courseService.getCourses(projectId, systemType);
+        List<CourseBean> courses = this.courseService.getCourses(projectId, systemType);
+        return courses;
     }
 
     @RequestMapping(value = "/delete.json")

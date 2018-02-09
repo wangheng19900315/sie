@@ -217,6 +217,12 @@ $(function(){
                                     //console.log(data);
                                     if(data != null){
                                         if(data.length != courseIds.length){
+                                            //用sie的名称代替所有的名称 如果提交系统为tru 把tru的名称赋值给sie
+                                            if(json.systemType==2){
+                                                $.each(data,function(i,course){
+                                                    course.sieEnglishName = course.truEnglishName;
+                                                });
+                                            }
                                             //项目中可以进行加课
                                             html = '<div class="form-group">' +
                                                 '<label  class="col-sm-2 control-label">';
@@ -226,7 +232,7 @@ $(function(){
                                             $.each(data,function(i,course){
                                                 if($.inArray(course.id.toString(), courseIds) == -1){
                                                     //没有选课
-                                                    html = html + '<input name="courseids" type="checkbox"  value="'+course.id+'"/>'+ course.chineseName+'&nbsp;&nbsp;&nbsp;&nbsp;';
+                                                    html = html + '<input name="courseids" type="checkbox"  value="'+course.id+'"/>'+ course.sieEnglishName+'&nbsp;&nbsp;&nbsp;&nbsp;';
                                                 }
 
                                             });
